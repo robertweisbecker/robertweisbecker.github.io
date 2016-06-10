@@ -1,0 +1,293 @@
+<html>
+<meta name="viewport" content="width=device-width">
+
+<head>
+<title>Portfolio</title>
+<link href='https://fonts.googleapis.com/css?family=Playfair+Display:900' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Poppins:700,500' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="isotope.pkgd.min.js"></script>
+
+<script>
+
+$( function() {
+  // init Isotope
+  var $container = $('.content').isotope({
+    itemSelector: '.thumbnail'
+  });
+
+  // store filter for each group
+  var filters = {};
+
+  $('#filters').on( 'click', '.button', function() {
+    var $this = $(this);
+    // get group key
+    var $buttonGroup = $this.parents('.button-group');
+    var filterGroup = $buttonGroup.attr('data-filter-group');
+    
+    // set filter for group
+    filters[ filterGroup ] = $this.attr('data-filter');
+    
+    // combine filters
+    var filterValue = '';
+    for ( var prop in filters ) {
+      filterValue += filters[ prop ];
+    }
+    
+    // set filter for Isotope
+    $container.isotope({ filter: filterValue });
+  });
+  
+   $('.button').click( function() {
+      $('.button-group').find('.is-checked').removeClass('is-checked');
+      $( this ).addClass('is-checked');
+    });
+
+});
+$(document).ready(function(){
+  $(".contact").click(function(){
+$('body').animate({scrollTop: $('body').get(0).scrollHeight}, 1500);
+});
+});
+</script>
+</head>
+
+<style>
+
+body {
+	font-family: 'Source Sans Pro';
+	width:100%;
+	min-width:;
+	height:100%;
+	background-color:F2F1EF;
+	}
+
+
+#main {
+	position:relative;
+	width:100%;
+	height:100%;
+	}
+	
+
+#header {
+	position:absolute;
+	top: 40px;
+	left:80px;
+	height:150px;
+	text-align:left;
+}
+
+#header h1 {
+	margin-left:20px;
+}
+
+.mainnav {		
+		position: relative;
+		display:inline-block;
+		text-align:center;
+		top:-125px;
+        margin-left:780px;
+    }
+
+.mainnav ul{
+        width:600px;
+        list-style:none;
+        }
+    
+.mainnav li{
+        float:left;
+        margin:1em 1.5em 1.5em 1.5em;
+		cursor: pointer;
+	}
+	
+.mainnav a:hover {
+	color:274CC1;
+	}
+
+.mininav {
+	position:fixed;
+	top:198px;
+	width:300px;
+	margin-right:px;
+	background-color:white;
+	  box-shadow: 0px 12px 12px -12px rgba(0, 0, 0, 0.5);
+	  z-index:100;
+	}
+
+.mininav p {
+	text-align: right;
+  	margin-right: 10px;
+  	font-size: 14pt;
+  	font-weight: 200;
+}
+
+.mininav ul li {
+	text-align: right;
+ 	display: block;
+  	position: relative;
+  	padding: 1em;
+  	cursor:pointer;
+  	list-style:none;
+  	font-size: 12pt;
+  	font-weight: 200;
+}
+
+				
+.mininav li:hover {
+	color:274CC1;
+	text-decoration:none;
+	background-color:F2F1EF;
+	transition: background-color 0.4s; 
+		-webkit-transition: background-color 0.4s;
+    }
+
+
+.button.is-checked{
+	color:2980B9;
+		}
+		
+
+.thumbnail:hover {
+		opacity: 1;
+			}
+
+.content {
+	position:absolute;
+	top: 180px;
+	width:80%;
+	margin-left:310px;
+	margin-bottom:0;
+	z-index:99;
+	
+	}
+	
+
+.thumbnail {
+	width: 300px;
+	height: 200px;
+	margin:10px,
+	float:left;
+	background-position:center;
+	margin:10px;
+	}
+	
+	
+h1{
+	font-family: 'Poppins';
+	color:1F3A93;
+	font-size: 20pt;
+	font-weight:700;
+	line-height:140%
+		}
+		
+h2 {
+		font-family:'Source Sans Pro';
+		font-weight: 200;
+		font-size: 18pt;
+		color:black;
+		}
+p {
+	font-weight:200;
+	font-size: 16pt;
+	}
+	
+a {
+	color:black;
+	text-decoration:none;
+	}
+	
+
+	
+		
+.content a span {
+		width:300px;
+		height:200px;
+		background-color: F2F1EF;
+		display:table-cell; 
+		vertical-align: middle;
+		text-align: center;
+		opacity:0;
+		transition: opacity 0.3s; 
+		-webkit-transition: opacity 0.3s;
+		}
+		
+.content a span:hover{
+            text-decoration:none;
+            color:1F3A93;
+			opacity:.9; 
+		}
+
+</style>
+
+<body>
+
+
+<div id="filters">
+	<div class="mininav">
+    <div class="button-group">
+    <p>FILTER WORK:</p>
+    <ul>
+      <li class="button is-checked" data-filter="">All</li>
+      <li class="button" data-filter=".fine">Fine Art</li>
+      <li class="button" data-filter=".ill">Illustration</li>
+      <li class="button" data-filter=".graph">Graphic Design</li>
+      <li class="button" data-filter=".web">Web/Mobile</em></li>
+	<ul>
+</div>
+</div>
+</div>
+
+<div id="main">
+
+<div id="header">
+	<h1><span style="font-size: 36pt">R</span><span style="font-size: 34pt">OBERT</span><br><span style="font-size: 28pt"> W</span>EISBECKER</h1>
+
+<div class="mainnav">
+	<ul>
+		<li><h2><a href="index.html"><span style="color:2980B9">WORK</span></a></h2></li>
+		<li><h2><a href="https://www.linkedin.com/in/robert-weisbecker-7070b888">LINKEDIN</a></h2></li>
+		<li><h2><a href="mailto:weisbecr@umich.edu">CONTACT</a></h2></li>
+	</ul>	
+</div>
+</div>
+
+
+
+<div class="content">
+
+	
+	<a href="findblue.html"><div class="thumbnail graph web" style="background-image: url(images/thumb/findbluethumb.jpg); background-size:cover;"><span>FindBlue<br>2016</span></div></a>
+	
+	<a href="interface.html"><div class="thumbnail web" style="background-image: url(images/thumb/bwithumb.jpg); background-size:cover;"><span>Interface Design<br>2015</span></div></a>
+	
+	<a href="daily.html"><div class="thumbnail ill" style="background-image: url(images/thumb/dailythumb.jpg); background-size:cover;"><span>Michigan Daily Cartoons<br>2016</span></div></a>
+	
+	<a href="parkingpanda.html"><div class="thumbnail graph web" style="background-image: url(images/thumb/ppthumb.jpg); background-size:cover;"><span>Parking Panda<br>2015</span></div></a>
+	
+	<a href="typography.html"><div class="thumbnail graph" style="background-image: url(images/thumb/typethumb.jpg); background-size:cover;"><span>Typography<br>2015</span></div></a>
+	
+	<a href="range.html"><div class="thumbnail graph web" style="background-image: url(images/thumb/rangethumb.jpg); background-size:cover;"><span>Range Messenger/TownHound<br>2014-2015</span></div></a>
+	
+	<a href="buzd.html"><div class="thumbnail graph web" style="background-image: url(images/thumb/buzdthumb.jpg); background-size:cover;"><span>Buzd Mobile<br>2014</span></div></a>
+	
+	<a href="illustration.html"><div class="thumbnail ill graph" style="background-image: url(images/thumb/illustrationthumb.jpg); background-size:cover;"><span>Digital Illustrations<br>2015-2016</span></div></a>
+	
+	<a href="apparel.html"><div class="thumbnail ill" style="background-image: url(images/thumb/apparelthumb.jpg); background-size:cover;"><span>Apparel<br>2013-2016</span></div></a>
+	
+	<a href="drawing.html"><div class="thumbnail fine" style="background-image: url(images/thumb/drawthumb.jpg); background-size:cover;"><span>Drawings<br>2011-2016</span></div></a>
+	
+	<a href="painting.html"><div class="thumbnail fine" style="background-image: url(images/thumb/paintingthumb.jpg); background-size:cover;"><span>Paintings<br>2011-2016</span></div></a>
+	
+	<a href="other.html"><div class="thumbnail fine graph web ill" style="background-image: url(images/thumb/otherthumb.jpg); background-size:cover;"><span>Assorted Design Work</span></div></a>
+			
+</div>
+
+
+
+
+
+</body>
+
+</html>
