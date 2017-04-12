@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" portfolio-container="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Merriweather|Rubik|Prociono" rel="stylesheet">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="https://unpkg.com/flickity@2.0/dist/flickity.css" media="screen">
-  
+
   <title>Robert Weisbecker</title>
-  
+
 </head>
 
-<style> 
+<style>
 
 * {
 	border: none;
@@ -21,21 +21,21 @@
 	border-radius: 0 !important;
 	}
 
-	
+
 body {
 	position:relative;
 	}
-	
+
 p {
 	font-family: 'Inconsolata';
-	}	
-	
+	}
+
 p.body {
 	font-family: 'Merriweather';
 	font-size: 18px;
 	line-height: 1.7;
 }
-	
+
 h1 {
 	font-family: 'Rubik';
 	}
@@ -45,7 +45,7 @@ h1 {
 .navbar-header {
 	border-radius:none;
 	}
-	
+
 .navbar-default {
 	background-color:;
 	opacity: ;
@@ -53,28 +53,28 @@ h1 {
 	border:none;
 	margin-bottom: 0;
 	}
-	
+
 .navbar-header .navbar-brand {
 	color:blue;
 	font-size: 14pt;
 	letter-spacing: .25em;
 	}
-	
+
 .navbar-default .navbar-nav li a {
 	font-size: 14pt;
 	color: #0517FF;
 	opacity: 1;
 	text-align: center;
 	}
-	
+
 .navbar-default .navbar-nav li a:hover, .navbar-default .navbar-nav li a:focus {
 	background-color: #380cb0;
 	color:white;
-	transition: background-color 0.2s; 
+	transition: background-color 0.2s;
 		-webkit-transition: background-color 0.2s;
 	}
-	
-	
+
+
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
 	font-style: ;
 }
@@ -82,13 +82,13 @@ h1 {
 .navbar-toggle {
 	border: none;
 	}
-	
+
 .navbar-default .navbar-toggle .icon-bar {
 	background-color: blue;
 	}
-	
+
 /* ---------------------------------------------------jumbotron style */
-	
+
 
 
 .jumbotron h1 {
@@ -96,21 +96,23 @@ h1 {
 	text-transform: uppercase;
 	letter-spacing: 4pt;
 	}
-	
+
 .bg {
 	position: fixed;
 	width:100%;
 	right: 0;
 	z-index: -1;
 	}
-	
+
 .jumbotron {
 	background: transparent;
 	background-size: cover;
 	color: white;
+  margin: 0 auto;
+  padding-bottom: 50px;
 	}
-	
-	
+
+
 /* --------------------------------------------------- intro style */
 
 .intro {
@@ -128,7 +130,7 @@ h1 {
 	background-color: #80ffd1;
 	}
 
-	
+
 /* --------------------------------------------------- filter bar style */
 
 
@@ -152,10 +154,10 @@ h1 {
 .btn-primary:hover {
 	color: #3f0ec6;
     background-color: #80FFD1;
-    transition: background-color 0.4s; 
+    transition: background-color 0.4s;
 		-webkit-transition: background-color 0.4s;
 }
-		
+
 .btn-default {
   padding: 14px 24px;
   margin-bottom: 0;
@@ -174,7 +176,7 @@ h1 {
 .btn-default:hover {
 	background-color: #3f0ec6;
 	color: white;
-    transition: background-color 0.4s; 
+    transition: background-color 0.4s;
 	-webkit-transition: background-color 0.4s;
 }
 
@@ -185,23 +187,23 @@ button.btn.btn-default.active {
 
 }
 
-.btn:focus, 
-.btn:active, 
-.btn.active, 
+.btn:focus,
+.btn:active,
+.btn.active,
 .btn:focus:active {
   background-image: none;
   outline: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-	
+
 /*--------------------------------------------------- thumbnail grid style */
-	
+
 .grid {
 	margin: 0 auto;
 	}
-	
-		
+
+
 .grid-item-content {
 	padding: 0 !important;
 	margin: 0 0 20px 0 !important;
@@ -210,15 +212,15 @@ button.btn.btn-default.active {
 	max-width:350px;
 	background:;
 	}
-	
+
 
 .grid-item .img-responsive {
 	margin: 0 auto;
 	}
-	
-/*--------------------------------------------------- hover effect */	
 
-	
+/*--------------------------------------------------- hover effect */
+
+
 
 /*------------------------------------------------------------------ modals */
 
@@ -226,7 +228,7 @@ button.btn.btn-default.active {
 	margin-top: 0;
 	width:95%;
 	height:100%;
-	border-radius: 0px !important; 
+	border-radius: 0px !important;
 }
 
 .modal-header {
@@ -251,7 +253,7 @@ button.btn.btn-default.active {
 .modal p {
 	display: block;
 	text-indent: 1em;
-	
+
 }
 
 .clickable {
@@ -264,22 +266,22 @@ button.btn.btn-default.active {
 	background-color: black;
 	margin: 0 auto;
 	}
-	
+
 .modal-body img {
 	margin: 0 auto;
 }
 
-	
+
 .carousel-control .glyphicon {
 	color: #3f0ec6 !important;
 	font-size: 24px;
-	
+
 }
 
 .carousel {
 	margin-left: px;
-	margin-right: px;	
-	
+	margin-right: px;
+
 }
 .carousel-control.left, .carousel-control.right {
 	background-image: hidden;
@@ -293,7 +295,7 @@ button.btn.btn-default.active {
 .carousel-indicators .active {
 	background-color: blue;
 	}
-	
+
 .carousel-indicators li{
 	border-color: blue;
 	}
@@ -307,7 +309,7 @@ button.btn.btn-default.active {
 linear-gradient(150deg, #240871 12%, transparent 12.5%, transparent 87%, #240871 87.5%, #240871),
 linear-gradient(30deg, #240871 12%, transparent 12.5%, transparent 87%, #240871 87.5%, #240871),
 linear-gradient(150deg, #240871 12%, transparent 12.5%, transparent 87%, #240871 87.5%, #240871),
-linear-gradient(60deg, #370CAC 25%, transparent 25.5%, transparent 75%, #370CAC 75%, #370CAC), 
+linear-gradient(60deg, #370CAC 25%, transparent 25.5%, transparent 75%, #370CAC 75%, #370CAC),
 linear-gradient(60deg, #370CAC 25%, transparent 25.5%, transparent 75%, #370CAC 75%, #370CAC);
 background-size:40px 70px;
 background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
@@ -375,15 +377,15 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 /*-----------------------------------------xs ONLY-------*/
 
 @media screen and (max-width: 480px) {
-	
+
 	.bg {
 	background: url("images/jumbotron-mobile2.png") no-repeat center center;
 	height: 300px;
 	}
-	
+
 	.jumbotron {
 	height:300px;
-	margin-bottom:0;		
+	margin-bottom:0;
 
 	}
 
@@ -392,42 +394,42 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 	margin-top: 80px;
 	}
 }
-	
+
 /*-----------------------------------------sm ONLY-------*/
-	
+
 @media screen and (min-width: 480px) and (max-width: 992px) {
 	.bg {
 		background: url("images/jumbotron-mobile.png") no-repeat center center;
 		height: 400px;
 	}
-	
+
 	.jumbotron {
 		height: 400px;
 
 	}
-			
+
 	.hero h1 {
 		font-size: 40px;
 		margin-top: 120px;
 	}
-	
-}	
+
+}
 
 /*-----------------------------------------xs and sm-------*/
 
 @media screen and (max-width: 992px) {
-	
-	
+
+
 	.btn-default {
 		font-size: 14px;
 		}
-		
+
 	.modal-footer button.btn.btn-default {
 		width:100%;
 		background-color: #3f0ec6;
 		color: white;
 	}
-		
+
 	h3 {
 		font-size: 18px;
 		}
@@ -443,26 +445,26 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 	.navbar-header .navbar-brand {
 		font-size: 12pt;
 	}
-	
+
 	.modal-dialog {
 		left: 0;
 		right: 0;
 		width:100%;
 		}
-	
+
 	.form-control {
 		height: 30px;
 	}
-	
+
 	.mobile-caption h1 {
 		font-size: 16px;
 		margin: 10px auto 4px auto;
 		}
-		
+
 	.mobile-caption h2 {
 		font-size: 14px;
 		}
-		
+
 	.hovereffect {
 		width: 100%;
 		height: 100%;
@@ -480,13 +482,14 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 @media screen and (min-width: 992px) {
 
 	.bg {
-	background: #332b22 url("images/jumbotron2.png") no-repeat center center;
-	height: 500px;
-	top: 50px;
+	background: #0e0325 url("images/jumbotron2.png") no-repeat right center;
+	height: contain;
+	top:;
 	}
 
 	.jumbotron {
-	height:500px;;
+	height: 500px;
+  top: 50px;
 	}
 
 	.hero h1 {
@@ -545,7 +548,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 	  position: relative;
 	  overflow: hidden;
 	  background-color: transparent;
-  
+
 	}
 
 	.hovereffect h2 {
@@ -607,25 +610,25 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 <nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-		
+
 			<button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsemenu">
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			
+
 			<a href="#" class="navbar-brand">ROBERT WEISBECKER</a>
 		</div>
-	
+
 		<div class="collapse navbar-collapse scrollspy smooth-scroll" id="collapsemenu">
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#intro">About</a></li>
 				<li><a href="#filters">Work</a></li>
 				<li><a href="#contact">Contact</a></li>
-			</ul>	
+			</ul>
 		</div>
-	</div>	
-</nav>		
+	</div>
+</nav>
 
 <div class="bg"></div>
 
@@ -639,7 +642,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
   			<br><br>
     	</div>
     	</div>
-    
+
 	 </div>
 </div>
 </div>
@@ -653,25 +656,25 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 				<br>
 				<br>
 			<h1 class="text-center">Hi, I'm Bob.</h1>
-			
+
 			<br><p class="body">I'm a 2016 graduate of the University of Michigan and current graduate student at the Maryland Institute College of Art (MICA), in Baltimore, MD, where I'm pursuing a Master's in User Experience Design. <br>
 			<br>Here you'll find a collection of my work, ranging from paintings and drawings to UX design and some reflections on my current coursework. Hit the link below to see my resume & feel free to contact me by sending a message below or shooting an email my way. Thanks for visiting.</p><br>
 			<a href="RobertWeisbecker.resume.12-16.pdf"><button class="btn-default pull-right">Resume --></button></a>
 			<br>
 			<br>
 			<br>
-			<br>	
+			<br>
 		</div>
 		<div class="col-md-2 hidden-xs"></div>
 	</div>
 </div>
-	
+
 
 <!-- portfolio meat --------------------------------------------------->
 
 	<!-- fuck yeah buttons --------------------------------------->
 
-	
+
 <div class="container body" id="filters">
 		<div class="row">
 			<div class="col-xs-12 text-center">
@@ -679,10 +682,10 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 				<br>
 				<br>
 				<br>
-				
+
 				<h1>Work</h1>
 				<br>
-				
+
     			<div class="btn-group btn-group-center">
      				<button class="btn btn-default active" data-filter="*">All</button>
       				<button class="btn btn-default" data-filter=".ux">UI/UX</button>
@@ -694,7 +697,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 </div>
 
 <br>
-<br>	
+<br>
 <br>
 
 <!-- GRID --------------------------------------------------->
@@ -703,8 +706,8 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 	<div class="container">
 		<div class="grid">
 			<div class="grid-sizer col-xs-12 col-sm-6 col-md-4"></div>
-		
-			
+
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#podcast">
 					<img src="images/thumb/podcast-thumbnail.png" class="img-responsive">
@@ -719,7 +722,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 						</div>
 				</div>
 			</div>
-    
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#mica">
 						<img src="images/thumb/muxd1-thumbnail.png" class="img-responsive">
@@ -728,49 +731,49 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 								<h2>Case Studies & User Testing</h2>
 								<p>Maryland Institute College of Art<p>Fall 2016</p>
 							</div>
-							
+
 							<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>MICA UX</h1>
 								<p>Case Studies & User Testing</p>
 							</div>
 				</div>
 			</div>
-	
-	
-	
+
+
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#residency">
 						<img src="images/thumb/muxd-residency-thumbnail.png" class="img-responsive">
 							<div class="overlay hidden-xs hidden-sm">
 								<h1>MICA UX</h1>
-								<h2>Residency I</h2> 
+								<h2>Residency I</h2>
 								<p>Maryland Institute College of Art, September 2016</p>
 							</div>
-							
+
 							<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>MICA UX</h1>
 								<p>Residency I: BFM App</p>
 							</div>
 				</div>
 			</div>
-	
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#findblue">
-					
+
 						<img src="images/thumb/findblue-thumbnail.png" class="img-responsive">
 							<div class="overlay hidden-xs hidden-sm">
 								<h1>FindBlue</h1>
 								<h2>App Prototyping & Design</h2>
 								<p>April 2016</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>FindBlue</h1>
 								<p>App Design</p>
 							</div>
 				</div>
 			</div>
-	
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 art design">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#illustration">
 						<img src="images/thumb/illustration-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
@@ -778,14 +781,14 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 							<h2>Cartoons, Graphics & Apparel</h2>
 								<p>2015-present</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Illustrations</h1>
 								<p>Cartoons, Graphics & Apparel</p>
 							</div>
 				</div>
 			</div>
-	
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#registrar">
 						<img src="images/thumb/registrar-thumbnail.png" class="img-responsive">
@@ -795,14 +798,14 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 								<p>University of Michigan</p>
 								<p>Building Web Interfaces, Fall 2015</p>
 						</div>
-					
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 							<h1>Umich Registrar</h1>
 							<p>Redesign Project</p>
 						</div>
 				</div>
 			</div>
-	
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 design">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#typography">
 						<img src="images/thumb/type-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
@@ -810,15 +813,15 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 							<h2>Garamond Poster Series</h2>
 								<p>University of Michigan, Spring 2015</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Typography</h1>
 								<p>Garamond Poster Series</p>
 							</div>
 				</div>
 			</div>
-			
-			
+
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux design">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#parkingpanda">
 					<img src="images/thumb/pp-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
@@ -826,15 +829,15 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 								<h2>UX/Design Internship</h2>
 								<p>Summer 2015</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Parking Panda</h1>
 								<p>UX/Design Internship</p>
 							</div>
 				</div>
 			</div>
-	
-	
+
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 art">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#drawings">
 						<img src="images/thumb/draw-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
@@ -842,14 +845,14 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 								<h2>Various Media</h2>
 								<p>2010-present</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Drawings</h1>
 								<p>2010-present</p>
 							</div>
 				</div>
 			</div>
-    
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4 art">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#paintings">
 						<img src="images/thumb/paint-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
@@ -857,14 +860,14 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 							<h2>Various Media</h2>
 								<p>2010-present</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Paintings</h1>
 								<p>2010-present</p>
 							</div>
 				</div>
 			</div>
-    
+
     		<div class="grid-item col-xs-12 col-sm-6 col-md-4 ux design">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#range">
 						<img src="images/thumb/range-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
@@ -872,36 +875,36 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 								<h2>Assorted Work</h2>
 								<p>2014-2016</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Freelance Design</h1>
 								<p>Assorted Work</p>
 							</div>
 				</div>
 			</div>
-			
+
 			<div class="grid-item col-xs-12 col-sm-6 col-md-4   design">
 				<div class="grid-item-content hovereffect clickable" data-toggle="modal" data-target="#misc">
-					
+
 						<img src="images/thumb/misc-thumbnail.png" class="img-responsive"><div class="overlay hidden-xs hidden-sm">
 							<h1>Buzd Mobile</h1>
 							<h2>App Design</h2>
 							<p>2014</p>
 						</div>
-						
+
 						<div class="mobile-caption hidden-md hidden-lg text-center">
 								<h1>Buzd Mobile</h1>
 								<p>App Design</p>
 							</div>
 				</div>
 			</div>
-	
+
 		</div>
 
-	</div> 
+	</div>
 </div>
 
-<br><br><br>	
+<br><br><br>
 
 <section class="contact-section" id="contact">
 	<div class="container">
@@ -913,29 +916,29 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 				<h1 class="hidden-md hidden-lg">Contact</h1><br>
 				<p class="body">If you've got any questions or comments about my work, potential opportunities, or you just want someone to bounce Westworld theories off of, then get in touch with the form here or send me a message via <a href="mailto:rpw@robertweisbecker.com">email</a> or <a href="https://www.linkedin.com/in/robertweisbecker"> LinkedIn</a>.</p><br>
 			</div>
-			
+
 			<div class="col-md-6 col-md-pull-6">
 				<h1 class="hidden-xs hidden-sm">Contact</h1><br>
 				<form id="contactform" class="form-horizontal" role="form" method="post" action="https://formspree.io/rpw@robertweisbecker.com">
-			
+
 					<div class="form-group">
 						<div class="col-sm-10">
 							<input type="text" class="form-control contact" id="name" name="name" placeholder="Name">
 						</div>
 					</div>
-				
+
 					<div class="form-group">
 						<div class="col-sm-10">
 							<input type="email" class="form-control contact" id="email" name="_replyto" placeholder="Email (required)" required>
 						</div>
 					</div>
-				
+
 					<div class="form-group">
 						<div class="col-sm-10">
 							<textarea class="form-control contact" rows="6" id="message" name="message" placeholder="Your Message"></textarea>
 						</div>
 					</div>
-				
+
 					<div class="form-group">
 						<div class="col-md-10 col-md-offset-7">
 							<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
@@ -949,8 +952,8 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 		</div>
 	</div>
 </section>
-	
-	
+
+
 
 
 <section class="footer">
@@ -970,7 +973,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 				<br>
 			</div>
 		</div>
-	
+
 	</div>
 </section>
 
@@ -985,7 +988,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Apple Podcasts Redesign</h1>
         	</div>
-        							
+
         	<div class="modal-body container-fluid">
 					<div class="row">
 						<section class="col-md-3"></section>
@@ -995,15 +998,15 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
         					<p>I've had many frustrations with the app, so, after playing around in Axure one day, I decided to try my hand at visualizing what a redesigned iOS10 Podcasts app would look like and explored solutions to some of the issues I've encountered. Below are a couple rough screens from the work in progress, and I'll keep updating this as I work. </p>
         					<br>
         				</section>
-	
+
 						<section class="col-md-3"></section>
 					</div>
 					<br>
 					<hr>
-					<div class="row"> 
+					<div class="row">
 					  <div class="col-xs-12">
 						<div id="podcastCarousel" class="carousel slide" data-interval="" data-ride="carousel">
-							
+
 							<ol class="carousel-indicators">
     							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -1013,51 +1016,51 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
     							<li data-target="#carousel-example-generic" data-slide-to="5"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="6"></li>
   							</ol>
-							      						
+
       						<div class="carousel-inner">
         						<div class="item active">
         							<img class="img-responsive" src="images/podcast/podcast1.png" style="margin: auto">
         						</div>
-          							
+
           						<div class="item">
           							<img class="img-responsive" src="images/podcast/podcast2.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/podcast/podcast3.png" style="margin: auto">
           						</div>
-          						
-          						
+
+
           						<div class="item">
           							<img class="img-responsive" src="images/podcast/podcast4.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/podcast/podcast5.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/podcast/podcast6.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/podcast/podcast7.png" style="margin: auto">
           						</div>
-          						
-          						
-          					
+
+
+
       						<a class="left carousel-control" href="#podcastCarousel" role="button" data-slide="prev">
     							<span class="glyphicon glyphicon-chevron-left"></span>
   							</a>
-  							
+
 							<a class="right carousel-control" href="#podcastCarousel" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>		
+							</a>
 						</div>
 					</div>
         		</div>
         		</div>
-				
+
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1072,7 +1075,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">MICA: Foundations of UX Design</h1>
         	</div>
-			
+
         	<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
@@ -1084,7 +1087,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 						<section class="col-md-2"></section>
 					</div>
 					<hr><br>
-					
+
 					<div class=row">
 						<div class="col-xs-12">
         					<img class="img-responsive" src="images/muxd/muxd1.png" style="margin: 0 auto">
@@ -1105,13 +1108,13 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
           					<h4 class="text-center">Card Sorting</h4>
         					<p class="text-center">Color-coded spreadsheet of Nature.org navigation card sort results.</p>
           				</div>
-          						
+
 						<div class="col-sm-6">
 							<img class="img-responsive" src="images/muxd/muxd3.png" style="margin: auto">
 							<h4 class="text-center">Similarity Matrix</h4>
         					<p class="text-center">Matrix showing correlations between individual cards</p>
 						</div>
-						
+
 						<div class="col-xs-12">
 							<img class="img-responsive" src="images/muxd/muxd4.png" style="margin: auto">
 							<h4 class="text-center">Navigation</h4>
@@ -1120,21 +1123,21 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 					</div>
 					<br>
 					<div class="row">
-							
+
 						<div class="col-sm-6 col-md-4">
 							<img class="img-responsive" src="images/muxd/muxd5.png" style="margin: auto">
 						</div>
-						
+
 						<div class="col-sm-6 col-md-4">
 							<img class="img-responsive" src="images/muxd/muxd6.png" style="margin: auto">
 						</div>
-						
+
 						<div class="col-sm-6 col-md-4">
 							<img class="img-responsive" src="images/muxd/muxd7.png" style="margin: auto">
-						</div>	
+						</div>
 					</div>
         		</div>
-				
+
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1159,13 +1162,13 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 							</div>
 					</div>
         	</div>
-        							
+
         	<div class="modal-body container-fluid">
 					<div class="row">
 						<section class="col-xs-12 col-md-2"></section>
 						<section class="col-xs-12 col-md-8">
         					<h2>Overview</h2>
-        					<p class="text-left"> As part of my studies at the Maryland Institute College of Art (MICA), I took part in a 3-day workshop where we were tasked with designing a hypothetical app for the Baltimore Farmers' Market to improve customer experience and meet the organizers' business goals. 
+        					<p class="text-left"> As part of my studies at the Maryland Institute College of Art (MICA), I took part in a 3-day workshop where we were tasked with designing a hypothetical app for the Baltimore Farmers' Market to improve customer experience and meet the organizers' business goals.
         					<p>On a cloudy September Sunday, we visited the bustling market to interview shoppers and vendors in the field, using those findings to develop composite user personas, ideate potential app functions, map the user experience, and, finally, create low-fidelity wireframes for presentation. </p>
         					<br>
         					<h3>Assignment Prompt:</h3>
@@ -1177,41 +1180,41 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
         							<li>Promote special events like live music & cooking demos.</li>
         	 					</ul>
         				</section>
-	
+
 						<section class="col-md-2"></section>
 					</div>
-	
+
 					<br><hr>
-	
-				<div class="row"> 
-					<h2 style="text-align:center">Design Process</h2><br><br> 
-        				
+
+				<div class="row">
+					<h2 style="text-align:center">Design Process</h2><br><br>
+
         				<section class="col-sm-6 col-md-4 content">
         					<img src="images/mica/residency1.png" class="img-responsive">
         					<h4 class="text-center">User Interviews</h4>
         					<p class="text-center">Interviewing shoppers & vendors in the field at the BFM.</p>
         				</section>
-        
+
         				<section class="col-sm-6 col-md-4 content">
         					<img src="images/mica/residency2.png" class="img-responsive">
         					<h4 class="text-center">Empathy Mapping</h4>
         					<p class="text-center"> Mapping out what users see, hear, think & feel while shopping, and what pains & gains they experience.  </p>
         				</section>
-        
+
         				<section class="col-sm-6 col-md-4 content">
         					<img src="images/mica/residency3.png" class="img-responsive">
         					<h4 class="text-center">User Personas</h4>
         					<p class="text-center">Imagining a prototypical user from interview data. </p>
         				</section>
         		</div>
-    
+
 				<br><hr>
-	
-				<div class="row"> 
-					<h2 style="text-align:center">Wireframing & Prototyping</h2><br> 
+
+				<div class="row">
+					<h2 style="text-align:center">Wireframing & Prototyping</h2><br>
         			<div class="col-xs-12">
         				<div id="residencyCarousel" class="carousel slide" data-interval="" data-ride="carousel">
-							
+
 							<ol class="carousel-indicators">
     							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -1223,58 +1226,58 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
     							<li data-target="#carousel-example-generic" data-slide-to="7"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="8"></li>
   							</ol>
-							      						
+
       						<div class="carousel-inner">
         						<div class="item active">
         							<img class="img-responsive" src="images/mica/carousel/residency-carousel1.png" style="margin: auto">
         						</div>
-          							
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel2.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel3.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel4.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel5.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel6.png" style="margin: auto">
           						</div>
-          						
-          						
+
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel8.png" style="margin: auto">
           						</div>
-          						
-          						
+
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel10.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/mica/carousel/residency-carousel11.png" style="margin: auto">
           						</div>
         					</div>
-          					
+
       						<a class="left carousel-control" href="#residencyCarousel" role="button" data-slide="prev">
     							<span class="glyphicon glyphicon-chevron-left"></span>
   							</a>
-  							
+
 							<a class="right carousel-control" href="#residencyCarousel" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>		
+							</a>
 						</div>
 			</div>
         </div>
-		
+
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1289,7 +1292,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">FindBlue</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
 					<br>
@@ -1302,20 +1305,20 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
         				</div>
         				<div class="col-md-3"></div>
         			</div>
-        			
+
         			<div class="row">
 						<section class="col-xs-12">
 							<img class="img-responsive" src="images/findblue/findblue-mockups2.png" style="margin: 0 auto">
         				</section>
-        			
+
         			<div class="row">
 						<section class="col-xs-12">
         			<img class="img-responsive" src="images/findblue/findblue-mockups.png" style="margin: 0 auto">
         				</section>
-        			</div>		
-			</div>	
+        			</div>
+			</div>
 		</div>
-		
+
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1330,56 +1333,56 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
          		<h1 class="modal-title text-center">Illustrations</h1>
         	</div>
-        							
+
         	<div class="modal-body container-fluid">
 					<div class="row">
         			<div class="col-xs-12">
         				<div id="illustrationCarousel" class="carousel slide" data-interval="" data-ride="carousel">
-							
-							      						
+
+
       						<div class="carousel-inner">
         						<div class="item active">
         							<img class="img-responsive" src="images/illustration/illustration1.png" style="margin: auto">
         						</div>
-          							
+
           						<div class="item">
           							<img class="img-responsive" src="images/illustration/illustration2.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/illustration/illustration3.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/illustration/illustration4.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/illustration/illustration5.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/illustration/illustration6.png" style="margin: auto">
           						</div>
-          						
-          						
+
+
           						<div class="item">
           							<img class="img-responsive" src="images/illustration/illustration7.png" style="margin: auto">
           						</div>
-          						
-          					
+
+
       						<a class="left carousel-control" href="#illustrationCarousel" role="button" data-slide="prev">
     							<span class="glyphicon glyphicon-chevron-left"></span>
   							</a>
-  							
+
 							<a class="right carousel-control" href="#illustrationCarousel" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>		
+							</a>
 						</div>
 					</div>
         		</div>
         		</div>
-				
+
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1394,30 +1397,30 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Office of the Registrar Case Study & Redesign</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
 	<div class="row">
 		<section class="col-sm-1"></section>
 		<section class="col-sm-7">
 		<br><br>
-			<p> In the fall of 2015, I took a course called Building Web Interfaces, an overview of web design from initial wireframing, design, and prototyping and introduction to coding the final product using primarily HTML & CSS. 
+			<p> In the fall of 2015, I took a course called Building Web Interfaces, an overview of web design from initial wireframing, design, and prototyping and introduction to coding the final product using primarily HTML & CSS.
         	<p>The following project is a redesign of the University of Michigan's notorious registrar's office website, home to important information including the academic calendar, tuition payments, degree progress, and school policies. Given the utility that the site provides to the campus community, I felt that its unsightly and cumbersome design warranted an overhaul.
         	<p>My redesign consisted of a reorganized sitemap, mockups for new desktop and mobile versions, and interactive homepage prototypes created with HTML & CSS.</p>
 		</section>
-		
+
 		<section class="hidden-xs col-md-4">
 			<img src="images/registrar/registrar2.gif" class="img-responsive">
         </section>
 	</div>
-	
+
 	<br><hr>
-	
-	<div class="row"> 
+
+	<div class="row">
 		<h2 class="text-center">The Original Site</h2>
 		<p class="text-center">A collection of images from the <a href="http://ro.umich.edu">existing Registrar page</a>, its sitemap, and noted areas for improvement.</p>
 		<br><br>
-		  
+
         <section class="col-sm-7 content">
         	<img src="images/registrar/registrar-og.png" class="img-responsive"></img>
         		<h4>Current Homepage</h4>
@@ -1428,45 +1431,45 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
         				<dd>Lack hierarchy, visual appeal.</dd>
         			</dl>
         </section>
-        
+
         <section class="col-sm-5 content">
         	<img src="images/registrar/registrar-sitemap3.png" class="img-responsive">
-        </section> 
+        </section>
     </div>
-    
+
     <hr>
-    
-    	<div class="row"> 
+
+    	<div class="row">
 			<h2 class="text-center">The Redesign</h2>
 			<p class="text-center">Revised sitemap and desktop/mobile interfaces.<br>View HTML/CSS prototypes here: <a href="http://www-personal.umich.edu/~weisbecr/web_f15/Project_3/index.html">Web</a>   |   <a href="http://www-personal.umich.edu/~weisbecr/web_f15/Project_3/mobile-index.html">Mobile</a></p>
 			<br>
-		  
+
 			<section class="col-xs-12">
 				<img class="img-responsive" src="images/registrar/registrar-sitemap4.png" style="margin: 0 auto">
-			</section>  
+			</section>
 		</div>
-		
+
 		<div class="row">
 			<section class="col-xs-12 content">
 				<img src="images/registrar/registrar1.png" class="img-responsive"></img>
 			</section>
 		</div>
-		<br><br><br><br>	
-		<div class="row"	
-			<br>			
+		<br><br><br><br>
+		<div class="row"
+			<br>
 			<section class="col-xs-12 content">
 				<img src="images/registrar/registrar-mobile-mock.png" class="img-responsive">
 			 </section>
 		</div>
 		<br><br><br><br>
-		<div class="row">        
-         
+		<div class="row">
+
 			<section class="col-xs-12">
 				<img class="img-responsive" src="images/registrar/registrar-mock.png" style="margin: 0 auto">
 			</section>
-        
+
     </div>
-        
+
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1481,61 +1484,61 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
          			<h1 class="modal-title text-center">Typography</h1>
         	</div>
-        							
+
         	<div class="modal-body container-fluid">
 					<div class="row">
 						<div class="col-xs-12">
 							<img class="img-responsive" src="images/typography/typography-all.png" />
 						</div>
-					
+
 						<div class="col-xs-1 col-md-2"></div>
-					
+
 						<div class="col-xs-10 col-md-8">
 							<h3 class="text-center">Garamond Poster Series</h3>
 							<p class="text-center">A series of posters about the history and construction of the typeface Garamond.<br>Course: Typography (Spring 2015), University of Michigan</p>
 						</div>
 						<div class="col-xs-1 col-md-2"></div>
 					</div>
-					
+
 					<br>
-					
+
 					<br>
 				<div class="row">
         			<div class="col-xs-12">
         				<div id="typographyCarousel" class="carousel slide" data-interval="" data-ride="carousel">
-							
+
 							<ol class="carousel-indicators">
     							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
   							</ol>
-							      						
+
       						<div class="carousel-inner">
         						<div class="item active">
         							<img class="img-responsive" src="images/typography/typography2.png" style="margin: auto">
         						</div>
-          							
+
           						<div class="item">
           							<img class="img-responsive" src="images/typography/typography1.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/typography/typography3.png" style="margin: auto">
           						</div>
-          						
-          						
-          					
+
+
+
       						<a class="left carousel-control" href="#typographyCarousel" role="button" data-slide="prev">
     							<span class="glyphicon glyphicon-chevron-left"></span>
   							</a>
-  							
+
 							<a class="right carousel-control" href="#typographyCarousel" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>		
+							</a>
 						</div>
 					</div>
         		</div>
-		</div>		
+		</div>
 <br><br><br>		<div class="modal-footer">
           	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -1551,7 +1554,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Parking Panda</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
@@ -1563,12 +1566,12 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 						<section class="col-md-2"></section>
 					</div>
 					<br>
-					
+
 					<div class="row">
 						<div class="col-xs-12">
-					
+
 							<div id="parkingpandaCarousel" class="carousel slide" data-interval="" data-ride="carousel">
-							
+
 							<ol class="carousel-indicators">
     							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -1580,52 +1583,52 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
     							<li data-target="#carousel-example-generic" data-slide-to="7"></li>
     							<li data-target="#carousel-example-generic" data-slide-to="8"></li>
   							</ol>
-							      						
+
       						<div class="carousel-inner">
         						<div class="item active">
         							<img class="img-responsive" src="images/parkingpanda/pp1.png" style="margin: auto">
         						</div>
-          							
+
           						<div class="item">
           							<img class="img-responsive" src="images/parkingpanda/pp2.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/parkingpanda/pp3.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
         							<img class="img-responsive" src="images/parkingpanda/pp4.png" style="margin: auto">
         						</div>
-          							
+
           						<div class="item">
           							<img class="img-responsive" src="images/parkingpanda/pp5.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/parkingpanda/pp6.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/parkingpanda/pp7.png" style="margin: auto">
           						</div>
-          						
+
           						<div class="item">
           							<img class="img-responsive" src="images/parkingpanda/pp8.png" style="margin: auto">
           						</div>
-          							
-          					
+
+
       						<a class="left carousel-control" href="#parkingpandaCarousel" role="button" data-slide="prev">
     							<span class="glyphicon glyphicon-chevron-left"></span>
   							</a>
-  							
+
 							<a class="right carousel-control" href="#parkingpandaCarousel" role="button" data-slide="next">
 								<span class="glyphicon glyphicon-chevron-right"></span>
-							</a>		
-						
+							</a>
+
 						</div>
 						</div>
-					</div>	
+					</div>
     			</div>
 			</div>
 			</div>
@@ -1643,10 +1646,10 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Drawings</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
-				
+
 					<div class="row">
 						<div class="col-xs-12"><img src="images/drawings/drawing1.png" class="img-responsive" style="margin: 0, auto">
 						</div>
@@ -1671,7 +1674,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 						<div class="col-xs-12"><img src="images/drawings/drawing5.png" class="img-responsive" style="margin: 0, auto">
 						</div>
 					</div>
-					<br>	
+					<br>
 					<div class="row">
 						<div class="col-xs-12"><img src="images/drawings/drawing6.png" class="img-responsive" style="margin: 0, auto">
 						</div>
@@ -1702,10 +1705,10 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Paintings</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
-				
+
 					<div class="row">
 						<div class="col-xs-12"><img src="images/paintings/painting1.png" class="img-responsive" style="margin: 0, auto">
 						</div>
@@ -1730,7 +1733,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
 						<div class="col-xs-12"><img src="images/paintings/painting5.png" class="img-responsive" style="margin: 0, auto">
 						</div>
 					</div>
-					<br>	
+					<br>
 					<div class="row">
 						<div class="col-xs-12"><img src="images/paintings/painting6.png" class="img-responsive" style="margin: 0, auto">
 						</div>
@@ -1752,7 +1755,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Freelance Design</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
@@ -1762,7 +1765,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
         					<p class="text-center">Check back soon.</p>
         				</section>
 						<section class="col-md-2"></section>
-					</div>	
+					</div>
     			</div>
 			</div>
 <br><br><br>		<div class="modal-footer">
@@ -1779,7 +1782,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
          		<button type="button" class="close" data-dismiss="modal">&#x2573;</button>
         		<h1 class="modal-title text-center">Buzd Mobile</h1>
         	</div>
-        							
+
         	<div class="modal-body">
 				<div class="container-fluid">
 					<div class="row">
@@ -1789,7 +1792,7 @@ box-shadow: inset -5px 5px 0px 0px rgba(56,13,176,1);
         					<p class="text-center">Check back soon.</p>
         				</section>
 						<section class="col-md-2"></section>
-					</div>	
+					</div>
     			</div>
 			</div>
 <br><br><br>		<div class="modal-footer">
@@ -1843,20 +1846,20 @@ $container.imagesLoaded().progress( function() {
     // get group key
     var $buttonGroup = $this.parents('.btn-group');
     var filterGroup = $buttonGroup.attr('data-filter-group');
-    
+
     // set filter for group
     filters[ filterGroup ] = $this.attr('data-filter');
-    
+
     // combine filters
     var filterValue = '';
     for ( var prop in filters ) {
       filterValue += filters[ prop ];
     }
-    
+
     // set filter for Isotope
     $container.isotope({ filter: filterValue });
   });
-  
+
   $(".btn-group > .btn").click(function(){
     $(this).addClass("active").siblings().removeClass("active");
 });
