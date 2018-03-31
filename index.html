@@ -9,9 +9,9 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="https://use.typekit.net/yzm6szz.css">
-  <link href="https://fonts.googleapis.com/css?family=Spectral:400,400i,700,700i|Work+Sans:400,600" rel="stylesheet">
   <script src="js/holder.min.js"></script>
 </head>
 
@@ -21,6 +21,7 @@
     background-color: #eaded0;
     font-family: 'nimbus-sans';
     color: #46454b;
+    /* border-top: .5vh solid #dbb700; */
   }
 
 
@@ -120,26 +121,26 @@ h5, .h5 {
 
 .bio {
   font-size: 1.25rem;
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 p.bio-lead{
   font-size: 2rem;
-  line-height: 1.8;
+  line-height: 1.5;
   font-family: 'nimbus-sans-extended';
   color: #151515;
 }
 
 .bio a {
   text-decoration: none;
-  box-shadow: inset 0 -.075em 0 #f43530;
+  box-shadow: inset 0 -.05em 0 #f43530;
   color: #151515;
-  /* transition: 0.2s cubic-bezier(.33,.66,.66,1); */
+  transition: 0.2s cubic-bezier(.33,.66,.66,1);
   font-weight: 600;
 }
 
 .bio a:hover {
-  box-shadow: inset 0 -.4em 0 #f43530;
+  box-shadow: inset 0 -.25em 0 #f43530;
 }
 
 .condensed {
@@ -161,58 +162,66 @@ p.bio-lead{
 
 <div class="bg1">
   <div class="container">
-    <div class="row mt-5 pt-5" style="">
-      <div class="col-lg-10 offset-lg-1 bio">
+    <div class="pt-3 mb-5" style="">
+      <div class="row col-lg-10 offset-lg-1 col-xl-12 bio">
         <p class="bio-lead mb-5 mt-5">I'm <a href="#" data-toggle="tooltip" data-placement="top" data-trigger="hover" title="but you can call me Bob"><span class="font-weight-heavy font-family-extended">Robert Weisbecker</span></a>, a product designer at <a href="https://wwww.everfi.com"><span class="font-weight-heavy font-family-extended">EVERFI</span></a>.</p>
 
+        <div class="d-none d-xl-block col-xl-2">
+          <h5 class="text-uppercase">About</h5>
+        </div>
+
+        <div class="col-xl-9">
           <p class="">I recently completed a <a href="#" data-toggle="tooltip" data-placement="top" data-trigger="hover" title="turns out you can get a degree in that"><span class="font-family-extended">Master's in UX</span></a> at <a href="https://www.mica.edu"><span class="font-family-extended">MICA</span></a>, with a thesis on conversational interfaces. Previously, I worked at <a href="https://www.npr.org">
             <span class="font-family-extended">NPR</span></a> & <a href="https://www.parkingpanda.com"><span class="font-family-extended">Parking Panda</span></a> and graduated from the <a href="#" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="Go Blue"><span class="font-family-extended">University of Michigan</span></a> in 2016.</p>
-        <p class="mt-5">I'm hard at work on a refresh of my portfolio site and hope to share it soon.
+          </div>
+            <div class="col-xl-9 offset-xl-2">
+        <p class="">I'm hard at work on a refresh of my portfolio site and hope to share it soon.
         <br>In the meantime, you can check out my <a href="resume.pdf">resume</a>, contact me on <a href="https://www.linkedin.com/in/robertweisbecker/">LinkedIn</a>, shoot me an <a href="mailto:rpw@robertweisbecker.com">email</a> or download my mixtape on <a href="#" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="Just kidding">Soundcloud</a>.</p>
+      </div>
       </div>
     </div>
   </div>
 </div>
 
-  <div style="height:12rem"></div>
+  <div style="height:4vh"></div>
 
     <div class="container bg2">
     <div class="row">
 
       <div class="row col-sm-6 col-lg-10 offset-lg-1">
 
-        <div class="col-sm-5 col-lg-3">
+        <div class="col-5 col-sm-5 col-lg-3">
           <h5 class="mb-4 text-uppercase">Experience</h5>
         </div>
 
-          <div class="col-lg-3 mb-4 ">
+          <div class="text-sm-left col-6 offset-1 col-sm-12 offset-sm-0 col-lg-3 mb-4 ">
             <h4 class="">Everfi</h4>
             <p class="">Washington, DC<br>Jun 2017 - present</p>
           </div>
 
-          <div class="col-lg-3 mb-4">
+          <div class="text-sm-left col-6 offset-6 col-sm-12 offset-sm-0 col-lg-3 mb-4">
             <h4>NPR Labs</h4>
             <p class="">Washington, DC<br>Jan - Apr 2017</p>
           </div>
 
-          <div class="col-lg-3 mb-5">
+          <div class=" col-6 offset-6 col-sm-12 offset-sm-0 col-lg-3 mb-5">
             <h4>Parking Panda</h4>
             <p class="">Baltimore, MD<br>Jun - Aug 2015</p>
           </div>
       </div>
 
-      <div class="row col-sm-6 col-lg-10 offset-lg-1">
+      <div class="row col-12 col-sm-6 col-lg-10 offset-lg-1">
 
-      <div class="col-sm-5 col-lg-3">
+      <div class="col-5 col-sm-5 col-lg-3">
           <h5 class="mb-4 text-uppercase">Education</h5>
         </div>
 
-        <div class="col-lg-4 mb-4">
+          <div class=" col-6 offset-1 col-sm-12 offset-sm-0 col-lg-3 mb-4 ">
             <h4>Maryland Institute<br> College of Art</h4>
             <p class="">Master’s (MPS), User Experience Design<br>2016 - 2017</p>
         </div>
 
-          <div class="col-lg-5 mb-4">
+            <div class=" col-6 offset-6 col-sm-12 offset-sm-0 col-lg-3 mb-4 ">
             <h4 class="">University of Michigan</h4>
             <p class="">BA, Cognitive Science / Minor, Art & Design<br>2012 - 2016</p>
           </div>
