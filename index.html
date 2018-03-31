@@ -1,155 +1,234 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" portfolio-container="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hello, world!</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-  <link rel="shortcut icon" href="favicon.ico?" type="image/x-icon">
-  <link rel="icon" href="favicon.ico?" type="image/x-icon">
-
-
-  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400,400i" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700,900" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-100486484-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
-
-<title>Robert Weisbecker: User Experience Design</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="https://use.typekit.net/yzm6szz.css">
+  <link href="https://fonts.googleapis.com/css?family=Spectral:400,400i,700,700i|Work+Sans:400,600" rel="stylesheet">
+  <script src="js/holder.min.js"></script>
 </head>
 
 <style>
+  body {
+    max-height: 100vh;
+    background-color: #FBF8F4;
+    font-family: 'nimbus-sans';
+  }
 
 
-.placeholder p {
-  font-family: 'Lato';
-  font-size: 1.2rem;
-  font-weight: 300;
-  line-height: 1.5;
-  color: #3D4957;
+  .navbar-brand {
+    font-family: 'nimbus-sans-extended';
+    font-weight: 900;
+    font-size: 1.5rem;
+    max-width: 100%;
+  }
+
+  .nav-link {
+    color: #000;
+  }
+
+  .nav-link.active {
+    color: #ff0000;
+    font-family: 'Spectral';
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  h1,
+  h2,
+  h3,
+  .h1,
+  .h2,
+  .h3,
+  .display {
+    font-family: 'nimbus-sans-extended';
+    font-weight: 600;
+
+  }
+
+h4, .h4 {
+  font-family: 'nimbus-sans';
+  font-weight: 400;
+  font-size: 1.25rem;
 }
 
-.placeholder p.lead {
+h5, .h5 {
+  font-weight: 800;
+  letter-spacing: 1.5;
+  font-size: 1rem
+}
+
+
+  /* .top-half {
+    position: absolute;
+    top: 0;
+    height: 33vh;
+    width: 100%;
+  }
+
+  .bottom-half {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 67vh;
+    width: 100%;
+    background-color: #233142;
+    color: #FBF8F4;
+  } */
+
+
+  .font-weight-heavy {
+    font-weight: 800;
+  }
+
+  .font-family-extended {
+    font-family: 'nimbus-sans-extended';
+  }
+
+.intro-text {
+  /* font-family: 'nimbus-sans-extended'; */
   font-size: 1.5rem;
-  line-height: 1.8;
+  font-weight: 200;
 }
 
+.footer {
+  position: relative;
+  bottom: 0;
+  margin-top: 33vh;
+}
 
-.placeholder a {
-  text-decoration:none;
-  box-shadow: inset 0 -1px 0 #ef8b80;
+.tooltip {
+  transition-duration: 0s;
+  border-radius: 0 !important;
+  font-family: 'nimbus-sans-extended';
+  background-color: #000;
+  font-size: 1rem;
+
+}
+
+.bio {
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+p.bio-lead{
+  font-size: 2rem;
+  line-height: 1.8;
+  font-family: 'nimbus-sans-extended'
+}
+
+.bio a {
+  text-decoration: none;
+  box-shadow: inset 0 -.1em 0 #ef8fb0;
   color: inherit;
   transition: 0.2s cubic-bezier(.33,.66,.66,1);
 }
 
-.placeholder a:hover {
-  background-color: #ef8b80;
+.bio a:hover {
+  box-shadow: inset 0 -1rem 0 #FF9A9A;
 }
 
-.faces img {
-  width: 200px;
+.condensed {
+  font-family: 'nimbus-sans-condensed';
 }
 
-.faces img.face2 {
-  display: none;
-}
 
-.faces:hover img.face1 {
-  display: none;
-}
-
-h1.label span::after {
-  content: 'Welcome!';
-}
-
-.faces:hover h1.label span{
-  display: none;
-}
-
-.faces:hover h1.label::after{
-  content: 'Ow!';
-}
-
-.faces:hover img.face2 {
-  display: block;
-}
-
-h1 {
-  font-family: 'Work Sans';
-  color: #3D4957;
-  font-weight: 300;
-  font-size: 2.5rem;
-}
-
-h3 {
-  font-family: 'Work Sans';
-  font-size: 1.8rem;
-}
-
-.text {
-  position:;
-  width: 100%;
-  height: 2rem;
-}
-
-.faces {
-  max-width: 200px;
-}
-
-html {
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (max-width: 767px) {
-   html {font-size: 14px;}
-}
 
 </style>
 
 <body>
 
-<div class="container-fluid">
-  <nav class="navbar navbar-toggleable-xl bg-transparent">
-    <h3 class="navbar-brand mx-auto"><span>Robert Weisbecker</span></h3>
-  </nav>
-</div>
+  <div class="container">
+    <div class="row mt-5 pt-5" style="">
+      <div class="col-lg-10 offset-lg-1 bio">
+        <p class="bio-lead mb-5 mt-5">I'm <a href="#" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="but you can call me Bob"><span class="font-weight-heavy font-family-extended">Robert Weisbecker</span></a>, a product designer at <a href="https://wwww.everfi.com"><span class="font-weight-heavy font-family-extended">EVERFI</span></a>.</p>
 
-
-
-<div class="container placeholder">
-    <div class="faces">
-        <img class="align-self-center mb-0 face1" src="images/face1.png" alt="Generic placeholder image">
-        <img class="align-self-center mb-0 face2" src="images/face2.png" alt="Generic placeholder image">
-        <h1 class="text-left label mt-3 display1"><span></span></h1>
+          <p class="">I recently completed a <a href="#" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="turns out you can get a degree in that"><span class="font-family-extended">Master's in UX</span></a> at <a href="https://www.mica.edu"><span class="font-family-extended">MICA</span></a>.
+            <br>Previously, I worked at <a href="https://www.npr.org">
+            <span class="font-family-extended">NPR</span></a> & <a href="parkingpanda.com"><span class="font-family-extended">Parking Panda</span></a> and graduated from the <a href="#" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="Go Blue"><span class="font-family-extended">University of Michigan</span></a>.</p>
+        <p class="mt-5">I'm hard at work on a refresh of my portfolio site, so check back soon.</p>
+      </div>
     </div>
+  </div>
 
+  <div style="height:12rem"></div>
+
+    <div class="container">
     <div class="row">
-      <div class="col-12">
-        <h1 class="display1 text-left mb-3"><s>This is my portfolio.</s><span style="color: #ef8b80;">*</span></h1>
+
+      <div class="row col-sm-6 col-lg-10 offset-lg-1">
+
+        <div class="col-sm-5 col-lg-3">
+          <h5 class="mb-4 text-uppercase">Experience</h5>
+        </div>
+
+          <div class="col-lg-3 mb-4 ">
+            <h4 class="">Everfi</h4>
+            <p class="font-weight-light">Washington, DC<br>Jun 2017 - present</p>
+          </div>
+
+          <div class="col-lg-3 mb-4">
+            <h4>NPR Labs</h4>
+            <p class="font-weight-light">Washington, DC<br>Jan - Apr 2017</p>
+          </div>
+
+          <div class="col-lg-3 mb-5">
+            <h4>Parking Panda</h4>
+            <p class="font-weight-light">Baltimore, MD<br>Jun - Aug 2015</p>
+          </div>
       </div>
-      <div class="col-10 flex-lg-last flex-md-last">
-        <p class="intro"><span style="color: #ef8b80; font-size: 2.5rem;">*</span>A new version of my website is under construction. In the meantime, you can send me an <a href="mailto:rpw@robertweisbecker.com">email</a>, find me on <a href="https://www.linkedin.com/in/robertweisbecker/">LinkedIn</a>, take a look at my <a href="robertweisbecker-resume.pdf">resume</a>, or visit my old <a href="old.html">website</a>.
+
+      <div class="row col-sm-6 col-lg-10 offset-lg-1">
+
+      <div class="col-sm-5 col-lg-3">
+          <h5 class="mb-4 text-uppercase">Education</h5>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <h4>Maryland Institute<br> College of Art</h4>
+            <p class="font-weight-light">Master’s (MPS), User Experience Design<br>2016 - 2017</p>
+        </div>
+
+          <div class="col-lg-5 mb-4">
+            <h4 class="">University of Michigan</h4>
+            <p class="font-weight-light">BA, Cognitive Science / Minor, Art & Design<br>2012 - 2016</p>
+          </div>
+
+        </div>
+
+        </div>
       </div>
-      <div class="col-12 mt-3">
-        <p class="lead">I’m a product designer and graduate student at <a href="https://www.mica.edu/">MICA</a>. This summer, I'll be designing educational tools at <a href="http://everfi.com/">EverFi</a>, in Washington, DC. <br>Previously, I’ve worked at <a href="http://www.npr.org/">NPR</a> & <a href="https://www.parkingpanda.com/">Parking Panda</a>, and I graduated from the <a href="http://umich.edu/">University of Michigan</a> in 2016.</p>
-        <br>
-      </div>
-    </div>
-</div>
+    <!-- CLOSE ROW -->
+
+    <!-- <nav class="nav">
+      <a class="nav-link active" href="#">Active</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link" href="#">Link</a>
+      <a class="nav-link disabled" href="#">Disabled</a>
+    </nav> -->
+
+
+
+  <!-- CLOSE CONTAINER -->
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script>
+  $(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
 </body>
 
 </html>
