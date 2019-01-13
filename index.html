@@ -86,7 +86,7 @@ html { font-family: 'Inter UI', sans-serif; }
                 <p class="my-2 card-subtitle">
                     Selected projects from EVERFI: Engage, Achieve, and component design systems work. Requires password to access.
                 </p>
-                <a href="everfi.html" class="project-link font-weight-bold mt-2" onClick="passWord()">View Project &#9758;</a>
+                <a href="" class="project-link font-weight-bold mt-2" onClick="passWord()">View Project &#9758;</a>
             </div>
 
             <div class="col-lg-8 mb-3 my-lg-0 order-1">
@@ -254,7 +254,7 @@ html { font-family: 'Inter UI', sans-serif; }
     <script>
         function passWord() {
             var testV = 1;
-            var pass1 = prompt('Please enter the secret word.', '');
+            var pass1 = prompt('Say the magic word.', '');
             while (testV < 3) {
                 if (!pass1)
                     history.go(-1);
