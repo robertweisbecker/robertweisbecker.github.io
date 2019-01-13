@@ -8,8 +8,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.typekit.net/yzm6szz.css">
-    <link href="https://fonts.googleapis.com/css?family=Chivo:400,400i,700,700i,900" rel="stylesheet">
+    <!--    <link rel="stylesheet" href="https://use.typekit.net/yzm6szz.css">-->
+    <link rel="stylesheet" href="css/main.css">
 
     <title>Robert Weisbecker</title>
     <script>
@@ -167,6 +167,30 @@
 
     <section class="intro">
         <div class="container">
+            <header>
+                <nav class="row navbar navbar-expand navbar-light pt-5 pb-3 border-bottom border-dark align-items-baseline flex-column flex-sm-row">
+
+                    <a class="navbar-brand font-weight-bold text-dark" href="index.html">Robert Weisbecker</a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse justify-content-sm-end px-0" id="navbar">
+                        <ul class="navbar-nav text-left">
+                            <li class="nav-item">
+                                <a class="nav-link pl-0" href="#work">Work</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="resume.pdf">Resume</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="mailto:rpw@robertweisbecker.com">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
             <div class="row py-5" id="intro">
                 <div class="col-md-8 offset-md-1">
                     <h1 class="ss02" style="font-family: 'Inter UI';">NPR Labs</h1>
@@ -195,112 +219,128 @@
             </div>
         </div>
     </section>
-
     <section>
 
 
 
         <div class="container">
-            <div class="row my-5">
-                <div class="col-md-8 offset-md-2">
-                    <h2 class="mb-3">Background</h2>
-                    <p>It was primarily used by member station managers, underwriters, and engineers across the country to inform decision-making around station planning efforts, such as improving reception or adding new services. However, it was first released in 2011 and hadn't changed much in the following years.</p>
-                    <p>Our main goals for this redesign effort were to overhaul the interface for better usability and increase performance, so we decided to use VueJS, a modern Javascript framework, and Mapbox GL JS, which provided additional customizability and performance in rendering the map view.</p>
+            <div class="row img-comp-container d-none d-md-block">
+                <div class="col-lg-10 offset-lg-1 img-comp-img">
+                    <img src="images/npr-labs/map-before.png" width="800px" height="492px">
+                </div>
+                <div class="col-lg-10 offset-lg-1 img-comp-img img-comp-overlay">
+                    <img src="images/npr-labs/map-after.png" width="800px" height="500px">
                 </div>
             </div>
             <div class="row my-5">
                 <div class="col-md-8 offset-md-2">
-                    <h2>Architecture</h2>
-                    <p>As the name suggests, MAPS consists of a map dotted with pins representing radio and television stations across the country. Each station within the current map view is listed in a sidebar, and users may either search for stations using a search bar in the top nav or drag, pinch, and zoom the map to find what they're looking for. The list also contains controls to toggle contour or coverage overlays on the map. When a coverage is activated, its callsign will appear as a chip below the main nav for quick access.</p>
-                    <p>Clicking a station card in the list opens a station detail view atop the list that includes additional station information, such as street address, contact information, and demographic information of the coverage area scraped from Census data. When a user searches for a station, the search results take over the sidebar, and the map zooms to the first result.</p>
-                    <p>In the top nav, a persistent search bar allows users to search for stations by callsign, street address, or jump to a city or state.</p>
-
-                    <h2>UI Improvements</h2>
-                    <h3>Layout</h3>
-                    <p>We retained the same basic layout as the existing tool, with a sidebar containing visible stations and a global search bar. Since users preferred to search for stations, rather than panning around the map, we gave more prominence to the search field, while moving additional settings and filters into a popover panel. This change also accommodated mobile users, for whom dragging a map within a mobile browser can prove clumsy.</p>
+                    <h2 class="mb-3">Background</h2>
+                    <p>The map tool is primarily used by member station managers, underwriters, and engineers across the country to inform decision-making around station planning efforts, such as improving reception or adding new services. However, it was first released in 2011 and hadn't changed much in the following years.</p>
+                    <p>Our main goals for this redesign effort were to overhaul the interface for better usability and increase performance, so we decided to use VueJS, a modern Javascript framework, and Mapbox GL JS, which provided additional customizability and performance in rendering the map view.</p>
                 </div>
-                <div class="container">
-                    <div class="row img-comp-container d-none d-md-block">
-                        <div class="col-lg-10 offset-lg-1 img-comp-img">
-                            <img src="images/npr-labs/map-before.png" width="800px" height="492px">
-                        </div>
-                        <div class="col-lg-10 offset-lg-1 img-comp-img img-comp-overlay">
-                            <img src="images/npr-labs/map-after.png" width="800px" height="500px">
-                        </div>
-                    </div>
-                    <div class="col-md-8 offset-md-2">
-                        <h3>Look & Feel</h3>
-                        <p>Assorted UI enhancements, such as hover states on each station card and visual design that reflected NPR’s branding. NPR’s mobile applications use Google Material Design, so we incorporated <a href="https://vuematerial.io/">Vue Material</a> for cohesion and rapid component-based development. The interface uses the typefaces Gotham and Knockout to match <a href="https://NPR.org">NPR.org</a>, with a color palette derived from NPR’s brand colors.</p>
-                    </div>
-                    <div class="col-12">
-                        <figure class="figure">
-                            <img src="images/npr-labs/map-ui.png" class="figure-img img-fluid rounded shadow-lg" />
-                            <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
-                        </figure>
-                    </div>
+            </div>
 
-                    <div class="col-md-8 offset-md-2">
-                        <h2>Usability Enhancements</h2>
-                        <h4>Station Cards</h4>
-                        <p>Originally, stations were listed in the sidebar with only their callsigns to identify them. We expanded these list items into cards that included each station’s location, and labelled the controls to differentiate between coverages and contours.
-                            <br>We also added logos for each member station make scanning the sidebar easier, while letting us inject some member station branding into the interface (the shots seen here were taken before the logos were added, so they are using the logo for WAMU in DC as a placeholder).
-                            <br>
-                            We were able to reuse the station card component on the mobile view, displaying it as a bottom drawer, so that users could access a given station’s information without having to switch over to the list view. As users moved around the map, the drawer updates to display the closest station.</p>
+            <div class="row my-5">
 
-                        <h3>Station Detail View</h3>
-                        <p>In order to accommodate the need for more in-depth station information, we added a detail view in the sidebar once users clicked on each station. Previously, this information was restricted to popovers on the map that would appear on hover over a station pin or name in the list. Demographic information was also moved into the station detail view, so users could access that information without navigating away from the map.</p>
+                <figure class="figure col-12">
+                    <video width="100%" height="auto" controls class="rounded shadow-lg">
+                        <source src="images/npr-labs/maps-desktop-station-720-medium.mp4" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
+                    </video>
+                    <figcaption class="figure-caption text-center font-italic">Navigating to a station</figcaption>
+                </figure>
+            </div>
 
-                        <h2>Added Functionality</h2>
-                        <p>To the sidebar we introduced a new persistent option to show all nearby station contours for stations, and another to hide all visible contours. This helped to improve performance and usability, as users would sometimes leave unneeded coverage overlays active, causing increased lag if they were to navigate away.</p>
-
-                        <p>Additionally, we created a new toolbar that displayed active contours as chips. This gave users a visual reminder of which contours were active and allowed them to jump to an active station to center it on the map, view station details, or quickly toggle it off.</p>
-
-                        <h2>Improved Performance & Data</h2>
-                        <p>To increase performance, we chose to have the map render station pins only when a user was zoomed in to a certain level. Previously, the map would render all pins before auto-zooming to a user’s current location, which caused a long initial load time. Since member stations are all located within the United States, it wasn’t necessary to keep rendering the stations when a user was zoomed out far enough to include the whole globe.
-                            <br>
-                            After some testing, we settled on a zoom level of around 600 miles wide, which ensured that users could compare coverages between members and affiliates in contiguous states (for reference, the average width of a state is about 300 miles).
-                        </p>
+            <div class="row my-5">
+                <div class="col-md-8 offset-md-2">
+                    <h2>Functionality</h2>
+                    <p>As the name suggests, MAPS consists of a map dotted with pins representing radio and television stations across the country. In the top nav, a persistent search bar allows users to search for stations by callsign, street address, or jump to a city or state. </p>
+                    <p>Each station within the viewport is also displayed in a sidebar, and users may either search for stations or drag, pinch, and zoom the map to find what they're looking for. Although we retained the same basic layout as the earlier version, we gave more prominence to the search field, since users preferred to search for stations over panning around the map. Secondary settings and filters were shifted into a popover panel to clean up the UI, and list items were expanded to include more information.</p>
 
 
-                    </div>
+                    <!--                    <h2>Architecture</h2>-->
+                    <p> The list also contains controls to toggle contour or coverage overlays on the map. When a coverage is activated, its callsign will appear as a chip below the main nav for quick access.
+                        Clicking on a station in the toolbar or the list opens a station detail view in the sidebar that includes additional station information, such as street address, contact information, and demographic information of the coverage area scraped from Census data. When a user searches for a station, the search results take over the sidebar, and the map zooms to the first result.</p>
+                    <p></p>
+
                 </div>
-                <div class="row py-5">
-                    <div class="col-8 embed-responsive embed-responsive-1by1 mx-auto my-5">
-                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MORbimYdRt4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <figure class="figure col-8 my-auto">
+            </div>
+            <div class="row my-5">
+                <div class="col-12 mb-3">
+                    <figure class="figure">
+                        <img src="images/npr-labs/map-ui.png" class="figure-img img-fluid rounded shadow-lg" />
+                        <figcaption class="figure-caption text-center font-italic"></figcaption>
+                    </figure>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <h2>Refreshing the UI</h2>
+                    <h4>Look & Feel</h4>
+                    <p>Assorted UI enhancements, such as hover states on each station card and visual design to reflect NPR’s updated branding. NPR’s mobile applications use Google Material Design, so we incorporated <a href="https://vuematerial.io/">Vue Material</a> for cohesion and rapid component-based development. The interface uses the typefaces Gotham and Knockout to match <a href="https://NPR.org">NPR.org</a>, with a color palette derived from NPR’s brand colors.</p>
+                </div>
+
+            </div>
+
+            <div class="row my-5">
+
+                <div class="col-8 col-md-6 offset-md-2">
+                    <h4>Station Cards</h4>
+                    <p>Originally, stations were listed in the sidebar with only their callsigns to identify them. We expanded these list items into cards that included each station’s location and labelled the controls to differentiate between coverages and contours.</p>
+                    <p>To the station list we introduced a persistent control to instantly show all nearby station contours for stations in view, and another to hide all visible contours. This helped to improve performance and usability, as users would sometimes leave unneeded coverage overlays active, causing increased lag if they were to navigate away.</p>
+                </div>
+                <div class="col-4 col-md-3">
+                    <figure class="figure">
+                        <img src="images/npr-labs/map-sidebar.png" class="img-fluid fig-img rounded shadow-sm" />
+                        <figcaption class="figure-caption text-center font-italic">Sidebar</figcaption>
+                    </figure>
+                </div>
+
+                <div class="col-md-8 offset-md-2">
+
+                    <h4>Station Detail View</h4>
+                    <p>In order to accommodate the need for more in-depth station information, we added a detail view in the sidebar once users clicked on each station. Previously, this information was restricted to popovers on the map that would appear on hover over a station pin or name in the list. Demographic information was also moved into the station detail view, so users could access that information without navigating away from the map.</p>
+                </div>
+                <div class="row my-5">
+
+                    <figure class="figure col-12">
                         <video width="100%" height="auto" controls class="rounded shadow-lg">
                             <source src="images/npr-labs/maps-desktop-settings-720.mp4" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
                         </video>
                         <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
                     </figure>
-                    <figure class="figure col-4">
-                        <video width="100%" height="auto" controls style="border-radius: 48px;">
-                            <source src="images/npr-labs/maps-mobile-1.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
-                        </video>
-                        <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
-                    </figure>
                 </div>
+
+                <div class="col-md-8 offset-md-2">
+                    <h2>Responsive Design</h2>
+                    <p>But the biggest change from earlier iterations of the map was the newly responsive design. To accomodate for mobile screens, the list and map views collapse atop one another, while the search bar remains persistent for discoverability. Toggling between list and map views is as easy as tapping an icon in the main nav.</p>
+                    <p>We were able to reuse the station card component on the mobile view, displaying it as a bottom drawer, so that users could access a given station’s information without having to switch over to the list view. As users moved around the map, the drawer updates to display the closest station.</p>
+                    <p>The new toolbar showing active stations let users to jump to an active station on the map by tapping it, benefitting mobile users who disliked the clumsiness of pinching & dragging on maps rendered within a mobile browser.</p>
+
+                    <!--
+<h2>Improved Performance & Data</h2>
+<p>To increase performance, we chose to have the map render station pins only when a user was zoomed in to a certain level. Previously, the map would render all pins before auto-zooming to a user’s current location, which caused a long initial load time. Since member stations are all located within the United States, it wasn’t necessary to keep rendering the stations when a user was zoomed out far enough to include the whole globe.
+    <br>
+    After some testing, we settled on a zoom level of around 600 miles wide, which ensured that users could compare coverages between members and affiliates in contiguous states (for reference, the average width of a state is about 300 miles).
+</p>
+-->
+                </div>
+
+
+                <div class="col-12 embed-responsive embed-responsive-16by9 my-5 rounded">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MORbimYdRt4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <!--
+<figure class="figure col-4">
+    <video width="100%" height="auto" controls style="border-radius: 1em;">
+        <source src="images/npr-labs/maps-mobile-1.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
+    </video>
+    <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
+</figure>
+-->
             </div>
-    </section>
-
-    <section>
-        <div class="container">
-
-
-
-
-
-            <video class="rounded shadow-lg" width="100%" height="auto" controls>
-                <source src="images/npr-labs/map-desktop-1.mov" type="video/mp4">
-            </video>
-
         </div>
-
-
-        <!-- SECTION 2 -->
-
+        </div>
     </section>
+
 
     <script>
         /*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
