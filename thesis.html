@@ -68,9 +68,9 @@ body {
     <section class="intro">
         <div class="container">
             <header>
-                <nav class="row navbar navbar-expand navbar-light pl-4 mt-5 py-sm-3 pl-sm-2 mx-sm-1 border-bottom align-items-baseline flex-column flex-sm-row">
+                <nav class="row navbar navbar-expand navbar-light pt-5 pb-3 border-bottom border-dark align-items-baseline flex-column flex-sm-row">
 
-                    <a class="navbar-brand text-extended text-dark pl-md-0" href="#">Robert Weisbecker</a>
+                    <a class="navbar-brand font-weight-bold text-dark" href="index.html">Robert Weisbecker</a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -131,10 +131,10 @@ body {
 
                 <div class="col-lg-2 d-none d-lg-block">
                     <nav class="nav flex-column sticky-top" style="top:240px;" id="sidebar">
-                        <a class="nav-link active" href="#background">Background</a>
-                        <a class="nav-link" href="#research-&-discovery">Research & Discovery</a>
-                        <a class="nav-link" href="#">Link</a>
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <a class="nav-link active" href="#problem-space">Problem Space</a>
+                        <a class="nav-link" href="#research">User Research</a>
+                        <a class="nav-link" href="#design">Design & Validation</a>
+                        <a class="nav-link" href="#iteration">Iteration</a>
                     </nav>
                 </div>
 
@@ -142,7 +142,7 @@ body {
 
                 <div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 
-                    <h2 id="background">Problem Space</h2>
+                    <h2 id="problem-space">Problem Space</h2>
                     <p class="text-secondary">
                         Few people enjoy filling out paperwork, and even fewer enjoy government paperwork. Forms are tedious and old-fashioned, and they often accompany a particularly byzantine process. But they surface infrequently enough that we're able to tolerate them for a few hours now and then before moving on with our lives.</p>
                     <p class="text-muted">
@@ -187,32 +187,32 @@ body {
 
 
                             <div class="row my-5">
-                                <div class="col-12 mb-3">
-                                    <h3>User Personas</h3>
-                                </div>
                                 <div class="col-6">
                                     <figure class="figure">
                                         <img src="images/thesis/thesis-persona-1.png" class="figure-img img-fluid rounded shadow-sm border" />
-                                        <figcaption class="figure-caption text-center font-italic">Conversation Mapping</figcaption>
+                                        <figcaption class="figure-caption text-center font-italic"></figcaption>
                                     </figure>
                                 </div>
                                 <div class="col-6">
                                     <figure class="figure">
                                         <img src="images/thesis/thesis-persona-2.png" class="figure-img img-fluid rounded shadow-sm border" />
-                                        <figcaption class="figure-caption text-center font-italic">Conversation Mapping</figcaption>
+                                        <figcaption class="figure-caption text-center font-italic"></figcaption>
                                     </figure>
                                 </div>
                                 <div class="col-6">
                                     <figure class="figure">
                                         <img src="images/thesis/thesis-persona-3.png" class="figure-img img-fluid rounded shadow-sm border" />
-                                        <figcaption class="figure-caption text-center font-italic">Conversation Mapping</figcaption>
+                                        <figcaption class="figure-caption text-center font-italic"></figcaption>
                                     </figure>
                                 </div>
                                 <div class="col-6">
                                     <figure class="figure">
                                         <img src="images/thesis/thesis-persona-4.png" class="figure-img img-fluid rounded shadow-sm border" />
-                                        <figcaption class="figure-caption text-center font-italic">Conversation Mapping</figcaption>
+                                        <figcaption class="figure-caption text-center font-italic"></figcaption>
                                     </figure>
+                                </div>
+                                <div class="col-12 mb-3 text-center">
+                                    <strong class="text-center">User Personas</strong>
                                 </div>
                             </div>
 
@@ -231,28 +231,30 @@ body {
                     </blockquote>
 
                     <div class="py-5">
-                        <h2>Design & Validation</h2>
+                        <h2 id="design">Design & Validation</h2>
                         <p>
                             In many cases, digital forms fail to overcome the challenges posed by paper ones. Simply creating a digital facsimile wouldn't suffice. My initial exploration & research pointed me toward conversational interfaces as a solution, since they rely upon <span class="font-weight-bold">progressive disclosure</span> — the method of only exposing immediately relevant information to a user at a given time. This reduces cognitive load in users, making complex tasks more manageable and thereby easier to complete. As a test case, I rewrote sections of the <a href="">USCIS Naturalization Eligibility Checklist</a> with more conversational copy and developed several prototypes.
                         </p>
 
-                        <div class="row d-flex mt-5">
-                            <div class="col-md-5 order-lg-2">
-                                <h5>Chatbot Prototype</h5>
-                                <p>
-                                    Simulating human conversation with a Facebook Messenger chatbot made with <a href="">ChatFuel</a>. This let me experiment with branching questions and friendly, casual language.
-                                </p>
-                            </div>
-                            <div class="col-md-7 order-lg-1">
-                                <figure class="figure">
-                                    <video width="100%" height="auto" controls class="rounded shadow-lg">
-                                        <source src="images/thesis/chatbot.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
-                                    </video><img src="images/npr-labs/map-ui.png" class="figure-img img-fluid rounded shadow-lg" />
-                                    <figcaption class="figure-caption text-center font-italic">Conversation Mapping</figcaption>
-                                </figure>
-                            </div>
+                        <!--
+<div class="row d-flex mt-5">
+    <div class="col-md-5 order-lg-2">
+        <h5>Chatbot Prototype</h5>
+        <p>
+            Simulating human conversation with a Facebook Messenger chatbot made with <a href="">ChatFuel</a>. This let me experiment with branching questions and friendly, casual language.
+        </p>
+    </div>
+    <div class="col-md-7 order-lg-1">
+        <figure class="figure">
+            <video width="100%" height="auto" controls class="rounded shadow-lg">
+                <source src="images/thesis/chatbot.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
+            </video><img src="images/npr-labs/map-ui.png" class="figure-img img-fluid rounded shadow-lg" />
+            <figcaption class="figure-caption text-center font-italic">Conversation Mapping</figcaption>
+        </figure>
+    </div>
 
-                        </div>
+</div>
+-->
 
                         <div class="row d-flex my-5">
                             <div class="col order-md-2">
@@ -266,7 +268,7 @@ body {
                                     <video width="100%" height="auto" controls class="rounded shadow-lg">
                                         <source src="images/thesis/chatbot.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
                                     </video>
-                                    <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
+                                    <figcaption class="figure-caption text-center font-italic"></figcaption>
                                 </figure>
                             </div>
                         </div>
@@ -344,7 +346,7 @@ body {
                             <li>“The chat paradox”: While chat was more familiar to users, it felt unofficial and potential risky. This was someone’s entire life - could they trust this service?</li>
                         </ol>
 
-                        <h2>Refinement</h2>
+                        <h2 id="iteration">Iteration</h2>
                         <h3>Goal:</h3>
                         <p>Create & test a hybrid UI with N-400 content that synthesized the positive qualities of the two earlier prototypes. Instill confidence by increasing fidelity, applying design standards, and using more restrained UI voice.</p>
 
