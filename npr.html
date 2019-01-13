@@ -127,6 +127,9 @@
     .img-comp-container {
         position: relative;
         height: 492px;
+        max-width: 100%;
+        overflow-y:scroll;
+        overflow-x: visible;
         /*should be the same height as the images*/
     }
 
@@ -193,7 +196,7 @@
             </header>
             <div class="row py-5" id="intro">
                 <div class="col-md-8 offset-md-1">
-                    <h1 class="ss02" style="font-family: 'Inter UI';">NPR Labs</h1>
+                    <h1>NPR Labs</h1>
                     <p class="lead">As NPR’s in-house technology research & development center, NPR Labs provides a variety of tools to assist public broadcasters nationwide, including the Mapping and Population System (MAPS), a web app that displays reception coverage maps for all public radio and television stations in the US. During my internship in the spring of 2017, I worked as part of a small team to build a new version of the tool from the ground up.</p>
                     <hr class="d-block d-md-none mt-3">
                 </div>
@@ -224,7 +227,7 @@
 
 
         <div class="container">
-            <div class="row img-comp-container d-none d-md-block">
+            <div class="row img-comp-container no-gutters">
                 <div class="col-lg-10 offset-lg-1 img-comp-img">
                     <img src="images/npr-labs/map-before.png" width="800px" height="492px">
                 </div>
