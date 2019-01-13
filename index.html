@@ -15,7 +15,11 @@
 </head>
 
 <style>
-
+    @import url('https://rsms.me/inter/inter-ui.css');
+html { font-family: 'Inter UI', sans-serif; }
+@supports (font-variation-settings: normal) {
+  html { font-family: 'Inter UI var alt', sans-serif; }
+}
 
 </style>
 
@@ -25,7 +29,7 @@
         <header>
             <nav class="row navbar navbar-expand navbar-light mt-5 pt-5 pb-3 border-bottom border-dark align-items-baseline flex-column flex-sm-row">
 
-                <a class="navbar-brand text-extended text-dark" href="index.html">Robert Weisbecker</a>
+                <a class="navbar-brand font-weight-bold text-dark" href="index.html">Robert Weisbecker</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -78,13 +82,14 @@
                     </h1>
                     <p class="d-inline-block mb-2 text-muted text-nowrap">2017 - present</p>
                 </div>
-                <p class="my-2 text-secondary">
-                    Selected projects from EVERFI: Engage, Achieve, and component design systems work.
+                <p class="">
+
                 </p>
-                <small class="text-muted">
-                    <span class="font-weight-bolder">Note:</span> Password protected.
-                </small>
-                <a href="everfi.html" class="project-link font-weight-bold mt-4">View Project &#9758;</a>
+                <p class="my-2 text-secondary">
+                    Selected projects from EVERFI: Engage, Achieve, and component design systems work. <span class="badge badge-secondary">Requires password</span>
+                </p>
+
+                <a href="everfi.html" class="project-link font-weight-bold mt-4" onClick="passWord()">View Project &#9758;</a>
             </div>
 
             <div class="col-lg-8 mb-3 my-lg-0 order-1 order-lg-2">
@@ -169,7 +174,7 @@
                         </div>
                         <div class="col-12 d-inline-flex justify-content-between flex-md-column">
                             <p class="mb-1"><span class="font-weight-bold">University of Michigan</span><br>BA, Cognitive Science / Minor, Art & Design</p>
-                            <p class="text-right text-md-left">2012-2016</p>
+                            <p class="text-right text-md-left text-nowrap">2012-2016</p>
                         </div>
                     </div>
                 </div>
@@ -235,6 +240,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script src="js/holder.min.js"></script>
+    <script>
+        function passWord() {
+            var testV = 1;
+            var pass1 = prompt('Please enter the secret word.', '');
+            while (testV < 3) {
+                if (!pass1)
+                    history.go(-1);
+                if (pass1.toLowerCase() == "hangspace") {
+                    alert('Access Granted.');
+                    window.replace('everfi.html');
+                    break;
+                }
+                testV += 1;
+                var pass1 =
+                    prompt('Access Denied - Password Incorrect, Please Try Again.', 'Password');
+            }
+            if (pass1.toLowerCase() != "password" & testV == 3)
+                history.go(-1);
+            return " ";
+        }
+
+    </script>
 </body>
 
 </html>
