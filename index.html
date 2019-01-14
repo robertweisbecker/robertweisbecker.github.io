@@ -90,7 +90,7 @@ html { font-family: 'Inter UI', sans-serif; }
             </div>
 
             <div class="col-lg-8 mb-3 my-lg-0 order-1">
-                <img class="img-fluid" src="images/thumb/engage-thumb-2.png" alt="Project thumbnail">
+                <img class="img-fluid" src="images/thumb/everfi-thumb.png" alt="Project thumbnail">
             </div>
         </div>
 
@@ -102,7 +102,7 @@ html { font-family: 'Inter UI', sans-serif; }
             </div>
             <div class="col-lg-4 d-flex flex-column my-auto">
                 <div class="d-inline-flex align-items-end justify-content-between">
-                    <h3 class="mb-1"><a class="text-dark" href="#">Conversational Immigration Forms</a></h3>
+                    <h3 class="mb-1"><a class="text-dark" href="thesis.html">Conversational Immigration Forms</a></h3>
                     <p class="d-inline-block mb-2 text-muted text-nowrap">2017</p>
                 </div>
                 <p class="my-2 card-subtitle">Exploring the application of conversational interaction principles to immigration and naturalization paperwork. Master's thesis project, Maryland Institute College of Art.</p>
@@ -116,7 +116,7 @@ html { font-family: 'Inter UI', sans-serif; }
             </div>
             <div class="col-lg-4 d-flex flex-column my-auto">
                 <div class="d-inline-flex align-items-end justify-content-between">
-                    <h3 class="mb-1"><a class="text-dark" href="#">NPR Labs</a></h3>
+                    <h3 class="mb-1"><a class="text-dark" href="npr.html">NPR Labs</a></h3>
                     <p class="d-inline-block mb-2 text-muted text-nowrap">2017</p>
                 </div>
                 <p class="my-2 card-subtitle">Redesigning the Mapping & Population System (MAPS) tool.</p>
@@ -124,34 +124,51 @@ html { font-family: 'Inter UI', sans-serif; }
             </div>
         </div>
 
-        <!-- Supplemental Projects -->
-
-        <div class="row py-5">
-            <div class="card-deck">
-                <div class="mr-1 card float-left rounded-0 bg-transparent">
-                    <img src="images/thumb/shine-logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">AIGA Shine <small class="text-muted float-right">2018</small></h5>
-                        <p class="card-text text-muted">Lorem ipsum</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <a href="#" class="">View &#9758;</a>
-                        <!--                            <small class="text-muted">Last updated 3 mins ago</small>-->
-                    </div>
+        <div class="row py-3 mb-3" id="npr-labs">
+            <div class="col-lg-8 mt-lg-0">
+                <img class="flex-auto img-fluid" src="images/thumb/shine-thumb.png" alt="Card image cap">
+            </div>
+            <div class="col-lg-4 d-flex flex-column my-auto">
+                <div class="d-inline-flex align-items-end justify-content-between">
+                    <h3 class="mb-1"><a class="text-dark" href="shine.html">AIGA Shine</a></h3>
+                    <p class="d-inline-block mb-2 text-muted text-nowrap">2018</p>
                 </div>
-
-                <div class="ml-1 card card-hover float-left rounded-0 bg-transparent">
-                    <img src="images/thumb/npr-thumb-bg.png" class="card-img-top rounded-0" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">NPR Labs</h5>
-                        <p class="card-text text-muted">Re-tooling the Mapping & Population System (MAPS)</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <a href="npr-labs.html" class="">View &#9758;</a>
-                    </div>
-                </div>
+                <p class="my-2 card-subtitle">Translating a UN Report on poverty in the United States into a narrative dataviz experience as part of AIGA DC's 2018 mentorship initiative.</p>
+                <a href="shine.html" class="font-weight-bold mt-2 disabled">View Project &#9758;</a>
             </div>
         </div>
+
+
+        <!-- Supplemental Projects -->
+
+        <!--
+<div class="row py-5">
+    <div class="card-deck">
+        <div class="mr-1 card float-left rounded-0 bg-transparent">
+            <img src="images/thumb/shine-logo.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">AIGA Shine <small class="text-muted float-right">2018</small></h5>
+                <p class="card-text text-muted">Lorem ipsum</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <a href="#" class="">View &#9758;</a>
+                <small class="text-muted">Last updated 3 mins ago</small>
+            </div>
+        </div>
+
+        <div class="ml-1 card card-hover float-left rounded-0 bg-transparent">
+            <img src="images/thumb/npr-thumb-bg.png" class="card-img-top rounded-0" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">NPR Labs</h5>
+                <p class="card-text text-muted">Re-tooling the Mapping & Population System (MAPS)</p>
+            </div>
+            <div class="card-footer bg-transparent border-0">
+                <a href="npr-labs.html" class="">View &#9758;</a>
+            </div>
+        </div>
+    </div>
+</div>
+-->
 
     </section>
     <!--End work, begin resume -->
@@ -260,7 +277,7 @@ html { font-family: 'Inter UI', sans-serif; }
                     history.go(-1);
                 if (pass1.toLowerCase() == "hangspace") {
                     alert('Access Granted.');
-                    window.replace('everfi.html');
+                    window.open('everfi.html');
                     break;
                 }
                 testV += 1;
