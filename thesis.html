@@ -104,11 +104,9 @@ body {
                     <h2 class="text-uppercase small my-md-4">Details</h2>
                     <dt class="">Project</dt>
                     <dd class="">Thesis, MICA UX</dd>
-                    <dt class="">Role</dt>
-                    <dd class="text-muted">UI/UX Designer</dd>
-                    <dt class="">Collaborators</dt>
+                    <dt class="">Advisor</dt>
                     <dd class="">
-                        <p><a href="text-reset">Glenette Clark</a><span class="text-muted"> / Thesis Advisor</p>
+                        <p>Glenette Clark</p>
                     </dd>
                     <dt class="">When</dt>
                     <dd class="">Q4 2017</dd>
@@ -222,20 +220,23 @@ body {
 
 
                     </div>
-                    <h4 class="small text-uppercase font-weight-bolder">Thesis Statement</h4>
-                    <blockquote class="blockquote text-left border-left p-4">
-                        <p class="mb-0"><span class="h1 text-black-50">❝</span><br>
-                            I propose an alternative to immigration paperwork in the form of a conversational interface.
-                            By re-contextualizing traditional paperwork into a question-and-answer format, we can use familiar language and interaction patterns to provide users with a personalized experience that is approachable and stress-free.
-                        </p>
-                        <!--                        <footer class="blockquote-footer text-right">Thesis Statement</footer>-->
-                    </blockquote>
+
 
                     <div class="py-5">
                         <h2 id="design">Design & Validation</h2>
-                        <p>
-                            In many cases, digital forms fail to overcome the challenges posed by paper ones. Simply creating a digital facsimile wouldn't suffice. My initial exploration & research pointed me toward conversational interfaces as a solution, since they rely upon <span class="font-weight-bold">progressive disclosure</span> — the method of only exposing immediately relevant information to a user at a given time. This reduces cognitive load in users, making complex tasks more manageable and thereby easier to complete. As a test case, I rewrote sections of the <a href="">USCIS Naturalization Eligibility Checklist</a> with more conversational copy and developed several prototypes.
+                        <p class="text-muted">
+                            In many cases, digital forms fail to overcome the challenges posed by paper ones. Simply creating a digital facsimile wouldn't suffice. My initial exploration & research pointed me toward conversational interfaces as a solution, since they rely upon <span class="font-weight-bold">progressive disclosure</span> — the method of only exposing immediately relevant information to a user at a given time. This reduces cognitive load in users, making complex tasks more manageable and thereby easier to complete.
                         </p>
+                        <blockquote class="blockquote text-left border-left p-4">
+                            <p class="mb-0 text-muted"><span class="h1 text-black-50">❝</span><br>
+                                I propose an alternative to immigration paperwork in the form of a conversational interface.
+                                By re-contextualizing traditional paperwork into a question-and-answer format, we can use familiar language and interaction patterns to provide users with a personalized experience that is approachable and stress-free.
+                            </p>
+                            <footer class="blockquote-footer text-right">Thesis Statement</footer>
+                        </blockquote>
+                        <p class="text-muted">I experimented with three different types of conversational UIs: chatbots, wizards, and natural language forms. As a test case, I rewrote sections of the <a href="" class="text-decoration-none">USCIS Naturalization Eligibility Checklist</a> with more conversational copy and developed several prototypes.</p>
+
+
 
                         <!--
 <div class="row d-flex mt-5">
@@ -257,14 +258,27 @@ body {
 </div>
 -->
 
-                        <div class="row d-flex my-5">
-                            <div class="col order-md-2">
+                        <div class="row mt-5">
+                            <div class="col-12 my-3">
                                 <h5>Chatbot Prototype</h5>
                                 <p>
                                     Simulating human conversation with a Facebook Messenger chatbot made with <a href="">ChatFuel</a>. This let me experiment with branching questions and friendly, casual language.
                                 </p>
                             </div>
-                            <div class="col-12 order-md-1">
+                            <div class="col-md-4">
+                                <div class="d-flex flex-row flex-md-column">
+
+                                    <figure class="figure" id="">
+                                        <img src="images/thesis/chatfuel.png" class="figure-img img-fluid shadow-sm" />
+                                        <figcaption class="figure-caption text-center font-italic"></figcaption>
+                                    </figure>
+                                    <figure class="figure " id="">
+                                        <img src="images/thesis/chatfuel-flow.png" class="figure-img img-fluid shadow-sm" />
+                                        <figcaption class="figure-caption text-center font-italic"></figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="col-md-8 order-md-1">
                                 <figure class="figure rounded" id="twine">
                                     <video width="100%" height="auto" controls class="rounded shadow-lg">
                                         <source src="images/thesis/chatbot.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
@@ -275,21 +289,28 @@ body {
                         </div>
 
 
-                        <div class="row d-flex my-5">
-                            <div class="col order-md-2">
-                                <h5>Wizard Form</h5>
-                                <p>
-                                    A wizard is a digital process that assists users in accomplishing a single task by breaking it into a series of steps that follow a prescribed order and presents information based on prior user input.
-                                </p>
-                            </div>
-                            <div class="col-12 order-md-1">
-                                <figure class="figure rounded" id="twine">
-                                    <video width="100%" height="auto" controls class="rounded shadow-lg">
-                                        <source src="images/thesis/twine.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
-                                    </video>
-                                    <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
-                                </figure>
-                            </div>
+                        <div class="row my-5">
+                            <h5>Wizard Form</h5>
+                            <p>
+                                A wizard is a digital process that assists users in accomplishing a single task by breaking it into a series of steps that follow a prescribed order and presents information based on prior user input.
+                            </p>
+                            <figure class="figure rounded" id="">
+                                <img src="images/thesis/twine-flow.png" class="figure-img img-fluid rounded shadow-lg" />
+                                <figcaption class="figure-caption text-center font-italic"></figcaption>
+                            </figure>
+                            <p class="my-5">
+                                A wizard is a digital process that assists users in accomplishing a single task by breaking it into a series of steps that follow a prescribed order and presents information based on prior user input.
+                            </p>
+
+                            <figure class="figure rounded my-3" id="twine">
+                                <video width="100%" height="auto" controls class="rounded shadow-lg">
+                                    <source src="images/thesis/twine.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
+                                </video>
+                                <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
+                            </figure>
+
+
+
                         </div>
 
                         <div class="row d-flex my-5">
@@ -452,6 +473,10 @@ body {
 <script>
     $('body').scrollspy({
         target: '#spy'
+    });
+
+    $('[data-spy="scroll"]').on('activate.bs.scrollspy', function() {
+        // do something…
     });
 
 </script>

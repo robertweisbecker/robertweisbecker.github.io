@@ -9,11 +9,64 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter-ui.css">
-    <title>Robert Weisbecker</title>
+
+
+    <title>Everfi Achieve - Robert Weisbecker</title>
 </head>
 
 <style>
+    @import url('https://rsms.me/inter/inter-ui.css');
+
+    html {
+        font-family: 'Inter UI', sans-serif;
+    }
+
+    body {
+        position: relative;
+    }
+    
+    @supports (font-variation-settings: normal) {
+        html {
+            font-family: 'Inter UI var alt', sans-serif;
+        }
+    }
+
+
+    .ss02 {
+        font-family: 'Inter UI', sans-serif;
+        -moz-font-feature-settings: 'calt'1, 'ss02'1;
+        -ms-font-feature-settings: 'calt'1, 'ss02'1;
+        -o-font-feature-settings: 'calt'1, 'ss02'1;
+        -webkit-font-feature-settings: 'calt'1, 'ss02'1;
+        font-feature-settings: 'calt'1, 'ss02'1;
+    }
+
+
+    ::-moz-selection {
+        /* Code for Firefox */
+        color: red;
+        background: yellow;
+    }
+
+    ::selection {
+        color: red;
+        background: yellow;
+    }
+
+/*
+ul {
+list-style: none;
+}
+
+ul li::before {
+content: "\2022";
+color: red;
+font-weight: bold;
+display: inline-block;
+width: 1em;
+margin-left: -1em;
+}
+*/
 
 </style>
 
@@ -48,141 +101,227 @@
                     </div>
                 </nav>
             </header>
+
             <!--
 <div class="row">
     <figure class="figure">
         <img src="images/engage/engage-1.png" class="figure-img img-fluid" />
     </figure>
-</div>
--->
-            <div class="row pt-5" id="intro">
+</div>-->
+
+            <div class="row mt-3 mb-5" id="intro">
                 <div class="col-md-8">
-                    <h1 class="font-weight-bold">EverFi Achieve</h1>
-                    <p class="lead mt-3">The goal of Achieve is to provide learners with financial lessons that can positively influence their decisions and management of personal, family, and business finances. Whether it’s breaking an ongoing cycle of debt and poverty, or helping to optimize existing financial plans and strategies, the @Work 6.0 product is focused on a broad spectrum of learning audiences.</p>
+                    <button type="button" class="btn btn-sm btn-link text-muted border-0 bg-transparent mb-3">⟵ Back to Everfi Projects</button>
+
+
+                    <h1 class="font-weight-bold mb-4">EverFi Achieve</h1>
+                    <p class="lead mt-3">This project represents a total overhaul of <span class="font-weight-bold"><a href="" class="text-reset text-dark">@work</a></span>, Everfi's flagship adult financial education product. Its goal is to provide learners with financial lessons that can positively influence their decisions and management of personal, family, and business finances. Whether it’s breaking an ongoing cycle of debt and poverty, or helping to optimize existing financial plans and strategies, Achieve is focused on a broad spectrum of learning audiences.</p>
+                    <p class="text-muted">
+                        <a href="" class="text-reset">See it in action ⟶ </a>
+                    </p>
                     <hr class="d-block d-md-none mt-3">
                 </div>
 
                 <dl class="col-md-3 offset-md-1" id="intro-description">
-                    <h2 class="text-uppercase small my-md-4">Details</h2>
-                    <dt class="">Type</dt>
-                    <dd class="">Financial Literacy</dd>
+                    <h2 class="text-uppercase small mt-md-5">Details</h2>
                     <dt class="">Role</dt>
-                    <dd class="text-muted">UI/UX Designer</dd>
+                    <dd class="">Lead UI/UX Designer</dd>
                     <dt class="">Collaborators</dt>
                     <dd class="">
                         <p><a href="https://franktstewart.squarespace.com/" class="text-decoration-none text-reset">Frank Stewart</a><span class="text-muted"> / UI & UX</span>
-                            <br><a href="http://annschoew.com/" class="text-decoration-none text-reset">Ann Schoew</a><span class="text-muted"> / Illustration</span></p>
+                            <br><a href="http://annschoew.com/" class="text-decoration-none text-reset">Ann Schoew</a> & Jenna Strange<span class="text-muted"> / Illustration</span>
+                            <br><a href="http://annschoew.com/" class="text-decoration-none text-reset">Terry Biddle & Drew Hard</a><span class="text-muted"> / Art Direction</span></p>
                     </dd>
                     <dt class="">When</dt>
-                    <dd class="">Q4 2017</dd>
-                    <!--                    <hr class="d-block d-md-none">-->
+                    <dd class="">2017-2018</dd>
+                    <hr class="d-block d-md-none">
                 </dl>
-
-            </div>
-            <div class="row">
                 <figure class="figure">
-                    <img src="images/engage/engage-1.png" class="figure-img img-fluid rounded shadow-sm" />
-                    <figcaption class="figure-caption text-left font-italic">Responsive design</figcaption>
+                    <img src="images/thumb/achieve-thumb.png" class="figure-img img-fluid" />
                 </figure>
             </div>
-
-        </div>
-    </section>
-
-    <section class="content">
-        <!--Background-->
-        <div class="container">
-            <!--
             <div class="row my-5">
                 <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-                    <h2 id="background">Design</h2>
+                    <h2>Early Explorations</h2>
+                    <h5>Visual Design</h5>
                     <p>
-                        Engage workshops are geared toward low- to moderate-income adults, families, and small business owners. In order to help these users feel at ease with a potentially daunting subject, the visual design relied on soft colors and springy animation.
+                        Engage workshops are geared toward low- to moderate-income adults, families, and small business owners. In order to help these users feel at ease with weighty topics, the visual design relied on soft colors and springy animation, and content was written with a casual tone.
                     </p>
-                </div>
-            </div>
--->
-            <div class="row">
-                <figure class="figure">
-                    <img src="images/engage/engage-components.png" class="figure-img img-fluid rounded shadow-sm" />
-                    <figcaption class="figure-caption text-left font-italic">Components</figcaption>
-                </figure>
-            </div>
-            <div class="row">
-                <!--
-                <div class="col-md-6 offset-md-1 col-lg-4 offset-lg-2">
-                    <h2 class="h4">Facilitator</h2>
-                    <p>Workshop facilitators can access their script at any time by tapping a persistent tab on the left edge.</p>
-                </div>
--->
 
-                <div class="col-md-6 offset-md-3">
-                    <figure class="figure rounded">
-                        <video width="100%" height="auto" controls class="rounded shadow-lg">
-                            <source src="images/engage/engage-facilitator-script-drawer.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
-                        </video>
-                        <figcaption class="figure-caption text-left font-italic">Expanding facilitator script</figcaption>
-                    </figure>
-                </div>
-            </div>
-            <div class="row my-5">
-                <div class="col-6">
-                    <figure class="figure rounded">
-                        <video width="100%" height="auto" controls class="rounded shadow-lg">
-                            <source src="images/engage/SB1-TypesOfCredit-AssetFadeIn+Carousel.mov" class="figure-img img-fluid roundeds" type="video/mp4">
-                        </video>
-                        <figcaption class="figure-caption text-left font-italic">UI Elements</figcaption>
-                    </figure>
-                </div>
-                <div class="col-6">
-                    <figure class="figure rounded">
-                        <video width="100%" height="auto" controls class="rounded shadow-lg">
-                            <source src="images/engage/Engage-Circle-Progression.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
-                        </video>
-                        <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
-                    </figure>
-                </div>
-                <!--
-                <div class="col-6">
-                    <figure class="figure rounded" id="twine">
-                        <video width="100%" height="auto" controls class="rounded shadow-lg">
-                            <source src="images/engage/engage-nl.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
-                        </video>
-                        <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
-                    </figure>
-                </div>
--->
-            </div>
+                    <h5>UX</h5>
+                    <p>
+                        Engage workshops are geared toward low- to moderate-income adults, families, and small business owners. In order to help these users feel at ease with weighty topics, the visual design relied on soft colors and springy animation, and content was written with a casual tone.
+                    </p>
 
-        </div>
+                    <h2>Building a Design Language</h2>
 
+                    <h5>Typography & Spacing</h5>
+                    <div class="row">
+                        <div class="col">
+                            <figure class="figure rounded shadow">
+                                <img src="images/achieve/style-shadows.png" class="figure-img img-fluid rounded mb-0" />
+                            </figure>
+                        </div>
+                        <div class="col">
+                            <figure class="figure rounded shadow">
+                                <img src="images/achieve/style-type.png" class="figure-img img-fluid rounded mb-0" />
+                            </figure>
+                        </div>
+                    </div>
+
+                    <h5>Color Strategy</h5>
+                </div>
+                <div class="row d-flex align-items-center">
+                    <div class="col">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/style-color.png" class="figure-img img-fluid rounded mb-0" />
+                        </figure>
+                    </div>
+
+                    <div class="col">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/Whitelabel-1.png" class="figure-img img-fluid rounded mb-0" />
+                        </figure>
+                    </div>
+                    <div class="col">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/Whitelabel-2.png" class="figure-img img-fluid rounded mb-0" />
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="row my-5">
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                        <h5>Components</h5>
+                        <p>
+                            Engage workshops are geared toward low- to moderate-income adults, families, and small business owners. In order to help these users feel at ease with weighty topics, the visual design relied on soft colors and springy animation, and content was written with a casual tone.
+                        </p>
+                    </div>
+                </div>
+                <div class="row my-5 d-inline-flex">
+                    <div class="col-6 col-md-3">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/style-guide-01.jpg" class="figure-img img-fluid mb-0 rounded" />
+                        </figure>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/style-guide-02.jpg" class="figure-img img-fluid mb-0 rounded" />
+                        </figure>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/style-guide-03.jpg" class="figure-img img-fluid mb-0 rounded" />
+                        </figure>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/style-guide-04.jpg" class="figure-img img-fluid mb-0 rounded" />
+                        </figure>
+                    </div>
+                </div>
+                <div class="row my-5">
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                        <h2>Responsive Design</h2>
+                        <p>
+                            Engage workshops are geared toward low- to moderate-income adults, families, and small business owners. In order to help these users feel at ease with weighty topics, the visual design relied on soft colors and springy animation, and content was written with a casual tone.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-start">
+
+                    <div class="col-9">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/layout-desktop.png" class="figure-img img-fluid mb-0 rounded" />
+                        </figure>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <figure class="figure rounded shadow">
+                            <img src="images/achieve/layout-mobile.png" class="figure-img img-fluid mb-0 rounded" />
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="row my-5">
+                    <!--Introduction-->
+                    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                        <h2>Key Interactions</h2>
+                        <p class="text-muted">
+                            I used a host of tools to prototype different interactions, including Invision, Flinto, Framer, as well as HTML/CSS so that we could ship code directly to developers.
+                            <p class="text-muted">A sampling of these are below. To see them in action, check out the live development link <a href="">here</a></p>
+                    </div>
+                </div>
+
+                <div class="row my-5">
+                    <div class="col-md-6">
+                        <figure class="figure rounded">
+                            <video width="100%" height="auto" controls class="shadow-sm">
+                                <source src="images/engage/engage-facilitator-script-drawer.mov" class="figure-img img-fluid" type="video/mp4">
+                            </video>
+                            <figcaption class="figure-caption text-center font-italic">Workshop facilitators can access their script at any time by tapping a persistent tab on the left edge.</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <figure class="figure rounded" id="twine">
+                            <video width="100%" height="auto" controls class="rounded shadow-lg">
+                                <source src="images/engage/carousel.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
+                            </video>
+                            <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
+                        </figure>
+                    </div>
+
+
+
+                    <div class="row my-5">
+                        <div class="col-6">
+                            <figure class="figure rounded">
+                                <video width="100%" height="auto" controls class="rounded shadow-lg">
+                                    <source src="images/engage/card-expand.mov" class="figure-img img-fluid roundeds" type="video/mp4">
+                                </video>
+                                <figcaption class="figure-caption text-left font-italic">UI Elements</figcaption>
+                            </figure>
+                        </div>
+                        <div class="col-6">
+                            <figure class="figure rounded">
+                                <video width="100%" height="auto" controls class="rounded shadow-lg">
+                                    <source src="images/engage/Engage-Circle-Progression.mov" class="figure-img img-fluid rounded shadow-lg" type="video/mp4">
+                                </video>
+                                <figcaption class="figure-caption text-center font-italic">UI Elements</figcaption>
+                            </figure>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
     </section>
 
-    <footer class="pb-5">
-        <div class="container border-top py-5 text-dark">
-            <div class="row align-items-end">
-                <div class="col text-left">
-                    <p>
-                        <a href="#" class="text-decoration-none"><span class="h1">☜</span><br><strong>Previous: </strong>Name</a>
-                    </p>
+    <section class="container" id="footer">
+        <footer class="mb-5 border-bottom border-dark border-top py-3 text-dark">
+            <div class="row align-items-bottom">
+                <div class="col-12 col-md-4 text-center order-md-2 my-auto">
+                    <small class="">
+                        <a href="#" class="text-decoration-none text-reset"><span class="h1">☝︎</span><br>Back to Top</a>
+                    </small>
                 </div>
 
-                <div class="col-2 text-center">
+                <div class="col text-left order-md-1">
+                </div>
+
+                <div class="col order-md-3 text-right">
                     <p class="">
-                        <a href="#" class="text-decoration-none"><span class="h1">☝︎</span><br>Top</a>
+                        <a href="achieve.html" class="text-decoration-none text-reset"><span class="h1">☞</span><br><small class="font-weight-bold">Next</small><br>Everfi Achieve</a>
                     </p>
                 </div>
 
-                <div class="col text-right">
-                    <p>
-                        <a href="#" class="text-decoration-none"><span class="h1">☞</span><br><strong>Next: </strong> NPR Labs</a>
-                    </p>
-                </div>
 
             </div>
-        </div>
-
-    </footer>
+        </footer>
+    </section>
 
 
 </body>
