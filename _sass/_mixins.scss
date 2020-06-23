@@ -1,0 +1,13 @@
+@mixin border-radius($size) {
+    @if not map-has-key($border-radii, $size) {
+      @error "Invalid style specified! Choose one of #{map-keys($border-radii)}";
+    }
+    border-radius: map-get($border-radii, $size);
+  }
+
+  @mixin elevations($level) {
+    @if not map-has-key($elevations, $level) {
+      @error "Invalid style specified! Choose one of #{map-keys($elevation)}";
+    }
+    box-shadow: map-get($elevations, $level);
+  }

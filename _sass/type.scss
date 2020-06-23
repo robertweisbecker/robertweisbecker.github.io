@@ -1,0 +1,66 @@
+@import "_primitives";
+
+// Typography
+//
+// Headings, body text, lists, and other misc typographic elements.
+
+// Headings
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: .5em;
+    font-weight: bold;
+    line-height: $header-line-height;
+    color: $text-emphasis;
+    text-rendering: optimizeLegibility;
+  }
+  h1, .h1 {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+  }
+  h2, .h2 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  h3, .h3 {
+    font-size: 1.25rem;
+  }
+  h4, h5, h6, .h4, .h5, .h6 {
+    font-size: 1rem;
+  }
+  
+  // Body text
+  p {
+    color: $text-muted;
+    line-height: $body-line-height;
+  }
+
+  .p1, .p2, .p3 {
+    line-height: $body-line-height;
+    margin-bottom: 1em;
+  }
+
+  .p1 {
+    font-size: 1.1875rem;
+  }
+
+  .p2 {
+    font-size: 1.0625rem;
+  }
+
+  .p3 {
+    font-size: .875rem;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+
+  
+ 
+  
+  
+  // Custom type
+  //
+  // Extend paragraphs with `.lead` for larger introductory text.
+  

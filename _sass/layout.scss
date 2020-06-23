@@ -1,0 +1,160 @@
+// Layout
+//
+// Styles for managing the structural hierarchy of the site.
+
+.container {
+    max-width: 60rem;
+    padding-left:  1.5rem;
+    padding-right: 1.5rem;
+    margin: map-get($spacing, 'lg') auto;
+  }
+
+  footer {
+    margin-bottom: 2rem;
+  }
+
+  hr {
+    border-width: $width-sm;
+    border-color: $text-muted;
+  }
+ 
+
+  // https://github.com/mdo/bootstrap-css-grid-layout/blob/master/css/grid.css
+
+$grid-columns: 4;
+$grid-columns-sm: 6;
+$grid-columns-md: 8;
+$grid-columns-lg: 12;
+$grid-gutter: $spacing-base * 1.5;
+$grid-gutter-sm: $spacing-base * 2;
+$grid-gutter-md: $spacing-base * 3;
+$grid-gutter-lg: $spacing-base * 4;
+  
+  .row {
+    display: grid;
+    /* Create 12 column units, each 1 fractional unit wide */
+    grid-template-columns: repeat($grid-columns, 1fr);
+    grid-gap: $grid-gutter;
+
+    &.no-gutter {
+      row-gap: 0;
+    }
+  }
+  
+  .row-xs {
+    /* do nothing */
+    display: grid;
+  }
+  
+  /* .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span, .span-auto, */
+  
+  .span-sm-1, .span-sm-2, .span-sm-3, .span-sm-4, .span-sm-5, .span-sm-6, 
+  .span-sm, .span-sm-auto, 
+  .span-md-1, .span-md-2, .span-md-3, .span-md-4, .span-md-5, .span-md-6, .span-md-7, .span-md-8,
+  .span-md, .span-md-auto,
+  .span-lg-1, .span-lg-2, .span-lg-3, .span-lg-4, .span-lg-5, .span-lg-6, .span-lg-7, .span-lg-8, .span-lg-9, .span-lg-10, .span-lg-11, .span-lg-12, 
+  .span-lg, .span-lg-auto {
+    grid-column: span $grid-columns;
+  }
+  
+  .span-1 { grid-column: span 1; }
+  .span-2 { grid-column: span 2; }
+  .span-3 { grid-column: span 3; }
+  .span-4 { grid-column: span 4; }
+  // .span-5 { grid-column: span 5; }
+  // .span-6 { grid-column: span 6; }
+  // .span-7 { grid-column: span 7; }
+  // .span-8 { grid-column: span 8; }
+  // .span-9 { grid-column: span 9; }
+  // .span-10 { grid-column: span 10; }
+  // .span-11 { grid-column: span 11; }
+  // .span-12 { grid-column: span 12; }
+  
+  @media (min-width: 576px) {
+    .row {
+      grid-template-columns: repeat($grid-columns-sm, 1fr);
+      grid-gap: $grid-gutter-sm;
+    }
+    .span-sm-1 { grid-column: span 1; }
+    .span-sm-2 { grid-column: span 2; }
+    .span-sm-3 { grid-column: span 3; }
+    .span-sm-4 { grid-column: span 4; }
+    .span-sm-5 { grid-column: span 5; }
+    .span-sm-6 { grid-column: span 6; }
+    // .span-sm-7 { grid-column: span 7; }
+    // .span-sm-8 { grid-column: span 8; }
+    // .span-sm-9 { grid-column: span 9; }
+    // .span-sm-10 { grid-column: span 10; }
+    // .span-sm-11 { grid-column: span 11; }
+    // .span-sm-12 { grid-column: span 12; }
+ 
+    .span-md-1, .span-md-2, .span-md-3, .span-md-4, .span-md-5, .span-md-6, .span-md-7, .span-md-8,
+.span-md, .span-md-auto,
+    .span-lg-1, .span-lg-2, .span-lg-3, .span-lg-4, .span-lg-5, .span-lg-6, .span-lg-7, .span-lg-8, .span-lg-9, .span-lg-10, .span-lg-11, .span-lg-12, 
+  .span-lg, .span-lg-auto {
+    grid-column: span $grid-columns-sm;
+  }
+  }
+  
+  @media (min-width: 768px) {
+    .row {
+      // display: grid;
+      /* Create 12 column units, each 1 fractional unit wide */
+      grid-template-columns: repeat($grid-columns-md, 1fr);
+      grid-gap: $grid-gutter-md;
+    }
+    .span-md-1 { grid-column: span 1; }
+    .span-md-2 { grid-column: span 2; }
+    .span-md-3 { grid-column: span 3; }
+    .span-md-4 { grid-column: span 4; }
+    .span-md-5 { grid-column: span 5; }
+    .span-md-6 { grid-column: span 6; }
+    .span-md-7 { grid-column: span 7; }
+    .span-md-8 { grid-column: span 8; }
+    // .span-md-9 { grid-column: span 9; }
+    // .span-md-10 { grid-column: span 10; }
+    // .span-md-11 { grid-column: span 11; }
+    // .span-md-12 { grid-column: span 12; }
+    }
+  
+  @media (min-width: 992px) {
+    .row {
+      // display: grid;
+      /* Create 12 column units, each 1 fractional unit wide */
+      grid-template-columns: repeat($grid-columns-lg, 1fr);
+      grid-gap: $grid-gutter-lg;
+    }
+    .span-lg-1 { grid-column: span 1; }
+    .span-lg-2 { grid-column: span 2; }
+    .span-lg-3 { grid-column: span 3; }
+    .span-lg-4 { grid-column: span 4; }
+    .span-lg-5 { grid-column: span 5; }
+    .span-lg-6 { grid-column: span 6; }
+    .span-lg-7 { grid-column: span 7; }
+    .span-lg-8 { grid-column: span 8; }
+    .span-lg-9 { grid-column: span 9; }
+    .span-lg-10 { grid-column: span 10; }
+    .span-lg-11 { grid-column: span 11; }
+    .span-lg-12 { grid-column: span 12; }
+    }
+  
+  // @media (min-width: 1200px) {
+  //   .row-xl {
+  //     display: grid;
+  //     /* Create 12 column units, each 1 fractional unit wide */
+  //     grid-template-columns: repeat($grid-columns, 1fr);
+  //     grid-gap: $grid-gutter;
+  //   }
+  //   .span-xl-1 { grid-column: span 1; }
+  //   .span-xl-2 { grid-column: span 2; }
+  //   .span-xl-3 { grid-column: span 3; }
+  //   .span-xl-4 { grid-column: span 4; }
+  //   .span-xl-5 { grid-column: span 5; }
+  //   .span-xl-6 { grid-column: span 6; }
+  //   .span-xl-7 { grid-column: span 7; }
+  //   .span-xl-8 { grid-column: span 8; }
+  //   .span-xl-9 { grid-column: span 9; }
+  //   .span-xl-10 { grid-column: span 10; }
+  //   .span-xl-11 { grid-column: span 11; }
+  //   .span-xl-12 { grid-column: span 12; }
+  // }

@@ -1,0 +1,111 @@
+$spacing-base: 8px;
+
+$spacing: (
+    xs: (.5 * $spacing-base),
+    sm: ($spacing-base),
+    md: (2 * $spacing-base),
+    lg: (3 * $spacing-base),
+    xl: (5 * $spacing-base),
+);
+
+@each $size, $value in $spacing {
+    .mb-#{$size} {
+      margin-bottom: #{$value};
+    };
+    .mt-#{$size} {
+        margin-top: #{$value};
+      };
+      .inline-#{$size} {
+        margin-right: #{$value};
+      };
+    .p-#{$size} {
+        padding-bottom: #{$value};
+      };  
+};
+
+$elevations: (
+  0: (none,),
+  1: (
+      0 0 1px 0 rgba(0, 0, 0, 0.12), 
+      0 1px 1px 0 rgba(0, 0, 0, 0.24),
+      ),
+  2: (
+      0 0 1px 0 rgba(0, 0, 0, 0.16), 
+      0 4px 8px -2px rgba(0, 0, 0, 0.24),
+      ),
+  3: (
+      0 0 1px 0 rgba(0, 0, 0, 0.2), 
+      0 8px 16px -2px rgba(0, 0, 0, 0.24),
+      ),
+  4: (
+      0 0 1px 0 rgba(0, 0, 0, 0.24),
+      0 12px 24px -4px rgba(0, 0, 0, 0.24),
+      ),
+  5: (
+      0 0 1px 0 rgba(0, 0, 0, 0.24), 
+      0 20px 32px -6px rgba(0, 0, 0, 0.32),
+      )
+);
+
+@each $level, $value in $elevations {
+    .elevation-#{$level} {
+      box-shadow: #{$value};
+  }
+};
+
+$radius-rounded: 200px;
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 12px;
+
+$width-sm: 1px;
+$width-md: 2px;
+$width-lg: 4px;
+
+$color: (
+  n100: (#fff),
+  n200: (#eee),
+  n300: (#e0e0e0),
+  n500: (#ACACAC),
+  n700: (#666),
+  n800: (#303030),
+  n900: (#0A1114),
+  ui100: (#268bd2),
+  ui200: (#00748d),
+  ui300: (#000),
+  ui500: (blue),
+  ui700: (#000),
+  ui800: (#000),
+  ui900: (#000),
+  info1: (purple),
+  info2: (purple),
+  warning1: (purple),
+  warning2: (purple),
+  error1: (purple),
+  error2: (purple),
+  success1: (purple),
+  success2: (purple),
+);
+
+@each $name, $value in $color {
+  .bg-#{$name} {
+    background: #{$value};
+}
+};
+
+$primary: map-get($color, 'ui500');
+$primary-hover: map-get($color, 'ui700');
+$primary-active: map-get($color, 'ui800');
+$surface: map-map-get($color, 'n100');
+$surface-hover: map-get($color, 'n200');
+$surface-active: map-get($color, 'n300');
+
+$text-on-primary: map-get($color, 'n100');
+
+$text-emphasis: map-get($color, 'n900');
+$text-muted: map-get($color, 'n700');
+$text-disabled: map-get($color, 'n300');
+$text-interactive: map-get($color, 'ui500');
+
+$header-line-height: 1.25;
+$body-line-height: 1.5;

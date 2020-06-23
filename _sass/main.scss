@@ -1,0 +1,136 @@
+@import "_reset";
+@import "_mixins";
+@import "_primitives";
+
+.visually-hidden {
+    opacity: 0;
+    height: 0px;
+    width: 0px;
+    margin: 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    box-shadow: map-get($elevations, '2');
+    padding: map-get($spacing, 'md') 0;
+    border-bottom: $width-lg solid map-get($color, 'n900');
+    margin: 0 map-get($spacing, 'lg');
+    
+&__breadcrumb {
+    font-weight: bold;
+    color: $text-muted;
+}
+
+    &__section {
+        flex: 1 1 auto;
+    }
+    &__link {
+        text-align: right;
+        font-style: italic;
+        margin-right: map-get($spacing, 'sm');
+        &--current {
+        border-radius: 4px;
+        background-color: rgba(black, 0.12);
+        
+        text-decoration: none;
+        }
+    }
+}
+
+.card {
+    @include elevations(3);
+    border: $width-sm solid map-get($color, 'n200');
+    border-radius: 8px;
+    position: relative;
+    box-sizing: border-box;
+    overflow: auto;
+
+    &__header {
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background: grey;
+        min-height: 200px;
+    }
+
+    &__body {
+        padding: map-get($spacing, 'md');
+    }
+
+    &__footer {
+        padding: map-get($spacing, 'md');
+        display: flex;
+        justify-content: flex-end;
+        align-content: baseline;
+    }
+  }
+
+  .label {
+      font-size: 12px;
+      padding: map-get($spacing, 'xs');
+      border-radius: $radius-sm;
+      background: red;
+      display: inline-block;
+      position: absolute;
+      top: map-get($spacing, 'xs');
+      left: map-get($spacing, 'xs');
+  }
+
+  .btn {
+    display: inline-block;
+    text-decoration: none !important; //override root anchor styles
+    color: $text-interactive;
+    border: $width-sm solid transparent;
+    border-radius: $radius-sm;
+    padding: map-get($spacing, 'sm') map-get($spacing, 'md');
+    background: transparent;
+    transition: all .2s ease-out;
+    font-weight: 600;
+
+    &:hover {
+        background: $surface-hover;
+        transform: translateY(-1px);
+    }
+
+    &:focus, &:active {
+        background: $surface-active;
+        transform: translateY(1px);
+    }
+
+    &-primary {
+        background: $primary;
+        color: $text-on-primary;
+
+        &:hover, &:focus {
+            background: $primary-hover;
+            @include elevations(1);
+        }
+
+        &:active {
+            background: $primary-active;
+            @include elevations(2);
+        }
+    }
+   
+  }
+
+.footer {
+    background-color: transparent;
+
+}
+
+
+.resume {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__section {
+        display: flex;
+        flex: 1 1 200px;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}

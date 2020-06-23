@@ -1,0 +1,23 @@
+<div class="row">
+    {% for author in site.authors %}
+    <div class="span-sm-4 span-lg-12">
+        <div class="card row no-gutter">
+            <div class="card__header span-4 span-md-8 span-lg-4">
+                <img class="radius-sm" {{ author.img }}/>
+                <span class="label">
+                    {{ author.year }}
+                </span>
+            </div>
+            <div class="card__body span-md-8">
+                <h2>{{ author.name }}</h2>
+                
+                <p>{{ author.description }}</p>
+                <a class="btn" href="{{ author.url }}">View</a>
+            </div>
+            <!-- <div class="card__footer span-md-8">
+                <a class="btn" href="{{ author.url }}">View</a>
+            </div> -->
+        </div>
+    </div>
+    {% endfor %}
+</div>
