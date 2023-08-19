@@ -1,0 +1,275 @@
+<style > @import url('https://rsms.me/inter/inter-ui.css');
+
+
+
+body {
+    font-family: 'Inter UI', sans-serif;
+    -moz-font-feature-settings: 'calt'1,
+        'ss02'1;
+    -ms-font-feature-settings: 'calt'1,
+        'ss02'1;
+    -o-font-feature-settings: 'calt'1,
+        'ss02'1;
+    -webkit-font-feature-settings: 'calt'1,
+        'ss02'1;
+    font-feature-settings: 'calt'1,
+        'ss02'1;
+    font-kerning: normal;
+    -webkit-font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+body {
+    background-color: #fbf8f4 !important;
+    color: #233142;
+    font-family: 'Inter UI',
+        sans-serif;
+    -moz-font-feature-settings: 'calt'1,
+        'ss02'1;
+    -ms-font-feature-settings: 'calt'1,
+        'ss02'1;
+    -o-font-feature-settings: 'calt'1,
+        'ss02'1;
+    -webkit-font-feature-settings: 'calt'1,
+        'ss02'1;
+    font-feature-settings: 'calt'1,
+        'ss02'1;
+    font-kerning: normal;
+    -webkit-font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+
+}
+
+@supports (font-variation-settings: normal) {
+    html {
+        font-family: 'Inter UI var alt', sans-serif;
+    }
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: var(--white);
+    background: var(--gray-dark);
+}
+
+::selection {
+    color: var(--white);
+    background: var(--gray-dark);
+}
+
+:root {
+    font-size: 18px;
+    --color-black: #000;
+    --color-dark: #0A1114;
+    --color-subdued: #303030;
+    --color-muted: #ACACAC;
+    --color-light: #E0E0E0;
+    --link-color: #A885FF;
+
+    --dark: #233142;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+
+h1,
+.h1 {
+    font-size: 2.25rem;
+}
+
+h2,
+.h2 {
+    font-size: 1.75rem;
+}
+
+
+
+.finger-left::before {
+    content: "☜";
+    font-size: 1.75rem;
+    position: absolute;
+    top: -.5rem;
+    left: -.75em;
+}
+
+.finger-right::after {
+    content: "☞";
+    font-size: 2em;
+    position: absolute;
+    top: -.25em;
+}
+
+.resume-logo {
+    width: 64px;
+}
+
+
+/*
+if using cards as links,
+un-comment to remove text decoration
+*/
+
+a.card,
+a.card:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+a.card:hover {
+    opacity: 0.9;
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    transition: all .3s ease-out;
+    border-radius: .25rem !important;
+}
+
+
+a.card > card-link:hover {
+    font-style: italic;
+}
+
+
+p {}
+
+/*
+.card-hover:hover {
+    background-color: var(--bg-dark);
+}
+*/
+
+
+/*
+.text-secondary,
+.text-muted {
+    color: var(--color-muted) !important;
+}
+
+.text-dark {
+    color: var(--color-light) !important;
+}
+
+.border-bottom {
+    border-bottom-color: var(--color-subdued) !important;
+}
+
+
+body {
+    font-family: 'nimbus-sans';
+    font-kerning: normal;
+    -webkit-font-kerning: normal;
+    -webkit-font-smoothing: antialiased;
+    background-color: #fbf8f4;
+    color: #233142;
+}
+
+h3,
+.h3 {
+
+    font-weight: 600;
+}
+
+h5,
+.h5 {
+    font-family: 'nimbus-sans-extended';
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+a:hover {
+    color: var(--link-color);
+}
+
+
+p .lead {
+    font-size: 2rem;
+    line-height: 1.5;
+}
+
+.project-link {
+    text-transform: uppercase;
+    letter-spacing: 2;
+    font-family: 'nimbus-sans-extended';
+}
+
+.text-extended {
+    font-family: 'nimbus-sans-extended';
+}
+
+.font-weight-heavy {
+    font-weight: 700;
+}
+*/
+
+
+
+
+
+
+/*
+html {
+	background-color: #FBF8F4;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: 'nimbus-sans-extended';
+}
+
+.fader {
+	opacity: 0;
+	transform: translate(0, 10rem);
+	-webkit-transition: all 750ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	transition:         all 750ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fadein {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.fadein img {
+	transition-delay: 1s;
+}
+
+#overflow-y {
+	min-width: 100vw;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+
+ .card {
+	margin-left: 2rem;
+	max-height: 250px;
+	width: 30vw;
+	min-width: 250px;
+} 
+
+.portfolio-item {
+		color: #;
+		 box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.12); 
+
+}
+
+.portfolio-item:hover {
+	 background-color: #FCCFCF; 
+}
+*/
+
+
+
+
+</style >

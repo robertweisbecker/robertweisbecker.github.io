@@ -1,0 +1,210 @@
+// import Resume from '../components/resume';
+import { LayoutGrid } from "../components/layout";
+import { Article } from "../components/article";
+import { ImageToggle } from "../components/imageToggle";
+import {
+  Heading,
+  Box,
+  Text,
+  Divider,
+  Stack,
+  SimpleGrid,
+  Icon,
+  Container,
+  Link,
+  GridItem,
+  HStack,
+  Image,
+  Spacer,
+  List,
+  ListItem,
+  UnorderedList,
+  Code,
+  OrderedList,
+} from "@chakra-ui/react";
+
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+
+import { AnimatePresence, motion } from "framer-motion";
+
+export const NPR: React.FC = () => {
+  return (
+    <Article pageKey="npr-maps">
+      <ImageToggle
+        before="/assets/npr/map-before.png"
+        after="/assets/npr/map-after.png"
+      />
+      <Stack spacing={5}>
+        <Heading as="h2" size="xl">
+          Background
+        </Heading>
+        <Text>
+          NPR affiliates nationwide – member station managers, underwriters,
+          engineers – use MAPS to inform decision-making around station planning
+          efforts, such as improving reception or adding new services. First
+          released in 2011, it remained largely unchanged since.
+        </Text>
+        <Text>
+          Our main goals for this redesign effort were to overhaul the interface
+          for better usability and increase performance. We decided to use Vue
+          and Mapbox, which provided additional customizability and performance
+          in rendering the map view.
+        </Text>
+      </Stack>
+
+      <Stack spacing={5}>
+        <Heading as="h2" size="xl">
+          Goals
+        </Heading>
+        <UnorderedList>
+          <ListItem>
+            Revamp the interface – more modern, brand alignment
+          </ListItem>
+          <ListItem>Improve usability</ListItem>
+          <ListItem>
+            Reliability: refresh data and optimize performance
+          </ListItem>
+        </UnorderedList>
+      </Stack>
+
+      <Stack spacing={5}>
+        <Heading as="h2" size="xl">
+          Component-ization
+        </Heading>
+        <Text>
+          Using a framework like Vue Material, we were driven to use its
+          elements as building blocks for more complex components.
+        </Text>
+        <Image src="/assets/npr/map-ui.png" />
+        <Spacer />
+
+        <Heading as="h3" size="lg">
+          Station Cards
+        </Heading>
+        <Text>
+          Initially, stations were listed in the sidebar with only their
+          callsigns as identifiers.{" "}
+        </Text>
+        <Text>
+          We expanded these list items into cards that included each station's
+          callsign, location, and logo, along with labeled controls to
+          differentiate between coverages and contour toggles.
+        </Text>
+        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+          <Image
+            maxW="320px"
+            mx="auto"
+            src="/assets/npr/map-sidebar.png"
+            boxShadow="2xl"
+          />
+        </Box>
+        <Heading as="h3" size="lg">
+          Station Detail
+        </Heading>
+        <Text>
+          To accommodate the need for more in-depth station information, we
+          added a detail view in the sidebar when users clicked on a station.
+          Demographic information, previously located in a modal, was moved into
+          the station detail view to provide access without navigating away from
+          the map.
+        </Text>
+        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+          <Image src="/assets/npr/map-detail.png" />
+        </Box>
+        <Heading as="h3" size="lg">
+          Navigation & Controls
+        </Heading>
+        <Text>
+          MAPS features a search bar allowing users to search for stations by
+          callsign, address, or location. This moved into a main navbar element
+          that emphasized the search field, while secondary settings and filters
+          became dropdowns.
+        </Text>
+
+        <Heading as="h4" size="md">
+          Filtering
+        </Heading>
+        <Text>
+          Stations displaying active contours or coverages were previously only
+          discoverable via their active button state in the sidebar list. If an
+          active station didn't appear in a user's search results, there was no
+          way to quickly reference the active station apart from locating it on
+          the map.
+        </Text>
+
+        <Text>
+          To solve this, a bar displaying active stations was overlaid on the
+          top edge of the map, with chips representing each station. Clicking a
+          station chip would navigate to the station and open its details in the
+          sidebar.
+        </Text>
+        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+          <video width="100%" height="auto" controls>
+            <source
+              src="assets/npr/maps-desktop-settings-720.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </Box>
+      </Stack>
+
+      <Stack spacing={5}>
+        <Heading as="h2" size="xl">
+          Responsiveness
+        </Heading>
+        <Text>
+          Perhaps the most significant change was the newly-responsive design.
+          On a phone, there simply isn't enough real estate to pan around a map
+          and see detailed information, so we decided that modality was the best
+          course of action.
+        </Text>
+
+        <Text>
+          List and map views collapse atop one another on small devices, and the
+          search bar remains persistent for discoverability. Users can easily
+          toggle between list and map views by tapping an icon button in the
+          nav.
+        </Text>
+
+        <Text>
+          Rather than creating a new component, we were able to repurpose our
+          new station card component, restyling them as drawers in map mode, to
+          let users access station information without having to toggle views.{" "}
+        </Text>
+        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+          <video width="100%" height="auto" controls>
+            <source src="assets/npr/maps-mobile-1.mp4" type="video/mp4" />
+          </video>
+        </Box>
+      </Stack>
+
+      <Stack spacing={5}>
+        <Heading as="h2" size="xl">
+          Conclusion
+        </Heading>
+        <Text>
+          With this redesign effort, we managed to tackle many of the problems
+          we were tasked with addressing. In updating the tech stack, we managed
+          to improve performance and reduce the friction of loading large
+          amounts of data.{" "}
+        </Text>
+
+        <Text>
+          The creation of responsive components allowed users to access station
+          information and engage with the map, while also allowing us to
+          introduce elements of NPR's brand that had evolved in the years since
+          the tool's inception.{" "}
+        </Text>
+
+        <Text>
+          It also added some degree of future-proofing: by nature, components
+          will always be more scalable and maintainable than ad-hoc features.
+          Meanwhile, surfacing more detailed information in the sidebar offers
+          essential information at a glance, simplifying the decision-making
+          process for station planning efforts, and ultimately, better serving
+          public broadcasters across the United States.
+        </Text>
+      </Stack>
+    </Article>
+  );
+};

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Signin Template · Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.typekit.net/yzm6szz.css">
+
+
+    <style>
+        .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+        
+html, body {
+  height: 100%;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;s
+  background-color: #f5f5f5;
+}
+
+
+.form-signin .form-control {
+position: relative;
+box-sizing: border-box;
+height: auto;
+padding: 10px;
+font-size: 16px;
+}
+        
+.form-signin .form-control:focus {
+  z-index: 2;
+}       
+        
+    </style>
+</head>
+
+<body class="">
+    <div class="container">
+        <div class="row">
+            <form class="form-signin  col-md-8 offset-md-2 text-center">
+                <img class="mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                <h1 class="font-weight-bold">Restricted Area</h1>
+                <p class="lead mb-5 font-weight-light">Please sign in to view this project.</p>
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control my-2" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="passWord()">Enter</button>
+                <a href="" class="btn mt-5 text-muted">Return to safety</a>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    function passWord() {
+        var testV = 1;
+        var pass1 = prompt('Please enter the secret word.', '');
+        while (testV < 3) {
+            if (!pass1)
+                history.go(-1);
+            if (pass1.toLowerCase() == "hangspace") {
+                alert('Access Granted.');
+                window.open('npr.html');
+                break;
+            }
+            testV += 1;
+            var pass1 =
+                prompt('Access Denied - Password Incorrect, Please Try Again.', 'Password');
+        }
+        if (pass1.toLowerCase() != "password" & testV == 3)
+            history.go(-1);
+        return " ";
+    }
+
+</script>
+
+
+
+</html>
