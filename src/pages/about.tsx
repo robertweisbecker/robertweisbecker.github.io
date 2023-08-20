@@ -27,7 +27,9 @@ import {
 } from "@chakra-ui/react";
 import {
   ArrowTopRightIcon,
+  BackpackIcon,
   SunIcon,
+  FileIcon,
   MoonIcon,
   LinkedInLogoIcon,
   ReaderIcon,
@@ -39,6 +41,7 @@ import {
   Link1Icon,
   DotFilledIcon,
   EnvelopeClosedIcon,
+  CursorArrowIcon,
 } from "@radix-ui/react-icons";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -47,36 +50,33 @@ export const About: React.FC = () => {
   return (
     <Stack spacing={10} py={20}>
       <Heading size="2xl" mb={10}>
-        About (Bob)
+        About
       </Heading>
       <LayoutGrid variant="twoThirds" columnGap={{ base: 4, xl: 20 }}>
         <GridItem>
-          <HStack mb={10}>
-            <Icon as={DotFilledIcon} color="green.400" />
+          <HStack mb={10} color="subtle">
+            <Icon as={CursorArrowIcon} />
             <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
               What I do
             </Heading>
           </HStack>
           <Stack gap={5} fontSize="lg" lineHeight="tall" color="emphasis">
             <Text>
-              During the day, I'm a{" "}
-              <Box as="span" fontWeight="medium">
+              By day, I'm a{" "}
+              <Box as="span" fontWeight="semibold">
                 Principal Designer, Design Systems
               </Box>{" "}
-              at Everfi, where I've spent the last two years leading the
-              creation of a shared organization-wide design language. And at
-              night, I{" "}
+              at <LinkOut href="https://everfi.com" text="Everfi" />, where I've
+              spent the last two years leading the creation of a shared
+              organization-wide design language. By night, night, I'm a{" "}
               <sub>
-                get{" "}
+                little{" "}
                 <sub>
                   {" "}
-                  a little <sub>sleepy.</sub>.
+                  <sub>sleepy...</sub>
                 </sub>
-                .
               </sub>
-              .
             </Text>
-
             <Text fontSize="lg" lineHeight="tall">
               Beginning in 2018, I led the creation of our product
               organization's first design system, shepherding its transition
@@ -84,93 +84,81 @@ export const About: React.FC = () => {
               theming and tooling to support 80+ courses across a dozen branded
               product lines.
             </Text>
+            <Spacer />
+            <HStack my={10} color="subtle">
+              <Icon as={CounterClockwiseClockIcon} />
+              <Heading
+                as="h2"
+                size="2xs"
+                textTransform="uppercase"
+                id="projects"
+              >
+                What I've done
+              </Heading>
+            </HStack>
+            <Text>
+              <UnorderedList spacing={3} fontSize="sm">
+                <ListItem>
+                  Led design efforts for adult & K12 e-learning courses at
+                  Everfi, including Achieve, Engage, and Data Science
+                  Foundations
+                </ListItem>
+                <ListItem>
+                  Worked on education products for customers such as Google,
+                  Meta, LinkedIn, Kroger, Beyond Meat, Truist, and more.
+                </ListItem>
+
+                <ListItem>
+                  Built a mapping application at{" "}
+                  <LinkOut href="https://npr.org" text="NPR" />
+                  when I wasn't busy
+                  <Link href="https://youtu.be/lgmw41CY1Fo?t=36" isExternal>
+                    standing awkwardly
+                  </Link>{" "}
+                  in the background of Tiny Desk recordings
+                </ListItem>
+                <ListItem>
+                  Designed web & iOS screens, performed user testing, and made
+                  some{" "}
+                  <Link
+                    href="https://twitter.com/ParkingPanda/status/617057417696833536?s=20"
+                    isExternal
+                  >
+                    cheesy
+                  </Link>{" "}
+                  social media assets for
+                  <LinkOut
+                    href="https://www.parkingpanda.com"
+                    text="Parking Panda"
+                  />
+                </ListItem>
+                <ListItem>
+                  Delivered a (finally relevant!) thesis on chatbots and
+                  conversational interface design at
+                  <LinkOut
+                    href="https://www.mica.edu/graduate-programs/ux-design-mps/"
+                    text="MICA"
+                  />
+                </ListItem>
+              </UnorderedList>
+            </Text>
           </Stack>
         </GridItem>
-        <GridItem position="relative">
-          <Image src="/assets/headshot.png" rounded="2xl" />
-        </GridItem>
-        <GridItem>
-          <HStack mb={10}>
-            <Icon as={CounterClockwiseClockIcon} />
-            <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
-              What I've done
-            </Heading>
-          </HStack>
-          <Text>
-            <UnorderedList spacing={3}>
-              <ListItem>
-                Led design efforts for adult & K12 products, including Everfi
-                Achieve, Engage, and Data Science
-              </ListItem>
-              {/* <ListItem>
-                Worked on other projects like{" "}
-                <LinkOut
-                  text="The Compassion Project"
-                  href="https://thecompassionproject.com/"
-                />
-                ,
-              </ListItem> */}
 
-              <ListItem>
-                Built a mapping application at{" "}
-                <Link href="https://npr.org" isExternal>
-                  NPR
-                  <Icon opacity=".5" as={ArrowTopRightIcon} mx={1} />
-                </Link>
-                when I wasn't busy{" "}
-                <Link href="https://youtu.be/lgmw41CY1Fo?t=36" isExternal>
-                  standing awkwardly
-                </Link>{" "}
-                in the background of Tiny Desk recordings
-              </ListItem>
-              <ListItem>
-                Designed web & iOS screens, performed user testing, and made
-                some{" "}
-                <Link
-                  href="https://twitter.com/ParkingPanda/status/617057417696833536?s=20"
-                  isExternal
-                >
-                  cheesy
-                </Link>{" "}
-                social media assets for{" "}
-                <Link href="https://www.parkingpanda.com">
-                  Parking Panda / SpotHero
-                  <Icon opacity=".5" as={ArrowTopRightIcon} mx={1} />
-                </Link>
-              </ListItem>
-              <ListItem>
-                Delivered a (finally relevant!) thesis on chatbots and
-                conversational interface design at {"  "}
-                <Link
-                  href="https://www.mica.edu/graduate-programs/ux-design-mps/"
-                  isExternal
-                >
-                  MICA
-                  <Icon opacity=".5" as={ArrowTopRightIcon} mx={1} />
-                </Link>
-              </ListItem>
-            </UnorderedList>
-          </Text>
-        </GridItem>
-        <GridItem>
-          <HStack mb={10}>
-            <Icon as={Link1Icon} />
-            <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
-              Links I have
-            </Heading>
-          </HStack>
-          <List spacing={4} fontSize="sm" color="subtle">
+        <GridItem position="relative">
+          <Image src="/assets/hb-bob-cropped.png" rounded="2xl" />
+          <List spacing={4} fontSize="sm" my={10}>
             <ListItem display="flex" gap={4} flexWrap="wrap">
               <Button
                 as={Link}
                 isExternal
                 href="/resume.pdf"
-                variant="link"
                 textDecoration="none"
+                variant="link"
                 size="sm"
-                leftIcon={<FileTextIcon />}
+                leftIcon={<FileIcon />}
               >
-                View resume
+                Download resume
               </Button>
               {/* <Divider orientation="vertical" h="24px" />
               <Button
@@ -186,23 +174,22 @@ export const About: React.FC = () => {
             <ListItem>
               <Button
                 as={Link}
-                isExternal
-                href="https://www.linkedin.com/in/robertweisbecker/"
+                href="mailto:rpw@robertweisbecker.com"
                 variant="link"
                 size="sm"
-                alignItems="center"
-                leftIcon={<LinkedInLogoIcon />}
+                textDecoration="none"
+                leftIcon={<EnvelopeClosedIcon />}
               >
-                LinkedIn
+                Contact
               </Button>
             </ListItem>
             <ListItem>
-              {" "}
               <Button
                 as={Link}
                 isExternal
                 href="https://read.cv/weisbecker"
                 variant="link"
+                textDecoration="none"
                 size="sm"
                 alignItems="center"
                 sx={{ "& svg": { transform: "rotate(-20deg)" } }}
@@ -211,149 +198,150 @@ export const About: React.FC = () => {
                 read.cv
               </Button>
             </ListItem>
-            {/* <ListItem>
+            <ListItem>
               <Button
+                as={Link}
+                isExternal
+                href="https://www.linkedin.com/in/robertweisbecker/"
                 variant="link"
+                textDecoration="none"
                 size="sm"
                 alignItems="center"
+                leftIcon={<LinkedInLogoIcon />}
+              >
+                LinkedIn
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                as={Link}
+                size="sm"
+                variant="link"
+                alignItems="center"
+                textDecoration="none"
                 leftIcon={<GitHubLogoIcon />}
+                href="https://github.com/robertweisbecker"
+                isExternal
               >
                 Github
               </Button>
-            </ListItem> */}
-            {/* <ListItem>
-              <Button
-                variant="link"
-                size="sm"
-                leftIcon={<EnvelopeClosedIcon />}
-              >
-                Email
-              </Button>
-            </ListItem> */}
+            </ListItem>
           </List>
         </GridItem>
       </LayoutGrid>
       <Spacer />
-      <Heading size="lg">Experience</Heading>
-      <LayoutGrid variant="threeUp" rowGap={4}>
-        <GridItem rowSpan={{ base: 1, md: 5 }}>
+
+      <HStack mb={5}>
+        <Icon as={BackpackIcon} />
+        <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
+          Where (I've worked)
+        </Heading>
+      </HStack>
+      <LayoutGrid variant="threeUp" rowGap={2}>
+        <GridItem rowSpan={{ base: 1, lg: 5 }} colSpan={{ sm: 2, lg: 1 }}>
           <Heading size="md" textTransform="uppercase">
             Everfi
           </Heading>{" "}
         </GridItem>
         <GridItem>
-          <HStack>
-            <Icon as={DotFilledIcon} display="inline" />
-            <Text>Current</Text>
-          </HStack>
+          <Text fontWeight="medium">
+            Principal Designer, Design Systems
+            <Icon
+              as={DotFilledIcon}
+              color="green.400"
+              display="inline"
+              verticalAlign="middle"
+            />
+          </Text>
         </GridItem>
         <GridItem>
-          <Text>Principal Designer, Design Systems</Text>{" "}
+          <Text color="subtle">2022 – present</Text>
         </GridItem>
         <GridItem>
-          <Text>2022</Text>
+          <Text fontWeight="medium">Principal Designer, Platform UX</Text>
         </GridItem>
         <GridItem>
-          <Text>Principal Designer, Platform UX</Text>
+          <Text color="subtle">2022</Text>
         </GridItem>
         <GridItem>
-          <Text>2020</Text>
+          <Text fontWeight="medium">Senior Interaction Designer</Text>
         </GridItem>
         <GridItem>
-          <Text>Senior Interaction Designer</Text>
+          <Text color="subtle">2020</Text>
         </GridItem>
         <GridItem>
-          <Text>2018</Text>
+          <Text fontWeight="medium">Interaction Designer</Text>
         </GridItem>
         <GridItem>
-          <Text>Interaction Designer</Text>
+          <Text color="subtle">2018</Text>
         </GridItem>
         <GridItem>
-          <Text>2017</Text>
+          <Text fontWeight="medium">UX Designer</Text>
         </GridItem>
         <GridItem>
-          <Text>UX Designer</Text>
+          <Text color="subtle">2017</Text>
         </GridItem>
       </LayoutGrid>
-      <LayoutGrid variant="threeUp">
-        <GridItem>
-          <Heading size="md">NPR Labs</Heading>
-        </GridItem>
-        <GridItem>
-          <Text>Research & Development Intern</Text>
-        </GridItem>
-        <GridItem>
-          <Text>2017</Text>
-        </GridItem>
-      </LayoutGrid>
-      <LayoutGrid variant="threeUp">
-        <GridItem>
-          <Heading size="md">Parking Panda</Heading>
-        </GridItem>
-        <GridItem>
-          <Text>UX Design Intern</Text>
-        </GridItem>
-        <GridItem>
-          <Text>2015</Text>
-        </GridItem>
-      </LayoutGrid>
-      <Divider />
-      <Heading size="lg">School</Heading>
-      <LayoutGrid variant="threeUp" rowGap={4}>
-        <GridItem rowSpan={{ base: 1, md: 5 }}>
-          <Heading size="md">Maryland Institute College of Art</Heading>{" "}
-        </GridItem>
-        <GridItem>
-          <Text>Master's in User Experience Design</Text>{" "}
-        </GridItem>
-        <GridItem>
-          <HStack>
-            <Icon as={DotFilledIcon} display="inline" />
-            <Text>2017</Text>
-          </HStack>
-        </GridItem>
-        <GridItem>
-          <Text>Principal Designer, Platform UX</Text>
-        </GridItem>
-        <GridItem>
-          <Text>2022</Text>
-        </GridItem>
-        <GridItem>
-          <Text>Senior Interaction Designer</Text>
-        </GridItem>
-        <GridItem>
-          <Text>2020</Text>
-        </GridItem>
-        <GridItem>
-          <Text>Interaction Designer</Text>
-        </GridItem>
-        <GridItem>
-          <Text>2018</Text>
-        </GridItem>
-        <GridItem>
-          <Text>UX Designer</Text>
-        </GridItem>
-        <GridItem>
-          <Text>2017</Text>
-        </GridItem>
 
-        <GridItem>
-          <Heading size="md">NPR Labs</Heading>
+      <LayoutGrid variant="threeUp" rowGap={2}>
+        <GridItem colSpan={{ sm: 2, lg: 1 }}>
+          <Heading size="md">National Public Radio</Heading>
         </GridItem>
         <GridItem>
-          <Text>Research & Development Intern</Text>
+          <Text fontWeight="medium">
+            Research & Development Intern, NPR Labs
+          </Text>
         </GridItem>
         <GridItem>
-          <Text>2017</Text>
+          <Text color="subtle">Spring 2017</Text>
+        </GridItem>
+      </LayoutGrid>
+      <LayoutGrid variant="threeUp" rowGap={2}>
+        <GridItem colSpan={{ sm: 2, lg: 1 }}>
+          <Heading size="md" display="inline">
+            Parking Panda
+          </Heading>
+          <Text mx={1} textStyle="caption" display="inline">
+            (acquired by SpotHero)
+          </Text>
         </GridItem>
         <GridItem>
-          <Heading size="md">Parking Panda</Heading>
+          <Text fontWeight="medium">UX Design Intern</Text>
         </GridItem>
         <GridItem>
-          <Text>UX Design Intern</Text>
+          <Text color="subtle">Summer 2015</Text>
+        </GridItem>
+      </LayoutGrid>
+      <Spacer />
+
+      <HStack mb={5}>
+        <Icon as={Link1Icon} />
+        <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
+          Where (I learned things)
+        </Heading>
+      </HStack>
+
+      <LayoutGrid variant="threeUp" rowGap={2}>
+        <GridItem colSpan={{ sm: 2, lg: 1 }}>
+          <Heading size="md">Maryland Institute College of Art</Heading>
         </GridItem>
         <GridItem>
-          <Text>2015</Text>
+          <Text fontWeight="medium">MPS, User Experience Design</Text>
+        </GridItem>
+        <GridItem>
+          <Text color="subtle">2016 – 2017</Text>
+        </GridItem>
+      </LayoutGrid>
+      <LayoutGrid variant="threeUp" rowGap={2}>
+        <GridItem colSpan={{ sm: 2, lg: 1 }}>
+          <Heading size="md">University of Michigan</Heading>
+        </GridItem>
+        <GridItem fontWeight="medium">
+          <Text>BA, Cognitive Science</Text>
+          <Text>Minor, Art & Design</Text>
+        </GridItem>
+        <GridItem>
+          <Text color="subtle">2012 – 2016</Text>
         </GridItem>
       </LayoutGrid>
     </Stack>

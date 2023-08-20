@@ -1,5 +1,5 @@
-// import Resume from '../components/resume';
 import { LayoutGrid } from "../components/layout";
+import { LinkOut } from "../components/linkOut";
 import { Article } from "../components/article";
 import {
   Heading,
@@ -25,101 +25,122 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const Engage: React.FC = () => {
   return (
-    <Article pageKey="data-science">
-      <Stack spacing={20} py={20}>
-        <Heading>EverFi Engage </Heading>
+    <Article pageKey="engage">
+      <Stack spacing={10} py={0}>
+        <Image src="/assets/engage/engage-1.png" />
 
-        <Text>
-          Engage allows financial institutions to deliver in-person financial
-          education to their customers and the community via guided workshop
-          events at their branches. The product consists of 13 digital learning
-          modules covering personal finance & money management, small business
-          operations, and home ownership.
-        </Text>
-
-        <Link href="https://everfi-curriculums.s3.amazonaws.com/curriculums/engage-content/develop/index.html#">
-          See it in action
-        </Link>
-        <Divider />
-        <Heading as="h2">Details</Heading>
-
-        <Image src="images/engage/engage-1.png" />
-
+        <Heading as="h2">Audience</Heading>
         <Text>
           Engage workshops are geared toward low- to moderate-income adults,
           families, and small business owners. In order to help these users feel
           at ease with weighty topics, the visual design relied on soft colors
-          and springy animation, and content was written with a casual tone.
+          and springy animation, and content was written in a casual and
+          approachable tone.
         </Text>
-        <Image src="images/engage/bbva-1.jpg" />
-        <Image src="images/engage/bbva-2.jpg" />
-        <Heading as="h2">Using a Design System</Heading>
-        <Text color="muted">
-          Upon joining the project, I had the team migrate existing designs to
-          Sketch, so that we could use it to build a design system that would
-          let us rapidly execute and iterate. That change in process led to the
-          creation of a template library containing 40+ unique pages in mobile,
-          tablet, and desktop sizes.
-        </Text>
-        <Image src="images/engage/engage-components.png" borderRadius="lg" />
 
-        <Text textAlign="center" fontStyle="italic">
-          Reusable components created in Sketch.
-        </Text>
-        <Image src="images/engage/engage-templates.png" borderRadius="lg" />
+        <Image src="/assets/engage/bbva-1.jpg" />
 
-        <Text textAlign="center" fontStyle="italic">
-          Check out the full template library
-          <Link href="https://frankfrankfrankfrank.github.io/engage/global/index.html">
-            here
-          </Link>
-        </Text>
-        <Heading as="h2">Interaction Design</Heading>
+        <Heading as="h2">Component Library</Heading>
         <Text color="muted">
-          I used a host of tools to prototype different interactions, including
-          Invision, Flinto, Framer, as well as HTML/CSS so that we could ship
-          code directly to developers.
+          Upon joining the project, I had the team migrate existing designs from
+          Adobe XD to Sketch, so that we could use it to build a reusable
+          component library that would let us rapidly execute and iterate. That
+          change in process led to the creation of a template library containing
+          40+ unique pages in mobile, tablet, and desktop sizes.
         </Text>
+        <Stack>
+          <Image src="/assets/engage/engage-components.png" borderRadius="lg" />
+          <Text textStyle="caption">
+            A collection of components recreated in Sketch
+          </Text>
+        </Stack>
+        <Stack>
+          <Image src="/assets/engage/engage-templates.png" />
+          <Text textStyle="caption">Template library</Text>
+        </Stack>
+        <Heading as="h2">Interactions</Heading>
         <Text color="muted">
-          A sampling of these are below. To see them in action, check out the
-          live development link{" "}
-          <Link href="http://everfi-curriculums.s3.amazonaws.com/curriculums/engage-content/develop/index.html#">
-            Hello
-          </Link>
+          To prototype new interactions, I learned to use Flinto, Framer, and
+          Invision Studio, and freshened up on HTML/CSS to ship code directly to
+          developers.
         </Text>
-        <video width="100%" height="auto" controlsshadow-sm>
-          <source
-            src="images/engage/engage-facilitator-script-drawer.mov"
-            type="video/mp4"
-          />
-        </video>
-
-        <Text textAlign="center" fontStyle="italic">
-          Workshop facilitators can access their script at any time by tapping a
-          persistent tab on the left edge.
-        </Text>
-        {/* <video width="100%" height="auto" controls borderRadius="lg"> */}
-        {/* <source src="images/engage/carousel.mov"
-borderRadius shadow-sm" type="video/mp4"> */}
-        {/* </video> */}
-        <Text textAlign="center" fontStyle="italic">
-          Carousel component with some light animation to focus users'
-          attention.
-        </Text>
-        {/* <video width="100%" height="auto" controls borderRadius="lg"> */}
-        {/* <source src="images/engage/card-expand.mov"
-borderRadius="lg" type="video/mp4"> */}
-        {/* </video> */}
-        <Text textAlign="center" fontStyle="italic">
-          Using animation to maintain continuity between components.
-        </Text>
-        {/* <video width="100%" height="auto" controls borderRadius="lg"> */}
-        {/* <source src="images/engage/Engage-Circle-Progression.mov" borderRadius shadow-sm" type="video/mp4"> */}
-        {/* </video> */}
-        <Text textAlign="center" fontStyle="italic">
-          Turning a list into an appealing interactive.
-        </Text>
+        <Text color="muted">A sampling of these are below:</Text>
+        <LayoutGrid variant="twoUp">
+          <Stack>
+            <Box
+              borderColor="emphasis"
+              border="8px"
+              borderRadius="2xl"
+              overflow="hidden"
+            >
+              <video width="100%" height="auto" controls>
+                <source
+                  src="/assets/engage/engage-facilitator-script-drawer.mov"
+                  type="video/mp4"
+                />
+              </video>
+            </Box>
+            <Text textStyle="caption">
+              Workshop facilitators can access their script at any time by
+              tapping a persistent tab on the left edge.
+            </Text>
+          </Stack>
+          <Stack>
+            <Box
+              borderColor="emphasis"
+              border="8px"
+              borderRadius="2xl"
+              overflow="hidden"
+            >
+              <video width="100%" height="auto" controls>
+                <source src="/assets/engage/carousel.mov" type="video/mp4" />
+              </video>
+            </Box>
+            <Text textStyle="caption">
+              Carousel component with some light animation to focus users'
+              attention
+            </Text>
+          </Stack>
+          <Stack>
+            <Box
+              borderColor="emphasis"
+              border="8px"
+              borderRadius="2xl"
+              overflow="hidden"
+            >
+              <video width="100%" height="auto" controls>
+                <source src="/assets/engage/card-expand.mov" type="video/mp4" />
+              </video>
+            </Box>
+            <Text textStyle="caption">
+              Maintaining continuity via animation
+            </Text>
+          </Stack>
+          <Stack>
+            <Box
+              borderColor="emphasis"
+              border="8px"
+              borderRadius="2xl"
+              overflow="hidden"
+            >
+              <video width="100%" height="auto" controls>
+                <source
+                  src="/assets/engage/Engage-Circle-Progression.mov"
+                  type="video/mp4"
+                />
+              </video>
+            </Box>
+            <Text textStyle="caption">Spicing up an ordered list</Text>
+          </Stack>
+        </LayoutGrid>
       </Stack>
+      <Text>
+        Read more about Engage on{" "}
+        <LinkOut
+          href="https://everfi-curriculums.s3.amazonaws.com/curriculums/engage-content/develop/index.html#"
+          text="everfi.com"
+        />
+      </Text>
     </Article>
   );
 };
