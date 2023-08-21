@@ -18,30 +18,35 @@ import {
 interface ImageProps {
   before: string;
   after: string;
+  tab1?: string;
+  tab2?: string;
 }
 
-export const ImageToggle: FC<ImageProps> = ({ before, after }) => {
+export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
   return (
     <Flex gap="4">
-      <Tabs variant="soft-rounded">
+      <Tabs variant="soft-rounded" colorScheme="blue" color="emphasis">
         <TabPanels
           mb={2}
-          bg="bg-subtle"
-          borderRadius="2xl"
+          // bg="bg-subtle"
+          borderRadius="lg"
           boxShadow="inner"
-          display="flex"
+          overflow="hidden"
+          border="1px"
+          borderColor="border"
+          // display="flex"
         >
-          <TabPanel p={0} flexGrow="1">
+          <TabPanel p={0}>
             <Image src={before}></Image>
           </TabPanel>
-          <TabPanel flexGrow="1">
+          <TabPanel p={0}>
             <Image src={after}></Image>
           </TabPanel>
         </TabPanels>
         <Center>
           <TabList>
-            <Tab>Before</Tab>
-            <Tab>After</Tab>
+            <Tab>{tab1 ? tab1 : "Before"}</Tab>
+            <Tab>{tab2 ? tab2 : "After"}</Tab>
           </TabList>
           <TabIndicator />
         </Center>

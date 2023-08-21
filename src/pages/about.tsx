@@ -68,7 +68,7 @@ export const About: React.FC = () => {
               </Box>{" "}
               at <LinkOut href="https://everfi.com" text="Everfi" />, where I've
               spent the last two years leading the creation of a shared
-              organization-wide design language. By night, night, I'm a{" "}
+              organization-wide design language. By night, I'm a{" "}
               <sub>
                 little{" "}
                 <sub>
@@ -107,11 +107,18 @@ export const About: React.FC = () => {
                   Worked on education products for customers such as Google,
                   Meta, LinkedIn, Kroger, Beyond Meat, Truist, and more.
                 </ListItem>
-
+                <ListItem>
+                  Delivered a (finally relevant!) thesis on chatbots and
+                  conversational interface design at
+                  <LinkOut
+                    href="https://www.mica.edu/graduate-programs/ux-design-mps/"
+                    text="MICA"
+                  />
+                </ListItem>
                 <ListItem>
                   Built a mapping application at{" "}
                   <LinkOut href="https://npr.org" text="NPR" />
-                  when I wasn't busy
+                  when I wasn't busy{" "}
                   <Link href="https://youtu.be/lgmw41CY1Fo?t=36" isExternal>
                     standing awkwardly
                   </Link>{" "}
@@ -130,14 +137,6 @@ export const About: React.FC = () => {
                   <LinkOut
                     href="https://www.parkingpanda.com"
                     text="Parking Panda"
-                  />
-                </ListItem>
-                <ListItem>
-                  Delivered a (finally relevant!) thesis on chatbots and
-                  conversational interface design at
-                  <LinkOut
-                    href="https://www.mica.edu/graduate-programs/ux-design-mps/"
-                    text="MICA"
                   />
                 </ListItem>
               </UnorderedList>

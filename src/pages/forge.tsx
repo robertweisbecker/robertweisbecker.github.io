@@ -1,6 +1,7 @@
 // import Resume from '../components/resume';
 import { LayoutGrid } from "../components/layout";
 import { Article } from "../components/article";
+import { ImageToggle } from "../components/imageToggle";
 
 import {
   Heading,
@@ -31,6 +32,10 @@ export const Forge: React.FC = () => {
   return (
     <Article pageKey="forge">
       <Stack spacing={10}>
+        <ImageToggle
+          before="/assets/forge/forge-before.png"
+          after="/assets/forge/forge-after.png"
+        />
         <Heading as="h2" size="xl">
           Background
         </Heading>
@@ -105,8 +110,8 @@ export const Forge: React.FC = () => {
         <Spacer />
 
         <Text>
-          Sometimes the most obvious solution works, and making the darks darker
-          and the lights lighter resolved any contrast or legibility concerns:
+          Applied to typography and surfaces, the new color palettes fully
+          resolved any contrast concerns:
         </Text>
         <LayoutGrid variant="twoUp" my={10}>
           <GridItem textStyle="caption">
@@ -130,6 +135,12 @@ export const Forge: React.FC = () => {
         </Text>
         <Spacer />
         <Image borderRadius="xl" src="/assets/forge/button-modes.png" />
+        <ImageToggle
+          before="/assets/forge/dark.png"
+          after="/assets/forge/light.png"
+          tab1="Dark Mode"
+          tab2="Light Mode"
+        />
       </Stack>
 
       <Stack spacing={10}>
@@ -146,11 +157,8 @@ export const Forge: React.FC = () => {
           desktop applications.
         </Text>
         <Text>
-          Starting fresh, I created a more dense type scale using Inter{" "}
-          <Box as="span" opacity=".5">
-            (I couldn't resist!)
-          </Box>{" "}
-          that offered a native look & feel and better-supported the complex
+          Starting fresh, I created a more dense type scale with Inter that
+          offered a more native look & feel and better-supported the complex
           interface.
         </Text>
         <Spacer />
@@ -163,11 +171,26 @@ export const Forge: React.FC = () => {
         </Stack>
         <Spacer />
         <Heading as="h4" size="md">
-          Editor Inputs
+          Edit Forms
         </Heading>
-        <Text></Text>
+        <Text>
+          In addition to the type and its inconsistent application, form styling
+          was a primary source of bloat. To combat this, inputs were made more
+          compact, and help text was moved into a tooltip to improve
+          scannability.
+        </Text>
+        <Stack>
+          <Image borderRadius="xl" src="/assets/forge/inputs.png" />
+          <Text textStyle="caption">
+            Dense spacing and type applied to input fields
+          </Text>
+        </Stack>
+        <Text>
+          With these changes in place, the length of various editor views
+          decreased by more than 60%.
+        </Text>
         <Stack textStyle="caption" align="center">
-          <Image borderRadius="xl" src="/assets/forge/type.png" />
+          <Image borderRadius="xl" src="/assets/forge/density-compare.png" />
 
           <Text>Before & after</Text>
         </Stack>
@@ -197,22 +220,53 @@ export const Forge: React.FC = () => {
           while simultaneously reinforcing the mental model of editing a
           higher-level view.
         </Text>
+        <ImageToggle
+          before="/assets/forge/edit-activity-before.png"
+          after="/assets/forge/edit-activity-after.png"
+        />
+        <Text>
+          This also benefitted performance and usability, since the old edit UI
+          always opened another panel adjacent to the navigation, causing the
+          live preview to resize and force a refresh. This was particularly
+          frustrating when editing a page, since the page would shift between
+          desktop and tablet breakpoints, causing you to lose context.
+        </Text>
+        <Text>
+          Rather than opening in a panel beside the block list, the block editor
+          would replace it to prevent resizing and remain consistent with the
+          drilldown navigation pattern.
+        </Text>
+        <ImageToggle
+          before="/assets/forge/edit-page-before.png"
+          after="/assets/forge/edit-page-after.png"
+        />
+        <Text>
+          Likewise, page actions were moved from a difficult-to-discover
+          right-click menu on their parent activities to a dedicated dropdown
+          when viewing the page's block list. Rather than editing a page in two
+          places, the block list became the home for all page edit features.
+        </Text>
+        <Stack textStyle="caption" align="center">
+          <Image borderRadius="xl" src="/assets/forge/sidebar.png" />
+
+          <Text>Before & after of menu hierarchy and actions</Text>
+        </Stack>
       </Stack>
 
       <Stack spacing={10}>
         <Heading as="h3" size="lg">
-          Components
+          4. Component Standardization
         </Heading>
 
-        <Text>A look at the UI with the new system applied:</Text>
-        <Stack textStyle="caption">
-          <Image borderRadius="xl" src="/assets/forge/fields.png" />
-          <Text>Inputs</Text>
-        </Stack>
+        <Text>A look at some components with standardized styling:</Text>
 
         <Stack textStyle="caption">
           <Image borderRadius="xl" src="/assets/forge/buttons.png" />
           <Text>Buttons</Text>
+        </Stack>
+        <Stack textStyle="caption">
+          <Image borderRadius="xl" src="/assets/forge/fields.png" />
+          <Text>Inputs</Text>
         </Stack>
         <Stack textStyle="caption">
           <Image borderRadius="xl" src="/assets/forge/nav.png" />
@@ -247,15 +301,13 @@ export const Forge: React.FC = () => {
           <GridItem>
             <Stack>
               <Image borderRadius="xl" src="/assets/forge/widgets.png" />
-              <Text>Utility class widgets</Text>
-              <Text> </Text>
+              <Text textStyle="caption">Utility class widgets</Text>
             </Stack>
           </GridItem>
           <GridItem>
             <Stack>
               <Image borderRadius="xl" src="/assets/forge/theme-picker.png" />
-              <Text>Theme picker</Text>
-              <Text> </Text>
+              <Text textStyle="caption">Theme picker</Text>
             </Stack>
           </GridItem>
         </LayoutGrid>
@@ -266,14 +318,12 @@ export const Forge: React.FC = () => {
         </Text>
         <Stack>
           <Image borderRadius="xl" src="/assets/forge/locale.png" />
-          <Text>In-context locale string editing</Text>
-          <Text> </Text>
+          <Text textStyle="caption">In-context locale string editing</Text>
         </Stack>
 
         <Stack>
           <Image borderRadius="xl" src="/assets/forge/template-logic.png" />
-          <Text>Template builder prototypes</Text>
-          <Text> </Text>
+          <Text textStyle="caption">Template builder prototypes</Text>
         </Stack>
       </Stack>
     </Article>

@@ -11,7 +11,6 @@ export const pageData = {
   },
   "unified-design-language": {
     title: "Unified Design Language",
-    description: "Lorem",
     subtitle:
       "Consolidating EVERFI's platform and product design systems into a shared system with a cohesive design language.",
     role: "Design Systems Lead",
@@ -31,9 +30,8 @@ export const pageData = {
   },
   forge: {
     title: "Forge",
-    description: "Description",
-    subtitle: "Subtitle",
-    role: "UI/UX Designer",
+    subtitle: "Building (and re-building) the builder",
+    role: "Design Systems Lead",
     team: [
       {
         name: "Kevin Grolton",
@@ -48,8 +46,7 @@ export const pageData = {
   },
   thesis: {
     title: "Immigration Forms as Conversational Interfaces",
-    description: "Lorem",
-    subtitle: "MICA Thesis Project",
+    subtitle: "Master's in UX Design Thesis Project",
     role: "Graduate Student",
     team: [
       {
@@ -63,7 +60,7 @@ export const pageData = {
   "npr-maps": {
     title: "NPR Labs",
     description:
-      "As NPR’s in-house technology research & development center, NPR Labs provides a variety of tools to assist public broadcasters nationwide, including the Mapping and Population System (MAPS), a web app that displays reception coverage maps for all public radio and television stations in the US. During my internship in the spring of 2017, I worked as part of a small team to build a new version of the tool from the ground up.",
+      "Designing responsive and performant web app for NPR affiliate stations",
     subtitle: "Mapping & Population System",
     role: "UI/UX Designer",
     team: [
@@ -82,14 +79,11 @@ export const pageData = {
   },
   "conversational-immigration-forms": {
     title: "Conversational Immigration Forms",
-    description: "Lorem",
     subtitle: "Thesis Project, Masters in UX",
     role: "Graduate Student",
   },
   engage: {
     title: "Engage Financial Workshops",
-    description:
-      "Engage allows financial institutions to deliver in-person financial education to their customers and the community via guided workshop events at their branches. The product consists of 13 digital learning modules covering personal finance & money management, small business operations, and home ownership.",
     subtitle: "Designing for an LMI audience in a hybrid setting",
     role: "UX Designer",
     team: [
@@ -171,5 +165,39 @@ export const pageData = {
       },
     ],
     date: "2020 – 2021",
+  },
+  furnace: {
+    title: "Furnace Design System",
+    subtitle: "lorem",
+    description: "lorem",
+    role: "Lead Designer",
+    team: [
+      {
+        name: "Kevin Grolton",
+        role: "Product Manager",
+      },
+      {
+        name: "Sadeep Nonis",
+        role: "Project Manager",
+        // url: "https://www.linkedin.com/in/sadeepnonis/details/experience/",
+      },
+      {
+        name: "Shannon Urban",
+        role: "Director, Accessibility",
+      },
+      {
+        name: "Carlos Henriquez",
+        role: "Lead Developer",
+      },
+      {
+        name: "Mpho Ramataboee",
+        role: "Lead Developer",
+        // url: "https://www.linkedin.com/in/mpho-ramataboee",
+      },
+      {
+        role: "+ many others",
+      },
+    ],
+    date: "2019 – 2022",
   },
 };

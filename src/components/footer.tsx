@@ -10,7 +10,7 @@ import {
 import {
   GitHubLogoIcon,
   LinkedInLogoIcon,
-  InstagramLogoIcon,
+  ReaderIcon,
 } from "@radix-ui/react-icons";
 import { Pattern } from "./pattern";
 import { ScrollButton } from "./scrollButton";
@@ -31,27 +31,30 @@ const Footer = () => {
             borderRadius="full"
             objectFit="contain"
             alt=""
-            src="app/public/assets/durve2.png"
+            src="/assets/logo.png"
           />
 
           <ButtonGroup variant="ghost" size="md">
             <IconButton
               as="a"
-              href="#"
+              href="https://www.linkedin.com/in/robertweisbecker/"
               aria-label="LinkedIn"
+              target="_blank"
               icon={<LinkedInLogoIcon />}
             />
             <IconButton
               as="a"
-              href="#"
+              href="https://github.com/robertweisbecker"
               aria-label="GitHub"
+              target="_blank"
               icon={<GitHubLogoIcon />}
             />
             <IconButton
               as="a"
-              href="#"
-              aria-label="Twitter"
-              icon={<InstagramLogoIcon />}
+              href="https://read.cv/weisbecker"
+              aria-label="read.cv"
+              target="_blank"
+              icon={<ReaderIcon />}
             />
             <ScrollButton />
           </ButtonGroup>

@@ -39,11 +39,20 @@ export const NPR: React.FC = () => {
           Background
         </Heading>
         <Text>
+          As NPR’s in-house technology research & development center, NPR Labs
+          provides a variety of tools to assist public broadcasters nationwide,
+          including the Mapping and Population System (MAPS), a web app that
+          displays reception coverage maps for all public radio and television
+          stations in the US.
+        </Text>
+        <Text>
           NPR affiliates nationwide – member station managers, underwriters,
           engineers – use MAPS to inform decision-making around station planning
           efforts, such as improving reception or adding new services. First
           released in 2011, it remained largely unchanged since.
         </Text>
+        During my internship in the spring of 2017, I worked as part of a small
+        team to build a new version of the tool from the ground up.
         <Text>
           Our main goals for this redesign effort were to overhaul the interface
           for better usability and increase performance. We decided to use Vue
@@ -90,9 +99,15 @@ export const NPR: React.FC = () => {
           callsign, location, and logo, along with labeled controls to
           differentiate between coverages and contour toggles.
         </Text>
-        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+        <Box
+          bg="bg-subtle"
+          shadow="inner"
+          p={{ base: 2, lg: 4 }}
+          overflow="hidden"
+          borderRadius="xl"
+        >
           <Image
-            maxW="320px"
+            maxW="280px"
             mx="auto"
             src="/assets/npr/map-sidebar.png"
             boxShadow="2xl"
@@ -108,7 +123,12 @@ export const NPR: React.FC = () => {
           the station detail view to provide access without navigating away from
           the map.
         </Text>
-        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+        <Box
+          bg="bg-subtle"
+          shadow="inner"
+          p={{ base: 2, lg: 4 }}
+          borderRadius="xl"
+        >
           <Image src="/assets/npr/map-detail.png" />
         </Box>
         <Heading as="h3" size="lg">
@@ -138,7 +158,12 @@ export const NPR: React.FC = () => {
           station chip would navigate to the station and open its details in the
           sidebar.
         </Text>
-        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+        <Box
+          bg="bg-subtle"
+          shadow="inner"
+          p={{ base: 2, lg: 4 }}
+          borderRadius="xl"
+        >
           <video width="100%" height="auto" controls>
             <source
               src="assets/npr/maps-desktop-settings-720.mp4"
@@ -171,9 +196,14 @@ export const NPR: React.FC = () => {
           new station card component, restyling them as drawers in map mode, to
           let users access station information without having to toggle views.{" "}
         </Text>
-        <Box bg="gray.200" shadow="inner" p={10} borderRadius="xl">
+        <Box
+          bg="bg-subtle"
+          shadow="inner"
+          p={{ base: 2, lg: 4 }}
+          borderRadius="xl"
+        >
           <video width="100%" height="auto" controls>
-            <source src="assets/npr/maps-mobile-1.mp4" type="video/mp4" />
+            <source src="/assets/npr/maps-mobile-1.mp4" type="video/mp4" />
           </video>
         </Box>
       </Stack>

@@ -11,6 +11,7 @@ import {
   AlertDescription,
   List,
   VStack,
+  Flex,
   HStack,
   UnorderedList,
   ListItem,
@@ -26,7 +27,7 @@ import { LayoutGrid } from "./layout";
 
 type PageData = {
   title: string;
-  description: string;
+  description?: string;
   subtitle?: string;
   role?: string;
   team?: { [key: string]: any }[];
@@ -60,13 +61,23 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
   }
 
   return (
-    <LayoutGrid variant="oneThird">
+    <LayoutGrid variant="twoThirds">
       <GridItem>
-        <Heading as="h1" size="2xl" mb={10}>
-          {page.title}
+        <Heading display="inline" flexGrow="1" as="h1" size="2xl">
+          {page.title}{" "}
+        </Heading>
+        <Heading
+          as="span"
+          display="inline"
+          size="2xl"
+          color="subtle"
+          fontWeight="regular"
+          mb={5}
+        >
+          {page.subtitle}
         </Heading>
 
-        <Stack gap={4}>
+        <Stack gap={4} mt={5}>
           {/* <HStack color="muted">
             <Icon as={DrawingPinIcon} />
             <Heading size="2xs">The deets</Heading>
@@ -119,12 +130,12 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
         </Stack>
       </GridItem>
       <GridItem as="aside" gap={2}>
-        <Text fontSize="xl" color="fg.subtle" mb={5}>
+        {/* <Text fontSize="xl" color="fg.subtle" mb={5}>
           {page.subtitle}
-        </Text>
-        <Text fontSize="lg" lineHeight="tall">
+        </Text> */}
+        {/* <Text fontSize="lg" lineHeight="tall">
           {page.description}
-        </Text>
+        </Text> */}
       </GridItem>
     </LayoutGrid>
   );

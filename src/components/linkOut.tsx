@@ -46,7 +46,7 @@ export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
         >
           {" "}
           {text} <Icon opacity=".5" as={ArrowTopRightIcon} />
-        </Link>
+        </Link>{" "}
       </Flex>
     </Box>
   );

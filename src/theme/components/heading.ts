@@ -19,7 +19,8 @@ export const headingStyles = defineStyleConfig({
     "2xl": {
       fontSize: "2xl",
       fontWeight: "medium",
-      letterSpacing: "tighter",
+      lineHeight: "base",
+      letterSpacing: "tight",
       mb: "8",
     },
     xl: {

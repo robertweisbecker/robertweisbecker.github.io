@@ -18,6 +18,7 @@ import * as components from "./theme/components";
 import {
   extendTheme,
   extendBaseTheme,
+  withDefaultColorScheme,
   theme as baseTheme,
 } from "@chakra-ui/react";
 import { theme as proTheme } from "@chakra-ui/pro-theme";
@@ -46,7 +47,19 @@ export const theme = extendTheme({
   },
   semanticTokens: { ...semanticTokens },
 
-  components: { ...components },
+  components: {
+    ...components,
+    Code: {
+      baseStyle: {
+        borderRadius: "md",
+        lineHeight: "short",
+        fontSize: ".875em",
+        fontWeight: "semibold",
+        color: "emphasis",
+      },
+      defaultProps: { colorScheme: "gray" },
+    },
+  },
   ...foundations,
   layerStyles: {
     base: {
@@ -60,5 +73,6 @@ export const theme = extendTheme({
       borderColor: "orange.500",
     },
   },
+
   proTheme,
 });

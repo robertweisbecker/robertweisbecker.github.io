@@ -24,6 +24,8 @@ import {
   Stack,
   StackDivider,
   Icon,
+  Badge,
+  Tag,
 } from "@chakra-ui/react";
 
 import { ArrowRightIcon, DotIcon, TokensIcon } from "@radix-ui/react-icons";
@@ -35,43 +37,54 @@ function ProjectGrid() {
   return (
     <Stack
       id="projects"
+      bg="whiteAlpha.50"
+      px={4}
+      borderRadius="2xl"
       gap={0}
+      boxShadow="lg"
+      borderColor="whiteAlpha.50"
+      backdropFilter="auto"
+      backdropBlur="80px"
+      borderWidth="1px"
       className="peer"
-      sx={{
-        ".chakra-stack__divider": {
-          pointerEvents: "none",
-          m: "0",
-        },
-      }}
-      divider={<StackDivider opacity=".5" borderStyle="dotted" />}
     >
       {projects.map((project, index) => (
         <LinkBox
-          className="group peer"
+          className="peer group"
           transitionProperty="common"
           transitionDuration="slow"
           transitionTimingFunction="ease-out"
-          _peerHover={{
-            opacity: ".25",
+          borderBottom="1px"
+          borderColor="border"
+          _last={{
+            border: "none",
           }}
+          pe={2}
           _hover={{
             opacity: "1",
             transform: "translateX(1em)",
             borderColor: "border",
           }}
+          _groupHover={{
+            opacity: ".25",
+          }}
+          _peerHover={{
+            opacity: ".25",
+          }}
           _focusWithin={{ boxShadow: "focus" }}
         >
           <HStack gap={2} position="relative" py={4} className="group">
-            {project.logoStub ? (
+            {project.logo ? (
               <Image
-                src={`assets/logos/${project.logoStub}-icon.png`}
+                src={`${project.logo}`}
                 w={8}
-                opacity=".5"
+                opacity=".8"
                 transitionProperty="common"
                 transitionDuration="fast"
                 transitionTimingFunction="ease-out"
                 transform="scale(.8)"
-                filter="brightness(100%) contrast(0%) grayscale(100%)"
+                // filter="brightness(0%)"
+                _dark={{ filter: "brightness(200%) grayscale(100%)" }}
                 _groupHover={{
                   filter: "none",
                   w: "8",
@@ -83,7 +96,7 @@ function ProjectGrid() {
               <Icon as={project.icon} w="8" opacity=".5" />
             )}
 
-            <Flex flexGrow="1" align="baseline">
+            <Flex flexGrow="1" align="baseline" wrap="wrap">
               <LinkOverlay
                 as={RouterLink}
                 to={project.path}
@@ -99,7 +112,7 @@ function ProjectGrid() {
                   {project.title}
                 </Text>
               </LinkOverlay>
-              <Text flexGrow="1" display="inline" fontSize="sm" color="subtle">
+              <Text flexGrow="1" display="inline" fontSize="sm" color="muted">
                 {project.description}
               </Text>
             </Flex>

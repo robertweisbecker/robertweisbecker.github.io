@@ -119,8 +119,8 @@ export const semanticTokens = {
     "chakra-border-color": "border",
     "chakra-subtle-bg": "bg-subtle",
     "chakra-placeholder-color": { _light: "gray.500", _dark: "whiteAlpha.400" },
-    "bg-page": { _light: "white", _dark: "gray.800" },
-    "bg-canvas": { _light: "gray.50", _dark: "gray.900" },
+    "bg-page": "bg-canvas",
+    "bg-canvas": { _light: "white", _dark: "gray.900" },
 
     surface: { _light: "white", _dark: "gray.700" },
     "surface-hover": { _light: "blackAlpha.100", _dark: "whiteAlpha.50" },
@@ -143,7 +143,7 @@ export const semanticTokens = {
     muted: { _light: "gray.700", _dark: "gray.200" },
     subtle: { _light: "gray.400", _dark: "gray.300" },
     disabled: { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
-    border: { _light: "gray.300", _dark: "whiteAlpha.200" },
+    border: { _light: "blackAlpha.200", _dark: "whiteAlpha.200" },
     "border-muted": { _light: "gray.100", _dark: "whiteAlpha.100" },
     accent: { _light: "brand.600", _dark: "brand.200" },
     interactive: { _light: "brand.400", _dark: "brand.300" },
@@ -161,31 +161,31 @@ export const semanticTokens = {
       default:
         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 1px 2px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 1px 2px rgba(13, 14, 20, 0.9)",
+        "0px 0px 1px rgba(13, 14, 20, 1), 0px 1px 2px rgba(13, 14, 20, .4)",
     },
     sm: {
       default:
         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 2px 4px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 2px 4px rgba(13, 14, 20, 0.9)",
+        "0px 0px 1px rgba(13, 14, 20, 1), 0px 2px 4px rgba(13, 14, 20, .4)",
     },
     md: {
       default:
         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 4px 8px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 4px 8px rgba(13, 14, 20, 0.9)",
+        "0px 0px 1px rgba(13, 14, 20, 1), 0px 4px 8px rgba(13, 14, 20, .4)",
     },
     lg: {
       default:
         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 8px 16px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 8px 16px rgba(13, 14, 20, 0.9)",
+        "0px 0px 1px rgba(13, 14, 20, 1), 0px 8px 16px rgba(13, 14, 20, .4)",
     },
     xl: {
       default:
         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 16px 24px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 16px 24px rgba(13, 14, 20, 0.9), inset 0 0 0 1px rgba(255,255,255,.12)",
+        "0px 0px 1px rgba(13, 14, 20, 1), 0px 16px 24px rgba(13, 14, 20, .4), inset 0 0 0 1px rgba(255,255,255,.12)",
     },
   },
   space: {

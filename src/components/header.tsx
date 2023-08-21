@@ -23,6 +23,10 @@ import {
   List,
   ListItem,
   Text,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 
 import {
@@ -43,16 +47,16 @@ interface HeaderProps {
   children?: React.ReactNode;
 }
 
-// function withRouter(Component) {
-//   function ComponentWithRouterProp(props) {
-//     let location = useLocation();
-//     let navigate = useNavigate();
-//     let params = useParams();
-//     return <Component {...props} router={{ location, navigate, params }} />;
-//   }
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
 
-//   return ComponentWithRouterProp;
-// }
+  return ComponentWithRouterProp;
+}
 
 // const headerButtons = [
 //   {
@@ -107,28 +111,40 @@ const Header: FC<HeaderProps> = ({ variant }) => {
       top="0"
       left="0"
       right="0"
-      bg="surface"
-      px="4"
-      //   mt={isChild ? "0" : "8"}
+      bg="bg-canvas"
+      // pt={8}
+      // mt={isChild ? "0" : "8"}
+      backdropFilter="auto"
+      backdropBlur="10px"
       fontFamily="heading"
-      maxW="100vw"
-      w="container.lg"
+      // maxW="100vw"
+      maxW="container.lg"
     >
-      <Flex mx="auto" py={4} align="center" direction="row" gap={4}>
+      <Flex
+        mx="auto"
+        align="center"
+        p={4}
+        direction="row"
+        gap={4}
+        borderBottom="1px"
+        borderColor="border"
+      >
         <Link
           as={NavHashLink}
           preventScrollReset
           lineHeight="shorter"
           color="emphasis"
-          fontWeight="normal"
+          fontWeight="semibold"
+          fontSize="md"
           textDecoration="none"
           colorScheme="blue"
           _hover={{ textDecoration: "none" }}
           to="/"
         >
-          <Text fontSize="">bob dot fyi</Text>
+          Bob Weisbecker
         </Link>
         <Spacer />
+
         <ButtonGroup isAttached fontWeight="normal" variant="ghost">
           <Button
             as={NavHashLink}
@@ -277,13 +293,13 @@ const Header: FC<HeaderProps> = ({ variant }) => {
             color: "emphasis",
           }}
         >
-          cv
+          resume
         </Button>
 
         <Spacer />
         <ColorModeSwitcher />
       </Flex>
-      <Divider />
+      {/* <Divider /> */}
     </Box>
   );
 };

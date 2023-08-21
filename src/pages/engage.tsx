@@ -28,7 +28,14 @@ export const Engage: React.FC = () => {
     <Article pageKey="engage">
       <Stack spacing={10} py={0}>
         <Image src="/assets/engage/engage-1.png" />
-
+        <Heading as="h2">About</Heading>
+        <Text>
+          Engage allows financial institutions to deliver in-person financial
+          education to their customers and the community via guided workshop
+          events at their branches. The product consists of 13 digital learning
+          modules covering personal finance & money management, small business
+          operations, and home ownership.
+        </Text>
         <Heading as="h2">Audience</Heading>
         <Text>
           Engage workshops are geared toward low- to moderate-income adults,
@@ -38,7 +45,10 @@ export const Engage: React.FC = () => {
           approachable tone.
         </Text>
 
-        <Image src="/assets/engage/bbva-1.jpg" />
+        <Stack>
+          <Image src="/assets/engage/bbva-1.png" />
+          <Text textStyle="caption">Engage in-person workshops</Text>
+        </Stack>
 
         <Heading as="h2">Component Library</Heading>
         <Text color="muted">
