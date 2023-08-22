@@ -120,20 +120,15 @@ export const semanticTokens = {
     "chakra-subtle-bg": "bg-subtle",
     "chakra-placeholder-color": { _light: "gray.500", _dark: "whiteAlpha.400" },
     "bg-page": "bg-canvas",
-    "bg-canvas": { _light: "white", _dark: "gray.900" },
+    "bg-canvas": { _light: "gray.50", _dark: "gray.800" },
 
-    surface: { _light: "white", _dark: "gray.700" },
+    surface: { _light: "white", _dark: "gray.600" },
     "surface-hover": { _light: "blackAlpha.100", _dark: "whiteAlpha.50" },
     "surface-active": { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
 
-    "bg-subtle": { _light: "gray.50", _dark: "gray.800" },
-    "bg-muted": { _light: "gray.100", _dark: "gray.900" },
-    "bg-forge": { _light: "gray.600", _dark: "gray.900" },
+    "bg-subtle": { _light: "gray.100", _dark: "gray.900" },
+    "bg-muted": { _light: "gray.100", _dark: "gray.800" },
     "bg-invert": { _light: "gray.800", _dark: "gray.100" },
-    "bg-furnace": { _light: "#0072e5", _dark: "blue.900" },
-    "bg-udl": { _light: "teal.100", _dark: "teal.800" },
-    "bg-mica": { _light: "pink.100", _dark: "pink.400" },
-    "bg-npr": { _light: "#E2F3FE", _dark: "#394F78" },
 
     default: "muted",
     inverted: { _light: "white", _dark: "white" },
@@ -147,6 +142,7 @@ export const semanticTokens = {
     "border-muted": { _light: "gray.100", _dark: "whiteAlpha.100" },
     accent: { _light: "brand.600", _dark: "brand.200" },
     interactive: { _light: "brand.400", _dark: "brand.300" },
+
     success: { _light: "green.600", _dark: "green.200" },
     error: { _light: "red.600", _dark: "red.200" },
     "bg-accent": "brand.600",

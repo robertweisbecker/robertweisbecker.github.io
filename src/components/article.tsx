@@ -42,7 +42,6 @@ export const Article: FC<ArticleProps> = ({ children, pageKey }) => {
         <Spacer />
         <PageHeader pageKey={pageKey} />
 
-        <Spacer />
         <Stack
           spacing={20}
           sx={{

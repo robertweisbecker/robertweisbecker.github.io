@@ -38,7 +38,8 @@ function ProjectGrid() {
     <Stack
       id="projects"
       bg="whiteAlpha.50"
-      px={4}
+      ps={4}
+      pe={6}
       borderRadius="2xl"
       gap={0}
       boxShadow="lg"
@@ -47,6 +48,11 @@ function ProjectGrid() {
       backdropBlur="80px"
       borderWidth="1px"
       className="peer"
+      // _hover={{
+      //   "&  .group:not(.group:hover)": {
+      //     opacity: ".5",
+      //   },
+      // }}
     >
       {projects.map((project, index) => (
         <LinkBox
@@ -66,14 +72,21 @@ function ProjectGrid() {
             borderColor: "border",
           }}
           _groupHover={{
-            opacity: ".25",
+            opacity: ".1",
+            filter: "grayscale(100%)",
           }}
           _peerHover={{
-            opacity: ".25",
+            opacity: ".5",
           }}
           _focusWithin={{ boxShadow: "focus" }}
         >
-          <HStack gap={2} position="relative" py={4} className="group">
+          <HStack
+            gap={3}
+            position="relative"
+            py={4}
+            align="start"
+            className="group"
+          >
             {project.logo ? (
               <Image
                 src={`${project.logo}`}
@@ -83,8 +96,7 @@ function ProjectGrid() {
                 transitionDuration="fast"
                 transitionTimingFunction="ease-out"
                 transform="scale(.8)"
-                // filter="brightness(0%)"
-                _dark={{ filter: "brightness(200%) grayscale(100%)" }}
+                _dark={{ filter: "brightness(120%) " }}
                 _groupHover={{
                   filter: "none",
                   w: "8",

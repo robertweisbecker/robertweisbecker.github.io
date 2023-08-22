@@ -28,9 +28,18 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const Home: React.FC = () => {
   return (
-    <Stack spacing={10} mx={0} px={0}>
-      <Box as={Pattern} position="fixed" right="0" top="0px" zIndex="-1" />
+    <Stack spacing={10}>
+      <Box
+        as={Pattern}
+        position="fixed"
+        mx="0"
+        mb="10vw"
+        w={{ base: "500px", md: "800px", xl: "1200px" }}
+        h={{ base: "500px", md: "800px", xl: "1200px" }}
+        zIndex="-1"
+      />
       <Spacer />
+
       <HStack align="center" mt={5} className="group">
         <Icon
           boxSize=""
@@ -67,8 +76,6 @@ export const Home: React.FC = () => {
           (we got acquired)
         </Text>
       </Box>
-      {/* <Divider borderStyle="dashed" orientation="vertical" h={20} /> */}
-      {/* <Squiggle w={10} color="gray.100" transform="rotate(-45deg)" /> */}
       <Spacer />
       <HStack align="center">
         <Icon boxSize="" as={EyeOpenIcon} opacity="0.5" />
@@ -77,6 +84,7 @@ export const Home: React.FC = () => {
         </Heading>
       </HStack>
       <ProjectGrid />
+      <Spacer />
     </Stack>
   );
 };

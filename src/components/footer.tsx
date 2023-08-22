@@ -21,10 +21,16 @@ const Footer = () => {
       maxW="container.lg"
       as="footer"
       role="contentinfo"
-      py={{ base: "12", md: "16" }}
+      borderTop="1px"
+      borderColor="border"
+      py={5}
     >
       <Stack spacing={{ base: "2", md: "5" }}>
-        <Stack justify="space-between" direction="row" align="center">
+        <Stack
+          justify="space-between"
+          direction={{ base: "column", md: "row" }}
+          align="center"
+        >
           <Image
             h={{ base: 10, sm: 8 }}
             float="right"
@@ -33,6 +39,9 @@ const Footer = () => {
             alt=""
             src="/assets/logo.png"
           />
+          <Text fontSize="2xs" color="subtle">
+            &copy; {new Date().getFullYear()} Robert Weisbecker
+          </Text>
 
           <ButtonGroup variant="ghost" size="md">
             <IconButton
@@ -54,15 +63,12 @@ const Footer = () => {
               href="https://read.cv/weisbecker"
               aria-label="read.cv"
               target="_blank"
+              sx={{ "& svg": { transform: "rotate(15deg)" } }}
               icon={<ReaderIcon />}
             />
             <ScrollButton />
           </ButtonGroup>
         </Stack>
-        <Text fontSize="sm" color="fg.subtle">
-          &copy; {new Date().getFullYear()} Robert Weisbecker. All rights
-          reserved.
-        </Text>
       </Stack>
       {/* <Pattern /> */}
     </Container>

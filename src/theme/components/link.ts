@@ -35,9 +35,18 @@ const isExternal = {
 const variants = {
   menu: () => ({
     borderRadius: "lg",
+    p: "2",
     _hover: {
       textDecoration: "none",
       bg: "bg-subtle",
+    },
+    _active: {
+      textDecoration: "none",
+      bg: "bg-active",
+    },
+    _activeLink: {
+      fontWeight: "bold",
+      bg: "bg-active",
     },
   }),
   external: {

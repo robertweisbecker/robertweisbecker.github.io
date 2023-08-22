@@ -40,6 +40,7 @@ export const pageData = {
       {
         name: "Annie Alvarado",
         role: "UX Research",
+        url: "http://anniealvarado.com/",
       },
     ],
     date: "Winter-Spring 2017",

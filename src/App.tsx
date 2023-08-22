@@ -1,7 +1,6 @@
 import * as React from "react";
 import "./App.css";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useLocation,
@@ -21,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import Header from "./components/header";
 import Footer from "./components/footer";
+
 import { Home, About, Engage, Furnace, UDL, DSF, Forge, NPR } from "./pages";
 
 // import { Achieve } from "./pages/achieve";
@@ -50,7 +50,6 @@ const App: React.FC = () => {
         <Container as="main" pb={16} maxW="container.lg" mx="auto">
           <SkipNavContent id="content" />
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/unified-design-language" element={<UDL />} />
             <Route path="/forge" element={<Forge />} />
@@ -59,6 +58,7 @@ const App: React.FC = () => {
             {/* <Route path="/everfi-achieve" element={<Achieve />} /> */}
             <Route path="/everfi-data-science" element={<DSF />} />
             <Route path="/npr-maps" element={<NPR />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </Container>
       </AnimatePresence>

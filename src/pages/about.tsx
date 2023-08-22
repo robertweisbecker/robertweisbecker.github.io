@@ -35,6 +35,7 @@ import {
   ReaderIcon,
   FileTextIcon,
   DownloadIcon,
+  BookmarkIcon,
   GitHubLogoIcon,
   CounterClockwiseClockIcon,
   DrawingPinIcon,
@@ -147,7 +148,7 @@ export const About: React.FC = () => {
         <GridItem position="relative">
           <Image src="/assets/hb-bob-cropped.png" rounded="2xl" />
           <List spacing={4} fontSize="sm" my={10}>
-            <ListItem display="flex" gap={4} flexWrap="wrap">
+            <ListItem>
               <Button
                 as={Link}
                 isExternal
@@ -156,8 +157,9 @@ export const About: React.FC = () => {
                 variant="link"
                 size="sm"
                 leftIcon={<FileIcon />}
+                rightIcon={<ArrowTopRightIcon />}
               >
-                Download resume
+                Resume
               </Button>
               {/* <Divider orientation="vertical" h="24px" />
               <Button
@@ -191,7 +193,7 @@ export const About: React.FC = () => {
                 textDecoration="none"
                 size="sm"
                 alignItems="center"
-                sx={{ "& svg": { transform: "rotate(-20deg)" } }}
+                sx={{ "& svg": { transform: "rotate(20deg)" } }}
                 leftIcon={<ReaderIcon />}
               >
                 read.cv
@@ -314,7 +316,7 @@ export const About: React.FC = () => {
       <Spacer />
 
       <HStack mb={5}>
-        <Icon as={Link1Icon} />
+        <Icon as={BookmarkIcon} />
         <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
           Where (I learned things)
         </Heading>

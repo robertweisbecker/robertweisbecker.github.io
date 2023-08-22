@@ -26,7 +26,7 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
   const text = useColorModeValue("Dark", "Light");
   const SwitchIcon = useColorModeValue(SunIcon, MoonIcon);
   const variant = useColorModeValue("ghost", "ghost");
-  const colorScheme = useColorModeValue("orange", "whiteAlpha");
+  const colorScheme = useColorModeValue("orange", "blue");
   const color = useColorModeValue("orange.500", "white");
   const iconPosition = useColorModeValue("50%", "4px");
 
@@ -53,8 +53,8 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
       fontSize="2xs"
       display="none"
     >
-      <HStack px={1}>
-        <FormControl display="flex" alignItems="center" gap={1}>
+      {/*<HStack px={1}>
+         <FormControl display="flex" alignItems="center" gap={1}>
           <Switch
             id="mode-toggle"
             size="sm"
@@ -78,21 +78,21 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
             />
             <VisuallyHidden>Toggle Color Mode</VisuallyHidden>
           </FormLabel>
-        </FormControl>
+        </FormControl> 
+        </HStack>*/}
 
-        {/* <IconButton
-          colorScheme="gray"
-          size="md"
-          isActive={colorMode === "light"}
-          // rounded="full"
-          // color={color}
-          variant={variant}
-          icon={<SwitchIcon />}
-          aria-label={`Toggle ${text} mode`}
-          {...props}
-          onClick={toggle}
-        /> */}
-      </HStack>
+      <IconButton
+        colorScheme={colorScheme}
+        isRound
+        size="sm"
+        // isActive={colorMode === "light"}
+        // color={color}
+        variant={variant}
+        icon={<SwitchIcon />}
+        aria-label={`Toggle ${text} mode`}
+        {...props}
+        onClick={toggle}
+      />
     </Tooltip>
   );
 };

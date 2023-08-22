@@ -1,5 +1,4 @@
-import * as React from "react";
-import { FC } from "react";
+import { FC, useId } from "react";
 
 import {
   Stack,
@@ -12,7 +11,7 @@ import {
   Image,
   Text,
   Center,
-  Flex,
+  Box,
 } from "@chakra-ui/react";
 
 interface ImageProps {
@@ -23,9 +22,15 @@ interface ImageProps {
 }
 
 export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
+  const tabId = useId();
   return (
-    <Flex gap="4">
-      <Tabs variant="soft-rounded" colorScheme="blue" color="emphasis">
+    <Box position="relative">
+      <Tabs variant="indicator" colorScheme="blue" color="emphasis" id={tabId}>
+        <TabList position="relative" mb="-6">
+          <Tab>{tab1 ? tab1 : "Before"}</Tab>
+          <Tab>{tab2 ? tab2 : "After"}</Tab>
+          <TabIndicator />
+        </TabList>
         <TabPanels
           mb={2}
           // bg="bg-subtle"
@@ -43,14 +48,7 @@ export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
             <Image src={after}></Image>
           </TabPanel>
         </TabPanels>
-        <Center>
-          <TabList>
-            <Tab>{tab1 ? tab1 : "Before"}</Tab>
-            <Tab>{tab2 ? tab2 : "After"}</Tab>
-          </TabList>
-          <TabIndicator />
-        </Center>
       </Tabs>
-    </Flex>
+    </Box>
   );
 };

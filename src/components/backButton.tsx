@@ -1,15 +1,17 @@
 import * as React from "react";
-// import { BrowserRouter as Router, NavLink } from 'react-router-dom';
+// import { useHistory } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 import { IconButton } from "@chakra-ui/react";
 
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
-function BackButton() {
+export const BackButton = () => {
+  // let history = useHistory();
   return (
     <IconButton
       as={HashLink}
+      // onClick={() => history.goBack()}
       preventScrollReset
       size="md"
       colorScheme="brand"
@@ -21,6 +23,4 @@ function BackButton() {
       aria-label="Back"
     />
   );
-}
-
-export default BackButton;
+};

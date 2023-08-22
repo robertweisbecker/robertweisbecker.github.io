@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   ScrollRestoration,
   createBrowserRouter,
   RouterProvider,
@@ -9,6 +9,7 @@ import {
 
 import "./index.css";
 import App from "./App";
+import ScrollToTop from "./components/scrollToTop";
 import reportWebVitals from "./reportWebVitals";
 
 import { ColorModeScript } from "@chakra-ui/react";
@@ -19,10 +20,12 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <Router>
+      <ScrollToTop />
       <ColorModeScript initialColorMode="system" />
       <App />
-    </BrowserRouter>
+      {/* <ScrollRestoration /> */}
+    </Router>
   </React.StrictMode>
 );
 

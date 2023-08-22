@@ -38,7 +38,7 @@ export const projects = [
   {
     id: 2,
     title: "Furnace Design System",
-    nickname: "Furnace",
+    nickname: "Furnace Design System",
     icon: ColorWheelIcon,
     date: "2019 – present",
     logo: "/assets/logos/furnace-icon.png",
@@ -56,7 +56,7 @@ export const projects = [
   {
     id: 3,
     title: "Forge Editor",
-    nickname: "Forge",
+    nickname: "Forge Design System",
     icon: CubeIcon,
     date: "2022",
     logo: "/assets/logos/forge-icon.png",
@@ -74,7 +74,7 @@ export const projects = [
   {
     id: 4,
     title: "Conversational Immigration Forms",
-    nickname: "Thesis",
+    nickname: "Conversational Immigration Forms",
     icon: InputIcon,
     path: "/conversational-immigration-forms",
     date: "2017",

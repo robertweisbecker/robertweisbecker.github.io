@@ -35,42 +35,46 @@ export const UDL: React.FC = () => {
   return (
     <>
       <Article pageKey="unified-design-language">
-        <Stack>
+        <Stack spacing={10}>
           <Heading as="h2" size="lg">
-            {" "}
-            Background
+            Problem Statement
           </Heading>
-          <UnorderedList>
-            <ListItem>
-              Supporting multiple brands/themes, product types, vastly different
-              users and tasks
-            </ListItem>
-            <ListItem>
-              Theming is critical to courses, whitelabeling is critical to
-              Platform
-            </ListItem>
-            <ListItem>Everfi has several distinct touchpoints:</ListItem>
-            <ListItem>Foundry: admin portal</ListItem>
-            <ListItem>Assigned Learner:</ListItem>
-            <ListItem>Next: Elective Admin</ListItem>
-            <ListItem>Next: Elective Learner</ListItem>
-            <ListItem>Homeroom Admin: K12 teacher center</ListItem>
-            <ListItem>Homeroom: Learner</ListItem>
-            <ListItem>Courses</ListItem>
-            <ListItem>
-              Courses have a multitude of themes, loosely related by their
-              product type
-            </ListItem>
-            <ListItem>
-              But, for the most part, their look and feel is determined by the
-              team that built the initial offering in a product line. There is
-              no singular{" "}
-            </ListItem>
-          </UnorderedList>
-          <Stack>
-            <Image borderRadius="2xl" src="/assets/udl/ecosystem.png" />
-            <Text textStyle="caption"></Text>
-          </Stack>
+          <Text>
+            EVERFI products lack a cohesive identity and experience; they look
+            like they were built by different teams (because they were!) —
+            undermining the experience for customers, teachers, and learners.
+          </Text>
+
+          <Text>
+            Users moving across our products – from everfi.com to platform to
+            course – encounter drastically different interfaces, preventing them
+            from having an intuitive, seamless experience. This endeavor is
+            geared toward unifying the design language across EVERFI’s product
+            portfolio.
+          </Text>
+        </Stack>
+        <Image borderRadius="2xl" src="/assets/udl/ecosystem.png" />
+        <Text textStyle="caption"></Text>
+        <Stack spacing={10}>
+          <Text>
+            Products are powered by different technologies, each influencing the
+            respective design direction at inception and ultimately dictating
+            the degree to which they could share with one another.
+          </Text>
+          <Text>
+            The ecocystem includes content, platform, marketing, and support
+            touchpoints. We lack a singular point of view on how an EVERFI
+            product looks, feels, and behaves.
+          </Text>
+          <Text>
+            The question “What does an Everfi button look like?” has a different
+            answer depending on which product you look at. Multiply this kind of
+            variation across a full library of styles and components per product
+            – fields, cards, headers, footers, surveys, data viz – and layer in
+            intentional theming of courses and platform tailored to content,
+            network, and/or customer branding, and of course we end up with a
+            disjointed experience.
+          </Text>
         </Stack>
         <Spacer />
         <Stack spacing={5}>
@@ -158,7 +162,7 @@ export const UDL: React.FC = () => {
             </Text>
           </Stack>
         </Stack>
-        <Stack>
+        <Stack gap={5}>
           <Heading as="h3" size="md">
             The Great Component-Off
           </Heading>
@@ -178,9 +182,9 @@ export const UDL: React.FC = () => {
             brick in our new shared foundations.
           </Text>
           <Stack>
-            <Image src="https://placehold.co/1024x520" />
+            <Image src="/assets/udl/off.png" />
             <Text textStyle="caption">
-              There can only be one <s>Highlander</s> button
+              There can only be one <del>Highlander</del> popover
             </Text>
           </Stack>
         </Stack>
@@ -211,28 +215,39 @@ export const UDL: React.FC = () => {
             </Text>
           </Stack>
         </Stack>
-        <Heading as="h2" size="lg">
-          Foundations
-        </Heading>
-        <ImageToggle
-          before="/assets/udl/color-before.png"
-          after="/assets/udl/color-after.png"
-        />
-        <ImageToggle
-          before="/assets/udl/type-before.png"
-          after="/assets/udl/type-after.png"
-        />
-        <Heading as="h2" size="md">
-          Color
-        </Heading>
-        <Divider />
-        Each color in the scale has
-        <Heading as="h2" size="lg">
-          Implementation
-        </Heading>
-        <Heading>Tokens Studio integration</Heading>
-        <Heading>Figma Setup</Heading>
-        <Heading>Storybook</Heading>
+        <Stack spacing={5}>
+          <Heading as="h2" size="lg">
+            Foundations
+          </Heading>
+          <Heading as="h3" size="md">
+            Color
+          </Heading>
+          <ImageToggle
+            before="/assets/udl/color-before.png"
+            after="/assets/udl/color-after.png"
+          />
+          <Heading as="h3" size="md">
+            Typography
+          </Heading>
+          <ImageToggle
+            before="/assets/udl/type-before.png"
+            after="/assets/udl/type-after.png"
+          />
+          <Heading as="h3" size="md">
+            Spacing
+          </Heading>
+          <ImageToggle
+            before="/assets/udl/space-before.png"
+            after="/assets/udl/space-after.png"
+          />
+        </Stack>
+
+        <Box bg="yellow.50" p={4} borderRadius="md" borderWidth="1px">
+          <Heading as="h2" size="lg" m="2">
+            That's it so far!
+          </Heading>
+          <Text>This is an ongoing project, so stay tuned...</Text>
+        </Box>
       </Article>
     </>
   );

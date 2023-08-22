@@ -30,6 +30,7 @@ import * as foundations from "./theme/foundations";
 export const theme = extendTheme({
   config: {
     cssVarPrefix: "bob",
+    initialColorMode: "dark",
   },
 
   styles: {

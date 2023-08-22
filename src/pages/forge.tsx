@@ -32,20 +32,38 @@ export const Forge: React.FC = () => {
   return (
     <Article pageKey="forge">
       <Stack spacing={10}>
+        <Text>
+          In early 2022, I was asked to assess the current state of Forge,
+          Everfi's course builder app, and apply lessons learned from Furnace to
+          propose a more scalable and user-friendly design framework.{"  "}
+          <Box as="span" opacity=".5">
+            I was trying to avoid typing the phrase "mini design system", but
+            that's pretty much the gist.
+          </Box>
+        </Text>
+        <Text>Here's a peek before we dive in:</Text>
         <ImageToggle
           before="/assets/forge/forge-before.png"
           after="/assets/forge/forge-after.png"
         />
         <Heading as="h2" size="xl">
-          Background
+          Context
         </Heading>
         <Text>
-          For much of its existence, Forge was largely a JSON content editing
-          tool with a minimal interface. However, the launch of our revamped
-          product design system in early 2020 hastened adoption by the product
-          team, and requests for more powerful WYSIWYG-like features quickly
-          outpaced design capacity.
+          Forge is the primary tool used by Everfi's Implementation team, who
+          translate course designs into interactive e-learning products. It's a
+          Git-connect Electron app that provides an interface for a local
+          development environment. Forge leverages the Everfi SDK and component
+          library (aka <Link href="/furnace">Furnace</Link>) to allow for course
+          creation and ongoing maintenance.
         </Text>
+        <Text>
+          For much of its existence, Forge was largely a JSON content editing
+          tool with a minimal interface. However, the launch of Furnace in early
+          2020 hastened adoption by the product team, and requests for more
+          powerful WYSIWYG-like features quickly outpaced design capacity.
+        </Text>
+
         <Text>
           The pace of iteration left the app without polish and well-considered
           UX; behind the scenes, its interface was cobbled together with ad-hoc
@@ -115,13 +133,13 @@ export const Forge: React.FC = () => {
         </Text>
         <LayoutGrid variant="twoUp" my={10}>
           <GridItem textStyle="caption">
-            <Stack>
+            <Stack w="full">
               <Image borderRadius="xl" src="/assets/forge/contrast1.png" />
               <Text>Darker darks!</Text>
             </Stack>
           </GridItem>
           <GridItem textStyle="caption">
-            <Stack>
+            <Stack w="full">
               <Image borderRadius="xl" src="/assets/forge/contrast2.png" />
               <Text>Lighter lights!</Text>
             </Stack>
@@ -179,7 +197,7 @@ export const Forge: React.FC = () => {
           compact, and help text was moved into a tooltip to improve
           scannability.
         </Text>
-        <Stack>
+        <Stack w="full">
           <Image borderRadius="xl" src="/assets/forge/inputs.png" />
           <Text textStyle="caption">
             Dense spacing and type applied to input fields
@@ -299,13 +317,13 @@ export const Forge: React.FC = () => {
 
         <LayoutGrid variant="twoUp" alignItems="center">
           <GridItem>
-            <Stack>
+            <Stack w="full">
               <Image borderRadius="xl" src="/assets/forge/widgets.png" />
               <Text textStyle="caption">Utility class widgets</Text>
             </Stack>
           </GridItem>
           <GridItem>
-            <Stack>
+            <Stack w="full">
               <Image borderRadius="xl" src="/assets/forge/theme-picker.png" />
               <Text textStyle="caption">Theme picker</Text>
             </Stack>
@@ -316,12 +334,12 @@ export const Forge: React.FC = () => {
           content and saving repeated patterns as course-level components from
           within the app:
         </Text>
-        <Stack>
+        <Stack w="full">
           <Image borderRadius="xl" src="/assets/forge/locale.png" />
           <Text textStyle="caption">In-context locale string editing</Text>
         </Stack>
 
-        <Stack>
+        <Stack w="full">
           <Image borderRadius="xl" src="/assets/forge/template-logic.png" />
           <Text textStyle="caption">Template builder prototypes</Text>
         </Stack>

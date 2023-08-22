@@ -9,6 +9,7 @@ export { default as Button } from "./button";
 export { headingStyles as Heading } from "./heading";
 // export { default as Input } from './input'
 export { default as Link } from "./link";
+export { default as Tabs } from "./tabs";
 // export { default as Popover } from './popover'
 // export { default as Progress } from './progress'
 // export { default as RadioCard } from './radio-card'

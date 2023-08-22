@@ -1,6 +1,6 @@
 import React from "react";
 import { IconButton } from "@chakra-ui/react";
-import { ArrowUpIcon } from "@radix-ui/react-icons";
+import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
 
 export const ScrollButton = () => {
   const handleClick = () => {
@@ -12,8 +12,9 @@ export const ScrollButton = () => {
 
   return (
     <IconButton
-      icon={<ArrowUpIcon />}
+      icon={<DoubleArrowUpIcon />}
       onClick={handleClick}
+      isRound
       aria-label="Scroll to top"
     />
   );
