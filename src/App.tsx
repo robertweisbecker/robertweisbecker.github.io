@@ -21,7 +21,17 @@ import {
 import Header from "./components/header";
 import Footer from "./components/footer";
 
-import { Home, About, Engage, Furnace, UDL, DSF, Forge, NPR } from "./pages";
+import {
+  Home,
+  About,
+  Engage,
+  Furnace,
+  UDL,
+  DSF,
+  Forge,
+  NPR,
+  Thesis,
+} from "./pages";
 
 // import { Achieve } from "./pages/achieve";
 // import * as components from "./theme";
@@ -58,6 +68,10 @@ const App: React.FC = () => {
             {/* <Route path="/everfi-achieve" element={<Achieve />} /> */}
             <Route path="/everfi-data-science" element={<DSF />} />
             <Route path="/npr-maps" element={<NPR />} />
+            <Route
+              path="/conversational-immigration-forms"
+              element={<Thesis />}
+            />
             <Route path="/" element={<Home />} />
           </Routes>
         </Container>

@@ -169,7 +169,7 @@ export const pageData = {
   },
   furnace: {
     title: "Furnace Design System",
-    subtitle: "lorem",
+    subtitle: "An accessible, themeable design system for e-learning products",
     description: "lorem",
     role: "Lead Designer",
     team: [

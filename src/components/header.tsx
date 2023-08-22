@@ -110,7 +110,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
       as="nav"
       position="sticky"
       mx="auto"
-      zIndex="10"
+      zIndex="modal"
       top="0"
       left="0"
       right="0"

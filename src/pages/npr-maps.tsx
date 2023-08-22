@@ -51,27 +51,30 @@ export const NPR: React.FC = () => {
           efforts, such as improving reception or adding new services. First
           released in 2011, it remained largely unchanged since.
         </Text>
-        During my internship in the spring of 2017, I worked as part of a small
-        team to build a new version of the tool from the ground up.
-        <Text>
-          Our main goals for this redesign effort were to overhaul the interface
-          for better usability and increase performance. We decided to use Vue
-          and Mapbox, which provided additional customizability and performance
-          in rendering the map view.
-        </Text>
       </Stack>
 
       <Stack spacing={5}>
         <Heading as="h2" size="xl">
           Goals
         </Heading>
+        <Text>
+          During my internship in the spring of 2017, I worked as part of a
+          small team to build a new version of the tool from the ground up.
+        </Text>
+        <Text>
+          Our main goals for this redesign effort were to overhaul the interface
+          for better usability and increase performance. We decided to use Vue
+          and Mapbox, which provided additional customizability and performance
+          in rendering the map view.
+        </Text>
         <UnorderedList>
           <ListItem>
-            Revamp the interface – more modern, brand alignment
+            Revamp the interface: modernize and align with the larger NPR brand
           </ListItem>
-          <ListItem>Improve usability</ListItem>
+          <ListItem>Find opportunities to improve usability</ListItem>
           <ListItem>
-            Reliability: refresh data and optimize performance
+            Improve reliability by refreshing data sources and optimizing
+            performance
           </ListItem>
         </UnorderedList>
       </Stack>
@@ -81,8 +84,10 @@ export const NPR: React.FC = () => {
           Component-ization
         </Heading>
         <Text>
-          Using a framework like Vue Material, we were driven to use its
-          elements as building blocks for more complex components.
+          At the time, NPR's mobile apps used a variation of Material Design.
+          Since we were using Vue, we imported components from Vue Material and
+          tailored them to our needs – re-theming them to match NPR's apps and
+          composing them to create more complex application-specific components.
         </Text>
         <Image src="/assets/npr/map-ui.png" />
         <Spacer />

@@ -6,5 +6,6 @@ export { UDL } from "./udl";
 export { DSF } from "./data-science";
 export { Forge } from "./forge";
 export { NPR } from "./npr-maps";
+export { Thesis } from "./thesis";
 
 // export { Achieve } from "./achieve";
