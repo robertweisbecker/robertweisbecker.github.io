@@ -34,7 +34,7 @@ export const pageData = {
     role: "Design Systems Lead",
     team: [
       {
-        name: "Kevin Grolton",
+        name: "Kevin Grolton-Francisco",
         role: "TPM",
       },
       {
@@ -174,7 +174,7 @@ export const pageData = {
     role: "Lead Designer",
     team: [
       {
-        name: "Kevin Grolton",
+        name: "Kevin Grolton-Francisco",
         role: "Product Manager",
       },
       {

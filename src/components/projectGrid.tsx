@@ -62,6 +62,7 @@ function ProjectGrid() {
           transitionTimingFunction="ease-out"
           borderBottom="1px"
           borderColor="border"
+          key={index}
           _last={{
             border: "none",
           }}
