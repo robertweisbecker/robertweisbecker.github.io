@@ -10,12 +10,9 @@ import {
   Heading,
   Box,
   Text,
-  Divider,
   Stack,
   Icon,
-  Link,
   HStack,
-  Image,
   Spacer,
 } from "@chakra-ui/react";
 import {
@@ -33,9 +30,11 @@ export const Home: React.FC = () => {
         as={Pattern}
         position="fixed"
         mx="0"
-        mb="10vw"
-        w={{ base: "500px", md: "800px", xl: "1200px" }}
-        h={{ base: "500px", md: "800px", xl: "1200px" }}
+        // mb="10vw"
+        left="-25vw"
+        top="-20vh"
+        w={{ base: "200vw", md: "200vw", xl: "200vw" }}
+        // h={{ base: "500px", md: "800px", xl: "1200px" }}
         zIndex="-1"
       />
       <Spacer />
