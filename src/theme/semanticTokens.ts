@@ -138,7 +138,7 @@ export const semanticTokens = {
     muted: { _light: "gray.700", _dark: "gray.200" },
     subtle: { _light: "gray.400", _dark: "gray.300" },
     disabled: { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
-    border: { _light: "blackAlpha.300", _dark: "whiteAlpha.500" },
+    border: { _light: "blackAlpha.200", _dark: "whiteAlpha.300" },
     "border-muted": { _light: "gray.100", _dark: "whiteAlpha.200" },
 
     accent: { _light: "brand.600", _dark: "brand.200" },

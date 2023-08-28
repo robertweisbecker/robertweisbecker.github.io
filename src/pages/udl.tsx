@@ -242,7 +242,13 @@ export const UDL: React.FC = () => {
           />
         </Stack>
 
-        <Box bg="yellow.50" p={4} borderRadius="md" borderWidth="1px">
+        <Box
+          bg="yellow.50"
+          _dark={{ bg: "yellow.900" }}
+          p={4}
+          borderRadius="md"
+          borderWidth="1px"
+        >
           <Heading as="h2" size="lg" m="2">
             That's it so far!
           </Heading>
