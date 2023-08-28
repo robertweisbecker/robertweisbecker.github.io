@@ -1,7 +1,6 @@
 import * as React from "react";
 import { ReactComponent as Pattern } from "../blur.svg";
 import ProjectGrid from "../components/projectGrid";
-// import Resume from '../components/resume';
 import { LayoutGrid } from "../components/layout";
 import { Squiggle } from "../components/images/squiggle";
 import { LinkOut } from "../components/linkOut";
