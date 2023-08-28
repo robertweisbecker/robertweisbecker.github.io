@@ -60,46 +60,43 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 
-const headerButtons = [
-  {
-    label: "about",
-    to: "/about",
-    as: NavLink,
-  },
-  {
-    label: "resume",
-    to: "/resume.pdf",
-    as: NavLink,
-    isExternal: "true",
-  },
-  // {
-  //   label: 'Contact',
-  //   to: '/contact',
-  //   as: NavLink,
-  //   rightIcon: <ArrowTopRightIcon />
-  // }
-].map((buttonProps) => (
-  <Button
-    key={buttonProps.to}
-    as={buttonProps.as}
-    variant="ghost"
-    size="sm"
-    textAlign="left"
-    fontWeight="regular"
-    // rightIcon={buttonProps.rightIcon}
-    // rounded="full"
-    // px={3}
-    _activeLink={{
-      borderColor: "emphasis",
-      fontWeight: "bold",
-      color: "emphasis",
-      bg: "bg-surface-active",
-    }}
-    to={buttonProps.to}
-  >
-    {buttonProps.label}
-  </Button>
-));
+const headerButtons = (
+  <ButtonGroup>
+    <Button
+      as={NavLink}
+      variant="ghost"
+      size="sm"
+      textAlign="left"
+      fontWeight="regular"
+      _activeLink={{
+        borderColor: "emphasis",
+        fontWeight: "bold",
+        color: "emphasis",
+        bg: "bg-surface-active",
+      }}
+      to="/about"
+    >
+      about
+    </Button>
+    <Button
+      as={Link}
+      variant="ghost"
+      size="sm"
+      textAlign="left"
+      fontWeight="regular"
+      textDecoration="none"
+      _activeLink={{
+        borderColor: "emphasis",
+        fontWeight: "bold",
+        color: "emphasis",
+        bg: "bg-surface-active",
+      }}
+      href="/resume.pdf"
+    >
+      resume
+    </Button>
+  </ButtonGroup>
+);
 
 const Header: FC<HeaderProps> = ({ variant }) => {
   const location = useLocation();

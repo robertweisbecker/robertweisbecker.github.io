@@ -15,20 +15,20 @@ const baseStyle = {
   fontWeight: "",
 
   textDecoration: "underline",
-  textDecorationColor: "subtle",
-  textDecorationThickness: ".08em",
+  textDecorationColor: "border",
+  textDecorationThickness: "2px",
 
   display: "inline-flex",
   alignItems: "baseline",
   _hover: {
     color: "accent",
+    textDecorationColor: "current",
   },
 };
 
 const isExternal = {
   _after: {
     content: `url('data:image/svg+xml,${encodedSvg}')`,
-    color: "red",
   },
 };
 
