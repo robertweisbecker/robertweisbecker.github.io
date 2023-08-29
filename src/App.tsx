@@ -56,8 +56,8 @@ const App: React.FC = () => {
     <ChakraProvider theme={theme}>
       <SkipNavLink id="content">Skip to Main</SkipNavLink>
       <Header />
-      <AnimatePresence>
-        <Container as="main" pb={16} maxW="container.lg" mx="auto">
+      <Container as="main" pb={16} maxW="container.lg" mx="auto">
+        <AnimatePresence>
           <SkipNavContent id="content" />
           <Routes location={location} key={location.pathname}>
             <Route path="/about" element={<About />} />
@@ -74,8 +74,8 @@ const App: React.FC = () => {
             />
             <Route path="/" element={<Home />} />
           </Routes>
-        </Container>
-      </AnimatePresence>
+        </AnimatePresence>
+      </Container>
       <Footer />
     </ChakraProvider>
   );

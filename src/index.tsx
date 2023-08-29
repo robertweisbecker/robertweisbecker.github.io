@@ -32,7 +32,7 @@ root.render(
     {/* </RouterProvider>
     <ScrollToTop />
     <ColorModeScript initialColorMode="system" /> */}
-    {/* <ScrollRestoration /> */}
+
     {/* </RouterProvider> */}
   </React.StrictMode>
 );
