@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
+  createHashRouter,
   ScrollRestoration,
   createBrowserRouter,
   RouterProvider,
@@ -17,15 +18,22 @@ import { ColorModeScript } from "@chakra-ui/react";
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
 const root = ReactDOM.createRoot(container);
+const router = createHashRouter([
+  {
+    path: "/*",
+    element: <App />,
+  },
+]);
 
 root.render(
   <React.StrictMode>
-    <Router>
-      <ScrollToTop />
-      <ColorModeScript initialColorMode="system" />
-      <App />
-      {/* <ScrollRestoration /> */}
-    </Router>
+    <RouterProvider router={router} />
+
+    {/* </RouterProvider>
+    <ScrollToTop />
+    <ColorModeScript initialColorMode="system" /> */}
+    {/* <ScrollRestoration /> */}
+    {/* </RouterProvider> */}
   </React.StrictMode>
 );
 

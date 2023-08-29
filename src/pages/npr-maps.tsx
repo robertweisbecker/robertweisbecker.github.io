@@ -169,7 +169,7 @@ export const NPR: React.FC = () => {
           p={{ base: 2, lg: 4 }}
           borderRadius="xl"
         >
-          <video width="100%" height="auto" controls>
+          <video width="100%" height="auto" controls playsInline>
             <source
               src="assets/npr/maps-desktop-settings-720.mp4"
               type="video/mp4"
@@ -207,8 +207,8 @@ export const NPR: React.FC = () => {
           p={{ base: 2, lg: 4 }}
           borderRadius="xl"
         >
-          <video width="100%" height="auto" controls>
-            <source src="/assets/npr/maps-mobile-1.mp4" type="video/mp4" />
+          <video width="100%" height="auto" controls playsInline>
+            <source src="/assets/npr/maps-mobile-1.webm" type="video/webm" />
           </video>
         </Box>
       </Stack>
