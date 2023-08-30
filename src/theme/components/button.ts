@@ -71,6 +71,7 @@ const variants = {
   }),
   neutral: (props: StyleFunctionProps) => ({
     color: "emphasized",
+    bg: "surface",
     _hover: {
       bg: mode(
         darken("gray.50", 1)(props.theme),

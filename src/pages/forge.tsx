@@ -2,6 +2,7 @@
 import { LayoutGrid } from "../components/layout";
 import { Article } from "../components/article";
 import { ImageToggle } from "../components/imageToggle";
+import { ImageModal } from "../components/imageModal";
 
 import {
   Heading,
@@ -101,16 +102,16 @@ export const Forge: React.FC = () => {
         <Spacer />
         <LayoutGrid variant="twoUp">
           <GridItem>
-            <Stack textStyle="caption">
-              <Image borderRadius="xl" src="/assets/forge/colors-neutral.png" />
-              <Text>Neutrals before and after</Text>
-            </Stack>
+            <ImageModal
+              src="/assets/forge/colors-neutral.png"
+              caption="Neutrals before and after"
+            />
           </GridItem>
           <GridItem textStyle="caption">
-            <Stack textStyle="caption">
-              <Image borderRadius="xl" src="/assets/forge/colors-teal.png" />
-              <Text>Primary colors before and after</Text>
-            </Stack>
+            <ImageModal
+              src="/assets/forge/colors-teal.png"
+              caption="Primary colors before and after"
+            />
           </GridItem>
         </LayoutGrid>
         <Spacer />
@@ -121,28 +122,27 @@ export const Forge: React.FC = () => {
           predictable and accessible manner.
         </Text>
         <Spacer />
-        <Stack textStyle="caption" align="center">
-          <Image borderRadius="xl" src="/assets/forge/colors-all.png" />
-          <Text>Full color palette updates</Text>
-        </Stack>
+        <ImageModal
+          src="/assets/forge/colors-all.png"
+          caption="Full color palette updates"
+        />
         <Spacer />
-
         <Text>
           Applied to typography and surfaces, the new color palettes fully
           resolved any contrast concerns:
         </Text>
         <LayoutGrid variant="twoUp" my={10}>
-          <GridItem textStyle="caption">
-            <Stack w="full">
-              <Image borderRadius="xl" src="/assets/forge/contrast1.png" />
-              <Text>Darker darks!</Text>
-            </Stack>
+          <GridItem>
+            <ImageModal
+              src="/assets/forge/contrast1.png"
+              caption="Darker darks!"
+            />
           </GridItem>
-          <GridItem textStyle="caption">
-            <Stack w="full">
-              <Image borderRadius="xl" src="/assets/forge/contrast2.png" />
-              <Text>Lighter lights!</Text>
-            </Stack>
+          <GridItem>
+            <ImageModal
+              src="/assets/forge/contrast2.png"
+              caption="Lighter lights!"
+            />
           </GridItem>
         </LayoutGrid>
         <Spacer />
@@ -152,7 +152,7 @@ export const Forge: React.FC = () => {
           between color modes.
         </Text>
         <Spacer />
-        <Image borderRadius="xl" src="/assets/forge/button-modes.png" />
+        <ImageModal src="/assets/forge/button-modes.png" />
         <ImageToggle
           before="/assets/forge/dark.png"
           after="/assets/forge/light.png"
@@ -181,11 +181,10 @@ export const Forge: React.FC = () => {
         </Text>
         <Spacer />
         <Stack textStyle="caption" align="center">
-          <Image borderRadius="xl" src="/assets/forge/type.png" />
-          <Text>
-            New type scale, with variable names shifted from a web-based
-            hierarchy to a more semantic convention
-          </Text>
+          <ImageModal
+            src="/assets/forge/type.png"
+            caption="New type scale, with variable names shifted from a web-based hierarchy to a more semantic convention"
+          />
         </Stack>
         <Spacer />
         <Heading as="h4" size="md">
@@ -197,21 +196,18 @@ export const Forge: React.FC = () => {
           compact, and help text was moved into a tooltip to improve
           scannability.
         </Text>
-        <Stack w="full">
-          <Image borderRadius="xl" src="/assets/forge/inputs.png" />
-          <Text textStyle="caption">
-            Dense spacing and type applied to input fields
-          </Text>
-        </Stack>
+        <ImageModal
+          src="/assets/forge/inputs.png"
+          caption="Dense spacing and type applied to input fields"
+        />
         <Text>
           With these changes in place, the length of various editor views
           decreased by more than 60%.
         </Text>
-        <Stack textStyle="caption" align="center">
-          <Image borderRadius="xl" src="/assets/forge/density-compare.png" />
-
-          <Text>Before & after</Text>
-        </Stack>
+        <ImageModal
+          src="/assets/forge/density-compare.png"
+          caption="Navigation and editor, before & after"
+        />
       </Stack>
 
       <Stack spacing={10}>
@@ -264,11 +260,10 @@ export const Forge: React.FC = () => {
           when viewing the page's block list. Rather than editing a page in two
           places, the block list became the home for all page edit features.
         </Text>
-        <Stack textStyle="caption" align="center">
-          <Image borderRadius="xl" src="/assets/forge/sidebar.png" />
-
-          <Text>Before & after of menu hierarchy and actions</Text>
-        </Stack>
+        <ImageModal
+          src="/assets/forge/sidebar.png"
+          caption="Before & after of menu hierarchy and actions"
+        />
       </Stack>
 
       <Stack spacing={10}>
@@ -277,23 +272,13 @@ export const Forge: React.FC = () => {
         </Heading>
 
         <Text>A look at some components with standardized styling:</Text>
-
-        <Stack textStyle="caption">
-          <Image borderRadius="xl" src="/assets/forge/buttons.png" />
-          <Text>Buttons</Text>
-        </Stack>
-        <Stack textStyle="caption">
-          <Image borderRadius="xl" src="/assets/forge/fields.png" />
-          <Text>Inputs</Text>
-        </Stack>
-        <Stack textStyle="caption">
-          <Image borderRadius="xl" src="/assets/forge/nav.png" />
-          <Text>Toolbar</Text>
-        </Stack>
-        <Stack textStyle="caption">
-          <Image borderRadius="xl" src="/assets/forge/dialogs.png" />
-          <Text>Dialogs</Text>
-        </Stack>
+        <ImageModal src="/assets/forge/buttons.png" caption="Buttons" />
+        <ImageModal
+          src="/assets/forge/fields.png"
+          caption="Redesigned inputs"
+        />
+        <ImageModal src="/assets/forge/nav.png" caption="Toolbar" />
+        <ImageModal src="/assets/forge/dialogs.png" caption="Dialogs" />
       </Stack>
 
       <Stack spacing={10}>
@@ -317,16 +302,16 @@ export const Forge: React.FC = () => {
 
         <LayoutGrid variant="twoUp" alignItems="center">
           <GridItem>
-            <Stack w="full">
-              <Image borderRadius="xl" src="/assets/forge/widgets.png" />
-              <Text textStyle="caption">Utility class widgets</Text>
-            </Stack>
+            <ImageModal
+              src="/assets/forge/widgets.png"
+              caption="Utility class widgets"
+            />
           </GridItem>
           <GridItem>
-            <Stack w="full">
-              <Image borderRadius="xl" src="/assets/forge/theme-picker.png" />
-              <Text textStyle="caption">Theme picker</Text>
-            </Stack>
+            <ImageModal
+              src="/assets/forge/theme-picker.png"
+              caption="Theme picker"
+            />
           </GridItem>
         </LayoutGrid>
         <Text>
@@ -335,13 +320,23 @@ export const Forge: React.FC = () => {
           within the app:
         </Text>
         <Stack w="full">
-          <Image borderRadius="xl" src="/assets/forge/locale.png" />
-          <Text textStyle="caption">In-context locale string editing</Text>
+          <ImageModal
+            src="/assets/forge/locale.png"
+            caption="In-context locale string editing"
+          />
         </Stack>
-
         <Stack w="full">
-          <Image borderRadius="xl" src="/assets/forge/template-logic.png" />
-          <Text textStyle="caption">Template builder prototypes</Text>
+          <ImageModal
+            src="/assets/forge/template-logic.png"
+            caption="Template builder prototypes"
+          />
+        </Stack>
+        <Stack>
+          <Text w="full">
+            And, for good measure, I also created icons for the production and
+            development versions of the app:
+          </Text>
+          <Image src="/assets/forge/app-icon.png" />
         </Stack>
       </Stack>
     </Article>

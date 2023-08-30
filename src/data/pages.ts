@@ -2,12 +2,12 @@ export const pageData = {
   index: {
     title: "",
     description: "About",
-    imageUrl: "/images/ecommerce-website.png",
+    imageUrl: "",
   },
   about: {
     title: "About Page",
     description: "Info about me!",
-    imageUrl: "/images/ecommerce-website.png",
+    imageUrl: "",
   },
   "unified-design-language": {
     title: "Unified Design Language",
@@ -17,13 +17,18 @@ export const pageData = {
     team: [
       {
         name: "Marianne Epstein",
-        // role: "Director, Platform UX",
+        role: "Director, Platform UX",
         url: "https://www.marianneepstein.com/",
       },
       {
         name: "Alyssa Kjar",
-        // role: "UX Design",
+        role: "Sr. UX Designer",
         url: "https://www.linkedin.com/in/alyssakjar/",
+      },
+      {
+        name: "Jey Nandakumar",
+        role: "Engineering Lead",
+        url: "",
       },
     ],
     date: "2021 – present",
@@ -35,15 +40,15 @@ export const pageData = {
     team: [
       {
         name: "Kevin Grolton-Francisco",
-        role: "TPM",
+        role: "Technical Product Manager",
       },
       {
         name: "Annie Alvarado",
-        role: "UX Research",
+        role: "User Research",
         url: "http://anniealvarado.com/",
       },
     ],
-    date: "Winter-Spring 2017",
+    date: "Winter - Spring 2017",
   },
   thesis: {
     title: "Immigration Forms as Conversational Interfaces",
@@ -72,7 +77,7 @@ export const pageData = {
       },
       {
         name: "Alice Goldfarb",
-        role: "Director",
+        role: "Director, NPR Labs",
         url: "http://www.alicegoldfarb.com/",
       },
     ],
@@ -90,7 +95,7 @@ export const pageData = {
     team: [
       {
         name: "Frank Stewart",
-        role: "UX Designer",
+        role: "UX Design",
         url: "https://frankfrankfrankfrank.github.io/",
       },
       {
@@ -124,7 +129,7 @@ export const pageData = {
       },
       {
         name: "Terry Biddle",
-        role: "Art Direction",
+        role: "Product Art Director",
         url: "https://www.terrybiddle.com/",
       },
     ],
@@ -175,7 +180,7 @@ export const pageData = {
     team: [
       {
         name: "Kevin Grolton-Francisco",
-        role: "Product Manager",
+        role: "Technical Product Manager",
       },
       {
         name: "Sadeep Nonis",
@@ -188,11 +193,11 @@ export const pageData = {
       },
       {
         name: "Carlos Henriquez",
-        role: "Lead Developer",
+        role: "Lead Developer (2019–2020)",
       },
       {
         name: "Mpho Ramataboee",
-        role: "Lead Developer",
+        role: "Lead Developer (2020–2022)",
         // url: "https://www.linkedin.com/in/mpho-ramataboee",
       },
       {

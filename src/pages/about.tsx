@@ -2,44 +2,32 @@
 import { LayoutGrid } from "../components/layout";
 import { LinkOut } from "../components/linkOut";
 import {
-  ButtonGroup,
   Heading,
   Box,
   List,
   UnorderedList,
   ListItem,
   Text,
-  Divider,
   Stack,
-  SimpleGrid,
   Icon,
-  Container,
   Link,
   GridItem,
   HStack,
   Image,
   Button,
   Spacer,
-  Tabs,
-  Tab,
-  TabList,
+  VisuallyHidden,
   TabIndicator,
 } from "@chakra-ui/react";
 import {
   ArrowTopRightIcon,
   BackpackIcon,
-  SunIcon,
   FileIcon,
-  MoonIcon,
   LinkedInLogoIcon,
   ReaderIcon,
-  FileTextIcon,
-  DownloadIcon,
   BookmarkIcon,
   GitHubLogoIcon,
   CounterClockwiseClockIcon,
-  DrawingPinIcon,
-  Link1Icon,
   DotFilledIcon,
   EnvelopeClosedIcon,
   CursorArrowIcon,
@@ -50,9 +38,11 @@ import { AnimatePresence, motion } from "framer-motion";
 export const About: React.FC = () => {
   return (
     <Stack spacing={10} py={20}>
-      <Heading size="2xl" mb={10}>
-        About
-      </Heading>
+      <VisuallyHidden>
+        <Heading as="h1" size="2xl" mb={10}>
+          About
+        </Heading>
+      </VisuallyHidden>
       <LayoutGrid variant="twoThirds" columnGap={{ base: 4, xl: 20 }}>
         <GridItem>
           <HStack mb={10} color="subtle">
@@ -146,7 +136,7 @@ export const About: React.FC = () => {
         </GridItem>
 
         <GridItem position="relative">
-          <Image src="/assets/hb-bob-cropped.png" rounded="2xl" />
+          <Image src="/assets/headshot2.png" rounded="2xl" />
           <List spacing={4} fontSize="sm" my={10}>
             <ListItem>
               <Button
@@ -175,13 +165,13 @@ export const About: React.FC = () => {
             <ListItem>
               <Button
                 as={Link}
-                href="mailto:rpw@robertweisbecker.com"
+                href="mailto:yo@bob.fyi"
                 variant="link"
                 size="sm"
                 textDecoration="none"
                 leftIcon={<EnvelopeClosedIcon />}
               >
-                Contact
+                Email
               </Button>
             </ListItem>
             <ListItem>
@@ -327,7 +317,7 @@ export const About: React.FC = () => {
           <Heading size="md">Maryland Institute College of Art</Heading>
         </GridItem>
         <GridItem>
-          <Text fontWeight="medium">MPS, User Experience Design</Text>
+          <Text fontWeight="medium">Master's in User Experience Design</Text>
         </GridItem>
         <GridItem>
           <Text color="subtle">2016 – 2017</Text>

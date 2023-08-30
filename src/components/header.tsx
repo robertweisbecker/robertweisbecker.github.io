@@ -138,14 +138,14 @@ const Header: FC<HeaderProps> = ({ variant }) => {
           preventScrollReset
           lineHeight="shorter"
           color="emphasis"
-          fontWeight="regular"
+          fontWeight="medium"
           fontSize="sm"
           textDecoration="none"
           colorScheme="blue"
           _hover={{ textDecoration: "none" }}
           to="/"
         >
-          Bob Weisbecker
+          bob weisbecker
         </Link>
         <Spacer />
 

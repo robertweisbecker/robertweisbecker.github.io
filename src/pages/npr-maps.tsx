@@ -179,38 +179,37 @@ export const NPR: React.FC = () => {
       </Stack>
 
       <Stack spacing={5}>
-        <Heading as="h2" size="xl">
-          Responsiveness
-        </Heading>
-        <Text>
-          Perhaps the most significant change was the newly-responsive design.
-          On a phone, there simply isn't enough real estate to pan around a map
-          and see detailed information, so we decided that modality was the best
-          course of action.
-        </Text>
+        <LayoutGrid variant="twoThirds" alignItems="center">
+          <Stack spacing="5">
+            <Heading as="h2" size="xl">
+              Responsiveness
+            </Heading>
+            <Text>
+              Perhaps the most significant change was the newly-responsive
+              design. On a phone, there simply isn't enough real estate to pan
+              around a map and see detailed information, so we decided that
+              modality was the best course of action.
+            </Text>
 
-        <Text>
-          List and map views collapse atop one another on small devices, and the
-          search bar remains persistent for discoverability. Users can easily
-          toggle between list and map views by tapping an icon button in the
-          nav.
-        </Text>
+            <Text>
+              List and map views collapse atop one another on small devices, and
+              the search bar remains persistent for discoverability. Users can
+              easily toggle between list and map views by tapping an icon button
+              in the nav.
+            </Text>
 
-        <Text>
-          Rather than creating a new component, we were able to repurpose our
-          new station card component, restyling them as drawers in map mode, to
-          let users access station information without having to toggle views.{" "}
-        </Text>
-        <Box
-          bg="bg-subtle"
-          shadow="inner"
-          p={{ base: 2, lg: 4 }}
-          borderRadius="xl"
-        >
+            <Text>
+              Rather than creating a new component, we were able to repurpose
+              our new station card component, restyling them as drawers in map
+              mode, to let users access station information without having to
+              toggle views.{" "}
+            </Text>
+          </Stack>
+
           <video width="100%" height="auto" controls playsInline>
-            <source src="/assets/npr/maps-mobile-1.webm" type="video/webm" />
+            <source src="/assets/npr/maps-mobile-1.mov" />
           </video>
-        </Box>
+        </LayoutGrid>
       </Stack>
 
       <Stack spacing={5}>

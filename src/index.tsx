@@ -10,10 +10,7 @@ import {
 
 import "./index.css";
 import App from "./App";
-import ScrollToTop from "./components/scrollToTop";
 import reportWebVitals from "./reportWebVitals";
-
-import { ColorModeScript } from "@chakra-ui/react";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
@@ -29,9 +26,7 @@ root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
 
-    {/* </RouterProvider>
-    <ScrollToTop />
-    <ColorModeScript initialColorMode="system" /> */}
+    {/* </RouterProvider> */}
 
     {/* </RouterProvider> */}
   </React.StrictMode>

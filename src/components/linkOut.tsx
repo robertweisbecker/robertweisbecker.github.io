@@ -43,6 +43,7 @@ export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
           color="emphasized"
           fontWeight="medium"
           colorScheme="brand"
+          isExternal
         >
           {" "}
           {text} <Icon opacity=".5" as={ArrowTopRightIcon} />

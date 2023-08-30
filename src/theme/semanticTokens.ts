@@ -122,12 +122,12 @@ export const semanticTokens = {
     "bg-page": "bg-canvas",
     "bg-canvas": { _light: "gray.50", _dark: "gray.800" },
 
-    surface: { _light: "white", _dark: "gray.600" },
+    surface: { _light: "white", _dark: "gray.700" },
     "surface-hover": { _light: "blackAlpha.100", _dark: "whiteAlpha.50" },
     "surface-active": { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
 
     "bg-subtle": { _light: "gray.100", _dark: "gray.900" },
-    "bg-muted": { _light: "gray.100", _dark: "gray.800" },
+    "bg-muted": { _light: "gray.200", _dark: "gray.800" },
     "bg-invert": { _light: "gray.800", _dark: "gray.100" },
 
     default: "muted",

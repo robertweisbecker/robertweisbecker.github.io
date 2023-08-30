@@ -38,6 +38,8 @@ import {
 // import { typographyOverrides } from "./theme/typography";
 // import { theme as proTheme } from "@chakra-ui/pro-theme";
 // import { extendTheme, theme as baseTheme } from "@chakra-ui/react";
+import ScrollToTop from "./components/scrollToTop";
+import { ColorModeScript } from "@chakra-ui/react";
 
 import { theme } from "./theme";
 
@@ -55,6 +57,8 @@ const App: React.FC = () => {
   return (
     <ChakraProvider theme={theme}>
       <SkipNavLink id="content">Skip to Main</SkipNavLink>
+      <ScrollToTop />
+      <ColorModeScript initialColorMode="system" />
       <Header />
       <Container as="main" pb={16} maxW="container.lg" mx="auto">
         <AnimatePresence>
