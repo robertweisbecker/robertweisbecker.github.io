@@ -12,17 +12,19 @@ const encodedSvg = encodeURIComponent(svgString);
 // ... (the rest of your code)
 
 const baseStyle = {
-  fontWeight: "",
-
   textDecoration: "underline",
-  textDecorationColor: "border",
+  textDecorationColor: "placeholder",
   textDecorationThickness: "2px",
-
+  fontWeight: "medium",
+  textDecorationSkipInk: "none",
   display: "inline-flex",
   alignItems: "baseline",
+  // boxShadow: "0 0 0 -2px inset",
   _hover: {
     color: "accent",
     textDecorationColor: "current",
+    textDecorationThickness: ".5px",
+    textDecorationStyle: "wavy",
   },
 };
 
@@ -49,7 +51,7 @@ const variants = {
       bg: "bg-active",
     },
   }),
-  external: {
+  isExternal: {
     _after: {
       content: `url('data:image/svg+xml,${encodedSvg}')`,
     },

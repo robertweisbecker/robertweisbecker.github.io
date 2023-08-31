@@ -73,19 +73,14 @@ const variants = {
     color: "emphasized",
     bg: "surface",
     _hover: {
-      bg: mode(
-        darken("gray.50", 1)(props.theme),
-        darken("gray.700", 4)(props.theme)
-      )(props),
+      bg: "surface-hover",
     },
     _active: {
-      bg: mode(
-        darken("gray.50", 1)(props.theme),
-        darken("gray.700", 4)(props.theme)
-      )(props),
+      bg: "surface-active",
     },
     _activeLink: {
-      bg: mode("gray.100", "gray.700")(props),
+      bg: "surface-active",
+      fontWeight: "semibold",
     },
   }),
   "neutral-invert": (props: StyleFunctionProps) => ({
@@ -102,12 +97,23 @@ const variants = {
     if (props.colorScheme === "gray") {
       return {
         color: "muted",
+        textDecoration: "none",
+        fontWeight: "normal",
+        rounded: "full",
+        padding: 2,
         _hover: {
-          textDecoration: "underline",
-          color: "blue.600",
+          bg: "surface-hover",
+          color: "emphasis",
+          textDecoration: "none",
         },
         _active: {
-          color: "default",
+          bg: "surface-active",
+          color: "emphasis",
+        },
+        _activeLink: {
+          bg: "surface-active",
+          color: "emphasis",
+          fontWeight: "semibold",
         },
       };
     }

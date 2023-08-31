@@ -20,7 +20,7 @@ export const projects = [
     title: "Unified Design Language",
     nickname: "Unified Design Language",
     icon: TokensIcon,
-    logo: "/assets/logos/udl-icon.png",
+    logo: "/assets/logos/udl-icon.svg",
     date: "2023",
     path: "/unified-design-language",
     description:
@@ -78,7 +78,7 @@ export const projects = [
     icon: InputIcon,
     path: "/conversational-immigration-forms",
     date: "2017",
-    logo: "/assets/logos/ellis-icon.png",
+    logo: "/assets/logos/ellis-icon.svg",
     description:
       "Improving government paperwork with conversation; thesis project",
     company: "MICA",

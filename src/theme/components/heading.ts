@@ -31,14 +31,14 @@ export const headingStyles = defineStyleConfig({
       fontSize: "lg",
       lineHeight: "base",
       letterSpacing: "normal",
-      fontWeight: "semibold",
-      mt: "2em",
+      fontWeight: "medium",
+      my: "2em",
     },
 
     md: {
       fontSize: "md",
       fontWeight: "semibold",
-      // mt: "2em",
+      my: "2em",
     },
     sm: {
       fontSize: "sm",

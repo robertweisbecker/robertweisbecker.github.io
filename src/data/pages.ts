@@ -11,6 +11,7 @@ export const pageData = {
   },
   "unified-design-language": {
     title: "Unified Design Language",
+    imageUrl: "/assets/logos/udl-icon.svg",
     subtitle:
       "Consolidating EVERFI's platform and product design systems into a shared system with a cohesive design language.",
     role: "Design Systems Lead",

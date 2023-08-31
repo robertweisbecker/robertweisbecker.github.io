@@ -2,6 +2,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import {
   Box,
+  Image,
   Heading,
   Text,
   Stack,
@@ -61,7 +62,7 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
   }
 
   return (
-    <LayoutGrid variant="twoThirds">
+    <LayoutGrid variant="twoUp" alignItems="baseline">
       <GridItem>
         <Heading display="inline" flexGrow="1" as="h1" size="2xl">
           {page.title}{" "}
@@ -76,7 +77,9 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
         >
           {page.subtitle}
         </Heading>
-
+        {/* <Image src={page.imageUrl} mb="3" /> */}
+      </GridItem>
+      <GridItem as="aside" gap={2}>
         <Stack gap={4} mt={5}>
           {/* <HStack color="muted">
             <Icon as={DrawingPinIcon} />
@@ -128,8 +131,6 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
             <Text fontSize="sm">{page.date}</Text>
           </VStack>
         </Stack>
-      </GridItem>
-      <GridItem as="aside" gap={2}>
         {/* <Text fontSize="xl" color="fg.subtle" mb={5}>
           {page.subtitle}
         </Text> */}

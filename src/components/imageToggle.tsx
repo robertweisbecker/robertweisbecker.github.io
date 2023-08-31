@@ -25,7 +25,7 @@ export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
   const tabId = useId();
   return (
     <Box position="relative" my="2">
-      <Tabs variant="indicator" colorScheme="blue" color="emphasis" id={tabId}>
+      <Tabs variant="indicator" color="emphasis" id={tabId}>
         <TabList position="relative" mb="-6">
           <Tab>{tab1 ? tab1 : "Before"}</Tab>
           <Tab>{tab2 ? tab2 : "After"}</Tab>
@@ -33,7 +33,7 @@ export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
         </TabList>
         <TabPanels
           mb={2}
-          bg="bg-muted"
+          bg="blackAlpha.100"
           borderRadius="xl"
           boxShadow="inner"
           overflow="hidden"

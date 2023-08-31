@@ -36,6 +36,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   DotIcon,
+  ArrowTopRightIcon,
 } from "@radix-ui/react-icons";
 
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
@@ -61,39 +62,24 @@ function withRouter(Component) {
 }
 
 const headerButtons = (
-  <ButtonGroup>
+  <ButtonGroup variant="ghost" size="sm">
     <Button
       as={NavLink}
-      variant="ghost"
-      size="sm"
-      textAlign="left"
-      fontWeight="regular"
-      _activeLink={{
-        borderColor: "emphasis",
-        fontWeight: "bold",
-        color: "emphasis",
-        bg: "bg-surface-active",
-      }}
       to="/about"
+      fontWeight="normal"
+      _activeLink={{ fontWeight: "medium", color: "emphasis" }}
     >
       about
     </Button>
     <Button
       as={Link}
-      variant="ghost"
-      size="sm"
-      textAlign="left"
-      fontWeight="regular"
       textDecoration="none"
-      _activeLink={{
-        borderColor: "emphasis",
-        fontWeight: "bold",
-        color: "emphasis",
-        bg: "bg-surface-active",
-      }}
       href="/resume.pdf"
+      fontWeight="normal"
+      _activeLink={{ fontWeight: "medium", color: "emphasis" }}
+      rightIcon={<ArrowTopRightIcon />}
     >
-      resume
+      cv
     </Button>
   </ButtonGroup>
 );
@@ -111,7 +97,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
       top="0"
       left="0"
       right="0"
-      bg={isNotHome ? "bg-canvas" : "transparent"}
+      bg={isNotHome ? "surface" : "transparent"}
       // pt={8}
       // mt={isNotHome ? "0" : "8"}
       backdropFilter="auto"
@@ -136,12 +122,10 @@ const Header: FC<HeaderProps> = ({ variant }) => {
         <Link
           as={NavHashLink}
           preventScrollReset
-          lineHeight="shorter"
-          color="emphasis"
-          fontWeight="medium"
           fontSize="sm"
           textDecoration="none"
-          colorScheme="blue"
+          px={1}
+          bg="transparent"
           _hover={{ textDecoration: "none" }}
           to="/"
         >
@@ -160,16 +144,13 @@ const Header: FC<HeaderProps> = ({ variant }) => {
             <>
               <PopoverTrigger>
                 <Button
-                  aria-label="View project list"
                   fontWeight="normal"
                   variant="ghost"
                   size="sm"
                   gap={1}
-                  _activeLink={{
-                    borderColor: "emphasis",
+                  _expanded={{
                     fontWeight: "semibold",
                     color: "emphasis",
-                    isActive: "true",
                   }}
                 >
                   <Show above="md">work</Show>
@@ -218,7 +199,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
                           size="sm"
                           color="muted"
                           fontWeight="regular"
-                          leftIcon={
+                          rightIcon={
                             <DotFilledIcon
                               className="popoverCurrentIcon"
                               opacity="0"
@@ -236,12 +217,8 @@ const Header: FC<HeaderProps> = ({ variant }) => {
                             },
                           }}
                         >
-                          <Box as="span" flexGrow="1">
-                            {project.nickname}
-                          </Box>
-                          {/* <Text fontWeight="normal" fontSize="xs">
-                            {project.description}
-                          </Text> */}
+                          {project.nickname}
+                          <Spacer />
                         </Button>
                       </ListItem>
                     ))}

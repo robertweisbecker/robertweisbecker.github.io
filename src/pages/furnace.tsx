@@ -13,25 +13,10 @@ import {
   Heading,
   Box,
   Text,
-  Divider,
   Stack,
-  SimpleGrid,
-  Icon,
-  Container,
-  Link,
-  GridItem,
-  HStack,
-  Image,
-  List,
   ListItem,
   Code,
-  Spacer,
-  Wrap,
   UnorderedList,
-  Alert,
-  AlertTitle,
-  AlertDescription,
-  AlertIcon,
 } from "@chakra-ui/react";
 
 import { InfoCircledIcon } from "@radix-ui/react-icons";
@@ -42,7 +27,7 @@ export const Furnace: React.FC = () => {
   return (
     <Article pageKey="furnace">
       <ImageModal src="/assets/furnace/elements-home.png" />
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Background</Heading>
         <Text>
           Everfi has a large portfolio of e-learning courses, ranging in subject
@@ -81,7 +66,7 @@ export const Furnace: React.FC = () => {
           rethink it from the ground up. By the end of the year, we'd built it.
         </Text>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Goals</Heading>
         <UnorderedList spacing={4}>
           <ListItem>
@@ -117,7 +102,7 @@ export const Furnace: React.FC = () => {
           </ListItem>
         </UnorderedList>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Introducing Primitives</Heading>
         <Text>
           I worked to distill all styling needed for a theme into seven
@@ -143,7 +128,7 @@ export const Furnace: React.FC = () => {
         Here's a look at where we ended up:
         <ImageModal src="/assets/furnace/elements-primitives.png" />
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Color</Heading>
         <Text>
           The challenge of creating a theme-friendly color system comes in
@@ -160,13 +145,13 @@ export const Furnace: React.FC = () => {
         <Text>
           Each theme’s color system is constructed using four color palettes,
           which are limited in scope. These colors are are then assigned to
-          specific roles to ensure correct contrast contrast and usability
-          throughout a course. Palette colors are each generated as a utility
-          class for font-color, border-color, and background-color. These can be
-          used to override the color of elements throughout a course as needed.
+          specific roles to ensure correct contrast and usability throughout a
+          course. Palette colors are each generated as a utility class for
+          font-color, border-color, and background-color. These can be used to
+          override the color of elements throughout a course as needed.
         </Text>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           Interactive Palette
         </Heading>
@@ -185,7 +170,7 @@ export const Furnace: React.FC = () => {
           />
         </LayoutGrid>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h3">Semantic Palette</Heading>
         <LayoutGrid variant="twoUp">
           <Stack>
@@ -210,7 +195,7 @@ export const Furnace: React.FC = () => {
           />
         </LayoutGrid>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           Neutral Palette
         </Heading>
@@ -236,7 +221,7 @@ export const Furnace: React.FC = () => {
           />
         </LayoutGrid>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           Transparent Palette
         </Heading>
@@ -261,7 +246,7 @@ export const Furnace: React.FC = () => {
           />
         </LayoutGrid>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2" size="lg">
           Color Roles
         </Heading>
@@ -305,7 +290,7 @@ export const Furnace: React.FC = () => {
           course.
         </Text>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Spacing</Heading>
         <Text>
           Spacing is calculated using a base unit (<Code>$spacing-xs</Code>){" "}
@@ -327,7 +312,7 @@ export const Furnace: React.FC = () => {
         </Text>
         <ImageModal src="/assets/furnace/padding.png" /> */}
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Typography</Heading>
         <Text>
           Our existing text classes weren't responsive, so that was a priority
@@ -380,7 +365,7 @@ export const Furnace: React.FC = () => {
           than skipping a level.
         </Text> */}
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Layout</Heading>
         <Text>
           One of the biggest pain points in our old library was the lack of a
@@ -411,7 +396,7 @@ export const Furnace: React.FC = () => {
           />
         </LayoutGrid>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Shadows</Heading>
         <LayoutGrid variant="twoUp">
           <Text>
@@ -428,7 +413,7 @@ export const Furnace: React.FC = () => {
           />
         </LayoutGrid>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Borders</Heading>
         <Text>
           Primitive variables also included <Code>border-width</Code> and{" "}
@@ -444,7 +429,7 @@ export const Furnace: React.FC = () => {
           caption="Radii variables were assigned according to a component's relative size. This allowed themes to deviate from the Core scale's semi-linear increments (above) to create rounded buttons, for instance."
         />
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2">Impact</Heading>
 
         <Heading as="h3" size="lg">

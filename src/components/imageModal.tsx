@@ -1,6 +1,8 @@
 import { FC, useId } from "react";
 
 import {
+  HStack,
+  Kbd,
   Stack,
   Modal,
   ModalOverlay,
@@ -47,8 +49,8 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
           color="muted"
           variant="neutral"
           position="absolute"
-          right={4}
-          bottom={4}
+          bottom={{ base: "1", lg: "4" }}
+          right={{ base: "1", lg: "4" }}
           boxShadow="md"
           sx={{
             "& > svg": {
@@ -69,7 +71,7 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
         onClose={onClose}
         allowPinchZoom
         id={modalId}
-        size="6xl"
+        size="full"
       >
         <ModalOverlay bg="blackAlpha.900" />
         <ModalContent
@@ -92,7 +94,6 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
               boxShadow: "lg",
             }}
           />
-
           <ModalBody p={0}>
             <Image
               mx="auto"
@@ -104,17 +105,30 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
               src={src2 ? src2 : src}
               alt="caption"
             />
+            {caption && (
+              <Text
+                fontSize="sm"
+                maxW="prose"
+                color="white"
+                textAlign="center"
+                mx="auto"
+                mt="2"
+              >
+                {caption}
+              </Text>
+            )}
           </ModalBody>
-          {caption && (
-            <ModalFooter
-              fontSize="sm"
-              justifyContent="center"
-              textAlign="center"
-              color="white"
+          {/* <ModalFooter justifyContent="center" textAlign="center">
+            <Button
+              variant="solid"
+              size="sm"
+              colorScheme="whiteAlpha"
+              gap="1"
+              onClick={onClose}
             >
-              {caption}
-            </ModalFooter>
-          )}
+              Close <Kbd color="muted">esc</Kbd>
+            </Button>
+          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </Stack>

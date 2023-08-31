@@ -144,7 +144,7 @@ export const About: React.FC = () => {
                 isExternal
                 href="/resume.pdf"
                 textDecoration="none"
-                variant="link"
+                variant="outline"
                 size="sm"
                 leftIcon={<FileIcon />}
                 rightIcon={<ArrowTopRightIcon />}
@@ -166,7 +166,7 @@ export const About: React.FC = () => {
               <Button
                 as={Link}
                 href="mailto:yo@bob.fyi"
-                variant="link"
+                variant="outline"
                 size="sm"
                 textDecoration="none"
                 leftIcon={<EnvelopeClosedIcon />}
@@ -179,7 +179,7 @@ export const About: React.FC = () => {
                 as={Link}
                 isExternal
                 href="https://read.cv/weisbecker"
-                variant="link"
+                variant="outline"
                 textDecoration="none"
                 size="sm"
                 alignItems="center"
@@ -194,7 +194,7 @@ export const About: React.FC = () => {
                 as={Link}
                 isExternal
                 href="https://www.linkedin.com/in/robertweisbecker/"
-                variant="link"
+                variant="outline"
                 textDecoration="none"
                 size="sm"
                 alignItems="center"
@@ -207,7 +207,7 @@ export const About: React.FC = () => {
               <Button
                 as={Link}
                 size="sm"
-                variant="link"
+                variant="outline"
                 alignItems="center"
                 textDecoration="none"
                 leftIcon={<GitHubLogoIcon />}

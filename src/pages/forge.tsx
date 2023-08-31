@@ -32,7 +32,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export const Forge: React.FC = () => {
   return (
     <Article pageKey="forge">
-      <Stack spacing={10}>
+      <Stack spacing={8}>
         <Text>
           In early 2022, I was asked to assess the current state of Forge,
           Everfi's course builder app, and apply lessons learned from Furnace to
@@ -77,7 +77,7 @@ export const Forge: React.FC = () => {
           than an enabler​.
         </Text>
       </Stack>
-      <Stack spacing={10}>
+      <Stack spacing={8}>
         <Heading as="h2" size="xl">
           Areas of Focus
         </Heading>
@@ -161,7 +161,7 @@ export const Forge: React.FC = () => {
         />
       </Stack>
 
-      <Stack spacing={10}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           2. Information Density
         </Heading>
@@ -210,7 +210,7 @@ export const Forge: React.FC = () => {
         />
       </Stack>
 
-      <Stack spacing={10}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           3. Reorganization
         </Heading>
@@ -266,7 +266,7 @@ export const Forge: React.FC = () => {
         />
       </Stack>
 
-      <Stack spacing={10}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           4. Component Standardization
         </Heading>
@@ -281,7 +281,7 @@ export const Forge: React.FC = () => {
         <ImageModal src="/assets/forge/dialogs.png" caption="Dialogs" />
       </Stack>
 
-      <Stack spacing={10}>
+      <Stack spacing={8}>
         <Heading as="h3" size="lg">
           Forge as a design system tool
         </Heading>

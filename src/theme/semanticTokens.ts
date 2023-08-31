@@ -118,19 +118,23 @@ export const semanticTokens = {
     "chakra-body-bg": "bg-page",
     "chakra-border-color": "border",
     "chakra-subtle-bg": "bg-subtle",
-    "chakra-placeholder-color": { _light: "gray.500", _dark: "whiteAlpha.400" },
-    "bg-page": "bg-canvas",
+    "chakra-placeholder-color": {
+      _light: "blackAlpha.400",
+      _dark: "whiteAlpha.400",
+    },
+    "bg-page": "surface",
     "bg-canvas": { _light: "gray.50", _dark: "gray.800" },
 
-    surface: { _light: "white", _dark: "gray.700" },
-    "surface-hover": { _light: "blackAlpha.100", _dark: "whiteAlpha.50" },
-    "surface-active": { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
+    surface: { _light: "white", _dark: "gray.900" },
+    "surface-hover": { _light: "gray.50", _dark: "gray.600" },
+    "surface-active": { _light: "gray.100", _dark: "gray.500" },
 
     "bg-subtle": { _light: "gray.100", _dark: "gray.900" },
     "bg-muted": { _light: "gray.200", _dark: "gray.800" },
     "bg-invert": { _light: "gray.800", _dark: "gray.100" },
 
     default: "muted",
+    placeholder: "chakra-placeholder-color",
     inverted: { _light: "white", _dark: "white" },
     emphasized: { _light: "gray.800", _dark: "gray.100" },
 
@@ -155,26 +159,35 @@ export const semanticTokens = {
   },
   shadows: {
     xs: {
-      default:
-        "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 1px 2px rgba(45, 55, 72,  0.1)",
+      // default:
+      //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 1px 2px rgba(45, 55, 72,  0.1)",
+      _light:
+        "0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
+
       _dark:
         "0px 0px 1px rgba(13, 14, 20, 1), 0px 1px 2px rgba(13, 14, 20, .4)",
     },
     sm: {
-      default:
-        "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 2px 4px rgba(45, 55, 72,  0.1)",
+      // default:
+      //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 2px 4px rgba(45, 55, 72,  0.1)",
+      _light:
+        "0px 8px 20px -6px rgba(36, 42, 66, 0.08), 0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
       _dark:
         "0px 0px 1px rgba(13, 14, 20, 1), 0px 2px 4px rgba(13, 14, 20, .4)",
     },
     md: {
-      default:
-        "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 4px 8px rgba(45, 55, 72,  0.1)",
+      _light:
+        "0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 10px 24px 8px rgba(36, 42, 66, 0.04), 0px 20px 70px -10px rgba(36, 42, 66, 0.08)",
+      // default:
+      //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 4px 8px rgba(45, 55, 72,  0.1)",
       _dark:
         "0px 0px 1px rgba(13, 14, 20, 1), 0px 4px 8px rgba(13, 14, 20, .4)",
     },
     lg: {
-      default:
-        "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 8px 16px rgba(45, 55, 72,  0.1)",
+      _light:
+        "0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 12px 36px -6px rgba(36, 42, 66, 0.12), 0px 32px 120px -15px rgba(36, 42, 66, 0.15)",
+      // default:
+      //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 8px 16px rgba(45, 55, 72,  0.1)",
       _dark:
         "0px 0px 1px rgba(13, 14, 20, 1), 0px 8px 16px rgba(13, 14, 20, .4)",
     },

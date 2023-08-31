@@ -36,7 +36,7 @@ export const theme = extendTheme({
   styles: {
     global: (props: StyleFunctionProps) => ({
       body: {
-        bg: "bg-page",
+        bg: "surface",
         lineHeight: "1.75",
       },
     }),

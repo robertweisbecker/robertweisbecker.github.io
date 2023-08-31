@@ -23,7 +23,7 @@ export const UDL: React.FC = () => {
   return (
     <>
       <Article pageKey="unified-design-language">
-        <Stack spacing={10}>
+        <Stack spacing={8}>
           <Heading as="h2">Context</Heading>
           <Text>
             EVERFI products lack a cohesive identity and experience; they look
@@ -44,7 +44,7 @@ export const UDL: React.FC = () => {
           caption="All the different ways we display course content across products and platforms – lacking a singular point of view on how an EVERFI
           product looks, feels, and behaves."
         />
-        <Stack spacing={10}>
+        <Stack spacing={8}>
           <Text>
             Products are powered by different technologies, each influencing
             their respective design direction at inception and ultimately
@@ -82,10 +82,10 @@ export const UDL: React.FC = () => {
           />
         </Stack>
         <Spacer />
-        <Stack spacing={5}>
+        <Stack spacing={8}>
           <Heading as="h2">Process</Heading>
           <Text>
-            We began with our North Star not as design system but a common
+            We began with our North Star not as a design system but a common
             design language that could guide our products closer together. The
             idea of sharing styles and components org-wide was unthinkable given
             the radically different natures of the respective codebases.
@@ -98,8 +98,8 @@ export const UDL: React.FC = () => {
             we could weave throughout experiences wherever technically feasible.
           </Text>
           <Text>
-            We defined a design language as such – note the emphasis on
-            "foundations" instead of components:
+            We defined a design language as such (note the emphasis on
+            "foundations" instead of components):
           </Text>
           <Text
             // fontStyle="italic"
@@ -182,7 +182,7 @@ export const UDL: React.FC = () => {
             </Text>
           </Stack>
         </Stack>
-        <Stack spacing={5}>
+        <Stack spacing={8}>
           <Heading as="h3" size="lg">
             Proof of Concept
           </Heading>
@@ -205,7 +205,7 @@ export const UDL: React.FC = () => {
             caption="Evaluations in platform and course contexts"
           />
         </Stack>
-        <Stack spacing={5}>
+        <Stack spacing={8}>
           <Heading as="h2">Foundations</Heading>
           <Heading as="h3" size="lg">
             Color
@@ -230,7 +230,7 @@ export const UDL: React.FC = () => {
           />
         </Stack>
 
-        <Stack spacing="5">
+        <Stack spacing={8}>
           <Heading as="h2">Implementation</Heading>
           <Heading as="h3" size="lg">
             Design Tokens
