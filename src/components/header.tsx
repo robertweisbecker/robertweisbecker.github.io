@@ -136,7 +136,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
         <Popover
           trigger="hover"
           openDelay={0}
-          closeDelay={400}
+          closeDelay={200}
           placement="bottom"
           gutter={-1}
         >
@@ -167,14 +167,14 @@ const Header: FC<HeaderProps> = ({ variant }) => {
                 </Button>
               </PopoverTrigger>
               <PopoverContent
-                boxShadow="2xl"
+                boxShadow="lg"
                 overflow="hidden"
                 w="auto"
-                bg="surface"
-                maxW={{ base: "320px", md: "container.md" }}
+                bg="surface-elevated"
+                maxW={{ base: "280px", md: "container.md" }}
                 rounded="xl"
               >
-                <PopoverBody p={1}>
+                <PopoverBody p="2">
                   <PopoverHeader
                     fontSize="2xs"
                     fontWeight="semibold"
@@ -182,23 +182,21 @@ const Header: FC<HeaderProps> = ({ variant }) => {
                     textTransform="uppercase"
                     color="subtle"
                     lineHeight="taller"
-                    mb={1}
                     border="none"
                   >
                     projects
                   </PopoverHeader>
 
-                  <List spacing={0}>
+                  <List spacing={1}>
                     {projects.map((project, index) => (
                       <ListItem>
                         <Button
-                          variant="ghost"
+                          variant="neutral"
                           w="full"
                           as={NavLink}
                           to={project.path}
                           size="sm"
                           color="muted"
-                          fontWeight="regular"
                           rightIcon={
                             <DotFilledIcon
                               className="popoverCurrentIcon"

@@ -1,117 +1,3 @@
-// export const semanticTokens = {
-//   colors: {
-//     "bg.canvas": {
-//       default: "gray.25",
-//       _dark: "gray.800",
-//     },
-//     "bg.surface": {
-//       default: "white",
-//       _dark: "gray.900",
-//     },
-//     "bg.subtle": {
-//       default: "gray.50",
-//       _dark: "gray.800",
-//     },
-//     "bg.muted": {
-//       default: "gray.100",
-//       _dark: "gray.700",
-//     },
-
-//     "fg.default": {
-//       default: "gray.900",
-//       _dark: "white",
-//     },
-//     "fg.emphasized": {
-//       default: "gray.700",
-//       _dark: "gray.200",
-//     },
-//     "fg.muted": {
-//       default: "gray.600",
-//       _dark: "gray.300",
-//     },
-//     "fg.subtle": {
-//       default: "gray.500",
-//       _dark: "gray.400",
-//     },
-//     "fg.inverted": {
-//       default: "white",
-//       _dark: "gray.950",
-//     },
-
-//     "border.default": {
-//       default: "gray.200",
-//       _dark: "gray.800",
-//     },
-//     "border.emphasized": {
-//       default: "gray.300",
-//       _dark: "gray.700",
-//     },
-//     "border.active": {
-//       default: "gray.400",
-//       _dark: "gray.600",
-//     },
-
-//     "bg.accent.default": "brand.600",
-//     "bg.accent.subtle": "brand.500",
-//     "bg.accent.muted": "brand.400",
-
-//     "fg.accent.subtle": "brand.100",
-//     "fg.accent.muted": "brand.50",
-//     "fg.accent.default": "white",
-
-//     accent: {
-//       default: "brand.500",
-//       _dark: "brand.200",
-//     },
-//     success: {
-//       default: "green.500",
-//       _dark: "green.200",
-//     },
-//     error: {
-//       default: "red.500",
-//       _dark: "red.200",
-//     },
-//   },
-//   shadows: {
-//     xs: {
-//       default:
-//         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 1px 2px rgba(45, 55, 72,  0.1)",
-//       _dark:
-//         "0px 0px 1px rgba(13, 14, 20, 1), 0px 1px 2px rgba(13, 14, 20, 0.9)",
-//     },
-//     sm: {
-//       default:
-//         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 2px 4px rgba(45, 55, 72,  0.1)",
-//       _dark:
-//         "0px 0px 1px rgba(13, 14, 20, 1), 0px 2px 4px rgba(13, 14, 20, 0.9)",
-//     },
-//     md: {
-//       default:
-//         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 4px 8px rgba(45, 55, 72,  0.1)",
-//       _dark:
-//         "0px 0px 1px rgba(13, 14, 20, 1), 0px 4px 8px rgba(13, 14, 20, 0.9)",
-//     },
-//     lg: {
-//       default:
-//         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 8px 16px rgba(45, 55, 72,  0.1)",
-//       _dark:
-//         "0px 0px 1px rgba(13, 14, 20, 1), 0px 8px 16px rgba(13, 14, 20, 0.9)",
-//     },
-//     xl: {
-//       default:
-//         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 16px 24px rgba(45, 55, 72,  0.1)",
-//       _dark:
-//         "0px 0px 1px rgba(13, 14, 20, 1), 0px 16px 24px rgba(13, 14, 20, 0.9)",
-//     },
-//     focus: {
-//       default: "0 0 0 4px #EDF2F7",
-//       _dark: "0 0 0 4px #2D3748",
-//     },
-//   },
-// };
-
-// import { ThemeContext } from '@emotion/react';
-
 export const semanticTokens = {
   colors: {
     "chakra-body-text": "muted",
@@ -122,37 +8,38 @@ export const semanticTokens = {
       _light: "blackAlpha.400",
       _dark: "whiteAlpha.400",
     },
-    "bg-page": "surface",
-    "bg-canvas": { _light: "gray.50", _dark: "gray.800" },
 
-    surface: { _light: "white", _dark: "gray.900" },
-    "surface-hover": { _light: "gray.50", _dark: "gray.600" },
-    "surface-active": { _light: "gray.100", _dark: "gray.500" },
+    surface: { _light: "white", _dark: "black" },
+    "surface-hover": { _light: "gray.50", _dark: "gray.700" },
+    "surface-active": { _light: "gray.100", _dark: "gray.600" },
+    "surface-elevated": { _light: "white", _dark: "gray.800" },
+    "bg-page": "surface",
+    "bg-canvas": { _light: "gray.100", _dark: "gray.900" },
 
     "bg-subtle": { _light: "gray.100", _dark: "gray.900" },
     "bg-muted": { _light: "gray.200", _dark: "gray.800" },
-    "bg-invert": { _light: "gray.800", _dark: "gray.100" },
+    "bg-invert": { _light: "gray.900", _dark: "white" },
 
     default: "muted",
     placeholder: "chakra-placeholder-color",
-    inverted: { _light: "white", _dark: "white" },
-    emphasized: { _light: "gray.800", _dark: "gray.100" },
-
-    emphasis: "emphasized",
-    muted: { _light: "gray.700", _dark: "gray.200" },
-    subtle: { _light: "gray.400", _dark: "gray.300" },
+    inverted: { _light: "white", _dark: "gray.800" },
+    emphasis: { _light: "black", _dark: "gray.100" },
+    emphasized: "emphasis",
+    muted: { _light: "gray.700", _dark: "whiteAlpha.800" },
+    subtle: { _light: "gray.500", _dark: "whiteAlpha.600" },
     disabled: { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
     border: { _light: "blackAlpha.200", _dark: "whiteAlpha.300" },
-    "border-muted": { _light: "gray.100", _dark: "whiteAlpha.200" },
+    "border-muted": { _light: "gray.300", _dark: "whiteAlpha.200" },
+    "border-subdued": { _light: "gray.100", _dark: "whiteAlpha.200" },
 
     accent: { _light: "brand.600", _dark: "brand.200" },
     interactive: { _light: "brand.400", _dark: "brand.300" },
 
-    success: { _light: "green.600", _dark: "green.200" },
-    error: { _light: "red.600", _dark: "red.200" },
-    "bg-accent": "brand.600",
-    "bg-accent-subtle": "brand.500",
-    "bg-accent-muted": "brand.400",
+    success: { _light: "green.500", _dark: "green.200" },
+    error: { _light: "red.500", _dark: "red.200" },
+    "bg-accent": "brand.500",
+    "bg-accent-subtle": "brand.400",
+    "bg-accent-muted": "brand.300",
     "emphasis-invert": { _light: "whiteAlpha.900", _dark: "gray.800" },
     "invert-muted": "brand.50",
     "invert-subtle": "brand.100",
@@ -189,7 +76,7 @@ export const semanticTokens = {
       // default:
       //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 8px 16px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 8px 16px rgba(13, 14, 20, .4)",
+        "0px 0px 1px rgba(13, 14, 20, .5), 0px 8px 16px rgba(13, 14, 20, .4)",
     },
     xl: {
       default:

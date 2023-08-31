@@ -37,8 +37,8 @@ export const Thesis: React.FC = () => {
         conversational interfaces.
       </Text>
       <Image src="/assets/thesis/thesis-1.png" />
-      <Stack spacing={5}>
-        <Heading size="lg">Problem Space</Heading>
+      <Stack spacing={8}>
+        <Heading>Problem Space</Heading>
         <Text>
           Few people enjoy filling out paperwork, and even fewer enjoy
           government paperwork. Forms are tedious and old-fashioned, and they
@@ -70,8 +70,8 @@ export const Thesis: React.FC = () => {
           particularly vulnerable audience.
         </Text>
       </Stack>
-      <Stack spacing={5}>
-        <Heading size="lg">Research</Heading>
+      <Stack spacing={8}>
+        <Heading>Research</Heading>
         <Text>
           I conducted user research by interviewing five people with firsthand
           experience in applying for residency or naturalization. Participants
@@ -87,8 +87,8 @@ export const Thesis: React.FC = () => {
           experiences.
         </Text>
       </Stack>
-      <Stack spacing={5}>
-        <Heading size="lg">Takeaways</Heading>
+      <Stack spacing={8}>
+        <Heading>Takeaways</Heading>
         <UnorderedList spacing={3}>
           <ListItem>
             <b>
@@ -131,7 +131,7 @@ export const Thesis: React.FC = () => {
       </Stack>
 
       <Stack>
-        <Heading size="lg">Thesis</Heading>
+        <Heading>Thesis</Heading>
         <Text>
           In many cases, digital forms fail to overcome the challenges posed by
           paper ones. Simply creating a digital facsimile wouldn't suffice. My
@@ -157,29 +157,32 @@ export const Thesis: React.FC = () => {
           with more conversational copy and developed several prototypes.
         </Text>
       </Stack>
-      <Stack spacing={5}>
-        <Heading size="lg">Prototypes</Heading>
-        <Heading size="md">Chatbot</Heading>
-        <Box
-          maxW="container.sm"
-          mx="auto"
-          bg="emphasis"
-          p={2}
-          borderRadius="md"
-          overflow="hidden"
-        >
-          <video width="100%" height="auto" controls>
-            <source src="assets/thesis/chatbot.mov" />
-          </video>
-        </Box>
-
+      <Stack spacing={8}>
+        <Heading>Prototypes</Heading>
+        <Heading as="h3" size="lg">
+          Chatbot
+        </Heading>
         <Text>
           Simulating human conversation with a Facebook Messenger chatbot made
           with ChatFuel. This let me experiment with branching questions and
           friendly, casual language.
         </Text>
+        <Box
+          maxW="container.sm"
+          bg="emphasis"
+          p={2}
+          borderRadius="2xl"
+          overflow="hidden"
+        >
+          <Box rounded="lg" as="video" width="100%" height="auto" controls>
+            <source src="assets/thesis/chatbot.mov" />
+          </Box>
+        </Box>
+
         <Spacer />
-        <Heading size="md">Wizard(ish)</Heading>
+        <Heading as="h3" size="lg">
+          Wizard(ish)
+        </Heading>
         <Text>
           I used Twine, an open-source tool for creating text-based narrative
           experiences, to mimic the step-by-step format of a wizard. The output
@@ -188,39 +191,33 @@ export const Thesis: React.FC = () => {
         </Text>
         <Box
           maxW="container.md"
-          mx="auto"
           bg="emphasis"
           p={2}
-          borderRadius="md"
+          borderRadius="2xl"
           overflow="hidden"
         >
-          <video width="100%" height="auto" controls>
+          <Box rounded="lg" as="video" width="100%" height="auto" controls>
             <source src="assets/thesis/twine.mov" />
-          </video>
+          </Box>
         </Box>
 
         <Image src="/assets/thesis/twine-flow.png" />
         <Spacer />
-        <Heading size="md">Hybrid</Heading>
+        <Heading as="h3" size="lg">
+          Hybrid
+        </Heading>
         <Text>
           A hybrid UI that allows toggling between chat and traditional form
           modes.
         </Text>
-        <Box
-          maxW="sm"
-          mx="auto"
-          bg="emphasis"
-          p={2}
-          borderRadius="md"
-          overflow="hidden"
-        >
-          <video width="100%" height="auto" controls>
+        <Box maxW="sm" bg="emphasis" p="2" borderRadius="3xl" overflow="hidden">
+          <Box rounded="2xl" as="video" width="100%" height="auto" controls>
             <source src="assets/thesis/toggle.mov" />
-          </video>
+          </Box>
         </Box>
       </Stack>
-      <Stack spacing={5}>
-        <Heading size="lg">Testing</Heading>
+      <Stack spacing={8}>
+        <Heading>Testing</Heading>
         <Text>
           Next came a round of user testing pitting the Twine wizard against my
           Facebook messenger bots. I was looking to determine which interaction
@@ -228,7 +225,9 @@ export const Thesis: React.FC = () => {
           gauged users' subjective attitudes toward the input methods, tone of
           voice, and ease of use.
         </Text>
-        <Heading size="md">Key Findings</Heading>
+        <Heading as="h3" size="lg">
+          Key Findings
+        </Heading>
         <OrderedList>
           <ListItem>
             Faster task completion using the Twine prototype than Messenger
@@ -248,8 +247,8 @@ export const Thesis: React.FC = () => {
           </ListItem>
         </OrderedList>
       </Stack>
-      <Stack spacing={5}>
-        <Heading size="lg">Results</Heading>
+      <Stack spacing={8}>
+        <Heading>Reflection</Heading>
         <Text>
           The biggest revelation from user testing was that conversational
           interfaces (or at least my means of reproducing them in prototypes)
@@ -261,7 +260,9 @@ export const Thesis: React.FC = () => {
           approach had discounted them from the outset.
         </Text>
         <Spacer />
-        <Heading size="md">The inefficiencies of chat</Heading>
+        <Heading as="h3" size="lg">
+          The inefficiencies of chat
+        </Heading>
         <Text>
           For example, a portion of the N-400 form asks applicants whether they
           have left the United States for an extended period in order to
@@ -287,7 +288,9 @@ export const Thesis: React.FC = () => {
           </UnorderedList>
         </Text>
         <Spacer />
-        <Heading size="md">Improvements</Heading>
+        <Heading as="h3" size="lg">
+          Improvements
+        </Heading>
         <Text>
           Users did, however, respond to progressive disclosure – validating the
           core of my hypothesis. So I then sought to create & test a hybrid UI
@@ -304,10 +307,12 @@ export const Thesis: React.FC = () => {
           insecurity presented by the Facebook Messenger bot.
         </Text>
       </Stack>
-      <Stack spacing={5}>
-        <Heading size="lg">Iteration: Natural Language Form</Heading>
+      <Stack spacing={8}>
+        <Heading>Iteration: Natural Language Form</Heading>
         <Spacer />
-        <Heading size="md">Key changes / benefits</Heading>
+        <Heading as="h3" size="lg">
+          Key changes / benefits
+        </Heading>
         <UnorderedList spacing={3}>
           <ListItem>More formal tone of voice </ListItem>
           <ListItem>
@@ -325,7 +330,7 @@ export const Thesis: React.FC = () => {
           </ListItem>
         </UnorderedList>
       </Stack>
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <LayoutGrid variant="threeUp">
           <Image src="/assets/thesis/thesis-device-img-01.png" />
           <Image src="/assets/thesis/thesis-device-img-03.png" />
@@ -335,40 +340,58 @@ export const Thesis: React.FC = () => {
             maxW="sm"
             mx="auto"
             bg="emphasis"
-            px={2}
-            py={5}
-            borderRadius="2xl"
+            p="2"
+            borderRadius="3xl"
             overflow="hidden"
           >
-            <video width="100%" height="auto" controls>
+            <Box
+              rounded="2xl"
+              as="video"
+              width="100%"
+              height="auto"
+              controls
+              loop
+            >
               <source src="assets/thesis/thesis-v2-1.mov" />
-            </video>
+            </Box>
           </Box>
           <Box
             maxW="sm"
             mx="auto"
             bg="emphasis"
-            px={2}
-            py={5}
-            borderRadius="2xl"
+            p="2"
+            borderRadius="3xl"
             overflow="hidden"
           >
-            <video width="100%" height="auto" controls>
+            <Box
+              rounded="2xl"
+              as="video"
+              width="100%"
+              height="auto"
+              controls
+              loop
+            >
               <source src="assets/thesis/thesis-v2-2.mov" />
-            </video>
+            </Box>
           </Box>
           <Box
             maxW="sm"
             mx="auto"
             bg="emphasis"
-            px={2}
-            py={5}
-            borderRadius="2xl"
+            p="2"
+            borderRadius="3xl"
             overflow="hidden"
           >
-            <video width="100%" height="auto" controls>
+            <Box
+              rounded="2xl"
+              as="video"
+              width="100%"
+              height="auto"
+              controls
+              loop
+            >
               <source src="assets/thesis/thesis-v2-3.mov" />
-            </video>
+            </Box>
           </Box>
         </LayoutGrid>
       </Stack>

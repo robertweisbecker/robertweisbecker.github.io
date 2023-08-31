@@ -1,6 +1,6 @@
 export default {
   letterSpacings: {
-    tighter: "-0.02em",
+    tighter: "-0.03em",
     tight: "-0.01em",
     normal: "0",
     wide: "0.025em",

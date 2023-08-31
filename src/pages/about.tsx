@@ -222,7 +222,7 @@ export const About: React.FC = () => {
       </LayoutGrid>
       <Spacer />
 
-      <HStack mb={5}>
+      <HStack>
         <Icon as={BackpackIcon} />
         <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
           Where (I've worked)
@@ -230,7 +230,7 @@ export const About: React.FC = () => {
       </HStack>
       <LayoutGrid variant="threeUp" rowGap={2}>
         <GridItem rowSpan={{ base: 1, lg: 5 }} colSpan={{ sm: 2, lg: 1 }}>
-          <Heading size="md" textTransform="uppercase">
+          <Heading size="lg" m="0" textTransform="uppercase">
             Everfi
           </Heading>{" "}
         </GridItem>
@@ -276,7 +276,9 @@ export const About: React.FC = () => {
 
       <LayoutGrid variant="threeUp" rowGap={2}>
         <GridItem colSpan={{ sm: 2, lg: 1 }}>
-          <Heading size="md">National Public Radio</Heading>
+          <Heading size="lg" m="0">
+            National Public Radio
+          </Heading>
         </GridItem>
         <GridItem>
           <Text fontWeight="medium">
@@ -289,7 +291,7 @@ export const About: React.FC = () => {
       </LayoutGrid>
       <LayoutGrid variant="threeUp" rowGap={2}>
         <GridItem colSpan={{ sm: 2, lg: 1 }}>
-          <Heading size="md" display="inline">
+          <Heading size="lg" m="0" display="inline">
             Parking Panda
           </Heading>
           <Text mx={1} textStyle="caption" display="inline">
@@ -304,8 +306,8 @@ export const About: React.FC = () => {
         </GridItem>
       </LayoutGrid>
       <Spacer />
-
-      <HStack mb={5}>
+      <Spacer />
+      <HStack>
         <Icon as={BookmarkIcon} />
         <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
           Where (I learned things)
@@ -314,7 +316,9 @@ export const About: React.FC = () => {
 
       <LayoutGrid variant="threeUp" rowGap={2}>
         <GridItem colSpan={{ sm: 2, lg: 1 }}>
-          <Heading size="md">Maryland Institute College of Art</Heading>
+          <Heading size="lg" m="0">
+            Maryland Institute College of Art
+          </Heading>
         </GridItem>
         <GridItem>
           <Text fontWeight="medium">Master's in User Experience Design</Text>
@@ -325,7 +329,9 @@ export const About: React.FC = () => {
       </LayoutGrid>
       <LayoutGrid variant="threeUp" rowGap={2}>
         <GridItem colSpan={{ sm: 2, lg: 1 }}>
-          <Heading size="md">University of Michigan</Heading>
+          <Heading size="lg" m="0">
+            University of Michigan
+          </Heading>
         </GridItem>
         <GridItem fontWeight="medium">
           <Text>BA, Cognitive Science</Text>

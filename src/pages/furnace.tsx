@@ -171,7 +171,9 @@ export const Furnace: React.FC = () => {
         </LayoutGrid>
       </Stack>
       <Stack spacing={8}>
-        <Heading as="h3">Semantic Palette</Heading>
+        <Heading as="h3" size="lg">
+          Semantic Palette
+        </Heading>
         <LayoutGrid variant="twoUp">
           <Stack>
             <Text>

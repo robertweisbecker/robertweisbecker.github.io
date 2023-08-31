@@ -34,7 +34,7 @@ export const NPR: React.FC = () => {
         before="/assets/npr/map-before.png"
         after="/assets/npr/map-after.png"
       />
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2" size="xl">
           Background
         </Heading>
@@ -53,7 +53,7 @@ export const NPR: React.FC = () => {
         </Text>
       </Stack>
 
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2" size="xl">
           Goals
         </Heading>
@@ -79,7 +79,7 @@ export const NPR: React.FC = () => {
         </UnorderedList>
       </Stack>
 
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2" size="xl">
           Component-ization
         </Heading>
@@ -178,7 +178,7 @@ export const NPR: React.FC = () => {
         </Box>
       </Stack>
 
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <LayoutGrid variant="twoThirds" alignItems="center">
           <Stack spacing="5">
             <Heading as="h2" size="xl">
@@ -212,7 +212,7 @@ export const NPR: React.FC = () => {
         </LayoutGrid>
       </Stack>
 
-      <Stack spacing={5}>
+      <Stack spacing={8}>
         <Heading as="h2" size="xl">
           Conclusion
         </Heading>

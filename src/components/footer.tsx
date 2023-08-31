@@ -31,14 +31,14 @@ const Footer = () => {
           direction={{ base: "column", md: "row" }}
           align="center"
         >
-          <Image
+          {/* <Image
             h={{ base: 10, sm: 8 }}
             float="right"
             borderRadius="full"
             objectFit="contain"
             alt=""
             src="/assets/logo.png"
-          />
+          /> */}
           <Text fontSize="2xs" color="subtle">
             &copy; {new Date().getFullYear()} Robert Weisbecker
           </Text>

@@ -11,8 +11,11 @@ const baseStyle = {
   ":focus:not(:focus-visible)": {
     boxShadow: "none",
   },
-  fontWeight: "semibold",
+  fontWeight: "medium",
   borderRadius: "lg",
+  _hover: {
+    textDecoration: "none",
+  },
 };
 
 const sizes = {
@@ -53,25 +56,43 @@ const variants = {
     _hover: { bg: "whiteAlpha.200" },
     _active: { bg: "whiteAlpha.200" },
   },
-  outline: (props: StyleFunctionProps) => ({
-    color: "emphasized",
-    bg: mode("white", "gray.800")(props),
+  ghost: (props: StyleFunctionProps) => ({
+    color: mode(`${props.colorScheme}.500`, `${props.colorScheme}.300`)(props),
     _hover: {
-      bg: mode(
-        darken("gray.50", 1)(props.theme),
-        transparentize("gray.700", 0.4)(props.theme)
+      color: mode(
+        `${props.colorScheme}.600`,
+        `${props.colorScheme}.200`
       )(props),
-    },
-    _checked: {
-      bg: mode("gray.100", "gray.700")(props),
+      bg: mode(`${props.colorScheme}.50`, `${props.colorScheme}.800`)(props),
     },
     _active: {
-      bg: mode("gray.100", "gray.700")(props),
+      color: mode(
+        `${props.colorScheme}.700`,
+        `${props.colorScheme}.100`
+      )(props),
+      bg: mode(`${props.colorScheme}.200`, `${props.colorScheme}.700`)(props),
+    },
+  }),
+  outline: (props: StyleFunctionProps) => ({
+    color: "emphasis",
+    bg: "surface",
+    borderColor: "border-subdued",
+    _hover: {
+      bg: "surface-hover",
+      borderColor: "border",
+    },
+    _checked: {
+      bg: "surface-active",
+      borderColor: "border-muted",
+    },
+    _active: {
+      bg: "surface-active",
+      borderColor: "current",
     },
   }),
   neutral: (props: StyleFunctionProps) => ({
     color: "emphasized",
-    bg: "surface",
+    bg: "surface-muted",
     _hover: {
       bg: "surface-hover",
     },
@@ -119,20 +140,20 @@ const variants = {
     }
     return {
       color: mode(
-        `${props.colorScheme}.600`,
-        `${props.colorScheme}.200`
+        `${props.colorScheme}.500`,
+        `${props.colorScheme}.300`
       )(props),
       _hover: {
         color: mode(
-          `${props.colorScheme}.700`,
-          `${props.colorScheme}.300`
+          `${props.colorScheme}.600`,
+          `${props.colorScheme}.200`
         )(props),
         textDecoration: "none",
       },
       _active: {
         color: mode(
           `${props.colorScheme}.700`,
-          `${props.colorScheme}.300`
+          `${props.colorScheme}.100`
         )(props),
       },
     };
@@ -145,10 +166,10 @@ const variants = {
       verticalAlign: "baseline",
       color: "brand.50",
       _hover: {
-        color: "white",
+        color: "inverted",
       },
       _active: {
-        color: "white",
+        color: "inverted",
       },
     };
   },

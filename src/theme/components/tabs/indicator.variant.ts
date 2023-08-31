@@ -20,13 +20,13 @@ export const indicator = definePartsStyle((props) => {
       justifyContent: "center",
       width: "max",
       mx: "auto",
-      bg: "bg-subtle",
+      bg: "bg-canvas",
       position: "relative",
     },
     tab: {
       color: "subtle",
-      fontSize: "sm",
-      fontWeight: "medium",
+      fontSize: "xs",
+      fontWeight: "normal",
       zIndex: 1,
       borderRadius: "full",
       px: "5",
@@ -40,7 +40,7 @@ export const indicator = definePartsStyle((props) => {
       },
       _selected: {
         color: "emphasis",
-        fontWeight: "semibold",
+        fontWeight: "medium",
         zIndex: "10",
         _hover: {
           bg: "transparent",
@@ -52,7 +52,7 @@ export const indicator = definePartsStyle((props) => {
       bottom: "1",
       borderRadius: "full",
       boxShadow: "xs",
-      bg: "surface",
+      bg: "surface-elevated",
 
       // _dark: {
       //   bg: "gray.700",

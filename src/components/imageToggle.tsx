@@ -26,7 +26,7 @@ export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
   return (
     <Box position="relative" my="2">
       <Tabs variant="indicator" color="emphasis" id={tabId}>
-        <TabList position="relative" mb="-6">
+        <TabList position="relative" mb="-4">
           <Tab>{tab1 ? tab1 : "Before"}</Tab>
           <Tab>{tab2 ? tab2 : "After"}</Tab>
           <TabIndicator />
