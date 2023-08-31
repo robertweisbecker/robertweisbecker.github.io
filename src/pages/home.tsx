@@ -30,8 +30,8 @@ export const Home: React.FC = () => {
         src="/assets/blob.png"
         position="fixed"
         mx="0"
-        boxSize="150vh"
-        left="75%"
+        boxSize={{ base: "150vmin" }}
+        left={{ base: "50%", sm: "75%" }}
         top="50%"
         transform="translate(-50%, -50%)"
         maxW="unset"
