@@ -47,7 +47,7 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
           aria-label="View fullscreen image"
           size="sm"
           color="muted"
-          variant="neutral"
+          variant="outline"
           position="absolute"
           bottom={{ base: "1", lg: "4" }}
           right={{ base: "1", lg: "4" }}

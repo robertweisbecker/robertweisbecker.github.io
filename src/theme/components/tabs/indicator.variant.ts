@@ -9,13 +9,14 @@ const { definePartsStyle } = createMultiStyleConfigHelpers(tabsAnatomy.keys);
 export const indicator = definePartsStyle((props) => {
   return {
     tablist: {
-      borderRadius: "full",
+      borderRadius: "2xl",
       overflow: "hidden",
       h: "auto",
       p: "1",
       px: "2",
       gap: "-1",
       borderWidth: "1px",
+      borderColor: "border-subtle",
       w: "auto",
       justifyContent: "center",
       width: "max",
@@ -25,10 +26,10 @@ export const indicator = definePartsStyle((props) => {
     },
     tab: {
       color: "subtle",
-      fontSize: "xs",
-      fontWeight: "normal",
+      fontSize: "sm",
+      fontWeight: "medium",
       zIndex: 1,
-      borderRadius: "full",
+      borderRadius: "xl",
       px: "5",
       py: "1",
       h: "auto",
@@ -40,7 +41,7 @@ export const indicator = definePartsStyle((props) => {
       },
       _selected: {
         color: "emphasis",
-        fontWeight: "medium",
+        fontWeight: "bold",
         zIndex: "10",
         _hover: {
           bg: "transparent",
@@ -50,8 +51,8 @@ export const indicator = definePartsStyle((props) => {
     indicator: {
       top: "1",
       bottom: "1",
-      borderRadius: "full",
-      boxShadow: "xs",
+      borderRadius: "xl",
+      boxShadow: "sm",
       bg: "surface-elevated",
 
       // _dark: {

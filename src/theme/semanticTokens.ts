@@ -9,12 +9,12 @@ export const semanticTokens = {
       _dark: "whiteAlpha.400",
     },
 
-    surface: { _light: "white", _dark: "black" },
+    surface: { _light: "white", _dark: "gray.900" },
     "surface-hover": { _light: "gray.50", _dark: "gray.700" },
     "surface-active": { _light: "gray.100", _dark: "gray.600" },
     "surface-elevated": { _light: "white", _dark: "gray.800" },
     "bg-page": "surface",
-    "bg-canvas": { _light: "gray.100", _dark: "gray.900" },
+    "bg-canvas": { _light: "gray.100", _dark: "black" },
 
     "bg-subtle": { _light: "gray.100", _dark: "gray.900" },
     "bg-muted": { _light: "gray.200", _dark: "gray.800" },

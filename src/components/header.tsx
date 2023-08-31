@@ -102,7 +102,6 @@ const Header: FC<HeaderProps> = ({ variant }) => {
       // mt={isNotHome ? "0" : "8"}
       backdropFilter="auto"
       backdropBlur="10px"
-      fontFamily="heading"
       // maxW="100vw"
       maxW="container.lg"
     >
@@ -115,16 +114,17 @@ const Header: FC<HeaderProps> = ({ variant }) => {
         direction="row"
         gap={4}
         borderBottom="1px"
-        borderColor="border"
+        borderColor="border-subdued"
       >
         {/* {isNotHome && <BackButton />} */}
 
         <Link
           as={NavHashLink}
           preventScrollReset
-          fontSize="sm"
+          fontSize="md"
           textDecoration="none"
           px={1}
+          fontWeight="semibold"
           bg="transparent"
           _hover={{ textDecoration: "none" }}
           to="/"
