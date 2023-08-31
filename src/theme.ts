@@ -15,19 +15,20 @@
 //   proTheme,
 // }),
 import * as components from "./theme/components";
+import { theme as proTheme } from "@chakra-ui/pro-theme";
 import {
   extendTheme,
   extendBaseTheme,
   withDefaultColorScheme,
   theme as baseTheme,
 } from "@chakra-ui/react";
-import { theme as proTheme } from "@chakra-ui/pro-theme";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 import { semanticTokens } from "./theme/semanticTokens";
 // import { typographyOverrides } from "./theme/foundations/typography";
 import * as foundations from "./theme/foundations";
 
 export const theme = extendTheme({
+  ...foundations,
   config: {
     cssVarPrefix: "bob",
     initialColorMode: "dark",
@@ -35,15 +36,23 @@ export const theme = extendTheme({
 
   styles: {
     global: (props: StyleFunctionProps) => ({
+      _selection: {
+        bg: "accent",
+        color: "emphasis-invert",
+      },
       body: {
         bg: "surface",
-        lineHeight: "1.75",
+        lineHeight: "base",
+        color: "text-muted",
       },
     }),
   },
-
+  colors: {
+    ...foundations.colors,
+    brand: foundations.colors.purple,
+  },
   fonts: {
-    heading: `'Inter Display', 'Inter', sans-serif`,
+    heading: `'Nimbus Sans', 'Inter var alt', system-ui, sans-serif`,
     body: `'Inter', sans-serif`,
   },
 
@@ -61,6 +70,6 @@ export const theme = extendTheme({
     },
   },
   semanticTokens: { ...semanticTokens },
-  ...foundations,
+
   proTheme,
 });

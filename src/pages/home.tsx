@@ -13,6 +13,7 @@ import {
   Icon,
   HStack,
   Spacer,
+  Image,
 } from "@chakra-ui/react";
 import {
   HandIcon,
@@ -25,14 +26,16 @@ import { AnimatePresence, motion } from "framer-motion";
 export const Home: React.FC = () => {
   return (
     <Stack spacing={10}>
-      <Box
-        as={Pattern}
+      <Image
+        src="/assets/blob.png"
         position="fixed"
         mx="0"
-        // mb="10vw"
-        left="-25vw"
-        top="-20vh"
-        w={{ base: "200vw", md: "200vw", xl: "200vw" }}
+        boxSize="150vh"
+        left="75%"
+        top="50%"
+        transform="translate(-50%, -50%)"
+        maxW="unset"
+        // w={{ base: "200vw", md: "200vw", xl: "200vw" }}
         // h={{ base: "500px", md: "800px", xl: "1200px" }}
         zIndex="-1"
       />

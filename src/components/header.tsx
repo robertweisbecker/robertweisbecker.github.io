@@ -71,7 +71,7 @@ const headerButtons = (
     >
       about
     </Button>
-    <Button
+    {/* <Button
       as={Link}
       textDecoration="none"
       href="/resume.pdf"
@@ -80,7 +80,7 @@ const headerButtons = (
       rightIcon={<ArrowTopRightIcon />}
     >
       cv
-    </Button>
+    </Button> */}
   </ButtonGroup>
 );
 
@@ -121,15 +121,20 @@ const Header: FC<HeaderProps> = ({ variant }) => {
         <Link
           as={NavHashLink}
           preventScrollReset
-          fontSize="md"
+          fontSize="sm"
+          letterSpacing="tight"
           textDecoration="none"
+          lineHeight="shorter"
           px={1}
           fontWeight="semibold"
           bg="transparent"
           _hover={{ textDecoration: "none" }}
           to="/"
         >
-          bob weisbecker
+          bob dot fyi
+          <Box as="span" fontWeight="normal" ms="2" color="text-subdued">
+            Bob Weisbecker
+          </Box>
         </Link>
         <Spacer />
 
@@ -180,7 +185,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
                     fontWeight="semibold"
                     letterSpacing="wider"
                     textTransform="uppercase"
-                    color="subtle"
+                    color="text-subdued"
                     lineHeight="taller"
                     border="none"
                   >
@@ -196,7 +201,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
                           as={NavLink}
                           to={project.path}
                           size="sm"
-                          color="muted"
+                          color="text-muted"
                           rightIcon={
                             <DotFilledIcon
                               className="popoverCurrentIcon"

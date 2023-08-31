@@ -71,7 +71,7 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
           as="span"
           display="inline"
           size="2xl"
-          color="subtle"
+          color="text-subdued"
           fontWeight="regular"
           mb={5}
         >
@@ -81,19 +81,19 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
       </GridItem>
       <GridItem as="aside" gap={2}>
         <Stack gap={4} mt={5}>
-          {/* <HStack color="muted">
+          {/* <HStack color="text-muted">
             <Icon as={DrawingPinIcon} />
             <Heading size="2xs">The deets</Heading>
           </HStack> */}
           <VStack align="start" spacing={0}>
-            <Text fontSize="xs" color="subtle">
+            <Text fontSize="xs" color="text-subdued">
               Role
             </Text>
             <Text fontSize="sm">{page.role}</Text>
           </VStack>
 
           <VStack align="start" spacing={2}>
-            <Text fontSize="xs" color="subtle">
+            <Text fontSize="xs" color="text-subdued">
               Team
             </Text>
 
@@ -119,19 +119,21 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
                     ) : (
                       member.name
                     )}
-                    {member.role && <Text color="subtle">{member.role}</Text>}
+                    {member.role && (
+                      <Text color="text-subdued">{member.role}</Text>
+                    )}
                   </ListItem>
                 ))}
             </UnorderedList>
           </VStack>
           <VStack align="start" spacing={0}>
-            <Text fontSize="xs" color="subtle">
+            <Text fontSize="xs" color="text-subdued">
               When
             </Text>
             <Text fontSize="sm">{page.date}</Text>
           </VStack>
         </Stack>
-        {/* <Text fontSize="xl" color="fg.subtle" mb={5}>
+        {/* <Text fontSize="xl" color="fg.subdued" mb={5}>
           {page.subtitle}
         </Text> */}
         {/* <Text fontSize="lg" lineHeight="tall">

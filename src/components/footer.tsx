@@ -22,7 +22,7 @@ const Footer = () => {
       as="footer"
       role="contentinfo"
       borderTop="1px"
-      borderColor="border"
+      borderColor="border-subdued"
       py={5}
     >
       <Stack spacing={{ base: "2", md: "5" }}>
@@ -39,7 +39,7 @@ const Footer = () => {
             alt=""
             src="/assets/logo.png"
           /> */}
-          <Text fontSize="2xs" color="subtle">
+          <Text fontSize="2xs" color="text-subdued">
             &copy; {new Date().getFullYear()} Robert Weisbecker
           </Text>
 
@@ -66,8 +66,8 @@ const Footer = () => {
               sx={{ "& svg": { transform: "rotate(15deg)" } }}
               icon={<ReaderIcon />}
             />
-            <ScrollButton />
           </ButtonGroup>
+          <ScrollButton />
         </Stack>
       </Stack>
       {/* <Pattern /> */}

@@ -27,14 +27,14 @@ export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
           <Image
             src={src}
             alt={`${text} Logo`}
-            h="1em"
+            h="1.5em"
             w="auto"
             boxShadow="inner"
-            rounded="base"
-            // bg="bg-canvas"
-            // border="1px"
-            // borderColor="chakra-border-color"
-            // p={2}
+            rounded="lg"
+            border="1px"
+            borderColor="border-subdued"
+            bg="bg-canvas"
+            p="0.5"
           />
         )}
         <Link

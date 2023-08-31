@@ -53,6 +53,6 @@ export default {
     mx: "auto",
     fontSize: "xs",
     letterSpacing: "wide",
-    color: "subtle",
+    color: "text-subdued",
   },
 };

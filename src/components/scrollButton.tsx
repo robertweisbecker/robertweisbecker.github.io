@@ -1,6 +1,6 @@
 import React from "react";
-import { IconButton } from "@chakra-ui/react";
-import { DoubleArrowUpIcon } from "@radix-ui/react-icons";
+import { IconButton, Tooltip } from "@chakra-ui/react";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 
 export const ScrollButton = () => {
   const handleClick = () => {
@@ -11,11 +11,15 @@ export const ScrollButton = () => {
   };
 
   return (
-    <IconButton
-      icon={<DoubleArrowUpIcon />}
-      onClick={handleClick}
-      isRound
-      aria-label="Scroll to top"
-    />
+    <Tooltip label="Scroll to top">
+      <IconButton
+        icon={<ArrowUpIcon />}
+        onClick={handleClick}
+        variant="ghost"
+        isRound
+        boxShadow="lg"
+        aria-label="Scroll to top"
+      />
+    </Tooltip>
   );
 };

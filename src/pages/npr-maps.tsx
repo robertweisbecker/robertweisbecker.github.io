@@ -105,7 +105,7 @@ export const NPR: React.FC = () => {
           differentiate between coverages and contour toggles.
         </Text>
         <Box
-          bg="bg-subtle"
+          bg="bg-subdued"
           shadow="inner"
           p={{ base: 2, lg: 4 }}
           overflow="hidden"
@@ -129,7 +129,7 @@ export const NPR: React.FC = () => {
           the map.
         </Text>
         <Box
-          bg="bg-subtle"
+          bg="bg-subdued"
           shadow="inner"
           p={{ base: 2, lg: 4 }}
           borderRadius="xl"
@@ -164,7 +164,7 @@ export const NPR: React.FC = () => {
           sidebar.
         </Text>
         <Box
-          bg="bg-subtle"
+          bg="bg-subdued"
           shadow="inner"
           p={{ base: 2, lg: 4 }}
           borderRadius="xl"

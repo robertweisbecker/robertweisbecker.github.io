@@ -1,7 +1,7 @@
 export default {
   letterSpacings: {
-    tighter: "-0.03em",
-    tight: "-0.01em",
+    tighter: "-0.01em",
+    tight: "-0.005em",
     normal: "0",
     wide: "0.025em",
     wider: "0.05em",
@@ -12,10 +12,10 @@ export default {
     normal: "normal",
     none: 1,
     shorter: 1.25,
-    short: 1.5,
-    base: 1.75,
-    tall: 1.875,
-    taller: "2",
+    short: 1.375,
+    base: 1.5,
+    tall: 1.75,
+    taller: "1.875",
   },
   fontSizes: {
     "3xs": "0.5rem", //8

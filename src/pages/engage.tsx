@@ -51,7 +51,7 @@ export const Engage: React.FC = () => {
         </Stack>
 
         <Heading as="h2">Component Library</Heading>
-        <Text color="muted">
+        <Text color="text-muted">
           Upon joining the project, I had the team migrate existing designs from
           Adobe XD to Sketch, so that we could use it to build a reusable
           component library that would let us rapidly execute and iterate. That
@@ -69,12 +69,12 @@ export const Engage: React.FC = () => {
           <Text textStyle="caption">Template library</Text>
         </Stack>
         <Heading as="h2">Interactions</Heading>
-        <Text color="muted">
+        <Text color="text-muted">
           To prototype new interactions, I learned to use Flinto, Framer, and
           Invision Studio, and freshened up on HTML/CSS to ship code directly to
           developers.
         </Text>
-        <Text color="muted">A sampling of these are below:</Text>
+        <Text color="text-muted">A sampling of these are below:</Text>
         <LayoutGrid variant="twoUp">
           <Stack>
             <Box

@@ -106,7 +106,7 @@ export const UDL: React.FC = () => {
             fontSize="xl"
             lineHeight="tall"
             fontWeight="regular"
-            color="muted"
+            color="text-muted"
             // textAlign="center"
             borderLeft="4px"
             borderColor="border-muted"

@@ -1,11 +1,12 @@
 # [bob.fyi](https://bob.fyi)
 
 ## Dependencies
-* [Create React App](https://github.com/facebook/create-react-app) | [Docs](https://facebook.github.io/create-react-app/docs/getting-started)
-* [Chakra UI](https://chakra-ui.com)
-* [Radix Icons](https://radix-ui.com/icons)
-* [React Router](https://reactrouter.com/en/main)
-* [React Docs](https://reactjs.org/)
+
+- [Create React App](https://github.com/facebook/create-react-app) | [Docs](https://facebook.github.io/create-react-app/docs/getting-started)
+- [Chakra UI](https://chakra-ui.com)
+- [Radix Icons](https://radix-ui.com/icons)
+- [React Router](https://reactrouter.com/en/main)
+- [React Docs](https://reactjs.org/)
 
 ## Local Development
 
@@ -47,3 +48,13 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
+### App
+
+For PWA functionality, see https://developers.google.com/web/fundamentals/web-app-manifest/.
+
+```
+// index.html
+<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+```
+
+      *Note:* `%PUBLIC_URL%` will be replaced with the URL of the `public` folder during the build. Only files inside the `public` folder can be referenced from the HTML.

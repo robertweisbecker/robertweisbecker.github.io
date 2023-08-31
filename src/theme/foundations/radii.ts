@@ -11,4 +11,5 @@ export const radii = {
   full: "9999px",
   circle: "50%",
   rounded: "9999px",
+  fluid: "max(0px, min(1.25rem, calc((100vw - 4px - 100%) * 9999)))/1.25rem",
 };

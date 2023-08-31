@@ -1,4 +1,5 @@
 export { colors } from "./colors";
+export { radii } from "./radii";
 // export { default as fonts } from './fonts'
 // export { default as sizes } from './sizes'
 // export { default as space } from './space'

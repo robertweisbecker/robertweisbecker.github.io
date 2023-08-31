@@ -74,16 +74,18 @@ const variants = {
     },
   }),
   outline: (props: StyleFunctionProps) => ({
-    color: "emphasis",
-    bg: "surface",
+    color: "muted",
+    bg: "surface-elevated",
     borderColor: "border-subdued",
     _hover: {
       bg: "surface-hover",
-      borderColor: "border",
+      color: "emphasis",
+      borderColor: "border-muted",
     },
     _checked: {
       bg: "surface-active",
-      borderColor: "border-muted",
+      borderColor: "interactive",
+      color: "interactive",
     },
     _active: {
       bg: "surface-active",
@@ -111,13 +113,13 @@ const variants = {
     },
     _activeLink: {
       color: "white",
-      bg: "bg-accent-subtle",
+      bg: "bg-accent-subdued",
     },
   }),
   link: (props: StyleFunctionProps) => {
     if (props.colorScheme === "gray") {
       return {
-        color: "muted",
+        color: "text-muted",
         textDecoration: "none",
         fontWeight: "normal",
         rounded: "full",

@@ -70,7 +70,7 @@ export const underline = definePartsStyle((props) => {
     tab: {
       [marginProp]: "-1px",
       fontWeight: "semibold",
-      color: "fg.subtle",
+      color: "fg.subdued",
       ...sizeProps.tab,
       _selected: {
         color: "accent",

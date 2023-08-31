@@ -29,24 +29,33 @@ interface ImageProps {
   src: string;
   src2?: string;
   caption?: string;
+  full?: boolean;
 }
 
-export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
+export const ImageModal: FC<ImageProps> = ({ src, src2, caption, full }) => {
   const modalId = useId();
   const captionId = useId();
   const buttonId = useId();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Stack my="2">
-      <Box position="relative">
-        <Image src={src} borderRadius="xl" bg="blackAlpha.100" />
+    <Stack my="2" mx={-4}>
+      <Box
+        position="relative"
+        borderRadius="fluid"
+        borderWidth="1px"
+        borderColor="border-subdued"
+        overflow="hidden"
+        w={full ? "100vw" : "auto"}
+        maxW={full ? "container.lg" : "100%"}
+      >
+        <Image src={src} />
 
         <IconButton
           id={buttonId}
           onClick={onOpen}
           aria-label="View fullscreen image"
           size="sm"
-          color="muted"
+          color="text-muted"
           variant="outline"
           position="absolute"
           bottom={{ base: "1", lg: "4" }}
@@ -55,7 +64,7 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
           sx={{
             "& > svg": {
               boxSize: "1.5em",
-              color: "muted",
+              color: "text-muted",
             },
           }}
           icon={<ZoomInIcon />}
@@ -73,7 +82,11 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
         id={modalId}
         size="full"
       >
-        <ModalOverlay bg="blackAlpha.900" />
+        <ModalOverlay
+          bg="surface-frosted"
+          backdropFilter="auto"
+          backdropBlur="xl"
+        />
         <ModalContent
           mx="5vw"
           aria-describedby={captionId}
@@ -126,7 +139,7 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption }) => {
               gap="1"
               onClick={onClose}
             >
-              Close <Kbd color="muted">esc</Kbd>
+              Close <Kbd color="text-muted">esc</Kbd>
             </Button>
           </ModalFooter> */}
         </ModalContent>

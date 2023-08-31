@@ -31,6 +31,7 @@ import {
   DotFilledIcon,
   EnvelopeClosedIcon,
   CursorArrowIcon,
+  IdCardIcon,
 } from "@radix-ui/react-icons";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -45,7 +46,7 @@ export const About: React.FC = () => {
       </VisuallyHidden>
       <LayoutGrid variant="twoThirds" columnGap={{ base: 4, xl: 20 }}>
         <GridItem>
-          <HStack mb={10} color="subtle">
+          <HStack mb={10} color="text-subdued">
             <Icon as={CursorArrowIcon} />
             <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
               What I do
@@ -76,7 +77,7 @@ export const About: React.FC = () => {
               product lines.
             </Text>
             <Spacer />
-            <HStack my={10} color="subtle">
+            <HStack my={10} color="text-subdued">
               <Icon as={CounterClockwiseClockIcon} />
               <Heading
                 as="h2"
@@ -147,7 +148,6 @@ export const About: React.FC = () => {
                 variant="outline"
                 size="sm"
                 leftIcon={<FileIcon />}
-                rightIcon={<ArrowTopRightIcon />}
               >
                 Resume
               </Button>
@@ -246,31 +246,31 @@ export const About: React.FC = () => {
           </Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2022 – present</Text>
+          <Text color="text-subdued">2022 – present</Text>
         </GridItem>
         <GridItem>
           <Text fontWeight="medium">Principal Designer, Platform UX</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2022</Text>
+          <Text color="text-subdued">2022</Text>
         </GridItem>
         <GridItem>
           <Text fontWeight="medium">Senior Interaction Designer</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2020</Text>
+          <Text color="text-subdued">2020</Text>
         </GridItem>
         <GridItem>
           <Text fontWeight="medium">Interaction Designer</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2018</Text>
+          <Text color="text-subdued">2018</Text>
         </GridItem>
         <GridItem>
           <Text fontWeight="medium">UX Designer</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2017</Text>
+          <Text color="text-subdued">2017</Text>
         </GridItem>
       </LayoutGrid>
 
@@ -286,7 +286,7 @@ export const About: React.FC = () => {
           </Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">Spring 2017</Text>
+          <Text color="text-subdued">Spring 2017</Text>
         </GridItem>
       </LayoutGrid>
       <LayoutGrid variant="threeUp" rowGap={2}>
@@ -302,13 +302,13 @@ export const About: React.FC = () => {
           <Text fontWeight="medium">UX Design Intern</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">Summer 2015</Text>
+          <Text color="text-subdued">Summer 2015</Text>
         </GridItem>
       </LayoutGrid>
       <Spacer />
       <Spacer />
       <HStack>
-        <Icon as={BookmarkIcon} />
+        <Icon as={IdCardIcon} />
         <Heading as="h2" size="2xs" textTransform="uppercase" id="projects">
           Where (I learned things)
         </Heading>
@@ -324,7 +324,7 @@ export const About: React.FC = () => {
           <Text fontWeight="medium">Master's in User Experience Design</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2016 – 2017</Text>
+          <Text color="text-subdued">2016 – 2017</Text>
         </GridItem>
       </LayoutGrid>
       <LayoutGrid variant="threeUp" rowGap={2}>
@@ -338,7 +338,7 @@ export const About: React.FC = () => {
           <Text>Minor, Art & Design</Text>
         </GridItem>
         <GridItem>
-          <Text color="subtle">2012 – 2016</Text>
+          <Text color="text-subdued">2012 – 2016</Text>
         </GridItem>
       </LayoutGrid>
     </Stack>

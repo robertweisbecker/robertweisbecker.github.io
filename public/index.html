@@ -2,17 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/assets/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="var(--bob-colors-surface)" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="robert (bob) weisbecker • design systems lead"
     />
+    <meta
+      name="theme-color"
+      content="#1A1D21"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#F5F8F9"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="icon" href="%PUBLIC_URL%/assets/favicon.ico" />
     <link
       rel="apple-touch-icon"
       href="%PUBLIC_URL%/assets/apple-touch-icon.png"
     />
+    <link rel="stylesheet" href="https://use.typekit.net/yzm6szz.css" />
+    <link rel="preconnect" href="https://rsms.me/" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <!-- analytics -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-100486484-1"
@@ -23,18 +36,43 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "UA-100486484-1");
     </script>
-    <!--
-      See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <!-- PWA -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      %PUBLIC_URL% will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-    -->
-    <title>Robert (Bob) Weisbecker • Design Systems Lead</title>
+
+    <title>bob dot fyi</title>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@rsms" />
+    <meta name="twitter:creator" content="@rsms" />
+    <meta
+      name="twitter:description"
+      content="Call me Bob. I'm currently designing design systems & systems for designers at Everfi from Blackbaud."
+    />
+    <meta
+      name="description"
+      content="Call me Bob. I'm currently designing design systems & systems for designers at Everfi from Blackbaud."
+    />
+    <meta
+      property="og:description"
+      content="Call me Bob. I'm currently designing design systems & systems for designers at Everfi from Blackbaud."
+    />
+
+    <meta property="og:title" content="Robert (Bob) Weisbecker" />
+    <meta name="twitter:title" content="Robert (Bob) Weisbecker" />
+
+    <meta property="og:image" content="%PUBLIC_URL%/assets/share.png" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/assets/share.png" />
+
+    <meta
+      property="og:image:alt"
+      content="Bob Weisbecker | bob.fyi | yo@bob.fyi"
+    />
+    <meta property="fb:app_id" content="38027689216" />
+    <meta property="og:site_name" content="bob.fyi" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://bob.fyi" />
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

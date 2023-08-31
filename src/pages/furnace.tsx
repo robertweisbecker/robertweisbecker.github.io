@@ -337,7 +337,7 @@ export const Furnace: React.FC = () => {
         <Text>
           Plus, we could always add responsive body text in the future if we
           needed it. <br />
-          <Box as="span" color="subtle">
+          <Box as="span" color="text-subdued">
             Spoiler alert: we didn't – it never once came up.
           </Box>
         </Text>

@@ -3,7 +3,7 @@ export const semanticTokens = {
     "chakra-body-text": "muted",
     "chakra-body-bg": "bg-page",
     "chakra-border-color": "border",
-    "chakra-subtle-bg": "bg-subtle",
+    "chakra-subtle-bg": "bg-subdued",
     "chakra-placeholder-color": {
       _light: "blackAlpha.400",
       _dark: "whiteAlpha.400",
@@ -13,36 +13,37 @@ export const semanticTokens = {
     "surface-hover": { _light: "gray.50", _dark: "gray.700" },
     "surface-active": { _light: "gray.100", _dark: "gray.600" },
     "surface-elevated": { _light: "white", _dark: "gray.800" },
+    "surface-frosted": { _light: "whiteAlpha.400", _dark: "blackAlpha.500" },
     "bg-page": "surface",
     "bg-canvas": { _light: "gray.100", _dark: "black" },
 
-    "bg-subtle": { _light: "gray.100", _dark: "gray.900" },
+    "bg-subdued": { _light: "gray.100", _dark: "gray.900" },
     "bg-muted": { _light: "gray.200", _dark: "gray.800" },
     "bg-invert": { _light: "gray.900", _dark: "white" },
 
     default: "muted",
     placeholder: "chakra-placeholder-color",
     inverted: { _light: "white", _dark: "gray.800" },
-    emphasis: { _light: "black", _dark: "gray.100" },
+    emphasis: { _light: "black", _dark: "gray.50" },
     emphasized: "emphasis",
-    muted: { _light: "gray.700", _dark: "whiteAlpha.800" },
-    subtle: { _light: "gray.500", _dark: "whiteAlpha.600" },
+    "text-muted": { _light: "gray.700", _dark: "gray.300" },
+    "text-subdued": { _light: "gray.500", _dark: "gray.400" },
     disabled: { _light: "blackAlpha.200", _dark: "whiteAlpha.100" },
-    border: { _light: "blackAlpha.200", _dark: "whiteAlpha.300" },
-    "border-muted": { _light: "gray.300", _dark: "whiteAlpha.200" },
-    "border-subdued": { _light: "gray.100", _dark: "whiteAlpha.200" },
+    border: { _light: "gray.300", _dark: "gray.700" },
+    "border-muted": { _light: "blackAlpha.200", _dark: "whiteAlpha.200" },
+    "border-subdued": { _light: "blackAlpha.100", _dark: "whiteAlpha.100" },
 
-    accent: { _light: "brand.600", _dark: "brand.200" },
+    accent: { _light: "brand.500", _dark: "brand.200" },
     interactive: { _light: "brand.400", _dark: "brand.300" },
 
     success: { _light: "green.500", _dark: "green.200" },
     error: { _light: "red.500", _dark: "red.200" },
     "bg-accent": "brand.500",
-    "bg-accent-subtle": "brand.400",
+    "bg-accent-subdued": "brand.400",
     "bg-accent-muted": "brand.300",
     "emphasis-invert": { _light: "whiteAlpha.900", _dark: "gray.800" },
     "invert-muted": "brand.50",
-    "invert-subtle": "brand.100",
+    "invert-subdued": "brand.100",
   },
   shadows: {
     xs: {
@@ -52,7 +53,7 @@ export const semanticTokens = {
         "0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
 
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 1px 2px rgba(13, 14, 20, .4)",
+        "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 1px 2px rgba(13, 14, 20, .4)",
     },
     sm: {
       // default:
@@ -60,7 +61,7 @@ export const semanticTokens = {
       _light:
         "0px 8px 20px -6px rgba(36, 42, 66, 0.08), 0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 2px 4px rgba(13, 14, 20, .4)",
+        "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 2px 4px rgba(13, 14, 20, .4)",
     },
     md: {
       _light:
@@ -68,7 +69,7 @@ export const semanticTokens = {
       // default:
       //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 4px 8px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 4px 8px rgba(13, 14, 20, .4)",
+        "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 4px 8px rgba(13, 14, 20, .4)",
     },
     lg: {
       _light:
@@ -76,13 +77,13 @@ export const semanticTokens = {
       // default:
       //   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 8px 16px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, .5), 0px 8px 16px rgba(13, 14, 20, .4)",
+        "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 12px 36px -6px rgba(13, 14, 20, .4),  0px 32px 120px -15px rgba(13, 14, 20, 0.6)",
     },
     xl: {
       default:
         "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 16px 24px rgba(45, 55, 72,  0.1)",
       _dark:
-        "0px 0px 1px rgba(13, 14, 20, 1), 0px 16px 24px rgba(13, 14, 20, .4), inset 0 0 0 1px rgba(255,255,255,.12)",
+        "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 16px 24px rgba(13, 14, 20, .4), inset 0 0 0 1px rgba(255,255,255,.12)",
     },
   },
   space: {

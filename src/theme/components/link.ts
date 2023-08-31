@@ -40,7 +40,7 @@ const variants = {
     p: "2",
     _hover: {
       textDecoration: "none",
-      bg: "bg-subtle",
+      bg: "bg-subdued",
     },
     _active: {
       textDecoration: "none",

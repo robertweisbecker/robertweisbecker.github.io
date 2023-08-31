@@ -37,13 +37,13 @@ function ProjectGrid() {
   return (
     <Stack
       id="projects"
-      bg="whiteAlpha.50"
+      bg="surface-frosted"
       ps={4}
       pe={6}
       borderRadius="2xl"
       gap={0}
       boxShadow="lg"
-      borderColor="whiteAlpha.50"
+      borderColor="whiteAlpha.100"
       backdropFilter="auto"
       backdropBlur="80px"
       borderWidth="1px"
@@ -61,7 +61,7 @@ function ProjectGrid() {
           transitionDuration="slow"
           transitionTimingFunction="ease-out"
           borderBottom="1px"
-          borderColor="border"
+          borderColor="border-subdued"
           key={index}
           _last={{
             border: "none",
@@ -70,7 +70,7 @@ function ProjectGrid() {
           _hover={{
             opacity: "1",
             transform: "translateX(1em)",
-            borderColor: "border",
+            borderColor: "border-muted",
           }}
           _groupHover={{
             opacity: ".1",
@@ -84,14 +84,19 @@ function ProjectGrid() {
           <HStack
             gap={3}
             position="relative"
-            py={4}
-            align="start"
+            align="center"
             className="group"
+            py={5}
           >
             {project.logo ? (
               <Image
                 src={`${project.logo}`}
-                w={8}
+                boxSize={10}
+                borderRadius="lg"
+                borderColor="transparent"
+                borderWidth="1px"
+                bg="emphasis-invert"
+                p="1"
                 opacity=".8"
                 transitionProperty="common"
                 transitionDuration="fast"
@@ -100,9 +105,11 @@ function ProjectGrid() {
                 _dark={{ filter: "brightness(120%) " }}
                 _groupHover={{
                   filter: "none",
-                  w: "8",
+                  bg: "surface-elevated",
+                  borderColor: "border-muted",
                   opacity: "1",
-                  transform: "translate(0) scale(1)",
+                  transform: "translate(0) scale(1.2)",
+                  boxShadow: "xl",
                 }}
               />
             ) : (
@@ -125,7 +132,12 @@ function ProjectGrid() {
                   {project.title}
                 </Text>
               </LinkOverlay>
-              <Text flexGrow="1" display="inline" fontSize="sm" color="muted">
+              <Text
+                flexGrow="1"
+                display="inline"
+                fontSize="sm"
+                color="text-muted"
+              >
                 {project.description}
               </Text>
             </Flex>

@@ -10,7 +10,7 @@ const { defineMultiStyleConfig } = createMultiStyleConfigHelpers(
 export default defineMultiStyleConfig({
   baseStyle: {
     tab: {
-      color: "muted",
+      color: "text-muted",
     },
   },
   variants: {

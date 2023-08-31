@@ -24,22 +24,20 @@ interface ImageProps {
 export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
   const tabId = useId();
   return (
-    <Box position="relative" my="2">
+    <Box position="relative" my="2" w="100vw" maxW="container.lg" mx={-4}>
       <Tabs variant="indicator" color="emphasis" id={tabId}>
-        <TabList position="relative" mb="-4">
+        <TabList position="relative" mb={2}>
           <Tab>{tab1 ? tab1 : "Before"}</Tab>
           <Tab>{tab2 ? tab2 : "After"}</Tab>
           <TabIndicator />
         </TabList>
         <TabPanels
           mb={2}
-          bg="blackAlpha.100"
-          borderRadius="xl"
-          boxShadow="inner"
+          bg="bg-canvas"
+          borderRadius="fluid"
           overflow="hidden"
           border="1px"
-          borderColor="border"
-          // display="flex"
+          borderColor="border-subdued"
         >
           <TabPanel p={0}>
             <Image src={before}></Image>
