@@ -5,12 +5,9 @@ import {
   Route,
   useLocation,
   ScrollRestoration,
-  // // Switch,
-  // createBrowserHistory,
 } from "react-router-dom";
 
 import { AnimatePresence, motion } from "framer-motion";
-
 import {
   ChakraProvider,
   Box,
@@ -20,7 +17,9 @@ import {
 } from "@chakra-ui/react";
 import Header from "./components/header";
 import Footer from "./components/footer";
-
+import ScrollToTop from "./components/scrollToTop";
+import { ColorModeScript } from "@chakra-ui/react";
+import { theme } from "./theme";
 import {
   Home,
   About,
@@ -32,28 +31,10 @@ import {
   NPR,
   Thesis,
 } from "./pages";
-
-// import { Achieve } from "./pages/achieve";
-// import * as components from "./theme";
-// import { typographyOverrides } from "./theme/typography";
-// import { theme as proTheme } from "@chakra-ui/pro-theme";
-// import { extendTheme, theme as baseTheme } from "@chakra-ui/react";
-import ScrollToTop from "./components/scrollToTop";
-import { ColorModeScript } from "@chakra-ui/react";
-
-import { theme } from "./theme";
-
-// export const theme = extendTheme({
-//   colors: { ...baseTheme.colors, brand: baseTheme.colors.blue },
-//   ...typographyOverrides,
-
-//   components: {
-//     ...components,
-//   },
-// });
-
+import { usePageTracking } from "./tracking/tracking";
 const App: React.FC = () => {
   const location = useLocation();
+  usePageTracking();
   return (
     <ChakraProvider theme={theme}>
       <SkipNavLink id="content">Skip to Main</SkipNavLink>
