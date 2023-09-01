@@ -59,7 +59,8 @@ export const headingStyles = defineStyleConfig({
     "2xs": {
       fontSize: "xs",
       textTransform: "uppercase",
-      color: "text-subdued",
+      color: "emphasis",
+      fontWeight: "medium",
       lineHeight: "1rem",
       letterSpacing: "wide",
     },

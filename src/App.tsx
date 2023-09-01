@@ -34,7 +34,7 @@ import {
 import { usePageTracking } from "./tracking/tracking";
 const App: React.FC = () => {
   const location = useLocation();
-  usePageTracking();
+  // usePageTracking();
   return (
     <ChakraProvider theme={theme}>
       <SkipNavLink id="content">Skip to Main</SkipNavLink>

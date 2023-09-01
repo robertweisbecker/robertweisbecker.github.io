@@ -81,10 +81,6 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
       </GridItem>
       <GridItem as="aside" gap={2}>
         <Stack gap={4} mt={5}>
-          {/* <HStack color="text-muted">
-            <Icon as={DrawingPinIcon} />
-            <Heading size="2xs">The deets</Heading>
-          </HStack> */}
           <VStack align="start" spacing={0}>
             <Text fontSize="xs" color="text-subdued">
               Role
@@ -92,11 +88,10 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
             <Text fontSize="sm">{page.role}</Text>
           </VStack>
 
-          <VStack align="start" spacing={2}>
+          <VStack align="start" spacing={0}>
             <Text fontSize="xs" color="text-subdued">
               Team
             </Text>
-
             <UnorderedList ms={0}>
               {page.team &&
                 page.team.map((member) => (
@@ -107,10 +102,6 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
                     fontSize="sm"
                     gap={2}
                   >
-                    {/* <Tooltip label={member.name}>
-                      <Avatar name={member.name} size="2xs" />
-                    </Tooltip> */}
-
                     {member.url ? (
                       <Link href={member.url} isExternal>
                         {member.name}

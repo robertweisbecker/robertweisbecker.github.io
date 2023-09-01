@@ -14,10 +14,12 @@ import {
   HStack,
   Spacer,
   Image,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   HandIcon,
   EyeOpenIcon,
+  EyeClosedIcon,
   BackpackIcon,
   ArrowTopRightIcon,
 } from "@radix-ui/react-icons";
@@ -35,8 +37,6 @@ export const Home: React.FC = () => {
         top="50%"
         transform="translate(-50%, -50%)"
         maxW="unset"
-        // w={{ base: "200vw", md: "200vw", xl: "200vw" }}
-        // h={{ base: "500px", md: "800px", xl: "1200px" }}
         zIndex="-1"
       />
       <Spacer />
@@ -58,24 +58,25 @@ export const Home: React.FC = () => {
       </HStack>
 
       <Box>
-        <Text fontSize="xl" lineHeight="taller">
+        <Text fontSize="xl" lineHeight="tall">
           I'm currently designing design systems
           <br /> & systems for designers at <br />
           <LinkOut
+            ms={0}
             src="/assets/logos/everfi-blue-icon.png"
             href="https://www.everfi.com"
             text="Everfi"
-          />
-          +
+          />{" "}
+          <Tooltip label="(we got acquired)">+</Tooltip>
           <LinkOut
             src="/assets/logos/blackbaud-logo.png"
             href="https://www.blackbaud.com"
             text="Blackbaud"
           />
         </Text>
-        <Text textStyle="caption" my={2} opacity={0.6}>
+        {/* <Text textStyle="caption" my={2} opacity={0.6}>
           (we got acquired)
-        </Text>
+        </Text> */}
       </Box>
       <Spacer />
       <HStack align="center">
@@ -84,6 +85,7 @@ export const Home: React.FC = () => {
           Take a gander
         </Heading>
       </HStack>
+
       <ProjectGrid />
       <Spacer />
     </Stack>

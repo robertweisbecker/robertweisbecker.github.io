@@ -52,7 +52,7 @@ export const About: React.FC = () => {
               What I do
             </Heading>
           </HStack>
-          <Stack gap={5} fontSize="lg" lineHeight="tall" color="emphasis">
+          <Stack gap={5} fontSize="lg" lineHeight="tall">
             <Text>
               By day, I'm a{" "}
               <Box as="span" fontWeight="semibold">

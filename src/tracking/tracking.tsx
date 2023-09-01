@@ -3,6 +3,9 @@ import { useLocation } from "react-router-dom";
 
 import localLog from "./localLog";
 
+import ReactGA from "react-ga4";
+ReactGA.initialize("100486484-1");
+
 export const usePageTracking = (): void => {
   const location = useLocation();
 

@@ -66,8 +66,9 @@ const headerButtons = (
     <Button
       as={NavLink}
       to="/about"
-      fontWeight="normal"
+      fontWeight={{ sm: "normal" }}
       _activeLink={{ fontWeight: "medium", color: "emphasis" }}
+      w={{ base: "full", lg: "auto" }}
     >
       about
     </Button>
@@ -128,6 +129,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
           px={1}
           fontWeight="semibold"
           bg="transparent"
+          color="emphasis"
           _hover={{ textDecoration: "none" }}
           to="/"
         >
