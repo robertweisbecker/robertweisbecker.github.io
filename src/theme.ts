@@ -16,60 +16,59 @@
 // }),
 import * as components from "./theme/components";
 import { theme as proTheme } from "@chakra-ui/pro-theme";
-import {
-  extendTheme,
-  extendBaseTheme,
-  withDefaultColorScheme,
-  theme as baseTheme,
-} from "@chakra-ui/react";
+import { extendTheme, extendBaseTheme, withDefaultColorScheme, theme as baseTheme } from "@chakra-ui/react";
 import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 import { semanticTokens } from "./theme/semanticTokens";
 // import { typographyOverrides } from "./theme/foundations/typography";
 import * as foundations from "./theme/foundations";
 
 export const theme = extendTheme({
-  ...foundations,
-  config: {
-    cssVarPrefix: "bob",
-    initialColorMode: "dark",
-  },
+	...foundations,
+	config: {
+		cssVarPrefix: "bob",
+		initialColorMode: "dark",
+	},
+	styles: {
+		global: (props: StyleFunctionProps) => ({
+			_selection: {
+				bg: "accent",
+				color: "emphasis-invert",
+			},
+			":root": {
+				fontFamily: "fallback",
+			},
+			body: {
+				bg: "surface",
+				lineHeight: "base",
+				color: "text-muted",
+			},
+		}),
+	},
+	fonts: {
+		heading: `'nimbus-sans-extended'`,
+		body: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+		fallback: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+	},
+	colors: {
+		...foundations.colors,
+		brand: foundations.colors.purple,
+	},
+	components: {
+		...components,
+		Code: {
+			baseStyle: {
+				borderRadius: "md",
+				lineHeight: "short",
+				fontSize: ".875em",
+				fontWeight: "semibold",
+				color: "emphasis",
+			},
+			defaultProps: { colorScheme: "gray" },
+		},
+	},
+	semanticTokens: { ...semanticTokens },
 
-  styles: {
-    global: (props: StyleFunctionProps) => ({
-      _selection: {
-        bg: "accent",
-        color: "emphasis-invert",
-      },
-      body: {
-        bg: "surface",
-        lineHeight: "base",
-        color: "text-muted",
-      },
-    }),
-  },
-  colors: {
-    ...foundations.colors,
-    brand: foundations.colors.purple,
-  },
-  fonts: {
-    heading: `'Nimbus Sans', 'Inter var alt', system-ui, sans-serif`,
-    body: `'Inter', sans-serif`,
-  },
-
-  components: {
-    ...components,
-    Code: {
-      baseStyle: {
-        borderRadius: "md",
-        lineHeight: "short",
-        fontSize: ".875em",
-        fontWeight: "semibold",
-        color: "emphasis",
-      },
-      defaultProps: { colorScheme: "gray" },
-    },
-  },
-  semanticTokens: { ...semanticTokens },
-
-  proTheme,
+	proTheme,
 });
