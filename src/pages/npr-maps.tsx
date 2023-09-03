@@ -165,9 +165,9 @@ export const NPR: React.FC = () => {
 					</Stack>
 					<Spacer />
 
-					<video width="100%" height="auto" controls playsInline>
+					<Box as="video" maxW="72" rounded="42px" boxShadow="lg" width="100%" height="auto" controls playsInline>
 						<source src="/assets/npr/maps-mobile-1.mov" />
-					</video>
+					</Box>
 				</LayoutGrid>
 			</Stack>
 			<Spacer />

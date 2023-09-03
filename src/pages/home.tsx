@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
 					I'm currently designing design systems
 					<br /> & systems for designers at <br />
 					<Box as="span">
-						<LinkOut ms={0} src="/assets/logos/everfi-blue-icon.png" href="https://www.everfi.com" text="Everfi" />
+						<LinkOut ms={0} src="/assets/logos/everfi-blue-icon.png" href="https://www.everfi.com" text="EVERFI" />
 						<Tooltip label="(we got acquired)">
 							<Box as="span" mx={2}>
 								+

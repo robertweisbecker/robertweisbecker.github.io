@@ -68,7 +68,7 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 				<Heading display="inline" flexGrow="1" as="h1" size="2xl">
 					{page.title}{" "}
 				</Heading>
-				<Heading as="span" display="inline" size="2xl" color="text-subdued" fontWeight="regular" mb={5}>
+				<Heading as="span" display="inline" size="2xl" color="text-subdued" fontWeight="light" mb={5}>
 					{page.subtitle}
 				</Heading>
 				{/* <Image src={page.imageUrl} mb="3" /> */}

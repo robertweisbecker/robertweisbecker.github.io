@@ -28,6 +28,7 @@ import {
 	ArrowTopRightIcon,
 	BackpackIcon,
 	FileIcon,
+	ImageIcon,
 	LinkedInLogoIcon,
 	ReaderIcon,
 	BookmarkIcon,
@@ -53,25 +54,25 @@ export const About: React.FC = () => {
 			</Heading>
 			<LayoutGrid variant="twoThirds" columnGap={{ base: 4, md: 20 }}>
 				<GridItem>
-					<HStack mb={10}>
+					<HStack mt={3} mb={10}>
 						<Icon as={PersonIcon} color="text-subdued" />
 						<Heading as="h2" size="2xs" id="projects">
 							Who
 						</Heading>
 					</HStack>
 					<Stack spacing="5">
-						<Text>My name's Robert, but everyone calls me Bob. I think that's pretty funny.</Text>
+						<Text>My name's Robert, but everyone calls me Bob. We're all about efficiency here at bob dot fyi.</Text>
 						<Text>
 							I work as a{" "}
 							<Box as="span" color="emphasis" fontStyle="italic">
 								Principal Designer, Design Systems
 							</Box>{" "}
-							at <LinkOut href="https://everfi.com" text="Everfi" />, where I design components and tooling to support
-							Everfi's mission of driving social good through education. Those things have{" "}
+							at <LinkOut href="https://everfi.com" text="EVERFI" />, where I design components and tooling to support
+							EVERFI's mission of driving social good through education. Those things have{" "}
 							<Link href="https://www.blackbaud.com/newsroom/article/blackbaud-acquires-everfi-a-saas-leader-powering-corporate-esg-and-csr-initiatives-that-reach-millions-of-learners-each-year">
 								allegedly
 							</Link>{" "}
-							reached more than 45 million learners globally. That, I think, is pretty cool.
+							reached more than 45 million learners globally.
 						</Text>
 						{/* <Text color="text-subdued">
 							By night, I'm a{" "}
@@ -83,7 +84,6 @@ export const About: React.FC = () => {
 								</sub>
 							</sub>
 						</Text> */}
-						<Text>Here are some links (as a treat):</Text>
 						<Wrap alignItems="baseline" spacing={4}>
 							<Button
 								as={Link}
@@ -143,13 +143,16 @@ export const About: React.FC = () => {
 				</GridItem>
 
 				<GridItem>
+					<HStack mt={3} mb={10}>
+						<Icon as={ImageIcon} color="text-subdued" />
+						<Heading as="h2" size="2xs" id="projects">
+							What (I look like)
+						</Heading>
+					</HStack>
 					<Image src="/assets/headshot2.png" rounded="2xl" />
-					<Text textStyle="caption" my={2}>
-						I look like this, but more handsome.
-					</Text>
 				</GridItem>
 				<GridItem>
-					<HStack mb={10}>
+					<HStack mt={3} mb={10}>
 						<Icon as={MagicWandIcon} color="text-subdued" />
 						<Heading as="h2" size="2xs" id="projects">
 							What (I do)
@@ -157,7 +160,7 @@ export const About: React.FC = () => {
 					</HStack>
 					<Stack gap={5}>
 						<Text>
-							At Everfi, I've spent the last two years leading the creation of a shared organization-wide design
+							At EVERFI, I've spent the last two years leading the creation of a shared organization-wide design
 							language.
 						</Text>
 						<Text>
@@ -169,7 +172,7 @@ export const About: React.FC = () => {
 						<Text>Before that, I...</Text>
 						<UnorderedList spacing={3} fontSize="sm">
 							<ListItem>
-								Led design efforts for adult & K12 e-learning courses at Everfi, including Achieve, Engage, and Data
+								Led design efforts for adult & K12 e-learning courses at EVERFI, including Achieve, Engage, and Data
 								Science Foundations
 							</ListItem>
 							<ListItem>
@@ -198,14 +201,14 @@ export const About: React.FC = () => {
 						</UnorderedList>
 					</Stack>
 				</GridItem>
-				<GridItem>
-					<HStack mb={10}>
+				<GridItem p={3} bg="surface-elevated" borderWidth="1px" rounded="xl">
+					<HStack mt={3} mb={10}>
 						<Icon as={CursorArrowIcon} color="text-subdued" />
 						<Heading as="h2" size="2xs" id="projects">
 							What (is this site?)
 						</Heading>
 					</HStack>
-					<Stack fontSize="sm" gap={5} color="text-subdued">
+					<Stack fontSize="xs" lineHeight="tall" gap={5} color="text-muted">
 						<Text>This is my little corner of the internet. If you're reading this now, I made it for you.</Text>
 						<Text>
 							This site was built in React and deployed on Github Pages. The icons come from{" "}
@@ -241,7 +244,7 @@ export const About: React.FC = () => {
 							<Link href="https://weisbecker.co" isExternal>
 								weisbecker.co
 							</Link>
-							. Some of those are pretty funny.
+							. One day I'll link that first one to my Venmo.
 						</Text>
 					</Stack>
 				</GridItem>
@@ -250,7 +253,7 @@ export const About: React.FC = () => {
 
 			<Divider />
 			<HStack>
-				<Icon as={BackpackIcon} />
+				<Icon as={BackpackIcon} color="text-subdued" />
 				<Heading as="h2" size="2xs" id="projects">
 					Where (I've worked)
 				</Heading>
@@ -258,7 +261,7 @@ export const About: React.FC = () => {
 			<LayoutGrid variant="threeUp" rowGap={2}>
 				<GridItem rowSpan={{ base: 1, lg: 5 }} colSpan={{ sm: 2, lg: 1 }}>
 					<Heading size="lg" m="0">
-						Everfi
+						EVERFI
 					</Heading>{" "}
 				</GridItem>
 				<GridItem>
@@ -331,7 +334,7 @@ export const About: React.FC = () => {
 
 			<Divider />
 			<HStack>
-				<Icon as={IdCardIcon} />
+				<Icon as={IdCardIcon} color="text-subdued" />
 				<Heading as="h2" size="2xs" id="projects">
 					Where (I learned things)
 				</Heading>

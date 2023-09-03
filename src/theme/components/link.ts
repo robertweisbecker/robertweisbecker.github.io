@@ -13,7 +13,7 @@ const baseStyle = {
 	textDecoration: "underline",
 	textDecorationColor: "placeholder",
 	textDecorationThickness: "2px",
-	fontWeight: "medium",
+	fontWeight: "semibold",
 	textDecorationSkipInk: "none",
 	display: "inline-flex",
 	alignItems: "baseline",

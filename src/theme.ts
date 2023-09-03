@@ -23,7 +23,6 @@ import { semanticTokens } from "./theme/semanticTokens";
 import * as foundations from "./theme/foundations";
 
 export const theme = extendTheme({
-	...foundations,
 	config: {
 		cssVarPrefix: "bob",
 		initialColorMode: "dark",
@@ -51,10 +50,6 @@ export const theme = extendTheme({
 		fallback: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
 		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
 	},
-	colors: {
-		...foundations.colors,
-		brand: foundations.colors.purple,
-	},
 	components: {
 		...components,
 		Code: {
@@ -68,7 +63,11 @@ export const theme = extendTheme({
 			defaultProps: { colorScheme: "gray" },
 		},
 	},
+	...foundations,
+	colors: {
+		...foundations.colors,
+		brand: foundations.colors.purple,
+	},
 	semanticTokens: { ...semanticTokens },
-
-	proTheme,
+	// proTheme,
 });

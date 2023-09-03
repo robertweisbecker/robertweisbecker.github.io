@@ -27,7 +27,6 @@ export const headingStyles = defineStyleConfig({
 		xl: {
 			fontSize: "xl",
 			fontWeight: "semibold",
-
 			my: "1em",
 		},
 		lg: {

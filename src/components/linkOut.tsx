@@ -22,8 +22,29 @@ export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
 	return (
 		<Box display="inline-block" fontSize="1em" verticalAlign="bottom">
 			<Flex gap={1} align="center" h="calc(1em * lineHeights.base)">
-				{src && <Image src={src} alt={`${text} Logo`} h="1.25em" w="auto" boxShadow="inner" rounded="full" borderWidth=".5px" borderColor="border-subdued" bg="surface-frosted" p="0.5" mx={0.5} />}
-				<Link href={href} {...rest} color="emphasized" fontWeight="semibold" colorScheme="brand" isExternal>
+				{src && (
+					<Image
+						src={src}
+						alt={`${text} Logo`}
+						h="1.25em"
+						w="auto"
+						boxShadow="inner"
+						rounded="full"
+						borderWidth=".5px"
+						borderColor="border-subdued"
+						bg="surface-frosted"
+						p="0.5"
+						mx={0.5}
+					/>
+				)}
+				<Link
+					href={href}
+					{...rest}
+					color="emphasized"
+					fontWeight="semibold"
+					colorScheme="brand"
+					isExternal
+					rel="noopener noreferrer">
 					{" "}
 					{text} <Icon opacity=".5" as={ArrowTopRightIcon} />
 				</Link>{" "}

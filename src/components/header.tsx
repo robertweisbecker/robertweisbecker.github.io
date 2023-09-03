@@ -59,7 +59,7 @@ const headerButtons = (
 			as={NavLink}
 			to="/about"
 			fontWeight={{ sm: "normal" }}
-			_activeLink={{ fontWeight: "medium", color: "emphasis" }}
+			_activeLink={{ fontWeight: "semibold", color: "emphasis" }}
 			w={{ base: "full", lg: "auto" }}>
 			about
 		</Button>
@@ -112,7 +112,6 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 					as={NavHashLink}
 					preventScrollReset
 					fontSize="sm"
-					letterSpacing="tight"
 					textDecoration="none"
 					lineHeight="shorter"
 					px={1}
@@ -120,15 +119,15 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 					bg="transparent"
 					color="emphasis"
 					_hover={{ textDecoration: "none" }}
-					to="/">
+					to="/"
+					letterSpacing="wide"
+					flexDirection="column"
+					fontFamily="heading">
 					bob dot fyi
-					<Box as="span" fontWeight="normal" ms="2" color="text-subdued">
+					<Box fontSize="xs" fontWeight="light" display="block" color="text-subdued">
 						Bob Weisbecker
 					</Box>
 				</Link>
-				<Box height="4">
-					<Divider orientation="vertical" height="1em" />
-				</Box>
 				<Spacer />
 
 				<Popover trigger="hover" openDelay={0} closeDelay={200} placement="bottom" gutter={-1}>
