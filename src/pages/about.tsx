@@ -88,7 +88,7 @@ export const About: React.FC = () => {
 							<Button
 								as={Link}
 								isExternal
-								href="/resume.pdf"
+								href="/bob-weisbecker-resume.pdf"
 								textDecoration="none"
 								variant="outline"
 								size="sm"
