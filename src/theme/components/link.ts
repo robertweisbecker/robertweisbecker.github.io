@@ -11,18 +11,18 @@ const encodedSvg = encodeURIComponent(svgString);
 
 const baseStyle = {
 	textDecoration: "underline",
-	textDecorationColor: "placeholder",
-	textDecorationThickness: "2px",
-	fontWeight: "semibold",
+	textDecorationColor: "border-interactive",
+	textDecorationThickness: ".125em",
+	fontWeight: "medium",
 	textDecorationSkipInk: "none",
 	display: "inline-flex",
 	alignItems: "baseline",
-	color: "emphasis",
+	color: "text-emphasis",
 	// boxShadow: "0 0 0 -2px inset",
 	_hover: {
-		color: "accent",
-		textDecorationColor: "current",
-		textDecorationThickness: ".5px",
+		color: "text-interactive",
+		textDecorationColor: "border-interactive-hover",
+		textDecorationThickness: ".0625em",
 		textDecorationStyle: "wavy",
 	},
 };
@@ -58,9 +58,6 @@ const variants = {
 };
 
 export default {
-	isExternal: {
-		color: "red",
-	},
 	variants,
 	baseStyle,
 };

@@ -46,7 +46,7 @@ const variants = {
 		props.theme.components["Button"]["variants"]["outline"]({
 			...props,
 			variant: "outline",
-			colorScheme: "gray",
+			colorScheme: "brand",
 		}),
 	"secondary-invert": {
 		color: "white",
@@ -67,12 +67,12 @@ const variants = {
 		},
 	}),
 	outline: (props: StyleFunctionProps) => ({
-		color: "text-muted",
+		color: mode(`${props.colorScheme}.500`, `${props.colorScheme}.300`)(props),
 		bg: "surface-elevated",
 		borderColor: "border-muted",
 		_hover: {
 			bg: "surface-hover",
-			color: "emphasis",
+			color: "text-emphasis",
 			borderColor: "border-muted",
 		},
 		_checked: {
@@ -114,20 +114,20 @@ const variants = {
 				color: "text-muted",
 				textDecoration: "none",
 				fontWeight: "normal",
-				rounded: "full",
+
 				padding: 2,
 				_hover: {
 					bg: "surface-hover",
-					color: "emphasis",
+					color: "text-emphasis",
 					textDecoration: "none",
 				},
 				_active: {
 					bg: "surface-active",
-					color: "emphasis",
+					color: "text-emphasis",
 				},
 				_activeLink: {
 					bg: "surface-active",
-					color: "emphasis",
+					color: "text-emphasis",
 					fontWeight: "semibold",
 				},
 			};

@@ -163,9 +163,16 @@ export const NPR: React.FC = () => {
 							them as drawers in map mode, to let users access station information without having to toggle views.{" "}
 						</Text>
 					</Stack>
-					<Spacer />
 
-					<Box as="video" maxW="72" rounded="42px" boxShadow="lg" width="100%" height="auto" controls playsInline>
+					<Box
+						as="video"
+						maxW="72"
+						rounded={{ base: "42px", md: "36px" }}
+						boxShadow="lg"
+						width="100%"
+						height="auto"
+						controls
+						playsInline>
 						<source src="/assets/npr/maps-mobile-1.mov" />
 					</Box>
 				</LayoutGrid>

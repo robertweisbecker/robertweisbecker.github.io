@@ -54,19 +54,21 @@ export const UDL: React.FC = () => {
 						platform tailored to content, network, and/or customer branding, and of course we end up with a disjointed
 						experience.
 					</Text>
-
+					<Spacer />
 					<ImageModal
 						src="/assets/udl/styles-foundry.png"
 						src2="/assets/udl/styles-foundry@2x.png"
 						caption="Foundry, the assigned learning platform, is powered by
             its own React design system, Alloy, which takes cues from Material Design"
 					/>
+					<Spacer />
 					<ImageModal
 						src="/assets/udl/styles-homeroom.png"
 						src2="/assets/udl/styles-homeroom@2x.png"
 						caption="Homeroom, the K12 platform, uses fully-custom styles that override its underlying legacy Bootstrap components. Its teacher-facing UI was redesigned in 2019, but other
             parts of the app remain untouched."
 					/>
+					<Spacer />
 					<ImageModal
 						src="/assets/furnace/theme-previews.png"
 						caption="EVERFI courses use Furnace, our product design system and SDK,
@@ -87,35 +89,33 @@ export const UDL: React.FC = () => {
 					<Text opacity=".5">Spoiler alert: it became thinkable. Keep reading.</Text>
 					<Text>
 						Instead, we set out to establish core design principles that we could weave throughout experiences wherever
-						technically feasible.
+						technically feasible. So we defined a design language as such:
 					</Text>
-					<Text>We defined a design language as such (note the emphasis on "foundations" instead of components):</Text>
 					<Text
-						// fontStyle="italic"
-						fontSize="xl"
-						lineHeight="tall"
-						fontWeight="regular"
+						textStyle="subtitle"
+						fontSize="lg"
 						color="text-muted"
-						// textAlign="center"
 						borderLeft="4px"
 						borderColor="border-muted"
-						px={6}
-						// mx={-6}
-						my={10}>
-						<Highlight query={["foundation", "across"]} styles={{ px: "1", bg: "blackAlpha.400", color: "emphasis" }}>
+						px={6}>
+						<Highlight
+							query={["foundation", "across"]}
+							styles={{ px: "1", bg: "bg-accent-subdued", color: "text-emphasis" }}>
 							A design language consists of an agreed-upon visual and interaction foundation upheld in both code and
 							design workflows to foster consistency, intentionality, and predictability within and across products.
 						</Highlight>
 					</Text>
 				</Stack>
-				<Stack gap={5}>
+				<Spacer />
+				<Stack spacing={8}>
 					<Heading as="h3" size="lg">
 						Audit
 					</Heading>
 					<Text>
-						We first needed to know what we were dealing with, so I devised a set of benchmarks we could use to gauge
-						the "system health" of our platforms, comparing their architecture to what had worked for{" "}
-						<Link as={NavHashLink} to="/furnace" fontWeight="medium">
+						Our first step was to assess the existing design languages in use across products, so I devised a set of
+						benchmarks we could use to gauge the "system health" of our platforms, comparing their architecture to the
+						more mature system in{" "}
+						<Link as={NavHashLink} to="/furnace">
 							Furnace
 						</Link>
 						.
@@ -130,9 +130,9 @@ export const UDL: React.FC = () => {
               used in our platforms and weighed it against a set of design
               system benchmarks to see just how far off we were. */}
 					</Text>
-					<ImageModal src="/assets/udl/audit.png" caption="~1/10th of our audit file" />
+					<ImageModal src="/assets/udl/audit.png" caption="A snippet of our UI audit & the system health report" />
 				</Stack>
-				<Stack gap={5}>
+				<Stack spacing={8}>
 					<Heading as="h3" size="lg">
 						The Great Component-Off
 					</Heading>

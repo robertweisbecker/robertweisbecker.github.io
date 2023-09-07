@@ -1,6 +1,6 @@
 // 1. Imports
 import * as React from "react";
-import PropTypes from "prop-types";
+import { NavHashLink } from "react-router-hash-link";
 
 import { Link, Flex, Box, Icon, LinkProps, Image } from "@chakra-ui/react";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
@@ -20,7 +20,7 @@ type props = LinkOutProps & LinkProps;
 
 export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
 	return (
-		<Box display="inline-block" fontSize="1em" verticalAlign="bottom">
+		<Box display="inline-block" fontSize="1em" verticalAlign="bottom" className="group">
 			<Flex gap={1} align="center" h="calc(1em * lineHeights.base)">
 				{src && (
 					<Image
@@ -29,7 +29,7 @@ export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
 						h="1.25em"
 						w="auto"
 						boxShadow="inner"
-						rounded="full"
+						rounded="lg"
 						borderWidth=".5px"
 						borderColor="border-subdued"
 						bg="surface-frosted"
@@ -37,16 +37,21 @@ export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
 						mx={0.5}
 					/>
 				)}
-				<Link
-					href={href}
-					{...rest}
-					color="emphasized"
-					fontWeight="semibold"
-					colorScheme="brand"
-					isExternal
-					rel="noopener noreferrer">
+				<Link href={href} {...rest} colorScheme="brand" isExternal rel="noopener noreferrer">
 					{" "}
-					{text} <Icon opacity=".5" as={ArrowTopRightIcon} />
+					{text}{" "}
+					<Icon
+						color="inherit"
+						alignSelf="center"
+						as={ArrowTopRightIcon}
+						transitionProperty="common"
+						transitionDuration="fast"
+						transitionTimingFunction="ease-out"
+						opacity=".5"
+						_groupHover={{
+							transform: "translateY(-2px) translateX(2px)",
+						}}
+					/>
 				</Link>{" "}
 			</Flex>
 		</Box>

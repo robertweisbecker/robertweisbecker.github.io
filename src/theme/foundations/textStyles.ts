@@ -1,6 +1,6 @@
 export default {
 	p1: {
-		fontSize: "xs",
+		fontSize: "md",
 		lineHeight: "",
 	},
 
@@ -53,7 +53,7 @@ export default {
 		letterSpacing: "-0.02em",
 	},
 	caption: {
-		fontWeight: "medium",
+		fontWeight: "regular",
 		mx: "auto",
 		fontSize: "xs",
 		letterSpacing: "wide",
@@ -69,7 +69,7 @@ export default {
 		letterSpacing: "widest",
 	},
 	"title-sm": {
-		fontSize: "xs",
+		fontSize: "2xs",
 		textTransform: "uppercase",
 		lineHeight: "taller",
 		fontWeight: "bold",

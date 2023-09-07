@@ -2,26 +2,38 @@ import * as React from "react";
 // import { useHistory } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
-import { Button, Icon } from "@chakra-ui/react";
+import { Link, Icon } from "@chakra-ui/react";
 
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 
 export const BackButton = () => {
 	// let history = useHistory();
 	return (
-		<Button
+		<Link
 			as={HashLink}
 			// onClick={() => history.goBack()}
 			preventScrollReset
 			size="sm"
 			colorScheme="brand"
-			variant="link"
+			fontFamily="heading"
+			color="text-interactive"
+			textDecoration="none"
 			borderRadius="full"
-			leftIcon={<Icon as={ArrowLeftIcon} />}
 			to="/#projects"
+			gap="2"
+			alignItems="center"
 			fontWeight="regular"
-			aria-label="Back">
+			className="group">
+			<Icon
+				as={ArrowLeftIcon}
+				transitionProperty="common"
+				transitionTimingFunction=""
+				transitionDuration="fast"
+				_groupHover={{
+					transform: "translateX(-.25em)",
+				}}
+			/>{" "}
 			Back
-		</Button>
+		</Link>
 	);
 };

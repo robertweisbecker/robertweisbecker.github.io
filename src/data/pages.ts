@@ -13,8 +13,9 @@ export const pageData = {
 		title: "Unified Design Language",
 		imageUrl: "/assets/logos/udl-icon.svg",
 		subtitle:
-			"Consolidating EVERFI's platform and product design systems into a shared system with a cohesive design language.",
+			"Consolidating EVERFI's platform and product design systems into a shared system with a cohesive design language",
 		role: "Design Systems Lead",
+		path: "/unified-design-language",
 		team: [
 			{
 				name: "Marianne Epstein",
@@ -41,7 +42,7 @@ export const pageData = {
 		team: [
 			{
 				name: "Kevin Grolton-Francisco",
-				role: "Technical Product Manager",
+				role: "Product Manager",
 			},
 			{
 				name: "Annie Alvarado",
@@ -53,7 +54,7 @@ export const pageData = {
 	},
 	thesis: {
 		title: "Immigration Forms as Conversational Interfaces",
-		subtitle: "Master's in UX Design Thesis Project",
+		subtitle: "Thesis Project, MICA",
 		role: "Graduate Student",
 		team: [
 			{
@@ -180,7 +181,7 @@ export const pageData = {
 		team: [
 			{
 				name: "Kevin Grolton-Francisco",
-				role: "Technical Product Manager",
+				role: "Product Manager",
 			},
 			{
 				name: "Sadeep Nonis",
@@ -193,11 +194,11 @@ export const pageData = {
 			},
 			{
 				name: "Carlos Henriquez",
-				role: "Lead Developer (2019–2020)",
+				role: "Dev Lead",
 			},
 			{
 				name: "Mpho Ramataboee",
-				role: "Lead Developer (2020–2022)",
+				role: "Engineering Lead",
 				// url: "https://www.linkedin.com/in/mpho-ramataboee",
 			},
 			{

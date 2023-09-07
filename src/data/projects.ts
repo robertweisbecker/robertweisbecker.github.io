@@ -37,7 +37,7 @@ export const projects = [
 	{
 		id: 2,
 		title: "Furnace Design System",
-		nickname: "Furnace",
+		nickname: "Furnace Design System",
 		icon: ColorWheelIcon,
 		date: "2019 – present",
 		logo: "/assets/logos/furnace-icon.png",
@@ -55,7 +55,7 @@ export const projects = [
 	{
 		id: 3,
 		title: "Forge Editor",
-		nickname: "Forge",
+		nickname: "Forge Editor",
 		icon: CubeIcon,
 		date: "2022",
 		logo: "/assets/logos/forge-icon.png",
@@ -73,7 +73,7 @@ export const projects = [
 	{
 		id: 4,
 		title: "Conversational Immigration Forms",
-		nickname: "MICA Thesis",
+		nickname: "MICA Thesis Project",
 		icon: InputIcon,
 		path: "/conversational-immigration-forms",
 		date: "2017",
@@ -92,7 +92,7 @@ export const projects = [
 		path: "/npr-maps",
 		title: "Mapping and Population System",
 		logo: "/assets/logos/npr-icon.svg",
-		nickname: "NPR",
+		nickname: "NPR Mapping App",
 		icon: GlobeIcon,
 		date: "2017",
 		description: "Rebuilding NPR's station coverage mapping tool",

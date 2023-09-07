@@ -38,32 +38,31 @@ export const theme = extendTheme({
 			},
 			body: {
 				bg: "surface",
-				lineHeight: "base",
+				lineHeight: "tall",
 				color: "text-muted",
 			},
 		}),
 	},
-	fonts: {
-		heading: `'nimbus-sans-extended'`,
-		body: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
-		fallback: `"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-		"Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
-	},
+	...foundations,
+	...foundations.typography,
 	components: {
 		...components,
+		Badge: {
+			baseStyle: {
+				fontFamily: "heading",
+				letterSpacing: "wider",
+			},
+		},
 		Code: {
 			baseStyle: {
-				borderRadius: "md",
+				borderRadius: "sm",
 				lineHeight: "short",
 				fontSize: ".875em",
-				fontWeight: "semibold",
-				color: "emphasis",
+				color: "text-emphasis",
 			},
-			defaultProps: { colorScheme: "gray" },
+			defaultProps: { colorScheme: "brand" },
 		},
 	},
-	...foundations,
 	colors: {
 		...foundations.colors,
 		brand: foundations.colors.purple,

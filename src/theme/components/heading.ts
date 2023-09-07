@@ -4,36 +4,37 @@ export const headingStyles = defineStyleConfig({
 	baseStyle: {
 		fontFamily: "heading",
 		fontWeight: "", // make sure it's empty,
-		lineHeight: "short",
+		lineHeight: "shorter",
 		letterSpacing: "tight",
-		color: "emphasis",
-		_first: {
-			mt: 0,
-		},
+		color: "text-emphasis",
 	},
 	sizes: {
 		"3xl": {
 			fontSize: "3xl",
 			letterSpacing: "tighter",
 			fontWeight: "bold",
+			lineHeight: "short",
 			mb: "2",
 		},
 		"2xl": {
-			fontSize: "2xl",
+			fontSize: ["xl", null, "2xl"],
 			fontWeight: "black",
 			lineHeight: "short",
 			mb: "8",
+			_first: {
+				mt: 0,
+			},
 		},
 		xl: {
-			fontSize: "xl",
+			fontSize: ["lg", null, "xl"],
 			fontWeight: "semibold",
-			my: "1em",
+			mt: "8",
 		},
 		lg: {
-			fontSize: "lg",
+			fontSize: ["md", null, "lg"],
 			lineHeight: "base",
 			fontWeight: "semibold",
-			mt: "1em",
+			mt: "2em",
 			mb: ".25em",
 		},
 
@@ -41,8 +42,8 @@ export const headingStyles = defineStyleConfig({
 			fontSize: "md",
 			fontWeight: "semibold",
 			letterSpacing: "normal",
-			mt: ".5em",
-			mb: "1em",
+			mt: "1em",
+			mb: ".5em",
 		},
 		sm: {
 			fontSize: "sm",
@@ -61,9 +62,7 @@ export const headingStyles = defineStyleConfig({
 		},
 	},
 	variants: {
-		h1: {
-			textStyle: "h1",
-		},
+		h1: {},
 		heading2: {
 			textStyle: "h2",
 		},

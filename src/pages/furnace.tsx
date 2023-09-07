@@ -8,6 +8,7 @@ import {
 	StatLabel,
 	StatNumber,
 	StatHelpText,
+	GridItem,
 	StatArrow,
 	StatGroup,
 	Heading,
@@ -16,10 +17,12 @@ import {
 	Stack,
 	ListItem,
 	Code,
+	Icon,
+	HStack,
 	UnorderedList,
 } from "@chakra-ui/react";
 
-import { InfoCircledIcon } from "@radix-ui/react-icons";
+import { InfoCircledIcon, ArrowDownIcon } from "@radix-ui/react-icons";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -98,8 +101,8 @@ export const Furnace: React.FC = () => {
 				</Text>
 				<Text>
 					​Changing one value affects all of its instances throughout the system, allowing for a consistent application
-					of visual style in a scalable and maintainable way.​ Each component was refactored to utilize only these
-					global variables for all of its styling:
+					of visual style in a scalable and maintainable way.​ Each component was refactored to use only global
+					variables from the following families:
 				</Text>
 				<UnorderedList spacing={2}>
 					<ListItem>Color</ListItem>
@@ -235,11 +238,11 @@ export const Furnace: React.FC = () => {
 						<Code>$ui-secondary</Code> backgrounds, while <Code>$text-interactive</Code> is used for links that may
 						appear on various background colors.
 					</Text>
+					<Text>
+						By defining the two colors separately, themes can flexibly change button colors without compromising the
+						accessibility of links within a course.
+					</Text>
 				</Stack>
-				<Text>
-					By defining the two colors separately, themes can flexibly change button colors without compromising the
-					accessibility of links within a course.
-				</Text>
 			</Stack>
 			<Stack spacing={8}>
 				<Heading as="h2">Spacing</Heading>
@@ -262,21 +265,15 @@ export const Furnace: React.FC = () => {
 			<Stack spacing={8}>
 				<Heading as="h2">Typography</Heading>
 				<Text>Our existing text classes weren't responsive, so that was a priority for any new type system.</Text>
-
 				<Text>
-					However, it's not <em>fully</em> responsive – only headings are, which is by design. I waffled on this for
-					some time, eventually coming to the realization that introducing another set of text size variables introduced
-					more room for error and additional maintenance.
-				</Text>
-
-				<Text>
-					Many of our products, especially in the K12 space, have a number of pages with short bits of content
-					punctuated by visuals and interactions – there was really no need to shrink the font size. We might as well
-					keep prose large and legible for young users.
+					However, it's not <em>fully</em> responsive – only headings are, which is by design. Many of our products,
+					especially in the K12 space, have a number of pages with short bits of content punctuated by visuals and
+					interactions – there was really no need to shrink the font size. Reducing bloat would ease future maintenance,
+					while keeping prose large and legible for young users.
 				</Text>
 				<Text>
-					Plus, we could always add responsive body text in the future if we needed it. <br />
-					<Box as="span" color="text-subdued">
+					Plus, we could always add responsive body text in the future if we needed it.{" "}
+					<Box as="span" color="text-subdued" display="inline">
 						Spoiler alert: we didn't – it never once came up.
 					</Box>
 				</Text>
@@ -284,6 +281,26 @@ export const Furnace: React.FC = () => {
 					src="assets/furnace/type.png"
 					caption="Default type scale with responsive headings. The Core theme uses Lato, EVERFI's brand typeface."
 				/>
+				<Text>Resize the pen below to see the responsive type and spacing in action.</Text>
+				<Box
+					as="iframe"
+					borderRadius="xl"
+					p="2"
+					maxW="100%"
+					resize="horizontal"
+					height={400}
+					style={{ width: "100%" }}
+					scrolling="no"
+					title="Primitives Type & Spacing"
+					src="https://codepen.io/weisbecker/embed/preview/eaOyKq?default-tab=result"
+					frameBorder="no"
+					loading="lazy"
+					sx={{ allowTransparency: "true", allowFullScreen: "true" }}>
+					See the Pen &lt;a href="https://codepen.io/weisbecker/pen/eaOyKq"&gt; Primitives Playground&lt;/a&gt; by
+					Robert Weisbecker (&lt;a href="https://codepen.io/weisbecker"&gt;@weisbecker&lt;/a&gt;) on &lt;a
+					href="https://codepen.io"&gt;CodePen&lt;/a&gt;.
+				</Box>
+
 				{/* <Text>
           A common issue in our legacy courses was the incorrect use of heading
           levels – ie. using a different semantic element for a smaller heading
@@ -315,7 +332,7 @@ export const Furnace: React.FC = () => {
 				</Text>
 				<Text>
 					To replace them, we created two CSS Grid layouts: a classic Boostrap-style 12-column grid for full
-					flexibility, and another inspired by
+					flexibility, and another inspired by{" "}
 					<LinkOut
 						href="https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins"
 						text="Material Design 2"
@@ -459,9 +476,7 @@ export const Furnace: React.FC = () => {
 				<Text>
 					The launch of Furnace and its emphasis on accessibility allowed the organization to develop a more mature and
 					rigorous accessibility practice. For more insight into some of our processes and tooling, check out my
-					colleague
-					<LinkOut href="http://anniealvarado.com" text="Annie Alvarado" />
-					's presentation for
+					colleague <LinkOut href="http://anniealvarado.com" text="Annie Alvarado's" /> presentation for{" "}
 					<LinkOut
 						href="https://makeitfable.com/article/experts-with-fable-everfi-cvs-health/"
 						text="Fable Accessibility"
@@ -469,59 +484,75 @@ export const Furnace: React.FC = () => {
 					.
 				</Text>
 			</Stack>
-			<Stack spacing="5">
+			<Stack spacing="8">
 				<Heading as="h2">By the numbers</Heading>
-				<StatGroup>
-					<Stat>
-						<StatLabel>Variables per theme</StatLabel>
-						<StatNumber>62</StatNumber>
-						<StatHelpText>
-							<StatArrow type="decrease" />
-							-1,533 (-96%)
-						</StatHelpText>
-					</Stat>
-					<Stat>
-						<StatLabel>Layout components</StatLabel>
-						<StatNumber>2</StatNumber>
-						<StatHelpText>
-							<StatArrow type="decrease" />
-							-10 (-83%)
-						</StatHelpText>
-					</Stat>
-					<Stat>
-						<StatLabel>Unique spacing declarations</StatLabel>
-						<StatNumber>6</StatNumber>
-						<StatHelpText>
-							<StatArrow type="decrease" />
-							-136 (-96%)
-						</StatHelpText>
-					</Stat>
-				</StatGroup>
-				<StatGroup>
-					<Stat>
-						<StatLabel>Color combinations</StatLabel>
-						<StatNumber>44</StatNumber>
-						<StatHelpText>
-							<StatArrow type="decrease" />
-							-109 (-71%)
-						</StatHelpText>
-					</Stat>
-					<Stat>
-						<StatLabel>Responsive courses</StatLabel>
-						<StatNumber>74</StatNumber>
-						<StatHelpText>
-							<StatArrow type="increase" />
-							+65 (720%)
-						</StatHelpText>
-					</Stat>
-					<Stat>
-						<StatLabel>Fully accessible components (AA)</StatLabel>
-						<StatNumber>59</StatNumber>
-						<StatHelpText>
-							<StatArrow type="increase" />
-							+53 (2580%)
-						</StatHelpText>
-					</Stat>
+
+				<StatGroup justifyContent="flexStart" alignItems="start">
+					<LayoutGrid variant="oneToThreeUp">
+						<Stat>
+							<StatLabel fontSize="xs">Variables per theme</StatLabel>
+
+							<StatNumber fontFamily="heading" fontWeight="normal">
+								62
+							</StatNumber>
+							<StatHelpText fontFamily="mono" fontSize="xs">
+								<StatArrow type="decrease" />
+								-1,533 (-96%)
+							</StatHelpText>
+						</Stat>
+
+						<Stat>
+							<StatLabel fontSize="xs">Layout components</StatLabel>
+							<StatNumber fontFamily="heading" fontWeight="normal">
+								2
+							</StatNumber>
+							<StatHelpText fontFamily="mono" fontSize="xs">
+								<StatArrow type="decrease" />
+								-10 (-83%)
+							</StatHelpText>
+						</Stat>
+						<Stat>
+							<StatLabel fontSize="xs">Unique spacing declarations</StatLabel>
+							<StatNumber fontFamily="heading" fontWeight="normal">
+								6
+							</StatNumber>
+							<StatHelpText fontFamily="mono" fontSize="xs">
+								<StatArrow type="decrease" />
+								-136 (-96%)
+							</StatHelpText>
+						</Stat>
+
+						<Stat>
+							<StatLabel fontSize="xs">Color combinations</StatLabel>
+							<StatNumber fontFamily="heading" fontWeight="normal">
+								44
+							</StatNumber>
+							<StatHelpText fontFamily="mono" fontSize="xs">
+								<StatArrow type="decrease" />
+								-109 (-71%)
+							</StatHelpText>
+						</Stat>
+						<Stat>
+							<StatLabel fontSize="xs">Responsive courses</StatLabel>
+							<StatNumber fontFamily="heading" fontWeight="normal">
+								74
+							</StatNumber>
+							<StatHelpText fontFamily="mono" fontSize="xs">
+								<StatArrow type="increase" />
+								+65 (720%)
+							</StatHelpText>
+						</Stat>
+						<Stat>
+							<StatLabel fontSize="xs">AA-compliant components</StatLabel>
+							<StatNumber fontFamily="heading" fontWeight="normal">
+								59
+							</StatNumber>
+							<StatHelpText fontFamily="mono" fontSize="xs">
+								<StatArrow type="increase" />
+								+53 (2580%)
+							</StatHelpText>
+						</Stat>
+					</LayoutGrid>
 				</StatGroup>
 			</Stack>
 		</Article>

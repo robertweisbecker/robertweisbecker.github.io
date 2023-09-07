@@ -1,5 +1,6 @@
 import * as React from "react";
 import PropTypes from "prop-types";
+import { NavHashLink, genericHashLink } from "react-router-hash-link";
 import {
 	Spacer,
 	Box,
@@ -11,23 +12,16 @@ import {
 	AlertIcon,
 	AlertTitle,
 	AlertDescription,
-	List,
 	VStack,
-	Flex,
-	HStack,
 	UnorderedList,
 	ListItem,
-	Tooltip,
-	Link,
-	Icon,
-	Avatar,
 	GridItem,
-	Wrap,
 } from "@chakra-ui/react";
 import { ArrowTopRightIcon, DrawingPinIcon } from "@radix-ui/react-icons";
 import { pageData } from "../data/pages";
 import { LayoutGrid } from "./layout";
 import { BackButton } from "./backButton";
+import { LinkOut } from "./linkOut";
 
 type PageData = {
 	title: string;
@@ -63,12 +57,12 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 	}
 
 	return (
-		<LayoutGrid variant="twoUp" alignItems="baseline">
+		<LayoutGrid variant="twoUp" alignItems="baseline" mb="10">
 			<GridItem>
-				<Heading display="inline" flexGrow="1" as="h1" size="2xl">
+				<Heading display="inline" flexGrow="1" as="h1" size="3xl">
 					{page.title}{" "}
 				</Heading>
-				<Heading as="span" display="inline" size="2xl" color="text-subdued" fontWeight="light" mb={5}>
+				<Heading as="span" display="inline" size="3xl" color="text-subdued" fontWeight="light" mb={8}>
 					{page.subtitle}
 				</Heading>
 				{/* <Image src={page.imageUrl} mb="3" /> */}
@@ -82,26 +76,31 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 
 					<VStack align="start" spacing={0}>
 						<Text textStyle="title-sm">Team</Text>
-						<UnorderedList ms={0}>
+						<UnorderedList spacing="1" ms="0">
 							{page.team &&
 								page.team.map((member) => (
-									<ListItem key={member.name} display="flex" alignItems="center" fontSize="sm" gap={2}>
+									<ListItem key={member.name} display="flex" alignItems="center" fontSize="sm" gap={0} flexWrap="wrap">
 										{member.url ? (
-											<Link href={member.url} isExternal>
-												{member.name}
-												<Icon as={ArrowTopRightIcon} />
-											</Link>
+											<LinkOut href={member.url} text={member.name} />
 										) : (
-											member.name
+											<Box as="span" fontWeight="semibold">
+												{member.name}
+											</Box>
 										)}
-										{member.role && <Text color="text-subdued">{member.role}</Text>}
+										{member.role && (
+											<Text ms="1" color="text-subdued">
+												{member.role}
+											</Text>
+										)}
 									</ListItem>
 								))}
 						</UnorderedList>
 					</VStack>
 					<VStack align="start" spacing={0}>
 						<Text textStyle="title-sm">When</Text>
-						<Text fontSize="sm">{page.date}</Text>
+						<Text fontSize="sm" fontFamily="mono">
+							{page.date}
+						</Text>
 					</VStack>
 				</Stack>
 				{/* <Text fontSize="xl" color="fg.subdued" mb={5}>

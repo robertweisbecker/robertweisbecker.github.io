@@ -30,7 +30,16 @@ import {
 	Hide,
 } from "@chakra-ui/react";
 
-import { DotFilledIcon, ChevronDownIcon, ChevronUpIcon, DotIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
+import {
+	DotFilledIcon,
+	HomeIcon,
+	ChevronDownIcon,
+	ChevronUpIcon,
+	DotIcon,
+	ArrowTopRightIcon,
+	IdCardIcon,
+	InfoCircledIcon,
+} from "@radix-ui/react-icons";
 
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 import { projects } from "../data/projects";
@@ -54,26 +63,29 @@ function withRouter(Component) {
 }
 
 const headerButtons = (
-	<ButtonGroup variant="ghost" size="sm">
+	<>
 		<Button
 			as={NavLink}
+			variant="link"
+			size="sm"
+			justifyContent="flex-start"
+			to="/"
+			fontWeight={{ sm: "normal" }}
+			w={{ base: "full", lg: "auto" }}>
+			home
+		</Button>
+		<Button
+			as={NavLink}
+			variant="link"
+			size="sm"
+			textAlign="left"
+			justifyContent="flex-start"
 			to="/about"
 			fontWeight={{ sm: "normal" }}
-			_activeLink={{ fontWeight: "semibold", color: "emphasis" }}
 			w={{ base: "full", lg: "auto" }}>
 			about
 		</Button>
-		{/* <Button
-      as={Link}
-      textDecoration="none"
-      href="/resume.pdf"
-      fontWeight="normal"
-      _activeLink={{ fontWeight: "medium", color: "emphasis" }}
-      rightIcon={<ArrowTopRightIcon />}
-    >
-      cv
-    </Button> */}
-	</ButtonGroup>
+	</>
 );
 
 const Header: FC<HeaderProps> = ({ variant }) => {
@@ -89,12 +101,9 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 			top="0"
 			left="0"
 			right="0"
-			bg={isNotHome ? "surface" : "transparent"}
-			// pt={8}
-			// mt={isNotHome ? "0" : "8"}
+			bg={isNotHome ? "surface" : "surface-frosted"}
 			backdropFilter="auto"
-			backdropBlur="10px"
-			// maxW="100vw"
+			backdropBlur="xl"
 			maxW="container.lg">
 			<Flex
 				mx="auto"
@@ -117,7 +126,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 					px={1}
 					fontWeight="semibold"
 					bg="transparent"
-					color="emphasis"
+					color="text-emphasis"
 					_hover={{ textDecoration: "none" }}
 					to="/"
 					letterSpacing="wide"
@@ -129,8 +138,8 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 					</Box>
 				</Link>
 				<Spacer />
-
-				<Popover trigger="hover" openDelay={0} closeDelay={200} placement="bottom" gutter={-1}>
+				<Show above="md">{headerButtons}</Show>
+				<Popover trigger="hover" openDelay={0} closeDelay={200} placement="bottom-end" gutter={-1}>
 					{({ isOpen, onClose }) => (
 						<>
 							<PopoverTrigger>
@@ -140,8 +149,8 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 									size="sm"
 									gap={1}
 									_expanded={{
-										fontWeight: "semibold",
-										color: "emphasis",
+										fontWeight: "medium",
+										color: "text-emphasis",
 									}}>
 									<Show above="md">work</Show>
 									<Show below="md">menu</Show>
@@ -156,37 +165,46 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 									/>
 								</Button>
 							</PopoverTrigger>
+
 							<PopoverContent
 								boxShadow="lg"
 								overflow="hidden"
-								w="auto"
 								bg="surface-elevated"
 								maxW={{ base: "280px", md: "container.md" }}
 								rounded="xl">
+								<Show below="md">
+									<PopoverHeader>{headerButtons}</PopoverHeader>
+								</Show>
 								<PopoverBody p="2">
-									<PopoverHeader textStyle="divider" border="none">
-										projects
+									<PopoverHeader textStyle="title-sm" border="none">
+										<Show above="md">projects</Show>
+										<Show below="md">work</Show>
 									</PopoverHeader>
 
 									<List spacing={1}>
 										{projects.map((project, index) => (
 											<ListItem>
 												<Button
-													variant="neutral"
+													variant="link"
 													w="full"
 													as={NavLink}
 													to={project.path}
 													size="sm"
 													color="text-muted"
-													rightIcon={
-														<DotFilledIcon className="popoverCurrentIcon" opacity="0" aria-label="Current Page" />
+													leftIcon={
+														<DotFilledIcon
+															className="popoverCurrentIcon"
+															visibility="hidden"
+															aria-label="Current Page"
+														/>
 													}
 													_activeLink={{
-														color: "emphasis",
+														color: "text-emphasis",
 														bg: "surface-active",
 														fontWeight: "semibold",
 														"& .popoverCurrentIcon": {
 															display: "inline",
+															visibility: "visible",
 															opacity: "1",
 															color: "accent",
 														},
@@ -198,14 +216,10 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 										))}
 									</List>
 								</PopoverBody>
-								<Show below="md">
-									<PopoverFooter>{headerButtons}</PopoverFooter>
-								</Show>
 							</PopoverContent>
 						</>
 					)}
 				</Popover>
-				<Show above="md">{headerButtons}</Show>
 
 				<ColorModeSwitcher />
 			</Flex>

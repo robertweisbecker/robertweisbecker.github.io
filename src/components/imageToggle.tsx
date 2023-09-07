@@ -13,6 +13,7 @@ import {
 	Center,
 	Box,
 } from "@chakra-ui/react";
+import { ImageModal } from "./imageModal";
 
 interface ImageProps {
 	before: string;
@@ -26,28 +27,24 @@ export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
 	return (
 		<Box
 			position="relative"
-			mb="2"
-			w="100vw"
-			maxW="container.lg"
-			mx={-4}
-			borderRadius="fluid"
-			overflow="hidden"
-			border="1px"
-			borderColor="border-subdued"
-			bg="surface-elevated"
-			pt={2}>
-			<Tabs variant="indicator" color="emphasis" id={tabId}>
-				<TabList position="relative" mb={2} ms={2}>
-					<Tab>{tab1 ? tab1 : "Before"}</Tab>
+			// mb="2"
+			// maxW="container.lg"
+			// mx={-4}
+			// bg="surface-elevated"
+			// pt={2}
+		>
+			<Tabs variant="indicator" color="text-emphasis" id={tabId}>
+				<TabList position="relative" mx="auto" mb="2">
 					<Tab>{tab2 ? tab2 : "After"}</Tab>
+					<Tab>{tab1 ? tab1 : "Before"}</Tab>
 					<TabIndicator />
 				</TabList>
 				<TabPanels>
 					<TabPanel p={0}>
-						<Image src={before}></Image>
+						<ImageModal src={after}></ImageModal>
 					</TabPanel>
 					<TabPanel p={0}>
-						<Image src={after}></Image>
+						<ImageModal src={before}></ImageModal>
 					</TabPanel>
 				</TabPanels>
 			</Tabs>

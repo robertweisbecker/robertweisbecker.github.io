@@ -41,7 +41,7 @@ export const indicator = definePartsStyle((props) => {
 				zIndex: "0",
 			},
 			_selected: {
-				color: "emphasis",
+				color: "text-emphasis",
 				// fontWeight: "bold",
 				zIndex: "10",
 				_hover: {
@@ -57,10 +57,9 @@ export const indicator = definePartsStyle((props) => {
 			bg: "surface-elevated",
 			border: "1px",
 			borderColor: "border-muted",
-
-			// _dark: {
-			//   bg: "gray.700",
-			// },
+		},
+		tabpanel: {
+			gap: 0,
 		},
 	};
 });

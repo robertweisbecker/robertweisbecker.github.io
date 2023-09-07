@@ -38,13 +38,13 @@ export const Article: FC<ArticleProps> = ({ children, pageKey }) => {
 				<BackButton />
 				<PageHeader pageKey={pageKey} />
 				<Stack
-					spacing={10}
+					maxW="container.md"
+					spacing={12}
 					sx={{
 						".chakra-heading, .chakra-text, .chakra-list, .chakra-stack ul": {
-							maxW: "container.sm",
+							maxW: "prose",
 							// m: "auto",
 						},
-
 						".chakra-heading": {
 							flexGrow: "1",
 							w: "full",
