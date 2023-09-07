@@ -51,7 +51,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const About: React.FC = () => {
 	return (
-		<Stack spacing={8} mt={10}>
+		<Stack spacing={10} mt={10}>
 			<VisuallyHidden>
 				<Heading as="h1" size="2xl" mb={10}>
 					About
@@ -156,8 +156,9 @@ export const About: React.FC = () => {
 					<Spacer />
 				</Stack>
 			</LayoutGrid>
+			<Spacer />
 			<LayoutGrid variant="oneThird">
-				<HStack>
+				<HStack mb="5">
 					<Icon as={CameraIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What{" "}
@@ -169,13 +170,14 @@ export const About: React.FC = () => {
 
 				<Box>
 					<Image src="/assets/headshot2.png" maxW="sm" w="full" rounded="2xl" />
-					<Text textStyle="caption" mt="2" mb="8" fontStyle="italic">
+					<Text textStyle="caption" mt="2" fontStyle="italic">
 						Moody!
 					</Text>
 				</Box>
 			</LayoutGrid>
+			<Spacer />
 			<LayoutGrid variant="oneThird">
-				<HStack>
+				<HStack mb="5">
 					<Icon as={MagicWandIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What
@@ -243,8 +245,9 @@ export const About: React.FC = () => {
 					<Spacer />
 				</Stack>
 			</LayoutGrid>
+			<Spacer />
 			<LayoutGrid variant="oneThird">
-				<HStack>
+				<HStack mb="5">
 					<Icon as={BackpackIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
 						Where{" "}
@@ -337,8 +340,9 @@ export const About: React.FC = () => {
 					</HStack>
 				</Stack>
 			</LayoutGrid>
+			<Spacer />
 			<LayoutGrid variant="oneThird">
-				<HStack>
+				<HStack mb="5">
 					<Icon as={BookmarkIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
 						Where{" "}
@@ -375,6 +379,7 @@ export const About: React.FC = () => {
 					</HStack>
 				</Stack>
 			</LayoutGrid>
+			<Spacer />
 			<LayoutGrid variant="oneThird">
 				<HStack mb={5}>
 					<Icon as={CursorArrowIcon} color="accent" />
