@@ -161,7 +161,7 @@ export const About: React.FC = () => {
 					<Icon as={CameraIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What{" "}
-						<Box as="span" textStyle="subtitle" color="text-subdued">
+						<Box as="span" fontWeight="normal" color="text-subdued">
 							(I look like)
 						</Box>
 					</Heading>
@@ -179,7 +179,7 @@ export const About: React.FC = () => {
 					<Icon as={MagicWandIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What
-						<Box as="span" textStyle="subtitle" color="text-subdued">
+						<Box as="span" fontWeight="normal" color="text-subdued">
 							{" "}
 							(I've done)
 						</Box>
@@ -248,7 +248,7 @@ export const About: React.FC = () => {
 					<Icon as={BackpackIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
 						Where{" "}
-						<Box as="span" textStyle="subtitle" color="text-subdued">
+						<Box as="span" fontWeight="normal" color="text-subdued">
 							(I've worked)
 						</Box>
 					</Heading>
@@ -342,7 +342,7 @@ export const About: React.FC = () => {
 					<Icon as={BookmarkIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
 						Where{" "}
-						<Box as="span" color="text-subdued" textStyle="subtitle">
+						<Box as="span" color="text-subdued" fontWeight="normal">
 							(I learned things)
 						</Box>
 					</Heading>
@@ -380,7 +380,7 @@ export const About: React.FC = () => {
 					<Icon as={CursorArrowIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What{" "}
-						<Box as="span" color="text-subdued" textStyle="subtitle">
+						<Box as="span" color="text-subdued" fontWeight="normal">
 							(is this site?)
 						</Box>
 					</Heading>
