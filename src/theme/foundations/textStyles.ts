@@ -78,6 +78,10 @@ export default {
 	},
 	subtitle: {
 		fontFamily: "heading",
-		fontWeight: "normal",
+		fontWeight: "light",
+		color: "text-subdued",
+		fontSize: "3xl",
+		lineHeight: "shorter",
+		letterSpacing: "tightest",
 	},
 };

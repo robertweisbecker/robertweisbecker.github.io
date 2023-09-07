@@ -114,8 +114,7 @@ const variants = {
 				color: "text-muted",
 				textDecoration: "none",
 				fontWeight: "normal",
-
-				padding: 2,
+				p: "2",
 				_hover: {
 					bg: "surface-hover",
 					color: "text-emphasis",

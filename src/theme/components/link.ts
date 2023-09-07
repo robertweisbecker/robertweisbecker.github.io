@@ -35,19 +35,40 @@ const isExternal = {
 
 const variants = {
 	menu: () => ({
+		color: "text-muted",
+		textDecoration: "none",
+		fontWeight: "normal",
+		fontSize: "sm",
 		borderRadius: "lg",
-		p: "2",
+		fontFamily: "heading",
+		alignItems: "center",
+		display: "inline-flex",
+		gap: 1,
+		px: 3,
+		py: 1,
 		_hover: {
+			bg: "surface-hover",
+			color: "text-emphasis",
 			textDecoration: "none",
-			bg: "bg-subdued",
+		},
+		_focus: {
+			bg: "brand.300",
 		},
 		_active: {
-			textDecoration: "none",
-			bg: "bg-active",
+			bg: "surface-active",
+			color: "text-interactive",
 		},
 		_activeLink: {
-			fontWeight: "bold",
-			bg: "bg-active",
+			bg: "surface-active",
+			color: "text-emphasis",
+			fontWeight: "semibold",
+
+			"& .link_icon--current": {
+				display: "inline",
+				visibility: "visible",
+				opacity: "1",
+				color: "accent",
+			},
 		},
 	}),
 	isExternal: {

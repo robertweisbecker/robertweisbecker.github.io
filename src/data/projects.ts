@@ -73,7 +73,7 @@ export const projects = [
 	{
 		id: 4,
 		title: "Conversational Immigration Forms",
-		nickname: "MICA Thesis Project",
+		nickname: "Conversational UI",
 		icon: InputIcon,
 		path: "/conversational-immigration-forms",
 		date: "2017",
@@ -92,7 +92,7 @@ export const projects = [
 		path: "/npr-maps",
 		title: "Mapping and Population System",
 		logo: "/assets/logos/npr-icon.svg",
-		nickname: "NPR Mapping App",
+		nickname: "NPR Labs",
 		icon: GlobeIcon,
 		date: "2017",
 		description: "Rebuilding NPR's station coverage mapping tool",

@@ -168,6 +168,7 @@ export const UDL: React.FC = () => {
 					<ImageModal src="/assets/udl/login-after.png" caption="One sign-in screen to rule them all" />
 					<ImageModal src="/assets/udl/create-after.png" caption="Aligning admin and K12 platform login flows" />
 					<ImageModal src="/assets/udl/evaluations-after.png" caption="Evaluations in platform and course contexts" />
+					<ImageToggle before="/assets/udl/data-before.png" after="/assets/udl/data-after.png" />
 				</Stack>
 				<Stack spacing={8}>
 					<Heading as="h2">Foundations</Heading>
@@ -236,9 +237,21 @@ export const UDL: React.FC = () => {
 						We continued iterating on our foundations, arriving at a family of comprehensive design tokens that
 						supported all our needs.
 					</Text>
-					<ImageModal src="/assets/udl/docs-tokens.png" caption="Figma token documentation" />
-					<ImageModal src="/assets/udl/base-tokens.png" caption="Global tokens" />
-					<ImageModal src="/assets/udl/semantic-tokens.png" caption="Semantic color tokens" />
+					<ImageModal
+						src="/assets/udl/docs-tokens.png"
+						src2="/assets/udl/docs-tokens.png"
+						caption="Figma token documentation"
+					/>
+					<ImageModal
+						src="/assets/udl/base-tokens.png"
+						src2="/assets/udl/base-tokens2.png"
+						caption="Some of our base (global) tokens"
+					/>
+					<ImageModal
+						src="/assets/udl/semantic-tokens.png"
+						src2="/assets/udl/semantic-tokens2.png"
+						caption="Semantic color tokens"
+					/>
 					<Text>
 						To ensure that tokens served as a single source of truth, I migrated our Figma styles to use{" "}
 						<LinkOut href="https://tokens.studio/" text="Tokens Studio" /> to enable syncing with GitHub. Once imported,
@@ -251,6 +264,8 @@ export const UDL: React.FC = () => {
 						generated SCSS variables so that we could refresh their styles to match their updated siblings.
 					</Text>
 					<ImageModal src="/assets/udl/design-code.png" />
+					<ImageModal src="/assets/udl/storybook-colors.png" caption="Base color palette tokens in Storybook" />
+					<ImageModal src="/assets/udl/storybook-tokens.png" caption="Semantic color tokens in Storybook" />
 
 					<Text>
 						With the help of the{" "}
@@ -269,6 +284,18 @@ export const UDL: React.FC = () => {
 					<ImageModal src="/assets/udl/figma.png" src2="/assets/udl/figma@2x" caption="Buttons in Figma" />
 					<ImageModal src="/assets/udl/storybook.png" caption="Buttons in Storybook" />
 				</Stack>
+				{/* <Stack spacing="8">
+					<Heading>Gallery</Heading>
+					<Heading as="h3">Login</Heading>
+					<ImageToggle before="/assets/udl/homeroom-login-before.png" after="/assets/udl/homeroom-login-after.png" />
+					<ImageToggle before="/assets/udl/foundry-login-before.png" after="/assets/udl/foundry-login-after.png" />
+					<Heading as="h3">Admin</Heading>
+					<ImageToggle before="/assets/udl/homeroom-login-before.png" after="/assets/udl/homeroom-login-after.png" />
+					<ImageToggle before="/assets/udl/foundry-login-before.png" after="/assets/udl/foundry-login-after.png" />
+					<Heading as="h3">Admin</Heading>
+					<ImageToggle before="/assets/udl/homeroom-login-before.png" after="/assets/udl/homeroom-login-after.png" />
+					<ImageToggle before="/assets/udl/foundry-login-before.png" after="/assets/udl/foundry-login-after.png" />
+				</Stack> */}
 			</Article>
 		</>
 	);

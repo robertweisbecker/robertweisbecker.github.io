@@ -354,12 +354,17 @@ export const Furnace: React.FC = () => {
 			<Stack spacing={8}>
 				<Heading as="h2">Shadows</Heading>
 				<LayoutGrid variant="twoUp">
-					<Text>
-						Shadows are defined as five gradually increasing elevations, corresponding to perceived z-index, or its
-						relative distance “above” the page. Themes can customize these elevations, such as using 'none' for a flat
-						theme or tinting shadows with a color from their palette. Some themes have even used layered box-shadows to
-						add an additional border to elements upon interaction.
-					</Text>
+					<Stack spacing="8">
+						<Text>
+							Shadows are defined as five gradually increasing elevations, corresponding to perceived z-index, or its
+							relative distance “above” the page.{" "}
+						</Text>
+						<Text>
+							Themes can customize these elevations, such as using <Code>none</Code> for a flat theme or tinting shadows
+							with a color from their palette. Using elevations with opaque box-shadows can also give themes additional
+							border or outline styles.
+						</Text>
+					</Stack>
 					<ImageModal src="assets/furnace/elevation.png" caption="Shadow elevations and z-index guidance" />
 				</LayoutGrid>
 			</Stack>

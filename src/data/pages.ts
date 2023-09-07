@@ -58,7 +58,7 @@ export const pageData = {
 		role: "Graduate Student",
 		team: [
 			{
-				name: "Glenette Clark",
+				name: "Glennette Clark",
 				role: "Advisor",
 				url: "https://www.mica.edu/graduate-programs/design-leadership-ma-mba/glennette-clark-2/",
 			},

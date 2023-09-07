@@ -62,9 +62,9 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 				<Heading display="inline" flexGrow="1" as="h1" size="3xl">
 					{page.title}{" "}
 				</Heading>
-				<Heading as="span" display="inline" size="3xl" color="text-subdued" fontWeight="light" mb={8}>
+				<Text as="span" display="inline" textStyle="subtitle" mb={8}>
 					{page.subtitle}
-				</Heading>
+				</Text>
 				{/* <Image src={page.imageUrl} mb="3" /> */}
 			</GridItem>
 			<GridItem as="aside" gap={2}>

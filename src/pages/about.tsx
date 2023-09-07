@@ -58,7 +58,7 @@ export const About: React.FC = () => {
 				</Heading>
 			</VisuallyHidden>
 			<Spacer />
-			<LayoutGrid variant="oneThird" columnGap={{ base: 4, md: 20 }}>
+			<LayoutGrid variant="oneThird">
 				<HStack>
 					<Icon as={PersonIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
@@ -155,7 +155,8 @@ export const About: React.FC = () => {
 					</Wrap>
 					<Spacer />
 				</Stack>
-
+			</LayoutGrid>
+			<LayoutGrid variant="oneThird">
 				<HStack>
 					<Icon as={CameraIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
@@ -167,12 +168,13 @@ export const About: React.FC = () => {
 				</HStack>
 
 				<Box>
-					<Image src="/assets/headshot2.png" maxW="sm" rounded="2xl" />
+					<Image src="/assets/headshot2.png" maxW="sm" w="full" rounded="2xl" />
 					<Text textStyle="caption" mt="2" mb="8" fontStyle="italic">
 						Moody!
 					</Text>
 				</Box>
-
+			</LayoutGrid>
+			<LayoutGrid variant="oneThird">
 				<HStack>
 					<Icon as={MagicWandIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
@@ -240,7 +242,8 @@ export const About: React.FC = () => {
 					</UnorderedList>
 					<Spacer />
 				</Stack>
-
+			</LayoutGrid>
+			<LayoutGrid variant="oneThird">
 				<HStack>
 					<Icon as={BackpackIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
@@ -250,91 +253,91 @@ export const About: React.FC = () => {
 						</Box>
 					</Heading>
 				</HStack>
-				<GridItem>
-					<Stack fontSize="sm" divider={<Divider borderColor="border-subdued" />}>
-						<HStack>
-							<Text fontWeight="semibold" fontSize="md" textTransform="uppercase">
-								Everfi
-							</Text>
-						</HStack>
-						<HStack>
-							<Icon
-								as={DotFilledIcon}
-								aria-label="Current position"
-								color="success"
-								ms={{ md: "-5" }}
-								verticalAlign="text-top"
-							/>
-							<Text>Principal Designer, Design Systems</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2022
-							</Text>
-						</HStack>
-						<HStack>
-							<Text>Principal Designer, Platform UX</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2022
-							</Text>
-						</HStack>
-						<HStack>
-							<Text>Senior Interaction Designer</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2020
-							</Text>
-						</HStack>
-						<HStack>
-							<Text>Interaction Designer</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2018
-							</Text>
-						</HStack>
-						<HStack>
-							<Text>UX Designer</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2017
-							</Text>
-						</HStack>
-						<HStack>
-							<Text>Product Design Intern</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2017
-							</Text>
-						</HStack>
 
-						<Text fontWeight="semibold" fontSize="md" mt="1em">
-							NPR Labs
+				<Stack fontSize="sm" divider={<Divider borderColor="border-subdued" />}>
+					<HStack>
+						<Text fontWeight="semibold" fontSize="md" textTransform="uppercase">
+							Everfi
 						</Text>
-						<HStack>
-							<Text>Research & Development Design Intern</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2017
-							</Text>
-						</HStack>
-						<HStack align="baseline">
-							<Text fontWeight="semibold" fontSize="md" mt="1em">
-								Parking Panda{" "}
-							</Text>
-							<Text fontSize="2xs" letterSpacing="wide">
-								(acquired by SpotHero)
-							</Text>
-						</HStack>
-						<HStack>
-							<Text>UX/Design Intern</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2015
-							</Text>
-						</HStack>
-					</Stack>
-				</GridItem>
+					</HStack>
+					<HStack>
+						<Icon
+							as={DotFilledIcon}
+							aria-label="Current position"
+							color="success"
+							ms={{ md: "-5" }}
+							verticalAlign="text-top"
+						/>
+						<Text>Principal Designer, Design Systems</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2022
+						</Text>
+					</HStack>
+					<HStack>
+						<Text>Principal Designer, Platform UX</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2022
+						</Text>
+					</HStack>
+					<HStack>
+						<Text>Senior Interaction Designer</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2020
+						</Text>
+					</HStack>
+					<HStack>
+						<Text>Interaction Designer</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2018
+						</Text>
+					</HStack>
+					<HStack>
+						<Text>UX Designer</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2017
+						</Text>
+					</HStack>
+					<HStack>
+						<Text>Product Design Intern</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2017
+						</Text>
+					</HStack>
 
+					<Text fontWeight="semibold" fontSize="md" mt="1em">
+						NPR Labs
+					</Text>
+					<HStack>
+						<Text>Research & Development Design Intern</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2017
+						</Text>
+					</HStack>
+					<HStack align="baseline">
+						<Text fontWeight="semibold" fontSize="md" mt="1em">
+							Parking Panda{" "}
+						</Text>
+						<Text fontSize="2xs" letterSpacing="wide">
+							(acquired by SpotHero)
+						</Text>
+					</HStack>
+					<HStack>
+						<Text>UX/Design Intern</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2015
+						</Text>
+					</HStack>
+				</Stack>
+			</LayoutGrid>
+			<LayoutGrid variant="oneThird">
 				<HStack>
 					<Icon as={BookmarkIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
@@ -344,34 +347,35 @@ export const About: React.FC = () => {
 						</Box>
 					</Heading>
 				</HStack>
-				<GridItem>
-					<Stack fontSize="sm" divider={<Divider borderColor="border-subdued" />}>
-						<Text fontWeight="semibold" fontSize="md">
-							Maryland Institute College of Art
+
+				<Stack fontSize="sm" divider={<Divider borderColor="border-subdued" />}>
+					<Text fontWeight="semibold" fontSize="md">
+						Maryland Institute College of Art
+					</Text>
+					<HStack>
+						<Text>Master's, UX Design</Text>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2016–2017
 						</Text>
-						<HStack>
-							<Text>Master's, UX Design</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2016–2017
-							</Text>
-						</HStack>
-						<Text fontWeight="semibold" fontSize="md" mt="1em">
-							University of Michigan, Ann Arbor
+					</HStack>
+					<Text fontWeight="semibold" fontSize="md" mt="1em">
+						University of Michigan, Ann Arbor
+					</Text>
+					<HStack align="end">
+						<Text>
+							BA, Cognitive Science
+							<br />
+							Minor, Art & Design
 						</Text>
-						<HStack align="end">
-							<Text>
-								BA, Cognitive Science
-								<br />
-								Minor, Art & Design
-							</Text>
-							<Spacer />
-							<Text color="text-subdued" fontFamily="mono">
-								2012–2016
-							</Text>
-						</HStack>
-					</Stack>
-				</GridItem>
+						<Spacer />
+						<Text color="text-subdued" fontFamily="mono">
+							2012–2016
+						</Text>
+					</HStack>
+				</Stack>
+			</LayoutGrid>
+			<LayoutGrid variant="oneThird">
 				<HStack mb={5}>
 					<Icon as={CursorArrowIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">

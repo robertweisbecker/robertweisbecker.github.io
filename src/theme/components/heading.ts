@@ -5,15 +5,15 @@ export const headingStyles = defineStyleConfig({
 		fontFamily: "heading",
 		fontWeight: "", // make sure it's empty,
 		lineHeight: "shorter",
-		letterSpacing: "tight",
+		letterSpacing: "tightest",
 		color: "text-emphasis",
 	},
 	sizes: {
 		"3xl": {
 			fontSize: "3xl",
-			letterSpacing: "tighter",
+			letterSpacing: "tightest",
 			fontWeight: "bold",
-			lineHeight: "short",
+			lineHeight: "shorter",
 			mb: "2",
 		},
 		"2xl": {

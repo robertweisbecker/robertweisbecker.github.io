@@ -1,5 +1,6 @@
 const typography = {
 	letterSpacings: {
+		tightest: "-0.025em",
 		tighter: "-0.01em",
 		tight: "-0.005em",
 		normal: "0",
@@ -29,7 +30,7 @@ const typography = {
 		"2xs": "0.625rem", //10
 		xs: "0.75rem", //12
 		sm: "0.875rem", //14
-		md: "1rem", //16
+		md: "0.9375rem", //16
 		lg: "1.25rem", //20
 		xl: "1.5rem", //24
 		"2xl": "1.75rem", //28

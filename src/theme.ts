@@ -38,8 +38,9 @@ export const theme = extendTheme({
 			},
 			body: {
 				bg: "surface",
-				lineHeight: "tall",
+				lineHeight: "base",
 				color: "text-muted",
+				fontSize: "md",
 			},
 		}),
 	},
@@ -61,6 +62,15 @@ export const theme = extendTheme({
 				color: "text-emphasis",
 			},
 			defaultProps: { colorScheme: "brand" },
+		},
+		List: {
+			baseStyle: {
+				item: {
+					"&::marker": {
+						color: "text-subdued",
+					},
+				},
+			},
 		},
 	},
 	colors: {

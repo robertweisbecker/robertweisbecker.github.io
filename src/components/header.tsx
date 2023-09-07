@@ -64,27 +64,12 @@ function withRouter(Component) {
 
 const headerButtons = (
 	<>
-		<Button
-			as={NavLink}
-			variant="link"
-			size="sm"
-			justifyContent="flex-start"
-			to="/"
-			fontWeight={{ sm: "normal" }}
-			w={{ base: "full", lg: "auto" }}>
+		<Link as={NavLink} display={{ md: "none" }} variant="menu" to="/" w={{ base: "full", md: "auto" }}>
 			home
-		</Button>
-		<Button
-			as={NavLink}
-			variant="link"
-			size="sm"
-			textAlign="left"
-			justifyContent="flex-start"
-			to="/about"
-			fontWeight={{ sm: "normal" }}
-			w={{ base: "full", lg: "auto" }}>
+		</Link>
+		<Link as={NavLink} variant="menu" to="/about" w={{ base: "full", md: "auto" }}>
 			about
-		</Button>
+		</Link>
 	</>
 );
 
@@ -139,13 +124,13 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 				</Link>
 				<Spacer />
 				<Show above="md">{headerButtons}</Show>
-				<Popover trigger="hover" openDelay={0} closeDelay={200} placement="bottom-end" gutter={-1}>
+				<Popover trigger="click" openDelay={0} closeDelay={200} placement="bottom-end" gutter={-1}>
 					{({ isOpen, onClose }) => (
 						<>
 							<PopoverTrigger>
 								<Button
 									fontWeight="normal"
-									variant="ghost"
+									variant="link"
 									size="sm"
 									gap={1}
 									_expanded={{
@@ -184,34 +169,23 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 									<List spacing={1}>
 										{projects.map((project, index) => (
 											<ListItem>
-												<Button
-													variant="link"
+												<Link
+													variant="menu"
 													w="full"
 													as={NavLink}
 													to={project.path}
-													size="sm"
-													color="text-muted"
-													leftIcon={
-														<DotFilledIcon
-															className="popoverCurrentIcon"
-															visibility="hidden"
-															aria-label="Current Page"
-														/>
-													}
-													_activeLink={{
-														color: "text-emphasis",
-														bg: "surface-active",
-														fontWeight: "semibold",
-														"& .popoverCurrentIcon": {
-															display: "inline",
-															visibility: "visible",
-															opacity: "1",
-															color: "accent",
-														},
-													}}>
+													// leftIcon={
+													// 	<DotFilledIcon
+													// 		className="popoverCurrentIcon"
+													// 		visibility="hidden"
+													// 		aria-label="Current Page"
+													// 	/>
+													// }
+												>
+													<Icon className="link_icon--current" display="none" as={DotFilledIcon} />
 													{project.nickname}
 													<Spacer />
-												</Button>
+												</Link>
 											</ListItem>
 										))}
 									</List>
