@@ -26,7 +26,7 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
 	const text = useColorModeValue("Dark", "Light");
 	const SwitchIcon = useColorModeValue(MoonIcon, SunIcon);
 	const variant = useColorModeValue("ghost", "ghost");
-	const colorScheme = useColorModeValue("brand", "orange");
+	const colorScheme = useColorModeValue("brand", "yellow");
 	// const color = useColorModeValue("orange.500", "white");
 	// const iconPosition = useColorModeValue("50%", "4px");
 

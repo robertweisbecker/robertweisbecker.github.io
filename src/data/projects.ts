@@ -78,7 +78,7 @@ export const projects = [
 		path: "/conversational-immigration-forms",
 		date: "2017",
 		logo: "/assets/logos/ellis-icon.svg",
-		description: "Improving government paperwork with conversation; thesis project",
+		description: "Improving government paperwork with conversation",
 		company: "MICA",
 		imageUrl: "",
 		liveUrl: "",

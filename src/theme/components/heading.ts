@@ -12,8 +12,9 @@ export const headingStyles = defineStyleConfig({
 		"3xl": {
 			fontSize: "3xl",
 			letterSpacing: "tightest",
-			fontWeight: "bold",
+			fontWeight: "black",
 			lineHeight: "shorter",
+			maxW: "4ch",
 			mb: "2",
 		},
 		"2xl": {
@@ -41,7 +42,7 @@ export const headingStyles = defineStyleConfig({
 		md: {
 			fontSize: "md",
 			fontWeight: "semibold",
-			letterSpacing: "normal",
+			letterSpacing: "tight",
 			mt: "1em",
 			mb: ".5em",
 		},

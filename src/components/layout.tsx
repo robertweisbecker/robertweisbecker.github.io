@@ -28,7 +28,7 @@ const layouts: Record<Props["variant"], { templateColumns: GridProps["templateCo
 	twoThirds: { templateColumns: { base: "1fr", md: "2fr 1fr" } },
 };
 
-const defaultLayout = { templateColumns: "twoUp" };
+const defaultLayout = { variant: "twoUp" };
 
 export const LayoutGrid: React.FC<Props> = ({
 	variant = "twoUp",

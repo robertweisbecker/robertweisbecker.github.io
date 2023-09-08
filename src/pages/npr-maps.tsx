@@ -41,7 +41,7 @@ export const NPR: React.FC = () => {
 					reception coverage maps for all public radio and television stations in the US.
 				</Text>
 				<Text>
-					NPR affiliates nationwide – member station managers, underwriters, engineers – use MAPS to inform
+					NPR affiliates nationwide — member station managers, underwriters, engineers — use MAPS to inform
 					decision-making around station planning efforts, such as improving reception or adding new services. First
 					released in 2011, it remained largely unchanged since.
 				</Text>
@@ -82,7 +82,7 @@ export const NPR: React.FC = () => {
 				<Text>
 					At the time, NPR's mobile apps used a variation of Material Design. Since we were using Vue, we imported
 					components from <LinkOut href="https://www.creative-tim.com/vuematerial/" text="Vue Material" /> and tailored
-					them to our needs – re-theming them to match NPR's apps and composing them to create more complex
+					them to our needs — re-theming them to match NPR's apps and composing them to create more complex
 					application-specific components.
 				</Text>
 				<Image src="/assets/npr/map-ui.png" />

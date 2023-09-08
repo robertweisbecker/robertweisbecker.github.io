@@ -16,6 +16,7 @@ export const semanticTokens = {
 		},
 
 		surface: { _light: "white", _dark: "gray.900" },
+		"surface-inset": "bg-canvas",
 		"surface-hover": { _light: "gray.50", _dark: "gray.700" },
 		"surface-active": { _light: "gray.100", _dark: "gray.600" },
 		"surface-elevated": { _light: "white", _dark: "gray.800" },
@@ -41,10 +42,10 @@ export const semanticTokens = {
 		"border-elevated": { _light: "blackAlpha.100", _dark: "whiteAlpha.400" },
 		"border-muted": { _light: "blackAlpha.200", _dark: "whiteAlpha.300" },
 		"border-subdued": { _light: "blackAlpha.100", _dark: "whiteAlpha.200" },
-		"border-interactive": { _light: "brand.400", _dark: "brand.200" },
+		"border-interactive": { _light: "brand.400", _dark: "brand.500" },
 		"border-interactive-hover": { _light: "brand.500", _dark: "brand.100" },
 		accent: { _light: "brand.400", _dark: "brand.300" },
-		"text-interactive": { _light: "brand.500", _dark: "brand.200" },
+		"text-interactive": { _light: "brand.500", _dark: "brand.400" },
 
 		success: { _light: "green.500", _dark: "green.200" },
 		error: { _light: "red.500", _dark: "red.200" },
@@ -57,15 +58,13 @@ export const semanticTokens = {
 	},
 	shadows: {
 		xs: {
-			// default:
-			//   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 1px 2px rgba(45, 55, 72,  0.1)",
-			_light: "0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
+			_light:
+				"0px 3px 6px -3px rgba(0,0,0,.05) ,0px 2px 4px -2px rgba(0,0,0,.05) ,0px 1px 2px -1px rgba(0,0,0,.05) ,0px 1px 1px -1px rgba(0,0,0,.05) ,0px 1px 0px -1px rgba(0,0,0,.05)",
+			// _light: "0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
 
 			_dark: "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 1px 2px rgba(13, 14, 20, .4)",
 		},
 		sm: {
-			// default:
-			//   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 2px 4px rgba(45, 55, 72,  0.1)",
 			_light:
 				"0px 8px 20px -6px rgba(36, 42, 66, 0.08), 0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 0px 2px rgba(36, 42, 66, 0.06)",
 			_dark: "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 2px 4px rgba(13, 14, 20, .4)",
@@ -73,8 +72,6 @@ export const semanticTokens = {
 		md: {
 			_light:
 				"0px 1px 4px 1px rgba(36, 42, 66, 0.06), 0px 10px 24px 8px rgba(36, 42, 66, 0.04), 0px 20px 70px -10px rgba(36, 42, 66, 0.08)",
-			// default:
-			//   "0px 0px 1px rgba(45, 55, 72, 0.05), 0px 4px 8px rgba(45, 55, 72,  0.1)",
 			_dark: "0px 0px 1px rgba(13, 14, 20, 0.5), 0px 4px 8px rgba(13, 14, 20, .4)",
 		},
 		lg: {

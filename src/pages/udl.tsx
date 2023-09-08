@@ -13,44 +13,76 @@ import {
 	GridItem,
 	UnorderedList,
 	ListItem,
+	AspectRatio,
 } from "@chakra-ui/react";
 import { LayoutGrid } from "../components/layout";
 import { Article } from "../components/article";
 import { ImageToggle } from "../components/imageToggle";
 import { ImageModal } from "../components/imageModal";
 import { LinkOut } from "../components/linkOut";
+import { Prose } from "../components/prose";
 
 export const UDL: React.FC = () => {
 	return (
 		<>
 			<Article pageKey="unified-design-language">
-				<Stack spacing={8}>
-					<Heading as="h2">Context</Heading>
+				<AspectRatio ratio={16 / 9} w="full" maxW="100%" rounded="xl" overflow="hidden">
+					<Box
+						bgImage="/assets/udl/foundry-light.png"
+						_dark={{ bgImage: "/assets/udl/foundry-dark.png" }}
+						backgroundSize="cover"
+						backgroundPosition="top center"
+						maxW="100%"
+						backgroundRepeat="no-repeat"
+					/>
+				</AspectRatio>
+				<Stack spacing="8">
+					<Heading>What</Heading>
+					<Text>At the outset of this project, we defined a design language as such:</Text>
+					<Text
+						textStyle="subtitle"
+						fontSize="lg"
+						lineHeight="taller"
+						color="text-muted"
+						borderLeft="4px"
+						borderColor="border-muted"
+						px={6}>
+						<Highlight
+							query={["visual and interaction", "code and design", "consistency, intentionality, and predictability"]}
+							styles={{ px: "1", bg: "bg-accent-subdued", color: "text-emphasis" }}>
+							A design language consists of an agreed-upon visual and interaction design foundation upheld in both code
+							and design workflows to foster consistency, intentionality, and predictability within and across products.
+						</Highlight>
+					</Text>
+				</Stack>
+
+				<Stack spacing="8">
+					<Heading as="h2">Why</Heading>
 					<Text>
-						EVERFI products lack a cohesive identity and experience; they look like they were built by different teams
-						(because they were!) – undermining the experience for customers, teachers, and learners.
+						EVERFI products lack a cohesive identity and experience; they look like — and were — built by different
+						teams, undermining the experience for customers: admins, teachers, and learners.
 					</Text>
 
 					<Text>
-						Users moving across our products – from everfi.com to platform to course – encounter drastically different
+						Users moving across our products — from everfi.com to platform to course — encounter drastically different
 						interfaces, preventing them from having an intuitive, seamless experience. With this project, we sought to
 						unify the design language across EVERFI’s product portfolio.
 					</Text>
 				</Stack>
 				<ImageModal
 					src="/assets/udl/ecosystem.png"
-					caption="All the different ways we display course content across products and platforms – lacking a singular point of view on how an EVERFI
+					caption="All the different ways we display course content across products and platforms — lacking a singular point of view on how an EVERFI
           product looks, feels, and behaves."
 				/>
-				<Stack spacing={8}>
+				<Stack spacing="8">
 					<Text>
 						Different products rely on different tech stacks, each influencing their respective design direction at
 						inception and ultimately dictating the degree to which they could share with one another.
 					</Text>
 					<Text>
 						The question “What does an EVERFI button look like?” has a different answer depending on which product you
-						look at. Multiply this kind of variation across a full library of styles and components per product –
-						fields, cards, headers, footers, surveys, data viz – and layer in intentional theming of courses and
+						look at. Multiply this kind of variation across a full library of styles and components per product —
+						fields, cards, headers, footers, surveys, data viz — and layer in intentional theming of courses and
 						platform tailored to content, network, and/or customer branding, and of course we end up with a disjointed
 						experience.
 					</Text>
@@ -79,8 +111,8 @@ export const UDL: React.FC = () => {
 					/>
 				</Stack>
 				<Spacer />
-				<Stack spacing={8}>
-					<Heading as="h2">Process</Heading>
+				<Stack spacing="8">
+					<Heading as="h2">How</Heading>
 					<Text>
 						We began with our North Star not as a design system but a common design language that could guide our
 						products closer together. The idea of sharing styles and components org-wide was unthinkable given the
@@ -89,32 +121,17 @@ export const UDL: React.FC = () => {
 					<Text opacity=".5">Spoiler alert: it became thinkable. Keep reading.</Text>
 					<Text>
 						Instead, we set out to establish core design principles that we could weave throughout experiences wherever
-						technically feasible. So we defined a design language as such:
-					</Text>
-					<Text
-						textStyle="subtitle"
-						fontSize="lg"
-						color="text-muted"
-						borderLeft="4px"
-						borderColor="border-muted"
-						px={6}>
-						<Highlight
-							query={["foundation", "across"]}
-							styles={{ px: "1", bg: "bg-accent-subdued", color: "text-emphasis" }}>
-							A design language consists of an agreed-upon visual and interaction foundation upheld in both code and
-							design workflows to foster consistency, intentionality, and predictability within and across products.
-						</Highlight>
+						technically feasible. But, first, we needed to get the lay of the land.
 					</Text>
 				</Stack>
 				<Spacer />
-				<Stack spacing={8}>
+				<Stack spacing="8">
 					<Heading as="h3" size="lg">
 						Audit
 					</Heading>
 					<Text>
-						Our first step was to assess the existing design languages in use across products, so I devised a set of
-						benchmarks we could use to gauge the "system health" of our platforms, comparing their architecture to the
-						more mature system in{" "}
+						To assess the existing design languages in use across products, I devised a set of benchmarks we could use
+						to gauge the "system health" of our platforms, comparing their architecture to the more mature system in{" "}
 						<Link as={NavHashLink} to="/furnace">
 							Furnace
 						</Link>
@@ -124,7 +141,7 @@ export const UDL: React.FC = () => {
 						We then set off on an old-fashioned visual audit cataloguing each step in a potential admin, teacher, or
 						learner journey.
 						{/* In order to sell this idea, we first needed to know the cost of a
-              style refactor in our platforms – at this stage, the best-case
+              style refactor in our platforms — at this stage, the best-case
               scenario was getting the green light to copy-paste variables from
               the theming system I'd devised for courses. I audited the SCSS
               used in our platforms and weighed it against a set of design
@@ -132,16 +149,20 @@ export const UDL: React.FC = () => {
 					</Text>
 					<ImageModal src="/assets/udl/audit.png" caption="A snippet of our UI audit & the system health report" />
 				</Stack>
-				<Stack spacing={8}>
+				<Stack spacing="8">
 					<Heading as="h3" size="lg">
-						The Great Component-Off
+						The Great{" "}
+						<Box as="span" textTransform="uppercase">
+							Everfi
+						</Box>{" "}
+						Component-Off
 					</Heading>
 					<Text>
-						The next step was to establish an opinion – to coalesce around a general visual style that reflected our
+						The next step was to establish an opinion — to coalesce around a general visual style that reflected our
 						brands, best practices, and, to an extent, our taste as a group of designers.
 					</Text>
 					<Text>
-						That spurred the first – and hopefully last –{" "}
+						That spurred the first — and hopefully last —{" "}
 						<Box as="span" fontWeight="medium">
 							Great EVERFI Component-Off™
 						</Box>
@@ -156,7 +177,7 @@ export const UDL: React.FC = () => {
 						</Text>
 					</Stack>
 				</Stack>
-				<Stack spacing={8}>
+				<Stack spacing="8">
 					<Heading as="h3" size="lg">
 						Proof of Concept
 					</Heading>
@@ -170,7 +191,7 @@ export const UDL: React.FC = () => {
 					<ImageModal src="/assets/udl/evaluations-after.png" caption="Evaluations in platform and course contexts" />
 					<ImageToggle before="/assets/udl/data-before.png" after="/assets/udl/data-after.png" />
 				</Stack>
-				<Stack spacing={8}>
+				<Stack spacing="8">
 					<Heading as="h2">Foundations</Heading>
 					<Text>The proof of concept helped to crytallize our new foundations. Key decisions included:</Text>
 					<UnorderedList spacing="4">
@@ -190,14 +211,14 @@ export const UDL: React.FC = () => {
 					<ImageToggle before="/assets/udl/space-before.png" after="/assets/udl/space-after.png" />
 				</Stack>
 
-				<Stack spacing={8}>
+				<Stack spacing="8">
 					<Heading as="h2">Implementation</Heading>
 
 					<Heading as="h3" size="lg">
 						Moving to React
 					</Heading>
 					<Text>
-						We were given the green light to implement the new design language – and to rebuild Furnace in React, so
+						We were given the green light to implement the new design language — and to rebuild Furnace in React, so
 						that it could be integrated with Alloy into a new design system monorepo powering all of{" "}
 						<Box as="span" textTransform="uppercase">
 							Everfi

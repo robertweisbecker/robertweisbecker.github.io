@@ -46,7 +46,7 @@ export const Furnace: React.FC = () => {
 				</Text>
 				<Text>In theory.</Text>
 				<Text>
-					But the components were hyper-specific and inflexible. Styles were incomplete and context-dependent – font
+					But the components were hyper-specific and inflexible. Styles were incomplete and context-dependent — font
 					sizes were often hard-coded, a padding variable was available on one button but not another. Somehow,
 					accordion chevrons were always pink.
 				</Text>
@@ -71,11 +71,11 @@ export const Furnace: React.FC = () => {
 					<ListItem>
 						<b>A fully-styled base theme with smart defaults.</b> Documentation and QA were nearly impossible because we
 						had no underlying styles for the components. Instead, variables were set to values matching the course they
-						were originally built for – leaving any documentation we created littered with mismatched fonts, white text
+						were originally built for — leaving any documentation we created littered with mismatched fonts, white text
 						on white, and a whole Skittles bag full of icon colors.
 					</ListItem>
 					<ListItem>
-						<b>Responsive layout and type with additional flexibility.</b> We had 13 different layout components – none
+						<b>Responsive layout and type with additional flexibility.</b> We had 13 different layout components — none
 						of which were a grid.
 					</ListItem>
 					<ListItem>
@@ -120,7 +120,7 @@ export const Furnace: React.FC = () => {
 				<Heading as="h2">Color</Heading>
 				<Text>
 					The challenge of creating a theme-friendly color system comes in threading the needle between customizability
-					and simplicity – too many options will slow both designers and developers creating themes.
+					and simplicity — too many options will slow both designers and developers creating themes.
 				</Text>
 				<Text>
 					I wanted to bake as many smart defaults into the system as possible so that components and themes could shed
@@ -180,7 +180,7 @@ export const Furnace: React.FC = () => {
 							near-black (900) non-linearly to avoid muddy middle greys that have poor contrast with white/black.
 						</Text>
 						<Text>
-							In the base theme, neutral colors have a 4.5:1 contrast ratio with those five slots away – e.g., Neutrals
+							In the base theme, neutral colors have a 4.5:1 contrast ratio with those five slots away — e.g., Neutrals
 							100 and 600 have a 5.74 contrast ratio. Course designers are discouraged from overriding these colors
 							without first verifying the relative contrast of a replacement palette.
 						</Text>
@@ -251,7 +251,7 @@ export const Furnace: React.FC = () => {
 					and desktop breakpoints.
 				</Text>
 				<Text>
-					Themes do not have the ability to override a single component’s spacing – instead, responsive margin and
+					Themes do not have the ability to override a single component’s spacing — instead, responsive margin and
 					padding are baked into components. Changing the base value in a theme will cause the new spacing scale to
 					cascade down to each component.
 				</Text>
@@ -266,15 +266,15 @@ export const Furnace: React.FC = () => {
 				<Heading as="h2">Typography</Heading>
 				<Text>Our existing text classes weren't responsive, so that was a priority for any new type system.</Text>
 				<Text>
-					However, it's not <em>fully</em> responsive – only headings are, which is by design. Many of our products,
+					However, it's not <em>fully</em> responsive — only headings are, which is by design. Many of our products,
 					especially in the K12 space, have a number of pages with short bits of content punctuated by visuals and
-					interactions – there was really no need to shrink the font size. Reducing bloat would ease future maintenance,
+					interactions — there was really no need to shrink the font size. Reducing bloat would ease future maintenance,
 					while keeping prose large and legible for young users.
 				</Text>
 				<Text>
 					Plus, we could always add responsive body text in the future if we needed it.{" "}
 					<Box as="span" color="text-subdued" display="inline">
-						Spoiler alert: we didn't – it never once came up.
+						Spoiler alert: we didn't — it never once came up.
 					</Box>
 				</Text>
 				<ImageModal
@@ -303,7 +303,7 @@ export const Furnace: React.FC = () => {
 
 				{/* <Text>
           A common issue in our legacy courses was the incorrect use of heading
-          levels – ie. using a different semantic element for a smaller heading
+          levels — ie. using a different semantic element for a smaller heading
           style. This wasn’t something we could enforce from a systems level,
           but we could at least provide cues to nudge product teams in the right
           direction.
@@ -391,7 +391,7 @@ export const Furnace: React.FC = () => {
 				</Heading>
 				<Text>
 					Overall, we drastically simplified theming, while also elevating our visual design. Old themes contained 1,595
-					variables spread across 58 files – with Primitives in place, themes became a single file containing just 63
+					variables spread across 58 files — with Primitives in place, themes became a single file containing just 63
 					variables, while providing more comprehensive styling than we'd ever had.
 				</Text>
 				<Text>
@@ -465,7 +465,7 @@ export const Furnace: React.FC = () => {
 			<Stack spacing="5">
 				<Heading as="h3">Accessibility</Heading>
 				<Text>
-					In early 2019, prior to the refactor, 352 accessibility issues in courses were attributed to components – an
+					In early 2019, prior to the refactor, 352 accessibility issues in courses were attributed to components — an
 					average of 88 per quarter. That dropped to 14 in the quarter after our release; by the next year, there were
 					just 2 reported bugs in the same quarter.
 				</Text>

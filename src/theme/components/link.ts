@@ -45,7 +45,7 @@ const variants = {
 		display: "inline-flex",
 		gap: 1,
 		px: 3,
-		py: 1,
+		py: 2,
 		_hover: {
 			bg: "surface-hover",
 			color: "text-emphasis",

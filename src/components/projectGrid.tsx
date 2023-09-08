@@ -86,7 +86,9 @@ function ProjectGrid() {
 								borderColor="transparent"
 								borderWidth="1px"
 								bg="emphasis-invert"
+								alignSelf="flex-start"
 								p="1"
+								me="2"
 								opacity=".8"
 								transitionProperty="common"
 								transitionDuration="fast"
@@ -99,7 +101,7 @@ function ProjectGrid() {
 									borderColor: "border-muted",
 									opacity: "1",
 									transform: "translate(0) scale(1.2)",
-									boxShadow: "xl",
+									boxShadow: "sm",
 								}}
 							/>
 						) : (
@@ -108,7 +110,7 @@ function ProjectGrid() {
 
 						<Flex flexGrow="1" align="baseline" wrap="wrap">
 							<LinkOverlay as={RouterLink} to={project.path} aria-label="{project.title}">
-								<Heading as="h3" size="md" fontWeight="600" me={3} my={1}>
+								<Heading as="h3" size="lg" fontWeight="bold" me={3} my={1}>
 									{project.title}
 								</Heading>
 							</LinkOverlay>

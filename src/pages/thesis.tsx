@@ -59,7 +59,7 @@ export const Thesis: React.FC = () => {
 				</Text>
 				<Text>
 					For my thesis project at MICA, I explored the application of usability and interaction design principles to
-					these forms – whether emerging interaction patterns could improve the experiences of those seeking to become
+					these forms — whether emerging interaction patterns could improve the experiences of those seeking to become
 					residents or citizens of the United States.
 				</Text>
 				<Text>
@@ -250,7 +250,7 @@ export const Thesis: React.FC = () => {
 					on multiple foreign trips, they must answer additional follow-ups.
 				</Text>
 				<Text>
-					My initial instinct was that continued questioning was natural – we were simply following the natural flow of
+					My initial instinct was that continued questioning was natural — we were simply following the natural flow of
 					a conversation. However, we should let content dictate the input mode:{" "}
 				</Text>
 				<UnorderedList spacing={4}>
@@ -272,7 +272,7 @@ export const Thesis: React.FC = () => {
 					Improvements
 				</Heading>
 				<Text>
-					Users did, however, respond to progressive disclosure – validating the core of my hypothesis. So I then sought
+					Users did, however, respond to progressive disclosure — validating the core of my hypothesis. So I then sought
 					to create & test a hybrid UI with N-400 content that synthesized the well-recieved qualities of the two
 					earlier prototypes along with some more traditional form elements.
 				</Text>
@@ -342,7 +342,7 @@ export const Thesis: React.FC = () => {
 							text="Naturalization Eligibility Tool"
 						/>
 						, an interactive questionnaire that potential applicants can use to determine their elibility criteria. And
-						– you guessed it – the tool presents abridged versions of N-400 Eligibility Checklist questions in a wizard
+						— you guessed it — the tool presents abridged versions of N-400 Eligibility Checklist questions in a wizard
 						format.
 					</Text>
 					<Spacer />

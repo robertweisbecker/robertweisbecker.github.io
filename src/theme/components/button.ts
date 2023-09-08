@@ -59,17 +59,20 @@ const variants = {
 		color: mode(`${props.colorScheme}.500`, `${props.colorScheme}.300`)(props),
 		_hover: {
 			color: mode(`${props.colorScheme}.600`, `${props.colorScheme}.200`)(props),
-			bg: mode(`${props.colorScheme}.50`, `${props.colorScheme}.800`)(props),
+			bg: mode(`${props.colorScheme}.50`, `${props.colorScheme}.700`)(props),
 		},
 		_active: {
 			color: mode(`${props.colorScheme}.700`, `${props.colorScheme}.100`)(props),
-			bg: mode(`${props.colorScheme}.200`, `${props.colorScheme}.700`)(props),
+			bg: mode(`${props.colorScheme}.200`, `${props.colorScheme}.600`)(props),
 		},
 	}),
 	outline: (props: StyleFunctionProps) => ({
-		color: mode(`${props.colorScheme}.500`, `${props.colorScheme}.300`)(props),
+		color: mode(`${props.colorScheme}.600`, `${props.colorScheme}.300`)(props),
 		bg: "surface-elevated",
 		borderColor: "border-muted",
+		backgroundClip: "padding-box",
+		boxShadow: "xs",
+
 		_hover: {
 			bg: "surface-hover",
 			color: "text-emphasis",
@@ -115,6 +118,8 @@ const variants = {
 				textDecoration: "none",
 				fontWeight: "normal",
 				p: "2",
+				h: "auto",
+				lineHeight: "shortest",
 				_hover: {
 					bg: "surface-hover",
 					color: "text-emphasis",

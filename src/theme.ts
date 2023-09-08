@@ -42,6 +42,9 @@ export const theme = extendTheme({
 				color: "text-muted",
 				fontSize: "md",
 			},
+			b: {
+				color: "text-emphasis",
+			},
 		}),
 	},
 	...foundations,
@@ -68,6 +71,7 @@ export const theme = extendTheme({
 				item: {
 					"&::marker": {
 						color: "text-subdued",
+						fontFamily: "mono",
 					},
 				},
 			},

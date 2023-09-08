@@ -11,13 +11,14 @@ import {
 	Button,
 	ButtonGroup,
 	Link,
-	PopoverHeader,
 	PopoverFooter,
 	Divider,
 	Popover,
 	PopoverTrigger,
 	PopoverContent,
 	PopoverBody,
+	PopoverHeader,
+	PopoverCloseButton,
 	Icon,
 	List,
 	ListItem,
@@ -39,6 +40,8 @@ import {
 	ArrowTopRightIcon,
 	IdCardIcon,
 	InfoCircledIcon,
+	Cross1Icon,
+	Cross2Icon,
 } from "@radix-ui/react-icons";
 
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
@@ -64,10 +67,27 @@ function withRouter(Component) {
 
 const headerButtons = (
 	<>
-		<Link as={NavLink} display={{ md: "none" }} variant="menu" to="/" w={{ base: "full", md: "auto" }}>
+		<Link
+			as={NavLink}
+			display={{ base: "inline-flex", md: "none" }}
+			variant="menu"
+			fontWeight={{ base: "semibold", md: "normal" }}
+			to="/"
+			w={{ base: "full", md: "auto" }}>
+			<Show below="md">
+				<Icon as={HomeIcon} />
+			</Show>
 			home
 		</Link>
-		<Link as={NavLink} variant="menu" to="/about" w={{ base: "full", md: "auto" }}>
+		<Link
+			as={NavLink}
+			variant="menu"
+			fontWeight={{ base: "semibold", md: "normal" }}
+			to="/about"
+			w={{ base: "full", md: "auto" }}>
+			<Show below="md">
+				<Icon as={InfoCircledIcon} />
+			</Show>
 			about
 		</Link>
 	</>
@@ -124,7 +144,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 				</Link>
 				<Spacer />
 				<Show above="md">{headerButtons}</Show>
-				<Popover trigger="click" openDelay={0} closeDelay={200} placement="bottom-end" gutter={-1}>
+				<Popover trigger="click" openDelay={0} closeDelay={200} placement="bottom-end" gutter={-36}>
 					{({ isOpen, onClose }) => (
 						<>
 							<PopoverTrigger>
@@ -133,6 +153,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 									variant="link"
 									size="sm"
 									gap={1}
+									px={3}
 									_expanded={{
 										fontWeight: "medium",
 										color: "text-emphasis",
@@ -144,7 +165,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 										transform={isOpen ? "rotate(-180deg)" : "none"}
 										transitionProperty="common"
 										transitionDuration="fast"
-										transitionTimingFunction="ease-in"
+										transitionTimingFunction="ease-out"
 										opacity="1"
 										as={ChevronDownIcon}
 									/>
@@ -157,16 +178,24 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 								bg="surface-elevated"
 								maxW={{ base: "280px", md: "container.md" }}
 								rounded="xl">
-								<Show below="md">
-									<PopoverHeader>{headerButtons}</PopoverHeader>
-								</Show>
-								<PopoverBody p="2">
-									<PopoverHeader textStyle="title-sm" border="none">
+								<PopoverHeader p="3">
+									<Text textStyle="title-sm" border="none">
 										<Show above="md">projects</Show>
 										<Show below="md">work</Show>
-									</PopoverHeader>
-
-									<List spacing={1}>
+										<IconButton
+											as={PopoverCloseButton}
+											icon={<Cross2Icon />}
+											right="1"
+											top="1"
+											size="sm"
+											variant="ghost"
+											position="absolute"
+											aria-label="Close"
+										/>
+									</Text>
+								</PopoverHeader>
+								<PopoverBody p="2">
+									<List>
 										{projects.map((project, index) => (
 											<ListItem>
 												<Link
@@ -190,6 +219,9 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 										))}
 									</List>
 								</PopoverBody>
+								<Show below="md">
+									<PopoverFooter p="2">{headerButtons}</PopoverFooter>
+								</Show>
 							</PopoverContent>
 						</>
 					)}

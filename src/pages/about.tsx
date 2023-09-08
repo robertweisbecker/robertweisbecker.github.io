@@ -169,7 +169,7 @@ export const About: React.FC = () => {
 				</HStack>
 
 				<Box>
-					<Image src="/assets/headshot2.png" maxW="sm" w="full" rounded="2xl" />
+					<Image src="/assets/headshot2.png" maxW="sm" w="full" rounded="2xl" boxShadow="xs" />
 					<Text textStyle="caption" mt="2" fontStyle="italic">
 						Moody!
 					</Text>

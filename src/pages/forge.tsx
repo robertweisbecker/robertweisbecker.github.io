@@ -79,7 +79,7 @@ export const Forge: React.FC = () => {
 					especially important in Forge, given the hierarchical parent-child nature of its editor views.
 				</Text>
 				<Text>
-					Just one problem – Forge's styles included only five neutrals whose lightness topped out too quickly, making
+					Just one problem — Forge's styles included only five neutrals whose lightness topped out too quickly, making
 					text virtually illegible after a few child views.
 				</Text>
 				<Text>
@@ -181,7 +181,7 @@ export const Forge: React.FC = () => {
 
 				<Text>
 					Everything that wasn't related to editing content and parameters moved into a modal. At that point, you're
-					editing the course itself – not the page you're looking at. Choosing to cover the course preview provided free
+					editing the course itself — not the page you're looking at. Choosing to cover the course preview provided free
 					real estate, since it's no longer relevant to the task, while simultaneously reinforcing the mental model of
 					editing a higher-level view.
 				</Text>
@@ -222,7 +222,7 @@ export const Forge: React.FC = () => {
 					Forge as a design system tool
 				</Heading>
 				<Text>
-					Forge had long since moved away from being a code editor – we needed to embrace it as a tool for creation
+					Forge had long since moved away from being a code editor — we needed to embrace it as a tool for creation
 					using our design system. Courses rely heavily on utility classes generated from system variables in order to
 					apply or override theme styles; forcing Forge users to memorize and apply class names manually was doing them
 					a disservice.
