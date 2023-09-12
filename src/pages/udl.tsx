@@ -48,7 +48,7 @@ export const UDL: React.FC = () => {
 						borderColor="border-muted"
 						px={6}>
 						<Highlight
-							query={["visual and interaction", "code and design", "consistency, intentionality, and predictability"]}
+							query={["visual and interaction", "code and design", "consistency", "intentionality", "predictability"]}
 							styles={{ px: "1", bg: "bg-accent-subdued", color: "text-emphasis" }}>
 							A design language consists of an agreed-upon visual and interaction design foundation upheld in both code
 							and design workflows to foster consistency, intentionality, and predictability within and across products.
