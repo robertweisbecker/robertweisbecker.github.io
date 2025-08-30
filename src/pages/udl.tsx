@@ -2,7 +2,6 @@ import * as React from "react";
 import { NavHashLink } from "react-router-hash-link";
 
 import {
-	Image,
 	Highlight,
 	Box,
 	Stack,
@@ -10,17 +9,16 @@ import {
 	Link,
 	Heading,
 	Spacer,
-	GridItem,
 	UnorderedList,
 	ListItem,
 	AspectRatio,
 } from "@chakra-ui/react";
-import { LayoutGrid } from "../components/layout";
+// import { LayoutGrid } from "../components/layout";
 import { Article } from "../components/article";
 import { ImageToggle } from "../components/imageToggle";
 import { ImageModal } from "../components/imageModal";
 import { LinkOut } from "../components/linkOut";
-import { Prose } from "../components/prose";
+// import { Prose } from "../components/prose";
 
 export const UDL: React.FC = () => {
 	return (
@@ -36,43 +34,39 @@ export const UDL: React.FC = () => {
 						backgroundRepeat="no-repeat"
 					/>
 				</AspectRatio>
-				<Stack spacing="8">
-					<Heading>What</Heading>
-					<Text>At the outset of this project, we defined a design language as such:</Text>
-					<Text
-						textStyle="subtitle"
-						fontSize="lg"
-						lineHeight="taller"
-						color="text-muted"
-						borderLeft="4px"
-						borderColor="border-muted"
-						px={6}>
-						<Highlight
-							query={["visual and interaction", "code and design", "consistency", "intentionality", "predictability"]}
-							styles={{ px: "1", bg: "bg-accent-subdued", color: "text-emphasis" }}>
-							A design language consists of an agreed-upon visual and interaction design foundation upheld in both code
-							and design workflows to foster consistency, intentionality, and predictability within and across products.
-						</Highlight>
-					</Text>
-				</Stack>
 
 				<Stack spacing="8">
-					<Heading as="h2">Why</Heading>
+					<Heading as="h2">Context</Heading>
 					<Text>
-						EVERFI products lack a cohesive identity and experience; they look like — and were — built by different
-						teams, undermining the experience for customers: admins, teachers, and learners.
+						In late 2021, it became clear that EVERFI's products lacked a cohesive identity and experience; they looked
+						like (and were) built by different teams.
 					</Text>
-
 					<Text>
-						Users moving across our products — from everfi.com to platform to course — encounter drastically different
-						interfaces, preventing them from having an intuitive, seamless experience. With this project, we sought to
-						unify the design language across EVERFI’s product portfolio.
+						The journey from website → platform → product ping-ponged users from one interface to another, undermining
+						the experience for admins, teachers, and learners. So we set out to define a singular point of view re: how
+						an Everfi product should look, feel, and behave, and to codify it in a new shared design language.
 					</Text>
 				</Stack>
+				<Text>We kicked it off with our own definition:</Text>
+				<Text
+					textStyle="subtitle"
+					fontSize="lg"
+					lineHeight="taller"
+					color="fg.muted"
+					borderLeft="4px"
+					borderColor="border-muted"
+					// sx={{ textWrap: "pretty" }}
+					px={6}>
+					<Highlight
+						query={["visual and interaction", "code and design", "consistency", "intentionality", "predictability"]}
+						styles={{ fontWeight: "medium" }}>
+						A design language consists of an agreed-upon visual and interaction design foundation upheld in both code
+						and design workflows to foster consistency, intentionality, and predictability within and across products.
+					</Highlight>
+				</Text>
 				<ImageModal
 					src="/assets/udl/ecosystem.png"
-					caption="All the different ways we display course content across products and platforms — lacking a singular point of view on how an EVERFI
-          product looks, feels, and behaves."
+					caption="All the different ways we display course content across products and platforms"
 				/>
 				<Stack spacing="8">
 					<Text>
@@ -80,7 +74,7 @@ export const UDL: React.FC = () => {
 						inception and ultimately dictating the degree to which they could share with one another.
 					</Text>
 					<Text>
-						The question “What does an EVERFI button look like?” has a different answer depending on which product you
+						The question "What does an EVERFI button look like?" has a different answer depending on which product you
 						look at. Multiply this kind of variation across a full library of styles and components per product —
 						fields, cards, headers, footers, surveys, data viz — and layer in intentional theming of courses and
 						platform tailored to content, network, and/or customer branding, and of course we end up with a disjointed

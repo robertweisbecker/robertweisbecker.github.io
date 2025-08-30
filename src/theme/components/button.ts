@@ -68,37 +68,37 @@ const variants = {
 	}),
 	outline: (props: StyleFunctionProps) => ({
 		color: mode(`${props.colorScheme}.600`, `${props.colorScheme}.300`)(props),
-		bg: "surface-elevated",
-		borderColor: "border-muted",
+		bg: "bg.elevated",
+		borderColor: "border.muted",
 		backgroundClip: "padding-box",
 		boxShadow: "xs",
 
 		_hover: {
-			bg: "surface-hover",
-			color: "text-emphasis",
-			borderColor: "border-muted",
+			bg: "bg.hover",
+			color: "fg.emphasized",
+			borderColor: "border.muted",
 		},
 		_checked: {
-			bg: "surface-active",
-			borderColor: "interactive",
-			color: "interactive",
+			bg: "bg.active",
+			borderColor: "border.interactive",
+			color: "fg.interactive",
 		},
 		_active: {
-			bg: "surface-active",
+			bg: "bg.active",
 			borderColor: "current",
 		},
 	}),
 	neutral: (props: StyleFunctionProps) => ({
-		color: "emphasized",
-		bg: "surface-muted",
+		color: "fg.emphasized",
+		bg: "bg.muted",
 		_hover: {
-			bg: "surface-hover",
+			bg: "bg.hover",
 		},
 		_active: {
-			bg: "surface-active",
+			bg: "bg.active",
 		},
 		_activeLink: {
-			bg: "surface-active",
+			bg: "bg.active",
 		},
 	}),
 	"neutral-invert": (props: StyleFunctionProps) => ({
@@ -108,30 +108,30 @@ const variants = {
 		},
 		_activeLink: {
 			color: "white",
-			bg: "bg-accent-subdued",
+			bg: "bg.accent-subdued",
 		},
 	}),
 	link: (props: StyleFunctionProps) => {
 		if (props.colorScheme === "gray") {
 			return {
-				color: "text-muted",
+				color: "fg.muted",
 				textDecoration: "none",
 				fontWeight: "normal",
 				p: "2",
 				h: "auto",
 				lineHeight: "shortest",
 				_hover: {
-					bg: "surface-hover",
-					color: "text-emphasis",
+					bg: "bg.hover",
+					color: "fg.emphasized",
 					textDecoration: "none",
 				},
 				_active: {
-					bg: "surface-active",
-					color: "text-emphasis",
+					bg: "bg.active",
+					color: "fg.emphasized",
 				},
 				_activeLink: {
-					bg: "surface-active",
-					color: "text-emphasis",
+					bg: "bg.active",
+					color: "fg.emphasized",
 					fontWeight: "semibold",
 				},
 			};
@@ -155,10 +155,10 @@ const variants = {
 			verticalAlign: "baseline",
 			color: "brand.50",
 			_hover: {
-				color: "inverted",
+				color: "fg.inverted",
 			},
 			_active: {
-				color: "inverted",
+				color: "fg.inverted",
 			},
 		};
 	},

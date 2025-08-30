@@ -55,11 +55,11 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption, full }) => {
 		<Stack mx={full ? "-4" : 0}>
 			<Box
 				position="relative"
-				borderRadius="2xl"
-				borderWidth="1px"
+				borderRadius="xl"
+				// borderWidth="1px"
 				bg="bg-subdued"
-				borderColor="border-subdued"
-				_dark={{ bg: "bg-subdued" }}
+				borderColor="border.subdued"
+				_dark={{ bg: "bg.subdued" }}
 				overflow="hidden"
 				w={full ? "100vw" : "auto"}
 				maxW={full ? "container.lg" : "100%"}>
@@ -87,19 +87,20 @@ export const ImageModal: FC<ImageProps> = ({ src, src2, caption, full }) => {
 					zIndex="docked"
 				/>
 			</Box>
-			<Text textStyle="caption" textAlign="center" maxW="prose" id={captionId}>
-				{caption}
-			</Text>
-
+			{caption && (
+				<Text textStyle="caption" textAlign="center" maxW="prose" id={captionId}>
+					{caption}
+				</Text>
+			)}
 			<Modal isOpen={isOpen} onClose={onClose} allowPinchZoom id={modalId} size="6xl">
-				<ModalOverlay bg="surface-frosted" backdropFilter="auto" backdropBlur="md" />
+				<ModalOverlay bg="bg.frosted" backdropFilter="auto" backdropBlur="md" />
 				<ModalContent p={{ md: "4" }} boxShadow="none" bg="transparent">
 					<ModalHeader p="0">
 						<VisuallyHidden>Image</VisuallyHidden>
 						{customClose}
 					</ModalHeader>
-					<ModalBody p="0" border="1px" borderColor="border-subdued" overflow="hidden" borderRadius="2xl">
-						<Image borderRadius="lg" objectFit="contain" src={src2 ? src2 : src} alt="caption" />
+					<ModalBody p="0" border="1px" borderColor="border.subdued" overflow="hidden" borderRadius="2xl">
+						<Image borderRadius="lg" objectFit="contain" src={src2 ? src2 : src} alt={caption} />
 					</ModalBody>
 					<ModalFooter p="0" display="flex" flexDirection="column">
 						{caption && (

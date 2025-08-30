@@ -45,36 +45,38 @@ export const Home: React.FC = () => {
 				</Heading>
 			</HStack>
 
-			<Box>
-				<Text fontSize="2xl" color="text-frosted" fontWeight="light" lineHeight="tall" fontFamily="heading">
-					I'm currently designing design systems
-					<br /> & systems for designers at <br />
-					<Box as="span" ms="-1">
-						<LinkOut
-							fontWeight="bold"
-							src="/assets/logos/everfi-icon.png"
-							href="https://www.everfi.com"
-							text="EVERFI"
-						/>
-						<Tooltip label="(we got acquired)">
-							<Box as="span" mx={2}>
-								+
-							</Box>
-						</Tooltip>
-						<LinkOut
-							fontWeight="bold"
-							src="/assets/logos/blackbaud-logo.png"
-							href="https://www.blackbaud.com"
-							text="Blackbaud"
-						/>
-					</Box>
-				</Text>
-			</Box>
+			<Text
+				textStyle="2xl"
+				color="text-frosted"
+				fontWeight="light"
+				// lineHeight="tall"
+				sx={{ textWrap: "balance" }}
+				fontFamily="heading">
+				Currently designing design systems & systems for designers at <br />
+				{/* <Box as="span" ms="-1"> */}
+				<LinkOut
+					inline
+					// fontWeight="bold"
+					src="/assets/logos/everfi-icon.png"
+					href="https://www.everfi.com"
+					text="Everfi"
+				/>{" "}
+				from{" "}
+				<LinkOut
+					inline
+					// fontWeight="bold"
+					// src="/assets/logos/blackbaud-logo.png"
+					href="https://www.blackbaud.com"
+					text="Blackbaud"
+				/>
+				{/* </Box> */}
+			</Text>
+
 			<Spacer />
 			<HStack align="center">
 				<Icon color="interactive" as={EyeOpenIcon} />
 				<Heading as="h2" size="2xs" id="projects">
-					Take a gander
+					Selected Projects
 				</Heading>
 			</HStack>
 			<ProjectGrid />

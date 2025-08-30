@@ -27,23 +27,28 @@ export const ImageToggle: FC<ImageProps> = ({ before, after, tab1, tab2 }) => {
 	return (
 		<Box
 			position="relative"
+			bg="bg.canvas"
+			rounded="2xl"
+			outline="1px solid"
+			outlineColor="border.subdued"
+			outlineOffset="-1px"
 			// mb="2"
 			// maxW="container.lg"
 			// mx={-4}
 			// bg="surface-elevated"
 			// pt={2}
 		>
-			<Tabs variant="indicator" color="text-emphasis" id={tabId}>
-				<TabList position="relative" mx="auto" mb="2">
+			<Tabs variant="indicator" id={tabId}>
+				<TabList position="relative">
 					<Tab>{tab2 ? tab2 : "After"}</Tab>
 					<Tab>{tab1 ? tab1 : "Before"}</Tab>
 					<TabIndicator />
 				</TabList>
 				<TabPanels>
-					<TabPanel p={0}>
+					<TabPanel>
 						<ImageModal src={after}></ImageModal>
 					</TabPanel>
-					<TabPanel p={0}>
+					<TabPanel>
 						<ImageModal src={before}></ImageModal>
 					</TabPanel>
 				</TabPanels>

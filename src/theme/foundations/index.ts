@@ -4,7 +4,7 @@ export { radii } from "./radii";
 // export { default as sizes } from './sizes'
 // export { default as space } from './space'
 // export { default as styles } from './styles'
-export { default as typography } from "./typography";
-export { default as textStyles } from "./textStyles";
-export { default as layerStyles } from "./layerStyles";
+export { typography } from "./typography";
+export { textStyles } from "./textStyles";
+export { layerStyles } from "./layerStyles";
 // export { default as semanticTokens } from './tokens'

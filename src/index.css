@@ -2,6 +2,7 @@ body {
 	margin: 0;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: "liga" 1, "calt" 1, "case" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "tnum" 1;
 }
 
 code {

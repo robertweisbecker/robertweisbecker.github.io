@@ -34,7 +34,7 @@ function ProjectGrid() {
 	return (
 		<Stack
 			id="projects"
-			bg="surface-frosted"
+			bg="bg.frosted"
 			ps={4}
 			pe={6}
 			borderRadius="2xl"
@@ -58,7 +58,7 @@ function ProjectGrid() {
 					transitionDuration="slow"
 					transitionTimingFunction="ease-out"
 					borderBottom="1px"
-					borderColor="border-subdued"
+					borderColor="border.muted"
 					key={index}
 					_last={{
 						border: "none",
@@ -85,7 +85,7 @@ function ProjectGrid() {
 								borderRadius="lg"
 								borderColor="transparent"
 								borderWidth="1px"
-								bg="emphasis-invert"
+								bg="fg.emphasis-invert"
 								alignSelf="flex-start"
 								p="1"
 								me="2"
@@ -97,8 +97,8 @@ function ProjectGrid() {
 								_dark={{ filter: "brightness(120%) " }}
 								_groupHover={{
 									filter: "none",
-									bg: "surface-elevated",
-									borderColor: "border-muted",
+									bg: "bg.elevated",
+									borderColor: "border.muted",
 									opacity: "1",
 									transform: "translate(0) scale(1.2)",
 									boxShadow: "sm",
@@ -114,7 +114,7 @@ function ProjectGrid() {
 									{project.title}
 								</Heading>
 							</LinkOverlay>
-							<Text flexGrow="1" display="inline" fontSize="md" color="text-muted">
+							<Text flexGrow="1" display="inline" fontSize="md" color="fg.muted">
 								{project.description}
 							</Text>
 						</Flex>

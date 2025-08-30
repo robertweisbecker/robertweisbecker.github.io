@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FC } from "react";
-import { NavHashLink, genericHashLink } from "react-router-hash-link";
+import { NavHashLink } from "react-router-hash-link";
 import { useLocation, useNavigate, useParams, NavLink } from "react-router-dom";
 
 import {
@@ -9,10 +9,8 @@ import {
 	Spacer,
 	IconButton,
 	Button,
-	ButtonGroup,
 	Link,
 	PopoverFooter,
-	Divider,
 	Popover,
 	PopoverTrigger,
 	PopoverContent,
@@ -23,20 +21,13 @@ import {
 	List,
 	ListItem,
 	Text,
-	Menu,
-	MenuButton,
-	MenuList,
-	MenuItem,
 	Show,
-	Hide,
 } from "@chakra-ui/react";
 
 import {
 	DotFilledIcon,
 	HomeIcon,
 	ChevronDownIcon,
-	ChevronUpIcon,
-	DotIcon,
 	ArrowTopRightIcon,
 	IdCardIcon,
 	InfoCircledIcon,
@@ -106,7 +97,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 			top="0"
 			left="0"
 			right="0"
-			bg={isNotHome ? "surface" : "surface-frosted"}
+			bg={isNotHome ? "bg.surface" : "bg.frosted"}
 			backdropFilter="auto"
 			backdropBlur="xl"
 			maxW="container.lg">
@@ -119,7 +110,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 				direction="row"
 				gap={4}
 				borderBottom="1px"
-				borderColor="border-subdued">
+				borderColor="border.subdued">
 				{/* {isNotHome && <BackButton />} */}
 
 				<Link
@@ -131,7 +122,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 					px={1}
 					fontWeight="semibold"
 					bg="transparent"
-					color="text-emphasis"
+					color="fg.emphasized"
 					_hover={{ textDecoration: "none" }}
 					to="/"
 					letterSpacing="wide"
@@ -156,7 +147,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 									px={3}
 									_expanded={{
 										fontWeight: "medium",
-										color: "text-emphasis",
+										color: "fg.emphasized",
 									}}>
 									<Show above="md">work</Show>
 									<Show below="md">menu</Show>
@@ -175,7 +166,7 @@ const Header: FC<HeaderProps> = ({ variant }) => {
 							<PopoverContent
 								boxShadow="lg"
 								overflow="hidden"
-								bg="surface-elevated"
+								bg="bg.elevated"
 								maxW={{ base: "280px", md: "container.md" }}
 								rounded="xl">
 								<PopoverHeader p="3">

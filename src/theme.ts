@@ -22,6 +22,16 @@ import { semanticTokens } from "./theme/semanticTokens";
 // import { typographyOverrides } from "./theme/foundations/typography";
 import * as foundations from "./theme/foundations";
 
+const interFontFeatureSettings = `
+	'liga' 1, 
+	'calt' 1,
+	'case' 1,
+	'cv01' 1,
+	'cv10' 1,
+	'ss01' 1,
+	'ss03' 1
+`;
+
 export const theme = extendTheme({
 	config: {
 		cssVarPrefix: "bob",
@@ -30,20 +40,28 @@ export const theme = extendTheme({
 	styles: {
 		global: (props: StyleFunctionProps) => ({
 			_selection: {
-				bg: "accent",
-				color: "emphasis-invert",
+				bg: "bg.accent",
+				color: "fg.emphasis-invert",
 			},
 			":root": {
 				fontFamily: "fallback",
+				fontFeatureSettings: interFontFeatureSettings,
+			},
+			"@supports (font-variation-settings: normal)": {
+				":root": {
+					fontFamily: "body",
+				},
 			},
 			body: {
-				bg: "surface",
+				bg: "bg.page",
 				lineHeight: "base",
-				color: "text-muted",
+				color: "fg.muted",
 				fontSize: "md",
+				fontFeatureSettings: interFontFeatureSettings,
 			},
 			b: {
-				color: "text-emphasis",
+				color: "fg.emphasized",
+				fontWeight: "semibold",
 			},
 		}),
 	},
@@ -62,7 +80,7 @@ export const theme = extendTheme({
 				borderRadius: "sm",
 				lineHeight: "short",
 				fontSize: ".875em",
-				color: "text-emphasis",
+				color: "fg.emphasized",
 			},
 			defaultProps: { colorScheme: "brand" },
 		},
@@ -70,7 +88,7 @@ export const theme = extendTheme({
 			baseStyle: {
 				item: {
 					"&::marker": {
-						color: "text-subdued",
+						color: "fg.subdued",
 						fontFamily: "mono",
 					},
 				},

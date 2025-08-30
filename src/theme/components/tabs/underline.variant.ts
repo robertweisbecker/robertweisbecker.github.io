@@ -70,12 +70,12 @@ export const underline = definePartsStyle((props) => {
 			color: "fg.subdued",
 			...sizeProps.tab,
 			_selected: {
-				color: "text-interactive",
+				color: "fg.interactive",
 			},
 			...(isVertical ? verticalStyles.tab : horizontalStyles.tab),
 		},
 		indicator: {
-			bg: "accent",
+			bg: "bg.accent",
 			...(isVertical ? verticalStyles.indicator : horizontalStyles.indicator),
 		},
 	};

@@ -11,17 +11,17 @@ const encodedSvg = encodeURIComponent(svgString);
 
 const baseStyle = {
 	textDecoration: "underline",
-	textDecorationColor: "border-interactive",
+	textDecorationColor: "border.interactive",
 	textDecorationThickness: ".125em",
 	fontWeight: "medium",
 	textDecorationSkipInk: "none",
 	display: "inline-flex",
 	alignItems: "baseline",
-	color: "text-emphasis",
+	color: "fg.emphasized",
 	// boxShadow: "0 0 0 -2px inset",
 	_hover: {
-		color: "text-interactive",
-		textDecorationColor: "border-interactive-hover",
+		color: "fg.interactive",
+		textDecorationColor: "border.interactive-hover",
 		textDecorationThickness: ".0625em",
 		textDecorationStyle: "wavy",
 	},
@@ -35,7 +35,7 @@ const isExternal = {
 
 const variants = {
 	menu: () => ({
-		color: "text-muted",
+		color: "fg.muted",
 		textDecoration: "none",
 		fontWeight: "normal",
 		fontSize: "sm",
@@ -47,20 +47,20 @@ const variants = {
 		px: 3,
 		py: 2,
 		_hover: {
-			bg: "surface-hover",
-			color: "text-emphasis",
+			bg: "bg.hover",
+			color: "fg.emphasized",
 			textDecoration: "none",
 		},
 		_focus: {
 			bg: "brand.300",
 		},
 		_active: {
-			bg: "surface-active",
-			color: "text-interactive",
+			bg: "bg.active",
+			color: "fg.interactive",
 		},
 		_activeLink: {
-			bg: "surface-active",
-			color: "text-emphasis",
+			bg: "bg.active",
+			color: "fg.emphasized",
 			fontWeight: "semibold",
 
 			"& .link_icon--current": {

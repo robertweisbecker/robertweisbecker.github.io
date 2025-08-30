@@ -2,13 +2,8 @@ import { NavHashLink } from "react-router-hash-link";
 import { LayoutGrid } from "../components/layout";
 import { LinkOut } from "../components/linkOut";
 import {
-	Divider,
-	Container,
-	IconButton,
 	Heading,
 	Box,
-	Flex,
-	SimpleGrid,
 	Wrap,
 	UnorderedList,
 	ListItem,
@@ -17,81 +12,61 @@ import {
 	Icon,
 	Link,
 	Tooltip,
-	GridItem,
 	HStack,
 	Image,
 	Button,
 	Spacer,
 	VisuallyHidden,
-	Badge,
-	TabIndicator,
+	Divider,
 } from "@chakra-ui/react";
 import {
-	ArrowRightIcon,
-	BackpackIcon,
-	FileIcon,
 	CameraIcon,
 	LinkedInLogoIcon,
 	ReaderIcon,
 	BookmarkIcon,
 	GitHubLogoIcon,
-	CounterClockwiseClockIcon,
-	DotFilledIcon,
-	Link1Icon,
 	EnvelopeClosedIcon,
-	CursorArrowIcon,
 	PersonIcon,
-	IdCardIcon,
-	QuestionMarkIcon,
-	InfoCircledIcon,
 	MagicWandIcon,
+	FileIcon,
+	DotFilledIcon,
+	CursorArrowIcon,
 } from "@radix-ui/react-icons";
-
 import { AnimatePresence, motion } from "framer-motion";
 
 export const About: React.FC = () => {
 	return (
-		<Stack spacing={10} mt={10}>
+		<Stack spacing={6} mt={10}>
 			<VisuallyHidden>
-				<Heading as="h1" size="2xl" mb={10}>
-					About
-				</Heading>
+				<h1>About</h1>
 			</VisuallyHidden>
-			<Spacer />
 			<LayoutGrid variant="oneThird">
-				<HStack>
+				{/* <HStack>
 					<Icon as={PersonIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						Who
 					</Heading>
-				</HStack>
+				</HStack> */}
 
 				<Stack spacing="4">
-					<Text>
+					{/* <Text>
 						My birth certificate says Robert, but everyone calls me{" "}
 						<Tooltip label="We're all about efficiency here at bob dot fyi.">
 							<Link>Bob</Link>
 						</Tooltip>
 						.
-					</Text>
+					</Text> */}
 					<Text>
-						I work as a{" "}
-						<Box as="span" color="text-emphasis" fontStyle="italic">
-							Principal Designer, Design Systems
-						</Box>{" "}
-						at <LinkOut href="https://everfi.com" text="EVERFI" />, where I design components and tooling to support
-						EVERFI's mission of driving social good through education. Those things have{" "}
+						I'm currently a principal designer at <LinkOut href="https://everfi.com" text="Everfi" />, designing
+						products, components, and tooling to help drive social good through education. These things have{" "}
 						<Link href="https://www.blackbaud.com/newsroom/article/blackbaud-acquires-everfi-a-saas-leader-powering-corporate-esg-and-csr-initiatives-that-reach-millions-of-learners-each-year">
 							allegedly
 						</Link>{" "}
 						reached more than 45 million learners globally.
 					</Text>
 					<Text>
-						Since late 2021, I've been leading the creation of a shared organization-wide design language for all of{" "}
-						<Box as="span" textTransform="uppercase">
-							Everfi
-						</Box>
-						. You can read a bit about that process{" "}
+						Since 2021, I've been leading the implementation of a unified design system across admin, educator, and
+						learner products. Read a bit about that process{" "}
 						<Link as={NavHashLink} to="/unified-design-language" gap={0.5}>
 							here
 						</Link>
@@ -162,7 +137,7 @@ export const About: React.FC = () => {
 					<Icon as={CameraIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What{" "}
-						<Box as="span" fontWeight="normal" color="text-subdued">
+						<Box as="span" fontWeight="normal" color="fg.subdued">
 							(I look like)
 						</Box>
 					</Heading>
@@ -181,7 +156,7 @@ export const About: React.FC = () => {
 					<Icon as={MagicWandIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What
-						<Box as="span" fontWeight="normal" color="text-subdued">
+						<Box as="span" fontWeight="normal" color="fg.subdued">
 							{" "}
 							(I've done)
 						</Box>
@@ -215,7 +190,7 @@ export const About: React.FC = () => {
 							and more.
 						</ListItem>
 						<ListItem>
-							Delivered a (finally relevant!){" "}
+							Delivered a (now relevant!){" "}
 							<Link as={NavHashLink} to="/conversational-immigration-forms" gap={0.5}>
 								thesis
 							</Link>{" "}
@@ -247,81 +222,64 @@ export const About: React.FC = () => {
 			</LayoutGrid>
 			<Spacer />
 			<LayoutGrid variant="oneThird">
-				<HStack mb="5">
-					<Icon as={BackpackIcon} color="accent" />
-					<Heading as="h2" size="2xs" id="projects" minW="200px">
+				<HStack>
+					<Icon as={FileIcon} color="accent" />
+					<Heading as="h2" size="2xs" id="projects">
 						Where{" "}
-						<Box as="span" fontWeight="normal" color="text-subdued">
+						<Box as="span" fontWeight="normal" color="fg.subdued">
 							(I've worked)
 						</Box>
 					</Heading>
 				</HStack>
 
-				<Stack fontSize="sm" divider={<Divider borderColor="border-subdued" />}>
+				<Stack divider={<Divider borderColor="border.subdued" />} spacing={1}>
+					<Text textStyle="subheading">Everfi from Blackbaud</Text>
 					<HStack>
-						<Text fontWeight="semibold" fontSize="md" textTransform="uppercase">
-							Everfi
-						</Text>
+						<Icon as={DotFilledIcon} aria-label="Current position" color="success" verticalAlign="middle" />
+						<Text>Principal Designer </Text>
+						<Spacer />
+						<Text textStyle="date">2024</Text>
 					</HStack>
 					<HStack>
-						<Icon
-							as={DotFilledIcon}
-							aria-label="Current position"
-							color="success"
-							ms={{ md: "-5" }}
-							verticalAlign="text-top"
-						/>
 						<Text>Principal Designer, Design Systems</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2022
-						</Text>
+						<Text textStyle="date">2022</Text>
 					</HStack>
 					<HStack>
 						<Text>Principal Designer, Platform UX</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2022
-						</Text>
+						<Text textStyle="date">2022</Text>
 					</HStack>
+					<Text textStyle="subheading">Everfi</Text>
 					<HStack>
 						<Text>Senior Interaction Designer</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2020
-						</Text>
+						<Text textStyle="date">2020</Text>
 					</HStack>
 					<HStack>
 						<Text>Interaction Designer</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2018
-						</Text>
+						<Text textStyle="date">2018</Text>
 					</HStack>
 					<HStack>
 						<Text>UX Designer</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2017
-						</Text>
+						<Text textStyle="date">2017</Text>
 					</HStack>
 					<HStack>
 						<Text>Product Design Intern</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2017
-						</Text>
+						<Text textStyle="date">2017</Text>
 					</HStack>
-
+				</Stack>
+				<Stack divider={<Divider borderColor="border.subdued" />} spacing={1}>
 					<Text fontWeight="semibold" fontSize="md" mt="1em">
 						NPR Labs
 					</Text>
 					<HStack>
 						<Text>Research & Development Design Intern</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2017
-						</Text>
+						<Text textStyle="date">2017</Text>
 					</HStack>
 					<HStack align="baseline">
 						<Text fontWeight="semibold" fontSize="md" mt="1em">
@@ -334,9 +292,7 @@ export const About: React.FC = () => {
 					<HStack>
 						<Text>UX/Design Intern</Text>
 						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2015
-						</Text>
+						<Text textStyle="date">2015</Text>
 					</HStack>
 				</Stack>
 			</LayoutGrid>
@@ -346,25 +302,23 @@ export const About: React.FC = () => {
 					<Icon as={BookmarkIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects" minW="200px">
 						Where{" "}
-						<Box as="span" color="text-subdued" fontWeight="normal">
+						<Box as="span" color="fg.subdued" fontWeight="normal">
 							(I learned things)
 						</Box>
 					</Heading>
 				</HStack>
 
-				<Stack fontSize="sm" divider={<Divider borderColor="border-subdued" />}>
+				<Stack fontSize="sm" divider={<Divider borderColor="border.subdued" />}>
 					<Text fontWeight="semibold" fontSize="md">
 						Maryland Institute College of Art
 					</Text>
 					<HStack>
 						<Text>Master's, UX Design</Text>
-						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2016–2017
-						</Text>
+						{/* <Spacer /> */}
+						<Text textStyle="date">2016–2017</Text>
 					</HStack>
 					<Text fontWeight="semibold" fontSize="md" mt="1em">
-						University of Michigan, Ann Arbor
+						University of Michigan
 					</Text>
 					<HStack align="end">
 						<Text>
@@ -372,10 +326,8 @@ export const About: React.FC = () => {
 							<br />
 							Minor, Art & Design
 						</Text>
-						<Spacer />
-						<Text color="text-subdued" fontFamily="mono">
-							2012–2016
-						</Text>
+						{/* <Spacer /> */}
+						<Text textStyle="date">2012–2016</Text>
 					</HStack>
 				</Stack>
 			</LayoutGrid>
@@ -385,12 +337,12 @@ export const About: React.FC = () => {
 					<Icon as={CursorArrowIcon} color="accent" />
 					<Heading as="h2" size="2xs" id="projects">
 						What{" "}
-						<Box as="span" color="text-subdued" fontWeight="normal">
+						<Box as="span" color="fg.subdued" fontWeight="normal">
 							(is this site?)
 						</Box>
 					</Heading>
 				</HStack>
-				<Stack gap={4} color="text-muted">
+				<Stack gap={4} color="fg.muted">
 					<Text>This is my little corner of the internet. If you're reading this now, I made it for you.</Text>
 					<Text>
 						You can also get here from{" "}
@@ -418,16 +370,16 @@ export const About: React.FC = () => {
 					<Text>
 						The current version of this site was built in React using{" "}
 						<LinkOut href="https://github.com/facebook/create-react-app" text="Create React App" /> and is deployed on
-						Github Pages. The icons come from <LinkOut href="https://www.radix-ui.com/icons" text="Radix Icons" />,
-						theming is handled by <LinkOut href="https://chakra-ui.com/" text="Chakra" />, and components are a mix of
-						Chakra's and some home cooking. My close and personal friends, StackOverflow and ChatGPT, helped to get{" "}
+						Github Pages. The icons come from <LinkOut href="https://www.radix-ui.com/icons" text="Radix" />, theming is
+						handled by <LinkOut href="https://chakra-ui.com/" text="Chakra" />, and components are a mix of Chakra's and
+						some home cooking. My buddy Claude helped me get{" "}
 						<LinkOut href="https://reactrouter.com/en/main" text="React Router" /> working.
 					</Text>
 					<Text>
 						{" "}
 						Headings use{" "}
 						<LinkOut href="https://www.fonts.com/font/urw-type-foundry/nimbus-sans" text="Nimbus Sans Extended" />, and
-						everything else is <LinkOut href="https://rsms.me/inter/" text="Inter" /> – because of course it is.
+						everything else is <LinkOut href="https://rsms.me/inter/" text="Inter" />, because of course it is.
 					</Text>
 				</Stack>
 			</LayoutGrid>

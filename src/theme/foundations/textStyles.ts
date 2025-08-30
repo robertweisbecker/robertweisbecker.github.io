@@ -1,9 +1,24 @@
-export default {
+export const textStyles = {
 	p1: {
 		fontSize: "md",
 		lineHeight: "",
 	},
+	subheading: {
+		fontSize: "md",
+		lineHeight: "2", // 24px
+		fontWeight: "medium",
+		letterSpacing: "tighter",
+		mt: "round(calc(1lh - 1em), 4px)",
+	},
+	date: {
+		fontFamily: "mono",
 
+		fontSize: "",
+		lineHeight: "inherit",
+		fontWeight: "normal",
+		fontVariantNumeric: "tabular-nums",
+		color: "fg.subdued",
+	},
 	xs: {
 		fontSize: "xs",
 		lineHeight: "1.125rem", // 18px
@@ -57,12 +72,12 @@ export default {
 		mx: "auto",
 		fontSize: "xs",
 		letterSpacing: "wide",
-		color: "text-subdued",
+		color: "fg.subdued",
 	},
 	divider: {
 		fontSize: "xs",
 		fontFamily: "heading",
-		color: "text-subdued",
+		color: "fg.subdued",
 		fontWeight: "bold",
 		textTransform: "uppercase",
 		lineHeight: "1rem",
@@ -74,12 +89,12 @@ export default {
 		lineHeight: "taller",
 		fontWeight: "bold",
 		fontFamily: "heading",
-		color: "text-subdued",
+		color: "fg.subdued",
 	},
 	subtitle: {
 		fontFamily: "heading",
 		fontWeight: "light",
-		color: "text-subdued",
+		color: "fg.subdued",
 		fontSize: "3xl",
 		lineHeight: "shorter",
 		letterSpacing: "tightest",

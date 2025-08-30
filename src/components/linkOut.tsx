@@ -10,6 +10,7 @@ type LinkOutProps = {
 	text: string;
 	href: string;
 	src?: string;
+	inline?: boolean;
 };
 
 // Extend the Chakra UI component props (BoxProps in this case)
@@ -18,41 +19,45 @@ type props = LinkOutProps & LinkProps;
 
 // 3. Component Definition
 
-export const LinkOut: React.FC<props> = ({ text, href, src, ...rest }) => {
+export const LinkOut: React.FC<props> = ({ text, href, src, inline, ...rest }) => {
 	return (
-		<Box display="inline-block" fontSize="1em" verticalAlign="bottom" className="group">
-			<Flex gap={1} align="center" h="calc(1em * lineHeights.base)">
+		<Box as="span" display="inline-block" fontSize="inherit" verticalAlign="bottom" className="group">
+			<Flex gap={1} align="end" minH="1lh">
 				{src && (
-					<Image
-						src={src}
-						alt={`${text} Logo`}
-						h="1.25em"
-						w="auto"
-						boxShadow="inner"
-						rounded="lg"
-						borderWidth=".5px"
-						borderColor="border-subdued"
-						bg="surface-frosted"
-						p="0.5"
-						mx={0.5}
-					/>
+					<>
+						{" "}
+						<Image
+							src={src}
+							alt={`${text} Logo`}
+							h="1em"
+							w="auto"
+							boxShadow="inner"
+							rounded="0"
+							outline=".5px solid"
+							outlineColor="red"
+							bg="bg.frosted"
+							px="0.5"
+							me={0.5}
+						/>
+					</>
 				)}
 				<Link href={href} {...rest} colorScheme="brand" isExternal rel="noopener noreferrer">
-					{" "}
 					{text}{" "}
-					<Icon
-						color="inherit"
-						alignSelf="center"
-						as={ArrowTopRightIcon}
-						transitionProperty="common"
-						transitionDuration="fast"
-						transitionTimingFunction="ease-out"
-						opacity=".5"
-						_groupHover={{
-							transform: "translateY(-2px) translateX(2px)",
-						}}
-					/>
-				</Link>{" "}
+					{!inline && (
+						<Icon
+							color="inherit"
+							alignSelf="center"
+							as={ArrowTopRightIcon}
+							transitionProperty="common"
+							transitionDuration="fast"
+							transitionTimingFunction="ease-out"
+							opacity=".5"
+							_groupHover={{
+								transform: "translateY(-2px) translateX(2px)",
+							}}
+						/>
+					)}{" "}
+				</Link>
 			</Flex>
 		</Box>
 	);

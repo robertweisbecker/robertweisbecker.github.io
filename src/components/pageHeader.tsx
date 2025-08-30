@@ -2,9 +2,9 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import { NavHashLink, genericHashLink } from "react-router-hash-link";
 import {
-	Spacer,
+	// Spacer,
 	Box,
-	Image,
+	// Image,
 	Heading,
 	Text,
 	Stack,
@@ -17,10 +17,10 @@ import {
 	ListItem,
 	GridItem,
 } from "@chakra-ui/react";
-import { ArrowTopRightIcon, DrawingPinIcon } from "@radix-ui/react-icons";
+// import { ArrowTopRightIcon, DrawingPinIcon } from "@radix-ui/react-icons";
 import { pageData } from "../data/pages";
 import { LayoutGrid } from "./layout";
-import { BackButton } from "./backButton";
+// import { BackButton } from "./backButton";
 import { LinkOut } from "./linkOut";
 
 type PageData = {
@@ -71,7 +71,7 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 				<Stack gap={4} mt={5}>
 					<VStack align="start" spacing={0}>
 						<Text textStyle="title-sm">Role</Text>
-						<Text fontSize="sm">{page.role}</Text>
+						<Text>{page.role}</Text>
 					</VStack>
 
 					<VStack align="start" spacing={0}>
@@ -79,17 +79,17 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 						<UnorderedList spacing="1" ms="0">
 							{page.team &&
 								page.team.map((member) => (
-									<ListItem key={member.name} display="flex" alignItems="center" fontSize="sm" gap={0} flexWrap="wrap">
+									<ListItem key={member.name} display="flex" alignItems="center" gap={0} flexWrap="wrap">
 										{member.url ? (
 											<LinkOut href={member.url} text={member.name} />
 										) : (
-											<Box as="span" fontWeight="semibold">
+											<Box as="span" fontWeight="semibold" color="fg.emphasized">
 												{member.name}
 											</Box>
 										)}
 										{member.role && (
-											<Text ms="1" color="text-subdued">
-												{member.role}
+											<Text ms="1" color="fg.muted">
+												∙ {member.role}
 											</Text>
 										)}
 									</ListItem>
@@ -98,9 +98,7 @@ const PageHeader = ({ pageKey }: PageHeaderProps) => {
 					</VStack>
 					<VStack align="start" spacing={0}>
 						<Text textStyle="title-sm">When</Text>
-						<Text fontSize="sm" fontFamily="mono">
-							{page.date}
-						</Text>
+						<Text textStyle="date">{page.date}</Text>
 					</VStack>
 				</Stack>
 				{/* <Text fontSize="xl" color="fg.subdued" mb={5}>

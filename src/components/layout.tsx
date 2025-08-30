@@ -32,8 +32,8 @@ const defaultLayout = { variant: "twoUp" };
 
 export const LayoutGrid: React.FC<Props> = ({
 	variant = "twoUp",
-	columnGap = { base: 8, md: 12 },
-	rowGap = { base: 4, sm: 10, md: 12 },
+	columnGap = { base: 6, md: 8 },
+	rowGap = { base: 4, sm: 8, md: 10 },
 	children,
 	...rest
 }) => {
