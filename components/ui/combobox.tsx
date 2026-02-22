@@ -11,7 +11,7 @@ import {
   InputGroupButton,
   InputGroupInput,
 } from "@/components/ui/input-group"
-import { RiArrowDownSLine, RiCloseLine, RiCheckLine } from "@remixicon/react"
+import { IconChevronDown, IconX, IconCheck } from "@tabler/icons-react"
 
 const Combobox = ComboboxPrimitive.Root
 
@@ -31,7 +31,7 @@ function ComboboxTrigger({
       {...props}
     >
       {children}
-      <RiArrowDownSLine className="text-muted-foreground size-4 pointer-events-none" />
+      <IconChevronDown className="text-muted-foreground size-4 pointer-events-none" />
     </ComboboxPrimitive.Trigger>
   )
 }
@@ -44,7 +44,7 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
       className={cn(className)}
       {...props}
     >
-      <RiCloseLine className="pointer-events-none" />
+      <IconX className="pointer-events-none" />
     </ComboboxPrimitive.Clear>
   )
 }
@@ -149,7 +149,7 @@ function ComboboxItem({
       <ComboboxPrimitive.ItemIndicator
         render={<span className="pointer-events-none absolute end-2 flex size-4 items-center justify-center" />}
       >
-        <RiCheckLine className="pointer-events-none" />
+        <IconCheck className="pointer-events-none" />
       </ComboboxPrimitive.ItemIndicator>
     </ComboboxPrimitive.Item>
   )
@@ -245,7 +245,7 @@ function ComboboxChip({
           className="-ms-1 opacity-50 hover:opacity-100"
           data-slot="combobox-chip-remove"
         >
-          <RiCloseLine className="pointer-events-none" />
+          <IconX className="pointer-events-none" />
         </ComboboxPrimitive.ChipRemove>
       )}
     </ComboboxPrimitive.Chip>

@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 import {
-  RiUserLine,
-  RiCameraLine,
-  RiMagicLine,
-  RiBriefcaseLine,
-  RiBookmarkLine,
-  RiCursorLine,
-  RiMailLine,
-  RiArticleLine,
-  RiLinkedinBoxLine,
-  RiGithubLine,
-} from "@remixicon/react";
+  IconUser,
+  IconCamera,
+  IconWand,
+  IconBriefcase,
+  IconBookmark,
+  IconPointer,
+  IconMail,
+  IconArticle,
+  IconBrandLinkedin,
+  IconBrandGithub,
+} from "@tabler/icons-react";
 import { buttonVariants } from "@/components/ui/button";
 import { LayoutGrid } from "@/components/layout-grid";
 import { LinkOut } from "@/components/link-out";
@@ -28,7 +28,7 @@ export default function About() {
 
       <LayoutGrid variant="oneThird">
         <div className="flex items-center gap-2">
-          <RiUserLine className="size-4 text-primary" />
+          <IconUser className="size-4 text-primary" />
           <Heading level={6}>Who</Heading>
         </div>
         <div className="flex flex-col gap-4">
@@ -55,19 +55,19 @@ export default function About() {
           <p>You can also find or reach me here:</p>
           <div className="mb-8 flex flex-wrap gap-4">
             <a href="mailto:yo@bob.fyi" className={buttonVariants({ variant: "outline", size: "sm" })}>
-              <RiMailLine className="size-3.5" />
+              <IconMail className="size-3.5" />
               Email
             </a>
             <a href="https://read.cv/weisbecker" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline", size: "sm" })}>
-              <RiArticleLine className="size-3.5 rotate-20" />
+              <IconArticle className="size-3.5 rotate-20" />
               read.cv
             </a>
             <a href="https://www.linkedin.com/in/robertweisbecker/" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline", size: "sm" })}>
-              <RiLinkedinBoxLine className="size-3.5" />
+              <IconBrandLinkedin className="size-3.5" />
               LinkedIn
             </a>
             <a href="https://github.com/robertweisbecker" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline", size: "sm" })}>
-              <RiGithubLine className="size-3.5" />
+              <IconBrandGithub className="size-3.5" />
               Github
             </a>
           </div>
@@ -78,7 +78,7 @@ export default function About() {
 
       <LayoutGrid variant="oneThird">
         <div className="mb-5 flex items-center gap-2">
-          <RiCameraLine className="size-4 text-primary" />
+          <IconCamera className="size-4 text-primary" />
           <Heading level={6}>
             What{" "}
             <span className="font-normal text-muted-foreground">
@@ -100,7 +100,7 @@ export default function About() {
 
       <LayoutGrid variant="oneThird">
         <div className="mb-5 flex items-center gap-2">
-          <RiMagicLine className="size-4 text-primary" />
+          <IconWand className="size-4 text-primary" />
           <Heading level={6}>
             What
             <span className="font-normal text-muted-foreground">
@@ -177,7 +177,7 @@ export default function About() {
 
       <LayoutGrid variant="oneThird">
         <div className="mb-5 flex items-center gap-2">
-          <RiBriefcaseLine className="size-4 text-primary" />
+          <IconBriefcase className="size-4 text-primary" />
           <Heading level={6}>
             Where{" "}
             <span className="font-normal text-muted-foreground">
@@ -238,7 +238,7 @@ export default function About() {
 
       <LayoutGrid variant="oneThird">
         <div className="mb-5 flex items-center gap-2">
-          <RiBookmarkLine className="size-4 text-primary" />
+          <IconBookmark className="size-4 text-primary" />
           <Heading level={6}>
             Where{" "}
             <span className="font-normal text-muted-foreground">
@@ -274,7 +274,7 @@ export default function About() {
 
       <LayoutGrid variant="oneThird">
         <div className="mb-5 flex items-center gap-2">
-          <RiCursorLine className="size-4 text-primary" />
+          <IconPointer className="size-4 text-primary" />
           <Heading level={6}>
             What{" "}
             <span className="font-normal text-muted-foreground">

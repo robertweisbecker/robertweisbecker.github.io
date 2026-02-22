@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { ImageModal } from "@/components/image-modal";
-import { cn } from "@/lib/utils";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface ImageToggleProps {
 	before: string;
@@ -12,29 +11,18 @@ interface ImageToggleProps {
 }
 
 export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After" }: ImageToggleProps) {
-	const [active, setActive] = useState<"after" | "before">("after");
-
 	return (
-		<div>
-			<div className="mb-2 flex gap-1">
-				<button
-					onClick={() => setActive("after")}
-					className={cn(
-						"rounded-md px-3 py-1.5 text-sm transition-colors",
-						active === "after" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
-					)}>
-					{tab2}
-				</button>
-				<button
-					onClick={() => setActive("before")}
-					className={cn(
-						"rounded-md px-3 py-1.5 text-sm transition-colors",
-						active === "before" ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
-					)}>
-					{tab1}
-				</button>
-			</div>
-			<ImageModal src={active === "after" ? after : before} />
-		</div>
+		<Tabs className="justify-center">
+			<TabsList className="mx-auto">
+				<TabsTrigger value="before">{tab1}</TabsTrigger>
+				<TabsTrigger value="after">{tab2}</TabsTrigger>
+			</TabsList>
+			<TabsContent value="after" keepMounted>
+				<ImageModal src={after} />
+			</TabsContent>
+			<TabsContent value="before" keepMounted>
+				<ImageModal src={before} />
+			</TabsContent>
+		</Tabs>
 	);
 }

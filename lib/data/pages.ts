@@ -68,12 +68,12 @@ export const pageData = {
 		title: "NPR Labs",
 		description: "Designing responsive and performant web app for NPR affiliate stations",
 		subtitle: "Mapping & Population System",
-		role: "UI/UX Designer",
+		role: "Product Design",
 		team: [
 			{
 				name: "Christian Wood",
 				role: "Developer",
-				url: "https://christianwood.net/",
+				url: "https://www.linkedin.com/in/christian-wood-2542273b/",
 			},
 			{
 				name: "Alice Goldfarb",
@@ -176,32 +176,19 @@ export const pageData = {
 		title: "Furnace Design System",
 		subtitle: "An accessible, themeable, and scalable design system for e-learning products",
 		description: "lorem",
-		role: "Lead Designer",
+		role: "Design Lead",
 		team: [
 			{
 				name: "Kevin Grolton-Francisco",
 				role: "Product Manager",
 			},
 			{
-				name: "Sadeep Nonis",
-				role: "Project Manager",
-				// url: "https://www.linkedin.com/in/sadeepnonis/details/experience/",
-			},
-			{
 				name: "Shannon Urban",
 				role: "Director, Accessibility",
 			},
 			{
-				name: "Carlos Henriquez",
-				role: "Dev Lead",
-			},
-			{
-				name: "Mpho Ramataboee",
-				role: "Engineering Lead",
-				// url: "https://www.linkedin.com/in/mpho-ramataboee",
-			},
-			{
-				role: "+ many others",
+				name: "Carlos Henriquez & Mpho Ramataboee",
+				role: "Engineering Leads",
 			},
 		],
 		date: "2019 – 2022",

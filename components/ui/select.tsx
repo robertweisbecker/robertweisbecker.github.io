@@ -4,7 +4,7 @@ import * as React from "react"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
 
 import { cn } from "@/lib/utils"
-import { RiArrowDownSLine, RiCheckLine, RiArrowUpSLine } from "@remixicon/react"
+import { IconChevronDown, IconCheck, IconChevronUp } from "@tabler/icons-react"
 
 const Select = SelectPrimitive.Root
 
@@ -49,7 +49,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         render={
-          <RiArrowDownSLine className="text-muted-foreground size-4 pointer-events-none" />
+          <IconChevronDown className="text-muted-foreground size-4 pointer-events-none" />
         }
       />
     </SelectPrimitive.Trigger>
@@ -128,7 +128,7 @@ function SelectItem({
       <SelectPrimitive.ItemIndicator
         render={<span className="pointer-events-none absolute end-2 flex size-4 items-center justify-center" />}
       >
-        <RiCheckLine className="pointer-events-none" />
+        <IconCheck className="pointer-events-none" />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   )
@@ -157,7 +157,7 @@ function SelectScrollUpButton({
       className={cn("bg-popover z-10 flex cursor-default items-center justify-center py-1 [&_svg:not([class*='size-'])]:size-4 top-0 w-full", className)}
       {...props}
     >
-      <RiArrowUpSLine
+      <IconChevronUp
       />
     </SelectPrimitive.ScrollUpArrow>
   )
@@ -173,7 +173,7 @@ function SelectScrollDownButton({
       className={cn("bg-popover z-10 flex cursor-default items-center justify-center py-1 [&_svg:not([class*='size-'])]:size-4 bottom-0 w-full", className)}
       {...props}
     >
-      <RiArrowDownSLine
+      <IconChevronDown
       />
     </SelectPrimitive.ScrollDownArrow>
   )

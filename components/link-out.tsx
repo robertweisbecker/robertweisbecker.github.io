@@ -1,4 +1,4 @@
-import { RiExternalLinkLine } from "@remixicon/react";
+import { IconExternalLink } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 interface LinkOutProps {
@@ -24,7 +24,7 @@ export function LinkOut({ text, href, src, className }: LinkOutProps) {
 				rel="noopener noreferrer"
 				className="inline-flex items-center gap-0.5 underline underline-offset-2 decoration-1 font-medium text-primary">
 				{text}
-				<RiExternalLinkLine className="inline size-[1em] transition-transform group-hover/link:-translate-y-px group-hover/link:translate-x-0.5" />
+				<IconExternalLink className="inline size-[1em] transition-transform group-hover/link:-translate-y-px group-hover/link:translate-x-0.5" />
 			</a>
 		</span>
 	);
