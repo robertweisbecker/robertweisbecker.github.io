@@ -28,9 +28,7 @@ type PageHeaderProps = PageHeaderWithFrontmatter | PageHeaderWithPageKey;
 
 export function PageHeader(props: PageHeaderProps) {
 	const page: PageData | undefined =
-		"frontmatter" in props && props.frontmatter
-			? props.frontmatter
-			: typedPageData[props.pageKey!];
+		"frontmatter" in props && props.frontmatter ? props.frontmatter : typedPageData[props.pageKey!];
 
 	if (!page) {
 		return (
@@ -41,12 +39,10 @@ export function PageHeader(props: PageHeaderProps) {
 	}
 
 	return (
-		<div className="mb-10 flex w-full items-start gap-16">
-			<div className="flex-1 text-balance pt-2 text-3xl tracking-tight">
+		<div className="mb-10 flex w-full items-start gap-16 max-sm:flex-col">
+			<div className="flex-1 text-pretty pt-2 text-3xl tracking-tight">
 				<h1 className="inline font-semibold">{page.title} </h1>
-				<span className="inline text-muted-foreground">
-					{page.subtitle}
-				</span>
+				<span className="inline text-muted-foreground">{page.subtitle}</span>
 			</div>
 			<aside className="flex flex-col gap-3 text-xs">
 				<div className="flex flex-col">
@@ -58,25 +54,13 @@ export function PageHeader(props: PageHeaderProps) {
 						<p className="text-muted-foreground">Team</p>
 						<ul className="flex flex-col gap-1">
 							{page.team.map((member) => (
-								<li
-									key={member.name ?? member.role}
-									className="flex flex-wrap items-center gap-2"
-								>
+								<li key={member.name ?? member.role} className="flex flex-wrap items-center gap-2">
 									{member.url ? (
-										<LinkOut
-											href={member.url}
-											text={member.name ?? ""}
-										/>
+										<LinkOut href={member.url} text={member.name ?? ""} />
 									) : (
-										<span className="font-medium">
-											{member.name}
-										</span>
+										<span className="font-medium">{member.name}</span>
 									)}
-									{member.role && (
-										<span className="text-muted-foreground">
-											{member.role}
-										</span>
-									)}
+									{member.role && <span className="text-muted-foreground">{member.role}</span>}
 								</li>
 							))}
 						</ul>

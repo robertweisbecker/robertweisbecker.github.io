@@ -44,15 +44,21 @@ export function Header() {
 				</Button>
 				<Separator className="mx-1 h-4 my-auto" orientation="vertical" />
 
-				<Button variant="ghost" size="sm" render={<Link href="/about" />} nativeButton={false}>
+				<Button
+					variant="ghost"
+					size="sm"
+					render={<Link href="/about" />}
+					nativeButton={false}
+					aria-current={pathname === "/about" ? "true" : "false"}
+					className="max-md:hidden text-muted-foreground aria-current:bg-accent/64 aria-current:text-accent-foreground">
 					About
 				</Button>
-				<Button variant="ghost" size="sm" render={<Link href="/components" />} nativeButton={false}>
+				<Button variant="ghost" size="sm" render={<Link href="/components" />} nativeButton={false} className="hidden">
 					Components
 				</Button>
 
 				<DropdownMenu open={open} onOpenChange={setOpen}>
-					<DropdownMenuTrigger render={<Button variant="ghost" size="sm" />}>
+					<DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="text-muted-foreground">
 						<span className="hidden md:block">Work</span>
 						<span className="md:hidden">Menu</span>
 						<IconChevronDown className={cn("transition-transform", open && "rotate-180")} data-icon="inline-end" />
@@ -61,18 +67,23 @@ export function Header() {
 						<DropdownMenuGroup>
 							<DropdownMenuLabel>Projects</DropdownMenuLabel>
 							{projects.map((project) => (
-								<DropdownMenuItem key={project.id} render={<Link href={project.path} />} nativeButton={false}>
+								<DropdownMenuItem
+									key={project.id}
+									render={<Link href={project.path} />}
+									nativeButton={false}
+									aria-current={pathname === project.path ? "true" : "false"}
+									className="aria-current:bg-accent/64">
 									{project.nickname}
 								</DropdownMenuItem>
 							))}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator className="md:hidden" />
 
-						<DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="sm:hidden">
+						<DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="md:hidden">
 							<IconHome />
 							Home
 						</DropdownMenuItem>
-						<DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="sm:hidden">
+						<DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="md:hidden">
 							<IconInfoCircle />
 							About
 						</DropdownMenuItem>
