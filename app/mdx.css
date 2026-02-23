@@ -1,0 +1,313 @@
+/*
+Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.css
+ */
+
+.prose {
+	--prose-body: var(--muted-foreground);
+	--prose-headings: var(--foreground);
+	--prose-links: var(--primary);
+	--prose-bold: var(--foreground);
+	--prose-code: var(--foreground);
+	--prose-code-bg: var(--muted);
+	--prose-quotes: var(--foreground);
+	--prose-quote-borders: var(--border);
+	--prose-captions: var(--muted-foreground);
+	--prose-hr: var(--border);
+	--prose-th-borders: var(--border);
+	--prose-td-borders: var(--border);
+
+	color: var(--prose-body);
+	max-width: 42rem;
+	font-family: var(--font-sans);
+}
+
+/* --- Paragraphs --- */
+.prose p {
+	margin-top: 1.25em;
+	margin-bottom: 1.25em;
+}
+
+/* --- Headings --- */
+.prose h1 {
+	color: var(--prose-headings);
+	font-weight: 600;
+	font-size: 2em;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+.prose h2 {
+	color: var(--prose-headings);
+	font-weight: 600;
+	font-size: 1.5em;
+	margin-top: 2em;
+	margin-bottom: 1em;
+	line-height: 1.33;
+	letter-spacing: -0.02em;
+}
+
+.prose h3 {
+	color: var(--prose-headings);
+	font-weight: 500;
+	font-size: 1.25em;
+	margin-top: 1.6em;
+	margin-bottom: 0.6em;
+	line-height: 1.6;
+}
+
+.prose h4 {
+	color: var(--prose-headings);
+	font-weight: 600;
+	margin-top: 1.5em;
+	margin-bottom: 0.5em;
+	line-height: 1.5;
+}
+
+.prose :is(h2, h3, h4) + * {
+	margin-top: 0;
+}
+
+/* --- Anchor links on headings --- */
+.prose :is(h2, h3, h4) {
+	scroll-margin-top: 4rem;
+}
+.prose :is(h2, h3, h4) > a.anchor {
+	text-decoration: none;
+	color: var(--prose-headings);
+}
+
+/* --- Links --- */
+.prose p > a {
+	color: var(--prose-links);
+	font-weight: 500;
+	:not([data-component="link-out"]) {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		text-decoration-thickness: 1px;
+	}
+}
+
+/* --- Bold --- */
+.prose strong {
+	color: var(--prose-bold);
+	font-weight: 600;
+}
+
+/* --- Lists --- */
+.prose ol {
+	list-style-type: decimal;
+	margin-top: 1.25em;
+	margin-bottom: 1.25em;
+	padding-inline-start: 1.625em;
+}
+.prose ul {
+	list-style-type: disc;
+	margin-top: 1.25em;
+	margin-bottom: 1.25em;
+	padding-inline-start: 1.625em;
+}
+.prose li {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+.prose :is(ol, ul) > li {
+	padding-inline-start: 0.375em;
+}
+.prose :is(ul, ol) :is(ul, ol) {
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+}
+
+/* --- Blockquotes --- */
+.prose blockquote {
+	font-style: italic;
+	font-family: var(--font-serif);
+	color: var(--prose-quotes);
+	font-size: var(--font-size-xl);
+	line-height: var(--line-height--text-xl);
+	border-inline-start-width: 0.25rem;
+	border-inline-start-color: var(--prose-quote-borders);
+	margin-top: 1.6em;
+	margin-bottom: 1.6em;
+	padding-inline-start: 1em;
+}
+/* --- Inline code --- */
+.prose :not(pre) > code {
+	color: var(--prose-code);
+	background: var(--prose-code-bg);
+	font-size: 0.875em;
+	font-weight: 500;
+	border-radius: 0.375rem;
+	padding: 0.2em 0.4em;
+}
+
+/* --- Code blocks --- */
+.prose pre {
+	overflow-x: auto;
+	font-size: 0.875em;
+	line-height: 1.7;
+	margin-top: 1.7em;
+	margin-bottom: 1.7em;
+	border-radius: 0.75rem;
+	padding: 0.85em 1.15em;
+	background: var(--prose-code-bg);
+}
+.prose pre code {
+	background: transparent;
+	border-width: 0;
+	border-radius: 0;
+	padding: 0;
+	font-weight: inherit;
+	color: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+/* --- Horizontal rules --- */
+.prose hr {
+	border-color: var(--prose-hr);
+	margin-top: 3em;
+	margin-bottom: 3em;
+}
+
+/* --- Images --- */
+.prose [data-media] {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+.prose [data-media] img {
+	width: 100%;
+}
+
+/* --- Media Chrome video player --- */
+media-controller {
+	--media-range-track-height: 4px;
+	--media-range-track-border-radius: 2px;
+	--media-control-background: rgb(0 0 0 / 0.6);
+	--media-control-hover-background: rgb(0 0 0 / 0.75);
+	--media-primary-color: #fff;
+	--media-secondary-color: rgb(255 255 255 / 0.8);
+}
+media-control-bar {
+	border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+	overflow: hidden;
+}
+
+/* --- Figures & captions --- */
+.prose figcaption {
+	color: var(--prose-captions);
+	font-size: 0.875em;
+	line-height: 1.4;
+	margin-top: 0.85em;
+}
+.prose figure > * {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* --- Tables --- */
+.prose table {
+	width: 100%;
+	table-layout: auto;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	font-size: 0.875em;
+	line-height: 1.7;
+}
+.prose thead {
+	border-bottom-width: 1px;
+	border-bottom-color: var(--prose-th-borders);
+}
+.prose thead th {
+	color: var(--prose-headings);
+	font-weight: 600;
+	vertical-align: bottom;
+	padding-inline-end: 0.57em;
+	padding-bottom: 0.57em;
+	padding-inline-start: 0.57em;
+}
+.prose tbody tr {
+	border-bottom-width: 1px;
+	border-bottom-color: var(--prose-td-borders);
+}
+.prose tbody tr:last-child {
+	border-bottom-width: 0;
+}
+.prose tbody td {
+	vertical-align: baseline;
+}
+.prose tfoot {
+	border-top-width: 1px;
+	border-top-color: var(--prose-th-borders);
+}
+.prose tfoot td {
+	vertical-align: top;
+}
+.prose :is(th, td) {
+	text-align: start;
+	padding-top: 0.57em;
+	padding-inline-end: 0.57em;
+	padding-bottom: 0.57em;
+	padding-inline-start: 0.57em;
+}
+.prose :is(thead th, tbody td, tfoot td):first-child {
+	padding-inline-start: 0;
+}
+.prose :is(thead th, tbody td, tfoot td):last-child {
+	padding-inline-end: 0;
+}
+
+/* --- Task lists (GFM) --- */
+.prose ul:has(> li > input[type="checkbox"]) {
+	list-style-type: none;
+	padding-inline-start: 0;
+}
+.prose li > input[type="checkbox"] {
+	margin-inline-end: 0.5em;
+}
+
+/* --- Strikethrough (GFM) --- */
+.prose del {
+	opacity: 0.65;
+}
+
+/* --- First/last child margin collapse --- */
+.prose > :first-child {
+	margin-top: 0;
+}
+.prose > :last-child {
+	margin-bottom: 0;
+}
+
+/*
+ * Escape hatch: .not-prose elements opt out of prose typography.
+ * Only resets the prose-specific properties, not all styles.
+ */
+.prose > .not-prose {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+.prose .not-prose p,
+.prose .not-prose h2,
+.prose .not-prose h3,
+.prose .not-prose h4,
+.prose .not-prose ul,
+.prose .not-prose ol,
+.prose .not-prose li,
+.prose .not-prose blockquote,
+.prose .not-prose pre,
+.prose .not-prose hr,
+.prose .not-prose table,
+.prose .not-prose img {
+	margin: 0;
+	padding: 0;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	letter-spacing: inherit;
+	color: inherit;
+	list-style-type: none;
+	border: none;
+}

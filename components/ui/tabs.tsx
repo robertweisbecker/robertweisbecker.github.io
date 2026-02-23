@@ -17,11 +17,11 @@ function Tabs({ className, orientation = "horizontal", ...props }: TabsPrimitive
 }
 
 const tabsListVariants = cva(
-	"relative z-0 rounded-lg p-[3px] group-data-horizontal/tabs:h-10 data-[variant=line]:rounded-none group/tabs-list text-muted-foreground inline-flex w-fit items-center justify-center group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col",
+	"relative z-0 rounded-lg p-0.5 group-data-horizontal/tabs:h-10 data-[variant=line]:rounded-none group/tabs-list text-muted-foreground inline-flex w-fit items-center justify-center group-data-vertical/tabs:h-fit group-data-vertical/tabs:flex-col",
 	{
 		variants: {
 			variant: {
-				default: "bg-muted",
+				default: "bg-muted gap-0.5",
 				line: "gap-1 bg-transparent",
 			},
 		},
@@ -50,7 +50,7 @@ function TabsList({
 					"-translate-y-(--active-tab-bottom) absolute bottom-0 left-0 h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) transition-[width,translate] duration-200 ease-in-out",
 					variant === "line"
 						? "data-[orientation=vertical]:-translate-x-px z-10 bg-primary data-[orientation=horizontal]:h-0.5 data-[orientation=vertical]:w-0.5 data-[orientation=horizontal]:translate-y-px"
-						: "-z-1 rounded-md bg-card shadow-sm/5 outline outline-border dark:-outline-offset-1 dark:bg-input",
+						: "-z-1 rounded-md bg-popover shadow-sm/5 outline outline-border dark:-outline-offset-1",
 				)}
 			/>
 		</TabsPrimitive.List>

@@ -6,6 +6,7 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { IconX } from "@tabler/icons-react";
+import { ScrollArea } from "./scroll-area";
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
 	return <DialogPrimitive.Root data-slot="dialog" {...props} />;
@@ -28,7 +29,7 @@ function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) 
 		<DialogPrimitive.Backdrop
 			data-slot="dialog-overlay"
 			className={cn(
-				"data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs fixed inset-0 isolate z-50",
+				"data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/10 duration-100 dark:bg-black/60 supports-backdrop-filter:backdrop-blur-xs fixed inset-0 isolate z-50",
 				className,
 			)}
 			{...props}
@@ -47,23 +48,27 @@ function DialogContent({
 	return (
 		<DialogPortal>
 			<DialogOverlay />
-			<DialogPrimitive.Popup
-				data-slot="dialog-content"
-				className={cn(
-					"bg-background data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/10 grid max-w-[calc(100%-2rem)] gap-4 rounded-xl p-4 text-sm ring-1 duration-100 sm:max-w-2xl fixed top-1/2 inset-s-1/2 z-50 w-full -translate-x-1/2 rtl:translate-x-1/2 -translate-y-1/2 outline-none shadow-xl",
-					className,
-				)}
-				{...props}>
-				{children}
-				{showCloseButton && (
-					<DialogPrimitive.Close
-						data-slot="dialog-close"
-						render={<Button variant="secondary" className="rounded-full absolute top-2 inset-e-2" size="icon" />}>
-						<IconX />
-						<span className="sr-only">Close</span>
-					</DialogPrimitive.Close>
-				)}
-			</DialogPrimitive.Popup>
+			<DialogPrimitive.Viewport className="fixed inset-0 z-50">
+				<ScrollArea className="box-border size-full overscroll-contain mx-auto" style={{ position: undefined }}>
+					<DialogPrimitive.Popup
+						data-slot="dialog-content"
+						className={cn(
+							"bg-popover relative my-12 data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/10 grid gap-4 rounded-2xl p-4 text-sm ring-1 duration-100 sm:max-w-2xl  z-50 w-full mx-auto outline outline-border dark:-outline-offset-1 shadow-xl max-w-[calc(100%-2rem)]",
+							className,
+						)}
+						{...props}>
+						{children}
+						{showCloseButton && (
+							<DialogPrimitive.Close
+								data-slot="dialog-close"
+								render={<Button variant="ghost" className="bg-popover/50 absolute top-2 inset-e-2" size="icon-sm" />}>
+								<IconX />
+								<span className="sr-only">Close</span>
+							</DialogPrimitive.Close>
+						)}
+					</DialogPrimitive.Popup>
+				</ScrollArea>
+			</DialogPrimitive.Viewport>
 		</DialogPortal>
 	);
 }
@@ -84,7 +89,7 @@ function DialogFooter({
 		<div
 			data-slot="dialog-footer"
 			className={cn(
-				"bg-muted/50 -mx-4 -mb-4 rounded-b-xl border-t p-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
+				"bg-muted -mx-4 -mb-4 rounded-b-xl border-t p-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
 				className,
 			)}
 			{...props}>

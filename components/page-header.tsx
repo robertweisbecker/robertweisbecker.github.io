@@ -1,6 +1,6 @@
 import { pageData } from "@/lib/data/pages";
 import { LinkOut } from "@/components/link-out";
-import { Heading } from "@/components/ui/heading";
+import type { ProjectFrontmatter } from "@/lib/types";
 
 type PageData = {
 	title: string;
@@ -14,40 +14,69 @@ type PageData = {
 
 const typedPageData: Record<string, PageData> = pageData;
 
-export function PageHeader({ pageKey }: { pageKey: string }) {
-	const page = typedPageData[pageKey];
+interface PageHeaderWithFrontmatter {
+	frontmatter: ProjectFrontmatter;
+	pageKey?: never;
+}
+
+interface PageHeaderWithPageKey {
+	pageKey: string;
+	frontmatter?: never;
+}
+
+type PageHeaderProps = PageHeaderWithFrontmatter | PageHeaderWithPageKey;
+
+export function PageHeader(props: PageHeaderProps) {
+	const page: PageData | undefined =
+		"frontmatter" in props && props.frontmatter
+			? props.frontmatter
+			: typedPageData[props.pageKey!];
 
 	if (!page) {
 		return (
 			<div className="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-destructive">
-				Page data not found for key: {pageKey}
+				Page data not found for key: {props.pageKey}
 			</div>
 		);
 	}
 
 	return (
-		<div className="mb-10 flex items-start gap-16 w-full">
-			<div className="flex-1 text-balance text-3xl tracking-tight pt-2">
+		<div className="mb-10 flex w-full items-start gap-16">
+			<div className="flex-1 text-balance pt-2 text-3xl tracking-tight">
 				<h1 className="inline font-semibold">{page.title} </h1>
-				<span className="inline text-muted-foreground">{page.subtitle}</span>
+				<span className="inline text-muted-foreground">
+					{page.subtitle}
+				</span>
 			</div>
 			<aside className="flex flex-col gap-3 text-xs">
 				<div className="flex flex-col">
 					<p className="text-muted-foreground">Role</p>
-					<p className="">{page.role}</p>
+					<p>{page.role}</p>
 				</div>
 				{page.team && page.team.length > 0 && (
-					<div className="flex gap-1 flex-col">
+					<div className="flex flex-col gap-1">
 						<p className="text-muted-foreground">Team</p>
-						<ul className="flex gap-1 flex-col">
+						<ul className="flex flex-col gap-1">
 							{page.team.map((member) => (
-								<li key={member.name ?? member.role} className="flex flex-wrap items-center gap-2">
+								<li
+									key={member.name ?? member.role}
+									className="flex flex-wrap items-center gap-2"
+								>
 									{member.url ? (
-										<LinkOut href={member.url} text={member.name ?? ""} />
+										<LinkOut
+											href={member.url}
+											text={member.name ?? ""}
+										/>
 									) : (
-										<span className="font-medium">{member.name}</span>
+										<span className="font-medium">
+											{member.name}
+										</span>
 									)}
-									{member.role && <span className="text-muted-foreground">{member.role}</span>}
+									{member.role && (
+										<span className="text-muted-foreground">
+											{member.role}
+										</span>
+									)}
 								</li>
 							))}
 						</ul>
@@ -56,7 +85,7 @@ export function PageHeader({ pageKey }: { pageKey: string }) {
 				{page.date && (
 					<div>
 						<p className="text-muted-foreground">When</p>
-						<p className="">{page.date}</p>
+						<p>{page.date}</p>
 					</div>
 				)}
 			</aside>

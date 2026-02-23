@@ -55,8 +55,15 @@ export default function RootLayout({
 			</head>
 			<body className="antialiased safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth bg-sidebar">
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+					<a
+						href="#main"
+						className="sr-only focus:absolute focus:z-100 focus:h-12 focus:bg-card focus:grid focus:place-items-center focus:px-4 text-sm font-medium focus:not-sr-only top-0 left-0">
+						Skip to main content
+					</a>
 					<Header />
-					<main className="mx-auto max-w-4xl px-4 sm:px-8 pb-16">{children}</main>
+					<main id="main" className="mx-auto max-w-4xl px-4 sm:px-8 pb-16">
+						{children}
+					</main>
 					<Footer />
 				</ThemeProvider>
 			</body>

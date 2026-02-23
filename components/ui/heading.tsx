@@ -3,19 +3,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const headingVariants = cva(
-	['scroll-32 lg:scroll-18 [&+hr]:my-16 [&+[data-slot="separator"]]:my-16 first:mt-0 last:mb-0 [&+p]:mt-2 [&+*]:mt-6'],
+	['scroll-32 lg:scroll-18 [&+hr]:my-16 [&+[data-slot="separator"]]:my-16 first:mt-0 last:mb-0 [&+p]:mt-2 text-pretty'],
 	{
 		variants: {
 			level: {
 				1: [
-					"mb-2 text-3xl leading-none font-semibold tracking-tight text-balance",
+					"mb-2 text-3xl leading-none font-semibold tracking-tight text-balance [&+section]:mt-6",
 
 					// 'first-of-type:not-only:pb-8 first-of-type:not-only:border-b',
 				],
 				2: [" mt-20 text-2xl font-medium tracking-tight [&+h3]:mt-6 [&~hr]:mt-16"],
 				3: [
 					"text-lg font-medium leading-normal tracking-tight text-balance mt-16",
-					// 'has-[+h4]:text-xs has-[+h4]:leading-loose has-[+h4]:font-medium has-[+h4]:font-mono has-[+h4]:tracking-widest has-[+h4]:uppercase has-[+h4]:text-muted-foreground',
+					"has-[+h4]:text-xs has-[+h4]:leading-loose has-[+h4]:font-medium has-[+h4]:font-mono has-[+h4]:tracking-widest has-[+h4]:uppercase has-[+h4]:text-muted-foreground",
 				],
 				4: " text-base font-medium tracking-snug leading-tight mt-12 opacity-90",
 				5: " text-sm font-[450] leading-normal tracking-normal mt-12 ",
