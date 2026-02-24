@@ -73,12 +73,12 @@ export default function Home() {
 				))}
 			</ItemGroup>
 
-			<Separator className="min-h-0.5 max-w-20" />
-			<h2 className="text-muted-foreground text-sm" id="resources">
+			{/* <Separator className=" min-h-0.5 max-w-20" />
+			<h2 className="text-muted-foreground  text-sm" id="resources">
 				Resources
 			</h2>
 
-			<div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+			<div className="grid  grid-cols-1 gap-4 sm:grid-cols-3">
 				{resources.map((resource) => (
 					<Card
 						key={resource.id}
@@ -111,7 +111,7 @@ export default function Home() {
 						</CardContent>
 					</Card>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }
