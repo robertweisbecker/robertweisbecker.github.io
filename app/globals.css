@@ -93,7 +93,7 @@
 
 :root {
 	--radius: 0.625rem;
-	--background: var(--color-white);
+	--background: var(--color-taupe-50);
 	--foreground: var(--color-stone-800);
 	--card: var(--color-white);
 	--card-foreground: var(--color-stone-800);

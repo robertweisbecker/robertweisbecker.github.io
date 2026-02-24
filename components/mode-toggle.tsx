@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
+import { IconMoonFilled, IconSun, IconSunFilled } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +16,7 @@ export function ModeToggle(props: React.ComponentProps<typeof Button>) {
 			aria-label="Toggle theme"
 			className={cn(props.className)}
 			{...props}>
-			<IconSunFilled className="dark:hidden" />
+			<IconSun className="dark:hidden text-muted-foreground" />
 			<IconMoonFilled className="dark:block hidden" />
 		</Button>
 	);
