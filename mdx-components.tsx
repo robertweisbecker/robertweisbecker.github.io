@@ -47,7 +47,12 @@ export function useMDXComponents(): MDXComponents {
 		h2: createHeading(2),
 		h3: createHeading(3),
 		h4: createHeading(4),
-		img: (props) => <Image {...(props as React.ImgHTMLAttributes<HTMLImageElement>)} />,
+		img: (props) => (
+			<Image
+				{...(props as React.ImgHTMLAttributes<HTMLImageElement>)}
+				className="my-16"
+			/>
+		),
 		a: ({ href, children, ...props }) => {
 			if (href?.startsWith("/")) {
 				return (
@@ -63,7 +68,14 @@ export function useMDXComponents(): MDXComponents {
 					</a>
 				);
 			}
-			return <LinkOut className="not-prose" text={String(children)} href={href} {...props} />;
+			return (
+				<LinkOut
+					className="not-prose"
+					text={String(children)}
+					href={href}
+					{...props}
+				/>
+			);
 		},
 	};
 }

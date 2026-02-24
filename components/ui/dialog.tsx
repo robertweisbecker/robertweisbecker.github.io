@@ -24,13 +24,16 @@ function DialogClose({ ...props }: DialogPrimitive.Close.Props) {
 	return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
 
-function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) {
+function DialogOverlay({
+	className,
+	...props
+}: DialogPrimitive.Backdrop.Props) {
 	return (
 		<DialogPrimitive.Backdrop
 			data-slot="dialog-overlay"
 			className={cn(
-				"data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/10 duration-100 dark:bg-black/60 supports-backdrop-filter:backdrop-blur-xs fixed inset-0 isolate z-50",
-				className,
+				"data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 supports-backdrop-filter:backdrop-blur-xs fixed inset-0 isolate z-50 bg-black/10 duration-100 dark:bg-black/60",
+				className
 			)}
 			{...props}
 		/>
@@ -49,19 +52,30 @@ function DialogContent({
 		<DialogPortal>
 			<DialogOverlay />
 			<DialogPrimitive.Viewport className="fixed inset-0 z-50">
-				<ScrollArea className="box-border size-full overscroll-contain mx-auto" style={{ position: undefined }}>
+				<ScrollArea
+					className="mx-auto box-border size-full overscroll-contain"
+					style={{ position: undefined }}
+				>
 					<DialogPrimitive.Popup
 						data-slot="dialog-content"
 						className={cn(
-							"bg-popover relative my-12 data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/10 grid gap-4 rounded-2xl p-4 text-sm ring-1 duration-100 sm:max-w-2xl  z-50 w-full mx-auto outline outline-border dark:-outline-offset-1 shadow-xl max-w-[calc(100%-2rem)]",
-							className,
+							"bg-popover data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 ring-foreground/10 outline-border relative z-50 mx-auto my-12 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-2xl p-4 text-sm shadow-xl outline ring-1 duration-100 sm:max-w-2xl dark:-outline-offset-1",
+							className
 						)}
-						{...props}>
+						{...props}
+					>
 						{children}
 						{showCloseButton && (
 							<DialogPrimitive.Close
 								data-slot="dialog-close"
-								render={<Button variant="elevated" className=" absolute top-2 inset-e-2" size="icon-sm" />}>
+								render={
+									<Button
+										variant="secondary"
+										className="inset-e-2 absolute top-2"
+										size="icon-sm"
+									/>
+								}
+							>
 								<IconX />
 								<span className="sr-only">Close</span>
 							</DialogPrimitive.Close>
@@ -74,7 +88,13 @@ function DialogContent({
 }
 
 function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
-	return <div data-slot="dialog-header" className={cn("gap-2 flex flex-col", className)} {...props} />;
+	return (
+		<div
+			data-slot="dialog-header"
+			className={cn("flex flex-col gap-2", className)}
+			{...props}
+		/>
+	);
 }
 
 function DialogFooter({
@@ -89,12 +109,17 @@ function DialogFooter({
 		<div
 			data-slot="dialog-footer"
 			className={cn(
-				"bg-muted -mx-4 -mb-4 rounded-b-xl border-t p-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-				className,
+				"bg-muted -mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t p-4 sm:flex-row sm:justify-end",
+				className
 			)}
-			{...props}>
+			{...props}
+		>
 			{children}
-			{showCloseButton && <DialogPrimitive.Close render={<Button variant="outline" />}>Close</DialogPrimitive.Close>}
+			{showCloseButton && (
+				<DialogPrimitive.Close render={<Button variant="outline" />}>
+					Close
+				</DialogPrimitive.Close>
+			)}
 		</div>
 	);
 }
@@ -103,19 +128,22 @@ function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
 	return (
 		<DialogPrimitive.Title
 			data-slot="dialog-title"
-			className={cn("text-base leading-none font-medium", className)}
+			className={cn("text-base font-medium leading-none", className)}
 			{...props}
 		/>
 	);
 }
 
-function DialogDescription({ className, ...props }: DialogPrimitive.Description.Props) {
+function DialogDescription({
+	className,
+	...props
+}: DialogPrimitive.Description.Props) {
 	return (
 		<DialogPrimitive.Description
 			data-slot="dialog-description"
 			className={cn(
-				"text-muted-foreground *:[a]:hover:text-foreground text-sm *:[a]:underline *:[a]:underline-offset-3",
-				className,
+				"text-muted-foreground *:[a]:hover:text-foreground *:[a]:underline *:[a]:underline-offset-3 text-sm",
+				className
 			)}
 			{...props}
 		/>

@@ -46,7 +46,7 @@
 // ];
 
 export const jobs = {
-	everfi: [
+	Everfi: [
 		{
 			id: 1,
 			title: "Principal Designer, Design Systems",
@@ -133,8 +133,8 @@ export const schools = [
 	},
 ];
 
-// export const everfi = {
-//   EVERFI: {
+// export const Everfi = {
+//   Everfi: {
 //     title: 'Unified Design Language',
 //     description: 'Lorem',
 //     roles: [

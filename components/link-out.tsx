@@ -10,12 +10,17 @@ interface LinkOutProps {
 
 export function LinkOut({ text, href, src, className }: LinkOutProps) {
 	return (
-		<span className={cn("group/link inline-flex items-center gap-1 relative", className)}>
+		<span
+			className={cn(
+				"group/link relative inline-flex items-center gap-1",
+				className
+			)}
+		>
 			{src && (
 				<img
 					src={src}
 					alt={`${text} Logo`}
-					className="inline-block h-[1.25em] w-auto rounded-lg ring ring-border bg-background/50"
+					className="ring-border bg-background/50 inline-block h-[1.25em] w-auto rounded-lg ring"
 				/>
 			)}
 			<a
@@ -23,9 +28,10 @@ export function LinkOut({ text, href, src, className }: LinkOutProps) {
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="inline-flex items-center gap-0.5 link pe-0.5">
+				className="link inline-flex items-center gap-[0.25em]"
+			>
 				{text}
-				<LinkOutIcon className="size-[1em] transition-[translate,opacity] group-hover/link:-translate-y-0.5 group-hover/link:translate-x-1 absolute -me-1 -my-1 top-0.5 -right-0.5 opacity-0 group-hover/link:opacity-100" />
+				<LinkOutIcon className="absolute -right-[.25em] top-[.25em] -my-1 -me-1 size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:-translate-y-[0.125em] group-hover/link:translate-x-[0.125em] group-hover/link:opacity-100" />
 			</a>
 		</span>
 	);
@@ -44,11 +50,12 @@ function LinkOutIcon(props: React.SVGProps<SVGSVGElement>) {
 			strokeLinecap="round"
 			strokeLinejoin="round"
 			className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up-right"
-			{...props}>
+			{...props}
+		>
 			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 			<path
 				d="M17 7l-10 10"
-				className="[stroke-dashoffset:20] group-hover/link:[stroke-dashoffset:initial] [stroke-dasharray:20] group-hover/link:[stroke-dasharray:10] transition-[stroke-dashoffset,stroke-dasharray] duration-150 ease-out"
+				className="transition-[stroke-dashoffset,stroke-dasharray] duration-150 ease-out [stroke-dasharray:20] [stroke-dashoffset:20] group-hover/link:[stroke-dasharray:10] group-hover/link:[stroke-dashoffset:initial]"
 			/>
 			<path d="M8 7l9 0l0 9" />
 		</svg>

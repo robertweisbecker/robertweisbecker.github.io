@@ -18,18 +18,16 @@ type ArticleProps = ArticleWithFrontmatter | ArticleWithPageKey;
 
 export function Article({ children, ...props }: ArticleProps) {
 	return (
-		<div className="flex max-w-4xl flex-col items-start gap-10">
-			<div className="h-4" />
-			<BackButton />
+		<div className="mx-auto max-w-4xl py-10">
+			<div className="mx-auto mb-10 max-w-2xl">
+				<BackButton className="sm:-ms-6!" />
+			</div>
 			{"frontmatter" in props && props.frontmatter ? (
 				<PageHeader frontmatter={props.frontmatter} />
 			) : (
 				<PageHeader pageKey={props.pageKey!} />
 			)}
-			<div className="prose flex max-w-2xl flex-col [&_h2]:w-full [&_h3]:w-full">
-				{children}
-			</div>
-			<div className="h-4" />
+			<div className="prose">{children}</div>
 		</div>
 	);
 }

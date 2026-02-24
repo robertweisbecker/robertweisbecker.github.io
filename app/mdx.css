@@ -17,8 +17,12 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 	--prose-td-borders: var(--border);
 
 	color: var(--prose-body);
-	max-width: 42rem;
 	font-family: var(--font-sans);
+}
+
+.prose :is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table) {
+	max-width: 42rem;
+	margin-inline: auto;
 }
 
 /* --- Paragraphs --- */
@@ -31,7 +35,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 .prose h1 {
 	color: var(--prose-headings);
 	font-weight: 600;
-	font-size: 2em;
+	font-size: 1.5em;
 	margin-top: 2em;
 	margin-bottom: 1em;
 	line-height: 1.2;
@@ -41,7 +45,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 .prose h2 {
 	color: var(--prose-headings);
 	font-weight: 600;
-	font-size: 1.5em;
+	font-size: 1.25em;
 	margin-top: 2em;
 	margin-bottom: 1em;
 	line-height: 1.33;
@@ -51,7 +55,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 .prose h3 {
 	color: var(--prose-headings);
 	font-weight: 500;
-	font-size: 1.25em;
+	font-size: 1.125em;
 	margin-top: 1.6em;
 	margin-bottom: 0.6em;
 	line-height: 1.6;

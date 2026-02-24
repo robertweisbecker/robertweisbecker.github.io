@@ -14,14 +14,15 @@ const buttonVariants = cva(
 					"bg-primary text-primary-foreground hover:bg-primary/90",
 					"shadow-sm inset-shadow-[0_1px_0_1px_--alpha(var(--color-white)/10%)] dark:ring dark:ring-black/40 outline -outline-offset-1 outline-[color-mix(in_oklch,_var(--primary)_90%,var(--foreground))]",
 				],
-				outline: "border bg-card hover:bg-accent text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+				outline:
+					"border bg-card hover:bg-accent text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
 				secondary:
 					"bg-secondary text-secondary-foreground hover:bg-accent aria-expanded:bg-accent aria-expanded:text-accent-foreground",
 				ghost:
 					"text-foreground hover:bg-accent hover:text-accent-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground",
 				destructive:
 					"bg-destructive hover:bg-destructive-foreground/10 focus-visible:ring-destructive text-destructive-foreground focus-visible:border-destructive-foreground shadow-sm inset-shadow-[0_1px_--alpha(var(--color-white)/5%)] dark:ring dark:ring-black/40 outline outline-destructive-foreground/10 hover:outline-destructive-foreground/20 dark:-outline-offset-1 active:shadow-none hover:shadow-xs ",
-				link: "text-primary hover:text-accent-foreground underline-offset-4 hover:underline px-1! -ms-1! text-[450]! transition-colors font-normal",
+				link: "hover:text-accent-foreground underline-offset-4 hover:underline px-1! -ms-1! font-[450]! transition-colors font-normal gap-[0.25em]!",
 				elevated:
 					"outline text-foreground active:shadow-none hover:shadow-xs outline-border dark:-outline-offset-1 bg-card hover:bg-sidebar aria-expanded:bg-accent aria-expanded:text-accent-foreground shadow-sm inset-shadow-[0_1px_--alpha(var(--color-white)/5%)] dark:ring dark:ring-black/40",
 			},
@@ -34,7 +35,8 @@ const buttonVariants = cva(
 				icon: "size-button [&_svg:not([class*='size-'])]:size-4.5 rounded-sm",
 				"icon-xs":
 					"size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-				"icon-sm": "size-8 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+				"icon-sm":
+					"size-8 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
 				"icon-lg": "size-10",
 			},
 		},
@@ -42,7 +44,7 @@ const buttonVariants = cva(
 			variant: "default",
 			size: "default",
 		},
-	},
+	}
 );
 
 function Button({
@@ -51,7 +53,13 @@ function Button({
 	size = "default",
 	...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
-	return <ButtonPrimitive data-slot="button" className={cn(buttonVariants({ variant, size, className }))} {...props} />;
+	return (
+		<ButtonPrimitive
+			data-slot="button"
+			className={cn(buttonVariants({ variant, size, className }))}
+			{...props}
+		/>
+	);
 }
 
 export { Button, buttonVariants };

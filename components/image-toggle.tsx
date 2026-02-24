@@ -10,9 +10,14 @@ interface ImageToggleProps {
 	tab2?: string;
 }
 
-export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After" }: ImageToggleProps) {
+export function ImageToggle({
+	before,
+	after,
+	tab1 = "Before",
+	tab2 = "After",
+}: ImageToggleProps) {
 	return (
-		<Tabs className="justify-center">
+		<Tabs className="my-16 justify-center">
 			<TabsList className="mx-auto">
 				<TabsTrigger value="before">{tab1}</TabsTrigger>
 				<TabsTrigger value="after">{tab2}</TabsTrigger>

@@ -24,23 +24,25 @@ export function Header() {
 	const isHome = pathname === "/";
 
 	return (
-		<nav className={cn("sticky top-0 z-50")}>
-			<div className="flex items-center gap-1 px-4 py-2 w-full max-w-4xl mx-auto h-12 sm:px-6">
+		<nav className={cn("max-w-8xl sticky top-0 z-50 mx-auto")}>
+			<div className="mx-auto flex h-12 items-center gap-1 px-4 py-2 sm:px-6">
 				<Button
 					render={<Link href="/" />}
 					nativeButton={false}
 					size="sm"
 					variant="ghost"
-					className="font-semibold font-mono text-muted-foreground">
+					className="text-muted-foreground font-mono font-semibold"
+				>
 					<span
 						data-icon="inline-start"
-						className="size-4 grid place-items-center text-lg -top-1 leading-5 relative"
-						aria-hidden="true">
+						className="relative -top-1 grid size-4 place-items-center text-lg leading-5"
+						aria-hidden="true"
+					>
 						◳
 					</span>{" "}
 					bob.fyi
 				</Button>
-				<Separator className="mx-1 h-4 my-auto" orientation="vertical" />
+				<Separator className="mx-1 my-auto h-4" orientation="vertical" />
 
 				<Button
 					variant="ghost"
@@ -48,10 +50,17 @@ export function Header() {
 					render={<Link href="/about" />}
 					nativeButton={false}
 					aria-current={pathname === "/about" ? "true" : "false"}
-					className="max-md:hidden text-muted-foreground aria-current:bg-accent/64 aria-current:text-accent-foreground">
+					className="text-muted-foreground aria-current:bg-accent/64 aria-current:text-accent-foreground max-md:hidden"
+				>
 					About
 				</Button>
-				<Button variant="ghost" size="sm" render={<Link href="/components" />} nativeButton={false} className="hidden">
+				<Button
+					variant="ghost"
+					size="sm"
+					render={<Link href="/components" />}
+					nativeButton={false}
+					className="hidden"
+				>
 					Components
 				</Button>
 
@@ -59,11 +68,14 @@ export function Header() {
 					<DropdownMenuTrigger
 						render={<Button variant="ghost" size="sm" />}
 						className="text-muted-foreground group/trigger"
-						openOnHover={true}>
+						openOnHover={true}
+					>
 						<span className="hidden md:block">Work</span>
 						<span className="md:hidden">Menu</span>
 						<IconChevronDown
-							className={cn("transition-transform duration-100 rotate-0 group-data-pressed/trigger:rotate-180")}
+							className={cn(
+								"group-data-pressed/trigger:rotate-180 rotate-0 transition-transform duration-100"
+							)}
 							data-icon="inline-end"
 						/>
 					</DropdownMenuTrigger>
@@ -76,18 +88,27 @@ export function Header() {
 									render={<Link href={project.path} />}
 									nativeButton={false}
 									aria-current={pathname === project.path ? "true" : "false"}
-									className="aria-current:bg-accent/64">
+									className="aria-current:bg-accent/64"
+								>
 									{project.nickname}
 								</DropdownMenuItem>
 							))}
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator className="md:hidden" />
 
-						<DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="md:hidden">
+						<DropdownMenuItem
+							render={<Link href="/" />}
+							nativeButton={false}
+							className="md:hidden"
+						>
 							<IconHome />
 							Home
 						</DropdownMenuItem>
-						<DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="md:hidden">
+						<DropdownMenuItem
+							render={<Link href="/about" />}
+							nativeButton={false}
+							className="md:hidden"
+						>
 							<IconInfoCircle />
 							About
 						</DropdownMenuItem>
@@ -98,11 +119,12 @@ export function Header() {
 			</div>
 			<div
 				className={cn(
-					"pointer-events-none absolute inset-0 -z-1 h-20",
+					"-z-1 pointer-events-none absolute inset-0 h-20",
 					"backdrop-blur-xs",
-					"bg-linear-to-b from-sidebar via-sidebar/80 via-35% from-0% to-sidebar/0",
-					"mask-b-from-50%",
-				)}></div>
+					"bg-linear-to-b from-sidebar via-sidebar/80 to-sidebar/0 from-0% via-35%",
+					"mask-b-from-50%"
+				)}
+			></div>
 		</nav>
 	);
 }
