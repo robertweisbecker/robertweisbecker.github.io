@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { IconChevronDown, IconHome, IconInfoCircle } from "@tabler/icons-react";
-import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { ModeToggle } from "@/components/mode-toggle";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
@@ -22,12 +21,11 @@ import { Separator } from "./ui/separator";
 
 export function Header() {
 	const pathname = usePathname();
-	// const isHome = pathname === "/";
-	const [open, setOpen] = useState(false);
+	const isHome = pathname === "/";
 
 	return (
-		<nav className={cn("sticky top-0 z-50 h-12")}>
-			<div className="flex items-center gap-2 px-4 py-2 w-full">
+		<nav className={cn("sticky top-0 z-50")}>
+			<div className="flex items-center gap-1 px-4 py-2 w-full max-w-4xl mx-auto h-12 sm:px-6">
 				<Button
 					render={<Link href="/" />}
 					nativeButton={false}
@@ -57,11 +55,17 @@ export function Header() {
 					Components
 				</Button>
 
-				<DropdownMenu open={open} onOpenChange={setOpen}>
-					<DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="text-muted-foreground">
+				<DropdownMenu>
+					<DropdownMenuTrigger
+						render={<Button variant="ghost" size="sm" />}
+						className="text-muted-foreground group/trigger"
+						openOnHover={true}>
 						<span className="hidden md:block">Work</span>
 						<span className="md:hidden">Menu</span>
-						<IconChevronDown className={cn("transition-transform", open && "rotate-180")} data-icon="inline-end" />
+						<IconChevronDown
+							className={cn("transition-transform duration-100 rotate-0 group-data-pressed/trigger:rotate-180")}
+							data-icon="inline-end"
+						/>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent>
 						<DropdownMenuGroup>

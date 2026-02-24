@@ -9,15 +9,13 @@ import {
 	IconBookmark,
 	IconPointer,
 	IconMail,
-	IconArticle,
 	IconBrandLinkedin,
-	IconBrandGithub,
 } from "@tabler/icons-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "@/components/layout-grid";
 import { LinkOut } from "@/components/link-out";
 import { Heading } from "@/components/ui/heading";
-import { Separator } from "@/components/ui/separator";
+import { GithubIcon } from "@/components/icons";
 
 export default function About() {
 	return (
@@ -26,10 +24,8 @@ export default function About() {
 				About
 			</Heading>
 
-			<div className="h-4" />
-
 			<LayoutGrid variant="oneThird">
-				<div className="flex items-center gap-2">
+				<div className="flex items-center gap-1">
 					<IconUser className="size-4 text-muted-foreground" />
 					<Heading level={6}>Who</Heading>
 				</div>
@@ -38,6 +34,7 @@ export default function About() {
 						I&apos;m currently a principal designer at <LinkOut href="https://everfi.com" text="Everfi" />, designing
 						products, components, and tooling to help drive social good through education. These things have{" "}
 						<a
+							className="link"
 							href="https://www.blackbaud.com/newsroom/article/blackbaud-acquires-everfi-a-saas-leader-powering-corporate-esg-and-csr-initiatives-that-reach-millions-of-learners-each-year"
 							target="_blank"
 							rel="noopener noreferrer">
@@ -70,7 +67,7 @@ export default function About() {
 							nativeButton={false}
 							variant="elevated"
 							size="sm">
-							<IconBrandGithub data-icon="inline-start" />
+							<GithubIcon data-icon="inline-start" />
 							Github
 						</Button>
 					</div>
@@ -109,9 +106,11 @@ export default function About() {
 				<div className="flex flex-col gap-4">
 					<p>
 						Starting in 2018, I led the creation of our product organization&apos;s{" "}
-						<Link href="/unified-design-language">first design system</Link>, shepherding its transition from an
-						unstyled SDK into an accessible component library with theming and tooling to support 80+ courses across a
-						dozen branded product lines.
+						<Link className="link" href="/unified-design-language">
+							first design system
+						</Link>
+						, shepherding its transition from an unstyled SDK into an accessible component library with theming and
+						tooling to support 80+ courses across a dozen branded product lines.
 					</p>
 					<p>Some other things I&apos;ve done:</p>
 					<ul className="list-disc space-y-3 ps-5">
@@ -130,27 +129,29 @@ export default function About() {
 							and more.
 						</li>
 						<li>
-							Delivered a (now relevant!) <Link href="/conversational-immigration-forms">thesis</Link> on chatbots and
-							conversational interface design at{" "}
+							Delivered a (now relevant!){" "}
+							<Link className="link" href="/conversational-immigration-forms">
+								thesis
+							</Link>{" "}
+							on chatbots and conversational interface design at{" "}
 							<LinkOut href="https://www.mica.edu/graduate-programs/ux-design-mps/" text="MICA" />
 						</li>
 						<li>
-							Built a <Link href="/npr-maps">mapping application</Link> at <LinkOut href="https://npr.org" text="NPR" />{" "}
-							when I wasn&apos;t busy{" "}
-							<a href="https://youtu.be/lgmw41CY1Fo?t=36" target="_blank" rel="noopener noreferrer">
-								standing awkwardly
-							</a>{" "}
-							in the background of Tiny Desk recordings
+							Built a{" "}
+							<Link className="link" href="/npr-maps">
+								mapping application
+							</Link>{" "}
+							at NPR when I wasn&apos;t busy{" "}
+							<LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background of Tiny
+							Desk recordings
 						</li>
 						<li>
 							Designed web &amp; iOS screens, performed user testing, and made some{" "}
-							<a
+							<LinkOut
+								text="social media assets"
 								href="https://twitter.com/ParkingPanda/status/617057417696833536?s=20"
-								target="_blank"
-								rel="noopener noreferrer">
-								cheesy
-							</a>{" "}
-							social media assets for <LinkOut href="https://www.parkingpanda.com" text="Parking Panda" />
+							/>{" "}
+							for <LinkOut href="https://www.parkingpanda.com" text="Parking Panda" />
 						</li>
 					</ul>
 				</div>
@@ -243,9 +244,7 @@ export default function About() {
 				</div>
 			</LayoutGrid>
 
-			<div className="h-4" />
-
-			<LayoutGrid variant="oneThird">
+			{/* <LayoutGrid variant="oneThird">
 				<div className="mb-5 flex items-center gap-2">
 					<IconPointer className="size-4 text-muted-foreground" />
 					<Heading level={6}>
@@ -284,7 +283,7 @@ export default function About() {
 						some home cooking. My buddy Claude helped me get it all working.
 					</p>
 				</div>
-			</LayoutGrid>
+			</LayoutGrid> */}
 		</div>
 	);
 }

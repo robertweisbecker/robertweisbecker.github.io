@@ -21,7 +21,7 @@ export function ImageModal({ src, src2, caption }: ImageModalProps) {
 				<Image
 					src={src}
 					alt={caption ?? ""}
-					className="my-0 [img]:my-0! dark:opacity-90 relative w-full overflow-hidden rounded-t-[inherit]"
+					className="my-0 [img]:my-0! dark:brightness-80 relative w-full overflow-hidden rounded-t-[inherit]"
 				/>
 				<Button
 					variant="elevated"

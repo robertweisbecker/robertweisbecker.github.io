@@ -11,7 +11,7 @@ export function ProjectGrid() {
 			{projects.map((project) => (
 				<Item key={project.id} variant="muted" render={<Link href={project.path} />}>
 					{project.logo && (
-						<ItemMedia variant="image">
+						<ItemMedia variant="image" className="p-1!">
 							<img src={project.logo} alt="" />
 						</ItemMedia>
 					)}

@@ -61,7 +61,7 @@ function DialogContent({
 						{showCloseButton && (
 							<DialogPrimitive.Close
 								data-slot="dialog-close"
-								render={<Button variant="ghost" className="bg-popover/50 absolute top-2 inset-e-2" size="icon-sm" />}>
+								render={<Button variant="elevated" className=" absolute top-2 inset-e-2" size="icon-sm" />}>
 								<IconX />
 								<span className="sr-only">Close</span>
 							</DialogPrimitive.Close>

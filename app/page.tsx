@@ -17,6 +17,7 @@ import {
 	ItemTitle,
 } from "@/components/ui/item";
 import React from "react";
+import { LayoutGrid } from "@/components/layout-grid";
 
 // function ProjectGrid() {
 // 	return (
@@ -43,25 +44,33 @@ import React from "react";
 
 export default function Home() {
 	return (
-		<div className="mt-10 grid gap-8">
+		<div className="grid gap-8">
 			{/* <img
 				src="/assets/blob.png"
 				alt=""
 				className="pointer-events-none fixed left-1/2 top-1/2 -z-10 h-[100vmin] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-80 sm:left-3/4"
 			/> */}
-			<div>
-				<p className="font-medium">Robert Weisbecker</p>
-				<p className="text-muted-foreground">Systems & Product Designer</p>
-			</div>
-			<Separator className="max-w-20 min-h-0.5" />
-			<p className="text-muted-foreground">Work</p>
 
-			<ItemGroup id="projects">
+			<div className="mt-5">
+				<h1 className="font-medium">Robert Weisbecker</h1>
+				<p className="text-muted-foreground">Designing products & systems</p>
+			</div>
+			<div className="">
+				<p className="text-balance">You can call me Bob. Here's my little corner of the internet. </p>
+				<p>If you're reading this now, I made it for you.</p>
+			</div>
+
+			<Separator className="max-w-20 min-h-0.5" />
+			<h2 className="text-muted-foreground text-sm" id="projects">
+				Projects
+			</h2>
+
+			<ItemGroup>
 				{projects.map((project, index) => (
 					<React.Fragment key={project.id}>
 						<Item key={project.id} size="lg" render={<Link href={project.path} />}>
 							{project.logo && (
-								<ItemMedia variant="image">
+								<ItemMedia variant="image" className="p-1 outline-black/5 shadow-black/20">
 									<img src={project.logo} alt="" />
 								</ItemMedia>
 							)}

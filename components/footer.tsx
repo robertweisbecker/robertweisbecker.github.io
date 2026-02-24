@@ -6,9 +6,9 @@ import { GithubIcon } from "@/components/icons";
 
 export function Footer() {
 	return (
-		<footer className="mx-auto max-w-4xl border-t px-4 py-5">
+		<footer className="mx-auto max-w-4xl border-t sm:ps-8 sm:pe-3 py-3">
 			<div className="flex flex-col items-center justify-between gap-2 md:flex-row">
-				<p className="text-[0.625rem] text-muted-foreground">&copy; {new Date().getFullYear()} Robert Weisbecker</p>
+				<p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Robert Weisbecker</p>
 
 				<div className="flex gap-1">
 					<Button
@@ -30,7 +30,7 @@ export function Footer() {
 						<GithubIcon />
 					</Button>
 					<Button
-						variant="link"
+						variant="ghost"
 						size="icon"
 						render={<a onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Scroll to top" />}
 						nativeButton={false}>

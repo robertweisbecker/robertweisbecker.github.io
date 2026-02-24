@@ -1,4 +1,4 @@
-import { IconExternalLink } from "@tabler/icons-react";
+import { IconChevronUpRight, IconExternalLink } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 interface LinkOutProps {
@@ -23,10 +23,34 @@ export function LinkOut({ text, href, src, className }: LinkOutProps) {
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="inline-flex items-center gap-0.5 font-medium text-primary relative after:absolute after:bottom-px after:left-0 after:h-px after:transition-width after:duration-150 after:ease-out group-hover/link:after:w-full group-hover/link:after:right-0 after:bg-primary after:w-0">
+				className="inline-flex items-center gap-0.5 link pe-0.5">
 				{text}
-				<IconExternalLink className="size-[1em] transition-transform group-hover/link:-translate-y-px group-hover/link:translate-x-0.5  relative -top-px opacity-64 group-hover/link:opacity-100" />
+				<LinkOutIcon className="size-[1em] transition-[translate,opacity] group-hover/link:-translate-y-0.5 group-hover/link:translate-x-1 absolute -me-1 -my-1 top-0.5 -right-0.5 opacity-0 group-hover/link:opacity-100" />
 			</a>
 		</span>
+	);
+}
+
+function LinkOutIcon(props: React.SVGProps<SVGSVGElement>) {
+	return (
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up-right"
+			{...props}>
+			<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+			<path
+				d="M17 7l-10 10"
+				className="[stroke-dashoffset:20] group-hover/link:[stroke-dashoffset:initial] [stroke-dasharray:20] group-hover/link:[stroke-dasharray:10] transition-[stroke-dashoffset,stroke-dasharray] duration-150 ease-out"
+			/>
+			<path d="M8 7l9 0l0 9" />
+		</svg>
 	);
 }

@@ -74,14 +74,14 @@ function Item({
 }
 
 const itemMediaVariants = cva(
-	"gap-2 group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start flex shrink-0 items-center justify-center [&_svg]:pointer-events-none",
+	"gap-2 group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start flex shrink-0 items-center justify-center [&_svg]:pointer-events-none support-[corner-shape]:[corner-shape:superellipse(1.5)]",
 	{
 		variants: {
 			variant: {
 				default: "bg-transparent",
 				icon: "[&_svg:not([class*='size-'])]:size-4",
 				image:
-					"size-10 bg-card p-0.5 overflow-hidden rounded-sm group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 [&_img]:size-full [&_img]:object-contain",
+					"size-10 bg-secondary filter-grayscale overflow-hidden outline outline-border/50 rounded-sm group-data-[size=sm]/item:size-8 group-data-[size=xs]/item:size-6 [&_img]:size-full [&_img]:object-contain",
 			},
 		},
 		defaultVariants: {
@@ -122,10 +122,7 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
 	return (
 		<div
 			data-slot="item-title"
-			className={cn(
-				"gap-2 text-base leading-snug font-medium underline-offset-4 line-clamp-1 flex w-fit items-center",
-				className,
-			)}
+			className={cn("gap-2 text-sm  font-medium underline-offset-4 line-clamp-1 flex w-fit items-center", className)}
 			{...props}
 		/>
 	);
@@ -136,7 +133,7 @@ function ItemDescription({ className, ...props }: React.ComponentProps<"p">) {
 		<p
 			data-slot="item-description"
 			className={cn(
-				"text-muted-foreground text-start text-sm leading-normal group-data-[size=xs]/item:text-xs [&>a:hover]:text-primary line-clamp-2 font-normal [&>a]:underline [&>a]:underline-offset-4",
+				"text-muted-foreground text-start text-sm group-data-[size=xs]/item:text-xs [&>a:hover]:text-primary line-clamp-2 font-normal [&>a]:underline [&>a]:underline-offset-4",
 				className,
 			)}
 			{...props}
