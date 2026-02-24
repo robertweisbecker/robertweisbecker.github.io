@@ -40,13 +40,13 @@
 	--color-popover: var(--popover);
 	--color-card-foreground: var(--card-foreground);
 	--color-card: var(--card);
-	--radius-sm: calc(var(--radius) - 4px);
-	--radius-md: calc(var(--radius) - 2px);
+	--radius-sm: calc(var(--radius) * 0.5);
+	--radius-md: calc(var(--radius) * 0.8);
 	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) + 4px);
-	--radius-2xl: calc(var(--radius) + 8px);
-	--radius-3xl: calc(var(--radius) + 12px);
-	--radius-4xl: calc(var(--radius) + 16px);
+	--radius-xl: calc(var(--radius) * 1.2);
+	--radius-2xl: calc(var(--radius) * 1.4);
+	--radius-3xl: calc(var(--radius) * 1.8);
+	--radius-4xl: calc(var(--radius) * 2);
 	--spacing-button: 2.25rem;
 }
 
@@ -134,23 +134,19 @@
 }
 
 .dark {
-	--background: var(--color-taupe-950);
+	--background: var(--color-black);
 	--foreground: var(--color-taupe-200);
-	--card: color-mix(in srgb, var(--background) 96%, var(--color-white));
+	--card: var(--color-taupe-950);
 	--card-foreground: var(--color-taupe-100);
-	--popover: color-mix(in srgb, var(--background) 92%, var(--color-white));
+	--popover: var(--color-taupe-900);
 	--popover-foreground: var(--color-taupe-100);
-	--primary: var(--color-taupe-200);
-	--primary-foreground: var(--color-taupe-950);
-	--secondary: color-mix(in srgb, var(--background) 94%, var(--color-white));
-	--secondary-foreground: var(--color-taupe-300);
+	--primary: var(--color-taupe-600);
+	--primary-foreground: var(--color-taupe-100);
+	--secondary: var(--color-taupe-800);
+	--secondary-foreground: var(--color-taupe-200);
 	--muted: --alpha(var(--color-white) / 2%);
-	--muted-foreground: color-mix(
-		in srgb,
-		var(--color-taupe-400) 90%,
-		var(--color-white)
-	);
-	--accent: color-mix(in srgb, var(--background) 88%, var(--color-white));
+	--muted-foreground: var(--color-taupe-400);
+	--accent: var(--color-taupe-700);
 	--accent-foreground: var(--color-taupe-100);
 	--destructive: var(--color-red-950);
 	--destructive-foreground: var(--color-red-400);
@@ -161,7 +157,7 @@
 	--warning: var(--color-amber-500);
 	--warning-foreground: var(--color-amber-400);
 	--border: --alpha(var(--color-white) / 6%);
-	--input: --alpha(var(--color-white) / 14%);
+	--input: --alpha(var(--color-white) / 16%);
 	--ring: var(--color-blue-400);
 	--sidebar: color-mix(in srgb, var(--color-taupe-950) 97%, var(--color-white));
 	--sidebar-foreground: color-mix(

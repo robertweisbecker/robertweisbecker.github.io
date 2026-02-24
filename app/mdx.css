@@ -5,7 +5,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 .prose {
 	--prose-body: var(--muted-foreground);
 	--prose-headings: var(--foreground);
-	--prose-links: var(--primary);
+	--prose-links: var(--foreground);
 	--prose-bold: var(--foreground);
 	--prose-code: var(--foreground);
 	--prose-code-bg: var(--muted);
@@ -22,7 +22,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 
 .prose :is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table) {
 	max-width: 42rem;
-	margin-inline: auto;
+	/* margin-inline: auto; */
 }
 
 /* --- Paragraphs --- */
@@ -83,7 +83,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/sr
 }
 
 /* --- Links --- */
-.prose p > a {
+.prose a {
 	color: var(--prose-links);
 	font-weight: 500;
 	:not([data-component="link-out"]) {

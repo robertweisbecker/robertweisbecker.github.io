@@ -6,13 +6,20 @@ interface LinkOutProps {
 	href: string;
 	src?: string;
 	className?: string;
+	linkClass?: string;
 }
 
-export function LinkOut({ text, href, src, className }: LinkOutProps) {
+export function LinkOut({
+	text,
+	href,
+	src,
+	className,
+	linkClass,
+}: LinkOutProps) {
 	return (
 		<span
 			className={cn(
-				"group/link relative inline-flex items-center gap-1",
+				"group/link mx-0.5 inline items-center space-x-1 self-baseline align-baseline",
 				className
 			)}
 		>
@@ -20,7 +27,7 @@ export function LinkOut({ text, href, src, className }: LinkOutProps) {
 				<img
 					src={src}
 					alt={`${text} Logo`}
-					className="ring-border bg-background/50 inline-block h-[1.25em] w-auto rounded-lg ring"
+					className="ring-border bg-background/50 -my-[.25em] inline aspect-square size-[1lh] rounded-sm ring"
 				/>
 			)}
 			<a
@@ -28,10 +35,13 @@ export function LinkOut({ text, href, src, className }: LinkOutProps) {
 				href={href}
 				target="_blank"
 				rel="noopener noreferrer"
-				className="link inline-flex items-center gap-[0.25em]"
+				className={cn(
+					"link relative inline-flex items-center gap-[0.25em]",
+					linkClass
+				)}
 			>
 				{text}
-				<LinkOutIcon className="absolute -right-[.25em] top-[.25em] -my-1 -me-1 size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:-translate-y-[0.125em] group-hover/link:translate-x-[0.125em] group-hover/link:opacity-100" />
+				<LinkOutIcon className="absolute -right-[.25em] top-px -my-1 -me-1 size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:-translate-y-[0.125em] group-hover/link:translate-x-[0.125em] group-hover/link:opacity-100" />
 			</a>
 		</span>
 	);

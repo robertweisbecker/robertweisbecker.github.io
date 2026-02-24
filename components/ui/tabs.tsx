@@ -55,7 +55,7 @@ function TabsList({
 			<TabsPrimitive.Indicator
 				data-slot="tabs-indicator"
 				className={cn(
-					"-translate-y-(--active-tab-bottom) h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) absolute bottom-0 left-0 transition-[width,translate] duration-200 ease-in-out",
+					"-translate-y-(--active-tab-bottom) h-(--active-tab-height) w-(--active-tab-width) translate-x-(--active-tab-left) absolute bottom-0 left-0 transition-[width,translate] duration-200 ease-out",
 					variant === "line"
 						? "bg-primary z-10 data-[orientation=horizontal]:h-0.5 data-[orientation=vertical]:w-0.5 data-[orientation=horizontal]:translate-y-px data-[orientation=vertical]:-translate-x-px"
 						: "-z-1 bg-popover shadow-sm/5 outline-border rounded-md outline dark:-outline-offset-1"
@@ -70,7 +70,7 @@ function TabsTrigger({ className, ...props }: TabsPrimitive.Tab.Props) {
 		<TabsPrimitive.Tab
 			data-slot="tabs-trigger"
 			className={cn(
-				"focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground hover:not-data-active:bg-accent hover:not-data-active:text-foreground group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-[color,background-color,box-shadow] focus-visible:outline-1 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+				"focus-visible:ring-ring/50 focus-visible:outline-ring text-muted-foreground hover:not-data-active:bg-current/2 hover:not-data-active:text-foreground group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start relative inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-sm font-medium transition-[color,background-color,box-shadow] focus-visible:outline-1 focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
 				"data-active:text-foreground",
 				className
 			)}

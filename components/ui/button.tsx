@@ -12,10 +12,10 @@ const buttonVariants = cva(
 			variant: {
 				default: [
 					"bg-primary text-primary-foreground hover:bg-primary/90",
-					"shadow-sm inset-shadow-[0_1px_0_1px_--alpha(var(--color-white)/10%)] dark:ring dark:ring-black/40 outline -outline-offset-1 outline-[color-mix(in_oklch,_var(--primary)_90%,var(--foreground))]",
+					"shadow-sm inset-shadow-[0_1px_0_1px_--alpha(var(--color-white)/10%)] dark:ring dark:ring-black/40 outline -outline-offset-1 outline-[color-mix(in_oklch,_var(--primary)_90%,var(--background))]",
 				],
 				outline:
-					"border bg-card hover:bg-accent text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
+					"border hover:bg-muted text-secondary-foreground active:text-foreground aria-expanded:bg-accent aria-expanded:text-accent-foreground hover:border-input active:border-input ",
 				secondary:
 					"bg-secondary text-secondary-foreground hover:bg-accent aria-expanded:bg-accent aria-expanded:text-accent-foreground",
 				ghost:
@@ -24,7 +24,7 @@ const buttonVariants = cva(
 					"bg-destructive hover:bg-destructive-foreground/10 focus-visible:ring-destructive text-destructive-foreground focus-visible:border-destructive-foreground shadow-sm inset-shadow-[0_1px_--alpha(var(--color-white)/5%)] dark:ring dark:ring-black/40 outline outline-destructive-foreground/10 hover:outline-destructive-foreground/20 dark:-outline-offset-1 active:shadow-none hover:shadow-xs ",
 				link: "hover:text-accent-foreground underline-offset-4 hover:underline px-1! -ms-1! font-[450]! transition-colors font-normal gap-[0.25em]!",
 				elevated:
-					"outline text-foreground active:shadow-none hover:shadow-xs outline-border dark:-outline-offset-1 bg-card hover:bg-sidebar aria-expanded:bg-accent aria-expanded:text-accent-foreground shadow-sm inset-shadow-[0_1px_--alpha(var(--color-white)/5%)] dark:ring dark:ring-black/40",
+					"outline text-foreground active:shadow-none hover:shadow-xs outline-border dark:-outline-offset-1 bg-popover hover:bg-secondary aria-expanded:bg-accent aria-expanded:text-accent-foreground shadow-sm inset-shadow-[0_1px_--alpha(var(--color-white)/5%)] dark:ring dark:ring-black/40",
 			},
 			size: {
 				default:
@@ -34,9 +34,8 @@ const buttonVariants = cva(
 				lg: "h-10 gap-2 px-4 has-data-[icon=inline-end]:pe-2 has-data-[icon=inline-start]:ps-2 [&_svg]:opacity-64",
 				icon: "size-button [&_svg:not([class*='size-'])]:size-4.5 rounded-sm",
 				"icon-xs":
-					"size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-				"icon-sm":
-					"size-8 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
+					"size-6 rounded-sm in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
+				"icon-sm": "size-8 rounded-sm in-data-[slot=button-group]:rounded-lg",
 				"icon-lg": "size-10",
 			},
 		},

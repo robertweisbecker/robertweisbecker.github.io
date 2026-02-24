@@ -1,16 +1,39 @@
 import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-function Card({ className, size = "default", ...props }: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+const cardVariants = cva(
+	"text-card-foreground gap-4 overflow-hidden rounded-xl py-4 text-sm has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col",
+	{
+		variants: {
+			variant: {
+				default:
+					"shadow-sm bg-card outline-border/50 outline-1 dark:-outline-offset-1",
+				muted: "bg-muted border-transparent",
+				outline:
+					"outline-border/50 outline-1 dark:-outline-offset-1",
+			},
+		},
+		defaultVariants: {
+			variant: "default",
+		},
+	},
+);
+
+function Card({
+	className,
+	variant = "default",
+	size = "default",
+	...props
+}: React.ComponentProps<"div"> &
+	VariantProps<typeof cardVariants> & { size?: "default" | "sm" }) {
 	return (
 		<div
 			data-slot="card"
 			data-size={size}
-			className={cn(
-				"outline-border/50 shadow-sm bg-card text-card-foreground gap-4 overflow-hidden rounded-xl py-4 text-sm outline-1 dark:-outline-offset-1 has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:gap-3 data-[size=sm]:py-3 data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl group/card flex flex-col",
-				className,
-			)}
+			data-variant={variant}
+			className={cn(cardVariants({ variant }), className)}
 			{...props}
 		/>
 	);
