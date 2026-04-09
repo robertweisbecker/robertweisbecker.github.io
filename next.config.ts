@@ -1,23 +1,22 @@
-import createMDX from "@next/mdx";
-import type { NextConfig } from "next";
+  import createMDX from "@next/mdx"
+  import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-	output: "export",
-	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-	images: {
-		unoptimized: true,
-	},
+  output: "export",
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  images: {
+    unoptimized: true,
+  },
+  experimental: {
+    optimizePackageImports: ["@tabler/icons-react"],
+  },
 };
 
 const withMDX = createMDX({
-	options: {
-		remarkPlugins: [
-			"remark-gfm",
-			"remark-frontmatter",
-			["remark-mdx-frontmatter", { name: "frontmatter" }],
-		],
-		rehypePlugins: ["rehype-unwrap-images"],
-	},
+  options: {
+    remarkPlugins: ["remark-gfm", "remark-frontmatter", ["remark-mdx-frontmatter", { name: "frontmatter" }]],
+    rehypePlugins: ["rehype-unwrap-images"],
+  },
 });
 
 export default withMDX(nextConfig);

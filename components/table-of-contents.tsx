@@ -1,0 +1,115 @@
+"use client";
+
+  import type { TocItem } from "@/lib/types"
+  import { cn } from "@/lib/utils"
+  import { IconArrowNarrowUpDashed } from "@tabler/icons-react"
+  import * as React from "react"
+  import { Button } from "./ui/button"
+  import { ScrollArea } from "./ui/scroll-area"
+
+function useActiveItem(ids: string[]) {
+  const [activeId, setActiveId] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const first = entries.find((entry) => entry.isIntersecting);
+        if (first) {
+          setActiveId(first.target.id);
+          window.history.replaceState(null, "", `#${first.target.id}`);
+        }
+      },
+      { rootMargin: "0% 0% -80% 0%" }
+    );
+
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
+
+    return () => observer.disconnect();
+  }, [ids]);
+
+  return activeId;
+}
+
+export function TableOfContents({ toc, className }: { toc: TocItem[]; className?: string }) {
+  const ids = React.useMemo(() => toc.map((item) => item.id), [toc]);
+  const activeId = useActiveItem(ids);
+
+  if (!toc.length) return null;
+
+  return (
+    <nav
+      className={cn(
+        "my-4 grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-4 text-xs",
+        className
+      )}
+    >
+      {/* <p className="flex items-center gap-1.5">
+        <IconMenuDeep className="size-3" />
+        Jump to:
+      </p> */}
+
+      <ScrollArea scrollFade scrollbarGutter>
+        <ul
+          className={cn(
+            "group relative ms-1 text-[0.8125rem]/4 [--inset:--spacing(4)]",
+            // "before:absolute before:inset-s-0 before:top-1.5 before:bottom-1.5 before:w-px before:bg-border",
+            className
+          )}
+        >
+          {toc.map((item) => (
+            <li
+              key={item.id}
+              data-depth={item.depth}
+              style={
+                {
+                  "--depth": item.depth - 1,
+                  "--depth-inset": "calc(var(--depth)*var(--inset))",
+                } as React.CSSProperties
+              }
+              className={cn(
+                "peer relative text-sm first:[&>a]:-mt-1.5",
+                // "before:absolute before:inset-y-1.5 before:-inset-s-px before:w-0.5 before:rounded-e has-data-[active=true]:before:bg-primary",
+                "group-has-data-active:[&>a]:not-data-active:border-border peer-has-data-active:[&>a]:border-transparent"
+              )}
+            >
+              <a
+                href={`#${item.id}`}
+                data-active={item.id === activeId}
+                data-depth={item.depth}
+                className={cn(
+                  "block w-full border-l border-transparent py-[round(calc(var(--inset)/3),2px)]",
+                  // "data-active:border-input",
+                  "text-muted-foreground hover:text-accent-foreground",
+                  "pl-(--depth-inset)",
+                  "data-[active=true]:font-[450] data-[active=true]:tracking-[-0.0025em] data-[active=true]:text-foreground",
+                  item.depth > 2 && ["text-[round(calc(1em-.05em*(var(--depth))),1px)] text-muted-foreground/80"],
+                  item.depth > 1 && [
+                    // "data-active:border-transparent!",
+                    "before:absolute before:top-0 before:left-0 before:h-1/2 before:w-[calc(var(--depth-inset)/1.5)] before:rounded-es-md before:border-b before:border-l before:border-transparent",
+                    "data-active:before:border-border",
+                    // "data-active:border-border",
+                    // "after:absolute after:top-[calc(var(--inset)/1)] after:bottom-0 after:left-0 after:w-px after:rounded-t data-active:after:bg-border",
+                    // "after:mask-l-from-[calc(100%-1px)] after:mask-l-to-[1px]",
+                  ]
+                )}
+              >
+                {item.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </ScrollArea>
+      <Button variant="link" size="sm" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <IconArrowNarrowUpDashed
+          data-icon="inline-start"
+          strokeWidth={1.5}
+          className="transition-transform duration-100 ease-out group-hover/button:-translate-y-0.5"
+        />
+        Top
+      </Button>
+    </nav>
+  );
+}

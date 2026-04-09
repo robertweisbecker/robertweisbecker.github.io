@@ -1,0 +1,7 @@
+---
+alwaysApply: true
+---
+
+When I say "watch mode", call `agentation_watch_annotations` in a loop.
+For each annotation: acknowledge it, make the fix, then resolve it with a summary.
+Continue watching until I say stop or timeout is reached.

@@ -1,27 +1,35 @@
 "use client";
 
-import Link from "next/link";
-import { IconArrowLeft } from "@tabler/icons-react";
-import { Button } from "./ui/button";
-import { cn } from "@/lib/utils";
+  import { cn } from "@/lib/utils"
+  import { LinkButton } from "./ui/link-button"
 
 export function BackButton({
-	className,
-	...rest
-}: React.ComponentProps<typeof Button>) {
-	return (
-		<Button
-			variant="link"
-			render={<Link href="/#projects" />}
-			nativeButton={false}
-			className={cn("text-muted-foreground group/back-button", className)}
-			{...rest}
-		>
-			<IconArrowLeft
-				className="transition-transform group-hover/back-button:-translate-x-0.5"
-				data-icon="inline-start"
-			/>
-			Back
-		</Button>
-	);
+  className,
+  size = "sm",
+  children,
+  href = "/#projects",
+  ...rest
+}: React.ComponentProps<typeof LinkButton> & { href?: string }) {
+  return (
+    <LinkButton
+      variant="link"
+      href={href}
+      size={size}
+      className={cn("group/back-button mx-0 self-start font-normal", className)}
+      {...rest}
+    >
+      {/* <IconArrowNarrowLeft
+        className="transition-transform group-hover/back-button:-translate-x-0.5"
+        data-icon="inline-start"
+        strokeWidth={1.5}
+      /> */}
+      <span
+        className="font-pixel text-[11px] no-underline! transition-transform group-hover/back-button:-translate-x-0.5"
+        data-icon="inline-start"
+      >
+        ↰
+      </span>
+      {children ?? "Back"}
+    </LinkButton>
+  );
 }

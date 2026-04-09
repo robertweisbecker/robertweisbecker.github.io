@@ -1,23 +1,27 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import { IconMoonFilled, IconSun, IconSunFilled } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+  import { Button } from "@/components/ui/button"
+  import { cn } from "@/lib/utils"
+  import { IconMoonFilled,IconSunHighFilled } from "@tabler/icons-react"
+  import { useTheme } from "next-themes"
+  import { Tooltip,TooltipContent,TooltipTrigger } from "./ui/tooltip"
 
-export function ModeToggle(props: React.ComponentProps<typeof Button>) {
-	const { setTheme, resolvedTheme } = useTheme();
+export function ModeToggle(props: React.ComponentProps<typeof TooltipTrigger>) {
+  const { setTheme, resolvedTheme } = useTheme();
 
-	return (
-		<Button
-			variant="ghost"
-			size="icon-sm"
-			onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-			aria-label="Toggle theme"
-			className={cn(props.className)}
-			{...props}>
-			<IconSun className="dark:hidden text-muted-foreground" />
-			<IconMoonFilled className="dark:block hidden" />
-		</Button>
-	);
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        aria-label="Toggle mode"
+        className={cn(props.className)}
+        {...props}
+        render={<Button variant="ghost" size="icon-sm" />}
+        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      >
+        <IconSunHighFilled className="dark:hidden" strokeWidth={1.5} />
+        <IconMoonFilled className="hidden dark:block" />
+      </TooltipTrigger>
+      <TooltipContent>Toggle mode</TooltipContent>
+    </Tooltip>
+  );
 }

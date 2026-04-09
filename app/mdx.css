@@ -1,299 +1,343 @@
-/*
-Adapted from https://github.com/tailwindlabs/tailwindcss-typography/blob/main/src/styles.css
+/* 
+Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/typography.css
  */
 
 .prose {
-	--prose-body: var(--muted-foreground);
-	--prose-headings: var(--foreground);
-	--prose-links: var(--foreground);
-	--prose-bold: var(--foreground);
-	--prose-code: var(--foreground);
-	--prose-code-bg: var(--muted);
-	--prose-quotes: var(--foreground);
-	--prose-quote-borders: var(--border);
-	--prose-captions: var(--muted-foreground);
-	--prose-hr: var(--border);
-	--prose-th-borders: var(--border);
-	--prose-td-borders: var(--border);
-
-	color: var(--prose-body);
-	font-family: var(--font-sans);
+  --prose-body: --alpha(var(--foreground) / 72%);
+  --prose-headings: var(--foreground);
+  --prose-links: var(--prose-bold);
+  --prose-bold: var(--foreground);
+  --prose-code: --alpha(var(--foreground) / 96%);
+  --prose-code-bg: --alpha(var(--foreground) / 8%);
+  --prose-quotes: var(--muted-foreground);
+  --prose-quote-borders: var(--border);
+  --prose-captions: var(--color-muted-foreground);
+  --prose-hr: var(--border);
+  --prose-th-borders: var(--input);
+  --prose-td-borders: var(--border);
+  font-family: var(--font-sans);
+  /* *:where(:not(.not-prose, .not-prose *)) {
+    color: var(--prose-body);
+    font-family: var(--font-sans);
+  } */
 }
 
-.prose :is(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, pre, table) {
-	max-width: 42rem;
-	/* margin-inline: auto; */
+.prose > * {
+  max-width: var(--container-xl);
+  margin-inline: auto;
+  width: 100%;
+  /* min-width: 0; */
 }
 
 /* --- Paragraphs --- */
-.prose p {
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
+.prose p:where(:not(.not-prose, .not-prose *)) {
+  @apply mt-6 mb-8 text-[13px]/4.5 text-pretty md:text-[15px]/5.5;
+  letter-spacing: -0.005em;
+  font-weight: 450;
+  color: var(--prose-body);
+  &:not(:first-child) {
+    @apply mb-4;
+  }
+}
+
+.prose li:where(:not(.not-prose, .not-prose *)),
+.prose td:where(:not(.not-prose, .not-prose *)) {
+  @apply text-[13px]/4.5 text-pretty md:text-[15px]/5.5;
+  letter-spacing: -0.005em;
+  font-weight: 450;
 }
 
 /* --- Headings --- */
-.prose h1 {
-	color: var(--prose-headings);
-	font-weight: 600;
-	font-size: 1.5em;
-	margin-top: 2em;
-	margin-bottom: 1em;
-	line-height: 1.2;
-	letter-spacing: -0.02em;
+.prose h1:where(:not(.not-prose, .not-prose *)) {
+  color: var(--prose-headings);
+  /* font-weight: 600;
+  font-size: 2em;
+  line-height: 1.2; */
+  margin-bottom: 0.75em;
+  /* letter-spacing: -0.025em; */
+  text-wrap: pretty;
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.01875rem;
+
+  /* Remove bottom margin on h1 if directly followed by a <p> */
+  &:has(+ p) {
+    margin-bottom: 0.5em;
+    & ~ p:first-of-type {
+      @apply text-lg/6 text-balance opacity-60;
+    }
+  }
 }
 
 .prose h2 {
-	color: var(--prose-headings);
-	font-weight: 600;
-	font-size: 1.25em;
-	margin-top: 2em;
-	margin-bottom: 1em;
-	line-height: 1.33;
-	letter-spacing: -0.02em;
+  color: var(--prose-headings);
+  @apply mt-24 mb-6 scroll-mt-12 text-xl font-[525] tracking-[-.02em];
 }
 
 .prose h3 {
-	color: var(--prose-headings);
-	font-weight: 500;
-	font-size: 1.125em;
-	margin-top: 1.6em;
-	margin-bottom: 0.6em;
-	line-height: 1.6;
+  color: var(--prose-headings);
+  @apply mt-16 mb-2 scroll-mt-8 text-lg font-semibold tracking-[-.016em];
 }
 
 .prose h4 {
-	color: var(--prose-headings);
-	font-weight: 600;
-	margin-top: 1.5em;
-	margin-bottom: 0.5em;
-	line-height: 1.5;
+  color: var(--prose-headings);
+  font-weight: 500;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.5;
 }
 
 .prose :is(h2, h3, h4) + * {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 /* --- Anchor links on headings --- */
-.prose :is(h2, h3, h4) {
-	scroll-margin-top: 4rem;
+.prose :is(h2, h3, h4, h5, h6) {
+  scroll-margin-top: 5em;
 }
-.prose :is(h2, h3, h4) > a.anchor {
-	text-decoration: none;
-	color: var(--prose-headings);
+.prose :is(h2, h3, h4) .anchor {
+  text-decoration: none;
+  color: var(--prose-headings);
+  text-decoration: none;
+  &:hover {
+    color: color-mix(in srgb, var(--prose-headings) 80%, transparent);
+  }
+  &:focus-visible {
+    outline: 0;
+    text-decoration: underline;
+    text-decoration-color: var(--ring);
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
 }
 
 /* --- Links --- */
-.prose a {
-	color: var(--prose-links);
-	font-weight: 500;
-	:not([data-component="link-out"]) {
-		text-decoration: underline;
-		text-underline-offset: 3px;
-		text-decoration-thickness: 1px;
-	}
+.prose a:where(:not(.not-prose, .not-prose *)) {
+  color: var(--prose-links);
+  /* font-weight: 500; */
+  outline: 0;
+  :not([data-component="link-out"]) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
 }
 
 /* --- Bold --- */
-.prose strong {
-	color: var(--prose-bold);
-	font-weight: 600;
+.prose strong:where(:not(.not-prose, .not-prose *)) {
+  color: var(--prose-bold);
+  font-weight: 550;
+  letter-spacing: -0.02em;
 }
 
 /* --- Lists --- */
-.prose ol {
-	list-style-type: decimal;
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
-	padding-inline-start: 1.625em;
+.prose ol:where(:not(.not-prose, .not-prose *)) {
+  list-style-type: decimal;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding-inline-start: 1.5em;
 }
-.prose ul {
-	list-style-type: disc;
-	margin-top: 1.25em;
-	margin-bottom: 1.25em;
-	padding-inline-start: 1.625em;
+.prose ul:where(:not(.not-prose, .not-prose *)) {
+  list-style-type: disc;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  padding-inline-start: 1.5em;
 }
-.prose li {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
+.prose li:where(:not(.not-prose, .not-prose *)) {
+  margin-block: 0.75em;
+  color: var(--prose-body);
 }
-.prose :is(ol, ul) > li {
-	padding-inline-start: 0.375em;
+.prose :is(ol, ul):where(:not(.not-prose, .not-prose *)) > li {
+  padding-inline-start: 0.25em;
+  /* line-height: round(1.65em, 2px); */
+}
+.prose :is(ol, ul) > li:where(:not(.not-prose, .not-prose *))::marker {
+  color: color-mix(in srgb, var(--prose-body) 50%, transparent);
 }
 .prose :is(ul, ol) :is(ul, ol) {
-	margin-top: 0.75em;
-	margin-bottom: 0.75em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
 
 /* --- Blockquotes --- */
-.prose blockquote {
-	font-style: italic;
-	font-family: var(--font-serif);
-	color: var(--prose-quotes);
-	font-size: var(--font-size-xl);
-	line-height: var(--line-height--text-xl);
-	border-inline-start-width: 0.25rem;
-	border-inline-start-color: var(--prose-quote-borders);
-	margin-top: 1.6em;
-	margin-bottom: 1.6em;
-	padding-inline-start: 1em;
+.prose blockquote:where(:not(.not-prose, .not-prose *)) {
+  @apply font-pixel text-xl italic;
+  color: var(--prose-quotes);
+  border-inline-start-width: 0.25rem;
+  border-inline-start-color: var(--prose-quote-borders);
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-inline-start: 1em;
 }
 /* --- Inline code --- */
-.prose :not(pre) > code {
-	color: var(--prose-code);
-	background: var(--prose-code-bg);
-	font-size: 0.875em;
-	font-weight: 500;
-	border-radius: 0.375rem;
-	padding: 0.2em 0.4em;
+.prose code:where(:not(.not-prose, .not-prose *, pre > *)) {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  font-size: 0.875em;
+  line-height: 1;
+  padding: 0.2em 0.2em 0.15em 0.2em;
+  color: var(--prose-code);
+  background: var(--prose-code-bg);
+  border-radius: 0.275em;
+  /* font-size: 0.8125em; */
+  /* padding: round(0.25ex, 0.5px) round(0.5ex, 0.5px) round(0.125ex, 0.5px) round(0.5ex, 0.5px); */
+  /* line-height: 1lh; */
+  font-family: var(--font-mono);
 }
 
 /* --- Code blocks --- */
-.prose pre {
-	overflow-x: auto;
-	font-size: 0.875em;
-	line-height: 1.7;
-	margin-top: 1.7em;
-	margin-bottom: 1.7em;
-	border-radius: 0.75rem;
-	padding: 0.85em 1.15em;
-	background: var(--prose-code-bg);
+.prose pre:where(:not(.not-prose, .not-prose *)) {
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.7;
+  margin-top: 1.7em;
+  margin-bottom: 1.7em;
+  border-radius: 0.75rem;
+  padding: 0.85em 1.15em;
+  background: var(--prose-code-bg);
 }
-.prose pre code {
-	background: transparent;
-	border-width: 0;
-	border-radius: 0;
-	padding: 0;
-	font-weight: inherit;
-	color: inherit;
-	font-size: inherit;
-	line-height: inherit;
+.prose pre code:where(:not(.not-prose, .not-prose *)) {
+  background: transparent;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 /* --- Horizontal rules --- */
-.prose hr {
-	border-color: var(--prose-hr);
-	margin-top: 3em;
-	margin-bottom: 3em;
+.prose hr:where(:not(.not-prose, .not-prose *)) {
+  border-color: var(--prose-hr);
+  margin-top: 3em;
+  margin-bottom: 3em;
 }
 
 /* --- Images --- */
 .prose [data-media] {
-	margin-top: 2em;
-	margin-bottom: 2em;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }
 .prose [data-media] img {
-	width: 100%;
+  width: 100%;
 }
 
-/* --- Media Chrome video player --- */
+/* --- Media Chrome video player ---
 media-controller {
-	--media-range-track-height: 4px;
-	--media-range-track-border-radius: 2px;
-	--media-control-background: rgb(0 0 0 / 0.6);
-	--media-control-hover-background: rgb(0 0 0 / 0.75);
-	--media-primary-color: #fff;
-	--media-secondary-color: rgb(255 255 255 / 0.8);
+  --media-range-track-height: 4px;
+  --media-range-track-border-radius: 2px;
+  --media-control-background: rgb(0 0 0 / 0.6);
+  --media-control-hover-background: rgb(0 0 0 / 0.75);
+  --media-primary-color: #fff;
+  --media-secondary-color: rgb(255 255 255 / 0.8);
 }
 media-control-bar {
-	border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-	overflow: hidden;
-}
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+  overflow: hidden;
+} */
 
 /* --- Figures & captions --- */
-.prose figcaption {
-	color: var(--prose-captions);
-	font-size: 0.875em;
-	line-height: 1.4;
-	margin-top: 0.85em;
+.prose figcaption:where(:not(.not-prose, .not-prose *)) {
+  color: var(--prose-captions);
+  font-size: 0.75em;
+  line-height: 1.4;
+  margin-top: 0.85em;
 }
 .prose figure > * {
-	margin-top: 0;
-	margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* --- Tables --- */
-.prose table {
-	width: 100%;
-	table-layout: auto;
-	margin-top: 2em;
-	margin-bottom: 2em;
-	font-size: 0.875em;
-	line-height: 1.7;
+.prose table:where(:not(.not-prose, .not-prose *)) {
+  width: 100%;
+  table-layout: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 0.875em;
+  line-height: 1.7;
 }
-.prose thead {
-	border-bottom-width: 1px;
-	border-bottom-color: var(--prose-th-borders);
+.prose thead:where(:not(.not-prose, .not-prose *)) {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--prose-th-borders);
 }
-.prose thead th {
-	color: var(--prose-headings);
-	font-weight: 600;
-	vertical-align: bottom;
-	padding-inline-end: 0.57em;
-	padding-bottom: 0.57em;
-	padding-inline-start: 0.57em;
+.prose thead th:where(:not(.not-prose, .not-prose *)) {
+  color: var(--prose-headings);
+  font-weight: 500;
+  /* font-size: 0.875em; */
+  line-height: 1;
+  vertical-align: bottom;
+  padding-top: 0;
+  padding-inline-end: 0.57em;
+  padding-bottom: 0.57em;
+  padding-inline-start: 0.57em;
 }
-.prose tbody tr {
-	border-bottom-width: 1px;
-	border-bottom-color: var(--prose-td-borders);
+.prose tbody tr:where(:not(.not-prose, .not-prose *)) {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--prose-td-borders);
 }
-.prose tbody tr:last-child {
-	border-bottom-width: 0;
+.prose tbody tr:where(:not(.not-prose, .not-prose *)):last-child {
+  border-bottom-width: 0;
 }
-.prose tbody td {
-	vertical-align: baseline;
+.prose tbody td:where(:not(.not-prose, .not-prose *)) {
+  vertical-align: baseline;
 }
-.prose tfoot {
-	border-top-width: 1px;
-	border-top-color: var(--prose-th-borders);
+.prose tfoot:where(:not(.not-prose, .not-prose *)) {
+  border-top-width: 1px;
+  border-top-color: var(--prose-th-borders);
 }
-.prose tfoot td {
-	vertical-align: top;
+.prose tfoot td:where(:not(.not-prose, .not-prose *)) {
+  vertical-align: top;
 }
-.prose :is(th, td) {
-	text-align: start;
-	padding-top: 0.57em;
-	padding-inline-end: 0.57em;
-	padding-bottom: 0.57em;
-	padding-inline-start: 0.57em;
+.prose :is(th, td):where(:not(.not-prose, .not-prose *)) {
+  text-align: start;
+  padding-top: round(0.75em, 4px);
+  padding-bottom: round(0.75em, 4px);
+  padding-inline-end: round(0.75em, 4px);
+  padding-inline-start: round(0.75em, 4px);
 }
-.prose :is(thead th, tbody td, tfoot td):first-child {
-	padding-inline-start: 0;
+.prose :is(thead th, tbody td, tfoot td):where(:not(.not-prose, .not-prose *)):first-child {
+  padding-inline-start: 0;
 }
-.prose :is(thead th, tbody td, tfoot td):last-child {
-	padding-inline-end: 0;
+.prose :is(thead th, tbody td, tfoot td):where(:not(.not-prose, .not-prose *)):last-child {
+  padding-inline-end: 0;
 }
 
 /* --- Task lists (GFM) --- */
-.prose ul:has(> li > input[type="checkbox"]) {
-	list-style-type: none;
-	padding-inline-start: 0;
+.prose ul:has(> li > input[type="checkbox"]):where(:not(.not-prose, .not-prose *)) {
+  list-style-type: none;
+  padding-inline-start: 0;
 }
-.prose li > input[type="checkbox"] {
-	margin-inline-end: 0.5em;
+.prose li > input[type="checkbox"]:where(:not(.not-prose, .not-prose *)) {
+  margin-inline-end: 0.5em;
 }
 
 /* --- Strikethrough (GFM) --- */
-.prose del {
-	opacity: 0.65;
+.prose del:where(:not(.not-prose, .not-prose *)) {
+  opacity: 0.65;
 }
 
 /* --- First/last child margin collapse --- */
-.prose > :first-child {
-	margin-top: 0;
+.prose > *:first-child,
+.prose p:first-of-type {
+  margin-top: 0;
 }
-.prose > :last-child {
-	margin-bottom: 0;
+.prose > :last-child,
+.prose p:last-of-type {
+  margin-bottom: 0;
 }
 
 /*
  * Escape hatch: .not-prose elements opt out of prose typography.
  * Only resets the prose-specific properties, not all styles.
  */
-.prose > .not-prose {
-	margin-top: 2em;
-	margin-bottom: 2em;
+.prose > :where(:not(.not-prose, .not-prose *)) + :where(:not(.not-prose, .not-prose *)) {
+  @apply mt-6;
 }
-.prose .not-prose p,
+/* .prose .not-prose p,
 .prose .not-prose h2,
 .prose .not-prose h3,
 .prose .not-prose h4,
@@ -305,13 +349,13 @@ media-control-bar {
 .prose .not-prose hr,
 .prose .not-prose table,
 .prose .not-prose img {
-	margin: 0;
-	padding: 0;
-	font-size: inherit;
-	font-weight: inherit;
-	line-height: inherit;
-	letter-spacing: inherit;
-	color: inherit;
-	list-style-type: none;
-	border: none;
-}
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  list-style-type: none;
+  border: none;
+} */

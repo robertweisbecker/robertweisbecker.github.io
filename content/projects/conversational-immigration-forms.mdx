@@ -55,15 +55,15 @@ I next experimented with three different types of conversational UIs: chatbots, 
 Using <LinkOut href="https://chatfuel.com/" text="ChatFuel" />, I created a <LinkOut href="https://developers.facebook.com/blog/post/2016/04/12/bots-for-messenger/" text="Facebook Messenger chatbot" /> that simulated human conversation by conditionally returning specific strings based on user prompts. This let me experiment with branching questions and friendly, casual language.
 
 <Video>
-	<source src="/assets/thesis/chatbot.mov" />
+  <source src="/assets/thesis/chatbot.mov" />
 </Video>
 
-### Wizard<span className="text-muted-foreground">(ish)</span>
+### Wizard
 
 I also employed <LinkOut href="https://twinery.org/" text="Twine" />, an open-source tool for creating text-based narrative experiences, to mimic the step-by-step format of a wizard. The output was sparse in terms of look & feel, but Twine's branching logic and visual flow editor kept interactions on rails, unlike the chatbot, which could get stumped by unexpected or irrelevant input.
 
 <Video>
-	<source src="/assets/thesis/twine.mov" />
+  <source src="/assets/thesis/twine.mov" />
 </Video>
 
 <ImageModal src="/assets/thesis/twine-flow.png" caption="Twine interface with branching conditions" />
@@ -73,7 +73,7 @@ I also employed <LinkOut href="https://twinery.org/" text="Twine" />, an open-so
 I also experimented with a hybrid UI that allows toggling between chat and traditional form modes. Unfortunately, its complexity proved too difficult to replicate using either design software or my limited Javascript skills. Since my explorations failed to represent the entirety of the N-400 form, I was forced to scrap it for testing. So it goes.
 
 <Video>
-	<source src="/assets/thesis/toggle.mov" />
+  <source src="/assets/thesis/toggle.mov" />
 </Video>
 
 ## Testing
@@ -122,18 +122,18 @@ My aim was to instill confidence by increasing the fidelity of the prototype and
 - Conform to users' mental models → don't rely exclusively upon chat
 
 <LayoutGrid variant="threeUp">
-	<img src="/assets/thesis/thesis-device-img-01.png" alt="Device screenshot 1" />
-	<img src="/assets/thesis/thesis-device-img-03.png" alt="Device screenshot 2" />
-	<img src="/assets/thesis/thesis-device-img-02.png" alt="Device screenshot 3" />
-	<Video loop autoPlay>
-		<source src="/assets/thesis/thesis-v2-1.mov" />
-	</Video>
-	<Video loop autoPlay>
-		<source src="/assets/thesis/thesis-v2-2.mov" />
-	</Video>
-	<Video loop autoPlay>
-		<source src="/assets/thesis/thesis-v2-3.mov" />
-	</Video>
+  <img src="/assets/thesis/thesis-device-img-01.png" alt="Device screenshot 1" />
+  <img src="/assets/thesis/thesis-device-img-03.png" alt="Device screenshot 2" />
+  <img src="/assets/thesis/thesis-device-img-02.png" alt="Device screenshot 3" />
+  <Video>
+    <source src="/assets/thesis/thesis-v2-1.mov" />
+  </Video>
+  <Video>
+    <source src="/assets/thesis/thesis-v2-2.mov" />
+  </Video>
+  <Video>
+    <source src="/assets/thesis/thesis-v2-3.mov" />
+  </Video>
 </LayoutGrid>
 
 ## Addendum
@@ -144,7 +144,7 @@ In 2018, they released <LinkOut href="https://www.uscis.gov/tools/meet-emma-our-
 
 In September 2021, USCIS also released the <LinkOut href="https://www.uscis.gov/citizenship-resource-center/learn-about-citizenship/naturalization-eligibility" text="Naturalization Eligibility Tool" />, an interactive questionnaire that potential applicants can use to determine their eligibility criteria. And — you guessed it — the tool presents abridged versions of N-400 Eligibility Checklist questions in a wizard format.
 
-<LayoutGrid variant="twoUp">
-	<ImageModal src="/assets/thesis/emma.png" caption="Emma, USCIS's virtual assistant" />
-	<ImageModal src="/assets/thesis/tool.png" caption="Naturalization Eligibility Tool" />
+<LayoutGrid variant="oneThird">
+  <ImageModal src="/assets/thesis/emma.png" caption="Emma, USCIS's virtual assistant" />
+  <ImageModal src="/assets/thesis/tool.png" caption="Naturalization Eligibility Tool" />
 </LayoutGrid>

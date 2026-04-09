@@ -1,14 +1,6 @@
-import { cn } from "@/lib/utils";
+  import { cn } from "@/lib/utils"
 
-type Variant =
-  | "two"
-  | "three"
-  | "twoUp"
-  | "threeUp"
-  | "fourUp"
-  | "fit"
-  | "oneThird"
-  | "twoThirds";
+type Variant = "two" | "three" | "twoUp" | "threeUp" | "fourUp" | "fit" | "oneThird" | "twoThirds";
 
 const variantClasses: Record<Variant, string> = {
   two: "grid-cols-2",
@@ -27,15 +19,11 @@ interface LayoutGridProps {
   children: React.ReactNode;
 }
 
-export function LayoutGrid({
-  variant = "twoUp",
-  className,
-  children,
-}: LayoutGridProps) {
+export function LayoutGrid({ variant = "twoUp", className, children }: LayoutGridProps) {
   return (
     <div
       className={cn(
-        "grid items-start gap-4 sm:gap-10 md:gap-12",
+        "grid items-start gap-4 group-[.prose]/article:mx-auto group-[.prose]/article:max-w-prose lg:gap-8",
         variantClasses[variant],
         className
       )}

@@ -1,6 +1,6 @@
 ---
-title: Forge
-subtitle: Building (and re-building) the builder
+title: Everfi Forge
+subtitle: Refreshing our internal learning content creation & management app
 role: Design Systems Lead
 date: Winter - Spring 2017
 team:
@@ -13,104 +13,74 @@ team:
 
 <Image src="/assets/forge/forge-after.png" />
 
-## Context
+Forge is the primary tool used by Everfi's implementation team, who translate course designs into interactive e-learning products.
 
-Forge is the primary tool used by Everfi's implementation team, who translate course designs into interactive e-learning products. It's a Git-connected Electron app that provides an interface for a local development environment. Forge leverages the Everfi SDK and component library (aka [Furnace](/furnace)) to allow for course creation and ongoing maintenance.
+It's a Git-connected Electron app that provides an interface for course creation using the Everfi SDK and component library (aka [Furnace](/furnace)).
 
-For much of its existence, Forge was largely a JSON content editing tool with a minimal interface. However, the launch of Furnace in early 2020 hastened adoption by the product team, and requests for more powerful WYSIWYG-like features quickly outpaced design capacity.
+Forge, however, started out as a JSON content editing tool with a minimal interface. But the launch of Furnace in early 2020 hastened adoption by the product team, and requests for more powerful WYSIWYG-like features quickly outpaced design and engineering capacity.
 
-The pace of iteration left the app without polish and well-considered UX, and its rough edges began to show.
+This pace of iteration left the app without polish and well-considered UX, and its rough edges began to show. It needed a refresh with strong foundations, taking cues from our other design system initiatives.
 
-## Areas of Focus
+---
 
-### Color & Contrast
+## Color
 
-In lieu of shadows, increasing lightness can visually communicate a surface as having been elevated. This is especially important in Forge, given the hierarchical parent-child nature of its editor views.
+<ImageModal src="/assets/forge/colors-all.png" caption="Full color palette updates" />
 
-Just one problem — Forge's styles included only five neutrals whose lightness topped out too quickly, making text virtually illegible after a few child views.
+In lieu of shadows, increasing lightness can visually communicate a surface as elevated. This is especially important in Forge, given the hierarchical parent-child nature of its editor views.
 
-Additional variables that fell outside the color scale were also added to the SCSS, leading to inconsistencies like `$interactive-925`.
+Just one problem: Forge's styles included only five neutrals whose lightness topped out too quickly, making text virtually illegible after a few child views.
 
-<LayoutGrid variant="twoUp">
-	<ImageModal
-		src="/assets/forge/colors-neutral.png"
-		caption="Neutrals before and after"
-	/>
-	<ImageModal
-		src="/assets/forge/colors-teal.png"
-		caption="Primary colors before and after"
-	/>
-</LayoutGrid>
+<ImageModal src="/assets/forge/colors-neutral.png" caption="Neutrals before and after" />
+
+Additional variables that fell outside the color scale were also added over the years, leading to oddities like `$interactive-955`.
+
+<ImageModal src="/assets/forge/colors-teal.png" caption="Primary colors before and after" />
 
 The new color scale includes values ranging from 100 to 900, plus white and black. Each value falls within a similar lightness range as its siblings, so we can apply colors from different palettes in a more predictable and accessible manner.
-
-<ImageModal
-	src="/assets/forge/colors-all.png"
-	caption="Full color palette updates"
-/>
 
 Applied to typography and surfaces, the new color palettes fully resolved any contrast concerns:
 
 <LayoutGrid variant="twoUp">
-	<ImageModal src="/assets/forge/contrast1.png" caption="Darker darks!" />
-	<ImageModal src="/assets/forge/contrast2.png" caption="Lighter lights!" />
+  <ImageModal src="/assets/forge/contrast1.png" caption="Darker darks!" />
+  <ImageModal src="/assets/forge/contrast2.png" caption="Lighter lights!" />
 </LayoutGrid>
 
 The expanded color system also allowed more nuanced styling: consistent states, additional variants, and a more distinct difference between color modes.
 
 <ImageModal src="/assets/forge/button-modes.png" />
 
-<ImageToggle
-	before="/assets/forge/dark.png"
-	after="/assets/forge/light.png"
-	tab1="Dark Mode"
-	tab2="Light Mode"
-/>
+<ImageToggle before="/assets/forge/dark.png" after="/assets/forge/light.png" tab1="Dark Mode" tab2="Light Mode" />
 
-### Density
+## Density
 
 <ImageModal
-	src="/assets/forge/type.png"
-	caption="New type scale, with variable names shifted from HTML references to semantics"
+  src="/assets/forge/type.png"
+  caption="New type scale, with variable names shifted from HTML references to semantics"
 />
 
-<ImageModal
-	src="/assets/forge/inputs.png"
-	caption="Dense spacing and type applied to input fields"
-/>
+<ImageModal src="/assets/forge/inputs.png" caption="Dense spacing and type applied to input fields" />
 
-<ImageModal
-	src="/assets/forge/density-compare.png"
-	caption="60% shorter (difference in red)"
-/>
+<ImageModal src="/assets/forge/density-compare.png" caption="60% shorter (difference in red)" />
 
-### Navigation
+## Navigation
 
 A crucial aspect of Forge's utility derives from having its edit views auto-generated by page and component schema.
 But organization that makes sense in code doesn't always make sense in a UI.
 
 Edit forms unrelated to content now overtakes the preview. There, you're editing the course itself — not the page you're looking at — free real estate that reinforces the idea of editing a higher-level view.
 
-<ImageToggle
-	before="/assets/forge/edit-activity-before.png"
-	after="/assets/forge/edit-activity-after.png"
-/>
+<ImageToggle before="/assets/forge/edit-activity-before.png" after="/assets/forge/edit-activity-after.png" />
 
 This also benefitted performance and usability, since the old edit UI always opened another panel adjacent to the navigation, causing the live preview to resize and force a refresh, losing context.
 
-<ImageToggle
-	before="/assets/forge/edit-page-before.png"
-	after="/assets/forge/edit-page-after.png"
-/>
+<ImageToggle before="/assets/forge/edit-page-before.png" after="/assets/forge/edit-page-after.png" />
 
-Page actions move a hidden context menu on list items to a dedicated dropdown on the parent view. No longer split between nav levels, all editing moves to the same pane.
+Page actions move from a hidden context menu on list items to a dedicated dropdown on the parent view. No longer split between nav levels, all editing moves to the same pane.
 
-<ImageModal
-	src="/assets/forge/sidebar.png"
-	caption="Before & after of menu hierarchy and actions"
-/>
+<ImageModal src="/assets/forge/sidebar.png" caption="Before & after of menu hierarchy and actions" />
 
-### Standardization
+## Standardization
 
 A look at some components with standardized styling:
 
@@ -122,23 +92,19 @@ A look at some components with standardized styling:
 
 <ImageModal src="/assets/forge/dialogs.png" caption="Dialogs" />
 
-### Custom widgets
+## Custom Components
 
 <LayoutGrid variant="twoUp">
-	<ImageModal src="/assets/forge/widgets.png" caption="Utility class widgets" />
-	<ImageModal src="/assets/forge/theme-picker.png" caption="Theme picker" />
+  <ImageModal src="/assets/forge/widgets.png" caption="Utility class widgets" />
+  <ImageModal src="/assets/forge/theme-picker.png" caption="Theme picker" />
 </LayoutGrid>
 
-<ImageModal
-	src="/assets/forge/locale.png"
-	caption="In-context locale string editing"
-/>
+<ImageModal src="/assets/forge/locale.png" caption="In-context locale string editing" />
 
-<ImageModal
-	src="/assets/forge/template-logic.png"
-	caption="Template builder prototypes"
-/>
+<ImageModal src="/assets/forge/template-logic.png" caption="Template builder prototypes" />
 
-And, for good measure, I also created icons for the production and development versions of the app:
+## App Icon
+
+And, for good measure, I also created app icons for both the production and development builds using our new colors.
 
 <img src="/assets/forge/app-icon.png" />

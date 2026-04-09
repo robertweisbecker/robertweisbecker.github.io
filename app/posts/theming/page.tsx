@@ -1,0 +1,263 @@
+"use client";
+
+  import { BackButton } from "@/components/back-button"
+  import { CodeBlock } from "@/components/code-block"
+  import { CheckIconStraight } from "@/components/icons"
+  import { Theme } from "@/components/theme"
+  import { ThemeResetAllButton,ThemeSettingsPanel } from "@/components/theme-settings"
+  import { Alert } from "@/components/ui/alert"
+  import { Badge } from "@/components/ui/badge"
+  import { Button } from "@/components/ui/button"
+  import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle
+  } from "@/components/ui/card"
+  import { Code } from "@/components/ui/code"
+  import { Heading } from "@/components/ui/heading"
+  import { Separator } from "@/components/ui/separator"
+  import { IconHeart,IconSend,IconSettings,IconTrash } from "@tabler/icons-react"
+  import Link from "next/link"
+
+function ButtonShowcase() {
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-center gap-3">
+        <Button variant="default" size="sm">
+          <IconSend data-icon="inline-start" />
+          Send
+        </Button>
+        <Button variant="secondary" size="sm">
+          <IconSettings data-icon="inline-start" />
+          Settings
+        </Button>
+        <Button variant="outline" size="sm">
+          <IconHeart data-icon="inline-start" />
+          Like
+        </Button>
+        <Button variant="success" size="sm">
+          <CheckIconStraight className="size-3" data-icon="inline-start" />
+          Success
+        </Button>
+        <Button variant="destructive" size="sm">
+          <IconTrash data-icon="inline-start" />
+          Delete
+        </Button>
+      </div>
+      <Separator />
+      <div className="flex flex-wrap items-center gap-2">
+        Badge
+        <Badge variant="outline">Outline</Badge>
+        <Badge variant="info">Info</Badge>
+        <Badge variant="success">Success</Badge>
+        <Badge variant="warning">Warning</Badge>
+        <Badge variant="error">Error</Badge>
+      </div>
+      <Separator />
+      <div className="flex flex-col gap-2">
+        <Alert variant="neutral">Neutral</Alert>
+        <Alert variant="secondary">Secondary</Alert>
+        <Alert variant="info">Info</Alert>
+        <Alert variant="success">Success</Alert>
+        <Alert variant="warning">Warning</Alert>
+        <Alert variant="error">Error</Alert>
+      </div>
+    </div>
+  );
+}
+
+export default function ThemingPostPage() {
+  return (
+    <div className="container mx-auto flex max-w-4xl flex-col items-start gap-6">
+      <div className="mx-auto flex max-w-xl flex-col gap-6">
+        <BackButton href="/posts" />
+
+        <section className="flex flex-col gap-4">
+          <h1 className="text-xl font-medium">Theming</h1>
+          <p>
+            A working demo of the theming described in my writeup of the{" "}
+            <Link href="/projects/oklch" className="link">
+              okLCH color system
+            </Link>
+            . While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so we end up
+            with a pretty close approximation.
+          </p>
+          <p>
+            You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the page,
+            but you can always change the whole site&apos;s theme in the header if you land on something you like.
+          </p>
+        </section>
+        <section className="flex flex-col gap-2"></section>
+      </div>
+
+      <Theme className="relative -mx-2 flex w-full flex-col gap-2 rounded-lg border-2 border-dotted bg-[canvas] p-2">
+        <Code variant="plain" className="absolute -top-3">{`<Theme/>`}</Code>
+        {/* <p className="max-w-prose text-xs text-muted-foreground">
+          Portaled elements (ie. popups) won't inherit theming from within a nested theme, unless a corresponding
+          provider is present. Otherwise, they'll use the global theme.
+        </p> */}
+
+        <div className="grid w-full items-stretch gap-4 sm:grid-cols-5">
+          <Card className="sm:col-span-2" variant="muted">
+            <CardHeader>
+              <CardTitle className="text-sm">Settings</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ThemeSettingsPanel />
+            </CardContent>
+            <CardFooter>
+              <ThemeResetAllButton size="md" variant="outline" className="w-full flex-1" />
+            </CardFooter>
+          </Card>
+
+          <div className="border-s p-3 sm:col-span-3">
+            <ButtonShowcase />
+          </div>
+        </div>
+      </Theme>
+
+      {/* <p>
+        As a thought experiment, I wanted to constrain myself to using only the out-of-the-box shadcn tokens. I
+        understand their purpose (<em>here's dark mode from Next Themes for your vibe-coded dashboard app</em>), and
+        their history (a side project adding defaults for Radix), but they've long befuddled me. I guess that's why he
+        added Create. Anyway, they're too limited for any real use, and a tad confusing. Does secondary mean "secondary
+        button" or "second background color"? Why is it always the same as "accent"? Why is "muted" darker in light mode
+        and lighter in dark mode? Shouldn't it just always be quieter? Doesn't having{" "}
+        <Code variant="plain">dark:bg-input/10</Code> on a button kind of defeat the point of semantic tokens?
+      </p> */}
+      <div className="mx-auto flex max-w-xl flex-col gap-6">
+        {/* ── How it works ──────────────────────────────────── */}
+        <section>
+          <Heading level={2}>How it works</Heading>
+          <p className="text-muted-foreground">
+            Colors are controlled by <Code variant="plain">data-hue</Code> and <Code variant="plain">data-neutral</Code>{" "}
+            attributes on the <Code variant="inline">{`<Theme>`}</Code> component, each of which assigns a given color
+            ramp to the alias variables that feed into the theme. These will cascade down from any ancestor, so you can
+            scope overrides to a section of the page.
+          </p>
+          <div className="prose">
+            <ul>
+              <li>
+                <Code variant="plain">colors.css</Code>: raw okLCH colors
+              </li>
+              <li>
+                <Code variant="plain">hues.css</Code>: alias scales for hue and neutral
+              </li>
+              <li>
+                <Code variant="plain">:root</Code> → <Code variant="plain">[data-theme]</Code> →{" "}
+                <Code variant="plain">[data-hue]</Code> → <Code variant="plain">[data-neutral]</Code>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ── Colors ──────────────────────────────────────── */}
+        <section className="flex flex-col gap-2">
+          <Heading level={3}>Colors</Heading>
+
+          <div className="flex flex-col gap-4">
+            <p className="text-muted-foreground">
+              Raw oklch palettes are registered with Tailwind in <Code variant="plain">colors.css</Code>, making them
+              available as both CSS variables and utility classes (<Code variant="plain">bg-ruby-500</Code>,{" "}
+              <Code variant="plain">text-sand-200</Code>, etc.).
+            </p>
+            <p className="text-muted-foreground">
+              Two alias scales — <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code> — act
+              as indirection layers. By default they point to the <Code variant="plain">sand</Code> palette, but setting{" "}
+              <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps
+              the entire scale.
+            </p>
+            <Heading level={4}>File structure</Heading>
+            <CodeBlock
+              language="text"
+              code={`app/
+├─ colors.css             // ← raw oklch palettes (registered with @theme)
+├─ hues.css               // ← --hue-* / --neutral-* aliases + data-attribute overrides
+├─ globals.css            // ← semantic tokens + radius scale (on :root, [data-theme])
+components/
+├─ theme.tsx              // ← <Theme> context provider (renders data-* attrs + inline --radius)
+├─ theme-settings.tsx     // ← settings panel UI (hue, neutral, radius controls)`}
+            />
+
+            <CodeBlock
+              filename="hues.css"
+              language="css"
+              code={`:where(:root) {
+  --neutral-25:  var(--color-sand-25);
+  /* … */
+  --neutral-975: var(--color-sand-975);
+
+  --hue-50:  var(--neutral-50);
+  /* … hues range 50—975 */
+  --hue-975: var(--neutral-975);
+}
+
+[data-hue="blue"] {
+  --hue-50:  var(--color-blue-50);
+  /* … */
+  --hue-975: var(--color-blue-975);
+}`}
+            />
+            <Heading level={4}>Semantic tokens</Heading>
+            <p className="text-muted-foreground">
+              Semantic tokens like <Code variant="plain">--primary</Code>, <Code variant="plain">--background</Code>,
+              and <Code variant="plain">--ring</Code> are declared on <Code variant="plain">:root, [data-theme]</Code>{" "}
+              and reference these aliases. Because <Code variant="plain">[data-theme]</Code> is in the selector, the
+              tokens re-evaluate whenever hue or neutral variables are overridden on a descendant.
+            </p>
+
+            <CodeBlock
+              filename="globals.css"
+              language="css"
+              code={`:root,
+[data-theme] {
+  --primary:    var(--hue-500);
+  --secondary:  var(--hue-200);
+  --background: var(--neutral-25);
+  --foreground: var(--neutral-900);
+  --ring:       var(--hue-500);
+  /* … */
+}`}
+            />
+          </div>
+        </section>
+        {/* ── Radius ──────────────────────────────────────── */}
+        <section className="flex flex-col gap-2">
+          <Heading level={3}>Radius</Heading>
+          <p>
+            Again, constraining myself to shadcn here. No real difference except I made the base radius = 10 for easier
+            math, and I wanted to play with odd-numbered radii.
+          </p>
+          <p>
+            So you have the <Code variant="plain">--radius</Code> base value with these odd multipliers. Instances of{" "}
+            <Code variant="plain">&lt;Theme&gt;</Code> will inject a new <Code variant="plain">--radius</Code> CSS
+            variable, so updated values cascade down.
+          </p>
+
+          <CodeBlock
+            filename="globals.css"
+            language="css"
+            code={`:root,
+[data-theme] {
+  --radius-xs:  calc(var(--radius) * 0.3);
+  --radius-sm:  calc(var(--radius) * 0.5);
+  --radius-md:  calc(var(--radius) * 0.7);
+  --radius-lg:  calc(var(--radius) * 0.9);
+  --radius-xl:  calc(var(--radius) * 1.3);
+  --radius-2xl: calc(var(--radius) * 1.7);
+  --radius-3xl: calc(var(--radius) * 2.1);
+  --radius-4xl: calc(var(--radius) * 2.9);
+}`}
+          />
+
+          <p className="text-muted-foreground">
+            Components use these via Tailwind utilities like <Code variant="plain">rounded-md</Code>, so adjusting the
+            base value rescales every corner radius in the themed scope proportionally.
+          </p>
+        </section>
+      </div>
+    </div>
+  );
+}

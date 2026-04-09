@@ -1,0 +1,38 @@
+/* Sugar-high syntax highlighting tokens */
+:root {
+  --sh-class: var(--color-blue-700);
+  --sh-identifier: var(--neutral-800);
+  --sh-sign: var(--neutral-500);
+  --sh-property: var(--color-blue-600);
+  --sh-entity: var(--color-teal-600);
+  --sh-jsxliterals: var(--color-indigo-600);
+  --sh-string: var(--color-emerald-700);
+  --sh-keyword: var(--color-rose-600);
+  --sh-comment: --alpha(var(--color-muted-foreground) / 50%);
+}
+
+.dark {
+  --sh-class: var(--color-amber-400);
+  --sh-identifier: var(--foreground);
+  --sh-sign: var(--neutral-400);
+  --sh-property: var(--color-violet-300);
+  --sh-entity: var(--color-sky-300);
+  --sh-jsxliterals: var(--color-indigo-400);
+  --sh-string: var(--color-pink-300);
+  --sh-keyword: var(--color-rose-400);
+  --sh-comment: --alpha(var(--color-muted-foreground) / 50%);
+}
+
+.show-line-numbers {
+  & > code {
+    counter-reset: sh-line-number;
+  }
+
+  .sh__line::before {
+    counter-increment: sh-line-number 1;
+    content: counter(sh-line-number);
+    margin-inline-end: --spacing(4);
+    text-align: right;
+    color: --alpha(var(--color-muted-foreground) / 50%);
+  }
+}
