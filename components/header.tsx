@@ -1,32 +1,26 @@
 "use client";
 
-  import { ModeToggle } from "@/components/mode-toggle"
-  import { ThemeSettings } from "@/components/theme-settings"
-  import { useMediaQuery } from "@/hooks/use-media-query"
-  import { projects } from "@/lib/data/projects"
-  import { cn } from "@/lib/utils"
-  import {
-    IconBlobFilled,
-    IconChevronDown,
-    IconComponents,
-    IconNews,
-    IconTemplateFilled
-  } from "@tabler/icons-react"
-  import Link from "next/link"
-  import { usePathname } from "next/navigation"
-  import { Favicon } from "./icons"
-  import { Button } from "./ui/button"
-  import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuLink,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "./ui/dropdown-menu"
-  import { LinkButton } from "./ui/link-button"
+import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeSettings } from "@/components/theme-settings";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { projects } from "@/lib/data/projects";
+import { cn } from "@/lib/utils";
+import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconTemplateFilled } from "@tabler/icons-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Favicon } from "./icons";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuLink,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { LinkButton } from "./ui/link-button";
 
 export function Header() {
   const isMobile = useMediaQuery("max-md");
@@ -67,13 +61,6 @@ export function Header() {
               href="/components"
               aria-current={pathname === "/components" ? "true" : "false"}
             />
-            <HeaderButton
-              label="Posts"
-              icon={<IconTemplateFilled data-icon={isMobile ? null : "inline-start"} />}
-              hideTextOnMobile={true}
-              href="/posts"
-              aria-current={pathname.startsWith("/posts") ? "true" : "false"}
-            />
           </>
         )}
 
@@ -83,7 +70,7 @@ export function Header() {
             className="group/trigger text-muted-foreground"
             openOnHover={true}
           >
-            <span className="hidden md:block">Work</span>
+            <span className="hidden md:block">Projects</span>
             <span className="md:hidden">Menu</span>
             <IconChevronDown
               className={cn("rotate-0 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
@@ -128,7 +115,13 @@ export function Header() {
             )}
           </DropdownMenuContent>
         </DropdownMenu>
-
+        <HeaderButton
+          label="Posts"
+          icon={<IconTemplateFilled data-icon={isMobile ? null : "inline-start"} />}
+          hideTextOnMobile={true}
+          href="/posts"
+          aria-current={pathname.startsWith("/posts") ? "true" : "false"}
+        />
         <ThemeSettings className="ml-auto" />
         <ModeToggle />
       </div>
