@@ -94,19 +94,17 @@ export function Header() {
             <DropdownMenuSeparator className="md:hidden" />
 
             <DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="md:hidden">
-              <IconBlobFilled data-icon="inline-start" />
               Home
             </DropdownMenuItem>
             <DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="md:hidden">
-              <IconTemplateFilled data-icon="inline-start" />
               About
+            </DropdownMenuItem>
+            <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false} className="md:hidden">
+              <IconNews />
+              Posts
             </DropdownMenuItem>
             {process.env.NODE_ENV === "development" && (
               <>
-                <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false} className="md:hidden">
-                  <IconNews />
-                  Posts
-                </DropdownMenuItem>
                 <DropdownMenuItem render={<Link href="/components" />} nativeButton={false} className="md:hidden">
                   <IconComponents />
                   Components
@@ -117,7 +115,7 @@ export function Header() {
         </DropdownMenu>
         <HeaderButton
           label="Posts"
-          icon={<IconTemplateFilled data-icon={isMobile ? null : "inline-start"} />}
+          icon={<IconNews data-icon={isMobile ? null : "inline-start"} />}
           hideTextOnMobile={true}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
