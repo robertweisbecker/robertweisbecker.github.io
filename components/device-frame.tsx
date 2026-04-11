@@ -1,18 +1,12 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import {
-    IconAntennaBars5,
-    IconBatteryFilled,
-    IconChevronLeft,
-    IconDots,
-    IconWifi
-  } from "@tabler/icons-react"
-  import * as React from "react"
-  import { CopyButton } from "./ui/copy-button"
+import { cn } from "@/lib/utils";
+import { IconAntennaBars5, IconBatteryFilled, IconChevronLeft, IconDots, IconWifi } from "@tabler/icons-react";
+import * as React from "react";
+import { CopyButton } from "./ui/copy-button";
 
 const glassClass =
-  "flex h-[12cqw] w-[12cqw] items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/30 to-popover/60 bg-cover  text-foreground/80 shadow-[0px_1px_4.5px_rgba(0,0,0,0.1),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_.5px_.5px_1px_rgba(0,0,0,0.1),var(--shadow-lg)] backdrop-blur-xs bg-blend-difference";
+  "flex h-[12cqw] w-[12cqw] items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover  text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
 
 const timeFormatter = new Intl.DateTimeFormat(undefined, {
   hour: "numeric",
@@ -72,10 +66,10 @@ export function DeviceFrame({
         <div className="relative w-full bg-black p-[2.5%] shadow-lg outline-2 outline-neutral-600/40 [&]:rounded-[15cqw]">
           <div className="relative aspect-9/19.5 overflow-hidden [&]:rounded-[calc(15cqw-2.5cqw)]">
             <div className="border/50 absolute inset-0 rounded-[inherit] border bg-sidebar" />
-            <div className={cn("absolute inset-0", hasTopGutter && "pt-[10%]", hasBottomGutter && "pb-[20%]")}>
+            <div className={cn("absolute inset-0", hasTopGutter && "pt-[10%]", hasBottomGutter && "pb-[15%]")}>
               {children}
             </div>
-            <div className="via-smooth pointer-events-none absolute inset-x-0 bottom-0 h-[20%] w-full bg-linear-to-b from-transparent via-black/10 to-black/30 bg-blend-multiply" />
+            <div className="via-smooth pointer-events-none absolute inset-x-0 bottom-0 h-[25%] w-full bg-linear-to-b from-transparent via-black/5 to-black/20 bg-blend-multiply" />
             {/* <div className="via-smooth inset-inline-e-[2%] inset-inline-s-0 pointer-events-none absolute bottom-0 h-[20%] rounded-full from-success from-0% to-destructive mask-t-from-90% backdrop-blur-xl" /> */}
           </div>
 
@@ -107,11 +101,10 @@ export function DeviceFrame({
                 </div>
               </div>
               <div
-                className="absolute top-[2.5%] left-1/2 box-border flex h-[4%] w-[30%] -translate-x-1/2 transform items-center justify-between rounded-full bg-black px-2 shadow-border-xs outline-[0.5px] -outline-offset-3 outline-neutral-800"
+                className="absolute top-[2.5%] left-1/2 box-border flex h-[4%] w-[30%] -translate-x-1/2 transform items-center justify-between rounded-full bg-neutral-975 px-2 shadow-border-xs outline-[0.5px] -outline-offset-3 outline-neutral-700"
                 aria-hidden
               >
-                <div className="aspect-square h-[50%] rounded-full bg-muted/50 shadow-border-xs" />
-                <div className="aspect-square h-[50%] rounded-full bg-muted/50 shadow-border-xs" />
+                <div className="aspect-square h-[50%] rounded-full bg-linear-to-br from-neutral-900 to-neutral-800 shadow-border-xs ring ring-black dark:opacity-50" />
               </div>
             </>
           )}

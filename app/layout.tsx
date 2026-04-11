@@ -79,8 +79,8 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="root mx-auto scroll-pt-20 bg-background py-20">
-            {/* bg-[image:linear-gradient(to_bottom,var(--background)_50%,transparent_50%),repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[8px_8px] px-4 py-20 [--pattern-bg:var(--border)]/5 [--pattern-fg:var(--border)] */}
+          <main id="main" className="root mx-auto scroll-pt-20 bg-background px-4 py-20">
+            {/* bg-[image:linear-gradient(to_bottom,var(--background)_50%,transparent_50%),repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[8px_8px] [--pattern-bg:var(--border)]/5 [--pattern-fg:var(--border)] */}
             {/* <div
               className="absolute inset-0 z-0 max-h-[33vh]"
               style={{
@@ -100,7 +100,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          {process.env.NODE_ENV === "development" && <DevMeasurer />}
+          {/* {process.env.NODE_ENV === "development" && <DevMeasurer />} */}
           {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
         </ThemeProvider>
       </body>

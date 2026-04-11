@@ -1,22 +1,21 @@
 "use client";
 
-  import { Button as ButtonPrimitive } from "@base-ui/react/button"
-  import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
+import { Button as ButtonPrimitive } from "@base-ui/react/button";
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 
-  import { BackButton } from "@/components/back-button"
-  import { CodeBlock } from "@/components/code-block"
-  import { InfoIcon } from "@/components/icons"
-  import { Alert,AlertContent,AlertDescription } from "@/components/ui/alert"
-  import { Button } from "@/components/ui/button"
-  import { Card,CardContent,CardFooter,CardHeader } from "@/components/ui/card"
-  import { Code } from "@/components/ui/code"
-  import { Collapsible,CollapsibleContent,CollapsibleTrigger } from "@/components/ui/collapsible"
-  import { Heading } from "@/components/ui/heading"
-  import { Separator } from "@/components/ui/separator"
-  import { cn } from "@/lib/utils"
-  import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
-  import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group"
-  import { IconArrowRight } from "@tabler/icons-react"
+import { CodeBlock } from "@/components/code-block";
+import { InfoIcon } from "@/components/icons";
+import { Alert, AlertContent, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Code } from "@/components/ui/code";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Heading } from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
+import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
+import { IconArrowRight } from "@tabler/icons-react";
 
 const baseButton =
   "relative px-4 h-button font-medium border bg-background items-center justify-center inline-flex cursor-pointer rounded-md text-sm w-fit hover:bg-accent text-muted-foreground data-pressed:bg-current/2 hover:text-accent-foreground data-pressed:text-foreground";
@@ -31,19 +30,6 @@ const tabTriggerIndicatorClasses = [
   "after:absolute after:inset-0 after:origin-right after:translate-x-full data-active:after:bg-accent after:rounded-[inherit]",
   "data-[active]:after:translate-x-0 peer-data-[active]:after:-translate-x-full after:max-w-full not-data-active:overflow-hidden peer-data-[active]:after:overflow-visible after:opacity-0 data-active:after:opacity-100",
 ].join(" ");
-
-const overlapTabClasses = (tint: "blue" | "red") =>
-  [
-    "peer relative min-h-button min-w-0 flex-1 overflow-hidden",
-    "m-0 inline-flex cursor-pointer appearance-none bg-transparent p-0 font-inherit text-inherit",
-    afterTransition,
-    "after:absolute after:inset-0 after:origin-right after:translate-x-full after:translate-y-full after:select-none",
-    tint === "blue" ? "after:bg-blue-500/40" : "after:bg-red-500/40",
-    "peer-data-[active]:after:-translate-x-full data-[active]:after:translate-x-0",
-  ].join(" ");
-
-const bareTabPlain =
-  "m-0 inline-flex min-h-10 min-w-0 flex-1 cursor-pointer border-0 bg-transparent p-0 font-medium text-base";
 
 const recipeSnippet = `Tab list: Tab + Panel only (no Indicator).
 
@@ -62,9 +48,7 @@ Toggle peer: peer-data-pressed:after:-translate-x-full`;
 
 export default function TabIndicatorPostPage() {
   return (
-    <div className="prose mx-auto grid max-w-4xl">
-      <BackButton href="/posts" />
-      <h1>CSS Pseudo-indicators</h1>
+    <div className="prose mx-auto w-full max-w-2xl">
       <p>
         Inspired by a tweet about Radix UI tabs not supporting a dynamic indicator like Base UI, I had an idea to fake
         one with Tailwind trickery. It mostly works.
@@ -103,8 +87,8 @@ export default function TabIndicatorPostPage() {
       </Card>
       <p>
         Sure, this is trivial with Motion and layout animations...and, sure, you soon won&apos;t need this once Base UI
-        is stable...but in the meantime, you can spruce up your tabs with a little CSS. Here we&apos;re using Tailwind for
-        expediency, but plain old CSS will do the trick. No additional JavaScript required.
+        is stable...but in the meantime, you can spruce up your tabs with a little CSS. Here we&apos;re using Tailwind
+        for expediency, but plain old CSS will do the trick. No additional JavaScript required.
       </p>
       <p>
         The trick is to animate an <code>::after</code> element on each trigger, then use adjacent sibling selectors to
@@ -120,10 +104,9 @@ export default function TabIndicatorPostPage() {
 
       <h2>Step-by-step</h2>
       <p>
-        Before we do anything, let&apos;s consider the possible positions for the indicator. We&apos;re trying to animate
-        the indicator in from the left when a previous tab is active, and in from the right when a later tab is active.
-        So,
-        we have three possible positions:
+        Before we do anything, let&apos;s consider the possible positions for the indicator. We&apos;re trying to
+        animate the indicator in from the left when a previous tab is active, and in from the right when a later tab is
+        active. So, we have three possible positions:
       </p>
       <ol>
         <li>Active: lined up with its trigger</li>
@@ -210,15 +193,14 @@ export default function TabIndicatorPostPage() {
 
       <p>
         It&apos;s important to note that the <code>peer</code> class is only aware of previous siblings. So, we&apos;ll
-        use{" "}
-        <code>peer-data-pressed</code> to move the indicator into position whenever any of the triggers to the left are
-        pressed.
+        use <code>peer-data-pressed</code> to move the indicator into position whenever any of the triggers to the left
+        are pressed.
       </p>
       <p>
         You may be wondering how we account for cases where subsequent siblings are active if we can&apos;t target them
-        with <code>peer</code>...well, we don&apos;t have to! Since we initially set the indicator&apos;s position to the
-        right of the
-        trigger, it just hangs out at the edge of the next sibling when neither of the first two conditions are met.
+        with <code>peer</code>...well, we don&apos;t have to! Since we initially set the indicator&apos;s position to
+        the right of the trigger, it just hangs out at the edge of the next sibling when neither of the first two
+        conditions are met.
       </p>
       <p>
         So, let&apos;s swap its position when a peer is pressed by adding{" "}
@@ -286,8 +268,7 @@ export default function TabIndicatorPostPage() {
         </li>
         <li>
           And you&apos;ll also notice that the &quot;old&quot; indicator is animating away from our new trigger when we
-          press a
-          previous one.
+          press a previous one.
         </li>
       </ol>
 
@@ -323,7 +304,9 @@ export default function TabIndicatorPostPage() {
         </TogglePrimitive>
       </ToggleGroupPrimitive>
 
-      <p>Here&apos;s that same example unskewed, so you can see how they overlap when adjacent siblings are selected:</p>
+      <p>
+        Here&apos;s that same example unskewed, so you can see how they overlap when adjacent siblings are selected:
+      </p>
       <div className="not-prose rounded-xl bg-muted p-4 pb-14">
         <ToggleGroupPrimitive
           defaultValue={["1"]}
@@ -423,8 +406,7 @@ export default function TabIndicatorPostPage() {
         </li>
         <li>
           If you have a long tab label followed by a much shorter one, you may see the indicator&apos;s extra width
-          briefly
-          appear as it animates across the shorter tab. You can mitigate this by delaying the opacity transition
+          briefly appear as it animates across the shorter tab. You can mitigate this by delaying the opacity transition
           ever-so-slightly.
         </li>
         <li>

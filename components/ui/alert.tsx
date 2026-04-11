@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "group/alert not-prose relative grid w-full outline outline-border gap-0.5 rounded-lg shadow-xs p-3 py-2.5 text-start text-[0.8125rem] has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pe-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:min-h-lh *:[svg]:text-current/80 *:[svg:not([class*='size-'])]:size-4  dark:-outline-offset-1",
+  "group/alert not-prose relative grid w-full outline outline-border gap-0.5 rounded-lg shadow-[inset_0_1px_0_.5px_rgba(255,255,255,0.40),var(--shadow-sm)] dark:shadow-border-sm p-3 py-2.5 text-start text-[0.8125rem] has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pe-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:min-h-lh *:[svg]:text-current/80 *:[svg:not([class*='size-'])]:size-4  dark:-outline-offset-1",
   {
     variants: {
       variant: {

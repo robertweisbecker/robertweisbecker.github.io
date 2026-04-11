@@ -6,7 +6,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Form, TooltipPositionerProps } from "@base-ui/react";
-import { IconPlus, IconX } from "@tabler/icons-react";
+import { IconPlus, IconTrash, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { Field, FieldLabel } from "./ui/field";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "./ui/input-group";
@@ -132,10 +132,13 @@ export function ColorSwatchGroup({
                       <InputGroupAddon align="inline-end">
                         <InputGroupButton
                           type="submit"
-                          variant="secondary"
+                          variant="ghost"
                           // disabled={!isCustomColorValid}
                         >
-                          Add <Kbd data-icon="inline-end">⏎</Kbd>
+                          Add{" "}
+                          <Kbd data-icon="inline-end" className="translate-x-0.5">
+                            ↲
+                          </Kbd>
                         </InputGroupButton>
                       </InputGroupAddon>
                     </InputGroup>
@@ -143,7 +146,7 @@ export function ColorSwatchGroup({
                 </Form>
 
                 {customColors.length > 0 ? (
-                  <ScrollArea className="max-h-36">
+                  <ScrollArea className="max-h-36" showScrollbar scrollFade>
                     <ItemGroup>
                       {customColors.map((swatch) => (
                         <Item key={swatch.value} variant="muted" size="xs" className="rounded-md">
@@ -164,10 +167,11 @@ export function ColorSwatchGroup({
                             <Button
                               variant="ghost"
                               size="icon-xs"
+                              className="text-destructive"
                               onClick={() => removeCustomColor(swatch.value)}
                               aria-label={`Remove ${swatch.label}`}
                             >
-                              <IconX />
+                              <IconTrash />
                             </Button>
                           </ItemActions>
                         </Item>

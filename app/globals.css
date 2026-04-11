@@ -133,11 +133,11 @@
   --popover-foreground: var(--foreground);
   --primary: var(--hue-500);
   --primary-foreground: var(--color-white);
-  --secondary: var(--hue-75, var(--hue-50));
+  --secondary: var(--hue-100);
   --secondary-foreground: var(--hue-700);
-  --muted: var(--neutral-100);
+  --muted: var(--neutral-50);
   --muted-foreground: var(--neutral-600);
-  --accent: --alpha(var(--foreground) / 10%);
+  --accent: --alpha(var(--foreground) / 5%);
   --accent-foreground: var(--neutral-950);
   --destructive: var(--error-500);
   --destructive-foreground: var(--error-25);
@@ -152,9 +152,9 @@
   --warning: var(--warning-50);
   --warning-primary: var(--warning-500);
   --warning-foreground: var(--warning-700);
-  --border: --alpha(var(--foreground) / 10%);
-  --input: var(--neutral-300);
-  --ring: var(--info-400);
+  --border: --alpha(var(--foreground) / 12%);
+  --input: --alpha(var(--foreground) / 32%);
+  --ring: var(--hue-400);
   --sidebar: var(--neutral-50);
   --sidebar-foreground: color-mix(in srgb, var(--neutral-800) 64%, var(--sidebar));
   --sidebar-primary: var(--neutral-800);
@@ -178,7 +178,7 @@
 .dark [data-theme] {
   --background: var(--neutral-975);
   --foreground: var(--neutral-100);
-  --card: var(--neutral-900);
+  --card: var(--neutral-950);
   --card-foreground: var(--neutral-300);
   --popover: var(--neutral-800);
   --popover-foreground: var(--neutral-50);
@@ -186,9 +186,9 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-white) / 5%);
+  --muted: --alpha(var(--neutral-500) / 5%);
   --muted-foreground: var(--neutral-300);
-  --accent: --alpha(var(--neutral-600) / 10%);
+  --accent: --alpha(var(--neutral-400) / 10%);
   --accent-foreground: var(--neutral-100);
   --destructive: var(--error-500);
   --destructive-foreground: var(--error-25);
@@ -205,7 +205,7 @@
   --warning-primary: var(--warning-500);
   --border: --alpha(var(--color-white) / 8%);
   --input: --alpha(var(--color-white) / 24%);
-  --ring: var(--info-300);
+  --ring: var(--hue-300);
   --sidebar: color-mix(in srgb, var(--neutral-950) 97%, var(--color-white));
   --sidebar-foreground: color-mix(in srgb, var(--neutral-100) 64%, var(--sidebar));
   --sidebar-primary: var(--neutral-100);

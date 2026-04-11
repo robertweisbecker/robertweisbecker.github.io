@@ -1,12 +1,12 @@
-  import { BackButton } from "@/components/back-button"
-  import { Pagination } from "@/components/pagination"
-  import { ProjectMeta } from "@/components/project-meta"
-  import { TableOfContents } from "@/components/table-of-contents"
-  import { projects } from "@/lib/data/projects"
-  import { getProjectToc } from "@/lib/projects"
-  import type { ProjectFrontmatter } from "@/lib/types"
-  import { resolveNeighbors } from "@/lib/utils"
-  import React from "react"
+import { BackButton } from "@/components/back-button";
+import { Pagination } from "@/components/pagination";
+import { ProjectMeta } from "@/components/project-meta";
+import { TableOfContents } from "@/components/table-of-contents";
+import { projects } from "@/lib/data/projects";
+import { getProjectToc } from "@/lib/projects";
+import type { ProjectFrontmatter } from "@/lib/types";
+import { resolveNeighbors } from "@/lib/utils";
+import React from "react";
 
 export default async function MDXLayout({
   children,
@@ -29,7 +29,9 @@ export default async function MDXLayout({
   return (
     <div className="container mx-auto grid grid-cols-[14rem_minmax(0,1fr)_14rem] gap-8 px-4 max-lg:flex max-lg:flex-col">
       <aside className="not-prose self-start max-lg:hidden lg:sticky lg:top-24">
-        <BackButton href="/#projects">Projects</BackButton>
+        <BackButton href="/#projects" className="ms-1">
+          Projects
+        </BackButton>
         <TableOfContents toc={toc} />
       </aside>
 

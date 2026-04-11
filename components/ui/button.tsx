@@ -1,16 +1,16 @@
 "use client";
 
-  import { Button as ButtonPrimitive } from "@base-ui/react/button"
-  import { cva,type VariantProps } from "class-variance-authority"
+import { Button as ButtonPrimitive } from "@base-ui/react/button";
+import { cva, type VariantProps } from "class-variance-authority";
 
-  import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-const iconClasses = "hover:data-[icon]:opacity-100 [&_svg]:data-[icon]:opacity-64 *:data-[icon]:-mx-0.5";
+const iconClasses = "hover:data-[icon]:opacity-100 [&_svg]:data-[icon]:opacity-80 *:data-[icon]:-mx-0.5";
 
 const buttonVariants = cva(
   [
-    "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring aria-invalid:ring-destructive/20  aria-invalid:border-destructive text-sm aria-invalid:ring-3 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 group/button select-none relative duration-100 ease px-(--button-x) py-(--button-y) gap-[calc(var(--button-y)*1)] has-data-[icon=inline-end]:pe-[calc(var(--button-y)+2px)] has-data-[icon=inline-start]:ps-[calc(var(--button-y)*1.5)] ",
-    "disabled:shadow-none disabled:inset-shadow-none disabled:bg-muted disabled:text-muted-foreground font-medium",
+    "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring aria-invalid:ring-destructive/20  aria-invalid:border-destructive text-sm aria-invalid:ring-3 [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 group/button select-none relative duration-100 ease px-(--button-x) py-(--button-y) gap-[calc(var(--button-y)*1.25)] has-data-[icon=inline-end]:pe-[calc(var(--button-y)+2px)] has-data-[icon=inline-start]:ps-[calc(var(--button-y)*1.5)] ",
+    "disabled:shadow-none disabled:inset-shadow-none disabled:bg-muted disabled:text-muted-foreground font-[475]",
     "not-[.w-full]:active:scale-[0.98] not-[.w-full]:will-change-transform",
     iconClasses,
   ],
@@ -41,10 +41,11 @@ const buttonVariants = cva(
           "bg-linear-to-b text-foreground/92 hover:text-foreground from-foreground/5 from-30% to-foreground/18 text-shadow-xs text-shadow-current/5 dark:outline-[0.5px] dark:bg-linear-to-t dark:outline-black/30 dark:shadow-[inset_0_-1px_0_1px] dark:shadow-black/10",
           // "dark:from-card/50 dark:to-card/10",
           "before:absolute before:inset-px before:rounded-[calc(var(--button-radius)-1px)] before:-z-1 before:bg-linear-to-b before:inset-ring",
-          "before:from-card before:to-card/94 before:via-smooth before:inset-ring-card dark:before:bg-linear-to-b",
+          "before:from-card before:to-card/90 before:inset-ring-card ",
+          "dark:before:from-popover before:via-smooth dark:before:inset-ring-border/10",
           // "dark:before:from-popover dark:before:to-card dark:before:inset-ring-border/20",
           "hover:before:opacity-80",
-          "after:absolute after:inset-px after:rounded-[calc(var(--button-radius)-1px)] after:-z-2 after:shadow-[0_2px_1px_0px_hsl(0deg_0%_0%_/_10%),var(--shadow-xs)]",
+          "after:absolute after:inset-px after:rounded-[calc(var(--button-radius)-1px)] after:-z-2 after:shadow-[0_2px_1px_-1px_hsl(0deg_0%_0%_/_5%),var(--shadow-sm)]",
           "active:before:opacity-50 active:after:shadow-xs active:bg-background",
           "focus-visible:outline-offset-2 active:before:inset-[0.5px] active:before:rounded-[inherit]",
         ],
@@ -106,4 +107,4 @@ function Button({
   );
 }
 
-  export { Button,buttonVariants }
+export { Button, buttonVariants };

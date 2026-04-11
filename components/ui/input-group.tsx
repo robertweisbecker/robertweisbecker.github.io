@@ -1,12 +1,12 @@
 "use client";
 
-  import { cva,type VariantProps } from "class-variance-authority"
-  import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-  import { Button } from "@/components/ui/button"
-  import { Input,inputVariants } from "@/components/ui/input"
-  import { Textarea } from "@/components/ui/textarea"
-  import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { Input, inputVariants } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 function InputGroup({
   className,
@@ -103,9 +103,9 @@ function InputGroupButton({
       variant={variant}
       className={cn(
         size === "icon-xs" && "size-button-xs rounded-xs [--button-xs:--spacing(5)]",
-        size === "icon-sm" && "size-button-xs p-0 has-[>svg]:p-0",
+        size === "icon-sm" && "size-button-xs rounded-sm p-0 has-[>svg]:p-0",
         size === "xs" && "gap-1 rounded px-1.5 [&>svg:not([class*='size-'])]:size-3",
-        size === "sm" && "gap-1 px-2 text-sm [--button-sm:--spacing(6)] [&>svg:not([class*='size-'])]:size-3.5",
+        size === "sm" && "gap-1.5 rounded text-sm [--button-sm:--spacing(6)] [&>svg:not([class*='size-'])]:size-3.5",
         className
       )}
       {...props}
@@ -152,4 +152,4 @@ function InputGroupTextarea({ className, ...props }: React.ComponentProps<"texta
   );
 }
 
-  export { InputGroup,InputGroupAddon,InputGroupButton,InputGroupInput,InputGroupText,InputGroupTextarea }
+export { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput, InputGroupText, InputGroupTextarea };

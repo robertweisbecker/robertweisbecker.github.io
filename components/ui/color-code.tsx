@@ -1,9 +1,9 @@
 "use client";
 
-  import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-  import { cn } from "@/lib/utils"
-  import { AnimatePresence,motion } from "motion/react"
-  import * as React from "react"
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
 
 function ColorCode({
   value,
@@ -16,7 +16,7 @@ function ColorCode({
     <button
       type="button"
       className={cn(
-        "focus-visible:outline-focus inline-flex cursor-pointer items-center gap-1 rounded-sm bg-foreground/8 px-1 py-0.5 align-baseline font-pixel text-[11px] leading-none uppercase transition-colors hover:bg-foreground/12 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-foreground/16 dark:hover:bg-foreground/24",
+        "focus-visible:outline-focus inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-sm bg-foreground/8 px-1 py-0.5 align-baseline font-pixel text-[11px] leading-none uppercase transition-colors hover:bg-foreground/12 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-foreground/16 dark:hover:bg-foreground/24",
         className
       )}
       aria-label={`Copy color ${value}`}
@@ -35,9 +35,9 @@ function ColorCode({
           {isCopied ? (
             <motion.span
               key="copied"
-              initial={{ opacity: 0, filter: "blur(3px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, filter: "blur(3px)" }}
+              initial={{ y: 8, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 2, opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
               Copied!
@@ -45,9 +45,9 @@ function ColorCode({
           ) : (
             <motion.span
               key="value"
-              initial={{ opacity: 0, filter: "blur(3px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, filter: "blur(3px)" }}
+              initial={{ y: -8, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -2, opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
               {value}
@@ -59,4 +59,4 @@ function ColorCode({
   );
 }
 
-  export { ColorCode }
+export { ColorCode };

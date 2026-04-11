@@ -1,11 +1,11 @@
 "use client";
 
-  import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
-  import * as React from "react"
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover";
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
-  import { cva,VariantProps } from "class-variance-authority"
-  import { ArrowSvg } from "../icons"
+import { cn } from "@/lib/utils";
+import { cva, VariantProps } from "class-variance-authority";
+import { ArrowSvg } from "../icons";
 
 const popoverVariants = cva(
   "group/popover data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-99 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-[side=inline-start]:slide-in-from-end-1 data-[side=inline-end]:slide-in-from-start-1 origin-(--transform-origin) z-50 flex duration-100 flex-col p-(--popover-padding)",
@@ -17,7 +17,7 @@ const popoverVariants = cva(
         translucent:
           "bg-popover/12 backdrop-blur-xl text-popover-foreground shadow-popover w-72 rounded-xl p-4 gap-2.5 [--popover-padding:--spacing(4)]",
         tooltip:
-          "bg-popover text-popover-foreground shadow-border-lg drop-shadow-md/2 dark:shadow-black/50 max-w-3xs gap-1 has-data-[slot=popover-header]:rounded-lg rounded-md [--popover-padding:--spacing(1.5)] text-sm",
+          "bg-popover text-popover-foreground shadow-border-lg drop-shadow-md/2 dark:shadow-black/50 max-w-3xs gap-1 has-data-[slot=popover-header]:rounded-lg rounded-lg [--popover-padding:--spacing(2)] text-sm",
       },
     },
   }
@@ -127,4 +127,4 @@ function PopoverDescription({ className, ...props }: PopoverPrimitive.Descriptio
   );
 }
 
-  export { Popover,PopoverContent,PopoverDescription,PopoverFooter,PopoverHeader,PopoverTitle,PopoverTrigger }
+export { Popover, PopoverContent, PopoverDescription, PopoverFooter, PopoverHeader, PopoverTitle, PopoverTrigger };

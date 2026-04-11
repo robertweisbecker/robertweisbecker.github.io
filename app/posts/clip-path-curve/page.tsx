@@ -1,38 +1,29 @@
 "use client";
 
-  import { BackButton } from "@/components/back-button"
-  import {
-    ClipPathEditor,
-    ClipPathEditorAdvanced,
-    ClipPathEditorCanvas,
-    ClipPathEditorOutput,
-    ClipPathEditorResetControl,
-    ClipPathEditorSettings,
-    ClipPathEditorSnapControl,
-    ClipPathEditorStyle,
-  } from "@/components/demos/clip-path-editor"
-  import { InfoTip } from "@/components/info-tip"
-  import { Avatar,AvatarImage } from "@/components/ui/avatar"
-  import { Badge } from "@/components/ui/badge"
-  import { Button } from "@/components/ui/button"
-  import { Card,CardAction,CardContent,CardFooter,CardHeader,CardTitle } from "@/components/ui/card"
-  import { Code } from "@/components/ui/code"
-  import { Collapsible,CollapsiblePanel,CollapsibleTrigger } from "@/components/ui/collapsible"
-  import {
-    IconChevronRight,
-    IconLine,
-    IconVectorBezier2,
-    IconVectorSpline,
-    IconX
-  } from "@tabler/icons-react"
+import {
+  ClipPathEditor,
+  ClipPathEditorAdvanced,
+  ClipPathEditorCanvas,
+  ClipPathEditorOutput,
+  ClipPathEditorResetControl,
+  ClipPathEditorSettings,
+  ClipPathEditorSnapControl,
+  ClipPathEditorStyle,
+} from "@/components/demos/clip-path-editor";
+import { InfoTip } from "@/components/info-tip";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Code } from "@/components/ui/code";
+import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { IconChevronRight, IconLine, IconVectorBezier2, IconVectorSpline, IconX } from "@tabler/icons-react";
 
 export default function ClipPathCurvePage() {
   return (
-    <div className="container mx-auto flex max-w-4xl flex-col items-start">
+    <>
       <div className="mx-auto flex max-w-xl flex-col gap-6">
-        <BackButton href="/posts" />
         <section className="flex flex-col gap-4">
-          <h1 className="text-xl font-medium">Clip-Path Playground</h1>
           <p className="">
             A little UI for experimenting with and generating curves as CSS clip-path values using the{" "}
             <Code>
@@ -41,8 +32,17 @@ export default function ClipPathCurvePage() {
                 className="-ms-0.5"
                 description={
                   <>
-                    <Code variant="inline">shape()</Code> is now baseline widely available as of 2026. May not work in
-                    legacy browsers.
+                    <Code variant="inline">
+                      <a
+                        href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/basic-shape/shape"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link text-primary!"
+                      >
+                        shape()
+                      </a>
+                    </Code>{" "}
+                    is now baseline widely available as of 2026. May not work in legacy browsers.
                   </>
                 }
               />
@@ -120,7 +120,8 @@ export default function ClipPathCurvePage() {
         <Collapsible className="my-8">
           <h2 className="font-medium">
             <CollapsibleTrigger className="-ms-5.5 flex items-center gap-1.5 transition-colors hover:text-foreground">
-              <IconChevronRight className="size-4 opacity-50 transition-all duration-150 ease-out group-hover/collapsible-trigger:opacity-100 in-data-panel-open:rotate-90" />
+              {/* <IconChevronRight className="size-4 opacity-50 transition-all duration-150 ease-out group-hover/collapsible-trigger:opacity-100 in-data-panel-open:rotate-90" /> */}
+              <CollapsibleIcon side="inline-start" />
               Instructions
             </CollapsibleTrigger>
           </h2>
@@ -201,6 +202,6 @@ export default function ClipPathCurvePage() {
         </div>
         <ClipPathEditorOutput />
       </ClipPathEditor>
-    </div>
+    </>
   );
 }

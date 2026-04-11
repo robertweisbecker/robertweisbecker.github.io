@@ -15,7 +15,10 @@ export function BackButton({
       variant="link"
       href={href}
       size={size}
-      className={cn("group/back-button -ms-0.5 self-start text-[13px] text-muted-foreground", className)}
+      className={cn(
+        "group/back-button self-start font-pixel text-[11px] text-muted-foreground uppercase no-underline",
+        className
+      )}
       {...rest}
     >
       {/* <IconArrowNarrowLeft
@@ -23,7 +26,7 @@ export function BackButton({
         data-icon="inline-start"
         strokeWidth={1.5}
       /> */}
-      <span className="font-pixel text-[11px] transition-transform group-hover/back-button:-translate-x-0.5">↰</span>
+      <span className="transition-transform group-hover/back-button:-translate-x-0.5">↰</span>
       {children ?? "Back"}
     </LinkButton>
   );

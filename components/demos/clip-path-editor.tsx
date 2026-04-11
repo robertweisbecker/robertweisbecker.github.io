@@ -27,7 +27,7 @@ import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Label } from "../ui/label";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipGroup, TooltipTrigger } from "../ui/tooltip";
 
 type Point = { x: number; y: number };
 
@@ -809,7 +809,7 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
         <Field orientation="vertical" className="h-full min-h-0">
           <Label>Origin</Label>
           <div className="flex min-h-0 flex-1 flex-col">
-            <TooltipProvider>
+            <TooltipGroup side="bottom">
               <ToggleGrid
                 columns={2}
                 spacing={0.5}
@@ -832,29 +832,22 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
               >
                 {(Object.keys(CORNER_PRESETS) as CornerPresetKey[]).map((presetKey) => (
                   <div key={presetKey} className="relative h-full min-h-0">
-                    <Tooltip>
-                      <TooltipTrigger
-                        render={
-                          <ToggleGroupItem
-                            value={presetKey}
-                            aria-label={CORNER_PRESETS[presetKey].label}
-                            shape="default"
-                            className={cn(
-                              "h-full min-h-0 w-full",
-                              presetKey === lastSelectedPreset ? "bg-card/50 dark:bg-popover/50" : ""
-                            )}
-                          />
-                        }
-                      >
-                        {CORNER_PRESETS[presetKey].icon}
-                      </TooltipTrigger>
-                      <TooltipContent
-                        side={presetKey.startsWith("top") ? "top" : "bottom"}
-                        align={presetKey.endsWith("left") ? "start" : "end"}
-                      >
-                        {CORNER_PRESETS[presetKey].label}
-                      </TooltipContent>
-                    </Tooltip>
+                    <TooltipTrigger
+                      tooltip={CORNER_PRESETS[presetKey].label}
+                      render={
+                        <ToggleGroupItem
+                          value={presetKey}
+                          aria-label={CORNER_PRESETS[presetKey].label}
+                          shape="default"
+                          className={cn(
+                            "h-full min-h-0 w-full",
+                            presetKey === lastSelectedPreset ? "bg-card/50 dark:bg-popover/50" : ""
+                          )}
+                        />
+                      }
+                    >
+                      {CORNER_PRESETS[presetKey].icon}
+                    </TooltipTrigger>
                     {isPresetModified && presetKey === lastSelectedPreset ? (
                       <IconArrowBackUp
                         className="absolute top-1 right-1.5 z-10 size-3 text-foreground/64"
@@ -865,13 +858,13 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
                   </div>
                 ))}
               </ToggleGrid>
-            </TooltipProvider>
+            </TooltipGroup>
           </div>
         </Field>
 
         <Field orientation="vertical">
           <Label htmlFor="curve-mode">Type</Label>
-          <TooltipProvider>
+          <TooltipGroup>
             <ToggleGrid
               columns={3}
               id="curve-mode"
@@ -889,26 +882,17 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
               aria-label="Curve mode"
               className="w-fit"
             >
-              <Tooltip>
-                <TooltipTrigger render={<ToggleGroupItem value="line" />}>
-                  <IconLine />
-                </TooltipTrigger>
-                <TooltipContent>Linear path</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger render={<ToggleGroupItem value="quadratic" />}>
-                  <IconVectorSpline />
-                </TooltipTrigger>
-                <TooltipContent>Quadratic bézier curve</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger render={<ToggleGroupItem value="cubic" />}>
-                  <IconVectorBezier2 />
-                </TooltipTrigger>
-                <TooltipContent>Cubic bézier curve</TooltipContent>
-              </Tooltip>
+              <TooltipTrigger tooltip="Linear path" render={<ToggleGroupItem value="line" />}>
+                <IconLine />
+              </TooltipTrigger>
+              <TooltipTrigger tooltip="Quadratic bézier curve" render={<ToggleGroupItem value="quadratic" />}>
+                <IconVectorSpline />
+              </TooltipTrigger>
+              <TooltipTrigger tooltip="Cubic bézier curve" render={<ToggleGroupItem value="cubic" />}>
+                <IconVectorBezier2 />
+              </TooltipTrigger>
             </ToggleGrid>
-          </TooltipProvider>
+          </TooltipGroup>
         </Field>
       </div>
     </div>

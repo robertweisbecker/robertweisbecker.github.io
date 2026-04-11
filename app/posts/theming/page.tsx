@@ -1,6 +1,5 @@
 "use client";
 
-import { BackButton } from "@/components/back-button";
 import { CodeBlock } from "@/components/code-block";
 import { CheckIconStraight } from "@/components/icons";
 import { Theme } from "@/components/theme";
@@ -64,12 +63,9 @@ function ButtonShowcase() {
 
 export default function ThemingPostPage() {
   return (
-    <div className="container mx-auto flex max-w-4xl flex-col items-start gap-6">
-      <div className="mx-auto flex max-w-xl flex-col gap-6">
-        <BackButton href="/posts" />
-
+    <>
+      <div className="mx-auto flex max-w-2xl flex-col gap-6">
         <section className="flex flex-col gap-4">
-          <h1 className="text-xl font-medium">Theming</h1>
           <p>
             A working demo of the theming described in my writeup of the{" "}
             <Link href="/projects/oklch" className="link">
@@ -252,6 +248,6 @@ components/
           </p>
         </section>
       </div>
-    </div>
+    </>
   );
 }

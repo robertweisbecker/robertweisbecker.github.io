@@ -83,8 +83,8 @@ function TabsTrigger({ className, children, label, ...props }: TabsPrimitive.Tab
       <span className="absolute flex items-center justify-center gap-(--tab-gap) text-center transition-[opacity,color] duration-100 ease-in-out will-change-contents in-data-active:opacity-0">
         {children ?? label}
       </span>
-      {/* Hidden active text */}
-      <span className="pointer-events-none flex grow items-center justify-center gap-(--tab-gap) font-[550] tracking-[-.015em] opacity-0 transition-[opacity,color] duration-100 ease-in-out will-change-contents select-none in-data-active:opacity-100">
+      {/* Hidden active text - note: tracking-[-.015em] if using Inter */}
+      <span className="pointer-events-none flex grow items-center justify-center gap-(--tab-gap) font-[500] opacity-0 transition-[opacity,color] duration-100 ease-in-out will-change-contents select-none in-data-active:opacity-100">
         {children ?? label}
       </span>
     </TabsPrimitive.Tab>

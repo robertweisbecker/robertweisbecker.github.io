@@ -1,9 +1,9 @@
 "use client";
 
-  import { Slider as SliderPrimitive } from "@base-ui/react/slider"
-  import * as React from "react"
+import { Slider as SliderPrimitive } from "@base-ui/react/slider";
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 function Slider({
   className,
@@ -49,7 +49,7 @@ function Slider({
         <SliderPrimitive.Track
           data-slot="slider-track"
           className={cn(
-            "relative isolate grow rounded-xl bg-muted inset-shadow-xs outline-[0.5px] -outline-offset-[0.5px] outline-input select-none data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
+            "relative isolate grow rounded-xl bg-input/25 inset-shadow-xs outline-[0.5px] -outline-offset-[0.5px] outline-input select-none data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
           )}
         >
           <SliderPrimitive.Indicator
@@ -86,4 +86,4 @@ function Slider({
   );
 }
 
-  export { Slider }
+export { Slider };

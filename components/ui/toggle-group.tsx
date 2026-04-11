@@ -1,12 +1,12 @@
 "use client";
 
-  import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
-  import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group"
-  import { type VariantProps } from "class-variance-authority"
-  import * as React from "react"
+import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
+import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
+import { type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-  import { toggleVariants } from "@/components/ui/toggle"
-  import { cn } from "@/lib/utils"
+import { toggleVariants } from "@/components/ui/toggle";
+import { cn } from "@/lib/utils";
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants> & {
@@ -135,7 +135,7 @@ function ToggleGrid({
       }
       className={cn(
         "grid gap-[--spacing(var(--gap))] rounded-xl data-[size=lg]:rounded-xl data-[size=sm]:rounded-md",
-        variant === "elevated" && "rounded-lg! bg-accent p-0.5",
+        variant === "elevated" && "rounded-lg! bg-muted p-0.5",
         className
       )}
       {...props}
@@ -155,4 +155,4 @@ function ToggleGrid({
   );
 }
 
-  export { ToggleGrid,ToggleGroup,ToggleGroupItem }
+export { ToggleGrid, ToggleGroup, ToggleGroupItem };

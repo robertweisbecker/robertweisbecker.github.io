@@ -1,8 +1,8 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible"
-  import type React from "react"
+import { cn } from "@/lib/utils";
+import { Collapsible as CollapsiblePrimitive } from "@base-ui/react/collapsible";
+import type React from "react";
 
 export function Collapsible({ ...props }: CollapsiblePrimitive.Root.Props): React.ReactElement {
   return <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />;
@@ -27,7 +27,7 @@ export function CollapsibleIcon({
     <span
       data-icon={side}
       className={cn(
-        "size-lh ease relative font-pixel text-[11px] leading-none opacity-50 transition-[opacity,transform,rotate] delay-50 duration-100 group-hover/collapsible-trigger:opacity-100 in-data-panel-open:opacity-100",
+        "size-lh relative self-center font-pixel text-[22px] leading-none opacity-50 transition-[opacity,transform,rotate] delay-50 duration-150 ease-out group-hover/collapsible-trigger:opacity-100 in-data-panel-open:opacity-100",
         side === "inline-end" && "rotate-90 text-[16.5px] leading-none in-data-panel-open:rotate-270",
         side === "inline-start" && "in-data-panel-open:rotate-90",
         className
@@ -36,7 +36,7 @@ export function CollapsibleIcon({
       {...props}
     >
       {/* <IconChevronDown  className="size-[1em]" /> */}
-      {side === "inline-start" ? "►" : ">"}
+      {side === "inline-start" ? "\u203A" : ">"}
     </span>
   );
 }
@@ -54,4 +54,4 @@ export function CollapsiblePanel({ className, ...props }: CollapsiblePrimitive.P
   );
 }
 
-  export { CollapsiblePanel as CollapsibleContent,CollapsiblePrimitive }
+export { CollapsiblePanel as CollapsibleContent, CollapsiblePrimitive };

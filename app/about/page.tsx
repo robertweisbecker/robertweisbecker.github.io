@@ -1,13 +1,13 @@
 "use client";
 
-  import { FigmaIcon,GithubIcon,LinkedinIcon } from "@/components/icons"
-  import { Image } from "@/components/image"
-  import { LayoutGrid } from "@/components/layout-grid"
-  import { LinkOut } from "@/components/link-out"
-  import { Button } from "@/components/ui/button"
-  import { Separator } from "@/components/ui/separator"
-  import { IconMailFilled } from "@tabler/icons-react"
-  import Link from "next/link"
+import { FigmaIcon, GithubIcon, LinkedinIcon } from "@/components/icons";
+import { Image } from "@/components/image";
+import { LayoutGrid } from "@/components/layout-grid";
+import { LinkOut } from "@/components/link-out";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { IconMailFilled } from "@tabler/icons-react";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -39,10 +39,10 @@ export default function About() {
 
         <div className="prose mx-auto max-w-xl">
           <p>To get in touch, you can find or reach me here:</p>
-          <div className="flex flex-wrap justify-stretch gap-2">
+          <div className="flex flex-wrap justify-stretch gap-2 max-sm:flex-col">
             <Button render={<a href="mailto:yo@bob.fyi" />} nativeButton={false} variant="elevated" size="sm">
               <IconMailFilled data-icon="inline-start" />
-              Email
+              yo@bob.fyi
             </Button>
             <Button
               render={
@@ -62,7 +62,7 @@ export default function About() {
               size="sm"
             >
               <GithubIcon data-icon="inline-start" />
-              Github
+              GitHub
             </Button>
             <Button
               render={<a href="https://figma.com/@yobob" target="_blank" rel="noopener noreferrer" />}
@@ -70,7 +70,7 @@ export default function About() {
               variant="elevated"
               size="sm"
             >
-              <FigmaIcon data-icon="inline-start" />
+              <FigmaIcon data-icon="inline-start" className="size-3.5 opacity-100!" />
               Figma
             </Button>
           </div>

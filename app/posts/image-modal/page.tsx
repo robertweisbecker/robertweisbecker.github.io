@@ -1,6 +1,5 @@
 "use client";
 
-  import { BackButton } from "@/components/back-button"
   import { ImageModal,ImageModalMotion,ImageModalPopover,ImageModalPopover2 } from "@/components/image-modal"
   import { Badge } from "@/components/ui/badge"
   import { Code } from "@/components/ui/code"
@@ -135,9 +134,7 @@ const resultLabels: Record<string, string> = {
 
 export default function ImageModalPostPage() {
   return (
-    <div className="prose mx-auto grid max-w-4xl">
-      <BackButton href="/posts" />
-      <h1>Image Modal Prototypes</h1>
+    <div className="prose w-full">
       <p>
         Comparing three approaches to an image lightbox with smooth <Code variant="plain">layoutId</Code> transitions:
         Base UI Dialog, Base UI Popover, and pure Motion. The goal is a seamless expand/collapse animation without
