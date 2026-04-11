@@ -1,11 +1,12 @@
-  import { Footer } from "@/components/footer"
-  import { Header } from "@/components/header"
-  import { ThemeProvider } from "@/components/theme-provider"
-  import { Agentation } from "agentation"
-  import type { Metadata } from "next"
-  import localFont from "next/font/local"
-  import Script from "next/script"
-  import "./globals.css"
+import { DevMeasurer } from "@/components/dev-measurer";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Agentation } from "agentation";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import Script from "next/script";
+import "./globals.css";
 
 const Inter_Variable = localFont({
   variable: "--font-inter-var",
@@ -20,12 +21,6 @@ const Booton = localFont({
   variable: "--font-booton",
   display: "swap",
   src: [{ path: "./fonts/BootonVF.woff2", style: "normal" }],
-});
-
-const Paper_Mono = localFont({
-  variable: "--font-paper-mono",
-  display: "swap",
-  src: [{ path: "./fonts/PaperMono-Regular.woff2", style: "normal" }],
 });
 
 const Departure_Mono = localFont({
@@ -45,13 +40,11 @@ export const metadata: Metadata = {
     siteName: "bob.fyi",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/assets/share.png", alt: "Bob Weisbecker | bob.fyi" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Robert (Bob) Weisbecker",
     description: "Bob Weisbecker is a systems & product designer at Everfi",
-    images: ["/assets/share.png"],
   },
   icons: {
     icon: "/assets/favicon.ico",
@@ -67,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${Inter_Variable.variable} ${Paper_Mono.variable} ${Departure_Mono.variable} ${Booton.variable}`}
+      className={`${Inter_Variable.variable} ${Departure_Mono.variable} ${Booton.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -86,7 +79,8 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="root mx-auto scroll-pt-20 px-4 py-20">
+          <main id="main" className="root mx-auto scroll-pt-20 bg-background py-20">
+            {/* bg-[image:linear-gradient(to_bottom,var(--background)_50%,transparent_50%),repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[8px_8px] px-4 py-20 [--pattern-bg:var(--border)]/5 [--pattern-fg:var(--border)] */}
             {/* <div
               className="absolute inset-0 z-0 max-h-[33vh]"
               style={{
@@ -106,6 +100,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          {process.env.NODE_ENV === "development" && <DevMeasurer />}
           {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
         </ThemeProvider>
       </body>

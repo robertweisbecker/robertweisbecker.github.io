@@ -1,18 +1,19 @@
-  import { Badge } from "@/components/ui/badge"
-  import {
-    Item,
-    ItemActions,
-    ItemContent,
-    ItemDescription,
-    ItemGroup,
-    ItemMedia,
-    ItemSeparator,
-    ItemTitle,
-  } from "@/components/ui/item"
-  import { postIcons,posts,type PostIconName } from "@/lib/data/posts"
-  import { IconFile } from "@tabler/icons-react"
-  import Link from "next/link"
-  import * as React from "react"
+import { Badge } from "@/components/ui/badge";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemGroup,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+} from "@/components/ui/item";
+import { postIcons, posts, type PostIconName } from "@/lib/data/posts";
+import { cn } from "@/lib/utils";
+import { IconFile } from "@tabler/icons-react";
+import Link from "next/link";
+import * as React from "react";
 
 function PostListIcon({ name }: { name?: PostIconName }) {
   const Icon = name ? postIcons[name] : IconFile;
@@ -39,7 +40,17 @@ export default function PostsPage() {
                 <ItemDescription>{post.description}</ItemDescription>
               </ItemContent>
               <ItemActions>
-                <Badge variant="outline">{post.category}</Badge>
+                <Badge
+                  variant="inherit"
+                  className={cn(
+                    "font-pixel text-[11px] uppercase",
+                    post.category === "Snippet" && "text-navy-500 dark:text-navy-300",
+                    post.category === "Demo" && "text-orange-500 dark:text-orange-300",
+                    post.category === "Motion" && "text-plum-500 dark:text-plum-300"
+                  )}
+                >
+                  {post.category}
+                </Badge>
               </ItemActions>
               <ItemDescription className="text-xs tabular-nums">{post.date}</ItemDescription>
             </Item>

@@ -1,25 +1,19 @@
 "use client";
 
-  import { BackButton } from "@/components/back-button"
-  import { CodeBlock } from "@/components/code-block"
-  import { CheckIconStraight } from "@/components/icons"
-  import { Theme } from "@/components/theme"
-  import { ThemeResetAllButton,ThemeSettingsPanel } from "@/components/theme-settings"
-  import { Alert } from "@/components/ui/alert"
-  import { Badge } from "@/components/ui/badge"
-  import { Button } from "@/components/ui/button"
-  import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle
-  } from "@/components/ui/card"
-  import { Code } from "@/components/ui/code"
-  import { Heading } from "@/components/ui/heading"
-  import { Separator } from "@/components/ui/separator"
-  import { IconHeart,IconSend,IconSettings,IconTrash } from "@tabler/icons-react"
-  import Link from "next/link"
+import { BackButton } from "@/components/back-button";
+import { CodeBlock } from "@/components/code-block";
+import { CheckIconStraight } from "@/components/icons";
+import { Theme } from "@/components/theme";
+import { ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme-settings";
+import { Alert } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Code } from "@/components/ui/code";
+import { Heading } from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
+import { IconHeart, IconSend, IconSettings, IconTrash } from "@tabler/icons-react";
+import Link from "next/link";
 
 function ButtonShowcase() {
   return (
@@ -81,12 +75,12 @@ export default function ThemingPostPage() {
             <Link href="/projects/oklch" className="link">
               okLCH color system
             </Link>
-            . While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so we end up
-            with a pretty close approximation.
+            . While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so
+            we end up with a pretty close approximation.
           </p>
           <p>
-            You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the page,
-            but you can always change the whole site&apos;s theme in the header if you land on something you like.
+            You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the
+            page, but you can always change the whole site&apos;s theme in the header if you land on something you like.
           </p>
         </section>
         <section className="flex flex-col gap-2"></section>
@@ -105,7 +99,7 @@ export default function ThemingPostPage() {
               <CardTitle className="text-sm">Settings</CardTitle>
             </CardHeader>
             <CardContent>
-              <ThemeSettingsPanel />
+              <ThemeSettingsPanel hueDisplay="swatches" neutralDisplay="swatches" />
             </CardContent>
             <CardFooter>
               <ThemeResetAllButton size="md" variant="outline" className="w-full flex-1" />

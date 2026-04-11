@@ -1,8 +1,8 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import { motion,useReducedMotion } from "motion/react"
-  import * as React from "react"
+import { cn } from "@/lib/utils";
+import { motion, useReducedMotion } from "motion/react";
+import * as React from "react";
 
 type Point = { x: number; y: number };
 
@@ -24,6 +24,7 @@ const KEYBOARD_STEP = 1;
 const KEYBOARD_STEP_LARGE = 5;
 const POINT_RADIUS = 1.5;
 const HIT_RADIUS = 8;
+const HIT_RADIUS_TOUCH = 14;
 const POINT_SPRING = {
   type: "spring" as const,
   stiffness: 300,
@@ -150,8 +151,8 @@ export function SvgGrid({
               textAnchor="middle"
               dominantBaseline="middle"
               fill={labelColor}
-              fontSize={3}
-              className="font-mono select-none"
+              fontSize={2.5}
+              className="font-pixel select-none"
             >
               {value}
             </text>
@@ -167,8 +168,8 @@ export function SvgGrid({
               textAnchor="end"
               dominantBaseline="middle"
               fill={labelColor}
-              fontSize={3}
-              className="font-mono select-none"
+              fontSize={2.5}
+              className="font-pixel select-none"
             >
               {value}
             </text>
@@ -225,7 +226,7 @@ export function DraggablePoint({
   y,
   label,
   color = "var(--ring)",
-  hitRadius = HIT_RADIUS,
+  hitRadius: hitRadiusProp,
   snapStep,
   bounds,
   disabled,
@@ -240,9 +241,20 @@ export function DraggablePoint({
   const prefersReducedMotion = useReducedMotion();
   const [isDragging, setIsDragging] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
+  const [isCoarsePointer, setIsCoarsePointer] = React.useState(false);
   const pointerIdRef = React.useRef<number | null>(null);
   const pointRef = React.useRef<SVGCircleElement | null>(null);
   const onDragEndRef = React.useRef(onDragEnd);
+
+  React.useEffect(() => {
+    const mq = window.matchMedia("(pointer: coarse)");
+    setIsCoarsePointer(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsCoarsePointer(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  const hitRadius = hitRadiusProp ?? (isCoarsePointer ? HIT_RADIUS_TOUCH : HIT_RADIUS);
 
   React.useEffect(() => {
     onDragEndRef.current = onDragEnd;
@@ -273,6 +285,7 @@ export function DraggablePoint({
   const handlePointerDown = React.useCallback(
     (event: React.PointerEvent<SVGCircleElement>) => {
       if (disabled) return;
+      event.preventDefault();
       pointerIdRef.current = event.pointerId;
       event.currentTarget.setPointerCapture(event.pointerId);
       setIsDragging(true);

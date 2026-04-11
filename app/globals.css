@@ -14,11 +14,8 @@
   /* --font-sans: var(--font-inter-var), "InterVariable", "Inter", system-ui, sans-serif; */
   --font-sans: var(--font-booton), var(--font-inter-var), system-ui, sans-serif;
   --font-serif: Georgia, ui-serif, serif;
-  --font-mono: var(--font-paper-mono), "PaperMono", ui-monospace, monospace;
+  --font-mono: ui-monospace, monospace;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
-  --font-geist-pixel: var(--font-geist-pixel-square), "GeistPixelSquare", ui-monospace, monospace;
-  --font-geist-grid: var(--font-geist-pixel-grid), "GeistPixelGrid", ui-monospace, monospace;
-
   /* Neutral alias — maps to taupe palette; change here to swap neutral base */
   --color-neutral-25: var(--neutral-25);
   --color-neutral-50: var(--neutral-50);
@@ -136,11 +133,11 @@
   --popover-foreground: var(--foreground);
   --primary: var(--hue-500);
   --primary-foreground: var(--color-white);
-  --secondary: var(--hue-50);
+  --secondary: var(--hue-75, var(--hue-50));
   --secondary-foreground: var(--hue-700);
-  --muted: --alpha(var(--neutral-400) / 5%);
+  --muted: var(--neutral-100);
   --muted-foreground: var(--neutral-600);
-  --accent: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --accent: --alpha(var(--foreground) / 10%);
   --accent-foreground: var(--neutral-950);
   --destructive: var(--error-500);
   --destructive-foreground: var(--error-25);
@@ -155,8 +152,8 @@
   --warning: var(--warning-50);
   --warning-primary: var(--warning-500);
   --warning-foreground: var(--warning-700);
-  --border: color-mix(in srgb, var(--color-foreground) 10%, transparent);
-  --input: --alpha(var(--color-foreground) / 30%);
+  --border: --alpha(var(--foreground) / 10%);
+  --input: var(--neutral-300);
   --ring: var(--info-400);
   --sidebar: var(--neutral-50);
   --sidebar-foreground: color-mix(in srgb, var(--neutral-800) 64%, var(--sidebar));
@@ -181,7 +178,7 @@
 .dark [data-theme] {
   --background: var(--neutral-975);
   --foreground: var(--neutral-100);
-  --card: var(--neutral-950);
+  --card: var(--neutral-900);
   --card-foreground: var(--neutral-300);
   --popover: var(--neutral-800);
   --popover-foreground: var(--neutral-50);
@@ -189,7 +186,7 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-white) / 2.5%);
+  --muted: --alpha(var(--color-white) / 5%);
   --muted-foreground: var(--neutral-300);
   --accent: --alpha(var(--neutral-600) / 10%);
   --accent-foreground: var(--neutral-100);
@@ -323,10 +320,13 @@
 @utility grid-stack {
   @apply grid;
   place-items: center center;
-
   > * {
     grid-area: 1 / 1;
   }
+}
+
+@utility ui-popup {
+  @apply bg-popover/60 text-popover-foreground shadow-popover backdrop-blur-md;
 }
 
 @layer utilities {

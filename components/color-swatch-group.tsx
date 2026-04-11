@@ -1,24 +1,18 @@
 "use client";
 
-  import { Button } from "@/components/ui/button"
-  import {
-    Popover,
-    PopoverContent,
-    PopoverHeader,
-    PopoverTitle,
-    PopoverTrigger
-  } from "@/components/ui/popover"
-  import { ToggleGroup,ToggleGroupItem } from "@/components/ui/toggle-group"
-  import { TooltipGroup,TooltipTrigger } from "@/components/ui/tooltip"
-  import { cn } from "@/lib/utils"
-  import { Form,TooltipPositionerProps } from "@base-ui/react"
-  import { IconPlus,IconX } from "@tabler/icons-react"
-  import * as React from "react"
-  import { Field,FieldLabel } from "./ui/field"
-  import { InputGroup,InputGroupAddon,InputGroupButton,InputGroupInput } from "./ui/input-group"
-  import { Item,ItemActions,ItemContent,ItemDescription,ItemGroup,ItemMedia,ItemTitle } from "./ui/item"
-  import { Kbd } from "./ui/kbd"
-  import { ScrollArea } from "./ui/scroll-area"
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { Form, TooltipPositionerProps } from "@base-ui/react";
+import { IconPlus, IconX } from "@tabler/icons-react";
+import * as React from "react";
+import { Field, FieldLabel } from "./ui/field";
+import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "./ui/input-group";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "./ui/item";
+import { Kbd } from "./ui/kbd";
+import { ScrollArea } from "./ui/scroll-area";
 
 export type ColorSwatch = {
   value: string;
@@ -205,7 +199,7 @@ export function ColorSwatchGroup({
                   value={swatch.value}
                   aria-label={swatch.label}
                   className={cn(
-                    "aspect-square rounded-full border p-0.5",
+                    "aspect-square h-8 w-8 rounded-full border p-0.5",
                     "group data-pressed:border-primary data-pressed:bg-muted data-pressed:ring-1 data-pressed:ring-primary"
                   )}
                   style={{ touchAction: "manipulation", color: swatch.color }}

@@ -1,25 +1,18 @@
-  import { BaseUiIcon,FigmaIcon } from "@/components/icons"
-  import { LinkOut } from "@/components/link-out"
-  import { ProjectGrid } from "@/components/project-grid"
-  import { Badge } from "@/components/ui/badge"
-  import {
-    Card,
-    CardAction,
-    CardHeader,
-    CardTitle
-  } from "@/components/ui/card"
-  import { Popover,PopoverContent,PopoverDescription,PopoverTrigger } from "@/components/ui/popover"
-  import { Separator } from "@/components/ui/separator"
-  import { resources } from "@/lib/data/resources"
-  import { ArrowUpRight } from "@gravity-ui/icons"
+import { BaseUiIcon, FigmaIcon } from "@/components/icons";
+import { LinkOut } from "@/components/link-out";
+import { ProjectGrid } from "@/components/project-grid";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card";
+import { Popover, PopoverContent, PopoverDescription, PopoverTrigger } from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
+import { resources } from "@/lib/data/resources";
+import { cn } from "@/lib/utils";
+import { ArrowUpRight } from "@gravity-ui/icons";
 
 export default function Home() {
   return (
-    <div className="mx-auto grid max-w-2xl gap-8">
-      <div className="mt-8">
-        {/* <h1 className="text-bold mb-4 font-pixel text-4xl tracking-tight">
-          bob<span className="font-grid opacity-50">.fyi</span>
-        </h1> */}
+    <div className={cn("mx-auto grid max-w-2xl gap-10 bg-background")}>
+      <div className="bg-background">
         <h1 className="font-medium">Robert Weisbecker</h1>
         <p className="text-muted-foreground/72">
           Designing products & systems at{" "}
@@ -27,16 +20,15 @@ export default function Home() {
         </p>
       </div>
 
-      <p className="mb-4 text-balance">
+      <p className="mb-4 bg-background text-balance">
         You can call me{" "}
         <Popover>
-          <PopoverTrigger openOnHover className="link font-normal text-inherit">
+          <PopoverTrigger openOnHover className="link font-normal text-inherit decoration-dotted">
             Bob
           </PopoverTrigger>
           <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
             <PopoverDescription className="inline">
-              We&apos;re all about efficiency here at{" "}
-              <span className="inline font-semibold text-popover-foreground">bob [dot] fyi</span>.
+              We&apos;re all about efficiency here at bob [dot] fyi.
             </PopoverDescription>
           </PopoverContent>
         </Popover>

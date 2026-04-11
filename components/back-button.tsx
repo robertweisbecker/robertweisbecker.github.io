@@ -1,7 +1,7 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import { LinkButton } from "./ui/link-button"
+import { cn } from "@/lib/utils";
+import { LinkButton } from "./ui/link-button";
 
 export function BackButton({
   className,
@@ -15,7 +15,7 @@ export function BackButton({
       variant="link"
       href={href}
       size={size}
-      className={cn("group/back-button mx-0 self-start font-normal", className)}
+      className={cn("group/back-button -ms-0.5 self-start text-[13px] text-muted-foreground", className)}
       {...rest}
     >
       {/* <IconArrowNarrowLeft
@@ -23,12 +23,7 @@ export function BackButton({
         data-icon="inline-start"
         strokeWidth={1.5}
       /> */}
-      <span
-        className="font-pixel text-[11px] no-underline! transition-transform group-hover/back-button:-translate-x-0.5"
-        data-icon="inline-start"
-      >
-        ↰
-      </span>
+      <span className="font-pixel text-[11px] transition-transform group-hover/back-button:-translate-x-0.5">↰</span>
       {children ?? "Back"}
     </LinkButton>
   );

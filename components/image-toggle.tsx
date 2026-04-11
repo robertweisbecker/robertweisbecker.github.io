@@ -21,11 +21,11 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
     return (
       <figure className="not-prose flex flex-col justify-center">
         <ResizablePanelGroup className="relative aspect-video" orientation="horizontal">
-          <ResizablePanel defaultSize="50%" minSize="1%" maxSize="99%">
+          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="rounded-s-xl rounded-e-md">
             <img src={before} className="h-full w-auto object-cover object-left" />
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel defaultSize="50%" minSize="1%" maxSize="99%">
+          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="rounded-s-md rounded-e-xl">
             <img src={after} className="h-full w-auto object-cover object-right" />
           </ResizablePanel>
         </ResizablePanelGroup>

@@ -1,7 +1,7 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import { Tabs as TabsPrimitive } from "@base-ui/react/tabs"
+import { cn } from "@/lib/utils";
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 
 function ChromeTabsRoot({ className, children, ...props }: TabsPrimitive.Root.Props) {
   return (

@@ -1,40 +1,33 @@
 "use client";
 
-  import { CodeBlock } from "@/components/code-block"
-  import { ColorSwatchGroup,type ColorSwatch } from "@/components/color-swatch-group"
-  import { InfoTip } from "@/components/info-tip"
-  import { NumberSlider } from "@/components/number-slider"
-  import { ControlTether,DraggablePoint,SvgGrid } from "@/components/svg-canvas"
-  import { Button } from "@/components/ui/button"
-  import { Collapsible,CollapsibleIcon,CollapsiblePanel,CollapsibleTrigger } from "@/components/ui/collapsible"
-  import {
-    Field,
-    FieldGroup,
-    FieldLabel,
-    FieldLegend,
-    FieldSeparator,
-    FieldSet
-  } from "@/components/ui/field"
-  import { Switch } from "@/components/ui/switch"
-  import { Tabs,TabsContent,TabsList,TabsTrigger } from "@/components/ui/tabs"
-  import { ToggleGrid,ToggleGroupItem } from "@/components/ui/toggle-group"
-  import { cn } from "@/lib/utils"
-  import {
-    IconArrowBackUp,
-    IconBoxAlignBottomLeftFilled,
-    IconBoxAlignBottomRightFilled,
-    IconBoxAlignTopLeftFilled,
-    IconBoxAlignTopRightFilled,
-    IconLine,
-    IconRestore,
-    IconVectorBezier2,
-    IconVectorSpline
-  } from "@tabler/icons-react"
-  import { AnimatePresence,motion } from "motion/react"
-  import * as React from "react"
-  import { Card,CardContent,CardHeader,CardTitle } from "../ui/card"
-  import { Label } from "../ui/label"
-  import { Tooltip,TooltipContent,TooltipProvider,TooltipTrigger } from "../ui/tooltip"
+import { CodeBlock } from "@/components/code-block";
+import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-group";
+import { InfoTip } from "@/components/info-tip";
+import { NumberSlider } from "@/components/number-slider";
+import { ControlTether, DraggablePoint, SvgGrid } from "@/components/svg-canvas";
+import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ToggleGrid, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { cn } from "@/lib/utils";
+import {
+  IconArrowBackUp,
+  IconBoxAlignBottomLeftFilled,
+  IconBoxAlignBottomRightFilled,
+  IconBoxAlignTopLeftFilled,
+  IconBoxAlignTopRightFilled,
+  IconLine,
+  IconRestore,
+  IconVectorBezier2,
+  IconVectorSpline,
+} from "@tabler/icons-react";
+import { AnimatePresence, motion } from "motion/react";
+import * as React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Label } from "../ui/label";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 type Point = { x: number; y: number };
 
@@ -141,9 +134,9 @@ const SWATCHES: ColorSwatch[] = [
 ];
 
 const AXIS_TICKS = [0, 25, 50, 75, 100];
-export const START_POINT_COLOR = "var(--color-success-foreground)";
+export const START_POINT_COLOR = "var(--color-success-primary)";
 export const END_POINT_COLOR = "var(--color-destructive)";
-export const CONTROL_POINT_COLOR = "var(--color-ring)";
+export const CONTROL_POINT_COLOR = "var(--color-info-primary)";
 export const CONTROL_POINT_COLOR_2 = "var(--color-muted-foreground)";
 
 const SLIDER_LAYOUT_SPRING = {
@@ -565,7 +558,12 @@ export function ClipPathEditorCanvas({ className }: React.ComponentProps<"div">)
         {/* <AxisLabels ticks={AXIS_TICKS} axis="x" className="inset-x-3" />
         <AxisLabels ticks={AXIS_TICKS} axis="y" className="top-6 -left-6 pt-6" /> */}
         <div className="absolute top-6 right-0 bottom-0 left-0">
-          <svg viewBox="0 0 100 100" className="block size-full overflow-visible" ref={svgRef}>
+          <svg
+            viewBox="0 0 100 100"
+            className="block size-full overflow-visible"
+            style={{ touchAction: "none" }}
+            ref={svgRef}
+          >
             <SvgGrid intervals={AXIS_TICKS} showGrid={true} showDots={true} />
             {/* Layer 2: Clipped shape */}
             <path d={fillPathD} fill={state.color} strokeWidth={0.5} />
