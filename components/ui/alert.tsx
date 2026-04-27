@@ -4,14 +4,14 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const alertVariants = cva(
-  "group/alert not-prose relative grid w-full outline outline-border gap-0.5 rounded-lg shadow-[inset_0_1px_0_.5px_rgba(255,255,255,0.40),var(--shadow-sm)] dark:shadow-border-sm p-3 py-2.5 text-start text-[0.8125rem] has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pe-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:min-h-lh *:[svg]:text-current/80 *:[svg:not([class*='size-'])]:size-4  dark:-outline-offset-1",
+  "group/alert not-prose relative grid w-full outline outline-border gap-0.5 rounded-lg shadow-[inset_0_1px_1px_.5px_rgba(255,255,255,0.20),var(--shadow-sm)] dark:shadow-border-sm px-3 py-2 text-start text-[0.8125rem] has-data-[slot=alert-action]:relative has-data-[slot=alert-action]:pe-18 has-[>svg]:grid-cols-[auto_1fr] has-[>svg]:gap-x-2 *:[svg]:min-h-lh *:[svg]:text-current/80 *:[svg:not([class*='size-'])]:size-4  dark:-outline-offset-1 ",
   {
     variants: {
       variant: {
-        default: "bg-card text-foreground [&>svg]:text-muted-foreground outline-border",
+        default: "bg-card text-card-foreground [&>svg]:text-muted-foreground outline-border",
         secondary:
           "bg-(--hue-50) dark:bg-(--hue-900) text-secondary-foreground [&>svg]:text-primary outline-primary/20",
-        neutral: "bg-neutral-50 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72",
+        neutral: "bg-neutral-25 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72",
         info: "bg-info text-info-foreground outline-info-primary/20 [&>svg]:text-info-primary",
         success: "bg-success text-success-foreground outline-success-primary/20 [&>svg]:text-success-primary",
         warning: "bg-warning text-warning-foreground outline-warning-primary/20 [&>svg]:text-warning-primary",
@@ -19,7 +19,7 @@ const alertVariants = cva(
         destructive: "bg-destructive/10 text-destructive-foreground outline-destructive/50  *:[svg]:text-current",
       },
       inline: {
-        true: "flex my-8 rounded-lg bg-gray-200 p-4 shadow-sm -mx-4",
+        true: "flex my-8 rounded-md px-4 py-2.5 -mx-4 bg-muted self-center",
         false: "",
       },
     },
@@ -30,12 +30,17 @@ const alertVariants = cva(
   }
 );
 
-function Alert({ className, variant, ...props }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+function Alert({
+  className,
+  variant,
+  inline,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
   return (
     <div
       data-slot="alert"
       role={variant === "destructive" ? "alert" : "status"}
-      className={cn(alertVariants({ variant }), className)}
+      className={cn(alertVariants({ variant, inline }), className)}
       {...props}
     />
   );
@@ -59,7 +64,11 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
 
 function AlertDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div data-slot="alert-description" className={cn("text-current/84 [svg~&]:col-start-2", className)} {...props} />
+    <div
+      data-slot="alert-description"
+      className={cn("text-pretty wrap-break-word text-current/72 [svg~&]:col-start-2", className)}
+      {...props}
+    />
   );
 }
 

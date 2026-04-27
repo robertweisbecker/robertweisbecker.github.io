@@ -1,12 +1,12 @@
 "use client";
 
-  import { Menu as MenuPrimitive } from "@base-ui/react/menu"
-  import * as React from "react"
+import { Menu as MenuPrimitive } from "@base-ui/react/menu";
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
-  import { IconArrowUpRight,IconCheck,IconChevronRight } from "@tabler/icons-react"
-  import { cva,VariantProps } from "class-variance-authority"
-  import { CheckIcon } from "../icons"
+import { cn } from "@/lib/utils";
+import { IconArrowUpRight, IconCheck, IconChevronRight } from "@tabler/icons-react";
+import { cva, VariantProps } from "class-variance-authority";
+import { CheckIcon } from "../icons";
 
 function DropdownMenu({ ...props }: MenuPrimitive.Root.Props) {
   return <MenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
@@ -21,7 +21,7 @@ function DropdownMenuTrigger({ ...props }: MenuPrimitive.Trigger.Props) {
 }
 
 function DropdownMenuContent({
-  align = "start",
+  align = "center",
   alignOffset = -4,
   side = "bottom",
   sideOffset = 4,
@@ -40,7 +40,7 @@ function DropdownMenuContent({
         <MenuPrimitive.Popup
           data-slot="dropdown-menu-content"
           className={cn(
-            "z-50 max-h-(--available-height) w-fit min-w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-xl bg-popover p-2 text-card-foreground shadow-popover outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95",
+            "z-50 max-h-(--available-height) w-fit min-w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto ui-popup py-2 text-card-foreground outline-hidden duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95",
             // "inset-shadow-[0_1px_--alpha(var(--color-white)/10%)]",
             className
           )}
@@ -67,7 +67,7 @@ function DropdownMenuLabel({
       data-slot="dropdown-menu-label"
       data-inset={inset}
       className={cn(
-        "flex min-h-7 items-center gap-2 px-3 pt-1.5 pb-1 text-xs text-popover-foreground/67 data-inset:ps-4",
+        "flex min-h-7 items-center gap-2 px-3 pt-1 pb-2 text-2xs font-medium text-popover-foreground/67 data-inset:ps-4",
         className
       )}
       {...props}
@@ -76,16 +76,17 @@ function DropdownMenuLabel({
 }
 
 const menuItemVariants = cva(
-  "group/dropdown-menu-item data-inset:ps-8 outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-50 data-disabled:bg-none! relative select-none flex items-center gap-2 rounded-md py-1.5 pe-2 ps-3 text-sm [&_svg]:opacity-64 [&_svg:not([class*='size-'])]:size-4 [&>svg:not([class*='ms-'])]:-ms-0.5 [&>svg:not([class*='me-'])]:-me-0.5 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "group/dropdown-menu-item data-inset:ps-10 outline-hidden data-disabled:cursor-not-allowed data-disabled:opacity-50 relative select-none flex items-center gap-2 rounded-md py-1.5 pe-4 ps-5 text-sm [&_svg]:opacity-64 [&_svg:not([class*='size-'])]:size-4 [&>svg:not([class*='ms-'])]:-ms-0.5 [&>svg:not([class*='me-'])]:-me-0.5 [&_svg]:pointer-events-none [&_svg]:shrink-0 relative before:absolute before:inset-y-0 before:inset-x-2 before:rounded-md data-disabled:before:hidden aria-current:before:bg-accent aria-current:before:text-accent-foreground",
+
   {
     variants: {
       variant: {
         default: [
           "text-popover-foreground/92",
-          "data-highlighted:bg-current/5 data-highlighted:text-popover-foreground data-highlighted:**:text-inherit ",
+          "data-highlighted:before:bg-current/5 data-highlighted:text-popover-foreground data-highlighted:**:text-inherit ",
         ],
         destructive:
-          "text-destructive data-[variant=destructive]:text-destructive data-[variant=destructive]:data-highlighted:bg-destructive/10 dark:data-[variant=destructive]:data-highlighted:bg-destructive/20 data-[variant=destructive]:data-highlighted:text-destructive data-[variant=destructive]:*:[svg]:text-destructive",
+          "text-destructive data-[variant=destructive]:text-destructive data-[variant=destructive]:data-highlighted:before:bg-destructive/10 data-[variant=destructive]:data-highlighted:text-destructive data-[variant=destructive]:*:[svg]:text-destructive",
       },
     },
     defaultVariants: {
@@ -282,6 +283,37 @@ function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"kbd
   );
 }
 
-  export {
-    DropdownMenu,DropdownMenuCheckboxItem,DropdownMenuContent,DropdownMenuGroup,DropdownMenuItem,DropdownMenuLabel,DropdownMenuLink,DropdownMenuPortal,DropdownMenuRadioGroup,DropdownMenuRadioItem,DropdownMenuSeparator,DropdownMenuShortcut,DropdownMenuSub,DropdownMenuSubContent,DropdownMenuSubTrigger,DropdownMenuTrigger,DropdownMenu as Menu,DropdownMenuCheckboxItem as MenuCheckbox,DropdownMenuGroup as MenuGroup,DropdownMenuLabel as MenuGroupLabel,DropdownMenuItem as MenuItem,DropdownMenuLink as MenuLink,DropdownMenuContent as MenuPopup,DropdownMenuPortal as MenuPortal,DropdownMenuRadioItem as MenuRadio,DropdownMenuRadioGroup as MenuRadioGroup,DropdownMenuSeparator as MenuSeparator,DropdownMenuShortcut as MenuShortcut,DropdownMenuSub as MenuSub,DropdownMenuSubContent as MenuSubPopup,DropdownMenuSubTrigger as MenuSubTrigger,DropdownMenuTrigger as MenuTrigger
-  }
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuLink,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+  DropdownMenu as Menu,
+  DropdownMenuCheckboxItem as MenuCheckbox,
+  DropdownMenuGroup as MenuGroup,
+  DropdownMenuLabel as MenuGroupLabel,
+  DropdownMenuItem as MenuItem,
+  DropdownMenuLink as MenuLink,
+  DropdownMenuContent as MenuPopup,
+  DropdownMenuPortal as MenuPortal,
+  DropdownMenuRadioItem as MenuRadio,
+  DropdownMenuRadioGroup as MenuRadioGroup,
+  DropdownMenuSeparator as MenuSeparator,
+  DropdownMenuShortcut as MenuShortcut,
+  DropdownMenuSub as MenuSub,
+  DropdownMenuSubContent as MenuSubPopup,
+  DropdownMenuSubTrigger as MenuSubTrigger,
+  DropdownMenuTrigger as MenuTrigger,
+};

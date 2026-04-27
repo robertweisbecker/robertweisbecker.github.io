@@ -1,25 +1,63 @@
 "use client";
+import { useState } from "react";
 import { ChromeTabs } from "@/components/chrome-tabs";
 import { DeviceFrame } from "@/components/device-frame";
+import { Favicon } from "@/components/icons";
 import { FigmaIcon, GithubIcon } from "@/components/icons";
 import { ImageToggle } from "@/components/image-toggle";
 import { LinkOut } from "@/components/link-out";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataList } from "@/components/ui/data-list";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
-import { Dialog, DialogBody, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogBody,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
@@ -28,7 +66,16 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Toolbar } from "@/components/ui/toolbar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible } from "@base-ui/react/collapsible";
-import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic } from "@tabler/icons-react";
+import {
+  IconAlignLeft,
+  IconAlignRight,
+  IconBold,
+  IconChevronDown,
+  IconCopy,
+  IconHome,
+  IconItalic,
+  IconTrash,
+} from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 import { Section } from "./section";
 
@@ -38,21 +85,43 @@ const ComponentDemos = dynamic(
 );
 
 export default function ComponentsPage() {
+  const [isLoading, setLoading] = useState(false);
   return (
     <div className="container mx-auto grid min-h-screen grid-rows-[auto_1fr_auto]">
-      <header className="border-x border-t bg-muted p-4">
+      <header className="border-x border-t border-dashed bg-muted p-4">
         <Heading level={1}>Components</Heading>
-        <p className="text-muted-foreground">
-          A kitchen sink of UI components. Use this page to preview and test components across light and dark themes.
-        </p>
+        <p className="text-muted-foreground">Kitchen sink</p>
       </header>
       <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[240px_1fr_240px]">
-        <aside className="order-2 border-s border-t bg-muted p-4 md:order-1">
+        <aside className="order-2 border-s border-t border-dashed bg-muted p-4 md:order-1">
           <Sidebar />
         </aside>
 
-        <main className="order-1 border-x border-t p-4 md:order-2">
+        <main className="order-1 max-w-full border-x border-t border-dashed p-4 md:order-2">
           <Section title="Playground">
+            <Badge variant="beta">Beta</Badge>
+            <Button
+              loading={isLoading}
+              onClick={() => {
+                setLoading(true);
+                window.setTimeout(() => setLoading(false), 2000);
+              }}
+            >
+              Loading
+            </Button>
+            <div className="wrapper">
+              <button className="group relative flex h-10 items-center gap-2 rounded-full bg-muted px-4 font-medium text-foreground transition-all duration-100 ease-out-quad active:scale-98">
+                <div
+                  className="absolute inset-0 flex h-10 items-center gap-2 rounded-full bg-destructive px-4 text-white transition-[clip-path] duration-300 ease-out [clip-path:inset(0_100%_0_0)] group-active:duration-2000 group-active:ease-out-quad group-active:[clip-path:inset(0_0_0_0)]"
+                  data-slot="inner"
+                >
+                  <IconTrash className="-ms-1 size-4" />
+                  Hold to Delete
+                </div>
+                <IconTrash className="-ms-1 size-4" />
+                Hold to Delete
+              </button>
+            </div>
             <ChromeTabs>
               <ChromeTabs.List>
                 <ChromeTabs.Tab value="tab1">
@@ -86,6 +155,11 @@ export default function ComponentsPage() {
           </Section>
           <Section title="Button" className="gap-4">
             <div className="flex flex-wrap gap-2">
+              <div className="squircle size-20 rounded-xl bg-destructive"></div>
+              <button className="focus-visible:outline-focus flex items-center gap-x-2 rounded-md bg-popover px-3.5 py-[calc(5/16*1rem)] text-neutral-500 shadow-[0_1px_rgba(0,0,0,0.04),0_1px_5px_-4px_rgba(0,0,0,0.4),0_2px_5px_rgba(0,0,0,0.06)] ring-1 ring-neutral-900/10 outline-none dark:shadow-[0_-1px_rgba(255,255,255,0.06),0_4px_8px_rgba(0,0,0,0.05),0_1px_6px_-4px_#000] dark:ring-white/10">
+                Clerk
+              </button>
+              <button className="rounded-md bg-foreground/80 px-4 py-2 text-background shadow-button">Default</button>
               <Button>Default</Button>
               <Button variant="secondary">Secondary</Button>
               <Button variant="outline">Outline</Button>
@@ -141,18 +215,14 @@ export default function ComponentsPage() {
             </div>
           </Section>
           <Section title="Device Frame">
-            <DeviceFrame island toolbar address="bob.fyi" gutter>
+            <p className="text-xs text-muted-foreground">Phone</p>
+            <DeviceFrame.Phone island toolbar address="bob.fyi" gutter>
               <p className="flex items-center justify-center p-6 text-center text-sm">
                 Preview content inside the frame. Use for screenshots, demos, or embedding app/website mockups.
               </p>
-            </DeviceFrame>
-            <DeviceFrame island toolbar gutter>
-              <ScrollArea
-                className="h-full w-full"
-                scrollFade
-                //   scrollbarGutter
-                // innerClass="p-4"
-              >
+            </DeviceFrame.Phone>
+            <DeviceFrame.Phone island toolbar gutter>
+              <ScrollArea className="h-full w-full" scrollFade>
                 <div className="space-y-4">
                   {Array.from({ length: 24 }, (_, i) => (
                     <p key={i} className="text-sm">
@@ -162,7 +232,14 @@ export default function ComponentsPage() {
                   ))}
                 </div>
               </ScrollArea>
-            </DeviceFrame>
+            </DeviceFrame.Phone>
+            <p className="text-xs text-muted-foreground">Browser</p>
+            <DeviceFrame.Browser address="bob.fyi">
+              <div className="flex items-center justify-center py-12 text-sm text-muted-foreground">
+                <Favicon className="mr-2 size-4" />
+                Browser frame preview
+              </div>
+            </DeviceFrame.Browser>
           </Section>
           <Section title="Button Group" id="button-group">
             <div className="flex flex-wrap gap-4">
@@ -393,6 +470,16 @@ export default function ComponentsPage() {
                 </div>
               </PopoverContent>
             </Popover>
+            <Separator />
+            <Popover>
+              <PopoverTrigger render={<Button variant="outline" />}>Open popover</PopoverTrigger>
+              <PopoverContent variant="annotation" arrow={false}>
+                <PopoverHeader>
+                  <PopoverTitle>Popover title</PopoverTitle>
+                  <p>Popover description or content.</p>
+                </PopoverHeader>
+              </PopoverContent>
+            </Popover>
           </Section>
           <Section title="Tooltip">
             <TooltipProvider>
@@ -586,6 +673,7 @@ const CUSTOM_LINKS: { href: string; label: string }[] = [
   { href: "#image-modal", label: "Image Modal" },
   { href: "#info-tip", label: "Info Tip" },
   { href: "#link-out", label: "Link Out" },
+  { href: "#mark-note", label: "Mark Note" },
   { href: "#mode-toggle", label: "Mode Toggle" },
   { href: "#number-slider", label: "Number Slider" },
   { href: "#stats", label: "Stats" },

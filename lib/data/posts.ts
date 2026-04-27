@@ -1,4 +1,12 @@
-  import { IconDragDrop,IconPalette,IconVectorBezier2,IconWindowMaximize } from "@tabler/icons-react"
+import {
+  IconColorFilter,
+  IconDragDrop,
+  IconPalette,
+  IconVectorBezier2,
+  IconWindowMaximize,
+  IconLivePhoto,
+  IconTooltip,
+} from "@tabler/icons-react";
 
 /** Serializable icon id → Tabler component. Use this map in UI; keep `Post.icon` as a string key. */
 export const postIcons = {
@@ -6,6 +14,9 @@ export const postIcons = {
   IconWindowMaximize,
   IconVectorBezier2,
   IconDragDrop,
+  IconColorFilter,
+  IconLivePhoto,
+  IconTooltip,
 } as const;
 
 export type PostIconName = keyof typeof postIcons;
@@ -22,9 +33,18 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    id: "via-smooth",
+    title: "Smooth Gradients",
+    description: "Adding easing curves to Tailwind gradients",
+    category: "Snippet",
+    date: "04/12/2026",
+    path: "/posts/smooth-gradients",
+    icon: "IconLivePhoto",
+  },
+  {
     id: "theming",
     title: "Theming Demo",
-    description: "Live accent hue and radius overrides via CSS custom properties",
+    description: "How theming works on this site with okLCH colors",
     category: "Demo",
     date: "04/02/2026",
     path: "/posts/theming",
@@ -51,10 +71,19 @@ export const posts: Post[] = [
   {
     id: "tab-indicator",
     title: "CSS Pseudo-indicators",
-    description: "Faking animated tabs indicators with CSS",
+    description: "Faking animated tab indicators with CSS",
     category: "Snippet",
     date: "11/01/2025",
     path: "/posts/tab-indicator",
     icon: "IconDragDrop",
+  },
+  {
+    id: "native-popovers",
+    title: "Native Popovers",
+    description: "HTML <popover>, anchoring, and starting-style",
+    category: "Snippet",
+    date: "08/26/2025",
+    path: "/posts/native-popovers",
+    icon: "IconTooltip",
   },
 ];

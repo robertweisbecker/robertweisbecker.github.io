@@ -1,32 +1,43 @@
----
-title: Furnace Design System
-subtitle: An accessible, themeable, and scalable design system for e-learning products
-role: Design Lead
-date: 2019 – 2022
-team:
-  - name: Kevin Grolton-Francisco
-    role: Product Manager
-  - name: Shannon Urban
-    role: Director, Accessibility
-  - name: Carlos Henriquez & Mpho Ramataboee
-    role: Engineering Leads
----
+export const frontmatter = {
+  title: "Furnace Design System",
+  subtitle: "An accessible, themeable, and scalable design system for e-learning products",
+  role: "Design Lead",
+  date: "2019 – 2022",
+  team: [
+    { name: "Kevin Grolton-Francisco", role: "Product Manager" },
+    { name: "Shannon Urban", role: "Director, Accessibility" },
+    { name: "Carlos Henriquez & Mpho Ramataboee", role: "Engineering Leads" },
+  ],
+};
 
-<ImageModal src="/assets/furnace/elements-home.png" />
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleIcon } from "@/components/ui/collapsible";
+
+![Components](/assets/furnace/core.png)
 
 ## Background
 
-Everfi has a large portfolio of e-learning courses, ranging in subject from Early Literacy to Workplace Inclusivity to the crowd favorite, Bloodborne Pathogen Training. Historically, courses were one-offs designed by individual teams using building blocks provided by our SDK, styling and composing them in unique ways. However, there was no feedback loop to collate these stylesheets, templates, and interactions for later reuse, so each new course build started from scratch.
+Everfi has a large portfolio of e-learning courses, ranging in subject from _Early Literacy_ to _Workplace Inclusivity_ to the crowd favorite, _Bloodborne Pathogen Training_. Historically, courses were one-offs designed by individual teams using building blocks provided by our SDK, styling and composing them in unique ways. However, there was no feedback loop to collate these stylesheets, templates, and interactions for later reuse, so each new course build started from scratch.
 
 Around 2018, as the company began to scale, there was a well-intentioned effort to do just that. Components were gathered from existing courses, their styles turned into variables, and custom stylesheets became themes that could be reused across product families. In theory.
 
-But the components were hyper-specific and inflexible. Styles were incomplete and context-dependent: font sizes were often hard-coded, a padding variable was available on one button but not another; somehow, accordion chevrons were always pink.
+Unfortunately, we ended up with components were hyper-specific and inflexible. Styles were incomplete and context-dependent: font sizes were often hard-coded, a padding variable was available on one button but not another; somehow, accordion chevrons were always pink.
 
-For the next year, we tried to make do, but without a style or UX foundation in place, designers and writers struggled to make square pegs designed for a past course fit into round holes posed by a new audience or topic.
+For the next year, we tried to make do, but without a style or UX foundation in place, designers and writers struggled to make square pegs designed in the past fit into round holes posed by a new audience or topic.
 
 It became difficult to maintain, impossible to fully document, and risky to make even minor changes to. We'd have to break everything in order to fix it, so, in early 2019, I began working on a proposal to rethink it from the ground up. By the end of the year, we'd built it.
 
 ### Goals
+
+<Collapsible>
+  <CollapsibleTrigger>
+    Show <CollapsibleIcon side="inline-end" />
+
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <p>Hello</p>
+  </CollapsibleContent>
+</Collapsible>
 
 - **A centralized style system that supported widespread theming.** No more one-off component variables or CSS seeping in from other courses.
 - **A fully-styled base theme with smart defaults.** Documentation and QA were nearly impossible because we had no underlying styles for the components.
@@ -85,13 +96,11 @@ Palette colors are almost never used directly inside components. Instead, they'r
 
 For each `$bg-[role]` in the SCSS, we have a corresponding `$text-on-[role]` mate. This is common practice now with design tokens, but we had to learn this the hard way.
 
-<LayoutGrid variant="twoUp">
-  <ImageModal src="/assets/furnace/color-roles.png" caption="Available color role variables in a theme." />
-  <ImageModal
-    src="/assets/furnace/color-roles-flow.png"
-    caption="Relationship between color palettes, color roles, and components."
-  />
-</LayoutGrid>
+<ImageModal src="/assets/furnace/color-roles.png" caption="Available color role variables in a theme." />
+<ImageModal
+  src="/assets/furnace/color-roles-flow.png"
+  caption="Relationship between color palettes, color roles, and components."
+/>
 
 **For example:**
 
@@ -101,13 +110,93 @@ This distinction is essential because `$text-on-ui-secondary` always pairs with 
 
 By defining the two colors separately, themes can flexibly change button colors without compromising the accessibility of links within a course.
 
-### Spacing
+### Layout & Spacing
 
 Spacing is calculated using a base unit `$spacing-xs / 4px` multiplied by different scales on mobile and desktop breakpoints.
 
 Themes actually don't have the ability to override a single component's spacing. Instead, we baked responsive margin and padding into components, causing them to scale automatically if / when the base unit is updated.
 
-<ImageModal src="/assets/furnace/spacing.png" caption="Responsive spacing formula" />
+#### Grid
+
+One of the biggest pain points in our SDK was the lack of a flexible grid. While there were a number of layout components (13!), they were all variations of two-, three-, and four-column grids, and each of them simply stacked their children below the desktop breakpoint.
+
+To replace them, we created two CSS Grid layouts: a classic Bootstrap-style 12-column grid for full flexibility, and another inspired by <LinkOut href="https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins" text="Material 2" /> that dynamically renders different columns per breakpoint (4 on mobile, 8 on tablet, and 12 on desktop).
+
+<LayoutGrid variant="twoUp">
+  <ImageModal
+    src="/assets/furnace/grid.png"
+    portrait={true}
+    caption="Grid examples at the tablet breakpoint. Note that the Dynamic Grid maxes out at 8 columns, while the Static Grid displays 12."
+  />
+  <ImageModal
+    src="/assets/furnace/grid-table.png"
+    portrait={true}
+    caption="Documentation comparing responsive class behaviors within the two grids."
+  />
+</LayoutGrid>
+
+<Tabs>
+  <TabsList variant="pill">
+    <TabsTrigger value="responsive">Responsive</TabsTrigger>
+    <TabsTrigger value="static">Static</TabsTrigger>
+  </TabsList>
+  <TabsContent value="responsive">
+    
+```css
+# Default
+
+## Spacing
+
+base = 8px 8 px
+
+// Desktop
+xxs = .5(base) 4 px
+xs = base 8 px
+ds = 2(base) 16 px
+dm = 3(base) 24 px
+dl = 5(base) 40 px
+dxl = 8(base) 64 px
+dxxl = 12(base) 96 px
+
+// Mobile
+xxs = .5(base) 4 px
+xs = base 8 px
+ms = 1.5(base) 12 px
+mm = 2.5(base) 20 px
+ml = 4(base) 32 px
+mxl = 6(base) 48 px
+mxxl = 8(base) 64 px
+
+````
+
+  </TabsContent>
+  <TabsContent value="static">
+
+```css
+base = 12px
+
+// Desktop
+xxs = .5(base) 6 px
+xs = base 12 px
+ds = 2(base) 24 px
+dm = 3(base) 36 px
+dl = 5(base) 60 px
+dxl = 8(base) 96 px
+dxxl = 12(base) 144 px
+
+// Mobile
+xxs = .5(base) 6 px
+xs = base 12 px
+ms = 1.5(base) 18 px
+mm = 2.5(base) 30 px
+ml = 4(base) 48 px
+mxl = 6(base) 72 px
+mxxl = 8(base) 96 px
+
+````
+
+  </TabsContent>
+</Tabs>
 
 ### Typography
 
@@ -166,36 +255,19 @@ Themes can customize these elevations, such as using `none` for a flat theme or 
 
 Primitive variables also included `border-width` and `border-radius` values. Border colors were applied using color palette variables and generated classes.
 
-<ImageModal
+<Image
   src="/assets/furnace/border-width-2.png"
   caption="We found that only three border-width values were sufficient."
 />
 
-<ImageModal
+<Image
   src="/assets/furnace/border-radius-2.png"
   caption="Radii variables were assigned according to a component's relative size."
 />
 
-## Layout
-
-One of the biggest pain points in our SDK was the lack of a flexible grid. While there were a number of layout components (13!), they were all variations of two-, three-, and four-column grids, and each of them simply stacked their children below the desktop breakpoint.
-
-To replace them, we created two CSS Grid layouts: a classic Bootstrap-style 12-column grid for full flexibility, and another inspired by <LinkOut href="https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins" text="Material 2" /> that dynamically renders different columns per breakpoint (4 on mobile, 8 on tablet, and 12 on desktop).
-
-<LayoutGrid variant="twoUp">
-  <ImageModal
-    src="/assets/furnace/grid.png"
-    portrait={true}
-    caption="Grid examples at the tablet breakpoint. Note that the Dynamic Grid maxes out at 8 columns, while the Static Grid displays 12."
-  />
-  <ImageModal
-    src="/assets/furnace/grid-table.png"
-    portrait={true}
-    caption="Documentation comparing responsive class behaviors within the two grids."
-  />
-</LayoutGrid>
-
 ## Impact
+
+![Documentation site](/assets/furnace/elements-home.png)
 
 Overall, we drastically simplified theming, while also elevating our visual design. Old themes contained 1,595 variables spread across 58 files — with Primitives in place, themes became a single file containing just 63 variables, while providing more comprehensive styling than we'd ever had.
 
@@ -204,8 +276,6 @@ For the first time, we had a fully styled base theme, Core, that aligned 1:1 wit
 <ImageModal src="/assets/furnace/core.png" caption="Core theme with fully-styled base components" />
 
 This provided smart defaults for other designers and streamlined the creation of new themes, both in Figma and in code. With styles in Figma aligned to our primitive variable names, designers were empowered to plug those values into an SCSS theme template and ship it off to a developer to push.
-
-<ImageModal src="/assets/furnace/themes.png" caption="The wide variety of themes enabled by primitives" />
 
 ### Development
 
@@ -257,3 +327,7 @@ If you're interested in how we got there, check out my colleague <LinkOut href="
 | Color combinations                      |   ~153~ |    44 |   -109 |  _-71%_ |
 | Responsive courses                      |     ~9~ |    74 |    +65 |  _720%_ |
 | AA-compliant components                 |     ~6~ |    59 |    +53 | _2580%_ |
+
+```
+
+```

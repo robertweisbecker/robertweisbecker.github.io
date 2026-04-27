@@ -1,11 +1,11 @@
 "use client";
 
-  import type { TocItem } from "@/lib/types"
-  import { cn } from "@/lib/utils"
-  import { IconArrowNarrowUpDashed } from "@tabler/icons-react"
-  import * as React from "react"
-  import { Button } from "./ui/button"
-  import { ScrollArea } from "./ui/scroll-area"
+import type { TocItem } from "@/lib/types";
+import { cn } from "@/lib/utils";
+import { IconArrowNarrowUpDashed } from "@tabler/icons-react";
+import * as React from "react";
+import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
 
 function useActiveItem(ids: string[]) {
   const [activeId, setActiveId] = React.useState<string | null>(null);
@@ -54,7 +54,7 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
       <ScrollArea scrollFade scrollbarGutter>
         <ul
           className={cn(
-            "group relative ms-1 text-[0.8125rem]/4 [--inset:--spacing(4)]",
+            "group relative ms-(--inset) text-[0.8125rem]/5 [--inset:--spacing(3)]",
             // "before:absolute before:inset-s-0 before:top-1.5 before:bottom-1.5 before:w-px before:bg-border",
             className
           )}
@@ -70,7 +70,7 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
                 } as React.CSSProperties
               }
               className={cn(
-                "peer relative text-sm first:[&>a]:-mt-1.5",
+                "peer relative first:[&>a]:-mt-1.5",
                 // "before:absolute before:inset-y-1.5 before:-inset-s-px before:w-0.5 before:rounded-e has-data-[active=true]:before:bg-primary",
                 "group-has-data-active:[&>a]:not-data-active:border-border peer-has-data-active:[&>a]:border-transparent"
               )}
@@ -85,11 +85,11 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
                   "text-muted-foreground hover:text-accent-foreground",
                   "pl-(--depth-inset)",
                   "data-[active=true]:font-[450] data-[active=true]:tracking-[-0.0025em] data-[active=true]:text-foreground",
-                  item.depth > 2 && ["text-[round(calc(1em-.05em*(var(--depth))),1px)] text-muted-foreground/80"],
+                  item.depth > 2 && ["text-[round(calc(1em-.05em*(var(--depth))),1px)]"],
                   item.depth > 1 && [
                     // "data-active:border-transparent!",
-                    "before:absolute before:top-0 before:left-0 before:h-1/2 before:w-[calc(var(--depth-inset)/1.5)] before:rounded-es-md before:border-b before:border-l before:border-transparent",
-                    "data-active:before:border-border",
+                    "before:rounded-es-0 before:absolute before:top-0 before:left-0 before:h-1/2 before:w-[calc(var(--depth-inset)/1.5)] before:border-b before:border-l before:border-transparent",
+                    "data-active:before:border-input",
                     // "data-active:border-border",
                     // "after:absolute after:top-[calc(var(--inset)/1)] after:bottom-0 after:left-0 after:w-px after:rounded-t data-active:after:bg-border",
                     // "after:mask-l-from-[calc(100%-1px)] after:mask-l-to-[1px]",
@@ -102,14 +102,6 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
           ))}
         </ul>
       </ScrollArea>
-      <Button variant="link" size="sm" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-        <IconArrowNarrowUpDashed
-          data-icon="inline-start"
-          strokeWidth={1.5}
-          className="transition-transform duration-100 ease-out group-hover/button:-translate-y-0.5"
-        />
-        Top
-      </Button>
     </nav>
   );
 }

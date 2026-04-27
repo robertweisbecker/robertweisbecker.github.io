@@ -1,6 +1,8 @@
 /* PALETTES
  * Registered as @theme so Tailwind generates utility classes
  * and CSS custom properties are available at runtime.
+ * Utility classes are tree-shaken; @source inline below safelists
+ * the bg-* classes used by the color palette component.
  */
 @theme {
   --color-gray-25: oklch(98.64% 0.00261 235.54);
@@ -80,7 +82,7 @@
 
   --color-sand-25: oklch(98.48% 0.001449 106.43);
   --color-sand-50: oklch(97.39% 0.005107 74.48);
-  --color-sand-75: oklch(94.72% 0.00398 73.24);
+  --color-sand-75: oklch(95.72% 0.00698 75.24);
   --color-sand-100: oklch(93.21% 0.008372 77.16);
   --color-sand-200: oklch(87.5% 0.009259 69.58);
   --color-sand-300: oklch(78.39% 0.013546 58.75);
@@ -110,11 +112,11 @@
 
   --color-steel-25: oklch(98.47% 0.004827 235);
   --color-steel-50: oklch(97.24% 0.012483 250.79);
-  --color-steel-75: oklch(94.92% 0.016784 240.54);
-  --color-steel-100: oklch(93.57% 0.021809 244.17);
-  --color-steel-200: oklch(88.37% 0.03258 246.44);
-  --color-steel-300: oklch(78.22% 0.042734 251.2);
-  --color-steel-400: oklch(61.45% 0.053767 253.63);
+  --color-steel-75: oklch(94.92% 0.009784 240.54);
+  --color-steel-100: oklch(93.57% 0.011809 244.17);
+  --color-steel-200: oklch(88.37% 0.02258 246.44);
+  --color-steel-300: oklch(78.22% 0.032734 251.2);
+  --color-steel-400: oklch(61.45% 0.043767 253.63);
   --color-steel-500: oklch(51.87% 0.061841 255.54);
   --color-steel-600: oklch(44.74% 0.055776 257.38);
   --color-steel-700: oklch(30.53% 0.043334 258.07);
@@ -125,36 +127,36 @@
 
   /* ── Black / White / Alpha ──────────────────────────────────────── */
 
-  --color-black-25: oklch(98.51% 0 0);
-  --color-black-50: oklch(96.72% 0 0);
-  --color-black-75: oklch(94.41% 0 0);
-  --color-black-100: oklch(92.8% 0 0);
-  --color-black-200: oklch(88.53% 0 0);
-  --color-black-300: oklch(77.31% 0 0);
-  --color-black-400: oklch(61.67% 0 0);
-  --color-black-500: oklch(52.08% 0 0);
-  --color-black-600: oklch(44.95% 0 0);
-  --color-black-700: oklch(30.08% 0 0);
-  --color-black-800: oklch(25.2% 0 0);
-  --color-black-900: oklch(21.78% 0 0);
-  --color-black-950: oklch(19.02% 0 0);
-  --color-black-975: oklch(17.38% 0 0);
-  --color-black-1000: #0b0b0b;
+  --color-black-25: oklch(98.51% 0 none);
+  --color-black-50: oklch(96.72% 0 none);
+  --color-black-75: oklch(94.41% 0 none);
+  --color-black-100: oklch(92.8% 0 none);
+  --color-black-200: oklch(88.53% 0 none);
+  --color-black-300: oklch(77.31% 0 none);
+  --color-black-400: oklch(61.67% 0 none);
+  --color-black-500: oklch(52.08% 0 none);
+  --color-black-600: oklch(44.95% 0 none);
+  --color-black-700: oklch(30.08% 0 none);
+  --color-black-800: oklch(25.2% 0 none);
+  --color-black-900: oklch(21.78% 0 none);
+  --color-black-950: oklch(19.02% 0 none);
+  --color-black-975: oklch(17.38% 0 none);
+  --color-black: #0b0b0b;
 
-  --color-black-alpha-25: oklch(0% 0 0 / 0.015);
-  --color-black-alpha-50: oklch(0% 0 0 / 0.033);
-  --color-black-alpha-75: oklch(0% 0 0 / 0.06);
-  --color-black-alpha-100: oklch(0% 0 0 / 0.09);
-  --color-black-alpha-200: oklch(0% 0 0 / 0.15);
-  --color-black-alpha-300: oklch(0% 0 0 / 0.29);
-  --color-black-alpha-400: oklch(0% 0 0 / 0.48);
-  --color-black-alpha-500: oklch(0% 0 0 / 0.59);
-  --color-black-alpha-600: oklch(0% 0 0 / 0.67);
-  --color-black-alpha-700: oklch(0% 0 0 / 0.82);
-  --color-black-alpha-800: oklch(0% 0 0 / 0.87);
-  --color-black-alpha-900: oklch(0% 0 0 / 0.9);
-  --color-black-alpha-950: oklch(0% 0 0 / 0.92);
-  --color-black-alpha-975: oklch(0% 0 0 / 0.94);
+  --color-black-alpha-25: oklch(0% 0 none / 0.015);
+  --color-black-alpha-50: oklch(0% 0 none / 0.033);
+  --color-black-alpha-75: oklch(0% 0 none / 0.06);
+  --color-black-alpha-100: oklch(0% 0 none / 0.09);
+  --color-black-alpha-200: oklch(0% 0 none / 0.15);
+  --color-black-alpha-300: oklch(0% 0 none / 0.29);
+  --color-black-alpha-400: oklch(0% 0 none / 0.48);
+  --color-black-alpha-500: oklch(0% 0 none / 0.59);
+  --color-black-alpha-600: oklch(0% 0 none / 0.67);
+  --color-black-alpha-700: oklch(0% 0 none / 0.82);
+  --color-black-alpha-800: oklch(0% 0 none / 0.87);
+  --color-black-alpha-900: oklch(0% 0 none / 0.9);
+  --color-black-alpha-950: oklch(0% 0 none / 0.92);
+  --color-black-alpha-975: oklch(0% 0 none / 0.94);
 
   --color-white-alpha-25: oklch(1 0 0 / 0.022);
   --color-white-alpha-50: oklch(1 0 0 / 0.044);
@@ -411,3 +413,13 @@
   --color-pink-950: oklch(23.17% 0.082689 354.41);
   --color-pink-975: oklch(19.9% 0.047189 350.36);
 }
+
+/* Safelist bg-* classes for the color palette demo component.
+ * These are dynamically constructed at runtime so Tailwind's
+ * source scanner can't detect them — @source inline forces generation.
+ */
+@source inline(
+  "bg-{ruby,red,orange,yellow,gold,lime,green,jade,teal,cyan,blue,navy,indigo,violet,purple,magenta,pink}-{25,50,100,200,300,400,500,600,700,800,900,950,975}"
+);
+@source inline("bg-{black,gray,zinc,ash,sage,sand,plum,steel}-{25,50,75,100,200,300,400,500,600,700,800,900,950,975}");
+@source inline("bg-{black-alpha,white-alpha,gray-alpha}-{25,50,75,100,200,300,400,500,600,700,800,900,950,975}");

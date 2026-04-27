@@ -8,15 +8,6 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 
-const Inter_Variable = localFont({
-  variable: "--font-inter-var",
-  display: "swap",
-  src: [
-    { path: "./fonts/InterVariable.woff2", style: "normal" },
-    { path: "./fonts/InterVariable-Italic.woff2", style: "italic" },
-  ],
-});
-
 const Booton = localFont({
   variable: "--font-booton",
   display: "swap",
@@ -27,6 +18,12 @@ const Departure_Mono = localFont({
   variable: "--font-departure-mono",
   display: "swap",
   src: [{ path: "./fonts/DepartureMono-Regular.woff2", style: "normal" }],
+});
+
+const Display = localFont({
+  variable: "--font-display",
+  display: "swap",
+  src: [{ path: "./fonts/SeasonCollectionVFT.woff2", style: "normal" }],
 });
 
 export const metadata: Metadata = {
@@ -60,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${Inter_Variable.variable} ${Departure_Mono.variable} ${Booton.variable}`}
+      className={`${Departure_Mono.variable} ${Booton.variable} ${Display.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -79,7 +76,7 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="root mx-auto scroll-pt-20 bg-background px-4 py-20">
+          <main id="main" className="root container mx-auto scroll-pt-20 bg-background px-4 py-20">
             {/* bg-[image:linear-gradient(to_bottom,var(--background)_50%,transparent_50%),repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[8px_8px] [--pattern-bg:var(--border)]/5 [--pattern-fg:var(--border)] */}
             {/* <div
               className="absolute inset-0 z-0 max-h-[33vh]"

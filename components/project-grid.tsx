@@ -11,23 +11,34 @@ import {
 import { projects } from "@/lib/data/projects";
 import Link from "next/link";
 import React from "react";
+import { TreeIconImage, TreeIconReact } from "./icons";
 
 const projectRows = projects.map((project, index) => (
   <React.Fragment key={project.id}>
-    <Item render={<Link href={project.path} />} size="default" className="peer hover:text-secondary-foreground sm:-mx-3">
-      {project.logo && (
+    <Item
+      render={<Link href={project.path} />}
+      size="default"
+      className="peer hover:text-secondary-foreground sm:-mx-3"
+    >
+      {project.icon ? (
         <ItemMedia variant="image" className="p-1">
-          <img src={project.logo} alt="" />
+          <img src={project.icon} alt="" />
+        </ItemMedia>
+      ) : (
+        <ItemMedia variant="image">
+          <TreeIconImage className="text-muted-foreground" />
         </ItemMedia>
       )}
       <ItemContent>
-        <ItemTitle>{project.title}</ItemTitle>
+        <ItemTitle style={{ viewTransitionName: project.title }}>{project.title}</ItemTitle>
         <ItemDescription>{project.description}</ItemDescription>
       </ItemContent>
       <ItemDescription className="text-xs tabular-nums">{project.date}</ItemDescription>
       <ItemActions>{/* <IconArrowRight className="text-muted-foreground size-4" /> */}</ItemActions>
     </Item>
-    {index !== projects.length - 1 && <ItemSeparator className="group-hover/item-group:opacity-0 peer-hover:opacity-0" />}
+    {index !== projects.length - 1 && (
+      <ItemSeparator className="group-hover/item-group:opacity-0 peer-hover:opacity-0" />
+    )}
   </React.Fragment>
 ));
 

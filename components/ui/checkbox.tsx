@@ -1,10 +1,10 @@
 "use client";
 
-  import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox"
-  import * as React from "react"
+import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
-  import { CheckIcon } from "../icons"
+import { cn } from "@/lib/utils";
+import { CheckIcon } from "../icons";
 
 function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
   return (
@@ -32,10 +32,10 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
         className="grid-stack size-full shrink-0 text-primary-foreground opacity-0 transition-[transform,color,scale,opacity] duration-200 ease-out data-checked:scale-100 data-checked:opacity-100 data-unchecked:scale-50 data-unchecked:text-muted-foreground"
       >
         {/* <IconCheck className="stroke-3 size-2.5" /> */}
-        <CheckIcon className="me-[0.5px] size-2.5" strokeWidth={4} />
+        <CheckIcon className="me-[0.5px] size-2.5 stroke-3" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   );
 }
 
-  export { Checkbox }
+export { Checkbox };

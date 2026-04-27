@@ -1,14 +1,14 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import { Switch as SwitchPrimitive } from "@base-ui/react/switch"
-  import { cva,VariantProps } from "class-variance-authority"
-  import * as React from "react"
+import { cn } from "@/lib/utils";
+import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
+import { cva, VariantProps } from "class-variance-authority";
+import * as React from "react";
 
 const switchVariants = cva(
   [
     // Default styles
-    "group/switch peer self-start rounded-full inline-flex shrink-0 items-center",
+    "group/switch peer self-start rounded-full inline-flex shrink-0 items-center justify-start",
     "inset-shadow-2xs inset-ring inset-ring-input",
     // Spacing & layout
     "h-(--switch-height) w-(--switch-width) p-(--switch-inset)",
@@ -29,8 +29,8 @@ const switchVariants = cva(
     variants: {
       size: {
         default:
-          "[--switch-height:var(--spacing-thumb)] [--switch-inset:--spacing(0.5)] [--switch-width:round(calc(var(--switch-height)*11/7),2px)]",
-        sm: "[--switch-height:--spacing(4)] [--switch-inset:1px] [--switch-width:--spacing(6.5)]",
+          "[--switch-height:var(--spacing-thumb)] [--switch-inset:2px] [--switch-width:round(calc(var(--switch-height)*11/7),2px)]",
+        sm: "[--switch-height:--spacing(4.5)] [--switch-inset:1px] [--switch-width:--spacing(7)]",
       },
     },
     defaultVariants: {
@@ -49,8 +49,8 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn([
-          "pointer-events-none block origin-center",
-          "h-[calc(var(--switch-height)-var(--switch-inset)*2)] w-[calc(var(--switch-height)-var(--switch-inset)*2)]",
+          "pointer-events-none relative top-[0.125px] block origin-center self-center",
+          "h-[calc(var(--switch-height)-calc(var(--switch-inset)*2))] w-[calc(var(--switch-height)-calc(var(--switch-inset)*2))]",
           "shadow-border-sm",
           "relative",
           "data-checked:bg-white",
@@ -66,4 +66,4 @@ function Switch({
   );
 }
 
-  export { Switch }
+export { Switch };

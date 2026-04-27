@@ -1,6 +1,6 @@
-  import type { PaginationLink } from "@/lib/utils"
-  import { IconChevronLeft } from "@tabler/icons-react"
-  import Link from "next/link"
+import type { PaginationLink } from "@/lib/utils";
+import { IconChevronLeft } from "@tabler/icons-react";
+import Link from "next/link";
 
 type PaginationProps = {
   previous?: PaginationLink;
@@ -14,7 +14,7 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
 
   if (!previous && !next && backHref) {
     return (
-      <nav aria-label="pagination" className="mt-12 border-t border-border pt-6">
+      <nav aria-label="pagination" className="mt-12 w-full border-t border-border pt-6">
         <Link
           href={backHref}
           aria-label={`Go back to ${backLabel}`}
@@ -46,7 +46,12 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
           </span>
           <span className="col-start-2 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Previous</span>
 
-          <span className="col-start-2 truncate font-medium">{previous.title}</span>
+          <span
+            className="col-start-2 truncate font-heading text-lg hover-weight"
+            // style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}
+          >
+            {previous.title}
+          </span>
         </Link>
       ) : (
         <span />
@@ -59,7 +64,12 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
           className="group grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-3 text-end"
         >
           <span className="col-start-1 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Next</span>
-          <span className="col-start-1 truncate font-medium">{next.title}</span>
+          <span
+            className="col-start-1 truncate font-heading text-lg"
+            style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}
+          >
+            {next.title}
+          </span>
           <span
             className="col-2 row-2 mt-px shrink-0 font-pixel text-[22px] leading-none text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-foreground"
             aria-hidden="true"

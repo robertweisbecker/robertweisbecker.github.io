@@ -13,8 +13,9 @@ export const ogContentType = "image/png";
 
 type BaseCardProps = {
   title: string;
-  description?: string;
+  description?: ReactNode;
   rightSlot?: ReactNode;
+  icon?: ReactNode;
 };
 
 let faviconDataUriPromise: Promise<string> | undefined;
@@ -22,28 +23,53 @@ let faviconDataUriPromise: Promise<string> | undefined;
 async function getFaviconDataUri() {
   if (!faviconDataUriPromise) {
     faviconDataUriPromise = readFile(join(process.cwd(), "app/favicon.svg"), "utf8").then(
-      (iconSvg) => `data:image/svg+xml;utf8,${encodeURIComponent(iconSvg)}`,
+      (iconSvg) => `data:image/svg+xml;utf8,${encodeURIComponent(iconSvg)}`
     );
   }
 
   return faviconDataUriPromise;
 }
 
-export async function createOgCard({ title, description, rightSlot }: BaseCardProps) {
-  const faviconDataUri = await getFaviconDataUri();
+// Satori (next/og) cannot parse variable fonts — use a static TTF/OTF cut here.
+// Ref: https://github.com/vercel/satori/issues/162, /issues/712
+const SEASON_STATIC_FONT_PATH: string | null = "app/fonts/SeasonMix-Medium.ttf";
+
+let seasonFontDataPromise: Promise<ArrayBuffer> | undefined;
+
+async function getSeasonFontData(): Promise<ArrayBuffer | null> {
+  if (!SEASON_STATIC_FONT_PATH) return null;
+  if (!seasonFontDataPromise) {
+    const fontPath = SEASON_STATIC_FONT_PATH;
+    seasonFontDataPromise = readFile(join(process.cwd(), fontPath)).then((buf) =>
+      buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength)
+    );
+  }
+
+  return seasonFontDataPromise;
+}
+
+const colors = {
+  bg: "#f4f0ec",
+  fg: "#555351",
+  border: "#dad5cf",
+  fg2: "#6c6864",
+};
+
+export async function createOgCard({ title, description, rightSlot, icon }: BaseCardProps) {
+  const [fontData, faviconDataUri] = await Promise.all([getSeasonFontData(), getFaviconDataUri()]);
 
   return new ImageResponse(
     <div
       style={{
-        background: "#f4f4f8",
-        color: "#131418",
+        background: colors.bg,
+        color: colors.fg,
         display: "flex",
         flexDirection: "column",
         width: "100%",
         height: "100%",
         padding: "48px",
-        justifyContent: "space-between",
-        border: "1px solid #d4d7e0",
+        border: `1px solid ${colors.border}`,
+        fontFamily: "sans-serif",
       }}
     >
       <div
@@ -52,57 +78,105 @@ export async function createOgCard({ title, description, rightSlot }: BaseCardPr
           justifyContent: "space-between",
           alignItems: "center",
           paddingBottom: "20px",
-          borderBottom: "1px solid #d9dce6",
+          borderBottom: `2px dashed ${colors.border}`,
+          marginBottom: "28px",
         }}
       >
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "16px",
+            gap: "32px",
           }}
         >
-          <img src={faviconDataUri} alt="bob.fyi favicon" width={44} height={44} />
-          <div style={{ display: "flex", fontSize: 34, fontWeight: 600, letterSpacing: "-0.02em" }}>bob.fyi</div>
+          <div style={{ fontSize: 24, color: colors.fg, fontFamily: "ui-monospace" }}>bob.fyi</div>
         </div>
-        <div style={{ display: "flex", minWidth: "160px", justifyContent: "flex-end", alignItems: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            minWidth: "160px",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            fontFamily: "sans-serif",
+          }}
+        >
           {rightSlot ?? null}
         </div>
       </div>
+      {icon ? (
+        <div
+          style={{
+            display: "flex",
+            width: "144px",
+            height: "144px",
+            borderRadius: "32px",
+            border: `1px solid ${colors.border}`,
+            background: "#ffffff",
+            alignItems: "center",
+            justifyContent: "center",
+            color: colors.fg2,
+            marginBottom: "28px",
+            fontSize: 96,
+          }}
+        >
+          {icon}
+        </div>
+      ) : (
+        <img src={faviconDataUri} width={144} height={144} />
+      )}
 
-      <div style={{ display: "flex", flex: 1, alignItems: "center", marginTop: "28px" }}>
-        <div style={{ display: "flex", flexDirection: "column", flex: 1, maxWidth: "980px", gap: "18px" }}>
-          <div
+      <div
+        style={{ display: "flex", flexDirection: "column", flex: 1, maxWidth: "980px", gap: "4px", marginTop: "auto" }}
+      >
+        <h1
+          style={{
+            display: "flex",
+            fontSize: 76,
+            fontWeight: 800,
+            letterSpacing: "-0.04em",
+            lineHeight: 1,
+            color: colors.fg,
+            textWrap: "balance",
+            fontFamily: fontData ? "Season Mix, sans-serif" : "sans-serif",
+          }}
+        >
+          {title}
+        </h1>
+        {description ? (
+          <p
             style={{
               display: "flex",
-              fontSize: 92,
-              fontWeight: 700,
-              lineHeight: 0.95,
-              letterSpacing: "-0.04em",
-              color: "#10131a",
+              fontSize: 32,
+              lineHeight: 1.2,
+              fontWeight: 500,
+              color: colors.fg2,
+              textWrap: "balance",
+              flexWrap: "wrap",
+              maxWidth: "760px",
+              fontFamily: "sans-serif",
             }}
           >
-            {title}
-          </div>
-          {description ? (
-            <div
-              style={{
-                display: "flex",
-                fontSize: 42,
-                lineHeight: 1.12,
-                letterSpacing: "-0.02em",
-                color: "#4b5261",
-                textWrap: "balance",
-                maxWidth: "760px",
-              }}
-            >
-              {description}
-            </div>
-          ) : null}
-        </div>
+            {description}
+          </p>
+        ) : null}
       </div>
     </div>,
-    ogSize,
+    {
+      ...ogSize,
+      // ...(fontData
+      //   ? {
+      //       fonts: [
+
+      //         {
+      //           name: "Season Mix",
+      //           data: fontData,
+      //           weight: 500,
+      //           style: "normal",
+      //         },
+      //       ],
+      //     }
+      //   : {}),
+    }
   );
 }
 
@@ -110,45 +184,27 @@ export async function createPostOgCard(post: Post) {
   const Icon = post.icon ? postIcons[post.icon] : undefined;
 
   return createOgCard({
-    title: post.title,
-    description: post.description,
+    title: "Robert Weisbecker",
+    description: (
+      <>
+        {post.title}
+        <span style={{ opacity: 0.5 }}> — {post.description ?? ""}</span>
+      </>
+    ),
+    icon: Icon ? <Icon size={48} stroke={1.8} color="#384056" /> : undefined,
     rightSlot: (
       <div
         style={{
           display: "flex",
-          alignItems: "center",
-          gap: "14px",
+          border: "1px solid #cfd4df",
+          borderRadius: "999px",
+          padding: "8px 14px",
+          fontSize: 20,
+          color: "#596073",
+          fontFamily: "monospace",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            border: "1px solid #cfd4df",
-            borderRadius: "999px",
-            padding: "8px 14px",
-            fontSize: 20,
-            color: "#596073",
-            background: "#ffffff",
-          }}
-        >
-          {post.date ?? ""}
-        </div>
-        {Icon ? (
-          <div
-            style={{
-              display: "flex",
-              width: "62px",
-              height: "62px",
-              borderRadius: "14px",
-              border: "1px solid #cfd4df",
-              background: "#ffffff",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Icon size={38} stroke={1.8} color="#384056" />
-          </div>
-        ) : null}
+        {post.date ?? ""}
       </div>
     ),
   });

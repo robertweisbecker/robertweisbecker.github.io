@@ -27,7 +27,7 @@ import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Label } from "../ui/label";
-import { Tooltip, TooltipContent, TooltipGroup, TooltipTrigger } from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipGroup, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 type Point = { x: number; y: number };
 
@@ -411,10 +411,17 @@ function PointSliders({
 function ResetButton({ onReset }: { onReset: () => void }) {
   return (
     <Tooltip>
-      <TooltipTrigger render={<Button variant="ghost" size="icon-sm" />} onClick={onReset}>
-        <IconRestore />
-      </TooltipTrigger>
-      <TooltipContent side="left">Reset</TooltipContent>
+      <TooltipProvider delay={0}>
+        <TooltipTrigger
+          render={
+            <Button variant="ghost" size="icon-sm" className="hover:[&>svg]:-rotate-90 active:[&>svg]:animate-spin" />
+          }
+          onClick={onReset}
+        >
+          <IconRestore className="rotate-45 transition-[transform,rotate] delay-100 duration-150 ease-in-out" />
+        </TooltipTrigger>
+        <TooltipContent side="left">Reset</TooltipContent>
+      </TooltipProvider>
     </Tooltip>
   );
 }
@@ -524,6 +531,14 @@ export function ClipPathEditorSnapControl({ className }: { className?: string })
 
   return (
     <Field orientation="horizontal" className={cn("gap-2", className)}>
+      <Label htmlFor="snap-to-grid" className="text-sm/none">
+        Snap to grid
+      </Label>
+      <InfoTip
+        help
+        description="Make handles and sliders snap to 5% increments when dragging. Does not affect number fields."
+        className="-my-1"
+      />
       <Switch
         size="sm"
         id="snap-to-grid"
@@ -534,14 +549,6 @@ export function ClipPathEditorSnapControl({ className }: { className?: string })
             snapToGrid: checked === true,
           })
         }
-      />
-      <Label htmlFor="snap-to-grid" className="text-sm/none">
-        Snap to grid
-      </Label>
-      <InfoTip
-        help
-        description="Make handles and sliders snap to 5% increments when dragging. Does not affect number fields."
-        className="-my-1"
       />
     </Field>
   );
@@ -862,38 +869,41 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
           </div>
         </Field>
 
-        <Field orientation="vertical">
-          <Label htmlFor="curve-mode">Type</Label>
-          <TooltipGroup>
-            <ToggleGrid
-              columns={3}
-              id="curve-mode"
-              value={[state.curveMode]}
-              onValueChange={(next) => {
-                const mode = Array.isArray(next) ? next[0] : next;
-                if (!mode) return;
-                if (mode === "line" || mode === "quadratic" || mode === "cubic") {
-                  dispatch({ type: "set-curve-mode", mode });
-                }
-              }}
-              spacing={0.5}
-              size="sm"
-              variant="elevated"
-              aria-label="Curve mode"
-              className="w-fit"
-            >
-              <TooltipTrigger tooltip="Linear path" render={<ToggleGroupItem value="line" />}>
-                <IconLine />
-              </TooltipTrigger>
-              <TooltipTrigger tooltip="Quadratic bézier curve" render={<ToggleGroupItem value="quadratic" />}>
-                <IconVectorSpline />
-              </TooltipTrigger>
-              <TooltipTrigger tooltip="Cubic bézier curve" render={<ToggleGroupItem value="cubic" />}>
-                <IconVectorBezier2 />
-              </TooltipTrigger>
-            </ToggleGrid>
-          </TooltipGroup>
-        </Field>
+        <div className="flex flex-col items-center gap-2">
+          <Field orientation="vertical">
+            <Label htmlFor="curve-mode">Type</Label>
+            <TooltipGroup>
+              <ToggleGrid
+                columns={3}
+                id="curve-mode"
+                value={[state.curveMode]}
+                onValueChange={(next) => {
+                  const mode = Array.isArray(next) ? next[0] : next;
+                  if (!mode) return;
+                  if (mode === "line" || mode === "quadratic" || mode === "cubic") {
+                    dispatch({ type: "set-curve-mode", mode });
+                  }
+                }}
+                spacing={0.5}
+                size="sm"
+                variant="elevated"
+                aria-label="Curve mode"
+                className="w-fit"
+              >
+                <TooltipTrigger tooltip="Linear path" render={<ToggleGroupItem value="line" />}>
+                  <IconLine />
+                </TooltipTrigger>
+                <TooltipTrigger tooltip="Quadratic bézier curve" render={<ToggleGroupItem value="quadratic" />}>
+                  <IconVectorSpline />
+                </TooltipTrigger>
+                <TooltipTrigger tooltip="Cubic bézier curve" render={<ToggleGroupItem value="cubic" />}>
+                  <IconVectorBezier2 />
+                </TooltipTrigger>
+              </ToggleGrid>
+            </TooltipGroup>
+          </Field>
+          <ClipPathEditorSnapControl className="my-auto" />
+        </div>
       </div>
     </div>
   );

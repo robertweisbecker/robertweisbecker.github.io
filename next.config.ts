@@ -1,5 +1,5 @@
-  import createMDX from "@next/mdx"
-  import type { NextConfig } from "next"
+import createMDX from "@next/mdx";
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
@@ -9,12 +9,13 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["@tabler/icons-react"],
+    viewTransition: true,
   },
 };
 
 const withMDX = createMDX({
   options: {
-    remarkPlugins: ["remark-gfm", "remark-frontmatter", ["remark-mdx-frontmatter", { name: "frontmatter" }]],
+    remarkPlugins: ["remark-gfm"],
     rehypePlugins: ["rehype-unwrap-images"],
   },
 });

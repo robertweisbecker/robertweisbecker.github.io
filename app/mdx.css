@@ -9,7 +9,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
   --prose-bold: var(--foreground);
   --prose-code: --alpha(var(--foreground) / 96%);
   --prose-code-bg: --alpha(var(--foreground) / 8%);
-  --prose-quotes: var(--muted-foreground);
+  --prose-quotes: var(--foreground);
   --prose-quote-borders: var(--border);
   --prose-captions: var(--color-muted-foreground);
   --prose-hr: var(--border);
@@ -26,6 +26,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
   max-width: var(--container-xl);
   margin-inline: auto;
   width: 100%;
+  margin-block: --spacing(8);
   /* min-width: 0; */
 }
 
@@ -49,17 +50,11 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 /* --- Headings --- */
 .prose h1:where(:not(.not-prose, .not-prose *)) {
+  @apply text-h1 leading-tight;
+  font-family: var(--font-heading);
   color: var(--prose-headings);
-  /* font-weight: 600;
-  font-size: 2em;
-  line-height: 1.2; */
   margin-bottom: 0.75em;
-  /* letter-spacing: -0.025em; */
   text-wrap: pretty;
-  font-size: 1.1875rem;
-  font-weight: 500;
-  line-height: normal;
-  letter-spacing: -0.01875rem;
 
   /* Remove bottom margin on h1 if directly followed by a <p> */
   &:has(+ p) {
@@ -72,12 +67,12 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 .prose h2 {
   color: var(--prose-headings);
-  @apply mt-24 mb-6 scroll-mt-12 text-xl font-[525] tracking-[-.02em];
+  @apply mt-16 mb-4 scroll-mt-12 text-[17px] font-[450] tracking-[-.02em];
 }
 
 .prose h3 {
   color: var(--prose-headings);
-  @apply mt-16 mb-2 scroll-mt-8 text-lg font-semibold tracking-[-.016em];
+  @apply mt-12 mb-3 scroll-mt-8 text-[15px] font-medium tracking-[-.016em];
 }
 
 .prose h4 {
@@ -132,6 +127,10 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 }
 
 /* --- Lists --- */
+.prose dl:where(:not(.not-prose, .not-prose *)) {
+  @apply grid grid-cols-[auto_1fr] gap-y-2 divide-y text-sm *:border-(--prose-border) **:pb-2 *:last-of-type:border-0 [&_dd]:text-current/72 [&_dt]:pe-4;
+}
+
 .prose ol:where(:not(.not-prose, .not-prose *)) {
   list-style-type: decimal;
   margin-top: 1.5em;
@@ -162,9 +161,9 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 /* --- Blockquotes --- */
 .prose blockquote:where(:not(.not-prose, .not-prose *)) {
-  @apply font-pixel text-xl italic;
+  @apply font-serif text-lg italic;
   color: var(--prose-quotes);
-  border-inline-start-width: 0.25rem;
+  border-inline-start-width: 0.125em;
   border-inline-start-color: var(--prose-quote-borders);
   margin-top: 1.6em;
   margin-bottom: 1.6em;
@@ -258,7 +257,6 @@ media-control-bar {
   margin-top: 2em;
   margin-bottom: 2em;
   font-size: 0.875em;
-  line-height: 1.7;
 }
 .prose thead:where(:not(.not-prose, .not-prose *)) {
   border-bottom-width: 1px;
@@ -271,9 +269,9 @@ media-control-bar {
   line-height: 1;
   vertical-align: bottom;
   padding-top: 0;
-  padding-inline-end: 0.57em;
-  padding-bottom: 0.57em;
-  padding-inline-start: 0.57em;
+  padding-inline-end: round(0.5em, 2px);
+  padding-bottom: round(0.5em, 2px);
+  padding-inline-start: round(0.5em, 2px);
 }
 .prose tbody tr:where(:not(.not-prose, .not-prose *)) {
   border-bottom-width: 1px;
@@ -284,6 +282,9 @@ media-control-bar {
 }
 .prose tbody td:where(:not(.not-prose, .not-prose *)) {
   vertical-align: baseline;
+  &:where([style="text-align:right"]) {
+    @apply tabular-nums;
+  }
 }
 .prose tfoot:where(:not(.not-prose, .not-prose *)) {
   border-top-width: 1px;
@@ -294,10 +295,10 @@ media-control-bar {
 }
 .prose :is(th, td):where(:not(.not-prose, .not-prose *)) {
   text-align: start;
-  padding-top: round(0.75em, 4px);
-  padding-bottom: round(0.75em, 4px);
-  padding-inline-end: round(0.75em, 4px);
-  padding-inline-start: round(0.75em, 4px);
+  padding-top: round(0.5em, 2px);
+  padding-bottom: round(0.5em, 2px);
+  padding-inline-end: round(0.5em, 2px);
+  padding-inline-start: round(0.5em, 2px);
 }
 .prose :is(thead th, tbody td, tfoot td):where(:not(.not-prose, .not-prose *)):first-child {
   padding-inline-start: 0;
@@ -330,13 +331,13 @@ media-control-bar {
   margin-bottom: 0;
 }
 
+.prose > :where(:not(.not-prose, .not-prose *)) + :where(:not(.not-prose, .not-prose *)) {
+  @apply mt-6;
+}
 /*
  * Escape hatch: .not-prose elements opt out of prose typography.
  * Only resets the prose-specific properties, not all styles.
  */
-.prose > :where(:not(.not-prose, .not-prose *)) + :where(:not(.not-prose, .not-prose *)) {
-  @apply mt-6;
-}
 /* .prose .not-prose p,
 .prose .not-prose h2,
 .prose .not-prose h3,

@@ -1,9 +1,21 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { IconAntennaBars5, IconBatteryFilled, IconChevronLeft, IconDots, IconWifi } from "@tabler/icons-react";
+import {
+  IconAntennaBars5,
+  IconArrowLeft,
+  IconArrowRight,
+  IconBatteryFilled,
+  IconBoltFilled,
+  IconChevronLeft,
+  IconDots,
+  IconRefresh,
+  IconWifi,
+} from "@tabler/icons-react";
 import * as React from "react";
 import { CopyButton } from "./ui/copy-button";
+import { Skeleton } from "./ui/skeleton";
+import { useBattery } from "@uidotdev/usehooks";
 
 const glassClass =
   "flex h-[12cqw] w-[12cqw] items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover  text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
@@ -11,19 +23,20 @@ const glassClass =
 const timeFormatter = new Intl.DateTimeFormat(undefined, {
   hour: "numeric",
   minute: "2-digit",
+  hour12: true,
 });
 
+function formatTime(date: Date) {
+  return timeFormatter.format(date).replace(/\s?(AM|PM)$/i, "");
+}
 function useCurrentTime() {
   const [time, setTime] = React.useState<string | null>(null);
-
   React.useEffect(() => {
     function update() {
-      setTime(timeFormatter.format(new Date()));
+      setTime(formatTime(new Date()));
     }
-
     update();
     const id = window.setInterval(update, 60_000);
-
     return () => {
       window.clearInterval(id);
     };
@@ -32,22 +45,42 @@ function useCurrentTime() {
   return time;
 }
 
-export interface DeviceFrameProps extends React.ComponentProps<"div"> {
-  /** Main content shown in the device screen area */
+export interface PhoneProps extends React.ComponentProps<"div"> {
   children?: React.ReactNode;
-  /** Show the top notch (Dynamic Island / island) */
   island?: boolean;
-  /** Show the bottom toolbar (back, address bar, menu) */
   toolbar?: boolean;
-  /** Content shown in the address bar when toolbar is true */
   address?: React.ReactNode;
-  /** Show the bottom home indicator line */
   indicator?: boolean;
-  /** Add padding to the content area so it is not hidden under island, toolbar, or indicator when they are visible */
   gutter?: boolean;
 }
 
-export function DeviceFrame({
+function BatteryDisplay({
+  loading,
+  supported,
+  level,
+  charging,
+}: {
+  loading: boolean;
+  supported: boolean;
+  level: number;
+  charging: boolean;
+}) {
+  const batteryLevel = supported ? Math.round((level ?? 0) * 100) : 67;
+  const batteryColor = batteryLevel > 50 ? "var(--success-primary)" : "var(--warning-primary)";
+  return (
+    <div className="z-1 -me-[.125em] flex items-center font-[system-ui] text-[2.4cqw] font-bold tracking-tighter text-white">
+      {loading ? (
+        <Skeleton className="absolute inset-0 rounded-sm" />
+      ) : (
+        <>
+          {batteryLevel} {charging && <IconBoltFilled className="size-[.9em] scale-y-110" />}
+        </>
+      )}
+    </div>
+  );
+}
+
+function Phone({
   className,
   children,
   island = true,
@@ -55,10 +88,13 @@ export function DeviceFrame({
   address = "bob.fyi",
   gutter = false,
   ...props
-}: DeviceFrameProps) {
+}: PhoneProps) {
   const time = useCurrentTime();
   const hasTopGutter = gutter && island;
   const hasBottomGutter = gutter && toolbar;
+  const { loading, supported, level, charging } = useBattery();
+  const batteryLevel = supported ? Math.round((level ?? 0) * 100) : 67;
+  const batteryColor = batteryLevel > 50 ? "var(--success-primary)" : "var(--warning-primary)";
 
   return (
     <div data-slot="device-frame" className={cn("mx-auto w-full max-w-sm", className)} {...props}>
@@ -69,33 +105,47 @@ export function DeviceFrame({
             <div className={cn("absolute inset-0", hasTopGutter && "pt-[10%]", hasBottomGutter && "pb-[15%]")}>
               {children}
             </div>
-            <div className="via-smooth pointer-events-none absolute inset-x-0 bottom-0 h-[25%] w-full bg-linear-to-b from-transparent via-black/5 to-black/20 bg-blend-multiply" />
-            {/* <div className="via-smooth inset-inline-e-[2%] inset-inline-s-0 pointer-events-none absolute bottom-0 h-[20%] rounded-full from-success from-0% to-destructive mask-t-from-90% backdrop-blur-xl" /> */}
+            <div className="via-smooth pointer-events-none absolute inset-x-0 bottom-0 h-[20%] w-full bg-linear-to-b from-transparent via-black/10 via-30% to-black/25 bg-blend-multiply" />
           </div>
 
           {island && (
             <>
               <div className="absolute inset-x-[10%] top-[3%] flex items-center justify-between">
                 <div
-                  className="w-[25%] text-center font-[system-ui] text-[3.67cqw] leading-none font-medium"
+                  className="relative min-h-[1em] w-[25%] text-center font-[system-ui] text-[3.67cqw] leading-none font-semibold"
                   style={{ fontFeatureSettings: "normal" }}
                 >
-                  {time ?? "9:41"}
+                  {time ?? <Skeleton className="mx-auto h-4 w-[3.5ch]" />}
                 </div>
                 <div className="flex items-center gap-1">
                   <IconAntennaBars5
                     className="**:[path]:nth-child(3):opacity-30 size-[5cqw] scale-x-125 **:[path]:last:opacity-30"
                     strokeWidth={2.5}
                   />
-                  <IconWifi className="size-[5cqw]" strokeWidth={2.5} />
+                  <IconWifi className="relative -top-[.125em] size-[5.25cqw] [&_path]:last:hidden" strokeWidth={2.5} />
                   <div className="grid-stack">
-                    <div className="z-1 -ms-[.75ch] font-[system-ui] text-[2.5cqw] font-bold -tracking-wide text-background">
-                      80
+                    <div className="z-1 flex items-center pe-px font-[system-ui] text-[2.4cqw] font-bold tracking-tighter text-white">
+                      {loading ? (
+                        <span className="relative inline-block min-h-[1em] w-[2ch]">
+                          <Skeleton className="absolute inset-0 rounded-sm" />
+                        </span>
+                      ) : (
+                        <>
+                          {batteryLevel} {charging && <IconBoltFilled className="size-[.875em] scale-y-110" />}
+                        </>
+                      )}
                     </div>
-                    <IconBatteryFilled className="size-[7cqw] scale-x-120 opacity-30" strokeWidth={3} />
                     <IconBatteryFilled
-                      className="size-[7cqw] scale-x-120 mask-r-from-67% mask-r-to-67%"
-                      strokeWidth={3}
+                      className="size-[7cqw] scale-x-120 text-input bg-blend-difference"
+                      strokeWidth={2}
+                    />
+                    <IconBatteryFilled
+                      className="size-[7cqw] scale-x-120"
+                      style={{
+                        maskImage: `linear-gradient(to left, transparent 0%, transparent ${100 - batteryLevel}%, currentColor ${100 - batteryLevel}%, currentColor 100%)`,
+                        fill: charging ? "var(--success-primary)" : batteryColor,
+                      }}
+                      strokeWidth={2}
                     />
                   </div>
                 </div>
@@ -104,17 +154,18 @@ export function DeviceFrame({
                 className="absolute top-[2.5%] left-1/2 box-border flex h-[4%] w-[30%] -translate-x-1/2 transform items-center justify-between rounded-full bg-neutral-975 px-2 shadow-border-xs outline-[0.5px] -outline-offset-3 outline-neutral-700"
                 aria-hidden
               >
-                <div className="aspect-square h-[50%] rounded-full bg-linear-to-br from-neutral-900 to-neutral-800 shadow-border-xs ring ring-black dark:opacity-50" />
+                <div className="aspect-square h-[50%] rounded-full bg-linear-to-br from-neutral-900 to-neutral-800 p-[2%] shadow-border-xs ring ring-black dark:opacity-50">
+                  <div
+                    className="size-full rounded-full bg-foreground/5 mix-blend-plus-darker"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(farthest-corner at 20% 20%,#6074bf 0,transparent 40%),radial-gradient(farthest-corner at 80% 80%,#513785 0,#24555e 20%,transparent 50%)",
+                    }}
+                  />
+                </div>
               </div>
             </>
           )}
-
-          {/* {indicator && (
-            <div
-              className="bg-input shadow-border-xs absolute bottom-[3%] left-1/2 h-[0.6%] w-[34%] -translate-x-1/2 rounded-full"
-              aria-hidden
-            />
-          )} */}
 
           {toolbar && (
             <div
@@ -160,3 +211,61 @@ export function DeviceFrame({
     </div>
   );
 }
+
+export interface BrowserProps extends React.ComponentProps<"div"> {
+  children?: React.ReactNode;
+  /** Show the toolbar with navigation buttons and address bar */
+  toolbar?: boolean;
+  /** Content shown in the address bar */
+  address?: React.ReactNode;
+  /** Add padding so content doesn't sit flush against the header */
+  gutter?: boolean;
+}
+
+function Browser({
+  className,
+  children,
+  toolbar = true,
+  address = "vercel.com",
+  gutter = false,
+  ...props
+}: BrowserProps) {
+  return (
+    <div data-slot="device-frame" className={cn("w-full", className)} {...props}>
+      <div style={{ containerType: "inline-size" }}>
+        <div className="squircle overflow-hidden rounded-xl bg-background shadow-border-md">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 bg-popover px-2 py-2 md:px-3 md:py-2.5">
+            <div className="flex shrink-0 items-center gap-1.5 self-start pe-1 md:self-center md:ps-1">
+              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border" />
+              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ffbd2e] inset-ring inset-ring-border" />
+              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#27c93f] inset-ring inset-ring-border" />
+            </div>
+
+            {toolbar && (
+              <div className="flex flex-1 basis-xs items-center justify-between gap-2">
+                <div className="flex shrink-0 items-center gap-2 opacity-50 max-md:hidden">
+                  <IconArrowLeft strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
+                  <IconArrowRight strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
+                  <IconRefresh strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
+                </div>
+
+                <div className="squircle relative flex h-button-sm flex-1 items-center rounded-lg bg-foreground/5 p-1">
+                  <span className="flex min-w-0 flex-1 gap-[.25em] truncate px-1.5 text-xs text-muted-foreground/50">
+                    https:// <span className="text-foreground">{address}</span>
+                  </span>
+                  <CopyButton value={String(address)} size="icon-xs" className="squircle shrink-0 rounded-md" />
+                </div>
+
+                <IconDots className={cn("size-4 text-muted-foreground", "shrink-0 max-md:hidden")} aria-hidden />
+              </div>
+            )}
+          </div>
+
+          <div className={cn(gutter && "p-6")}>{children}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const DeviceFrame = { Phone, Browser };

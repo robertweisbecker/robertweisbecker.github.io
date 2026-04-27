@@ -1,17 +1,14 @@
 "use client";
 
-  import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
-  import * as React from "react"
+import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
-  import { ArrowSvg } from "../icons"
+import { cn } from "@/lib/utils";
+import { ArrowSvg } from "../icons";
 
 const TooltipGroupContext = React.createContext<{
   handle: TooltipPrimitive.Handle<React.ReactNode>;
 } | null>(null);
-
-const GROUP_EASING = "ease-[cubic-bezier(0.22,1,0.36,1)]";
-const GROUP_DURATION = "duration-[0.35s]";
 
 export type TooltipGroupProps = Pick<
   TooltipPrimitive.Positioner.Props,
@@ -23,7 +20,7 @@ export type TooltipGroupProps = Pick<
     children: React.ReactNode;
   };
 
-function TooltipProvider({ delay = 250, ...props }: TooltipPrimitive.Provider.Props) {
+function TooltipProvider({ delay = 200, ...props }: TooltipPrimitive.Provider.Props) {
   return <TooltipPrimitive.Provider data-slot="tooltip-provider" delay={delay} {...props} />;
 }
 
@@ -62,12 +59,7 @@ function TooltipGroup({
   const handle = React.useMemo(() => TooltipPrimitive.createHandle<React.ReactNode>(), []);
 
   return (
-    <TooltipPrimitive.Provider
-      data-slot="tooltip-group-provider"
-      delay={delay}
-      closeDelay={closeDelay}
-      timeout={timeout}
-    >
+    <TooltipProvider data-slot="tooltip-group-provider" delay={delay} closeDelay={closeDelay} timeout={timeout}>
       <TooltipGroupContext.Provider value={{ handle }}>
         {children}
         <TooltipPrimitive.Root data-slot="tooltip-group" handle={handle} trackCursorAxis={trackCursorAxis}>
@@ -81,8 +73,8 @@ function TooltipGroup({
                 className={cn(
                   "isolate z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width)",
                   "transition-[top,left,right,bottom,transform]",
-                  GROUP_DURATION,
-                  GROUP_EASING,
+                  "duration-[0.35s]",
+                  "ease-[cubic-bezier(0.22,1,0.36,1)]",
                   "data-instant:transition-none"
                 )}
               >
@@ -94,8 +86,8 @@ function TooltipGroup({
                     "rounded-md bg-popover text-[0.8125rem] text-popover-foreground",
                     "shadow-border-lg drop-shadow-md/2 dark:shadow-black/50",
                     "transition-[width,height,opacity,scale]",
-                    GROUP_DURATION,
-                    GROUP_EASING,
+                    "duration-[0.35s]",
+                    "ease-[cubic-bezier(0.22,1,0.36,1)]",
                     "data-starting-style:scale-90 data-starting-style:opacity-0",
                     "data-ending-style:scale-90 data-ending-style:opacity-0",
                     "data-instant:transition-none",
@@ -108,8 +100,8 @@ function TooltipGroup({
                     className={cn(
                       "flex",
                       "transition-[left]",
-                      GROUP_DURATION,
-                      GROUP_EASING,
+                      "duration-[0.35s]",
+                      "ease-[cubic-bezier(0.22,1,0.36,1)]",
                       "data-instant:transition-none",
                       "data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0",
                       "data-[side=left]:right-[-13px] data-[side=left]:rotate-90",
@@ -157,7 +149,7 @@ function TooltipGroup({
           )}
         </TooltipPrimitive.Root>
       </TooltipGroupContext.Provider>
-    </TooltipPrimitive.Provider>
+    </TooltipProvider>
   );
 }
 
@@ -184,23 +176,12 @@ function TooltipContent({
           data-slot="tooltip-content"
           className={cn(
             "origin-(--transform-origin) rounded-md bg-popover px-1.5 py-1 text-[0.8125rem] text-popover-foreground shadow-border-lg drop-shadow-md/2 transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-90 data-starting-style:opacity-0 dark:shadow-black/50",
-            // "data-instant:slide-in-0 data-instant:fade-in-100 data-instant:zoom-in-100",
-            // "data-[side=bottom]:slide-in-from-top-2",
-            // "data-[side=top]:slide-in-from-bottom-2",
-            // "data-[side=left]:slide-in-from-right-2",
-            // "data-[side=right]:slide-in-from-left-2",
-            // "data-[side=inline-end]:slide-in-from-start-2",
-            // "data-[side=inline-start]:slide-in-from-end-2",
-            // "data-[state=delayed-open]:animate-in data-[state=delayed-open]:fade-in-100 data-[state=delayed-open]:zoom-in-100",
-            // "data-open:animate-in data-open:fade-in-100 data-open:zoom-in-100",
-            // "data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
             "data-[side=left]:*:data-[slot=tooltip-arrow]:hidden data-[side=right]:*:data-[slot=tooltip-arrow]:hidden",
             className
           )}
           {...props}
         >
           {children}
-          {/* <TooltipPrimitive.Arrow className="data-[side=inline-end]:top-1/2! data-[side=inline-start]:top-1/2! bg-foreground fill-foreground data-[side=left]:top-1/2! data-[side=right]:top-1/2! data-[side=inline-end]:-inset-s-1 data-[side=inline-start]:-inset-e-1 z-50 size-2.5 translate-y-[calc(-50%-2px)] rotate-45 rounded-[2px] data-[side=bottom]:top-1 data-[side=left]:-right-1 data-[side=right]:-left-1 data-[side=top]:-bottom-2.5 data-[side=inline-end]:-translate-y-1/2 data-[side=inline-start]:-translate-y-1/2 data-[side=left]:-translate-y-1/2 data-[side=right]:-translate-y-1/2" /> */}
           <TooltipPrimitive.Arrow
             data-slot="tooltip-arrow"
             className="flex data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0 data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180"
@@ -213,4 +194,4 @@ function TooltipContent({
   );
 }
 
-  export { Tooltip,TooltipContent,TooltipGroup,TooltipProvider,TooltipTrigger }
+export { Tooltip, TooltipContent, TooltipGroup, TooltipProvider, TooltipTrigger };

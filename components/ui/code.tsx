@@ -3,15 +3,16 @@ import { cva, VariantProps } from "class-variance-authority";
 import { CopyButton } from "./copy-button";
 
 const codeVariants = cva(
-  "inline-flex not-prose relative w-fit h-fit min-w-lh items-center justify-center [&>svg:not([class*='size-'])]:size-[.9125em] font-mono [&>svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 [&_svg]:opacity-72",
+  "inline-flex not-prose relative w-fit h-fit min-w-lh items-center justify-center [&>svg:not([class*='size-'])]:size-[.9125em] font-pixel [&>svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 [&_svg]:opacity-72 select-all",
   {
     variants: {
       variant: {
         plain:
           "text-current bg-current/10 text-[calc(12/14*1em)] leading-lh px-[0.5ex] gap-[0.25em]  mx-[.25ex] py-0 rounded",
         default:
-          "isolate before:rounded-sm before:outline-[0.5px] before:outline-background/10 dark:-outline-offset-[0.5px] before:bg-card px-[0.75ex] before:-top-[.0625ex] before:-bottom-[0.125ex] text-current before:shadow-[inset_0_.0625em_hsl(0_0%_100%_/_10%),_0_.0625em_hsl(0_0%_0%_/_5%),inset_0_-0.125em_0.125em_-.0625em_hsl(0_0%_0%_/_5%),var(--shadow-border-xs)] gap-[0.25em] text-[0.875em] leading-[inherit] before:inset-x-0 before:absolute before:-z-1 mx-[.25ex]",
-        inline: "before:content-['`'] after:content-['`'] text-[.925em] inline-flex",
+          "isolate before:rounded before:outline before:outline-popover/50 dark:before:-outline-offset-[0.5px] before:bg-linear-to-b before:from-card before:to-popover dark:before:bg-linear-to-t before:backdrop-blur-xs px-[0.67ex] before:-top-[.0625ex] before:bottom-[0.125ex] -top-px text-popover-foreground before:shadow-[inset_-0_.0625em_hsl(0_0%_100%_/_5%),_0_.0625em_hsl(0_0%_0%_/_5%),inset_0_-0.125em_0.5em_-.0625em_hsl(0_0%_0%_/_5%),var(--shadow-border-xs)] gap-[0.25em] text-[11px] leading-[inherit] before:inset-x-0 before:absolute before:-z-1 mx-px min-h-5",
+        inline:
+          "before:content-['`'] after:content-['`'] text-[.925em] inline-flex font-mono font-semibold text-foreground",
       },
     },
     defaultVariants: {

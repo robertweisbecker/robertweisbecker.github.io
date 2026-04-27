@@ -1,15 +1,13 @@
----
-title: Everfi Forge
-subtitle: Refreshing our internal learning content creation & management app
-role: Design Systems Lead
-date: Winter - Spring 2017
-team:
-  - name: Kevin Grolton-Francisco
-    role: Product Manager
-  - name: Annie Alvarado
-    role: User Research
-    url: http://anniealvarado.com/
----
+export const frontmatter = {
+  title: "Everfi Forge",
+  subtitle: "Refreshing our internal learning content creation & management app",
+  role: "Design Systems Lead",
+  date: "Winter - Spring 2017",
+  team: [
+    { name: "Kevin Grolton-Francisco", role: "Product Manager" },
+    { name: "Annie Alvarado", role: "User Research", url: "http://anniealvarado.com/" },
+  ],
+};
 
 <Image src="/assets/forge/forge-after.png" />
 
@@ -84,13 +82,15 @@ Page actions move from a hidden context menu on list items to a dedicated dropdo
 
 A look at some components with standardized styling:
 
-<ImageModal src="/assets/forge/buttons.png" caption="Buttons" />
-
-<ImageModal src="/assets/forge/fields.png" caption="Redesigned inputs" />
-
-<ImageModal src="/assets/forge/nav.png" caption="Toolbar" />
-
-<ImageModal src="/assets/forge/dialogs.png" caption="Dialogs" />
+<ProjectImageCarousel
+  variant="inset"
+  slides={[
+    { src: "/assets/forge/buttons.png", alt: "", caption: "Buttons" },
+    { src: "/assets/forge/fields.png", alt: "", caption: "Redesigned inputs" },
+    { src: "/assets/forge/nav.png", alt: "", caption: "Toolbar" },
+    { src: "/assets/forge/dialogs.png", alt: "", caption: "Dialogs" },
+  ]}
+/>
 
 ## Custom Components
 

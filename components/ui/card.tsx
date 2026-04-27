@@ -1,7 +1,7 @@
-  import { cva,type VariantProps } from "class-variance-authority"
-  import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
   "text-card-foreground overflow-hidden rounded-(--card-radius) py-(--card-padding) text-sm has-[>[data-slot=card-footer]]:pb-0 has-[>img:first-child]:pt-0 gap-[calc(var(--card-padding)/1)] [&>img:first-child]:rounded-t-[inherit] [&>img:last-child]:rounded-b-[inherit] has-[>[data-slot=media]:last-child]:pb-0 group/card flex flex-col",
@@ -59,7 +59,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-title"
       className={cn(
-        "-mt-0.5 flex items-center gap-1.5 text-base font-medium text-foreground group-data-[size=md]/card:text-base in-group-data-[size=sm]/card:text-sm",
+        "-mt-0.5 flex items-center gap-1.5 text-base font-[525] text-foreground group-data-[size=md]/card:text-base in-group-data-[size=sm]/card:text-sm",
         className
       )}
       {...props}
@@ -113,4 +113,4 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-  export { Card,CardAction,CardContent,CardDescription,CardFooter,CardHeader,CardTitle }
+export { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle };

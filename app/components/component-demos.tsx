@@ -19,6 +19,7 @@ import { Image } from "@/components/image";
 import { ImageModal } from "@/components/image-modal";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
+import { Mark, MarkNote } from "@/components/mark-note";
 import { ModeToggle } from "@/components/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
 import { Stats } from "@/components/stats";
@@ -26,7 +27,7 @@ import { Alert, AlertAction, AlertContent, AlertDescription, AlertTitle } from "
 import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Carousel, CarouselContent, CarouselItem, CarouselToolbar } from "@/components/ui/carousel";
+import { Carousel, CarouselViewport, CarouselItem, CarouselToolbar } from "@/components/ui/carousel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Code } from "@/components/ui/code";
 import { ColorCode } from "@/components/ui/color-code";
@@ -77,6 +78,13 @@ const DEMO_SWATCHES = [
   { value: "#ec4899", label: "Pink", color: "#ec4899" },
 ];
 
+const CAROUSEL_SLIDES = [
+  { src: "/assets/udl/foundry-light.png", alt: "Foundry design system – light theme" },
+  { src: "/assets/forge/course-edit-after.png", alt: "Forge – course edit redesign" },
+  { src: "/assets/engage/engage-desktop.png", alt: "Engage – desktop layout" },
+  { src: "/assets/udl/figma-colors.png", alt: "UDL – Figma color tokens" },
+];
+
 const LOREM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 const LOREM_ALT =
@@ -123,7 +131,15 @@ function NumberSliderDemo() {
 
   return (
     <div className="max-w-sm">
-      <NumberSlider label="Opacity" min={0} max={100} step={1} value={value} onValueChange={setValue} format="percent" />
+      <NumberSlider
+        label="Opacity"
+        min={0}
+        max={100}
+        step={1}
+        value={value}
+        onValueChange={setValue}
+        format="percent"
+      />
     </div>
   );
 }
@@ -199,19 +215,86 @@ export function ComponentDemos() {
       </Section>
 
       <Section title="Carousel">
-        <div className="mx-auto w-full">
-          <Carousel>
-            <CarouselContent>
-              {Array.from({ length: 4 }, (_, i) => (
-                <CarouselItem key={i}>
-                  <div className="flex aspect-video items-center justify-center rounded-xl border bg-[url('/assets/udl/foundry-light.png')] bg-cover bg-center text-2xl font-medium">
-                    {i + 1}
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselToolbar />
-          </Carousel>
+        <div className="grid gap-8">
+          {/* Default */}
+          <div className="space-y-2">
+            <p className="text-xs text-muted-foreground">Default — scroll</p>
+            <Carousel>
+              <CarouselViewport>
+                {CAROUSEL_SLIDES.map((slide) => (
+                  <CarouselItem key={slide.src}>
+                    <div
+                      className="aspect-video rounded-xl border bg-cover bg-center"
+                      style={{ backgroundImage: `url('${slide.src}')` }}
+                      role="img"
+                      aria-label={slide.alt}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselViewport>
+              <CarouselToolbar />
+            </Carousel>
+          </div>
+
+          {/* Autoplay */}
+          <div className="space-y-2">
+            <p className="text-xs text-muted-foreground">Autoplay — pill progress + play/pause</p>
+            <Carousel autoplay={{ delay: 3000, defaultInteraction: false }}>
+              <CarouselViewport>
+                {CAROUSEL_SLIDES.map((slide) => (
+                  <CarouselItem key={slide.src}>
+                    <div
+                      className="aspect-video rounded-xl border bg-cover bg-center"
+                      style={{ backgroundImage: `url('${slide.src}')` }}
+                      role="img"
+                      aria-label={slide.alt}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselViewport>
+              <CarouselToolbar />
+            </Carousel>
+          </div>
+
+          {/* Fade */}
+          <div className="space-y-2">
+            <p className="text-xs text-muted-foreground">Fade — crossfade transitions</p>
+            <Carousel fade>
+              <CarouselViewport>
+                {CAROUSEL_SLIDES.map((slide) => (
+                  <CarouselItem key={slide.src}>
+                    <div
+                      className="aspect-video rounded-xl border bg-cover bg-center"
+                      style={{ backgroundImage: `url('${slide.src}')` }}
+                      role="img"
+                      aria-label={slide.alt}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselViewport>
+              <CarouselToolbar />
+            </Carousel>
+          </div>
+
+          {/* Autoplay + Fade */}
+          <div className="space-y-2">
+            <p className="text-xs text-muted-foreground">Autoplay + Fade</p>
+            <Carousel autoplay={{ delay: 3000, defaultInteraction: false }} fade>
+              <CarouselViewport>
+                {CAROUSEL_SLIDES.map((slide) => (
+                  <CarouselItem key={slide.src}>
+                    <div
+                      className="aspect-video rounded-xl border bg-cover bg-center"
+                      style={{ backgroundImage: `url('${slide.src}')` }}
+                      role="img"
+                      aria-label={slide.alt}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselViewport>
+              <CarouselToolbar />
+            </Carousel>
+          </div>
         </div>
       </Section>
 
@@ -440,7 +523,7 @@ export function ComponentDemos() {
               filename: "demo-scroll.tsx",
               language: "ts",
               value: `<Demo maxHeight={220} overflowBehavior="scroll" centerContent={false}>
-  <div className="min-w-[44rem] space-y-3">
+  <div className="min-w-176 space-y-3">
     <p>...lorem ipsum...</p>
   </div>
 </Demo>`,
@@ -569,10 +652,25 @@ export function ComponentDemos() {
         </div>
       </Section>
 
+      <Section title="Mark Note" id="mark-note">
+        <div className="max-w-prose space-y-6 text-sm leading-relaxed">
+          <MarkNote note="A target derived from our brand teal.">
+            Each ramp is centered on a <Mark>500 step</Mark>, which sits at roughly 5.2:1 contrast vs white.
+          </MarkNote>
+          <MarkNote note="still can't believe we made this">
+            <Mark>
+              This approach to reactions led users to discover &lsquo;emoji battles&rsquo;, a spontaneous game hidden as
+              a fun easter egg that a tiny physics engine drives on screen.
+            </Mark>{" "}
+            Friends intentionally caused these collisions, transforming reactions into something totally different.
+          </MarkNote>
+        </div>
+      </Section>
+
       <Section title="Video">
         <p className="text-sm text-muted-foreground">
-          Custom video player built on <Code variant="inline">media-chrome</Code> with themed toolbar controls, play/pause
-          overlay, fullscreen, and optional volume.
+          Custom video player built on <Code variant="inline">media-chrome</Code> with themed toolbar controls,
+          play/pause overlay, fullscreen, and optional volume.
         </p>
         <div className="max-w-lg">
           <Video

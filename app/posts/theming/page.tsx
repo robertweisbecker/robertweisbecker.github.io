@@ -1,7 +1,8 @@
 "use client";
 
 import { CodeBlock } from "@/components/code-block";
-import { CheckIconStraight } from "@/components/icons";
+import { Demo } from "@/components/demo";
+import { CheckIconStraight, InfoIcon2 } from "@/components/icons";
 import { Theme } from "@/components/theme";
 import { ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme-settings";
 import { Alert } from "@/components/ui/alert";
@@ -11,13 +12,13 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Code } from "@/components/ui/code";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { IconHeart, IconSend, IconSettings, IconTrash } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled, IconSend, IconSettings, IconTrash } from "@tabler/icons-react";
 import Link from "next/link";
 
-function ButtonShowcase() {
+function ThemeDemo() {
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-center gap-3">
+    <div className="not-prose flex flex-col gap-4">
+      <div className="flex flex-wrap items-center gap-2">
         <Button variant="default" size="sm">
           <IconSend data-icon="inline-start" />
           Send
@@ -27,7 +28,7 @@ function ButtonShowcase() {
           Settings
         </Button>
         <Button variant="outline" size="sm">
-          <IconHeart data-icon="inline-start" />
+          <IconHeartFilled data-icon="inline-start" className="text-destructive" />
           Like
         </Button>
         <Button variant="success" size="sm">
@@ -41,12 +42,50 @@ function ButtonShowcase() {
       </div>
       <Separator />
       <div className="flex flex-wrap items-center gap-2">
-        Badge
-        <Badge variant="outline">Outline</Badge>
+        <Badge variant="secondary">Neutral</Badge>
         <Badge variant="info">Info</Badge>
         <Badge variant="success">Success</Badge>
         <Badge variant="warning">Warning</Badge>
         <Badge variant="error">Error</Badge>
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge variant="secondary" className="bg-neutral-500 text-white">
+          Neutral
+        </Badge>
+        <Badge variant="secondary" className="bg-info-primary text-white">
+          Info
+        </Badge>
+        <Badge variant="secondary" className="bg-success-primary text-white">
+          Success
+        </Badge>
+        <Badge variant="secondary" className="bg-warning-primary text-white">
+          Warning
+        </Badge>
+        <Badge variant="secondary" className="bg-destructive text-white">
+          Error
+        </Badge>
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge variant="outline">
+          <span className="size-2 rounded-full bg-neutral-400" />
+          Neutral
+        </Badge>
+        <Badge variant="outline">
+          <span className="size-2 rounded-full bg-info-primary" />
+          Info
+        </Badge>
+        <Badge variant="outline">
+          <span className="size-2 rounded-full bg-success-primary" />
+          Success
+        </Badge>
+        <Badge variant="outline">
+          <span className="size-2 rounded-full bg-warning-primary" />
+          Warning
+        </Badge>
+        <Badge variant="outline">
+          <span className="size-2 rounded-full bg-destructive" />
+          Error
+        </Badge>
       </div>
       <Separator />
       <div className="flex flex-col gap-2">
@@ -64,7 +103,7 @@ function ButtonShowcase() {
 export default function ThemingPostPage() {
   return (
     <>
-      <div className="mx-auto flex max-w-2xl flex-col gap-6">
+      <div className="mx-auto flex max-w-xl flex-col gap-6">
         <section className="flex flex-col gap-4">
           <p>
             A working demo of the theming described in my writeup of the{" "}
@@ -82,17 +121,20 @@ export default function ThemingPostPage() {
         <section className="flex flex-col gap-2"></section>
       </div>
 
-      <Theme className="relative -mx-2 flex w-full flex-col gap-2 rounded-lg border-2 border-dotted bg-[canvas] p-2">
-        <Code variant="plain" className="absolute -top-3">{`<Theme/>`}</Code>
+      <Theme className="relative flex w-full flex-col gap-2 border border-dashed border-purple-500 bg-[canvas]">
+        <div className="to-canvas absolute left-3 flex -translate-y-1/2 gap-x-1 bg-linear-to-b from-background from-50% to-50% px-2 text-[11px]">
+          <div className="bg-purple-500 px-1 font-pixel leading-4 text-white uppercase">{`<Theme>`}</div>
+        </div>
+
         {/* <p className="max-w-prose text-xs text-muted-foreground">
           Portaled elements (ie. popups) won't inherit theming from within a nested theme, unless a corresponding
           provider is present. Otherwise, they'll use the global theme.
         </p> */}
 
-        <div className="grid w-full items-stretch gap-4 sm:grid-cols-5">
+        <div className="grid w-full items-stretch gap-4 p-4 sm:grid-cols-5">
           <Card className="sm:col-span-2" variant="muted">
             <CardHeader>
-              <CardTitle className="text-sm">Settings</CardTitle>
+              <CardTitle>Settings</CardTitle>
             </CardHeader>
             <CardContent>
               <ThemeSettingsPanel hueDisplay="swatches" neutralDisplay="swatches" />
@@ -102,9 +144,9 @@ export default function ThemingPostPage() {
             </CardFooter>
           </Card>
 
-          <div className="border-s p-3 sm:col-span-3">
-            <ButtonShowcase />
-          </div>
+          <Demo title="Preview" className="sm:col-span-3">
+            <ThemeDemo />
+          </Demo>
         </div>
       </Theme>
 

@@ -1,19 +1,26 @@
-  import { Demo } from "@/components/demo"
-  import { Image } from "@/components/image"
-  import { ImageModal } from "@/components/image-modal"
-  import { ImageToggle } from "@/components/image-toggle"
-  import { LayoutGrid } from "@/components/layout-grid"
-  import { LinkOut } from "@/components/link-out"
-  import { ProjectImageCarousel } from "@/components/project-image-carousel"
-  import { Stats } from "@/components/stats"
-  import { Separator } from "@/components/ui/separator"
-  import { Video } from "@/components/video"
-  import { slugify } from "@/lib/utils"
-  import { IconLinkFilled } from "@tabler/icons-react"
-  import type { MDXComponents } from "mdx/types"
-  import Link from "next/link"
-  import React from "react"
-  import { CodeBlock,type CodeBlockProps } from "./components/code-block"
+import { ColorPalette, ColorSwatch, ColorRamp } from "@/components/demos/color-palette";
+import { Demo } from "@/components/demo";
+import { DeviceFrame } from "@/components/device-frame";
+import { Image } from "@/components/image";
+import { ImageModal } from "@/components/image-modal";
+import { ImageToggle } from "@/components/image-toggle";
+import { LayoutGrid } from "@/components/layout-grid";
+import { LinkOut } from "@/components/link-out";
+import { Mark, MarkNote } from "@/components/mark-note";
+import { ProjectImageCarousel } from "@/components/project-image-carousel";
+import { Stats } from "@/components/stats";
+import { Separator } from "@/components/ui/separator";
+import { Video } from "@/components/video";
+import { slugify } from "@/lib/utils";
+import { IconLinkFilled } from "@tabler/icons-react";
+import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
+import React from "react";
+import { CodeBlock, type CodeBlockProps } from "./components/code-block";
+import { Alert, AlertContent, AlertDescription, AlertTitle } from "./components/ui/alert";
+import { Badge } from "./components/ui/badge";
+import { ColorCode } from "./components/ui/color-code";
+import { TextReveal } from "@/components/animations";
 
 function createHeading(level: number) {
   const HeadingTag = `h${level}` as "h2" | "h3" | "h4";
@@ -36,16 +43,30 @@ function createHeading(level: number) {
 
 export function useMDXComponents(): MDXComponents {
   return {
+    ColorPalette,
+    ColorSwatch,
+    ColorRamp,
+    Alert,
+    AlertContent,
+    AlertDescription,
+    AlertTitle,
+    Badge,
+    ColorCode,
     Image,
     ImageModal,
     ImageToggle,
     Demo,
+    DeviceFrame: DeviceFrame.Phone,
     ProjectImageCarousel,
+    ProjectCarousel: ProjectImageCarousel,
     LayoutGrid,
     LinkOut,
+    Mark,
+    MarkNote,
     Stats,
     Video,
     Separator,
+    TextReveal,
     pre: ({ children, ...props }) => {
       const codeElement = React.isValidElement<{ className?: string; children?: React.ReactNode }>(children)
         ? children
@@ -65,7 +86,7 @@ export function useMDXComponents(): MDXComponents {
     h2: createHeading(2),
     h3: createHeading(3),
     h4: createHeading(4),
-    img: (props) => <Image {...(props as React.ImgHTMLAttributes<HTMLImageElement>)} className="my-16" />,
+    img: (props) => <Image {...(props as React.ImgHTMLAttributes<HTMLImageElement>)} />,
     a: ({ href, children, ...props }) => {
       if (href?.startsWith("/")) {
         return (

@@ -1,3 +1,5 @@
+import * as React from "react";
+import { TextReveal } from "@/components/animations";
 import { BackButton } from "@/components/back-button";
 import { Pagination } from "@/components/pagination";
 import { ProjectMeta } from "@/components/project-meta";
@@ -6,7 +8,7 @@ import { projects } from "@/lib/data/projects";
 import { getProjectToc } from "@/lib/projects";
 import type { ProjectFrontmatter } from "@/lib/types";
 import { resolveNeighbors } from "@/lib/utils";
-import React from "react";
+import { Separator } from "@/components/ui/separator";
 
 export default async function MDXLayout({
   children,
@@ -27,24 +29,48 @@ export default async function MDXLayout({
   );
 
   return (
-    <div className="container mx-auto grid grid-cols-[14rem_minmax(0,1fr)_14rem] gap-8 px-4 max-lg:flex max-lg:flex-col">
-      <aside className="not-prose self-start max-lg:hidden lg:sticky lg:top-24">
+    <div className="mx-auto max-w-7xl gap-8 border-e max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
+      <aside id="toc" className="not-prose self-start outline max-lg:hidden lg:sticky lg:top-16">
         <BackButton href="/#projects" className="ms-1">
           Projects
         </BackButton>
+        <Separator variant="dashed" />
         <TableOfContents toc={toc} />
       </aside>
 
-      <div className="col-start-2 mx-auto max-w-3xl min-w-0">
-        <div className="mx-auto mb-6 grid max-w-xl items-baseline gap-2">
-          <h1 className="scroll-mt-24 text-2xl font-[575] tracking-tight text-balance">{fm.title}</h1>
-          <p className="max-w-prose text-xl leading-tight font-[450] tracking-tight text-balance">{fm.subtitle}</p>
+      <div id="content-max" className="col-start-2 min-w-0">
+        <div id="content-header" className="mx-auto grid max-w-xl gap-2">
+          <TextReveal
+            once
+            style={{ viewTransitionName: fm.title }}
+            children={fm.title}
+            className="scroll-mt-5 text-h1 text-balance"
+          />
+          <p className="mb-4 max-w-prose text-base leading-tight text-balance text-muted-foreground">{fm.subtitle}</p>
+          <ProjectMeta
+            role={fm.role}
+            team={fm.team}
+            date={fm.date}
+            meta={fm.meta}
+            className="lg:hidden"
+            size="sm"
+            orientation="horizontal"
+          />
         </div>
 
-        <div className="prose group/article col-start-2 max-w-full min-w-0 sm:mb-96">{children}</div>
+        <div
+          id="content-body"
+          className="prose group/article col-start-2 max-w-full min-w-0 sm:mb-96"
+          style={{ anchorName: "--article" }}
+        >
+          {children}
+        </div>
         <Pagination {...neighbors} backHref="/#projects" backLabel="Projects" />
       </div>
-      <ProjectMeta role={fm.role} team={fm.team} date={fm.date} meta={fm.meta} />
+
+      <aside id="meta" className="not-prose max-lg:hidden max-md:order-2" style={{ anchorName: "--meta" }}>
+        <ProjectMeta role={fm.role} team={fm.team} date={fm.date} meta={fm.meta} />
+      </aside>
     </div>
   );
 }

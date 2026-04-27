@@ -1,13 +1,13 @@
 "use client";
 
-  import { cva,type VariantProps } from "class-variance-authority"
-  import { useMemo } from "react"
+import { cva, type VariantProps } from "class-variance-authority";
+import { useMemo } from "react";
 
-  import { Label } from "@/components/ui/label"
-  import { Separator } from "@/components/ui/separator"
-  import { cn } from "@/lib/utils"
-  import { Field as FieldPrimitive } from "@base-ui/react/field"
-  import { Fieldset as FieldsetPrimitive } from "@base-ui/react/fieldset"
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { Field as FieldPrimitive } from "@base-ui/react/field";
+import { Fieldset as FieldsetPrimitive } from "@base-ui/react/fieldset";
 
 function FieldSet({ className, ...props }: FieldsetPrimitive.Root.Props) {
   return (
@@ -26,12 +26,18 @@ function FieldLegend({
   className,
   variant = "legend",
   ...props
-}: FieldsetPrimitive.Legend.Props & { variant?: "legend" | "label" }) {
+}: FieldsetPrimitive.Legend.Props & { variant?: "legend" | "label" | "heading" }) {
   return (
     <FieldsetPrimitive.Legend
       data-slot="field-legend"
       data-variant={variant}
-      className={cn("group/field-legend text-xs text-muted-foreground data-[variant=label]:text-sm", className)}
+      className={cn(
+        "group/field-legend",
+        variant === "heading" && "mb-2 border-b pb-2 text-base font-medium text-foreground",
+        variant === "legend" && "text-md font-medium text-foreground",
+        variant === "label" && "text-sm font-[450]",
+        className
+      )}
       {...props}
     />
   );
@@ -218,10 +224,16 @@ function FieldError({
   );
 }
 
-  export {
-    Field,FieldContent,FieldDescription,
-    FieldError,
-    FieldGroup,FieldLabel,FieldLegend,
-    FieldSeparator,
-    FieldSet,FieldSetDescription,FieldTitle
-  }
+export {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldSetDescription,
+  FieldTitle,
+};

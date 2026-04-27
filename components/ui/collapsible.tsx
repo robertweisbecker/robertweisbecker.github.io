@@ -27,8 +27,9 @@ export function CollapsibleIcon({
     <span
       data-icon={side}
       className={cn(
-        "size-lh relative self-center font-pixel text-[22px] leading-none opacity-50 transition-[opacity,transform,rotate] delay-50 duration-150 ease-out group-hover/collapsible-trigger:opacity-100 in-data-panel-open:opacity-100",
-        side === "inline-end" && "rotate-90 text-[16.5px] leading-none in-data-panel-open:rotate-270",
+        "size-lh decoration-none! relative inline-block self-center font-pixel text-[22px] leading-none opacity-50 transition-[opacity,transform,rotate] delay-50 duration-150 ease-out group-hover/collapsible-trigger:opacity-100 in-data-panel-open:opacity-100",
+        side === "inline-end" &&
+          "decoration-none text-[16.5px] leading-none no-underline decoration-transparent in-data-panel-open:-rotate-180",
         side === "inline-start" && "in-data-panel-open:rotate-90",
         className
       )}
@@ -36,7 +37,21 @@ export function CollapsibleIcon({
       {...props}
     >
       {/* <IconChevronDown  className="size-[1em]" /> */}
-      {side === "inline-start" ? "\u203A" : ">"}
+      {side === "inline-start" ? (
+        "\u203A"
+      ) : (
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" className="size-[1em]">
+          <rect x="9" y="3" width="1" height="1" fill="currentColor" />
+          <rect x="8" y="4" width="1" height="1" fill="currentColor" />
+          <rect x="7" y="5" width="1" height="1" fill="currentColor" />
+          <rect x="6" y="6" width="1" height="1" fill="currentColor" />
+          <rect x="5" y="7" width="1" height="1" fill="currentColor" />
+          <rect x="4" y="6" width="1" height="1" fill="currentColor" />
+          <rect x="3" y="5" width="1" height="1" fill="currentColor" />
+          <rect x="2" y="4" width="1" height="1" fill="currentColor" />
+          <rect x="1" y="3" width="1" height="1" fill="currentColor" />
+        </svg>
+      )}
     </span>
   );
 }
@@ -45,7 +60,7 @@ export function CollapsiblePanel({ className, ...props }: CollapsiblePrimitive.P
   return (
     <CollapsiblePrimitive.Panel
       className={cn(
-        "mt-1 h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 data-ending-style:h-0 data-starting-style:h-0",
+        "mt-1 h-(--collapsible-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0",
         className
       )}
       data-slot="collapsible-panel"

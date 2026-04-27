@@ -1,10 +1,10 @@
-  import { mergeProps } from "@base-ui/react/merge-props"
-  import { useRender } from "@base-ui/react/use-render"
-  import { cva,type VariantProps } from "class-variance-authority"
-  import * as React from "react"
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
-  import { Separator } from "@/components/ui/separator"
-  import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 function ItemGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
@@ -33,20 +33,20 @@ function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Sepa
 }
 
 const itemVariants = cva(
-  "[a]:hover:after:bg-accent [a]:after:transition-all [a]:hover:after:scale-100 [a]:after:scale-95 [a]:after:absolute [a]:after:inset-0 [a]:after:duration-200 [a]:after:ease [a]:after:rounded-[inherit] [a]:after:-z-1 isolate relative rounded-lg border border-border/50 text-sm flex-1 group/item focus-visible:border-ring focus-visible:ring-ring/50 flex items-center flex-wrap outline-none transition-colors duration-100 focus-visible:ring-[3px] [a]:transition-colors [data-slot=card-content]>:where(&):py-0",
+  "[a]:hover:after:bg-accent [a]:after:transition-all [a]:hover:after:scale-100 [a]:after:scale-95 [a]:after:absolute [a]:after:inset-0 [a]:after:duration-200 [a]:after:ease [a]:after:rounded-[inherit] [a]:after:-z-1 isolate relative rounded-xl border border-border/50 text-sm flex-1 group/item focus-visible:border-ring focus-visible:ring-ring/50 flex items-center flex-wrap outline-none transition-colors duration-100 focus-visible:ring-[3px] [a]:transition-colors [data-slot=card-content]>:where(&):py-0 squircle",
   {
     variants: {
       variant: {
         default: "border-transparent",
         outline: "border-border",
-        muted: "bg-muted border-transparent",
-        elevated: "shadow-sm bg-clip-padding bg-card [a]:hover:after:bg-sidebar",
+        muted: "bg-accent border-transparent",
+        elevated: "shadow-border-sm border-transparent bg-card [a]:hover:after:bg-sidebar",
       },
       size: {
-        lg: "gap-4 p-5 rounded-xl data-[variant=default]:-mx-5",
-        default: "gap-3 px-4 py-3 data-[variant=default]:-mx-4",
-        sm: "gap-2.5 px-3 py-2.5 has-data-[variant=default]:-mx-3 ",
-        xs: "gap-2 p-1.5 in-data-[slot=dropdown-menu-content]:p-0  data-[variant=default]:-mx-2.5",
+        lg: "gap-4 p-5 rounded-2xl data-[variant=default]:-mx-5",
+        default: "gap-4 px-4 py-3 data-[variant=default]:-mx-4",
+        sm: "gap-3 px-3 py-2.5 has-data-[variant=default]:-mx-3 ",
+        xs: "gap-2.5 p-1.5 in-data-[slot=dropdown-menu-content]:p-0  data-[variant=default]:-mx-2.5",
       },
     },
     defaultVariants: {
@@ -80,22 +80,19 @@ function Item({
   });
 }
 
-const itemMediaVariants = cva(
-  "gap-2 group-has-data-[slot=item-description]/item:translate-y-0.5 group-has-data-[slot=item-description]/item:self-start flex shrink-0 items-center justify-center [&_svg]:pointer-events-none",
-  {
-    variants: {
-      variant: {
-        default: "bg-transparent min-h-lh min-w-lh",
-        icon: " [&_svg:not([class*='size-'])]:size-4 min-h-4 grid-stack min-w-4",
-        image:
-          "size-10 bg-card filter-grayscale overflow-hidden shadow-border-xs rounded-sm group-data-[size=sm]/item:size-9 group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-contain",
-      },
+const itemMediaVariants = cva("gap-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none squircle", {
+  variants: {
+    variant: {
+      default: "bg-transparent min-h-lh min-w-lh",
+      icon: " [&_svg:not([class*='size-'])]:size-3.5 grid-stack min-h-5 grid-stack min-w-5 bg-current/5 text-primary rounded-xs self-center",
+      image:
+        "size-10 bg-card overflow-hidden shadow-border-xs rounded-md group-data-[size=sm]/item:size-9 group-data-[size=sm]/item:rounded-md group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-contain [&_svg]:size-6 in-group-data-[variant=muted]/item:bg-muted in-group-data-[variant=muted]/item:shadow-none group-has-data-[slot=item-description]/item:self-start group-has-data-[slot=item-description]/item:translate-y-0.5",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
 
 function ItemMedia({
   className,
@@ -176,7 +173,15 @@ function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-  export {
-    Item,ItemActions,ItemContent,ItemDescription,ItemFooter,ItemGroup,ItemHeader,ItemMedia,ItemSeparator,
-    ItemTitle
-  }
+export {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemFooter,
+  ItemGroup,
+  ItemHeader,
+  ItemMedia,
+  ItemSeparator,
+  ItemTitle,
+};

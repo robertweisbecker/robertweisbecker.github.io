@@ -1,19 +1,15 @@
----
-title: Unified Design Language
-subtitle: Consolidating Everfi's platform & product design systems into a shared design language
-role: Design Systems Lead
-date: 2021 – present
-team:
-  - name: Marianne Epstein
-    role: UX
-    url: https://www.marianneepstein.com/
-  - name: Alyssa Kjar
-    role: UX
-    url: https://www.linkedin.com/in/alyssakjar/
-  - name: Jey Nandakumar
-    role: Engineering
-  - role: + more
----
+export const frontmatter = {
+  title: "Unified Design Language",
+  subtitle: "Consolidating Everfi's platform & product design systems into a shared design language",
+  role: "Design Systems Lead",
+  date: "2021 – present",
+  team: [
+    { name: "Marianne Epstein", role: "UX", url: "https://www.marianneepstein.com/" },
+    { name: "Alyssa Kjar", role: "UX", url: "https://www.linkedin.com/in/alyssakjar/" },
+    { name: "Jey Nandakumar", role: "Engineering" },
+    { role: "+ more" },
+  ],
+};
 
 <div className="not-prose relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
   <div
@@ -77,11 +73,13 @@ For each moment of consensus, we laid another brick in our growing foundations.
 
 When we'd reached a critical mass of solid decisions, I created a rough set of components to stress-test in various use cases across the organization. The goal was to further refine our approach and develop a proof of concept that we could pitch to leadership.
 
-<ImageModal src="/assets/udl/login-after.png" caption="One sign-in screen to rule them all" />
-
-<ImageModal src="/assets/udl/create-after.png" caption="Aligning admin and K12 platform login flows" />
-
-<ImageModal src="/assets/udl/evaluations-after.png" caption="Evaluations in platform and course contexts" />
+<ProjectImageCarousel
+  slides={[
+    { src: "/assets/udl/login-after.png", alt: "One sign-in screen to rule them all", caption: "One sign-in screen to rule them all" },
+    { src: "/assets/udl/create-after.png", alt: "Aligning admin and K12 platform login flows", caption: "Aligning admin and K12 platform login flows" },
+    { src: "/assets/udl/evaluations-after.png", alt: "Evaluations in platform and course contexts", caption: "Evaluations in platform and course contexts" },
+  ]}
+/>
 
 <ImageToggle before="/assets/udl/data-before.png" after="/assets/udl/data-after.png" />
 
@@ -106,11 +104,13 @@ We were given the green light to implement the new design language — and to re
 
 We continued iterating on our foundations, arriving at a family of comprehensive design tokens that supported all our needs.
 
-<ImageModal src="/assets/udl/docs-tokens.png" caption="Figma token documentation" />
-
-<ImageModal src="/assets/udl/base-tokens.png" caption="Some of our base (global) tokens" />
-
-<ImageModal src="/assets/udl/semantic-tokens.png" caption="Semantic color tokens" />
+<ProjectImageCarousel
+  slides={[
+    { src: "/assets/udl/docs-tokens.png", alt: "Figma token documentation", caption: "Figma token documentation" },
+    { src: "/assets/udl/base-tokens.png", alt: "Some of our base (global) tokens", caption: "Some of our base (global) tokens" },
+    { src: "/assets/udl/semantic-tokens.png", alt: "Semantic color tokens", caption: "Semantic color tokens" },
+  ]}
+/>
 
 To ensure that tokens served as a single source of truth, I migrated our Figma styles to use Tokens Studio to enable syncing with GitHub. Once imported, tokens were converted from JSON to TypeScript via Amazon Style Dictionary for consumption by the new React components.
 

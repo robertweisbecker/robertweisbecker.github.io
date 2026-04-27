@@ -1,3 +1,4 @@
+"use client";
 import { BaseUiIcon, FigmaIcon } from "@/components/icons";
 import { LinkOut } from "@/components/link-out";
 import { ProjectGrid } from "@/components/project-grid";
@@ -6,39 +7,49 @@ import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverDescription, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { resources } from "@/lib/data/resources";
+import { GlitchFilter, PixelPortrait } from "@/components/animations";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "@gravity-ui/icons";
 
 export default function Home() {
   return (
     <div className={cn("mx-auto grid max-w-2xl gap-10 bg-background")}>
-      <div className="bg-background">
-        <h1 className="font-medium">Robert Weisbecker</h1>
-        <p className="text-muted-foreground/72">
-          Designing products & systems at{" "}
-          <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />
-        </p>
+      <div className="flex items-end justify-between gap-2">
+        <div className="min-w-0">
+          <h1
+            className="font-display w-fit text-3xl leading-[.9] text-(--hue-700) filter-[url(#glitch-name)]"
+            style={{
+              fontVariationSettings: '"wght" 680, "slnt" -5, "SERF" 20',
+            }}
+          >
+            Robert Weisbecker
+          </h1>
+          <p className="mt-2">
+            Designing products & systems at{" "}
+            <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />
+          </p>
+          <p className="mt-4 max-w-prose bg-background text-balance">
+            You can call me{" "}
+            <Popover>
+              <PopoverTrigger openOnHover className="link font-normal text-inherit decoration-dotted">
+                Bob
+              </PopoverTrigger>
+              <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
+                <PopoverDescription className="inline">
+                  We&apos;re all about efficiency here at bob [dot] fyi.
+                </PopoverDescription>
+              </PopoverContent>
+            </Popover>
+            . This is my little corner of the internet.
+            <br />
+            If you&apos;re here now, I made it for you. <br />
+          </p>
+        </div>
+        <PixelPortrait />
       </div>
 
-      <p className="mb-4 bg-background text-balance">
-        You can call me{" "}
-        <Popover>
-          <PopoverTrigger openOnHover className="link font-normal text-inherit decoration-dotted">
-            Bob
-          </PopoverTrigger>
-          <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
-            <PopoverDescription className="inline">
-              We&apos;re all about efficiency here at bob [dot] fyi.
-            </PopoverDescription>
-          </PopoverContent>
-        </Popover>
-        . This is my little corner of the internet.
-        <br />
-        If you&apos;re here now, I made it for you. <br />
-      </p>
-      {/* <span className="font-pixel text-[11px]">░░▒▒▓▓▒░</span> */}
-      {/* <span>⸪⸫⸪⸫⸪⸫⸪⸫⸪⸫⸪⸫⸪⸫</span> */}
-      <Separator className="min-h-0.5 max-w-18" />
+      <Separator className="mx-auto w-4 shrink-0" thickness={1} />
+
       <h2 className="font-pixel text-[11px] uppercase" id="projects">
         » Projects
       </h2>
@@ -106,3 +117,40 @@ export default function Home() {
     </div>
   );
 }
+
+// function AxisCursor() {
+//   const [mouse, containerRef] = useMouse<HTMLDivElement>();
+//   const xIntersecting = mouse.elementX > 0 && mouse.elementX < 200;
+//   const yIntersecting = mouse.elementY > 0 && mouse.elementY < 200;
+//   const isIntersecting = xIntersecting && yIntersecting;
+//   return (
+//     <div className="relative overflow-clip">
+//       <div
+//         className={cn(
+//           "absolute top-0 h-screen w-px -translate-x-1/2 bg-border",
+//           isIntersecting ? "opacity-100" : "opacity-0"
+//         )}
+//         style={{
+//           left: `${mouse.elementX - 4}px`,
+//         }}
+//       />
+//       <div
+//         className={cn(
+//           "absolute left-0 h-px w-screen -translate-y-1/2 bg-border",
+//           isIntersecting ? "opacity-100" : "opacity-0"
+//         )}
+//         style={{
+//           top: `${mouse.elementY - 4}px`,
+//         }}
+//       />
+//       <div
+//         className="absolute h-0.5 w-0.5 -translate-x-1/2 -translate-y-1/2 animate-caret-blink bg-primary"
+//         style={{
+//           top: `${mouse.elementY - 4}px`,
+//           left: `${mouse.elementX - 4}px`,
+//         }}
+//       />
+//       <div className="size-50 bg-info" ref={containerRef} />
+//     </div>
+//   );
+// }

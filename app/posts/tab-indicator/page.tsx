@@ -18,16 +18,16 @@ import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group
 import { IconArrowRight } from "@tabler/icons-react";
 
 const baseButton =
-  "relative px-4 h-button font-medium border bg-background items-center justify-center inline-flex cursor-pointer rounded-md text-sm w-fit hover:bg-accent text-muted-foreground data-pressed:bg-current/2 hover:text-accent-foreground data-pressed:text-foreground";
+  "relative px-4 h-button font-medium border bg-background items-center justify-center inline-flex cursor-pointer rounded-md text-sm w-fit hover:bg-accent text-muted-foreground data-pressed:bg-secondary hover:text-foreground data-pressed:text-secondary-foreground border-dashed -mx-[0.5px]";
 
 const afterTransition =
   "after:pointer-events-none after:transition-[transform,translate,opacity,background-color] after:duration-200 after:ease-out after:content-['']";
 
 const tabTriggerIndicatorClasses = [
-  "peer relative min-w-0 font-medium text-base",
+  "peer relative min-w-0 font-medium text-base isolate",
   "inline-flex min-h-button items-center justify-center hover:text-accent-foreground cursor-pointer px-3 data-active:text-foreground rounded-lg",
   afterTransition,
-  "after:absolute after:inset-0 after:origin-right after:translate-x-full data-active:after:bg-accent after:rounded-[inherit]",
+  "after:absolute after:inset-0 after:origin-right after:translate-x-full data-active:after:bg-secondary after:rounded-[inherit] after:-z-1",
   "data-[active]:after:translate-x-0 peer-data-[active]:after:-translate-x-full after:max-w-full not-data-active:overflow-hidden peer-data-[active]:after:overflow-visible after:opacity-0 data-active:after:opacity-100",
 ].join(" ");
 
@@ -48,13 +48,12 @@ Toggle peer: peer-data-pressed:after:-translate-x-full`;
 
 export default function TabIndicatorPostPage() {
   return (
-    <div className="prose mx-auto w-full max-w-2xl">
+    <div className="prose mx-auto w-full max-w-3xl">
       <p>
         Inspired by a tweet about Radix UI tabs not supporting a dynamic indicator like Base UI, I had an idea to fake
         one with Tailwind trickery. It mostly works.
       </p>
 
-      <hr />
       <p>Here&apos;s the end result:</p>
 
       <Card className="w-full">
@@ -95,6 +94,13 @@ export default function TabIndicatorPostPage() {
         reposition the indicators when a given trigger is active.
       </p>
       <p>
+        Basically, we want each tab to have its own indicator element. When the tab is active, the indicator lines up
+        with its parent. And when a different tab is active, we move the indicator to line up with <em>that</em> tab. If
+        we sync them up correctly, the active tab's indicator will move toward the new tab at the same time the new
+        tab's indicator does. When the two indicators meet, we crossfade them, and it looks like as if a single
+        indicator is moving between siblings.
+      </p>
+      <p>
         Thankfully, Tailwind has an abstraction for this kind of thing: <code>group</code> and <code>peer</code>. We can
         use these classes to make adjacent triggers &quot;hand off&quot; the indicator from one trigger to another by
         flipping the animation direction based on whether the previous trigger is active or not.
@@ -114,25 +120,17 @@ export default function TabIndicatorPostPage() {
         <li>If a later sibling is active: lined up with the trigger&apos;s next sibling</li>
       </ol>
 
-      <div className="not-prose flex flex-col items-center justify-center gap-4 rounded-xl bg-muted/50 p-4">
+      <div className="not-prose grid grid-cols-3 place-items-center gap-4 rounded-xl bg-muted p-4">
+        <p>Previous active:</p>
+        <p>Active:</p>
+        <p>Later active:</p>
         <div className="flex items-center gap-1">
-          <div className="grid-stack w-20 rounded-md bg-card p-2 text-xs text-muted-foreground/50 shadow-border-xs">
-            Indicator
-          </div>
+          <div className={"rounded-md bg-muted p-2 font-pixel text-[11px] text-muted-foreground/50"}>Indicator</div>
           <IconArrowRight className="size-4" />
-          <div className="grid-stack w-20 rounded-md bg-muted p-2">Trigger</div>
         </div>
-        <div className="flex gap-1">
-          <div className="grid-stack w-20 rounded-md bg-card p-2 text-xs text-muted-foreground/50 shadow-border-xs">
-            Indicator
-          </div>
-          <div className="grid-stack w-20 rounded-md bg-muted p-2">Trigger</div>
-        </div>
-        <div className="flex gap-1">
-          <div className="grid-stack w-20 rounded-md bg-card p-2 text-xs text-muted-foreground/50 shadow-border-xs">
-            Indicator
-          </div>
-          <div className="grid-stack w-20 rounded-md bg-muted p-2">Trigger</div>
+        <div className={`${baseButton}`}>Trigger</div>
+        <div className="grid-stack w-20 rounded-md bg-card p-2 text-xs text-muted-foreground/50 shadow-border-xs">
+          Indicator
         </div>
       </div>
       <p>
@@ -143,7 +141,7 @@ export default function TabIndicatorPostPage() {
       <Card variant="muted">
         <CardContent>
           <ButtonPrimitive
-            className={`${baseButton} w-fit after:absolute after:inset-0 after:grid-stack after:origin-right after:translate-x-full after:rounded-[inherit] after:border after:border-dashed after:bg-info after:text-info-foreground after:content-[':after']`}
+            className={`${baseButton} w-fit after:absolute after:inset-0 after:grid-stack after:origin-right after:translate-x-full after:rounded-[inherit] after:outline-2 after:outline-primary/60 after:content-[':after']`}
           >
             Button
           </ButtonPrimitive>
@@ -172,7 +170,7 @@ export default function TabIndicatorPostPage() {
         trigger on click. Be sure to add some duration and easing to the transformation.
       </p>
 
-      <div className="not-prose rounded-xl bg-muted p-4">
+      <div className="not-prose flex items-center rounded-xl bg-muted p-4">
         <ButtonPrimitive
           type="button"
           className={`${baseButton} mx-auto after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-sm after:outline-2 after:outline-primary/60 ${afterTransition} active:after:translate-x-0`}
@@ -185,16 +183,17 @@ export default function TabIndicatorPostPage() {
         <InfoIcon data-icon="inline-start" className="size-3" />
         <AlertContent>
           <AlertDescription>
-            If the indicator obscures your trigger, give it a negative z-index (i.e., <Code>.-z-1</Code>), and throw{" "}
-            <Code>.isolate</Code> on the parent to create an independent stacking context.
+            If the indicator obscures your trigger, give it a negative z-index (i.e.,{" "}
+            <Code variant="inline">.-z-1</Code>), and throw <Code variant="inline">.isolate</Code> on the parent to
+            create an independent stacking context.
           </AlertDescription>
         </AlertContent>
       </Alert>
 
       <p>
-        It&apos;s important to note that the <code>peer</code> class is only aware of previous siblings. So, we&apos;ll
-        use <code>peer-data-pressed</code> to move the indicator into position whenever any of the triggers to the left
-        are pressed.
+        It&apos;s important to note that the <code>peer</code>&nbsp;class is only aware of previous siblings. So,
+        we&apos;ll use <code>peer-data-pressed</code> to move the indicator into position whenever any of the triggers
+        to the left are pressed.
       </p>
       <p>
         You may be wondering how we account for cases where subsequent siblings are active if we can&apos;t target them
@@ -207,13 +206,13 @@ export default function TabIndicatorPostPage() {
         <code>peer-data-pressed:after:-translate-x-full</code>.
       </p>
       <div className="not-prose flex flex-wrap justify-center gap-4 rounded-xl border bg-muted/50 p-4">
-        <ToggleGroupPrimitive defaultValue={["1"]}>
-          <TogglePrimitive value="1" className={`${baseButton} peer`}>
-            Peer
+        <ToggleGroupPrimitive>
+          <TogglePrimitive value="1" className={`${baseButton} peer z-1`}>
+            Peer Trigger
           </TogglePrimitive>
           <TogglePrimitive
             value="2"
-            className={`${afterTransition} ${baseButton} relative after:pointer-events-none after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-sm after:outline-2 after:outline-primary/60 after:select-none peer-data-pressed:after:-translate-x-full data-pressed:after:translate-x-0`}
+            className={`${afterTransition} ${baseButton} relative rounded-s-none after:pointer-events-none after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-[inherit] after:outline-2 after:outline-primary/60 after:select-none peer-data-pressed:after:-translate-x-full data-pressed:after:translate-x-0`}
           >
             Trigger
           </TogglePrimitive>

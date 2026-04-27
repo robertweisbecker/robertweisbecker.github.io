@@ -1,12 +1,9 @@
 "use client";
 
-  import { CodeBlock } from "@/components/code-block"
-  import { Button } from "@/components/ui/button"
-  import { Collapsible,CollapsibleIcon,CollapsiblePanel,CollapsibleTrigger } from "@/components/ui/collapsible"
-  import { ResizableHandle,ResizablePanel,ResizablePanelGroup } from "@/components/ui/resizable"
-  import { cn } from "@/lib/utils"
-  import { IconChevronDown } from "@tabler/icons-react"
-  import * as React from "react"
+import { CodeBlock } from "@/components/code-block";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { cn } from "@/lib/utils";
+import * as React from "react";
 
 type DemoCodeLanguage = "css" | "html" | "js" | "ts" | "json" | "tsx" | "jsx" | "md" | "mdx" | "text";
 
@@ -33,42 +30,28 @@ type DemoProps = React.ComponentProps<"figure"> & {
   code?: DemoCodeConfig;
 };
 
-function toCssLength(value: number | string) {
-  return typeof value === "number" ? `${value}px` : value;
-}
-
-const card = "rounded-[calc(var(--radius-xl)-2px)] bg-card dark:bg-card/50 shadow-border-xs";
+const card =
+  "rounded-[calc(var(--radius-xl)-1px)] bg-card dark:bg-card shadow-border-xs w-[calc(100%-3px)] mx-auto mb-px";
 
 function DemoBody({
   children,
   overflowBehavior,
   maxHeight,
-  expanded,
   centerContent,
   innerClass,
 }: {
   children: React.ReactNode;
   overflowBehavior: DemoOverflowBehavior;
   maxHeight?: number | string;
-  expanded: boolean;
   centerContent: boolean;
   innerClass?: string;
 }) {
-  const isConstrained = maxHeight !== undefined && !expanded;
-  const heightStyle = isConstrained ? { height: toCssLength(maxHeight!) } : undefined;
-
   const demoInnerClasses = cn("p-4", centerContent && "grid place-items-center", innerClass);
 
   if (overflowBehavior === "resize") {
     return (
       <ResizablePanelGroup orientation="horizontal" style={{ overflow: "visible" }}>
-        <ResizablePanel
-          defaultSize="100%"
-          minSize="25%"
-          maxSize="100%"
-          className={cn(card, "h-full min-h-56")}
-          style={isConstrained ? heightStyle : { maxHeight: "min(28rem, 70vh)" }}
-        >
+        <ResizablePanel defaultSize="100%" minSize="25%" maxSize="100%" className={cn(card, "h-full min-h-56")}>
           <div className={demoInnerClasses}>{children}</div>
         </ResizablePanel>
         <ResizableHandle withHandle />
@@ -81,21 +64,14 @@ function DemoBody({
 
   if (overflowBehavior === "scroll") {
     return (
-      <div className={cn(card, "w-full overflow-auto", !isConstrained && "max-h-56 min-h-14")} style={heightStyle}>
+      <div className={cn(card, "max-h-56 min-h-14 w-full overflow-auto")}>
         <div className={cn(demoInnerClasses, "min-w-max")}>{children}</div>
       </div>
     );
   }
 
   // wrap (default)
-  return (
-    <div
-      className={cn(card, "min-h-14 overflow-hidden p-4", centerContent && "grid place-items-center", innerClass)}
-      style={heightStyle}
-    >
-      {children}
-    </div>
-  );
+  return <div className={cn(card, "min-h-14 overflow-hidden p-4", demoInnerClasses, innerClass)}>{children}</div>;
 }
 
 export function Demo({
@@ -104,7 +80,7 @@ export function Demo({
   caption,
   maxHeight,
   overflowBehavior = "wrap",
-  centerContent = true,
+  centerContent = false,
   innerClass,
   headerClassName,
   captionClassName,
@@ -113,7 +89,6 @@ export function Demo({
   children,
   ...props
 }: DemoProps) {
-  const [isExpanded, setIsExpanded] = React.useState(false);
   const [isCodeOpen, setIsCodeOpen] = React.useState(code?.defaultOpen ?? false);
   const canExpand = maxHeight !== undefined;
   const hasHeader = title !== undefined || controls !== undefined || canExpand;
@@ -124,65 +99,44 @@ export function Demo({
   }, [code?.defaultOpen]);
 
   return (
-    <figure data-demo className={cn("not-prose overflow-hidden rounded-xl bg-muted p-px", className)} {...props}>
+    <figure
+      data-demo
+      className={cn("not-prose overflow-hidden rounded-xl bg-muted dark:outline dark:outline-border/50", className)}
+      {...props}
+    >
       {hasHeader ? (
         <header
           className={cn(
-            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-1 text-sm font-medium",
+            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-2 text-xs text-muted-foreground",
             headerClassName
           )}
         >
-          <div className="min-w-0 grow text-foreground">{title}</div>
-          <div className="flex items-center gap-1">
-            {controls}
-            {canExpand ? (
-              <Collapsible open={isExpanded} onOpenChange={setIsExpanded}>
-                <CollapsibleTrigger render={<Button variant="ghost" size="xs" className="rounded-full" />}>
-                  {isExpanded ? "Collapse" : "Expand"}
-                  <IconChevronDown
-                    className={cn("size-4 opacity-64 transition-transform duration-200", isExpanded && "rotate-180")}
-                  />
-                </CollapsibleTrigger>
-              </Collapsible>
-            ) : null}
-          </div>
+          <div className="min-w-0 grow font-pixel text-[11px] uppercase">{title}</div>
+          <div className="flex items-center gap-1">{controls}</div>
         </header>
       ) : null}
 
-      <div className="p-px">
-        <DemoBody
-          overflowBehavior={overflowBehavior}
-          maxHeight={maxHeight}
-          expanded={isExpanded}
-          centerContent={centerContent}
-          innerClass={innerClass}
-        >
-          {children}
-        </DemoBody>
-      </div>
+      <DemoBody
+        overflowBehavior={overflowBehavior}
+        maxHeight={maxHeight}
+        centerContent={centerContent}
+        innerClass={innerClass}
+      >
+        {children}
+      </DemoBody>
 
       {caption ? (
         <figcaption className={cn("p-2 text-sm text-muted-foreground", captionClassName)}>{caption}</figcaption>
       ) : null}
 
       {hasCode ? (
-        <Collapsible open={isCodeOpen} onOpenChange={setIsCodeOpen}>
-          <CollapsiblePanel className="mt-0 border-t p-2">
-            <CodeBlock
-              code={code.value}
-              language={code.language}
-              filename={code.filename}
-              lineNumbers={code.lineNumbers}
-            />
-          </CollapsiblePanel>
-          <CollapsibleTrigger
-            render={<Button variant="ghost" className="w-full rounded-none" />}
-            aria-label={isCodeOpen ? "Hide code" : "Show code"}
-          >
-            Code
-            <CollapsibleIcon />
-          </CollapsibleTrigger>
-        </Collapsible>
+        <CodeBlock
+          code={code.value}
+          language={code.language}
+          filename={code.filename}
+          lineNumbers={code.lineNumbers}
+          className="-mx-px mt-px rounded-b-none bg-transparent"
+        />
       ) : null}
     </figure>
   );

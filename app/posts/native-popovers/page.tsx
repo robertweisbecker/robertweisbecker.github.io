@@ -1,0 +1,246 @@
+"use client";
+
+import { Demo } from "@/components/demo";
+import { Button } from "@/components/ui/button";
+import { Code } from "@/components/ui/code";
+import { Heading } from "@/components/ui/heading";
+import { Badge } from "@/components/ui/badge";
+import { IconAlertCircle, IconArrowUpRight } from "@tabler/icons-react";
+import { cn } from "@/lib/utils";
+import { Separator } from "@base-ui/react";
+
+const backdropPopoverCode = `<Button popoverTarget="popover-backdrop" variant="outline" className="relative">
+  Popover with backdrop
+</Button>
+<div
+  popover="auto"
+  id="popover-backdrop"
+  aria-labelledby="popover-backdrop-title"
+  aria-describedby="popover-backdrop-desc"
+  className="bg-card not-prose fixed inset-y-0 mx-auto my-auto transform overflow-hidden rounded-lg border p-4 opacity-0 shadow-2xl transition-[opacity,transform,translate,scale] transition-discrete duration-300 backdrop:bg-transparent backdrop:transition-colors open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/30 sm:w-full sm:max-w-96 starting:open:translate-y-4 starting:open:scale-95 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
+>
+  <h2 id="popover-backdrop-title" className="mt-0 mb-3 text-base! font-medium text-pretty">
+    This is a native HTML popover. You can read up on{" "}
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API"
+      target="_blank"
+      rel="noreferrer"
+      className="link"
+    >
+      MDN
+      <IconArrowUpRight />
+    </a>
+    .
+  </Heading>
+  <p id="popover-backdrop-desc">
+    Click outside or press <Code>Esc</Code> to dismiss.
+  </p>
+</div>`;
+
+const anchoredPopoverCode = `<Button
+  popoverTarget="popover-anchor"
+  variant="outline"
+  className="[anchor-name:--trigger2]"
+>
+  Anchor, no backdrop
+</Button>
+<div
+  popover="auto"
+  id="popover-anchor"
+  aria-labelledby="popover-anchor-title"
+  aria-describedby="popover-anchor-desc"
+  className="not-prose bg-card [position-anchor]:--trigger2 absolute inset-y-[unset] bottom-[anchor(top)] z-50 mb-1 max-w-3xs transform overflow-hidden rounded-lg border px-3 py-2 opacity-0 shadow-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out open:translate-y-0 open:scale-100 open:opacity-100 starting:open:translate-y-1 starting:open:scale-90 starting:open:opacity-0"
+>
+  <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">
+    Howdy!
+  </h3>
+  <p id="popover-anchor-desc" className="text-sm">
+    This should be accessible without any additional config
+  </p>
+</div>`;
+
+export default function NativePopoversAnchoringPage() {
+  return (
+    <div className="prose mx-auto w-full">
+      <p>
+        Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and{" "}
+        <Code>starting-style</Code>.
+      </p>
+
+      <Demo title="Anchored" code={{ value: anchoredPopoverCode, language: "tsx" }} centerContent={true}>
+        <div className="grid min-h-48 place-items-center">
+          <Button popoverTarget="popover-anchor" variant="outline" className="[anchor-name:--trigger2]">
+            Open popover
+          </Button>
+          <div
+            popover="auto"
+            id="popover-anchor"
+            aria-labelledby="popover-anchor-title"
+            aria-describedby="popover-anchor-desc"
+            className="not-prose [position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
+          >
+            <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">
+              Howdy!
+            </h3>
+            <p id="popover-anchor-desc" className="text-sm">
+              This should be accessible without any additional config
+            </p>
+          </div>
+        </div>
+      </Demo>
+      <Demo title="Centered native popover" code={{ value: backdropPopoverCode, language: "tsx" }} centerContent={true}>
+        <div className="not-prose grid min-h-48 place-items-center">
+          <Button
+            popoverTarget="popover-toast"
+            variant="outline"
+            className="relative"
+            id="popover-toast-trigger"
+            popoverTargetAction="show"
+          >
+            Notifications{" "}
+            <Badge variant="destructive" size="sm" className="absolute top-0 right-0 -m-1.5 min-w-4 rounded-full">
+              1
+            </Badge>
+          </Button>
+          <div
+            popover="manual"
+            id="popover-toast"
+            aria-labelledby="popover-toast-title"
+            aria-describedby="popover-toast-desc"
+            className={cn(
+              "not-prose fixed mx-auto grid origin-bottom transform auto-rows-min grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] gap-2 rounded-lg bg-[canvas] p-3 shadow-lg outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-200 ease-out dark:-outline-offset-1",
+              "inset-x-8 top-auto bottom-8 w-auto max-w-full",
+              "md:right-8 md:left-auto md:max-w-96",
+              "translate-y-2 scale-100 opacity-0",
+              "starting:open:translate-y-1 starting:open:scale-90 starting:open:opacity-0",
+              "open:translate-y-0 open:scale-100 open:opacity-100"
+            )}
+          >
+            <IconAlertCircle className="col-1 row-1 row-start-1 size-4 text-destructive" />
+            <h2 className="col-2 row-1 m-0 text-sm font-medium" id="popover-toast-title">
+              Uh oh — I'm exposed!
+            </h2>
+            <p id="popover-toast-desc" className="col-2 row-2 text-sm">
+              I'm set to <Code>popover="manual"</Code> so only this button will hide me.
+            </p>
+            <Button
+              popoverTarget="popover-toast"
+              variant="outline"
+              size="sm"
+              id="popover-toast-close"
+              popoverTargetAction="hide"
+              className="col-3 row-span-2 row-start-1"
+            >
+              Close
+            </Button>
+          </div>
+        </div>
+      </Demo>
+      <Demo title="With backdrop" code={{ value: backdropPopoverCode, language: "tsx" }} centerContent={true}>
+        <div className="grid min-h-48 place-items-center">
+          <Button popoverTarget="popover-backdrop" variant="outline" className="relative">
+            With backdrop
+          </Button>
+          <div
+            popover="auto"
+            id="popover-backdrop"
+            aria-labelledby="popover-backdrop-title"
+            aria-describedby="popover-backdrop-desc"
+            className={cn(
+              "not-prose fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-98 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/5 sm:w-full sm:max-w-96 dark:-outline-offset-1 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
+            )}
+          >
+            <h2 className="mt-0 mb-3 text-base font-medium text-pretty" id="popover-backdrop-title">
+              This is a native HTML popover. You can read up on{" "}
+              <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center text-secondary-foreground underline decoration-current/20"
+              >
+                MDN
+                <IconArrowUpRight className="size-4" />
+              </a>
+              .
+            </h2>
+            <p id="popover-backdrop-desc">
+              Click outside or press <Code>Esc</Code> to dismiss.
+            </p>
+          </div>
+        </div>
+      </Demo>
+      <Demo title="With backdrop" code={{ value: backdropPopoverCode, language: "tsx" }} centerContent={true}>
+        <div className="grid min-h-48 place-items-center">
+          <Button
+            popoverTarget="popover-backdrop-2"
+            variant="destructive"
+            className="relative"
+            id="popover-backdrop-2-trigger"
+            popoverTargetAction="show"
+          >
+            Danger ahead
+          </Button>
+          <div
+            popover="manual"
+            id="popover-backdrop-2"
+            aria-labelledby="popover-backdrop-2-title"
+            aria-describedby="popover-backdrop-2-desc"
+            className={cn(
+              "not-prose fixed inset-y-0 mx-auto mt-auto mb-8 flex w-full max-w-dialog origin-top translate-y-10 scale-98 transform flex-col gap-2 overflow-hidden rounded-2xl bg-error p-6 pt-10 text-center text-error-foreground opacity-0 shadow-2xl outline outline-destructive transition-[opacity,transform,translate,scale] transition-discrete duration-300 backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-destructive/30 sm:max-w-96 dark:-outline-offset-1 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent",
+              "items-center not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-[repeating-linear-gradient(315deg,var(--error)_0,var(--error)_1px,transparent_0,transparent_50%)] backdrop:bg-size-[10px_10px] backdrop:bg-fixed"
+            )}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              id="Interface-Essential-File-Error--Streamline-Pixel"
+              height="32"
+              width="32"
+              className="mb-2 animate-bounce"
+            >
+              <desc>Interface Essential File Error Streamline Icon: https://streamlinehq.com</desc>
+              <title>interface-essential-file-error</title>
+              <g>
+                <path
+                  d="M3.05 32h25.9V7.62h-1.52V6.1h-1.52V4.57h-1.53V3.05h-1.52V1.52h-1.53V0H3.05ZM4.57 1.52h15.24v7.62h7.62v21.34H4.57Z"
+                  fill="currentColor"
+                  strokeWidth="1"
+                ></path>
+                <path
+                  d="m7.62 19.81 0 1.52 10.67 0 0 3.05 1.52 0 0 -3.05 3.05 0 0 3.05 1.52 0 0 -4.57 -16.76 0z"
+                  fill="currentColor"
+                  strokeWidth="1"
+                ></path>
+                <path
+                  d="m22.86 12.19 -1.53 0 0 1.52 -1.52 0 0 1.53 1.52 0 0 1.52 1.53 0 0 -1.52 1.52 0 0 -1.53 -1.52 0 0 -1.52z"
+                  fill="currentColor"
+                  strokeWidth="1"
+                ></path>
+                <path d="M19.81 24.38h3.05v1.52h-3.05Z" fill="currentColor" strokeWidth="1"></path>
+                <path
+                  d="m9.14 16.76 1.53 0 0 -1.52 1.52 0 0 -1.53 -1.52 0 0 -1.52 -1.53 0 0 1.52 -1.52 0 0 1.53 1.52 0 0 1.52z"
+                  fill="currentColor"
+                  strokeWidth="1"
+                ></path>
+              </g>
+            </svg>
+            <h2 className="m-0 text-2xl font-bold text-inherit" id="popover-backdrop-2-title">
+              The Danger Zone
+            </h2>
+            <p id="popover-backdrop-2-desc">Did you try unplugging it?</p>
+            <Separator />
+            <Button
+              popoverTarget="popover-backdrop-2"
+              variant="destructive"
+              className="w-full"
+              id="popover-backdrop-2-close"
+              popoverTargetAction="hide"
+            >
+              Surrender
+            </Button>
+          </div>
+        </div>
+      </Demo>
+    </div>
+  );
+}

@@ -13,8 +13,8 @@
 
 .dark {
   --sh-class: var(--color-amber-400);
-  --sh-identifier: var(--foreground);
-  --sh-sign: var(--neutral-400);
+  --sh-identifier: var(--neutral-300);
+  --sh-sign: var(--neutral-500);
   --sh-property: var(--color-violet-300);
   --sh-entity: var(--color-sky-300);
   --sh-jsxliterals: var(--color-indigo-400);

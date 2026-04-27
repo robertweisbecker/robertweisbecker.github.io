@@ -1,16 +1,13 @@
----
-title: NPR Labs
-subtitle: Mapping & Population System
-role: Product Design
-date: Winter-Spring 2017
-team:
-  - name: Christian Wood
-    role: Developer
-    url: https://www.linkedin.com/in/christian-wood-2542273b/
-  - name: Alice Goldfarb
-    role: Director, NPR Labs
-    url: http://www.alicegoldfarb.com/
----
+export const frontmatter = {
+  title: "NPR Labs",
+  subtitle: "Mapping & Population System",
+  role: "Product Design",
+  date: "Winter-Spring 2017",
+  team: [
+    { name: "Christian Wood", role: "Developer", url: "https://www.linkedin.com/in/christian-wood-2542273b/" },
+    { name: "Alice Goldfarb", role: "Director, NPR Labs", url: "http://www.alicegoldfarb.com/" },
+  ],
+};
 
 <ImageToggle before="/assets/npr/map-before.png" after="/assets/npr/map-after.png" />
 
@@ -42,7 +39,7 @@ Initially, stations were listed in the sidebar with only their callsigns as iden
 
 We expanded these list items into cards that included each station's callsign, location, and logo, along with labeled controls to differentiate between coverages and contour toggles.
 
-<div className="not-prose overflow-hidden rounded-xl bg-muted p-2 shadow-inner lg:p-4">
+<div className="not-prose overflow-hidden rounded-xl bg-muted p-2 lg:p-4">
   <img src="/assets/npr/map-sidebar.png" alt="Station sidebar cards" className="mx-auto max-w-[280px] shadow-2xl" />
 </div>
 
@@ -50,7 +47,7 @@ We expanded these list items into cards that included each station's callsign, l
 
 To accommodate the need for more in-depth station information, we added a detail view in the sidebar when users clicked on a station. Demographic information, previously located in a modal, was moved into the station detail view to provide access without navigating away from the map.
 
-<div className="not-prose overflow-hidden rounded-xl bg-muted p-2 shadow-inner lg:p-4">
+<div className="not-prose overflow-hidden rounded-xl bg-muted p-2 lg:p-4">
   <img src="/assets/npr/map-detail.png" alt="Station detail view" />
 </div>
 
@@ -68,20 +65,17 @@ To solve this, a bar displaying active stations was overlaid on the top edge of 
 
 ## Responsiveness
 
-<LayoutGrid variant="twoUp">
-  <div>
+The most significant change was the newly-responsive design. On a phone, there simply isn't enough real estate to pan around a map and see detailed information, so we decided that modality was the best course of action.
 
-Perhaps the most significant change was the newly-responsive design. On a phone, there simply isn't enough real estate to pan around a map and see detailed information, so we decided that modality was the best course of action.
+<div className="not-prose">
+  <Video className="max-w-xs">
+    <source src="/assets/npr/maps-mobile-1.mov" />
+  </Video>
+</div>
 
 List and map views collapse atop one another on small devices, and the search bar remains persistent for discoverability. Users can easily toggle between list and map views by tapping an icon button in the nav.
 
 Rather than creating a new component, we were able to repurpose our new station card component, restyling them as drawers in map mode, to let users access station information without having to toggle views.
-
-  </div>
-  <Video>
-    <source src="/assets/npr/maps-mobile-1.mov" />
-  </Video>
-</LayoutGrid>
 
 ## Conclusion
 

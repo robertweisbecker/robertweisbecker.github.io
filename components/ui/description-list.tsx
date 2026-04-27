@@ -1,6 +1,6 @@
-  import * as React from "react"
+import * as React from "react";
 
-  import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 function DescriptionList({ className, ...props }: React.ComponentProps<"dl">) {
   return (
@@ -30,7 +30,7 @@ function DescriptionListValue({ className, ...props }: React.ComponentProps<"dd"
     <dd
       data-slot="description-list-value"
       className={cn(
-        "space-y-3 pt-1 pb-3 text-foreground nth-2:pt-0 sm:border-t sm:py-3 sm:nth-2:border-none",
+        "flex items-center gap-2 space-y-3 pt-1 pb-3 text-foreground nth-2:pt-0 sm:border-t sm:py-3 sm:nth-2:border-none",
         className
       )}
       {...props}
@@ -38,4 +38,4 @@ function DescriptionListValue({ className, ...props }: React.ComponentProps<"dd"
   );
 }
 
-  export { DescriptionList,DescriptionListLabel,DescriptionListValue }
+export { DescriptionList, DescriptionListLabel, DescriptionListValue };

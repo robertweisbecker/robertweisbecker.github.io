@@ -1,28 +1,28 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import {
-    IconArrowsDiagonal,
-    IconArrowsDiagonalMinimize2,
-    IconPlayerPauseFilled,
-    IconPlayerPlayFilled,
-    IconVolume,
-    IconVolume2,
-    IconVolumeOff
-  } from "@tabler/icons-react"
-  import {
-    MediaControlBar,
-    MediaController,
-    MediaFullscreenButton,
-    MediaMuteButton,
-    // MediaMuteButton,
-    MediaPlayButton,
-    // MediaSeekForwardButton,
-    MediaTimeDisplay,
-    MediaTimeRange
-  } from "media-chrome/react"
-  import { Button } from "./ui/button"
-  import { Toolbar } from "./ui/toolbar"
+import { cn } from "@/lib/utils";
+import {
+  IconArrowsDiagonal,
+  IconArrowsDiagonalMinimize2,
+  IconPlayerPauseFilled,
+  IconPlayerPlayFilled,
+  IconVolume,
+  IconVolume2,
+  IconVolumeOff,
+} from "@tabler/icons-react";
+import {
+  MediaControlBar,
+  MediaController,
+  MediaFullscreenButton,
+  MediaMuteButton,
+  // MediaMuteButton,
+  MediaPlayButton,
+  // MediaSeekForwardButton,
+  MediaTimeDisplay,
+  MediaTimeRange,
+} from "media-chrome/react";
+import { Button } from "./ui/button";
+import { Toolbar } from "./ui/toolbar";
 
 interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src?: string;
@@ -34,7 +34,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
   const wrapper = (
     <div
       className={cn(
-        "not-prose content-visibility-auto relative mx-auto my-4 overflow-hidden rounded-xl bg-muted p-2 inset-shadow-sm",
+        "not-prose content-visibility-auto relative mx-auto my-4 overflow-hidden rounded-xl outline -outline-offset-1 outline-border/50",
         className
       )}
     >

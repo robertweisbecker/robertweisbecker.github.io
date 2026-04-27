@@ -8,7 +8,8 @@ import { cn } from "@/lib/utils";
 import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconTemplateFilled } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Favicon } from "./icons";
+import { Favicon, PixelNewsIcon } from "./icons";
+import { SiteSearch } from "./site-search";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -21,15 +22,25 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { LinkButton } from "./ui/link-button";
+import { Avatar, AvatarImage } from "./ui/avatar";
+import { PreviewCardGroup, PreviewCardPrimitive, PreviewCardTrigger } from "./ui/preview-card";
+import { LayoutGroup, motion } from "motion/react";
+import { ProjectMeta } from "./project-meta";
+import { Badge } from "./ui/badge";
+import { DataList, DataListItem, DataListLabel, DataListValue } from "./ui/data-list";
+import * as React from "react";
 
 export function Header() {
   const isMobile = useMediaQuery("max-md");
   const pathname = usePathname();
+  const anchorRef = React.useRef<HTMLDivElement>(null);
   // const notHome = pathname !== "/";
+  const previewHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
+  const previewActions = React.useRef<PreviewCardPrimitive.Root.Actions | null>(null);
 
   return (
-    <nav className={cn("sticky top-0 z-10")}>
-      <div className="mx-auto flex h-12 items-center gap-1 px-2 py-2 sm:px-4">
+    <nav className={cn("sticky top-0 z-1")}>
+      <div className="max-w-8xl mx-auto flex h-12 items-center gap-1 px-2 py-2 sm:px-4">
         <LinkButton
           href="/"
           variant="ghost"
@@ -37,7 +48,7 @@ export function Header() {
           aria-current={pathname === "/" ? "true" : "false"}
           className="font-pixel"
         >
-          <Favicon className="size-4 text-primary" />
+          <Favicon className="size-4 text-secondary-foreground" />
           <span>
             bob<span className="text-primary">.</span>fyi
           </span>
@@ -63,75 +74,138 @@ export function Header() {
             />
           </>
         )}
-
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={<Button variant="ghost" size="sm" />}
-            className="group/trigger text-muted-foreground"
-            openOnHover={true}
+        <PreviewCardGroup
+          side="right"
+          sideOffset={8}
+          // handle={previewHandle}
+          // actionsRef={previewActions}
+          align="start"
+          // anchor={anchorRef}
+        >
+          <DropdownMenu
+            modal={false}
+            // onOpenChange={(open) => {
+            //   if (!open) {
+            //     previewHandle.close();
+            //     previewActions.current?.unmount();
+            //   }
+            // }}
           >
-            <span className="hidden md:block">Projects</span>
-            <span className="md:hidden">Menu</span>
-            <IconChevronDown
-              className={cn("rotate-0 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
-              data-icon="inline-end"
-            />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Projects</DropdownMenuLabel>
-              {projects.map((project) => (
-                <DropdownMenuLink
-                  key={project.id}
-                  render={<Link href={project.path} />}
-                  aria-current={pathname === project.path ? "true" : "false"}
-                  className="pe-8 aria-current:bg-accent aria-current:text-accent-foreground"
-                >
-                  {project.nickname}
-                </DropdownMenuLink>
-              ))}
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator className="md:hidden" />
+            <DropdownMenuTrigger
+              render={<Button variant="ghost" size="sm" />}
+              className="group/trigger text-muted-foreground"
+            >
+              <span className="hidden md:block">Projects</span>
+              <span className="md:hidden">Menu</span>
+              <IconChevronDown
+                className={cn("rotate-0 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
+                data-icon="inline-end"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Projects</DropdownMenuLabel>
 
-            <DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="md:hidden">
-              Home
-            </DropdownMenuItem>
-            <DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="md:hidden">
-              About
-            </DropdownMenuItem>
-            <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false} className="md:hidden">
-              <IconNews />
-              Posts
-            </DropdownMenuItem>
-            {process.env.NODE_ENV === "development" && (
-              <>
-                <DropdownMenuItem render={<Link href="/components" />} nativeButton={false} className="md:hidden">
-                  <IconComponents />
-                  Components
-                </DropdownMenuItem>
-              </>
-            )}
-          </DropdownMenuContent>
-        </DropdownMenu>
+                {projects.map((project) => (
+                  <PreviewCardTrigger
+                    key={project.id}
+                    delay={100}
+                    preview={
+                      <>
+                        <div className="flex w-64 flex-col p-1 md:w-sm">
+                          {project.heroImage && (
+                            <img
+                              src={project.heroImage}
+                              className="mask-b-via-smooth block aspect-square w-full max-w-full rounded-lg mask-b-from-80% mask-b-to-transparent bg-top object-cover object-top"
+                            />
+                          )}
+                          <DataList.Root size="sm" className="px-4 py-2">
+                            <DataListItem>
+                              <DataListLabel className="font-pixel text-[11px]">Title</DataListLabel>
+                              <DataListValue className="font-medium">{project.title}</DataListValue>
+                            </DataListItem>
+                            <DataListItem>
+                              <DataListLabel className="font-pixel text-[11px]">Description</DataListLabel>
+                              <DataListValue>{project.description}</DataListValue>
+                            </DataListItem>
+                            <DataListItem>
+                              <DataListLabel className="font-pixel text-[11px]">Date</DataListLabel>
+                              <DataListValue>{project.date}</DataListValue>
+                            </DataListItem>
+
+                            <DataListItem>
+                              <DataListLabel className="font-pixel text-[11px]">Tags</DataListLabel>
+                              <DataListValue>
+                                <Badge>{project.category}</Badge>
+                              </DataListValue>
+                            </DataListItem>
+                          </DataList.Root>
+                        </div>
+                      </>
+                    }
+                    render={
+                      <DropdownMenuLink
+                        closeOnClick
+                        render={<Link href={project.path} />}
+                        aria-current={pathname === project.path ? "true" : "false"}
+                      />
+                    }
+                  >
+                    {project.icon && (
+                      <Avatar className="size-[1lh] p-1 [--avatar-radius:var(--radius-sm)]">
+                        <AvatarImage src={project.icon} alt={project.nickname} className="object-contain" />
+                      </Avatar>
+                    )}
+                    {project.nickname}
+                    <span className="ms-auto text-xs text-muted-foreground">{project.date}</span>
+                  </PreviewCardTrigger>
+                ))}
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator className="md:hidden" />
+
+              <DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="md:hidden">
+                Home
+              </DropdownMenuItem>
+              <DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="md:hidden">
+                About
+              </DropdownMenuItem>
+              <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false} className="md:hidden">
+                <IconNews />
+                Posts
+              </DropdownMenuItem>
+              {process.env.NODE_ENV === "development" && (
+                <>
+                  <DropdownMenuItem render={<Link href="/components" />} nativeButton={false} className="md:hidden">
+                    <IconComponents />
+                    Components
+                  </DropdownMenuItem>
+                </>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </PreviewCardGroup>
         <HeaderButton
           label="Posts"
-          icon={<IconNews data-icon={isMobile ? null : "inline-start"} />}
+          icon={<PixelNewsIcon data-icon={isMobile ? null : "inline-start"} />}
           hideTextOnMobile={true}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
         />
-        <ThemeSettings className="ml-auto" />
+        <SiteSearch className="ml-auto" />
+        <ThemeSettings />
         <ModeToggle />
       </div>
       <div
         className={cn(
-          "pointer-events-none absolute inset-0 isolate -z-1 h-24 transform-gpu",
-          "backdrop-blur-sm",
+          "pointer-events-none absolute inset-0 isolate -z-1 h-20 transform-gpu",
+          // "backdrop-blur-sm",
           //   "bg-background",
-          "via-smooth bg-linear-to-b from-background/90",
-          "mask-b-from-black mask-b-from-25% mask-b-to-black/0"
+          "via-smooth overflow-hidden bg-linear-to-b from-background from-25% to-background/0"
         )}
-      ></div>
+      >
+        <div className="absolute inset-0 mask-b-from-black mask-b-from-10% mask-b-to-black/0 backdrop-blur-xs" />
+        <div className="absolute inset-0 mask-b-from-black mask-b-from-25% mask-b-to-black/0 backdrop-blur-md" />
+      </div>
     </nav>
   );
 }
@@ -149,7 +223,7 @@ function HeaderButton({
       variant="ghost"
       size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "sm"}
       className={cn(
-        "text-muted-foreground aria-current:bg-accent aria-current:text-accent-foreground",
+        "text-muted-foreground backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground",
         props.className
       )}
     >

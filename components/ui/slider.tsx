@@ -62,7 +62,7 @@ function Slider({
             data-slot="slider-thumb"
             key={index}
             className={cn(
-              "flex size-thumb shrink-0 items-center justify-center select-none group-hover/slider:cursor-grab data-dragging:cursor-grabbing",
+              "group/slider-thumb flex size-thumb shrink-0 items-center justify-center select-none group-hover/slider:cursor-grab data-dragging:cursor-grabbing",
               "rounded-full has-focus-visible:outline-2 has-focus-visible:outline-ring",
               "disabled:pointer-events-none disabled:opacity-50"
             )}
@@ -71,7 +71,7 @@ function Slider({
               className={cn(
                 "relative aspect-square h-thumb rounded-[inherit] bg-white/96 bg-radial-[at_50%_25%] to-black/5 to-90% text-center outline outline-input backdrop-blur-[1px] transition-[aspect-ratio,box-shadow,width,height,transform,scale] dark:outline-background",
                 "group-hover/slider:transform-[scale(1.1)]",
-                "in-data-dragging:aspect-video in-data-dragging:scale-75 in-data-dragging:bg-white/84 in-data-focus:ring-2 in-data-focus:ring-ring/50 in-data-focus:ring-offset-1 in-data-focus:ring-offset-ring",
+                "group-active/slider-thumb:scale-75 group-active/slider-thumb:bg-white/84 group-data-dragging/slider-thumb:group-active/slider-thumb:aspect-video group-data-focus/slider-thumb:ring-2 group-data-focus/slider-thumb:ring-ring/50 group-data-focus/slider-thumb:ring-offset-1 group-data-focus/slider-thumb:ring-offset-ring",
                 "shadow-[inset_-1px_0_--alpha(var(--background)/12%),inset_0_-1px_--alpha(var(--background)/12%),inset_-2px_-2px_2px_-3px_white,inset_0_1px_--alpha(var(--background)/24%),inset_1px_0_--alpha(var(--background)/16%),inset_4px_4px_1px_-5px_white,inset_0_0_0_2px_--alpha(#000/1%),var(--shadow-md)]"
               )}
             />

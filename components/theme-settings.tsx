@@ -12,7 +12,15 @@ import {
   type NeutralName,
 } from "@/components/theme";
 import { Button } from "@/components/ui/button";
-import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+} from "@/components/ui/field";
 import {
   Popover,
   PopoverContent,
@@ -35,6 +43,7 @@ import { cn } from "@/lib/utils";
 import { IconRotate2, IconWheel } from "@tabler/icons-react";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { Badge } from "./ui/badge";
 
 const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({
   value: opt.value,
@@ -49,10 +58,12 @@ const NEUTRAL_SWATCHES: ColorSwatch[] = NEUTRAL_OPTIONS.map((opt) => ({
 }));
 
 function ThemeFieldReset({
+  className,
   dirty,
   onReset,
   "aria-label": ariaLabel,
 }: {
+  className?: string;
   dirty: boolean;
   onReset: () => void;
   "aria-label": string;
@@ -66,8 +77,9 @@ function ThemeFieldReset({
             variant="ghost"
             size="icon-xs"
             className={cn(
-              "-my-1 shrink-0 text-muted-foreground opacity-100 transition-opacity",
-              !dirty && "pointer-events-none invisible opacity-0"
+              "-my-1 shrink-0 text-muted-foreground opacity-100 transition-opacity starting:opacity-0",
+              !dirty && "pointer-events-none hidden opacity-0",
+              className
             )}
             disabled={!dirty}
             onClick={onReset}
@@ -87,7 +99,7 @@ export function ThemeResetAllButton({ variant = "ghost", size = "sm", ...props }
 
   return (
     <Button variant={variant} size={size} onClick={reset} disabled={!isDirty} {...props}>
-      Reset all
+      Reset theme
     </Button>
   );
 }
@@ -113,23 +125,23 @@ export function ThemeSettings({ className }: { className?: string }) {
           className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720"
         />
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-xs">
-        <PopoverHeader className="border-b">
+      <PopoverContent align="end" className="flex w-xs flex-col gap-0 overflow-hidden p-0">
+        <PopoverHeader className="px-4 pt-4 pb-2">
           <div className="flex w-full items-start justify-between gap-2">
-            <div className="min-w-0 flex-1">
-              <PopoverTitle>Theme</PopoverTitle>
-              <PopoverDescription>
-                Adjust the theme to your heart&apos;s content. See{" "}
-                <Link href="/posts/theming" className="link text-secondary-foreground">
-                  how it works
-                </Link>
-                .
-              </PopoverDescription>
-            </div>
-            <ThemeResetAllButton size="xs" />
+            <PopoverTitle>Theme</PopoverTitle>
           </div>
+          <PopoverDescription>Adjust the theme to your heart&apos;s content.</PopoverDescription>
         </PopoverHeader>
-        <ThemeSettingsPanel />
+        <ThemeSettingsPanel className="px-4 pb-2" />
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border px-4 py-3 text-sm">
+          <Link href="/posts/theming" className="link text-secondary-foreground">
+            Learn more
+          </Link>
+          <span className="text-muted-foreground" aria-hidden>
+            ∙
+          </span>
+          <ThemeResetAllButton variant="link" size="md" className="h-auto min-h-0 p-0" />
+        </div>
       </PopoverContent>
     </Popover>
   );
@@ -159,7 +171,9 @@ export function ThemeSettingsPanel({
         <FieldGroup>
           <Field>
             <div className="flex items-center gap-1">
-              <FieldLabel>Primary Hue</FieldLabel>
+              <FieldLabel className="me-auto">Primary hue</FieldLabel>
+
+              <span className="text-xs text-muted-foreground capitalize">{hue}</span>
               <ThemeFieldReset
                 dirty={hueDirty}
                 onReset={() => set({ hue: defaultHue })}
@@ -207,14 +221,15 @@ export function ThemeSettingsPanel({
           </Field>
 
           <Field>
-            <FieldLabel>
-              Neutral{" "}
+            <div className="flex items-center gap-2">
+              <FieldLabel>Neutral hue</FieldLabel>
+              <span className="ms-auto text-xs text-muted-foreground capitalize">{neutral}</span>
               <ThemeFieldReset
                 dirty={neutralDirty}
                 onReset={() => set({ neutral: defaultNeutral })}
                 aria-label="Reset neutral palette to default"
               />
-            </FieldLabel>
+            </div>
 
             {neutralDisplay === "swatches" ? (
               <ColorSwatchGroup

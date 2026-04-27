@@ -22,10 +22,10 @@ function PostListIcon({ name }: { name?: PostIconName }) {
 
 export default function PostsPage() {
   return (
-    <div className="mx-auto grid max-w-2xl gap-12">
+    <div className="mx-auto grid gap-12">
       <div>
-        <h1 className="font-medium">Posts</h1>
-        <p className="mt-1 text-balance">Code experiments and small tools.</p>
+        <h1 className="text-h1">Posts</h1>
+        <p className="text-lg text-balance text-muted-foreground">Code experiments and small tools.</p>
       </div>
 
       <ItemGroup className="">

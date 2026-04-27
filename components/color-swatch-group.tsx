@@ -94,95 +94,6 @@ export function ColorSwatchGroup({
     // <TooltipProvider delay={0}>
     <div className="my-0">
       <TooltipGroup side={tooltipSide} sideOffset={6}>
-        {allowCustomColors ? (
-          <>
-            <Popover open={isCustomOpen} onOpenChange={setIsCustomOpen}>
-              <PopoverTrigger
-                render={
-                  <TooltipTrigger
-                    tooltip="Add custom color…"
-                    render={
-                      <Button variant="elevated" size="icon-sm" aria-label="Add custom color" rounded className="my-1">
-                        <IconPlus />
-                      </Button>
-                    }
-                  />
-                }
-              />
-              <PopoverContent initialFocus={false} className="container w-96">
-                <PopoverHeader>
-                  <PopoverTitle className="text-xs text-muted-foreground">Custom colors</PopoverTitle>
-                </PopoverHeader>
-                <Form
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    addCustomColor();
-                  }}
-                >
-                  <Field>
-                    <FieldLabel>New color</FieldLabel>
-                    <InputGroup>
-                      <InputGroupInput
-                        ref={customColorInputRef}
-                        value={customColorInput}
-                        onChange={(event) => setCustomColorInput(event.target.value)}
-                        placeholder="#b0b0b0"
-                        aria-label="Custom color value"
-                      />
-                      <InputGroupAddon align="inline-end">
-                        <InputGroupButton
-                          type="submit"
-                          variant="ghost"
-                          // disabled={!isCustomColorValid}
-                        >
-                          Add{" "}
-                          <Kbd data-icon="inline-end" className="translate-x-0.5">
-                            ↲
-                          </Kbd>
-                        </InputGroupButton>
-                      </InputGroupAddon>
-                    </InputGroup>
-                  </Field>
-                </Form>
-
-                {customColors.length > 0 ? (
-                  <ScrollArea className="max-h-36" showScrollbar scrollFade>
-                    <ItemGroup>
-                      {customColors.map((swatch) => (
-                        <Item key={swatch.value} variant="muted" size="xs" className="rounded-md">
-                          <ItemMedia>
-                            <span
-                              className="size-3 rounded-full inset-ring inset-ring-input"
-                              style={{ backgroundColor: swatch.color }}
-                              aria-hidden
-                            />
-                          </ItemMedia>
-                          <ItemContent>
-                            <ItemTitle>{swatch.label} </ItemTitle>
-                          </ItemContent>
-                          <ItemDescription className="flex-1 truncate text-end font-mono text-xs text-muted-foreground">
-                            {swatch.value}
-                          </ItemDescription>
-                          <ItemActions>
-                            <Button
-                              variant="ghost"
-                              size="icon-xs"
-                              className="text-destructive"
-                              onClick={() => removeCustomColor(swatch.value)}
-                              aria-label={`Remove ${swatch.label}`}
-                            >
-                              <IconTrash />
-                            </Button>
-                          </ItemActions>
-                        </Item>
-                      ))}
-                    </ItemGroup>
-                  </ScrollArea>
-                ) : null}
-              </PopoverContent>
-            </Popover>
-          </>
-        ) : null}
         <ToggleGroup
           value={selected}
           onValueChange={(next) => {
@@ -216,6 +127,103 @@ export function ColorSwatchGroup({
               />
             </TooltipTrigger>
           ))}
+          {allowCustomColors ? (
+            <>
+              <Popover open={isCustomOpen} onOpenChange={setIsCustomOpen}>
+                <PopoverTrigger
+                  render={
+                    <TooltipTrigger
+                      tooltip="Add…"
+                      render={
+                        <Button
+                          variant="elevated"
+                          size="icon-sm"
+                          aria-label="Add color option"
+                          rounded
+                          className="my-1"
+                        >
+                          <IconPlus />
+                        </Button>
+                      }
+                    />
+                  }
+                />
+                <PopoverContent initialFocus={false} className="container w-96">
+                  <PopoverHeader>
+                    <PopoverTitle className="text-xs text-muted-foreground">
+                      Enter a new color in CSS format
+                    </PopoverTitle>
+                  </PopoverHeader>
+                  <Form
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      addCustomColor();
+                    }}
+                  >
+                    <Field>
+                      <FieldLabel>Color</FieldLabel>
+                      <InputGroup>
+                        <InputGroupInput
+                          ref={customColorInputRef}
+                          value={customColorInput}
+                          onChange={(event) => setCustomColorInput(event.target.value)}
+                          placeholder="#b0b0b0"
+                          aria-label="Custom color value"
+                        />
+                        <InputGroupAddon align="inline-end">
+                          <InputGroupButton
+                            type="submit"
+                            variant="ghost"
+                            // disabled={!isCustomColorValid}
+                          >
+                            Add{" "}
+                            <Kbd data-icon="inline-end" className="translate-x-0.5">
+                              ↲
+                            </Kbd>
+                          </InputGroupButton>
+                        </InputGroupAddon>
+                      </InputGroup>
+                    </Field>
+                  </Form>
+
+                  {customColors.length > 0 ? (
+                    <ScrollArea className="max-h-36" showScrollbar scrollFade>
+                      <ItemGroup>
+                        {customColors.map((swatch) => (
+                          <Item key={swatch.value} variant="muted" size="xs" className="rounded-md">
+                            <ItemMedia>
+                              <span
+                                className="size-3 rounded-full inset-ring inset-ring-input"
+                                style={{ backgroundColor: swatch.color }}
+                                aria-hidden
+                              />
+                            </ItemMedia>
+                            <ItemContent>
+                              <ItemTitle>{swatch.label} </ItemTitle>
+                            </ItemContent>
+                            <ItemDescription className="flex-1 truncate text-end font-mono text-xs text-muted-foreground">
+                              {swatch.value}
+                            </ItemDescription>
+                            <ItemActions>
+                              <Button
+                                variant="ghost"
+                                size="icon-xs"
+                                className="text-destructive"
+                                onClick={() => removeCustomColor(swatch.value)}
+                                aria-label={`Remove ${swatch.label}`}
+                              >
+                                <IconTrash />
+                              </Button>
+                            </ItemActions>
+                          </Item>
+                        ))}
+                      </ItemGroup>
+                    </ScrollArea>
+                  ) : null}
+                </PopoverContent>
+              </Popover>
+            </>
+          ) : null}
         </ToggleGroup>
       </TooltipGroup>
     </div>

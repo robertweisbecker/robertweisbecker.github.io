@@ -1,8 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Dialog } from "@base-ui/react/dialog";
+import { cn } from "@/lib/utils";
+import { Dialog as DialogBase } from "@base-ui/react/dialog";
 import { Popover } from "@base-ui/react/popover";
 import { Xmark } from "@gravity-ui/icons";
 import { IconArrowsDiagonal } from "@tabler/icons-react";
@@ -10,6 +11,17 @@ import { AnimatePresence, HTMLMotionProps, LayoutGroup, motion } from "motion/re
 import * as React from "react";
 import { createPortal } from "react-dom";
 
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+  DialogPopup,
+} from "@/components/ui/dialog";
+import { Image } from "@/components/image";
 const SPRING = { type: "spring" as const, damping: 28, stiffness: 220 };
 
 interface ImageModalProps {
@@ -66,7 +78,7 @@ function ModalImage({ src, alt, imgAspect }: { src: string; alt: string; imgAspe
 
   return (
     <>
-      {!loaded && imgAspect && <Skeleton className="absolute inset-2 rounded-[20px]" />}
+      {!loaded && imgAspect && <Skeleton className="inset-2 h-100 rounded-[20px]" />}
       <img
         src={src}
         alt={alt}
@@ -87,32 +99,58 @@ function ModalImage({ src, alt, imgAspect }: { src: string; alt: string; imgAspe
   );
 }
 
+export function ImageModal({ src, caption }: ImageModalProps) {
+  return (
+    <Dialog>
+      <figure className="group/figure my-0! block">
+        <div className="relative">
+          <Image src={src} alt={caption ?? ""} className="w-full" />
+          <DialogTrigger
+            aria-label="View fullscreen image"
+            className="absolute inset-e-2 bottom-2"
+            render={<Button variant="overlay" size="icon-sm" rounded />}
+          >
+            <IconArrowsDiagonal />
+          </DialogTrigger>
+        </div>
+        <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>
+      </figure>
+      <DialogContent>
+        <DialogPopup className="relative mx-auto my-18 w-[min(40rem,calc(100vw-2rem))]! p-1 transition-transform duration-300 ease-[cubic-bezier(0.45,1.005,0,1.005)] outline-none data-[ending-style]:translate-y-[max(100dvh,100%)] data-[ending-style]:duration-[350ms] data-[ending-style]:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] data-[starting-style]:translate-y-[50dvh] motion-reduce:transition-none">
+          <img src={src} alt={caption ?? ""} />
+        </DialogPopup>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 // ===========================================================================
 // Prototype A: Dialog + layoutId (improved)
 // ===========================================================================
-export function ImageModal({ src, src2, caption }: ImageModalProps) {
+export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
   const [open, setOpen] = React.useState(false);
   const { imgAspect, handleImgLoad } = useImageAspect();
   const layoutId = React.useId();
   const popupRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <DialogBase.Root open={open} onOpenChange={setOpen}>
       <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
         <div className="not-prose relative mb-2">
           {!open ? (
             <motion.div
-              className="overflow-hidden shadow-border-sm"
+              className="w-full shadow-border-sm"
               style={{
                 aspectRatio: imgAspect,
                 borderRadius: 12,
                 padding: 4,
+                width: "100%",
                 background: "var(--card)",
               }}
             >
               <motion.img
                 layoutId={layoutId}
-                transition={{ layout: SPRING }}
+                // transition={{ layout: SPRING }}
                 src={src}
                 alt={caption ?? ""}
                 onLoad={handleImgLoad}
@@ -120,13 +158,13 @@ export function ImageModal({ src, src2, caption }: ImageModalProps) {
                   aspectRatio: imgAspect,
                   borderRadius: 8,
                   display: "block",
-                  width: "600px",
+                  width: "100%",
                   height: "auto",
                 }}
               />
             </motion.div>
           ) : (
-            <div aria-hidden style={{ visibility: "hidden" }}>
+            <div aria-hidden style={{ opacity: 0 }}>
               <div style={{ padding: 4, borderRadius: 12 }}>
                 <img
                   src={src}
@@ -142,68 +180,67 @@ export function ImageModal({ src, src2, caption }: ImageModalProps) {
             </div>
           )}
 
-          <Dialog.Trigger
-            className="absolute right-3 bottom-3 rounded-full opacity-0 transition-opacity duration-100 ease-out group-hover/figure:opacity-100 hover:opacity-100 focus-visible:opacity-100"
-            render={<Button variant="overlay" size="icon" />}
+          <DialogBase.Trigger
+            render={
+              <motion.button
+                layoutId={`${layoutId}-button`}
+                className={cn(buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }))}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  bottom: 12,
+                  zIndex: 10,
+                }}
+              />
+            }
             aria-label="View fullscreen image"
           >
             <IconArrowsDiagonal />
-          </Dialog.Trigger>
+          </DialogBase.Trigger>
         </div>
 
-        <AnimatePresence>
+        <AnimatePresence initial={false} mode="sync">
           {open && (
-            <Dialog.Portal keepMounted>
-              <Dialog.Backdrop
-                // render={
-                //   <motion.div
-                //     initial={{ opacity: 0 }}
-                //     animate={{ opacity: 1 }}
-                //     exit={{ opacity: 0 }}
-                //     transition={{ duration: 0.3, delay: 0.05 }}
-                //   />
-                // }
-                className="fixed inset-0 z-50 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50"
-              />
-              <Dialog.Viewport className="fixed inset-0 z-50 grid max-h-screen place-items-center overflow-auto p-4">
-                <Dialog.Popup
+            <DialogBase.Portal keepMounted>
+              <DialogBase.Backdrop className="fixed inset-0 z-50 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50" />
+              <DialogBase.Viewport className="fixed inset-0 z-50 grid max-h-screen place-items-center overflow-auto p-4">
+                <DialogBase.Popup
                   ref={popupRef}
                   initialFocus={popupRef}
                   className="group/popup relative w-[min(var(--container-7xl),calc(100vw-2rem))]"
                 >
-                  <Dialog.Title className="sr-only">Image</Dialog.Title>
-
-                  <Dialog.Close
+                  <DialogBase.Title className="sr-only">Image</DialogBase.Title>
+                  <DialogBase.Close
                     aria-label="Close"
-                    render={<Button variant="overlay" size="sm" />}
-                    className="group/close pointer-events-auto z-10 gap-0 rounded-full p-2 transition-all duration-300 ease-out hover:gap-1 hover:px-3"
+                    render={
+                      <motion.button
+                        layoutId={`${layoutId}-button`}
+                        className={cn(
+                          "group/close pointer-events-auto",
+                          buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true })
+                        )}
+                        style={{
+                          position: "absolute",
+                          top: -12,
+                          right: -12,
+                          zIndex: 10,
+                        }}
+                      />
+                    }
                   >
                     <Xmark />
-                    <span className="max-w-0 translate-x-2 overflow-hidden text-right opacity-0 transition-all duration-300 ease-out group-hover/close:max-w-[6ch] group-hover/close:translate-x-0 group-hover/close:opacity-100">
-                      Close
-                    </span>
-                  </Dialog.Close>
-
-                  {/* <motion.div
-                    layout
-                    className="overflow-hidden shadow-border-2xl"
-                    style={{
-                      aspectRatio: imgAspect,
-                      borderRadius: 24,
-                      padding: 8,
-                      background: "var(--card)",
-                    }}
-                  > */}
+                  </DialogBase.Close>
                   <motion.img
                     layoutId={layoutId}
-                    transition={{ layout: SPRING }}
+                    // transition={{ layout: SPRING }}
                     src={src2 ?? src}
                     alt={caption ?? ""}
                     onLoad={handleImgLoad}
                     className="min-w-full"
                     style={{
+                      borderRadius: 12,
                       aspectRatio: imgAspect,
-                      minWidth: "100%",
+                      width: "calc(100%-2rem)",
                       height: "auto",
                       objectFit: "contain",
                       objectPosition: "center",
@@ -211,16 +248,15 @@ export function ImageModal({ src, src2, caption }: ImageModalProps) {
                       scale: open ? 1 : 0.5,
                     }}
                   />
-                  {/* </motion.div> */}
-                </Dialog.Popup>
-              </Dialog.Viewport>
-            </Dialog.Portal>
+                </DialogBase.Popup>
+              </DialogBase.Viewport>
+            </DialogBase.Portal>
           )}
         </AnimatePresence>
 
         {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
       </figure>
-    </Dialog.Root>
+    </DialogBase.Root>
   );
 }
 
@@ -437,7 +473,7 @@ export function ImageModalPopover2({ src, src2, caption }: ImageModalProps) {
 // ===========================================================================
 // Prototype C: Pure Motion + portal (control)
 // ===========================================================================
-export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
+export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
   const [open, setOpen] = React.useState(false);
   const { imgAspect, handleImgLoad } = useImageAspect();
   const layoutId = React.useId();

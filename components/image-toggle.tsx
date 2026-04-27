@@ -5,6 +5,8 @@ import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./ui/resizable";
+import { Badge } from "./ui/badge";
+import { Image } from "./image";
 
 interface ImageToggleProps {
   before: string;
@@ -12,21 +14,51 @@ interface ImageToggleProps {
   tab1?: string;
   tab2?: string;
   mode?: "tabs" | "slider" | "comparison";
+  description?: React.ReactNode;
 }
 
-export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mode = "tabs" }: ImageToggleProps) {
+export function ImageToggle({
+  before,
+  after,
+  tab1 = "Before",
+  tab2 = "After",
+  mode = "tabs",
+  description,
+}: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
   if (mode === "comparison") {
     return (
       <figure className="not-prose flex flex-col justify-center">
-        <ResizablePanelGroup className="relative aspect-video" orientation="horizontal">
-          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="rounded-s-xl rounded-e-md">
+        <ResizablePanelGroup className="squircle relative aspect-video rounded-xl" orientation="horizontal">
+          <ResizablePanel
+            defaultSize="50%"
+            minSize="0%"
+            maxSize="100%"
+            className="squircle group relative rounded-s-xl rounded-e-xs"
+          >
             <img src={before} className="h-full w-auto object-cover object-left" />
+            <Badge
+              variant="outline"
+              className="absolute top-2 left-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
+            >
+              {tab1}
+            </Badge>
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="rounded-s-md rounded-e-xl">
+          <ResizablePanel
+            defaultSize="50%"
+            minSize="0%"
+            maxSize="100%"
+            className="squircle group relative rounded-s-xs rounded-e-xl"
+          >
             <img src={after} className="h-full w-auto object-cover object-right" />
+            <Badge
+              variant="outline"
+              className="absolute top-2 right-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
+            >
+              {tab2}
+            </Badge>
           </ResizablePanel>
         </ResizablePanelGroup>
       </figure>
@@ -56,16 +88,16 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
   }
 
   return (
-    <Tabs className="not-prose mx-auto my-16 max-w-3xl">
-      <TabsList className="mx-auto w-full max-w-xl">
+    <Tabs className="not-prose mx-auto">
+      <TabsList className="" variant="pill">
         <TabsTrigger value="before">{tab1}</TabsTrigger>
         <TabsTrigger value="after">{tab2}</TabsTrigger>
       </TabsList>
       <TabsContent value="after" keepMounted>
-        <ImageModal src={after} />
+        <Image src={after} />
       </TabsContent>
       <TabsContent value="before" keepMounted>
-        <ImageModal src={before} />
+        <Image src={before} />
       </TabsContent>
     </Tabs>
   );

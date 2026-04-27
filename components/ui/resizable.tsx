@@ -30,12 +30,11 @@ function ResizableHandle({
     <ResizablePrimitive.Separator
       data-slot="resizable-handle"
       className={cn(
-        "group/resizable-handle relative flex w-2 items-center justify-center outline-none after:absolute after:inset-y-0 after:inset-s-1/2 after:w-px after:-translate-x-1/2 aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:inset-s-0 aria-[orientation=horizontal]:after:h-6 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 rtl:after:translate-x-1/2 rtl:aria-[orientation=horizontal]:after:-translate-x-0 [&[aria-orientation=horizontal]>div]:rotate-90",
-        "after:transition-colors hover:after:bg-input",
+        "group/resizable-handle relative flex w-2 items-center justify-center outline-none after:absolute after:inset-y-0 after:inset-s-1/2 after:w-px after:-translate-x-1/2 aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:inset-s-0 aria-[orientation=horizontal]:after:h-6 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 rtl:after:translate-x-1/2 rtl:aria-[orientation=horizontal]:after:translate-x-0 [&[aria-orientation=horizontal]>div]:rotate-90",
+        "after:transition-colors hover:after:bg-border",
         // "focus:bg-ring/10 focus:after:bg-ring focus-visible:outline-hidden",
-        "[--pattern-bg:var(--color-pink-300)]/50 [--pattern-fg:var(--color-pink-500)]",
-        "dark:[--pattern-bg:var(--color-pink-500)]/50 dark:[--pattern-fg:var(--color-pink-300)]",
-        "bg-(--pattern-bg)/20 bg-[image:repeating-linear-gradient(315deg,var(--pattern-bg)_0,var(--pattern-bg)_1px,transparent_0,transparent_50%)] bg-size-[5px_5px] bg-fixed",
+        "[--pattern-bg:var(--muted)] [--pattern-fg:var(--input)]",
+        "hover:bg-(--pattern-bg) hover:bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] hover:bg-size-[5px_5px]",
 
         // !withHandle && "focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-ring",
         className
@@ -45,12 +44,12 @@ function ResizableHandle({
       {withHandle && (
         <div
           className={cn(
-            "z-10 flex shrink-0 items-center justify-center rounded-md bg-muted-foreground/50 shadow-xs ring inset-ring ring-black/30 inset-ring-background/20 backdrop-blur-lg transition-all duration-200 ease-in-out",
+            "z-10 flex shrink-0 items-center justify-center rounded-md bg-foreground shadow-xs backdrop-blur-lg transition-all duration-200 ease-in-out",
             "h-6 w-4",
-            "md:h-16 md:w-0.5 md:rounded-none md:group-hover/resizable-handle:h-20",
-            "group-hover/resizable-handle:bg-muted-foreground group-hover/resizable-handle:outline-primary group-focus/resizable-handle:ring-background",
-            "group-focus/resizable-handle:bg-ring",
-            "bg-(--pattern-fg) shadow-none ring-white"
+            "md:h-16 md:w-1 md:rounded-sm md:group-hover/resizable-handle:h-20 md:group-hover/resizable-handle:w-1.5",
+            // "group-hover/resizable-handle:bg-(--pattern-fg) group-hover/resizable-handle:outline-primary group-focus/resizable-handle:ring-background",
+            "group-active/resizable-handle:ring-background",
+            "bg-foreground/50 group-hover/resizable-handle:bg-foreground/75 group-active/resizable-handle:bg-foreground"
           )}
         >
           <IconGripVertical className="size-3 shrink-0 text-background md:hidden" />
