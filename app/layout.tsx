@@ -1,4 +1,4 @@
-import { DevMeasurer } from "@/components/dev-measurer";
+import { Analytics } from "@vercel/analytics/next";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -7,12 +7,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
-
-const Booton = localFont({
-  variable: "--font-booton",
-  display: "swap",
-  src: [{ path: "./fonts/BootonVF.woff2", style: "normal" }],
-});
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -55,11 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${Departure_Mono.variable} ${Booton.variable} ${Display.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={`${Departure_Mono.variable} ${Display.variable}`} suppressHydrationWarning>
       <head>
         <Script src="https://www.googletagmanager.com/gtag/js?id=UA-100486484-1" strategy="afterInteractive" />
         <Script id="gtag-init" strategy="afterInteractive">
@@ -100,6 +90,7 @@ export default function RootLayout({
           {/* {process.env.NODE_ENV === "development" && <DevMeasurer />} */}
           {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -1,10 +1,10 @@
 "use client";
 
-  import { Label } from "@/components/ui/label"
-  import { cn } from "@/lib/utils"
-  import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field"
-  import { IconMinus,IconPlus } from "@tabler/icons-react"
-  import * as React from "react"
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
+import * as React from "react";
 
 export const NumberFieldContext: React.Context<{
   fieldId: string;
@@ -146,4 +146,4 @@ export function CursorGrowIcon(props: React.ComponentProps<"svg">): React.ReactE
   );
 }
 
-  export { NumberFieldPrimitive }
+export { NumberFieldPrimitive };

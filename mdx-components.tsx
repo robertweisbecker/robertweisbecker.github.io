@@ -86,7 +86,19 @@ export function useMDXComponents(): MDXComponents {
     h2: createHeading(2),
     h3: createHeading(3),
     h4: createHeading(4),
-    img: (props) => <Image {...(props as React.ImgHTMLAttributes<HTMLImageElement>)} />,
+    img: (props) => {
+      const { src, alt, width, height, ...rest } = props as React.ImgHTMLAttributes<HTMLImageElement>;
+      if (!src || typeof src !== "string") return null;
+      return (
+        <Image
+          src={src}
+          alt={alt ?? ""}
+          width={width ? Number(width) : 1200}
+          height={height ? Number(height) : 630}
+          {...rest}
+        />
+      );
+    },
     a: ({ href, children, ...props }) => {
       if (href?.startsWith("/")) {
         return (

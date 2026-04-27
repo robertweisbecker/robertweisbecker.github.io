@@ -1,4 +1,4 @@
-  import { getProjectSlugs } from "@/lib/projects"
+import { getProjectSlugs } from "@/lib/projects";
 
 export function generateStaticParams() {
   return getProjectSlugs().map((slug) => ({ slug }));

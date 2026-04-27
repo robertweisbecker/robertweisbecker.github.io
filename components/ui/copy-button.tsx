@@ -1,10 +1,10 @@
 "use client";
 
-  import { Button } from "@/components/ui/button"
-  import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-  import { cn } from "@/lib/utils"
-  import { IconClipboard } from "@tabler/icons-react"
-  import { CheckIcon2 } from "../icons"
+import { Button } from "@/components/ui/button";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { cn } from "@/lib/utils";
+import { IconClipboard } from "@tabler/icons-react";
+import { CheckIcon2 } from "../icons";
 
 interface CopyButtonProps extends Omit<React.ComponentProps<typeof Button>, "children"> {
   value: string;

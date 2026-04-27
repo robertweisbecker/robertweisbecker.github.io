@@ -33,7 +33,7 @@ function Annotation({
 
   return (
     <div
-      className={`pointer-events-none absolute ${posClasses} max-w-[220px] rounded-lg bg-black/80 px-3 py-2 text-xs text-white/90 opacity-0 backdrop-blur-sm transition-[opacity,transform] duration-150 ease-out group-hover:opacity-100 group-focus-within:opacity-100 [transform:translateY(4px)] group-hover:[transform:translateY(0)] group-focus-within:[transform:translateY(0)]`}
+      className={`pointer-events-none absolute ${posClasses} max-w-[220px] [transform:translateY(4px)] rounded-lg bg-black/80 px-3 py-2 text-xs text-white/90 opacity-0 backdrop-blur-sm transition-[opacity,transform] duration-150 ease-out group-focus-within:[transform:translateY(0)] group-focus-within:opacity-100 group-hover:[transform:translateY(0)] group-hover:opacity-100`}
     >
       {label && <div className="mb-1 font-pixel text-[10px] text-white/50">{label}</div>}
       {children}
@@ -60,11 +60,7 @@ function BentoCell({
   style?: React.CSSProperties;
 }) {
   return (
-    <div
-      className={`group relative overflow-hidden rounded-xl bg-muted ${className}`}
-      tabIndex={0}
-      style={style}
-    >
+    <div className={`group relative overflow-hidden rounded-xl bg-muted ${className}`} tabIndex={0} style={style}>
       <img
         src={src}
         alt={alt}
@@ -75,7 +71,7 @@ function BentoCell({
         {annotation}
       </Annotation>
       {/* Subtle gradient scrim so annotation reads over any image */}
-      <div className="via-smooth pointer-events-none absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100" />
+      <div className="via-smooth pointer-events-none absolute inset-0 bg-linear-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-150 group-focus-within:opacity-100 group-hover:opacity-100" />
     </div>
   );
 }
@@ -84,7 +80,7 @@ function BentoCell({
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="font-pixel text-[10px] uppercase text-muted-foreground">{label}</span>
+      <span className="font-pixel text-[10px] text-muted-foreground uppercase">{label}</span>
       <span className="text-sm font-medium">{value}</span>
     </div>
   );
@@ -96,10 +92,7 @@ export default function DirectionA() {
     <div className="min-h-screen bg-background">
       {/* Back nav */}
       <div className="px-6 pt-6">
-        <Link
-          href="/private/testing"
-          className="font-pixel text-[11px] text-muted-foreground hover:text-foreground"
-        >
+        <Link href="/private/testing" className="font-pixel text-[11px] text-muted-foreground hover:text-foreground">
           ← directions
         </Link>
       </div>

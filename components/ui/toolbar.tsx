@@ -1,9 +1,9 @@
 "use client";
 
-  import { cn } from "@/lib/utils"
-  import { Toolbar as ToolbarPrimitive } from "@base-ui/react/toolbar"
-  import { VariantProps } from "class-variance-authority"
-  import { buttonVariants } from "./button"
+import { cn } from "@/lib/utils";
+import { Toolbar as ToolbarPrimitive } from "@base-ui/react/toolbar";
+import { VariantProps } from "class-variance-authority";
+import { buttonVariants } from "./button";
 
 function ToolbarRoot({ className, orientation = "horizontal", ...props }: ToolbarPrimitive.Root.Props) {
   return (
@@ -108,4 +108,4 @@ const Toolbar = {
   Input: ToolbarInput,
 };
 
-  export { Toolbar,ToolbarButton,ToolbarGroup,ToolbarInput,ToolbarLink,ToolbarRoot,ToolbarSeparator }
+export { Toolbar, ToolbarButton, ToolbarGroup, ToolbarInput, ToolbarLink, ToolbarRoot, ToolbarSeparator };

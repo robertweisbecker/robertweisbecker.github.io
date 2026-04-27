@@ -1,9 +1,9 @@
-  import { mergeProps } from "@base-ui/react/merge-props"
-  import { useRender } from "@base-ui/react/use-render"
-  import { cva,type VariantProps } from "class-variance-authority"
+import { mergeProps } from "@base-ui/react/merge-props";
+import { useRender } from "@base-ui/react/use-render";
+import { cva, type VariantProps } from "class-variance-authority";
 
-  import { Separator } from "@/components/ui/separator"
-  import { cn } from "@/lib/utils"
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 const buttonGroupVariants = cva(
   "has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-e-(--button-radius) flex w-fit items-stretch *:focus-visible:z-10 *:focus-visible:relative [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1 **:[--button-radius:var(--radius-md)] [&>*]:first:origin-right [&>*]:last:origin-left ",
@@ -77,4 +77,4 @@ function ButtonGroupSeparator({
   );
 }
 
-  export { ButtonGroup,ButtonGroupSeparator,ButtonGroupText,buttonGroupVariants }
+export { ButtonGroup, ButtonGroupSeparator, ButtonGroupText, buttonGroupVariants };

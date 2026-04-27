@@ -123,7 +123,8 @@ export function CodeBlock({
               className="relative overflow-hidden data-open:h-(--collapsible-panel-height) data-closed:h-(--initial-height)!"
               style={
                 {
-                  "--initial-height": initialHeight !== undefined ? `${initialHeight}px` : COLLAPSED_MAX_HEIGHT_FALLBACK,
+                  "--initial-height":
+                    initialHeight !== undefined ? `${initialHeight}px` : COLLAPSED_MAX_HEIGHT_FALLBACK,
                 } as React.CSSProperties
               }
               keepMounted

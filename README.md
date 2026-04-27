@@ -2,7 +2,7 @@
 
 ## Stack
 
-- [Next.js](https://nextjs.org) with static export
+- [Next.js](https://nextjs.org) on [Vercel](https://vercel.com)
 - [MDX](https://mdxjs.com) via `@next/mdx`
 - [Tailwind](https://tailwindcss.com)
 - [Base UI](https://base-ui.com) for unstyled components
@@ -37,8 +37,4 @@ Formats all files with Prettier.
 
 ## Deployment
 
-```
-npm run deploy
-```
-
-Builds the static export and publishes to the `gh-pages` branch via [gh-pages](https://github.com/tschaub/gh-pages).
+Deployed automatically to [Vercel](https://vercel.com) on push to `master`.

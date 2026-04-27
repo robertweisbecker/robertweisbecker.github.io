@@ -1,6 +1,6 @@
 "use client";
 
-  import { useCallback,useSyncExternalStore } from "react"
+import { useCallback, useSyncExternalStore } from "react";
 
 const BREAKPOINTS = {
   "2xl": 1536,

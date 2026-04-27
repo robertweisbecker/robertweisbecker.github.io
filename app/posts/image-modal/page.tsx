@@ -1,12 +1,12 @@
 "use client";
 
-  import { ImageModal,ImageModalMotion,ImageModalPopover,ImageModalPopover2 } from "@/components/image-modal"
-  import { Badge } from "@/components/ui/badge"
-  import { Code } from "@/components/ui/code"
-  import { DescriptionList,DescriptionListLabel,DescriptionListValue } from "@/components/ui/description-list"
-  import { Heading } from "@/components/ui/heading"
-  import { Separator } from "@/components/ui/separator"
-  import * as React from "react"
+import { ImageModal, ImageModalMotion, ImageModalPopover, ImageModalPopover2 } from "@/components/image-modal";
+import { Badge } from "@/components/ui/badge";
+import { Code } from "@/components/ui/code";
+import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
+import { Heading } from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
+import * as React from "react";
 
 const TEST_IMAGE = "/assets/share.png";
 

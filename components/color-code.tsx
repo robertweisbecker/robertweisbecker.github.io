@@ -1,7 +1,7 @@
 "use client";
 
-  import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
-  import { cn } from "@/lib/utils"
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
+import { cn } from "@/lib/utils";
 
 function ColorCode({
   value,
@@ -43,4 +43,4 @@ function ColorCode({
   );
 }
 
-  export { ColorCode }
+export { ColorCode };

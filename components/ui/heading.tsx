@@ -1,7 +1,7 @@
-  import { cn,slugify } from "@/lib/utils"
-  import { IconLinkFilled } from "@tabler/icons-react"
-  import { cva,type VariantProps } from "class-variance-authority"
-  import * as React from "react"
+import { cn, slugify } from "@/lib/utils";
+import { IconLinkFilled } from "@tabler/icons-react";
+import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 
 const headingVariants = cva(
   ['scroll-32 lg:scroll-18 [&+hr]:my-16 [&+[data-slot="separator"]]:my-16 first:mt-0 last:mb-0 [&+p]:mt-2 text-pretty'],
@@ -75,4 +75,4 @@ function Heading({ level = 2, render, className, children, ...props }: HeadingPr
   );
 }
 
-  export { Heading,headingVariants }
+export { Heading, headingVariants };

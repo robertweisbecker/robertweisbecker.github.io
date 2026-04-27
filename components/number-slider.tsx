@@ -1,18 +1,18 @@
 "use client";
 
-  import { Field,FieldLabel } from "@/components/ui/field"
-  import {
-    NumberField,
-    NumberFieldDecrement,
-    NumberFieldGroup,
-    NumberFieldIncrement,
-    NumberFieldInput,
-    NumberFieldScrubArea,
-  } from "@/components/ui/number-field"
-  import { Slider } from "@/components/ui/slider"
-  import { cn } from "@/lib/utils"
-  import * as React from "react"
-  import { InputGroupAddon,InputGroupText } from "./ui/input-group"
+import { Field, FieldLabel } from "@/components/ui/field";
+import {
+  NumberField,
+  NumberFieldDecrement,
+  NumberFieldGroup,
+  NumberFieldIncrement,
+  NumberFieldInput,
+  NumberFieldScrubArea,
+} from "@/components/ui/number-field";
+import { Slider } from "@/components/ui/slider";
+import { cn } from "@/lib/utils";
+import * as React from "react";
+import { InputGroupAddon, InputGroupText } from "./ui/input-group";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));

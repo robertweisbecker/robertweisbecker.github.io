@@ -71,7 +71,7 @@ export default function TestingIndex() {
         </p>
 
         <div className="mb-10 flex flex-col gap-4">
-          <p className="font-pixel text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+          <p className="font-pixel text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
             Component previews
           </p>
           {previews.map((dir) => (

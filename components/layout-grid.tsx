@@ -1,4 +1,4 @@
-  import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 type Variant = "two" | "three" | "twoUp" | "threeUp" | "fourUp" | "fit" | "oneThird" | "twoThirds";
 

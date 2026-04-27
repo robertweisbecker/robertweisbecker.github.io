@@ -1,7 +1,7 @@
-  import fs from "fs"
-  import path from "path"
-  import type { TocItem } from "./types"
-  import { slugify } from "./utils"
+import fs from "fs";
+import path from "path";
+import type { TocItem } from "./types";
+import { slugify } from "./utils";
 
 const projectsDir = path.join(process.cwd(), "content", "projects");
 

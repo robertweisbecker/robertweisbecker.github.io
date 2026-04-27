@@ -1,10 +1,10 @@
-  import { Input as InputPrimitive } from "@base-ui/react/input"
-  import { NumberField as NumberPrimitive } from "@base-ui/react/number-field"
+import { Input as InputPrimitive } from "@base-ui/react/input";
+import { NumberField as NumberPrimitive } from "@base-ui/react/number-field";
 
-  import { Button } from "@/components/ui/button"
-  import { cn } from "@/lib/utils"
-  import { IconMinus,IconPlus } from "@tabler/icons-react"
-  import { cva,type VariantProps } from "class-variance-authority"
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const inputVariants = cva(
   ["transition-colors text-base", "file:bg-card file:inline-flex file:border-0 file:text-sm file:font-medium"],
@@ -61,4 +61,4 @@ function NumberInput({
   );
 }
 
-  export { Input,inputVariants,NumberInput }
+export { Input, inputVariants, NumberInput };

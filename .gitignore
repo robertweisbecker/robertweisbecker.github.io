@@ -43,6 +43,7 @@ yarn-error.log*
 AGENTS.md
 .cursorignore
 skills-lock.json
+.cursor
 
 
 # typescript

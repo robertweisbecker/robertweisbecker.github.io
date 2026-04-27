@@ -1,8 +1,8 @@
-  import { type VariantProps } from "class-variance-authority"
-  import Link from "next/link"
+import { type VariantProps } from "class-variance-authority";
+import Link from "next/link";
 
-  import { buttonVariants } from "@/components/ui/button"
-  import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
@@ -56,4 +56,4 @@ function LinkButton({
   );
 }
 
-  export { LinkButton }
+export { LinkButton };

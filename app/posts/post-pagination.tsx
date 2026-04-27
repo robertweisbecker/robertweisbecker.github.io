@@ -1,9 +1,9 @@
 "use client";
 
-  import { Pagination } from "@/components/pagination"
-  import { posts } from "@/lib/data/posts"
-  import { resolveNeighbors } from "@/lib/utils"
-  import { usePathname } from "next/navigation"
+import { Pagination } from "@/components/pagination";
+import { posts } from "@/lib/data/posts";
+import { resolveNeighbors } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 const items = posts.map((p) => ({ title: p.title, path: p.path }));
 
