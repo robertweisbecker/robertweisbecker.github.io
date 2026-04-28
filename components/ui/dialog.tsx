@@ -29,7 +29,7 @@ function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) 
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
-        "data-ending-style:backdrop-blur-0 data-starting-style:backdrop-blur-0 fixed inset-0 z-50 bg-[linear-gradient(to_bottom,rgb(0_0_0/5%)_0,rgb(0_0_0/10%)_50%)] opacity-100 backdrop-blur-[1.5px] transition-[backdrop-filter,opacity] duration-600 ease-out data-ending-style:opacity-0 data-ending-style:duration-350 data-ending-style:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute dark:opacity-70",
+        "data-ending-style:backdrop-blur-0 data-starting-style:backdrop-blur-0 fixed inset-0 z-50 bg-[linear-gradient(to_bottom,hsl(0_0_0%/50%)_0,hsl(0_0_0%/100%)_50%)] opacity-20 backdrop-blur-[1.5px] transition-[backdrop-filter,opacity] duration-600 ease-out data-ending-style:opacity-0 data-ending-style:duration-350 data-ending-style:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute dark:opacity-70",
         className
       )}
       {...props}
@@ -52,6 +52,7 @@ function DialogPopup({
       data-slot="dialog-content"
       className={cn(
         "relative z-50 grid w-full max-w-dialog gap-4 overflow-hidden rounded-2xl bg-card p-4 text-sm shadow-border-xl duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+        "w-md",
         className
       )}
       {...props}
@@ -59,7 +60,7 @@ function DialogPopup({
       {showCloseButton && (
         <DialogPrimitive.Close
           data-slot="dialog-close"
-          render={<Button variant="ghost" className="absolute inset-e-3 top-3 rounded-full bg-muted" size="icon-sm" />}
+          render={<Button variant="ghost" className="absolute inset-e-3 top-3 bg-muted" size="icon-sm" rounded />}
         >
           <IconX strokeWidth={2} />
           <span className="sr-only">Close</span>
@@ -85,21 +86,8 @@ function DialogContent({
   return (
     <DialogPortal keepMounted={keepMounted}>
       <DialogOverlay />
-      <DialogPrimitive.Viewport className="group/dialog fixed inset-0 z-50">
-        <ScrollArea.Root
-          className="flex h-full w-full flex-col items-start justify-center overscroll-contain group-data-ending-style/dialog:pointer-events-none"
-          style={{ position: undefined }}
-        >
-          <ScrollArea.Viewport
-            className={cn(
-              "size-full overscroll-contain group-data-ending-style/dialog:pointer-events-none",
-              "before:pointer-events-none before:absolute before:top-0 before:block before:h-[min(40px,var(--scroll-area-overflow-y-start))] before:w-full before:rounded-[inherit] before:bg-linear-to-b before:from-popover before:to-transparent before:transition-[height] before:duration-100 before:ease-out before:[--scroll-area-overflow-y-start:inherit]",
-              "after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:block after:h-[min(40px,var(--scroll-area-overflow-y-end,40px))] after:w-full after:rounded-[inherit] after:bg-linear-to-t after:from-popover after:to-transparent after:transition-[height] after:duration-100 after:ease-out after:[--scroll-area-overflow-y-end:inherit]"
-            )}
-          >
-            <ScrollArea.Content className="flex min-h-full">{children}</ScrollArea.Content>
-          </ScrollArea.Viewport>
-        </ScrollArea.Root>
+      <DialogPrimitive.Viewport className="group/dialog fixed inset-0 z-50 grid place-items-center px-4 py-6 lg:py-10">
+        {children}
       </DialogPrimitive.Viewport>
     </DialogPortal>
   );

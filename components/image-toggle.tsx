@@ -6,7 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import * as React from "react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./ui/resizable";
 import { Badge } from "./ui/badge";
-import { Image } from "./image";
+import { Image, ImageProps } from "./image";
 
 interface ImageToggleProps {
   before: string;
@@ -15,6 +15,7 @@ interface ImageToggleProps {
   tab2?: string;
   mode?: "tabs" | "slider" | "comparison";
   description?: React.ReactNode;
+  imageProps?: ImageProps;
 }
 
 export function ImageToggle({
@@ -24,6 +25,7 @@ export function ImageToggle({
   tab2 = "After",
   mode = "tabs",
   description,
+  imageProps,
 }: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
@@ -94,10 +96,10 @@ export function ImageToggle({
         <TabsTrigger value="after">{tab2}</TabsTrigger>
       </TabsList>
       <TabsContent value="after" keepMounted>
-        <Image src={after} />
+        <Image src={after} {...imageProps} className="mt-0" />
       </TabsContent>
       <TabsContent value="before" keepMounted>
-        <Image src={before} />
+        <Image src={before} {...imageProps} className="mt-0" />
       </TabsContent>
     </Tabs>
   );

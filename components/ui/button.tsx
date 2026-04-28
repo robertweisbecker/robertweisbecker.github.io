@@ -21,7 +21,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "[--button-color:var(--primary-foreground)] bg-linear-to-b from-primary/80 bg-primary text-(--button-color) hover:bg-[oklch(from_var(--primary)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground",
+          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-(--button-bg)/90 to-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground",
           "active:shadow-xs active:inset-shadow-button-pressed",
           "focus-visible:outline-offset-2  disabled:bg-none disabled:bg-muted",
         ],
@@ -34,7 +34,7 @@ const buttonVariants = cva(
         ghost:
           "[--button-color:var(--foreground)] hover:bg-accent hover:text-accent-foreground aria-expanded:text-accent-foreground aria-expanded:bg-accent disabled:bg-transparent",
         destructive:
-          "[--button-color:white] bg-linear-to-b from-current/5 bg-destructive text-(--button-color) hover:bg-[oklch(from_var(--destructive)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground active:shadow-xs active:inset-shadow-button-pressed focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
+          "[--button-color:white] [--button-bg:var(--destructive)] bg-linear-to-b from-current/15 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--destructive)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground active:shadow-xs active:inset-shadow-button-pressed focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
         success:
           "[--button-color:white] bg-success-primary hover:bg-[oklch(from_var(--success-primary)_calc(l*.95)_calc(c*1.05)_h)] focus-visible:outline-success-primary focus-visible:outline-offset-2 text-white shadow-[color-mix(in_oklch,var(--success-primary),black)]/20 inset-shadow-button shadow-sm active:inset-shadow-button-pressed active:shadow-xs",
         link: "[--button-color:var(--secondary-foreground)] link disabled:bg-transparent cursor-pointer px-0.5 aria-expanded:text-accent-foreground aria-expanded:decoration-current has-data-[icon=inline-start]:ps-0 has-data-[icon=inline-end]:pe-0 has-data-icon:[&_svg]:opacity-50 has-data-icon:hover:[&_svg]:opacity-100  text-secondary-foreground after:absolute after:inset-y-2 font-normal",
@@ -59,7 +59,9 @@ const buttonVariants = cva(
           "hover:shadow-[inset_-1px_0_--alpha(var(--background)_/_12%),inset_0_-1px_--alpha(var(--background)_/_12%),inset_-2px_-2px_2px_-3px_white,inset_0_1px_--alpha(var(--background)_/_24%),inset_1px_0_--alpha(var(--background)_/_16%),inset_4px_4px_1px_-5px_white,inset_0_0_0_2px_--alpha(#000_/_1%),var(--shadow-md)]",
           "focus-visible:outline-offset-2",
         ],
-        overlay: ["[--button-color:white] bg-neutral-800 backdrop-blur-xl "],
+        overlay: [
+          "[--button-color:white] bg-black/60 hover:bg-black/70 backdrop-blur-xl text-white outline outline-white/20 ring-1 ring-black/60 -outline-offset-1",
+        ],
       },
       size: {
         md: "[--button-x:--spacing(3.5)] [--button-y:--spacing(2)] h-button",

@@ -7,7 +7,7 @@ export const frontmatter = {
 import { Mark, MarkNote } from "@/components/mark-note";
 import { ColorDiagrams } from "@/components/demos/color-diagrams";
 
-![Color palette overview](/assets/oklch/wheel-hue.png)
+<Image src="/assets/oklch/wheel-hue.png" width={576} height={324} preload={true} />
 
 ## Context
 
@@ -18,33 +18,41 @@ As the [UDL](/unified-design-language) project evolved, we needed an extended co
     <>
       If you're new to okLCH, Evil Martians has a great primer on it <a href="https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl">here</a>.
     </>
-
 }>
 
-This led us to the <Mark>okLCH</Mark> color space and a growing set of perceptually uniform palettes. What started as a side-of-desk project ended with 28 new color palettes, 365 colors, and a visual evolution of the brand.
+This led me to the <Mark>okLCH</Mark> color space and the idea of re-balancing our colors into perceptually uniform palettes.
 
 </MarkNote>
 
-Here's a high-level overview of the color system and how it works. Maybe I'll go more in-depth in a future post.
+<MarkNote note="One for each day of the year"> 
+What started as a side-of-desk project ended with 28 new color ramps, <Mark>365 colors</Mark>, and a visual evolution of the brand.
+
+</MarkNote>
+
+Here's a high-level overview of the color system and how it works. A more in-depth post about the process is coming soon.
 
 ## Overview
 
-It starts with the logic. Each ramp has steps `25` to `975` and falls within a given hue range (`0` being white and `1000` black). Steps are ordered by luminance; therefore, each step corresponds to a target contrast range. Chroma is defined more loosely, but it depends on a step's relationship to its neighbors.
+The primary goal was to expand our color offerings and ensure accessible contrast across themes. To that end, the resulting ramps each have steps `25` to `975` and fall within a given hue range (`0` being white and `1000` black). Steps are ordered by luminance, and each step corresponds to a target contrast range.
 
 Since steps are aligned to luminance, we can ensure consistent contrast no matter the combination.
 
 <ImageToggle
   before="/assets/oklch/luminance.png"
   after="/assets/oklch/luminance-bw.png"
+  imageProps={{
+    width: 576,
+    height: 324,
+  }}
   tab1="Color"
   tab2="Grayscale"
 />
 
-Colors are divided into three categories: spectrum colors (ROYGBIV & friends), neutrals, and alphas.
+Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, and Alphas.
 
 ### Spectrum Colors
 
-Primary and status colors for a theme. Multiple options for common status colors (red, green, yellow, etc) let you find a harmonious combo with your primary color.
+16 chromatic ramps for primary and status slots in a theme. Includes alternate ramps for common hues (red, green, yellow, etc) to let you find a harmonious status palette to pair with your primary.
 
 <div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
   <ColorSwatch color="ruby-400" label="Ruby" />
@@ -71,7 +79,7 @@ In these saturated palettes, ramps are based around the `500` step, which has mi
 
 ### Neutral Colors
 
-Neutrals are for icons, text, borders, and other relatively monochromatic elements. There are two informal subsets of neutrals: grays and…funky grays.
+Neutrals are for icons, text, borders, and other relatively monochromatic elements. There are two informal subsets of neutrals: grays and…spicier grays.
 
 <div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
   <ColorSwatch color="black-500" label="Black" />
@@ -84,34 +92,40 @@ Neutrals are for icons, text, borders, and other relatively monochromatic elemen
   <ColorSwatch color="steel-500" label="Steel" />
 </div>
 
-- `black`: pure white → black
-- `gray`: cool gray
-- `ash`: temperate gray
-- <MarkNote note="Yes, I borrowed this name from Tailwind. I'm in the market for a different one, hmu">
-    `zinc`: warm gray{" "}
-  </MarkNote>
-- `plum`: tinted red
-- `sand`: tinted yellow
-- `sage`: tinted green
-- `steel`: tinted blue
+1. `black`: pure white → black
+2. `gray`: cool gray
+3. `ash`: temperate gray
+4. <MarkNote note="Yes, I borrowed this name from Tailwind. I'm in the market for a different one, hmu">
+     `zinc`: warm gray
+   </MarkNote>
+5. `plum`: tinted red 🌶️
+6. `sand`: tinted yellow 🌶️
+7. `sage`: tinted green 🌶️
+8. `steel`: tinted blue 🌶️
 
-Neutral colors have a more dramatic luminance curve than the ROYGBIV ramps. This means the middle steps meant for foregrounds have a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast vs. 200 instead of 100 in the saturated palettes.
+Neutral colors have a more dramatic luminance curve than the ROYGBIV ramps. This means the middle steps meant for foregrounds have a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast with `200`, instead of `100`.
 
 <ColorDiagrams type="luminance" caption="Average luminance by step" />
 
-They also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can see this in the full palettes below.
+Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maybe spot this in the chart above.
 
-## Alpha Colors
+### Alpha Colors
 
-Alphas take the luminance curve of the neutral colors and apply it to the alpha value.
+Black and white aphas take the luminance curve of the `black` ramp and apply it to their respective alpha values.
 
-**black:**
+**black**
 
 <ColorRamp name="black" className="**:rounded-none" showLabels={false} />
 **black-alpha** (on white)
 <div className="bg-white">
   <ColorRamp name="black-alpha" className="**:rounded-none" showLabels={false} />
 </div>
+<div className="bg-black">
+  <ColorRamp name="white-alpha" className="**:rounded-none" showLabels={false} />
+</div>
+
+The system also currently supports an alpha ramp for the default `gray`, which visually mimics the opaque version.
+
 ---
 
 ## Palettes
@@ -121,11 +135,11 @@ Alphas take the luminance curve of the neutral colors and apply it to the alpha 
 A single step has min. 3:1 contrast vs steps four spots away, and 4.5:1 five steps away in any palette.
 For example, step 400 has a 3:1 contrast ratio vs. white through 100 and 4.5:1 vs. 900 to black.
 
-<ColorPalette group="hues" showNames showLabels />
+<ColorPalette group="hues" showNames />
 
 ### Neutrals
 
-<ColorPalette group="neutrals" showNames showLabels />
+<ColorPalette group="neutrals" showNames />
 
 ### Alpha
 
@@ -133,25 +147,17 @@ For example, step 400 has a 3:1 contrast ratio vs. white through 100 and 4.5:1 v
 
 ## Usage
 
-It starts with the logic. Each ramp has steps `25` to `975` and falls within a given hue range (`0` being white and `1000` black). Steps are ordered by luminance; therefore, each step corresponds to a target contrast range. Chroma is defined more loosely, but it depends on a step's relationship to its neighbors.
+Themes include slots for brand, neutral, info, success, warning, error, and highlight palettes. Semantic tokens like `bg-primary` point to default aliases like `colors.brand.500` so you only need to define which ramp you want to use for each slot to get up and running.
 
-Ramps are based around the `500` step, which has minimum 5.2:1 contrast vs. white and 4.5:1 vs. black, a target derived from our brand teal <ColorCode value="#0d7977" />. Each multiple of 100 has minimum AA contrast with steps five spots away in either direction, and 3:1 contrast vs. those four spots away.
-
-<MarkNote note="And Huetone!">
-  This is all done by <Mark>hand and eye</Mark>, not generated, but the logic can extend to generated colors in the
-  future.
-</MarkNote>
+You can then override individual tokens as needed, but have to ensure contrast ratios are maintained, since the system assigns foreground and background colors based on the step number by default.
 
 ### Theming
 
-With 16 hues and 8 neutrals, we can map colors to semantic slots without having to worry about conflicts.
+With 16 hues and 8 neutrals, we can map colors to semantic slots without having to worry about conflicts with brand colors.
 
-Want your primary color to be red? _Cool, your error colors can be pink or magenta. Or ruby or orange._ Going for something more muted? _Try navy for info and gold for warnings._
+Need your primary color to be red? _Cool, your error colors can be pink or magenta. Or ruby or orange._ Going for something more muted? _Try navy for info and gold for warnings._
 
-Some general guidelines:
-
-- Step 400 has a 3:1 contrast ratio vs. white through 100 and 4.5:1 vs. 900 to black.
-- 500 has 5:1 contrast vs. white, 4.5:1 contrast vs. 50, and 3:1 vs. 950.
+Most components also support raw `colorScheme` props to use a specific color from the system, even if it's not one of your designated slots.
 
 ![Badges](/assets/oklch/badges.png)
 
@@ -159,9 +165,13 @@ Some general guidelines:
 
 ### Dataviz
 
+The final piece of the puzzle is a dataviz palette designed with contrast and visual differences in mind. The range of colors now available allowed us to replace one-off or hardcoded colors with intentional choices.
+
+Here's a little tool I made to test and ship our dataviz palettes:
+
 <Demo
   className="mx-auto self-center"
-  title={"Chart Colors"}
+  title={"Chart Colors [iframe]"}
   controls={<LinkOut text="Open in new tab" className="text-sm" href="https://sax-rename-35190045.figma.site/" />}
   innerClass="p-0"
 >
@@ -176,8 +186,30 @@ Some general guidelines:
   />
 </Demo>
 
-## Resources
+## Demo
 
-Some links I found useful when building out the color system:
+For a simulated demo of the color system in action, check out my [Theming Demo post](/posts/theming), or fiddle around with the theme settings in the header. I've used the same color palettes on this site, and though the components are different, it might give you a sense of how the colors work together.
 
-- [Huetone](https://huetone.ardov.me/)
+<Alert>
+  <AlertTitle>Note</AlertTitle>
+  <AlertDescription>Tailwind converts</AlertDescription>
+</Alert>
+
+## Further reading
+
+Some resources I found useful when building out the color system:
+
+Tools
+
+- [Huetone](https://huetone.ardov.me/) - A tool to create and visualize okLCH palettes from [Alexey Ardov](https://ardov.me/)
+- [OkColor](https://www.figma.com/community/plugin/1173638098109123591/okcolor) - an okLCH color picker for Figma
+- [Accessible Palette](https://accessiblepalette.com/) from [Euguene Fedorenko](https://efedorenko.com/)
+- [Adobe Leonardo](https://leonardocolor.io/) by [Nate Baldwin](https://natebaldw.in/) for Adobe
+
+Articles
+
+- [OKLCH in CSS: why we moved from RGB and HSL](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl) - a great primer on okLCH by [Evil Martians](https://evilmartians.com)
+- [How to generate color palettes for design systems](https://mattstromawn.com/writing/generating-color-palettes/) by Matt Ström-Awn
+- [Reinventing Adobe Spectrum's Colors](https://adobe.design/ideas/reinventing-adobe-spectrum-s-colors) by [Nate Baldwin](https://natebaldw.in/)
+- [How we redesigned the Linear UI (part II)](https://linear.app/now/how-we-redesigned-the-linear-ui) - specifically the [Appearance](https://linear.app/now/how-we-redesigned-the-linear-ui#2.-appearance) section
+- [Accessible Color Systems](https://stripe.com/blog/accessible-color-systems) from Stripe

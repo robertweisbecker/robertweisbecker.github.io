@@ -11,8 +11,7 @@ const separatorVariants = cva(
       variant: {
         default:
           "bg-(--separator-color) data-horizontal:h-[var(--separator-thickness)] data-horizontal:max-h-[var(--separator-thickness)] data-vertical:w-[var(--separator-thickness)]",
-        dotted:
-          "border-dotted border-(--separator-color) data-horizontal:border-t-[var(--separator-thickness)] data-vertical:border-s-[var(--separator-thickness)]",
+        dotted: "bg-dotted border-(--separator-color) data-horizontal:bg-top data-vertical:bg-left",
         dashed:
           "border-dashed border-(--separator-color) data-horizontal:border-t-[var(--separator-thickness)] data-vertical:border-s-[var(--separator-thickness)]",
       },

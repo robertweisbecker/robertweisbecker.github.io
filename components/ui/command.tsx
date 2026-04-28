@@ -186,7 +186,11 @@ export function CommandItem({
   ...props
 }: React.ComponentProps<typeof AutocompleteItem>): React.ReactElement {
   return (
-    <AutocompleteItem className={cn("squircle gap-2 rounded-lg py-2", className)} data-slot="command-item" {...props} />
+    <AutocompleteItem
+      className={cn("group/command-item squircle gap-2 rounded-lg py-2", className)}
+      data-slot="command-item"
+      {...props}
+    />
   );
 }
 

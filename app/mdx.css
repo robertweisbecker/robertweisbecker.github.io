@@ -59,9 +59,9 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
   /* Remove bottom margin on h1 if directly followed by a <p> */
   &:has(+ p) {
     margin-bottom: 0.5em;
-    & ~ p:first-of-type {
+    /* & ~ p:first-of-type {
       @apply text-lg/6 text-balance opacity-60;
-    }
+    } */
   }
 }
 
@@ -138,7 +138,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
   padding-inline-start: 1.5em;
 }
 .prose ul:where(:not(.not-prose, .not-prose *)) {
-  list-style-type: disc;
+  list-style-type: square;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   padding-inline-start: 1.5em;

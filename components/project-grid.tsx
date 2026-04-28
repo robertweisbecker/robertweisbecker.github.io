@@ -21,7 +21,7 @@ const projectRows = projects.map((project, index) => (
       className="peer hover:text-secondary-foreground sm:-mx-3"
     >
       {project.icon ? (
-        <ItemMedia variant="image" className="p-1">
+        <ItemMedia variant="image" className="p-0.5">
           <img src={project.icon} alt="" />
         </ItemMedia>
       ) : (
@@ -36,9 +36,7 @@ const projectRows = projects.map((project, index) => (
       <ItemDescription className="text-xs tabular-nums">{project.date}</ItemDescription>
       <ItemActions>{/* <IconArrowRight className="text-muted-foreground size-4" /> */}</ItemActions>
     </Item>
-    {index !== projects.length - 1 && (
-      <ItemSeparator className="group-hover/item-group:opacity-0 peer-hover:opacity-0" />
-    )}
+    {index !== projects.length - 1 && <ItemSeparator className="peer-hover:opacity-0" />}
   </React.Fragment>
 ));
 

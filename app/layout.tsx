@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -56,7 +57,10 @@ export default function RootLayout({
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','UA-100486484-1',{send_page_view:false});`}
         </Script>
       </head>
-      <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
+      <body
+        className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased"
+        style={{ backgroundImage: "radial-gradient(circle,var(--border) 1px,#0000 0)", backgroundSize: "1rem 1rem" }}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"
@@ -67,23 +71,6 @@ export default function RootLayout({
 
           <Header />
           <main id="main" className="root container mx-auto scroll-pt-20 bg-background px-4 py-20">
-            {/* bg-[image:linear-gradient(to_bottom,var(--background)_50%,transparent_50%),repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] bg-size-[8px_8px] [--pattern-bg:var(--border)]/5 [--pattern-fg:var(--border)] */}
-            {/* <div
-              className="absolute inset-0 z-0 max-h-[33vh]"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px)",
-                backgroundSize: "20px 20px",
-                backgroundPosition: "0 0, 0 0",
-                maskImage:
-                  "repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px), repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px), radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
-                WebkitMaskImage:
-                  "repeating-linear-gradient(to right, black 0px, black 3px, transparent 3px, transparent 8px), repeating-linear-gradient(to bottom, black 0px, black 3px, transparent 3px, transparent 8px), radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
-                maskComposite: "intersect",
-                WebkitMaskComposite: "source-in",
-              }}
-            /> */}
-
             {children}
           </main>
           <Footer />
@@ -91,6 +78,7 @@ export default function RootLayout({
           {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
         </ThemeProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

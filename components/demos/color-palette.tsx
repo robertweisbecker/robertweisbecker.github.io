@@ -65,7 +65,7 @@ function ColorSwatch({ color, label, className, showLabel = true, swatchClass }:
           className="absolute inset-px -z-1 rounded-[inherit]"
           style={{
             backgroundImage:
-              "repeating-linear-gradient(45deg,transparent,transparent 7px,var(--border) 7px,var(--border) 9px)",
+              "repeating-linear-gradient(45deg,transparent,transparent 7px,var(--border) 7px,var(--border) 8px)",
           }}
         />
         <div className={` bg-${color} size-full rounded-[clamp(2px,.4vw,var(--radius-md))] border`} />

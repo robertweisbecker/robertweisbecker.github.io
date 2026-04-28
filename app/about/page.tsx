@@ -1,33 +1,20 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import {
-  BaseUiIcon,
-  FigmaIcon,
-  NextJsIcon,
-  GithubIcon,
-  LinkedinIcon,
-  TreeIconCss,
-  TreeIconNextJs,
-  TreeIconReact,
-  TreeIconTailwind,
-} from "@/components/icons";
+import { BaseUiIcon, FigmaIcon, NextJsIcon, GithubIcon, LinkedinIcon, TreeIconTailwind } from "@/components/icons";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Image } from "@/components/image";
 import { LayoutGrid } from "@/components/layout-grid";
 import { LinkOut } from "@/components/link-out";
 import { IconMailFilled } from "@tabler/icons-react";
 import Link from "next/link";
-import { Code } from "@/components/ui/code";
 
 export default function About() {
   return (
     <div className="mx-auto mt-10 grid max-w-3xl px-4">
       <div className="prose container">
         <h1>About</h1>
-        <p>My birth certificate says Robert, but everyone calls me Bob.</p>
+
         <LayoutGrid variant="fit" className="mx-auto max-w-xl">
           <div className="prose columns-2 text-balance [&_p]:mt-0">
             <p>
@@ -62,8 +49,6 @@ export default function About() {
               .
             </p>
           </div>
-
-          <Image src="/assets/bob.png" aria-hidden="true" className="my-0 max-w-xs" />
         </LayoutGrid>
 
         <div className="prose mx-auto max-w-xl">

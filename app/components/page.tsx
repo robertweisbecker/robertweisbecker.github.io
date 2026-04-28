@@ -31,6 +31,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogPopup,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -406,19 +407,21 @@ export default function ComponentsPage() {
             <Dialog>
               <DialogTrigger render={<Button variant="outline" />}>Open dialog</DialogTrigger>
               <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Dialog title</DialogTitle>
-                  <DialogDescription>
-                    This is a dialog. It has a title, description, and can contain any content.
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogBody>
-                  <p>Dialog content goes here. Close with the X or the button below.</p>
-                </DialogBody>
-                <DialogFooter>
-                  <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
-                  <DialogClose render={<Button />}>Save</DialogClose>
-                </DialogFooter>
+                <DialogPopup>
+                  <DialogHeader>
+                    <DialogTitle>Dialog title</DialogTitle>
+                    <DialogDescription>
+                      This is a dialog. It has a title, description, and can contain any content.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogBody>
+                    <p>Dialog content goes here. Close with the X or the button below.</p>
+                  </DialogBody>
+                  <DialogFooter>
+                    <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
+                    <DialogClose render={<Button />}>Save</DialogClose>
+                  </DialogFooter>
+                </DialogPopup>
               </DialogContent>
             </Dialog>
           </Section>

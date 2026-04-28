@@ -29,9 +29,9 @@ import { Kbd } from "./ui/kbd";
 import { DialogClose } from "./ui/dialog";
 import { Dialog } from "@base-ui/react/dialog";
 import { Badge } from "./ui/badge";
-import { TreeIconImage } from "./icons";
+import { TreeIconFile, Favicon } from "./icons";
 import { Separator } from "./ui/separator";
-import { Item, ItemTitle, ItemContent, ItemMedia, ItemDescription } from "./ui/item";
+import { Item, ItemTitle, ItemContent, ItemMedia, ItemDescription, ItemActions } from "./ui/item";
 
 type SearchItem = {
   value: string;
@@ -49,7 +49,7 @@ type SearchGroup = {
 
 function itemIcon(Icon: React.ComponentType<{ className?: string }>): ReactNode {
   return (
-    <Avatar size="sm">
+    <Avatar size="sm" className="object-contain">
       <AvatarFallback className="opacity-50">
         <Icon className="size-4 text-muted-foreground" />
       </AvatarFallback>
@@ -60,9 +60,9 @@ function itemIcon(Icon: React.ComponentType<{ className?: string }>): ReactNode 
 function itemAvatar(src: string, label: string): ReactNode {
   return (
     <Avatar size="sm">
-      <AvatarImage src={src} alt="" />
+      <AvatarImage src={src} alt="" className="object-contain" />
       <AvatarFallback>
-        <IconFile className="size-4 text-muted-foreground" />
+        <TreeIconFile className="size-4 text-muted-foreground" />
       </AvatarFallback>
     </Avatar>
   );
@@ -212,21 +212,6 @@ export function SiteSearch({ className }: { className?: string }) {
               {(group: SearchGroup) => (
                 <CommandGroup key={group.value} items={group.items}>
                   <CommandGroupLabel>{group.value}</CommandGroupLabel>
-                  <CommandItem>
-                    <Item size="sm" className="p-0">
-                      <ItemMedia variant="icon">
-                        <IconHome />
-                      </ItemMedia>
-                      <ItemContent>
-                        <ItemTitle>
-                          Home <ItemDescription>Home</ItemDescription>
-                        </ItemTitle>
-                      </ItemContent>
-                      <ItemDescription>
-                        <CommandShortcut>↵</CommandShortcut>
-                      </ItemDescription>
-                    </Item>
-                  </CommandItem>
                   <CommandCollection>
                     {(item: SearchItem) => {
                       const isCurrent = pathname === item.path;
@@ -237,16 +222,34 @@ export function SiteSearch({ className }: { className?: string }) {
                           onClick={() => navigate(item.path)}
                           className={cn(isCurrent && "text-foreground")}
                         >
-                          <span className="relative grid size-[1lh] shrink-0 place-items-center">
-                            {item.icon ? item.icon : <TreeIconImage className="size-4 opacity-64" />}
-                            {isCurrent && (
-                              <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />
-                            )}
+                          <Item size="sm" className="p-0">
+                            <ItemMedia variant="icon" className="relative object-contain">
+                              {item.icon ? item.icon : <TreeIconFile className="size-4 opacity-64" />}
+                              {isCurrent && (
+                                <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />
+                              )}
+                            </ItemMedia>
+                            <ItemContent>
+                              <ItemTitle>
+                                {item.label} <ItemDescription>{item.date}</ItemDescription>
+                              </ItemTitle>
+                            </ItemContent>
+                            <ItemDescription>
+                              {item.category && <span className="text-xs text-muted-foreground">{item.category}</span>}
+                            </ItemDescription>
+                            <ItemActions>
+                              <CommandShortcut className="ease opacity-0 transition-opacity duration-50 group-data-highlighted/command-item:opacity-100">
+                                ↵
+                              </CommandShortcut>
+                            </ItemActions>
+                          </Item>
+                          {/* <span className="relative grid size-[1lh] shrink-0 place-items-center">
+                            
                           </span>
                           <span className="truncate">{item.label}</span>
                           {item.category && <span className="text-muted-foreground/72">{item.category}</span>}
 
-                          {item.date && <span className="ms-auto text-xs text-muted-foreground">{item.date}</span>}
+                          {item.date && <span className="ms-auto text-xs text-muted-foreground">{item.date}</span>} */}
                         </CommandItem>
                       );
                     }}
@@ -258,18 +261,15 @@ export function SiteSearch({ className }: { className?: string }) {
 
             <CommandFooter className="text-xs font-medium">
               <span className="flex items-center gap-1">
-                <Kbd>↵</Kbd> Home
+                <Favicon className="size-4 opacity-50" />
               </span>
               <span className="flex items-center gap-4">
                 <span className="flex items-center gap-1">
-                  <Kbd>↵</Kbd> navigate
+                  Go <Kbd>↵</Kbd>
                 </span>
                 <Separator orientation="vertical" />
                 <Dialog.Close className="after:squircle relative isolate flex items-center gap-1 after:absolute after:-inset-x-2 after:-z-1 after:h-button-sm after:rounded-sm after:transition-colors after:duration-100 after:ease-out hover:after:bg-accent">
-                  Close{" "}
-                  <Kbd variant="elevated" className="-me-0.5">
-                    esc
-                  </Kbd>
+                  Close <Kbd className="-me-0.5">esc</Kbd>
                 </Dialog.Close>
               </span>
             </CommandFooter>

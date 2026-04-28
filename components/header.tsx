@@ -80,7 +80,7 @@ export function Header() {
           // handle={previewHandle}
           // actionsRef={previewActions}
           align="start"
-          // anchor={anchorRef}
+          anchor={anchorRef}
         >
           <DropdownMenu
             modal={false}
@@ -102,7 +102,7 @@ export function Header() {
                 data-icon="inline-end"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
+            <DropdownMenuContent align="start" ref={anchorRef}>
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Projects</DropdownMenuLabel>
 
@@ -116,7 +116,7 @@ export function Header() {
                           {project.heroImage && (
                             <img
                               src={project.heroImage}
-                              className="mask-b-via-smooth block aspect-square w-full max-w-full rounded-lg mask-b-from-80% mask-b-to-transparent bg-top object-cover object-top"
+                              className="mask-b-via-smooth block aspect-video w-full max-w-full rounded-lg mask-b-from-80% mask-b-to-transparent bg-top object-cover object-top"
                             />
                           )}
                           <DataList.Root size="sm" className="px-4 py-2">

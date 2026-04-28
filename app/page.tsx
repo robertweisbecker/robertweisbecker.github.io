@@ -13,43 +13,41 @@ import { ArrowUpRight } from "@gravity-ui/icons";
 
 export default function Home() {
   return (
-    <div className={cn("mx-auto grid max-w-2xl gap-10 bg-background")}>
-      <div className="flex items-end justify-between gap-2">
-        <div className="min-w-0">
-          <h1
-            className="font-display w-fit text-3xl leading-[.9] text-(--hue-700) filter-[url(#glitch-name)]"
-            style={{
-              fontVariationSettings: '"wght" 680, "slnt" -5, "SERF" 20',
-            }}
-          >
-            Robert Weisbecker
-          </h1>
-          <p className="mt-2">
-            Designing products & systems at{" "}
-            <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />
-          </p>
-          <p className="mt-4 max-w-prose bg-background text-balance">
-            You can call me{" "}
-            <Popover>
-              <PopoverTrigger openOnHover className="link font-normal text-inherit decoration-dotted">
-                Bob
-              </PopoverTrigger>
-              <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
-                <PopoverDescription className="inline">
-                  We&apos;re all about efficiency here at bob [dot] fyi.
-                </PopoverDescription>
-              </PopoverContent>
-            </Popover>
-            . This is my little corner of the internet.
-            <br />
-            If you&apos;re here now, I made it for you. <br />
-          </p>
-        </div>
-        <PixelPortrait />
+    <div className={cn("mx-auto grid max-w-2xl gap-10")}>
+      <div className="grid grid-cols-2 items-end">
+        <h1
+          className="-mb-1 block font-heading text-4xl leading-[.875] tracking-[-.025em] text-secondary-foreground"
+          style={{
+            fontVariationSettings: '"wght" 720, "slnt" 0, "SERF" 25',
+          }}
+        >
+          <s className="opacity-20">Robert</s> <br />
+          Bob
+          <br /> Weisbecker
+        </h1>
+        <PixelPortrait className="mx-auto" />
       </div>
 
-      <Separator className="mx-auto w-4 shrink-0" thickness={1} />
-
+      <p className="text-balance md:columns-2">
+        You can call me{" "}
+        <Popover>
+          <PopoverTrigger openOnHover className="link text-secondary-foreground decoration-dotted">
+            Bob
+          </PopoverTrigger>
+          <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
+            <PopoverDescription className="inline">
+              We&apos;re all about efficiency here at bob [dot] fyi.
+            </PopoverDescription>
+          </PopoverContent>
+        </Popover>
+        . I'm currently designing products & systems at{" "}
+        <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />.
+        <br />
+        This is my little corner of the internet.
+        <br />
+        If you&apos;re here now, I made it for you.
+      </p>
+      <Separator className="min-h-0.5 max-w-20" />
       <h2 className="font-pixel text-[11px] uppercase" id="projects">
         » Projects
       </h2>

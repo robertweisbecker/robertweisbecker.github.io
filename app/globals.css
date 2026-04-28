@@ -15,7 +15,7 @@
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
   --font-mono: var(--font-departure-mono), ui-monospace, monospace;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
-  /* Neutral alias — maps to taupe palette; change here to swap neutral base */
+
   --color-neutral-25: var(--neutral-25);
   --color-neutral-50: var(--neutral-50);
   --color-neutral-75: var(--neutral-75);
@@ -183,7 +183,7 @@
   --sidebar-ring: var(--ring);
   --border-shadow:
     inset 0 0.5px 0.5px --alpha(var(--color-white) / 8%), 0 1px --alpha(var(--color-black) / 4%),
-    0 0 0 1px var(--color-border);
+    0 0 0 1px --alpha(var(--color-border) / 50%);
   --inner-border-shadow:
     inset 0 1px 0 var(--color-border), inset 0 1px 2px -1px --alpha(var(--color-foreground) / 20%),
     inset 0 1px 4px -2px --alpha(var(--color-foreground) / 20%), inset 0 0 0 0.5px --alpha(var(--color-border) / 50%);
@@ -191,9 +191,21 @@
     0 0 0 1px var(--border), inset 0 1px hsl(0 0 100% / 50%), inset 0 1px 2px 1px hsl(0 0 100% / 20%),
     0 4px 28px hsl(0 0 0% / 25%), var(--shadow-xl);
   --shadow-button-inset:
-    inset 0 1px 0 0.5px --alpha(currentColor / 15%), inset 0 -2px 0 -1px hsl(0 0 0% / 8%),
-    inset 0 0 0.5px hsl(0 0 0% / 30%);
+    inset 0 1.5px 0 0 --alpha(currentColor / 20%), inset 0 0 0 1.5px --alpha(currentColor / 10%),
+    inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, hsl(0 0 0% / 50%));
   --shadow-button-inset-pressed: inset 0 2px 0 0px hsl(0 0 0% / 10%), inset 0 0 0 1px hsl(0 0 0% / 10%);
+}
+
+[data-hue="black"],
+[data-hue="gray"],
+[data-hue="ash"],
+[data-hue="zinc"],
+[data-hue="plum"],
+[data-hue="sand"],
+[data-hue="sage"],
+[data-hue="steel"] {
+  --primary: var(--hue-700);
+  --primary-foreground: var(--hue-100);
 }
 
 .dark,
@@ -208,7 +220,7 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-black) / 24%);
+  --muted: --alpha(var(--color-black) / 64%);
   --muted-foreground: var(--neutral-400);
   --accent: --alpha(var(--hue-500) / 5%);
   --accent-foreground: var(--neutral-100);
@@ -250,6 +262,18 @@
   --inner-border-shadow:
     inset 0 0 1px 0.5px --alpha(var(--color-border) / 100%), inset 0 -1px 0 0 --alpha(var(--color-border) / 50%),
     inset 0 2px 4px 1px var(--color-black);
+}
+
+.dark [data-hue="black"],
+.dark [data-hue="gray"],
+.dark [data-hue="ash"],
+.dark [data-hue="zinc"],
+.dark [data-hue="plum"],
+.dark [data-hue="sand"],
+.dark [data-hue="sage"],
+.dark [data-hue="steel"] {
+  --primary: var(--hue-100);
+  --primary-foreground: var(--hue-900);
 }
 
 @layer base {
@@ -359,6 +383,18 @@
   :where(&) {
     @apply max-w-[calc(100%-2rem)];
   }
+}
+
+@utility bg-dotted {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--separator-color, var(--border)) 0,
+    var(--separator-color, var(--border)) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
 }
 
 @utility ui-input {

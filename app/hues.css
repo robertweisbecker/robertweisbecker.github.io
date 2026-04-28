@@ -671,6 +671,20 @@
   --hue-900: var(--color-pink-900);
   --hue-950: var(--color-pink-950);
   --hue-975: var(--color-pink-975);
+
+  --error-25: var(--color-orange-25);
+  --error-50: var(--color-orange-50);
+  --error-100: var(--color-orange-100);
+  --error-200: var(--color-orange-200);
+  --error-300: var(--color-orange-300);
+  --error-400: var(--color-orange-400);
+  --error-500: var(--color-orange-500);
+  --error-600: var(--color-orange-600);
+  --error-700: var(--color-orange-700);
+  --error-800: var(--color-orange-800);
+  --error-900: var(--color-orange-900);
+  --error-950: var(--color-orange-950);
+  --error-975: var(--color-orange-975);
 }
 
 /* ------------------------------------------------------------------ */

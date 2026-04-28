@@ -233,12 +233,12 @@ function Browser({
   return (
     <div data-slot="device-frame" className={cn("w-full", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
-        <div className="squircle overflow-hidden rounded-xl bg-background shadow-border-md">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 bg-popover px-2 py-2 md:px-3 md:py-2.5">
+        <div className="squircle overflow-hidden rounded-2xl bg-popover shadow-border-sm">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-2 py-2 md:px-3 md:py-2.5">
             <div className="flex shrink-0 items-center gap-1.5 self-start pe-1 md:self-center md:ps-1">
-              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border" />
-              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ffbd2e] inset-ring inset-ring-border" />
-              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#27c93f] inset-ring inset-ring-border" />
+              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border/50" />
+              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ffbd2e] inset-ring inset-ring-border/50" />
+              <div className="aspect-square size-3 shrink-0 rounded-full bg-[#27c93f] inset-ring inset-ring-border/50" />
             </div>
 
             {toolbar && (
@@ -249,7 +249,7 @@ function Browser({
                   <IconRefresh strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
                 </div>
 
-                <div className="squircle relative flex h-button-sm flex-1 items-center rounded-lg bg-foreground/5 p-1">
+                <div className="squircle relative mx-auto flex h-button-sm max-w-md flex-1 items-center rounded-lg bg-accent p-1">
                   <span className="flex min-w-0 flex-1 gap-[.25em] truncate px-1.5 text-xs text-muted-foreground/50">
                     https:// <span className="text-foreground">{address}</span>
                   </span>
