@@ -1,33 +1,22 @@
 export const frontmatter = {
-  title: "okLCH Color Palettes",
-  subtitle: "Creating perceptually-uniform color palettes for consistent contrast, brand expression, and dataviz",
+  title: "OkLCH Color Palettes",
+  subtitle:
+    "Creating perceptually-uniform color palettes for consistent contrast in theming, brand expression, and data visualization",
   role: "Design Lead",
   date: "2025—2026",
 };
 import { Mark, MarkNote } from "@/components/mark-note";
 import { ColorDiagrams } from "@/components/demos/color-diagrams";
 
-<Image src="/assets/oklch/wheel-hue.png" width={576} height={324} preload={true} />
+<Image src="/assets/oklch/oklch-gradient.png" preload={true} />
 
 ## Context
 
 As the [UDL](/unified-design-language) project evolved, we needed an extended color system with underlying logic to make palettes plug and play for any of the dozen themes.
 
-<MarkNote
-  note={
-    <>
-      If you're new to okLCH, Evil Martians has a great primer on it <a href="https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl">here</a>.
-    </>
-}>
+This led me to the okLCH color space and the idea of re-balancing our colors into perceptually uniform palettes.
 
-This led me to the <Mark>okLCH</Mark> color space and the idea of re-balancing our colors into perceptually uniform palettes.
-
-</MarkNote>
-
-<MarkNote note="One for each day of the year"> 
-What started as a side-of-desk project ended with 28 new color ramps, <Mark>365 colors</Mark>, and a visual evolution of the brand.
-
-</MarkNote>
+What started as a side-of-desk project ended with 28 new color ramps, 365 colors, and a visual evolution of the brand.
 
 Here's a high-level overview of the color system and how it works. A more in-depth post about the process is coming soon.
 
@@ -51,6 +40,8 @@ Since steps are aligned to luminance, we can ensure consistent contrast no matte
 Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, and Alphas.
 
 ### Spectrum Colors
+
+<Image src="/assets/oklch/wheel-hue.png" />
 
 16 chromatic ramps for primary and status slots in a theme. Includes alternate ramps for common hues (red, green, yellow, etc) to let you find a harmonious status palette to pair with your primary.
 

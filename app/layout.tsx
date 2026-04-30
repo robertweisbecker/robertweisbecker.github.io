@@ -57,10 +57,23 @@ export default function RootLayout({
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','UA-100486484-1',{send_page_view:false});`}
         </Script>
       </head>
-      <body
-        className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased"
-        style={{ backgroundImage: "radial-gradient(circle,var(--border) 1px,#0000 0)", backgroundSize: "1rem 1rem" }}
-      >
+      <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
+        <div
+          className="gradient-anim fixed inset-x-0 top-0 bottom-0 -z-100 max-md:hidden"
+          style={
+            {
+              // backgroundImage: "radial-gradient(circle,var(--border) 1px,#0000 0)",
+              // backgroundSize: ".5rem .5rem",
+              // maskImage: "radial-gradient(50% 100% at 0% 100%, rgb(0, 0, 0) 60%, transparent 100%)",
+              // "--s": "50vh",
+              // "--c1": "var(--muted)",
+              // "--c2": "var(--background)",
+              // "--_g": "var(--c1) 35%, #0000 36%",
+              // background: "radial-gradient(at 100% 100%, var(--_g)), radial-gradient(at 0 0, var(--_g)) var(--c2)",
+              // backgroundSize: "var(--s) var(--s)",
+            } as React.CSSProperties
+          }
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"
@@ -70,7 +83,7 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="root container mx-auto scroll-pt-20 bg-background px-4 py-20">
+          <main id="main" className="root container mx-auto scroll-pt-20 px-4 py-20">
             {children}
           </main>
           <Footer />

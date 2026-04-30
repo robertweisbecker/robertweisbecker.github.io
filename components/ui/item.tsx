@@ -26,14 +26,17 @@ function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Sepa
     <Separator
       data-slot="item-separator"
       orientation="horizontal"
-      className={cn("peer my-1 opacity-50", className)}
+      className={cn(
+        "peer my-0 opacity-50 transition-opacity duration-100 has-[+_a[data-slot=item]:hover]:opacity-0",
+        className
+      )}
       {...props}
     />
   );
 }
 
 const itemVariants = cva(
-  "[a]:hover:after:bg-accent [a]:after:transition-all [a]:hover:after:scale-100 [a]:after:scale-95 [a]:after:absolute [a]:after:inset-0 [a]:after:duration-200 [a]:after:ease [a]:after:rounded-[inherit] [a]:after:-z-1 isolate relative rounded-xl border border-border/50 text-sm flex-1 group/item focus-visible:border-ring focus-visible:ring-ring/50 flex items-center flex-wrap outline-none transition-colors duration-100 focus-visible:ring-[3px] [a]:transition-colors [data-slot=card-content]>:where(&):py-0 squircle",
+  "[a]:hover:after:bg-accent [a]:after:transition-all [a]:hover:after:scale-100 [a]:after:scale-95 [a]:after:absolute [a]:after:inset-0 [a]:after:duration-200 [a]:after:ease [a]:after:rounded-[inherit] [a]:after:-z-1 isolate relative rounded-xl border border-border/50 text-sm flex-1 group/item focus-visible:border-ring focus-visible:ring-ring/50 flex items-center flex-wrap outline-none transition-colors duration-100 focus-visible:ring-[3px] [a]:transition-colors [data-slot=card-content]>:where(&):py-0 squircle [a]:hover:[&_+[data-slot=item-separator]]:opacity-0 ",
   {
     variants: {
       variant: {

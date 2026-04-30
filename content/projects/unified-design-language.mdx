@@ -59,19 +59,27 @@ The next step was to establish an opinion — to coalesce around a general visua
 
 <ImageModal src="/assets/udl/audit.png" caption="A snippet of our UI audit & the system health report" />
 
+Many of the same components are used across platforms and in courses. These became opportunities to unify UI/UX.
+
+Abstract components based on underlying structure, behaviors, and common props. To what extent can they share styling or properties?
+
+## Consolidation
+
 That spurred the first (and hopefully last) **Great Everfi Component-Off™**: we pitted competing components from
 platforms and products against one another, holding working sessions to dissect their behavior, style, and utility.
 
-For each moment of consensus, we laid another brick in our growing foundations.
+- Establish an “Everfi” opinion on how things should look and behave by comparing styles & components side-by-side
+- Choose the best parts of each & coalesce around a shared visual and interaction design foundation
 
 <ImageToggle
   before="/assets/udl/off-before.png"
   after="/assets/udl/off-after.png"
   caption="There can be only one ~~Highlander~~ popover"
 />
-## Proof of Concept
 
-When we'd reached a critical mass of solid decisions, I created a rough set of components to stress-test in various use cases across the organization. The goal was to further refine our approach and develop a proof of concept that we could pitch to leadership.
+## Concept
+
+One system that supports three information density schemes to meet the varying and overlapping needs of our product ecosystem.
 
 <ProjectImageCarousel
   slides={[
@@ -118,13 +126,12 @@ We continued iterating on our foundations, arriving at a family of comprehensive
 
 <ProjectImageCarousel
   slides={[
-    { src: "/assets/udl/docs-tokens.png", alt: "Figma token documentation", caption: "Figma token documentation" },
+    { src: "/assets/udl/docs-tokens.png", alt: "Figma token documentation" },
     {
       src: "/assets/udl/base-tokens.png",
       alt: "Some of our base (global) tokens",
-      caption: "Some of our base (global) tokens",
     },
-    { src: "/assets/udl/semantic-tokens.png", alt: "Semantic color tokens", caption: "Semantic color tokens" },
+    { src: "/assets/udl/semantic-tokens.png", alt: "Semantic color tokens" },
   ]}
 />
 

@@ -9,37 +9,83 @@ import {
   ItemTitle,
 } from "@/components/ui/item";
 import { projects } from "@/lib/data/projects";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
-import React from "react";
-import { TreeIconImage, TreeIconReact } from "./icons";
+import * as React from "react";
+import { TreeIconFile } from "./icons";
 
-const projectRows = projects.map((project, index) => (
-  <React.Fragment key={project.id}>
-    <Item
-      render={<Link href={project.path} />}
-      size="default"
-      className="peer hover:text-secondary-foreground sm:-mx-3"
-    >
-      {project.icon ? (
-        <ItemMedia variant="image" className="p-0.5">
-          <img src={project.icon} alt="" />
-        </ItemMedia>
-      ) : (
-        <ItemMedia variant="image">
-          <TreeIconImage className="text-muted-foreground" />
-        </ItemMedia>
-      )}
-      <ItemContent>
-        <ItemTitle style={{ viewTransitionName: project.title }}>{project.title}</ItemTitle>
-        <ItemDescription>{project.description}</ItemDescription>
-      </ItemContent>
-      <ItemDescription className="text-xs tabular-nums">{project.date}</ItemDescription>
-      <ItemActions>{/* <IconArrowRight className="text-muted-foreground size-4" /> */}</ItemActions>
-    </Item>
-    {index !== projects.length - 1 && <ItemSeparator className="peer-hover:opacity-0" />}
-  </React.Fragment>
-));
+export type ProjectGridItem = {
+  id: string | number;
+  title: string;
+  description?: string;
+  date?: string;
+  path: string;
+  /** String renders as <img> src. ReactNode renders as-is (e.g. an icon component). */
+  icon?: string | React.ReactNode;
+  /** Optional content rendered in the trailing actions slot (e.g. a Badge). */
+  action?: React.ReactNode;
+  /** Enables CSS view-transition on the title. Defaults to the title string. */
+  viewTransitionName?: string;
+};
 
-export function ProjectGrid() {
-  return <ItemGroup className="bg-background">{projectRows}</ItemGroup>;
+export type ProjectGridProps = {
+  items?: ProjectGridItem[];
+  className?: string;
+  itemClassName?: string;
+};
+
+function renderMedia(icon: ProjectGridItem["icon"]) {
+  if (typeof icon === "string") {
+    return (
+      <ItemMedia variant="image" className="p-0.5">
+        <img src={icon} alt="" />
+      </ItemMedia>
+    );
+  }
+  if (icon) {
+    return <ItemMedia variant="image">{icon}</ItemMedia>;
+  }
+  return (
+    <ItemMedia variant="image">
+      <TreeIconFile className="text-muted-foreground" />
+    </ItemMedia>
+  );
+}
+
+const defaultItems: ProjectGridItem[] = projects.map((p) => ({
+  id: p.id,
+  title: p.title,
+  description: p.description,
+  date: p.date,
+  path: p.path,
+  icon: p.icon,
+}));
+
+export function ProjectGrid({ items = defaultItems, className, itemClassName }: ProjectGridProps) {
+  return (
+    <ItemGroup className={className}>
+      {items.map((item, index) => (
+        <React.Fragment key={item.id}>
+          <Item
+            render={<Link href={item.path} />}
+            size="default"
+            className={cn("peer hover:text-secondary-foreground sm:-mx-3", itemClassName)}
+          >
+            {renderMedia(item.icon)}
+            <ItemContent>
+              <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>
+                {item.title}
+              </ItemTitle>
+              {item.description && <ItemDescription>{item.description}</ItemDescription>}
+            </ItemContent>
+            {item.action && <ItemActions>{item.action}</ItemActions>}
+            {item.date && (
+              <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>
+            )}
+          </Item>
+          {index !== items.length - 1 && <ItemSeparator />}
+        </React.Fragment>
+      ))}
+    </ItemGroup>
+  );
 }

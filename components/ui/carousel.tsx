@@ -9,7 +9,7 @@ import { AnimatePresence, motion, type Transition } from "motion/react";
 import { IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronUp } from "@tabler/icons-react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Meter, Toolbar } from "@base-ui/react";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
 import { PauseFill, PlayFill, ArrowRotateLeft } from "@gravity-ui/icons";
@@ -341,6 +341,7 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       rounded
+      render={<motion.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
         orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
@@ -366,7 +367,7 @@ function CarouselPrevious({
 
 function CarouselNext({
   className,
-  variant = "elevated",
+  variant = "overlay",
   size = "icon-sm",
   ...props
 }: React.ComponentProps<typeof Button>) {
@@ -377,6 +378,7 @@ function CarouselNext({
       variant={variant}
       size={size}
       rounded
+      render={<motion.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
         orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
@@ -400,9 +402,6 @@ function CarouselNext({
   );
 }
 
-const toolbarButtonClasses =
-  "relative grid-stack size-8 shrink-0 cursor-pointer rounded-full bg-neutral-800/60 backdrop-blur-xl transition-colors duration-100 not-disabled:hover:bg-neutral-800/80 active:scale-98 active:bg-neutral-800/40 aria-disabled:bg-neutral-800/10! aria-disabled:text-white/50";
-
 function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolbar.Group>) {
   const { snaps, selectedSnap, goTo, autoplayEnabled, isPlaying, autoplayProgress, orientation } = useCarousel();
 
@@ -410,11 +409,11 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
     <Toolbar.Group
       role="tablist"
       className={cn(
-        "flex h-8 shrink-0 items-center justify-center rounded-full border bg-neutral-800/60 px-2.5 py-1.5 backdrop-blur-xl",
+        "flex h-button-sm shrink-0 items-center justify-center rounded-full border bg-neutral-700/60 px-2.5 py-1.5 backdrop-blur-xl",
         orientation === "vertical" && "rotate-90",
         className
       )}
-      aria-label="Choose slide to display."
+      aria-label="Choose a slide to show."
       {...props}
     >
       {snaps.map((_, index) => {
@@ -427,6 +426,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
             role="tab"
             aria-selected={isActive}
             data-selected={isActive}
+            aria-label={`Slide ${index + 1}`}
             onClick={() => goTo(index)}
             className={cn(
               "relative shrink-0 cursor-pointer rounded-full transition-all duration-500 ease-out not-first:ms-3",
@@ -436,8 +436,6 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
               isFillingSlide && "bg-current/30"
             )}
           >
-            <span className="sr-only">Slide {index + 1}</span>
-
             {autoplayEnabled && isActive && (
               <Meter.Root
                 value={autoplayProgress}
@@ -475,7 +473,11 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
       {...props}
       onClick={isFinished ? restartAutoplay : togglePlay}
       aria-label={isFinished ? "Restart" : isPlaying ? "Pause" : "Play"}
-      className={cn(toolbarButtonClasses, orientation === "vertical" && "-rotate-90", className)}
+      className={cn(
+        buttonVariants({ variant: "overlay", size: "icon-sm" }),
+        orientation === "vertical" && "-rotate-90",
+        className
+      )}
       render={<motion.button />}
     >
       <AnimatePresence mode="popLayout" initial={false}>
@@ -488,7 +490,7 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
           transition={iconTransition}
         >
           {isFinished ? (
-            <ArrowRotateLeft className="relative -bottom-px size-4" />
+            <ArrowRotateLeft className="relative" />
           ) : isPlaying ? (
             <PauseFill className="relative" />
           ) : (
@@ -517,7 +519,7 @@ function CarouselToolbar({
         "z-10 flex shrink-0 items-center gap-3 text-white",
         orientation === "horizontal" && "w-fit flex-row",
         orientation === "vertical" && "flex-col",
-        !inset && "shrink-0",
+        !inset && "m-2 mx-auto shrink-0",
         inset && orientation === "horizontal" && "absolute bottom-4 left-1/2 -translate-x-1/2",
         inset && orientation === "vertical" && "inset-inline-s-0 absolute top-1/2 -translate-y-1/2",
         className

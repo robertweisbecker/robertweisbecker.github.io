@@ -77,19 +77,19 @@ export function Header() {
         <PreviewCardGroup
           side="right"
           sideOffset={8}
-          // handle={previewHandle}
-          // actionsRef={previewActions}
+          handle={previewHandle}
+          actionsRef={previewActions}
           align="start"
           anchor={anchorRef}
         >
           <DropdownMenu
             modal={false}
-            // onOpenChange={(open) => {
-            //   if (!open) {
-            //     previewHandle.close();
-            //     previewActions.current?.unmount();
-            //   }
-            // }}
+            onOpenChange={(open) => {
+              if (!open) {
+                previewHandle.close();
+                previewActions.current?.unmount();
+              }
+            }}
           >
             <DropdownMenuTrigger
               render={<Button variant="ghost" size="sm" />}
@@ -116,7 +116,7 @@ export function Header() {
                           {project.heroImage && (
                             <img
                               src={project.heroImage}
-                              className="mask-b-via-smooth block aspect-video w-full max-w-full rounded-lg mask-b-from-80% mask-b-to-transparent bg-top object-cover object-top"
+                              className="via-smooth aspect-video w-full rounded-lg bg-linear-to-b to-popover object-cover object-top"
                             />
                           )}
                           <DataList.Root size="sm" className="px-4 py-2">

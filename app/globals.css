@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "dither-plugin";
 @import "shadcn/tailwind.css";
 @import "./colors.css";
 @import "./mdx.css" layer(components);
@@ -163,7 +164,7 @@
   --error-foreground: var(--error-700);
   --info: var(--info-50);
   --info-primary: var(--info-500);
-  --info-foreground: var(--info-700);
+  --info-foreground: var(--info-600);
   --success: var(--success-50);
   --success-primary: var(--success-500);
   --success-foreground: var(--success-700);
@@ -205,7 +206,7 @@
 [data-hue="sage"],
 [data-hue="steel"] {
   --primary: var(--hue-700);
-  --primary-foreground: var(--hue-100);
+  --primary-foreground: var(--color-white);
 }
 
 .dark,
@@ -222,7 +223,7 @@
   --secondary-foreground: var(--hue-200);
   --muted: --alpha(var(--color-black) / 64%);
   --muted-foreground: var(--neutral-400);
-  --accent: --alpha(var(--hue-500) / 5%);
+  --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
   --destructive: var(--error-600);
   --destructive-foreground: var(--error-25);

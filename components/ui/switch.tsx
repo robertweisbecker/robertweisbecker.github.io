@@ -29,7 +29,7 @@ const switchVariants = cva(
     variants: {
       size: {
         default:
-          "[--switch-height:var(--spacing-thumb)] [--switch-inset:2px] [--switch-width:round(calc(var(--switch-height)*11/7),2px)]",
+          "[--switch-height:var(--spacing-thumb)] [--switch-inset:2px] p-(--switch-inset) [--switch-width:round(calc(var(--switch-height)*11/7),1px)] h-thumb w-[calc(var(--spacing-thumb)*11/7)]",
         sm: "[--switch-height:--spacing(4.5)] [--switch-inset:1px] [--switch-width:--spacing(7)]",
       },
     },
@@ -49,14 +49,17 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn([
-          "pointer-events-none relative top-[0.125px] block origin-center self-center",
+          "pointer-events-none relative block origin-center self-center",
           "h-[calc(var(--switch-height)-calc(var(--switch-inset)*2))] w-[calc(var(--switch-height)-calc(var(--switch-inset)*2))]",
+          "",
           "shadow-border-sm",
           "relative",
           "data-checked:bg-white",
           "bg-white bg-linear-to-b to-black/5 group-hover/switch:bg-white",
           "inset-ring-1 inset-ring-white",
-          "data-checked:h-[calc(var(--switch-height)-var(--switch-inset))] data-checked:w-[calc(var(--switch-height)-var(--switch-inset))] data-checked:translate-x-[calc(var(--switch-inset)/2)]",
+
+          // "data-checked:h-[calc(var(--switch-height)-var(--switch-inset))] data-checked:w-[calc(var(--switch-height)-var(--switch-inset))] data-checked:translate-x-[calc(var(--switch-inset)/2)]",
+          "data-checked:h-thumb data-checked:w-thumb data-checked:translate-x-[calc(var(--switch-inset))]",
           "transition-[margin,translate,width,height] ease-out",
           "rounded-full group-active/switch:not-data-disabled:w-[calc(var(--switch-height)+var(--switch-inset)/2)]",
           "data-disabled:bg-border! data-disabled:bg-none data-disabled:shadow-none data-disabled:inset-ring-0",

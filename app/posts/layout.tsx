@@ -11,7 +11,7 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
 
   if (isIndex) {
     return (
-      <div className="container mx-auto flex max-w-xl flex-col items-center gap-6">
+      <div className="mx-auto flex flex-col items-center gap-6">
         {children}
         <PostPagination />
       </div>

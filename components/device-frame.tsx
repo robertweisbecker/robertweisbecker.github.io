@@ -94,7 +94,7 @@ function Phone({
   const hasBottomGutter = gutter && toolbar;
   const { loading, supported, level, charging } = useBattery();
   const batteryLevel = supported ? Math.round((level ?? 0) * 100) : 67;
-  const batteryColor = batteryLevel > 50 ? "var(--success-primary)" : "var(--warning-primary)";
+  const batteryColor = batteryLevel > 50 ? "var(--color-green-400)" : "var(--color-yellow-400)";
 
   return (
     <div data-slot="device-frame" className={cn("mx-auto w-full max-w-sm", className)} {...props}>
@@ -124,7 +124,7 @@ function Phone({
                   />
                   <IconWifi className="relative -top-[.125em] size-[5.25cqw] [&_path]:last:hidden" strokeWidth={2.5} />
                   <div className="grid-stack">
-                    <div className="z-1 flex items-center pe-px font-[system-ui] text-[2.4cqw] font-bold tracking-tighter text-white">
+                    <div className="z-1 flex items-center pe-px font-[system-ui] text-[2.4cqw]/none font-bold tracking-tighter text-white">
                       {loading ? (
                         <span className="relative inline-block min-h-[1em] w-[2ch]">
                           <Skeleton className="absolute inset-0 rounded-sm" />
@@ -143,7 +143,7 @@ function Phone({
                       className="size-[7cqw] scale-x-120"
                       style={{
                         maskImage: `linear-gradient(to left, transparent 0%, transparent ${100 - batteryLevel}%, currentColor ${100 - batteryLevel}%, currentColor 100%)`,
-                        fill: charging ? "var(--success-primary)" : batteryColor,
+                        fill: charging ? "var(--color-green-400)" : batteryColor,
                       }}
                       strokeWidth={2}
                     />
@@ -255,8 +255,9 @@ function Browser({
                   </span>
                   <CopyButton value={String(address)} size="icon-xs" className="squircle shrink-0 rounded-md" />
                 </div>
-
-                <IconDots className={cn("size-4 text-muted-foreground", "shrink-0 max-md:hidden")} aria-hidden />
+                <div className="flex w-16 justify-end max-md:hidden md:me-1">
+                  <IconDots className={cn("size-4 text-muted-foreground", "shrink-0")} aria-hidden />
+                </div>
               </div>
             )}
           </div>

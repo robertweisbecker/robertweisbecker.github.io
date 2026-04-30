@@ -95,10 +95,10 @@ export function ImageToggle({
         <TabsTrigger value="before">{tab1}</TabsTrigger>
         <TabsTrigger value="after">{tab2}</TabsTrigger>
       </TabsList>
-      <TabsContent value="after" keepMounted>
+      <TabsContent value="after">
         <Image src={after} {...imageProps} className="mt-0" />
       </TabsContent>
-      <TabsContent value="before" keepMounted>
+      <TabsContent value="before">
         <Image src={before} {...imageProps} className="mt-0" />
       </TabsContent>
     </Tabs>

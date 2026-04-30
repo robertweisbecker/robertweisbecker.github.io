@@ -14,7 +14,7 @@ export function LinkOut({ text, href, src, icon, className, linkClass }: LinkOut
   return (
     <span
       className={cn(
-        "group/link link relative mx-px space-x-1 text-[1em] leading-[inherit] text-foreground",
+        "group/link link relative mx-px space-x-1 text-[1em] leading-[inherit] text-info-foreground",
         src && "ps-[1.25em]",
         className
       )}

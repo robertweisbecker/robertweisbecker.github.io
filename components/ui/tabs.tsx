@@ -95,7 +95,13 @@ function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
   return (
     <TabsPrimitive.Panel
       data-slot="tabs-content"
-      className={cn("w-full max-w-full min-w-0 flex-1 outline-none", className)}
+      className={cn(
+        "w-full max-w-full min-w-0 flex-1 overflow-hidden outline-none",
+        "transition-opacity duration-500 data-ending-style:opacity-100 data-starting-style:opacity-50",
+        "data-ending-style:ease-in data-starting-style:ease-out",
+
+        className
+      )}
       {...props}
     />
   );

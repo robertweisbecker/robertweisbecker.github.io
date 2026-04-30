@@ -169,20 +169,29 @@ export default function ThemingPostPage() {
             ramp to the alias variables that feed into the theme. These will cascade down from any ancestor, so you can
             scope overrides to a section of the page.
           </p>
-          <div className="prose">
-            <ul>
-              <li>
-                <Code variant="plain">colors.css</Code>: raw okLCH colors
-              </li>
-              <li>
-                <Code variant="plain">hues.css</Code>: alias scales for hue and neutral
-              </li>
-              <li>
-                <Code variant="plain">:root</Code> → <Code variant="plain">[data-theme]</Code> →{" "}
-                <Code variant="plain">[data-hue]</Code> → <Code variant="plain">[data-neutral]</Code>
-              </li>
-            </ul>
-          </div>
+          <pre className="overflow-x-auto font-mono text-[11px] leading-[1.25] whitespace-pre-wrap text-foreground">
+            {`                    
+            ╔──────────────────╗
+            │    colors.css    │
+            ╚────────┬─────────╝
+                     │
+      ┌──────────────┴──────────────┐
+      │                             │
+      ▼                             ▼
+╔────────────────╗          ╔───────────────╗
+│    hues.css    ├─ ─ ─ ─ ─►│  globals.css  │
+╚────────────────╝          ╚──────┬────────╝
+                                   │
+                                Tokens 
+                    ┌──────────────┘
+  ╔────────────────────────────────────────╗
+  ║  <Theme>                               ║
+  ╠────────────────────────────────────────╣
+  ║  ┌───────────────────────────────────┐ ║
+  ║  │            <body>                 │ ║
+  ║  └───────────────────────────────────┘ ║
+  ╚────────────────────────────────────────╝`}
+          </pre>
         </section>
 
         {/* ── Colors ──────────────────────────────────────── */}

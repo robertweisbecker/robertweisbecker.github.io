@@ -60,7 +60,8 @@ const buttonVariants = cva(
           "focus-visible:outline-offset-2",
         ],
         overlay: [
-          "[--button-color:white] bg-black/60 hover:bg-black/70 backdrop-blur-xl text-white outline outline-white/20 ring-1 ring-black/60 -outline-offset-1",
+          "[--button-color:white] bg-neutral-700/60 hover:bg-neutral-700/70 backdrop-blur-xl text-white outline outline-white/10 ring-1 ring-black/60 -outline-offset-1 ",
+          "not-disabled:hover:bg-neutral-800/80 active:bg-neutral-700/40 aria-disabled:bg-neutral-700/10! aria-disabled:text-white/50",
         ],
       },
       size: {

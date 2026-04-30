@@ -89,6 +89,7 @@ export function PreviewCardGroup({
               alignOffset={alignOffset}
               side={side}
               sideOffset={sideOffset}
+              disableAnchorTracking
               className={cn(
                 "isolate z-50 max-w-(--available-width)",
                 "transition-[top,left,right,bottom,transform]",

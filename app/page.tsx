@@ -1,61 +1,110 @@
 "use client";
 import { BaseUiIcon, FigmaIcon } from "@/components/icons";
 import { LinkOut } from "@/components/link-out";
-import { ProjectGrid } from "@/components/project-grid";
+import { ProjectGrid, type ProjectGridItem } from "@/components/project-grid";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverDescription, PopoverTrigger } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { resources } from "@/lib/data/resources";
-import { GlitchFilter, PixelPortrait } from "@/components/animations";
+import { GlitchFilter, PixelPortrait, PixelDino, PixelReveal } from "@/components/animations";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "@gravity-ui/icons";
+import { posts, postIcons } from "@/lib/data/posts";
+import { IconFile } from "@tabler/icons-react";
+import { Button } from "@/components/ui/button";
+import * as React from "react";
+import { PixelShuffleIcon } from "@/components/icons";
+
+const postItems: ProjectGridItem[] = posts.map((post) => {
+  const Icon = post.icon ? postIcons[post.icon] : IconFile;
+  return {
+    id: post.id,
+    title: post.title,
+    description: post.description,
+    date: post.date,
+    path: post.path,
+    icon: <Icon aria-hidden strokeWidth={1} className="opacity-72" />,
+    action: post.category ? (
+      <Badge
+        variant="inherit"
+        className={cn(
+          "font-pixel text-[11px] uppercase",
+          post.category === "Snippet" && "text-navy-500 dark:text-navy-300",
+          post.category === "Demo" && "text-orange-500 dark:text-orange-300",
+          post.category === "Motion" && "text-plum-500 dark:text-plum-300"
+        )}
+      >
+        {post.category}
+      </Badge>
+    ) : undefined,
+  };
+});
 
 export default function Home() {
+  const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
     <div className={cn("mx-auto grid max-w-2xl gap-10")}>
-      <div className="grid grid-cols-2 items-end">
-        <h1
-          className="-mb-1 block font-heading text-4xl leading-[.875] tracking-[-.025em] text-secondary-foreground"
-          style={{
-            fontVariationSettings: '"wght" 720, "slnt" 0, "SERF" 25',
-          }}
-        >
-          <s className="opacity-20">Robert</s> <br />
-          Bob
-          <br /> Weisbecker
-        </h1>
-        <PixelPortrait className="mx-auto" />
+      <div className="grid items-end md:grid-cols-2">
+        <div className="flex flex-col gap-5">
+          <h1 className="-mb-1 block text-h1 text-foreground">Robert Weisbecker</h1>
+
+          <p className="text-lg font-[450] text-balance text-muted-foreground">
+            You can call me&nbsp;
+            <Popover>
+              <PopoverTrigger openOnHover className="link text-secondary-foreground decoration-dotted">
+                Bob
+              </PopoverTrigger>
+              <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
+                <PopoverDescription className="inline">
+                  We&apos;re all about efficiency here at bob dot fyi.
+                </PopoverDescription>
+              </PopoverContent>
+            </Popover>
+            .&nbsp;I'm currently designing products & systems at{" "}
+            <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />.
+          </p>
+          <p className="text-muted-foreground">
+            This is my little corner of the internet.
+            <br />
+            If you&apos;re here now, I made it for you.
+          </p>
+        </div>
+        <div className="group/pixel relative ms-auto size-50">
+          <Button
+            onClick={() => setIsDinoVisible((v) => !v)}
+            variant="ghost"
+            size="icon-xs"
+            className="md:blur-2xs absolute inset-s-1 top-1 z-1 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none md:-translate-y-1 md:opacity-0"
+          >
+            {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
+          </Button>
+          <PixelPortrait className="ms-auto transition-all duration-300" />
+          {isDinoVisible && (
+            <PixelReveal className="absolute inset-0 size-50">
+              <PixelDino />
+            </PixelReveal>
+          )}
+        </div>
       </div>
 
-      <p className="text-balance md:columns-2">
-        You can call me{" "}
-        <Popover>
-          <PopoverTrigger openOnHover className="link text-secondary-foreground decoration-dotted">
-            Bob
-          </PopoverTrigger>
-          <PopoverContent align="start" variant="tooltip" className="w-fit max-w-[unset]">
-            <PopoverDescription className="inline">
-              We&apos;re all about efficiency here at bob [dot] fyi.
-            </PopoverDescription>
-          </PopoverContent>
-        </Popover>
-        . I'm currently designing products & systems at{" "}
-        <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />.
-        <br />
-        This is my little corner of the internet.
-        <br />
-        If you&apos;re here now, I made it for you.
-      </p>
-      <Separator className="min-h-0.5 max-w-20" />
-      <h2 className="font-pixel text-[11px] uppercase" id="projects">
-        » Projects
-      </h2>
+      <Separator className="min-h-px max-w-20" />
+      <div>
+        <h2 className="font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
+          ☆ Projects
+        </h2>
+      </div>
       <ProjectGrid />
 
-      <Separator className="min-h-0.5 max-w-20" />
+      <Separator className="min-h-px max-w-14" />
       <h2 className="font-pixel text-[11px] uppercase" id="resources">
-        ✧ Resources
+        ✧ Posts
+      </h2>
+      <ProjectGrid items={postItems} />
+
+      <Separator className="max-w-20" />
+      <h2 className="font-pixel text-[11px] uppercase" id="resources">
+        ♥ Resources
       </h2>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

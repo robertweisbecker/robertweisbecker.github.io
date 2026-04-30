@@ -116,7 +116,7 @@ export function ImageModal({ src, caption }: ImageModalProps) {
         <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>
       </figure>
       <DialogContent>
-        <DialogPopup className="relative mx-auto my-18 w-[min(40rem,calc(100vw-2rem))]! p-1 transition-transform duration-300 ease-[cubic-bezier(0.45,1.005,0,1.005)] outline-none data-[ending-style]:translate-y-[max(100dvh,100%)] data-[ending-style]:duration-[350ms] data-[ending-style]:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] data-[starting-style]:translate-y-[50dvh] motion-reduce:transition-none">
+        <DialogPopup className="relative mx-auto my-18 w-[min(var(--container-7xl),calc(100vw-2rem))] overflow-hidden p-0 outline-none">
           <img src={src} alt={caption ?? ""} />
         </DialogPopup>
       </DialogContent>
