@@ -161,7 +161,7 @@
   --destructive: var(--error-500);
   --destructive-foreground: var(--error-25);
   --error: var(--error-50);
-  --error-foreground: var(--error-700);
+  --error-foreground: var(--error-600);
   --info: var(--info-50);
   --info-primary: var(--info-500);
   --info-foreground: var(--info-600);
@@ -170,7 +170,7 @@
   --success-foreground: var(--success-700);
   --warning: var(--warning-50);
   --warning-primary: var(--warning-500);
-  --warning-foreground: var(--warning-700);
+  --warning-foreground: var(--warning-600);
   --border: --alpha(var(--neutral-600) / 20%);
   --input: --alpha(var(--neutral-600) / 40%);
   --ring: var(--hue-400);

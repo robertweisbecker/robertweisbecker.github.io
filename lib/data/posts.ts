@@ -39,7 +39,6 @@ export const posts: Post[] = [
     title: "Component Playground",
     description: "Some fun components I made for this site",
     category: "Demo",
-    date: "∞ Ongoing",
     path: "/posts/component-playground",
     icon: "IconNut",
   },
@@ -61,15 +60,6 @@ export const posts: Post[] = [
     path: "/posts/theming",
     icon: "IconPalette",
   },
-  // {
-  //   id: "image-modal",
-  //   title: "Image Modal Prototypes",
-  //   description: "Comparing Dialog, Popover, and pure-Motion approaches",
-  //   category: "Motion",
-  //   date: "03/31/2026",
-  //   path: "/posts/image-modal",
-  //   icon: "IconWindowMaximize",
-  // },
   {
     id: "clip-path-curve",
     title: "Clip-Path Playground",

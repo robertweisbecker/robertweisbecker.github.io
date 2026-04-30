@@ -57,7 +57,7 @@ export default function ComponentPlaygroundPage() {
   return (
     <div className="flex w-full max-w-3xl flex-col gap-8">
       <div className="prose mx-auto w-full max-w-3xl">
-        <p>Interactive demos of a few components from this site&apos;s design system.</p>
+        <p>Interactive demos of some components I thought were fun. Your mileage may vary.</p>
       </div>
 
       <Demo title="Switch" centerContent>

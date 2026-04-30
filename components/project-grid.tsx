@@ -23,7 +23,7 @@ export type ProjectGridItem = {
   /** String renders as <img> src. ReactNode renders as-is (e.g. an icon component). */
   icon?: string | React.ReactNode;
   /** Optional content rendered in the trailing actions slot (e.g. a Badge). */
-  action?: React.ReactNode;
+  category?: React.ReactNode;
   /** Enables CSS view-transition on the title. Defaults to the title string. */
   viewTransitionName?: string;
 };
@@ -73,15 +73,11 @@ export function ProjectGrid({ items = defaultItems, className, itemClassName }: 
           >
             {renderMedia(item.icon)}
             <ItemContent>
-              <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>
-                {item.title}
-              </ItemTitle>
+              <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>{item.title}</ItemTitle>
               {item.description && <ItemDescription>{item.description}</ItemDescription>}
             </ItemContent>
-            {item.action && <ItemActions>{item.action}</ItemActions>}
-            {item.date && (
-              <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>
-            )}
+            {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
+            {item.category && <ItemActions>{item.category}</ItemActions>}
           </Item>
           {index !== items.length - 1 && <ItemSeparator />}
         </React.Fragment>

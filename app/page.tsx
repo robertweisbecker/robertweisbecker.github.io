@@ -25,13 +25,13 @@ const postItems: ProjectGridItem[] = posts.map((post) => {
     date: post.date,
     path: post.path,
     icon: <Icon aria-hidden strokeWidth={1} className="opacity-72" />,
-    action: post.category ? (
+    category: post.category ? (
       <Badge
-        variant="inherit"
+        variant={"inherit"}
         className={cn(
           "font-pixel text-[11px] uppercase",
-          post.category === "Snippet" && "text-navy-500 dark:text-navy-300",
-          post.category === "Demo" && "text-orange-500 dark:text-orange-300",
+          post.category === "Snippet" && "text-info-foreground",
+          post.category === "Demo" && "text-warning-foreground",
           post.category === "Motion" && "text-plum-500 dark:text-plum-300"
         )}
       >
@@ -45,11 +45,11 @@ export default function Home() {
   const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
     <div className={cn("mx-auto grid max-w-2xl gap-10")}>
-      <div className="grid items-end md:grid-cols-2">
+      <div className="grid md:grid-cols-2">
         <div className="flex flex-col gap-5">
           <h1 className="-mb-1 block text-h1 text-foreground">Robert Weisbecker</h1>
 
-          <p className="text-lg font-[450] text-balance text-muted-foreground">
+          <p className="text-balance text-muted-foreground">
             You can call me&nbsp;
             <Popover>
               <PopoverTrigger openOnHover className="link text-secondary-foreground decoration-dotted">

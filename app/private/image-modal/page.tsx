@@ -8,7 +8,7 @@ import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import * as React from "react";
 
-const TEST_IMAGE = "/assets/share.png";
+const TEST_IMAGE = "/assets/oklch/oklch-gradient.png";
 
 function PrototypeSection({
   title,
@@ -135,6 +135,7 @@ const resultLabels: Record<string, string> = {
 export default function ImageModalPostPage() {
   return (
     <div className="prose w-full">
+      <h1 className="text-h1">Image Modal Prototypes</h1>
       <p>
         Comparing three approaches to an image lightbox with smooth <Code variant="plain">layoutId</Code> transitions:
         Base UI Dialog, Base UI Popover, and pure Motion. The goal is a seamless expand/collapse animation without
