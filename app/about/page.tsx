@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export default function About() {
   return (
-    <div className="mx-auto mt-10 grid max-w-3xl px-4">
+    <div className="mx-auto grid max-w-3xl px-4">
       <div className="prose container">
         <h1>About</h1>
 

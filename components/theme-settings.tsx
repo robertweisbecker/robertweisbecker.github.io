@@ -77,8 +77,8 @@ function ThemeFieldReset({
             variant="ghost"
             size="icon-xs"
             className={cn(
-              "-my-1 shrink-0 text-muted-foreground opacity-100 transition-opacity starting:opacity-0",
-              !dirty && "pointer-events-none hidden opacity-0",
+              "-my-1 shrink-0 text-muted-foreground opacity-100 transition-opacity",
+              !dirty && "pointer-events-none opacity-0!",
               className
             )}
             disabled={!dirty}
@@ -173,12 +173,12 @@ export function ThemeSettingsPanel({
             <div className="flex items-center gap-1">
               <FieldLabel className="me-auto">Primary hue</FieldLabel>
 
-              <span className="text-xs text-muted-foreground capitalize">{hue}</span>
               <ThemeFieldReset
                 dirty={hueDirty}
                 onReset={() => set({ hue: defaultHue })}
                 aria-label="Reset hue to default"
               />
+              <span className="text-xs text-muted-foreground capitalize">{hue}</span>
             </div>
             {hueDisplay === "select" ? (
               <Select value={hue} onValueChange={(v) => set({ hue: v as HueName })}>
@@ -222,13 +222,13 @@ export function ThemeSettingsPanel({
 
           <Field>
             <div className="flex items-center gap-2">
-              <FieldLabel>Neutral hue</FieldLabel>
-              <span className="ms-auto text-xs text-muted-foreground capitalize">{neutral}</span>
+              <FieldLabel className="me-auto">Neutral hue</FieldLabel>
               <ThemeFieldReset
                 dirty={neutralDirty}
                 onReset={() => set({ neutral: defaultNeutral })}
                 aria-label="Reset neutral palette to default"
               />
+              <span className="text-xs text-muted-foreground capitalize">{neutral}</span>
             </div>
 
             {neutralDisplay === "swatches" ? (

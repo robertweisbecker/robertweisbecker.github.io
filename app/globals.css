@@ -221,7 +221,7 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-black) / 64%);
+  --muted: --alpha(var(--color-neutral-800) / 20%);
   --muted-foreground: var(--neutral-400);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
@@ -238,7 +238,7 @@
   --warning: var(--warning-900);
   --warning-foreground: var(--warning-300);
   --warning-primary: var(--warning-500);
-  --border: --alpha(var(--color-white) / 8%);
+  --border: --alpha(var(--color-white) / 14%);
   --input: --alpha(var(--color-white) / 24%);
   --ring: var(--hue-300);
   --sidebar: color-mix(in srgb, var(--neutral-950) 97%, var(--color-white));

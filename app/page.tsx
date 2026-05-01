@@ -45,7 +45,7 @@ export default function Home() {
   const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
     <div className={cn("mx-auto grid max-w-2xl gap-10")}>
-      <div className="grid md:grid-cols-2">
+      <div className="grid items-start gap-10 md:grid-cols-2">
         <div className="flex flex-col gap-5">
           <h1 className="-mb-1 block text-h1 text-foreground">Robert Weisbecker</h1>
 
@@ -61,7 +61,7 @@ export default function Home() {
                 </PopoverDescription>
               </PopoverContent>
             </Popover>
-            .&nbsp;I'm currently designing products & systems at{" "}
+            . I'm currently designing products & systems at{" "}
             <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />.
           </p>
           <p className="text-muted-foreground">
@@ -70,7 +70,7 @@ export default function Home() {
             If you&apos;re here now, I made it for you.
           </p>
         </div>
-        <div className="group/pixel relative ms-auto size-50">
+        <div className="group/pixel relative order-first size-50 md:order-last md:ms-auto">
           <Button
             onClick={() => setIsDinoVisible((v) => !v)}
             variant="ghost"
@@ -79,7 +79,7 @@ export default function Home() {
           >
             {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
           </Button>
-          <PixelPortrait className="ms-auto transition-all duration-300" />
+          <PixelPortrait className="transition-all duration-300" />
           {isDinoVisible && (
             <PixelReveal className="absolute inset-0 size-50">
               <PixelDino />

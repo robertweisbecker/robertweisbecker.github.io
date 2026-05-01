@@ -30,7 +30,7 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
   return (
     <nav
       aria-label="pagination"
-      className="mx-auto mt-12 grid max-w-5xl grid-cols-[1fr_1fr] border-t border-dashed pt-6"
+      className="mx-auto mt-12 grid w-full max-w-5xl grid-cols-[1fr_1fr] border-t border-dashed pt-6"
     >
       {previous ? (
         <Link
@@ -47,8 +47,8 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
           <span className="col-start-2 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Previous</span>
 
           <span
-            className="col-start-2 truncate font-heading text-lg hover-weight"
-            // style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}
+            className="col-start-2 truncate font-heading text-lg"
+            style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}
           >
             {previous.title}
           </span>

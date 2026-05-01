@@ -192,14 +192,14 @@ export function SiteSearch({ className }: { className?: string }) {
       <CommandDialog open={open} onOpenChange={setOpen} modal={false}>
         <CommandDialogTrigger
           className={cn(
-            "ease flex h-button-sm items-center justify-start gap-2 rounded-md bg-muted ps-2 pe-1.5 text-sm text-muted-foreground duration-100 hover:bg-accent hover:text-accent-foreground md:inset-shadow-border",
+            "ease flex h-button-sm items-center justify-start gap-2 rounded-md bg-muted ps-2 pe-3 text-sm text-muted-foreground inset-shadow-border duration-100 hover:bg-accent hover:text-accent-foreground",
             className
           )}
           onClick={() => setOpen(true)}
         >
           <IconSearch data-icon="inline-start" className="size-3.5 stroke-1 text-muted-foreground" />
-          <span className="text-xs text-muted-foreground max-md:sr-only">Search</span>
-          <Kbd className="ml-auto" variant="elevated">
+          <span className="text-xs text-muted-foreground">Search</span>
+          <Kbd className="-me-1.5 ml-auto hidden md:block" variant="elevated">
             ⌘ /
           </Kbd>
         </CommandDialogTrigger>

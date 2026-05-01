@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconTemplateFilled } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Favicon, PixelNewsIcon } from "./icons";
+import { Favicon, PixelChevronDownIcon, PixelNewsIcon } from "./icons";
 import { SiteSearch } from "./site-search";
 import { Button } from "./ui/button";
 import {
@@ -40,13 +40,13 @@ export function Header() {
 
   return (
     <nav className={cn("sticky top-0 z-1")}>
-      <div className="max-w-8xl mx-auto flex h-12 items-center gap-1 px-2 py-2 sm:px-4">
+      <div className="max-w-8xl mx-auto flex h-12 items-center gap-3 px-2 py-2 sm:px-4">
         <LinkButton
           href="/"
           variant="ghost"
           size="sm"
           aria-current={pathname === "/" ? "true" : "false"}
-          className="font-pixel"
+          className="me-4 font-pixel"
         >
           <Favicon className="size-4 text-secondary-foreground" />
           <span>
@@ -59,7 +59,7 @@ export function Header() {
           variant="ghost"
           size="sm"
           aria-current={pathname === "/about" ? "true" : "false"}
-          className="text-muted-foreground aria-current:bg-accent aria-current:text-accent-foreground max-md:hidden"
+          className="aria-current:bg-accent aria-current:text-accent-foreground max-md:hidden"
         >
           About
         </LinkButton>
@@ -91,18 +91,35 @@ export function Header() {
               }
             }}
           >
-            <DropdownMenuTrigger
-              render={<Button variant="ghost" size="sm" />}
-              className="group/trigger text-muted-foreground"
-            >
+            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="group/trigger">
               <span className="hidden md:block">Projects</span>
               <span className="md:hidden">Menu</span>
-              <IconChevronDown
+              <PixelChevronDownIcon
                 className={cn("rotate-0 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
                 data-icon="inline-end"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" ref={anchorRef}>
+              <DropdownMenuGroup className="md:hidden">
+                <DropdownMenuItem render={<Link href="/" />} nativeButton={false}>
+                  Home
+                </DropdownMenuItem>
+                <DropdownMenuItem render={<Link href="/about" />} nativeButton={false}>
+                  About
+                </DropdownMenuItem>
+                <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false}>
+                  Posts
+                </DropdownMenuItem>
+                {process.env.NODE_ENV === "development" && (
+                  <>
+                    <DropdownMenuItem render={<Link href="/components" />} nativeButton={false} className="md:hidden">
+                      <IconComponents />
+                      Components
+                    </DropdownMenuItem>
+                  </>
+                )}
+                <DropdownMenuSeparator />
+              </DropdownMenuGroup>
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Projects</DropdownMenuLabel>
 
@@ -161,26 +178,6 @@ export function Header() {
                   </PreviewCardTrigger>
                 ))}
               </DropdownMenuGroup>
-              <DropdownMenuSeparator className="md:hidden" />
-
-              <DropdownMenuItem render={<Link href="/" />} nativeButton={false} className="md:hidden">
-                Home
-              </DropdownMenuItem>
-              <DropdownMenuItem render={<Link href="/about" />} nativeButton={false} className="md:hidden">
-                About
-              </DropdownMenuItem>
-              <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false} className="md:hidden">
-                <IconNews />
-                Posts
-              </DropdownMenuItem>
-              {process.env.NODE_ENV === "development" && (
-                <>
-                  <DropdownMenuItem render={<Link href="/components" />} nativeButton={false} className="md:hidden">
-                    <IconComponents />
-                    Components
-                  </DropdownMenuItem>
-                </>
-              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </PreviewCardGroup>
@@ -190,6 +187,7 @@ export function Header() {
           hideTextOnMobile={true}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
+          className="max-md:hidden"
         />
         <SiteSearch className="ml-auto" />
         <ThemeSettings />
@@ -222,10 +220,7 @@ function HeaderButton({
       {...props}
       variant="ghost"
       size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "sm"}
-      className={cn(
-        "text-muted-foreground backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground",
-        props.className
-      )}
+      className={cn("backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground", props.className)}
     >
       {icon}
       <span className={cn(hideTextOnMobile && "max-md:sr-only")}>{label}</span>

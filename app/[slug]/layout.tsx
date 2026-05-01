@@ -40,12 +40,9 @@ export default async function MDXLayout({
 
       <div id="content-max" className="col-start-2 min-w-0">
         <div id="content-header" className="mx-auto grid max-w-xl gap-2">
-          <TextReveal
-            once
-            style={{ viewTransitionName: fm.title }}
-            children={fm.title}
-            className="scroll-mt-5 text-h1 text-balance"
-          />
+          <h1 style={{ viewTransitionName: "title" }} className="scroll-pt-10 text-h1 text-balance">
+            {fm.title}
+          </h1>
           <p className="mb-4 max-w-prose text-base leading-tight text-balance text-muted-foreground">{fm.subtitle}</p>
           <ProjectMeta
             role={fm.role}

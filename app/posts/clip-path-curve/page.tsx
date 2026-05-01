@@ -70,7 +70,7 @@ export default function ClipPathCurvePage() {
                   <div className="absolute inset-y-0 -right-8 -z-1 h-full w-8 bg-inherit [clip-path:shape(from_100%_100%,curve_to_0%_0%_with_25%_100%/75%_0%,vline_to_100%,hline_to_100%)]" />
                 </div>
               </div>
-              <figcaption className="flex-1 text-xs">Curved tabs</figcaption>
+              <figcaption className="flex-1 text-xs text-muted-foreground">Curved tabs</figcaption>
             </figure>
             <figure className="flex flex-col gap-2">
               <div className="grid-stack h-24 rounded border bg-muted/50">
@@ -82,7 +82,7 @@ export default function ClipPathCurvePage() {
                   </div>
                 </div>
               </div>
-              <figcaption className="text-xs">Rounded arrows</figcaption>
+              <figcaption className="text-xs text-muted-foreground">Rounded arrows</figcaption>
             </figure>
             <figure className="flex flex-col gap-2">
               <div className="grid h-24 grid-cols-[auto_1fr_auto] rounded border bg-muted/50 p-2">
@@ -111,7 +111,7 @@ export default function ClipPathCurvePage() {
                   Button
                 </Button>
               </div>
-              <figcaption className="text-xs">Annotation lines</figcaption>
+              <figcaption className="text-xs text-muted-foreground">Annotation lines</figcaption>
             </figure>
           </div>
         </section>

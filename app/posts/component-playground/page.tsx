@@ -6,6 +6,7 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import * as React from "react";
 import { Field, FieldLabel, FieldDescription, FieldContent, FieldTitle } from "@/components/ui/field";
+import { SiteSearch } from "@/components/site-search";
 
 function SwitchDemo() {
   const [checked, setChecked] = React.useState(false);
@@ -70,6 +71,10 @@ export default function ComponentPlaygroundPage() {
 
       <Demo title="Chrome Tabs">
         <ChromeTabsDemo />
+      </Demo>
+
+      <Demo title="Site Search">
+        <SiteSearch className="w-full max-w-xs" />
       </Demo>
     </div>
   );

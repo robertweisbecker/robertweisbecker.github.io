@@ -28,7 +28,7 @@ function ThemeDemo() {
           Settings
         </Button>
         <Button variant="outline" size="sm">
-          <IconHeartFilled data-icon="inline-start" className="text-destructive" />
+          <IconHeartFilled data-icon="inline-start" className="text-destructive opacity-100!" />
           Like
         </Button>
         <Button variant="success" size="sm">
@@ -105,13 +105,13 @@ export default function ThemingPostPage() {
     <>
       <div className="mx-auto flex max-w-xl flex-col gap-6">
         <section className="flex flex-col gap-4">
-          <p>
-            A working demo of the theming described in my writeup of the{" "}
+          <p className="">
+            A working demo of the theming described in my{" "}
             <Link href="/projects/oklch" className="link">
-              okLCH color system
-            </Link>
-            . While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so
-            we end up with a pretty close approximation.
+              writeup
+            </Link>{" "}
+            of the okLCH color system I made. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the
+            same thinking to this site, so we end up with a pretty close approximation.
           </p>
           <p>
             You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the
@@ -159,13 +159,19 @@ export default function ThemingPostPage() {
         and lighter in dark mode? Shouldn't it just always be quieter? Doesn't having{" "}
         <Code variant="plain">dark:bg-input/10</Code> on a button kind of defeat the point of semantic tokens?
       </p> */}
-      <div className="mx-auto flex max-w-xl flex-col gap-6">
+      <div className="mx-auto mt-4 flex max-w-xl flex-col gap-6">
         {/* ── How it works ──────────────────────────────────── */}
         <section>
-          <Heading level={2}>How it works</Heading>
-          <p className="text-muted-foreground">
+          <Heading level={2}>
+            How it works<span className="text-muted-foreground">*</span>
+          </Heading>
+          <small className="m-2 block ps-10 text-xs text-muted-foreground italic">
+            * just on this site, not the actual project
+          </small>
+          <br />
+          <p>
             Colors are controlled by <Code variant="plain">data-hue</Code> and <Code variant="plain">data-neutral</Code>{" "}
-            attributes on the <Code variant="inline">{`<Theme>`}</Code> component, each of which assigns a given color
+            attributes on the <Code variant="plain">{`<Theme>`}</Code> component, each of which assigns a given color
             ramp to the alias variables that feed into the theme. These will cascade down from any ancestor, so you can
             scope overrides to a section of the page.
           </p>
@@ -175,22 +181,25 @@ export default function ThemingPostPage() {
             │    colors.css    │
             ╚────────┬─────────╝
                      │
-      ┌──────────────┴──────────────┐
+      ╭──────────────┴──────────────╮
       │                             │
       ▼                             ▼
 ╔────────────────╗          ╔───────────────╗
 │    hues.css    ├─ ─ ─ ─ ─►│  globals.css  │
 ╚────────────────╝          ╚──────┬────────╝
-                                   │
-                                Tokens 
-                    ┌──────────────┘
-  ╔────────────────────────────────────────╗
-  ║  <Theme>                               ║
-  ╠────────────────────────────────────────╣
-  ║  ┌───────────────────────────────────┐ ║
-  ║  │            <body>                 │ ║
-  ║  └───────────────────────────────────┘ ║
-  ╚────────────────────────────────────────╝`}
+        │                          │
+        │                       Tokens
+        │                          │
+        ╰──╮        ╭──────────────╯
+           │        │ 
+           │        ▼
+  ╔╌╌╌╌╌╌╌╌│╌╌╌╌╌<Theme>╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╗
+  ╎     ╭──▼───────╮ ╭──────────────╮     ╎
+  ╠─────│ data-hue ├─┤ data-neutral │─────╣
+  ╎  ╭──╯╌╌╌╌╌╌╌╌╌╌╰─╯╌╌╌╌╌╌╌╌╌╌╌╌╌╌╰──╮  ╎
+  ╎  │         {children}              │  ╎
+  ╎  ╰─────────────────────────────────╯  ╎
+  ╚╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╝`}
           </pre>
         </section>
 
@@ -199,12 +208,12 @@ export default function ThemingPostPage() {
           <Heading level={3}>Colors</Heading>
 
           <div className="flex flex-col gap-4">
-            <p className="text-muted-foreground">
+            <p>
               Raw oklch palettes are registered with Tailwind in <Code variant="plain">colors.css</Code>, making them
               available as both CSS variables and utility classes (<Code variant="plain">bg-ruby-500</Code>,{" "}
               <Code variant="plain">text-sand-200</Code>, etc.).
             </p>
-            <p className="text-muted-foreground">
+            <p>
               Two alias scales — <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code> — act
               as indirection layers. By default they point to the <Code variant="plain">sand</Code> palette, but setting{" "}
               <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps
@@ -242,11 +251,15 @@ components/
 }`}
             />
             <Heading level={4}>Semantic tokens</Heading>
-            <p className="text-muted-foreground">
+            <p>
               Semantic tokens like <Code variant="plain">--primary</Code>, <Code variant="plain">--background</Code>,
               and <Code variant="plain">--ring</Code> are declared on <Code variant="plain">:root, [data-theme]</Code>{" "}
               and reference these aliases. Because <Code variant="plain">[data-theme]</Code> is in the selector, the
               tokens re-evaluate whenever hue or neutral variables are overridden on a descendant.
+            </p>
+            <p>
+              (Despite my reservations, I'm using shadcn tokens on this site to see what the hype's about / how my
+              colors work with them; this isn't what's used in the actual project.)
             </p>
 
             <CodeBlock
@@ -268,13 +281,17 @@ components/
         <section className="flex flex-col gap-2">
           <Heading level={3}>Radius</Heading>
           <p>
-            Again, constraining myself to shadcn here. No real difference except I made the base radius = 10 for easier
-            math, and I wanted to play with odd-numbered radii.
+            Just for fun, I made the base radius = 10 for easier math, and I also wanted to play with odd-numbered
+            radii.
           </p>
           <p>
             So you have the <Code variant="plain">--radius</Code> base value with these odd multipliers. Instances of{" "}
             <Code variant="plain">&lt;Theme&gt;</Code> will inject a new <Code variant="plain">--radius</Code> CSS
-            variable, so updated values cascade down.
+            variable, so updated values cascade down and re-scale instances.
+          </p>
+          <p>
+            I also capped the values with some eyeballing to avoid absurdly large radii; I'd prefer to use a more
+            precise approach, but this is a quick and dirty solution.
           </p>
 
           <CodeBlock
@@ -282,21 +299,35 @@ components/
             language="css"
             code={`:root,
 [data-theme] {
-  --radius-xs:  calc(var(--radius) * 0.3);
-  --radius-sm:  calc(var(--radius) * 0.5);
-  --radius-md:  calc(var(--radius) * 0.7);
-  --radius-lg:  calc(var(--radius) * 0.9);
-  --radius-xl:  calc(var(--radius) * 1.3);
-  --radius-2xl: calc(var(--radius) * 1.7);
-  --radius-3xl: calc(var(--radius) * 2.1);
-  --radius-4xl: calc(var(--radius) * 2.9);
+  --radius: 0.625rem; /* 10px */
+  --ellipse-factor: 1;
+  --radius-xs: min(calc(var(--radius) * var(--ellipse-factor) * 0.3), 0.5rem);
+  --radius-sm: min(calc(var(--radius) * var(--ellipse-factor) * 0.5), 0.75rem);
+  --radius-md: min(calc(var(--radius) * var(--ellipse-factor) * 0.7), 1.25rem);
+  --radius-lg: min(calc(var(--radius) * var(--ellipse-factor) * 0.9), 1.5rem);
+  --radius-xl: min(calc(var(--radius) * var(--ellipse-factor) * 1.3), 1.75rem);
+  --radius-2xl: min(calc(var(--radius) * var(--ellipse-factor) * 1.7), 2rem);
+  --radius-3xl: min(calc(var(--radius) * var(--ellipse-factor) * 2.1), 2.25rem);
+  --radius-4xl: min(calc(var(--radius) * var(--ellipse-factor) * 2.9), 2.5rem);
 }`}
           />
 
-          <p className="text-muted-foreground">
-            Components use these via Tailwind utilities like <Code variant="plain">rounded-md</Code>, so adjusting the
-            base value rescales every corner radius in the themed scope proportionally.
+          <p>
+            PS — If you're wondering what the <Code variant="plain">--ellipse-factor</Code> is for, it has nothing to do
+            with theming. I made a utility class for squircle corners, and that'll offset the radius variable to get the
+            desired effect.
           </p>
+
+          <CodeBlock
+            filename="globals.css"
+            language="css"
+            code={`.squircle {
+  @supports (corner-shape: squircle) {
+    corner-shape: superellipse(1.4);
+    --ellipse-factor: 1.4;
+  }
+}`}
+          />
         </section>
       </div>
     </>
