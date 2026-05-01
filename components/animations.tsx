@@ -331,7 +331,7 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
   const y = useMotionValue(0);
   const isAirborne = useRef(false);
   const svgRef = useRef<SVGSVGElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
