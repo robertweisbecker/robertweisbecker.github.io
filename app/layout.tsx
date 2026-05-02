@@ -7,7 +7,7 @@ import { Agentation } from "agentation";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
-import "./globals.css";
+import "@/styles/globals.css";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",

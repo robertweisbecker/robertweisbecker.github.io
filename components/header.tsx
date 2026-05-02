@@ -46,7 +46,7 @@ export function Header() {
           variant="ghost"
           size="sm"
           aria-current={pathname === "/" ? "true" : "false"}
-          className="me-4 font-pixel"
+          className="me-2 font-pixel"
         >
           <Favicon className="size-4 text-secondary-foreground" />
           <span>
@@ -189,7 +189,8 @@ export function Header() {
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
           className="max-md:hidden"
         />
-        <SiteSearch className="ml-auto" />
+        {/* <SiteSearch className="ml-auto" /> */}
+        <div className="ms-auto" />
         <ThemeSettings />
         <ModeToggle />
       </div>

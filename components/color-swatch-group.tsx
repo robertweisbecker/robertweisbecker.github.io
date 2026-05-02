@@ -93,7 +93,7 @@ export function ColorSwatchGroup({
   return (
     // <TooltipProvider delay={0}>
     <div className="my-0">
-      <TooltipGroup side={tooltipSide} sideOffset={6}>
+      <TooltipGroup side={tooltipSide} sideOffset={6} delay={100}>
         <ToggleGroup
           value={selected}
           onValueChange={(next) => {

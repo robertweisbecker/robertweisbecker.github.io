@@ -104,6 +104,7 @@ function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>)
       className={cn(
         "group/field-label peer/field-label flex w-fit gap-2 text-sm text-foreground group-data-[disabled=true]/field:opacity-50 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-[>[data-slot=field]]:has-data-checked:border-primary/30 has-[>[data-slot=field]]:has-data-checked:bg-primary/5 *:data-[slot=field]:p-2.5 dark:has-[>[data-slot=field]]:has-data-checked:border-primary/20 dark:has-[>[data-slot=field]]:has-data-checked:bg-primary/10",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
+        "group-data-[orientation=horizontal]/field:min-w-fit",
         className
       )}
       {...props}
@@ -126,7 +127,7 @@ function FieldSetDescription({ className, ...props }: React.ComponentProps<"div"
     <div
       data-slot="field-description"
       className={cn(
-        "group/field-description text-start text-sm text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
+        "group/field-description text-start text-sm text-muted-foreground group-has-data-[orientation=horizontal]/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
         "last:mt-0 nth-last-2:-mt-1",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-foreground",
         className
@@ -141,7 +142,7 @@ function FieldDescription({ className, ...props }: FieldPrimitive.Description.Pr
     <FieldPrimitive.Description
       data-slot="field-description"
       className={cn(
-        "group/field-description text-start text-xs text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
+        "group/field-description text-start text-xs text-muted-foreground group-has-data-[orientation=horizontal]/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
         // "last:mt-0 nth-last-2:-mt-1",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-foreground",
         className

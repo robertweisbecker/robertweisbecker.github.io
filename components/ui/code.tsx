@@ -3,7 +3,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { CopyButton } from "./copy-button";
 
 const codeVariants = cva(
-  "inline-flex not-prose relative w-fit h-fit min-w-lh items-center justify-center [&>svg:not([class*='size-'])]:size-[.9125em] font-pixel [&>svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 [&_svg]:opacity-72 select-all",
+  "inline-flex not-prose relative w-fit h-fit min-w-lh items-center justify-center [&>svg:not([class*='size-'])]:size-[.9125em] [&>svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 [&_svg]:opacity-72 select-all",
   {
     variants: {
       variant: {

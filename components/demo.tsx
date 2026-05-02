@@ -50,13 +50,13 @@ function DemoBody({
 
   if (overflowBehavior === "resize") {
     return (
-      <ResizablePanelGroup orientation="horizontal" style={{ overflow: "visible" }}>
+      <ResizablePanelGroup orientation="horizontal" style={{ overflow: "visible" }} className="p-px">
         <ResizablePanel defaultSize="100%" minSize="25%" maxSize="100%" className={cn(card, "h-full min-h-56")}>
           <div className={demoInnerClasses}>{children}</div>
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize="1%" minSize="0%" maxSize="75%">
-          <div aria-hidden className="h-full bg-background" />
+          <div aria-hidden className="h-full bg-muted" />
         </ResizablePanel>
       </ResizablePanelGroup>
     );

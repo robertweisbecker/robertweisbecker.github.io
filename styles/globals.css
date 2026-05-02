@@ -14,7 +14,6 @@
   --font-sans: ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-display), var(--font-sans);
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
-  --font-mono: var(--font-departure-mono), ui-monospace, monospace;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
 
   --color-neutral-25: var(--neutral-25);

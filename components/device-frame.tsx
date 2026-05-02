@@ -18,7 +18,8 @@ import { Skeleton } from "./ui/skeleton";
 import { useBattery } from "@uidotdev/usehooks";
 
 const glassClass =
-  "flex h-[12cqw] w-[12cqw] items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover  text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
+  "flex items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover  text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
+const glassCircleClass = "rounded-full h-[12cqw] w-[12cqw]";
 
 const timeFormatter = new Intl.DateTimeFormat(undefined, {
   hour: "numeric",
@@ -173,7 +174,7 @@ function Phone({
               role="img"
               aria-label="Device navigation"
             >
-              <div className={glassClass}>
+              <div className={cn(glassClass, glassCircleClass)}>
                 <IconChevronLeft className="-ml-[1cqw] size-10 max-h-[6cqw] max-w-[6cqw]" aria-hidden />
               </div>
               <div className={cn(glassClass, "relative h-[12cqw] w-auto min-w-0 flex-1 gap-[1cqw]")}>
@@ -184,7 +185,7 @@ function Phone({
                   className="absolute top-[2cqw] left-[2cqw] size-[8cqw]! rounded-full [&>svg]:size-[6cqw]!"
                 />
               </div>
-              <div className={glassClass}>
+              <div className={cn(glassClass, glassCircleClass)}>
                 <IconDots className="h-[6cqw] w-[6cqw]" aria-hidden />
               </div>
             </div>
@@ -243,10 +244,15 @@ function Browser({
 
             {toolbar && (
               <div className="flex flex-1 basis-xs items-center justify-between gap-2">
-                <div className="flex shrink-0 items-center gap-2 opacity-50 max-md:hidden">
-                  <IconArrowLeft strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
-                  <IconArrowRight strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
-                  <IconRefresh strokeWidth={2.5} className={"size-4 text-muted-foreground"} aria-hidden />
+                <div
+                  className={cn(
+                    "flex h-full shrink-0 items-center gap-2 pe-2 opacity-50 max-md:hidden"
+                    // glassClass
+                  )}
+                >
+                  <IconArrowLeft strokeWidth={2} className={"size-4 text-muted-foreground"} aria-hidden />
+                  <IconArrowRight strokeWidth={2} className={"size-4 text-muted-foreground"} aria-hidden />
+                  {/* <IconRefresh strokeWidth={2} className={"size-4 text-muted-foreground"} aria-hidden /> */}
                 </div>
 
                 <div className="squircle relative mx-auto flex h-button-sm max-w-md flex-1 items-center rounded-lg bg-accent p-1">
