@@ -37,7 +37,7 @@ export function ProjectImageCarousel({
         className={cn(
           "",
           variant === "inset" &&
-            "**:data-[slot=carousel-viewport]:overflow-hidden **:data-[slot=carousel-viewport]:rounded-2xl",
+            "**:data-[slot=carousel-viewport]:rounded-2xl",
           variant === "full" &&
             "**:data-[slot=carousel-item]:ps-0 **:data-[slot=carousel-viewport]:rounded-none **:data-[slot=carousel-viewport]:data-[orientation=horizontal]:overflow-visible **:data-[slot=carousel-viewport]:[&>div]:ms-0"
         )}
@@ -53,7 +53,7 @@ export function ProjectImageCarousel({
                 <Image src={slide.src} alt={slide.alt} caption={slide.caption} />
               ) : (
                 <figure className="flex flex-col gap-2">
-                  <img src={slide.src} alt={slide.alt} />
+                  <img src={slide.src} alt={slide.alt} className="h-auto w-full max-w-full" />
                   {slide.caption && (
                     <figcaption className="mx-auto max-w-prose text-center text-xs text-muted-foreground">
                       {slide.caption}

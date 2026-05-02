@@ -38,7 +38,7 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
             isCopied ? "scale-25 opacity-0 blur-xs" : "blur-0 scale-100 opacity-100"
           )}
         >
-          <IconClipboard />
+          <IconClipboard className="size-[1em]" />
         </span>
       </div>
     </Button>

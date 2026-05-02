@@ -20,7 +20,7 @@ import { CodeBlock, type CodeBlockProps } from "./components/code-block";
 import { Alert, AlertContent, AlertDescription, AlertTitle } from "./components/ui/alert";
 import { Badge } from "./components/ui/badge";
 import { ColorCode } from "./components/ui/color-code";
-import { TextReveal } from "@/components/animations";
+import { TextReveal } from "@/components/animation/shared";
 
 function createHeading(level: number) {
   const HeadingTag = `h${level}` as "h2" | "h3" | "h4";

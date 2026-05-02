@@ -12,7 +12,10 @@ type DemoCodeConfig = {
   filename?: string;
   language?: DemoCodeLanguage;
   lineNumbers?: boolean;
-  defaultOpen?: boolean;
+  /** Passed through to {@link CodeBlock}; enables expand/collapse for long samples. */
+  collapsible?: boolean;
+  /** Collapsed max height in px when `collapsible` is true. */
+  initialHeight?: number;
 };
 
 type DemoOverflowBehavior = "wrap" | "scroll" | "resize";
@@ -36,13 +39,11 @@ const card =
 function DemoBody({
   children,
   overflowBehavior,
-  maxHeight,
   centerContent,
   innerClass,
 }: {
   children: React.ReactNode;
   overflowBehavior: DemoOverflowBehavior;
-  maxHeight?: number | string;
   centerContent: boolean;
   innerClass?: string;
 }) {
@@ -89,14 +90,9 @@ export function Demo({
   children,
   ...props
 }: DemoProps) {
-  const [isCodeOpen, setIsCodeOpen] = React.useState(code?.defaultOpen ?? false);
   const canExpand = maxHeight !== undefined;
   const hasHeader = title !== undefined || controls !== undefined || canExpand;
   const hasCode = code?.value !== undefined;
-
-  React.useEffect(() => {
-    setIsCodeOpen(code?.defaultOpen ?? false);
-  }, [code?.defaultOpen]);
 
   return (
     <figure
@@ -116,12 +112,7 @@ export function Demo({
         </header>
       ) : null}
 
-      <DemoBody
-        overflowBehavior={overflowBehavior}
-        maxHeight={maxHeight}
-        centerContent={centerContent}
-        innerClass={innerClass}
-      >
+      <DemoBody overflowBehavior={overflowBehavior} centerContent={centerContent} innerClass={innerClass}>
         {children}
       </DemoBody>
 
@@ -135,6 +126,8 @@ export function Demo({
           language={code.language}
           filename={code.filename}
           lineNumbers={code.lineNumbers}
+          collapsible={code.collapsible}
+          initialHeight={code.initialHeight}
           className="-mx-px mt-px rounded-b-none bg-transparent"
         />
       ) : null}

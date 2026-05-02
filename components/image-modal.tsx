@@ -14,11 +14,8 @@ import { createPortal } from "react-dom";
 import {
   Dialog,
   DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
   DialogPopup,
 } from "@/components/ui/dialog";
 import { Image } from "@/components/image";
@@ -115,11 +112,26 @@ export function ImageModal({ src, caption }: ImageModalProps) {
         </div>
         <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>
       </figure>
-      <DialogContent>
-        <DialogPopup className="relative mx-auto my-18 w-[min(var(--container-7xl),calc(100vw-2rem))] overflow-hidden p-0 outline-none">
-          <img src={src} alt={caption ?? ""} />
-        </DialogPopup>
-      </DialogContent>
+      <DialogPortal>
+        <DialogOverlay />
+        <DialogBase.Viewport
+          className={cn(
+            "fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain outline-none",
+            "pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]",
+            "px-0 sm:px-4 sm:pt-6 sm:pb-10 lg:py-10"
+          )}
+        >
+          <DialogPopup
+            className={cn(
+              "relative mx-auto my-0 w-full max-w-none overflow-hidden rounded-none p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
+              "sm:my-18 sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
+            )}
+          >
+            <DialogBase.Title className="sr-only">{caption || "Image"}</DialogBase.Title>
+            <img src={src} alt={caption ?? ""} className="block h-auto w-full max-w-none object-contain" />
+          </DialogPopup>
+        </DialogBase.Viewport>
+      </DialogPortal>
     </Dialog>
   );
 }
@@ -203,11 +215,16 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
           {open && (
             <DialogBase.Portal keepMounted>
               <DialogBase.Backdrop className="fixed inset-0 z-50 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50" />
-              <DialogBase.Viewport className="fixed inset-0 z-50 grid max-h-screen place-items-center overflow-auto p-4">
+              <DialogBase.Viewport
+                className={cn(
+                  "fixed inset-0 z-50 flex max-h-none items-start justify-center overflow-y-auto overscroll-contain p-0 sm:p-4",
+                  "pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
+                )}
+              >
                 <DialogBase.Popup
                   ref={popupRef}
                   initialFocus={popupRef}
-                  className="group/popup relative w-[min(var(--container-7xl),calc(100vw-2rem))]"
+                  className="group/popup relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
                 >
                   <DialogBase.Title className="sr-only">Image</DialogBase.Title>
                   <DialogBase.Close
@@ -236,11 +253,11 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
                     src={src2 ?? src}
                     alt={caption ?? ""}
                     onLoad={handleImgLoad}
-                    className="min-w-full"
+                    className="w-full max-w-none min-w-0"
                     style={{
                       borderRadius: 12,
                       aspectRatio: imgAspect,
-                      width: "calc(100%-2rem)",
+                      width: "100%",
                       height: "auto",
                       objectFit: "contain",
                       objectPosition: "center",
@@ -547,7 +564,7 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
                 aria-modal="true"
                 aria-label="Image"
                 tabIndex={-1}
-                className="fixed inset-0 z-50 flex items-center justify-center overflow-auto px-4 py-10 outline-none xl:py-6"
+                className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain px-0 py-10 outline-none sm:px-4 xl:py-6"
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -558,7 +575,10 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
                   onClick={() => setOpen(false)}
                 />
 
-                <motion.div className="relative w-[min(var(--container-7xl),calc(100vw-2rem))]" layout>
+                <motion.div
+                  className="relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
+                  layout
+                >
                   <CloseButton onClick={() => setOpen(false)} />
 
                   <motion.div

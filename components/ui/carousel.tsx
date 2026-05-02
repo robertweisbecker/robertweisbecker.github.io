@@ -288,7 +288,9 @@ function CarouselViewport({ className, ...props }: React.ComponentProps<"div">) 
     <div
       ref={carouselRef}
       className={cn(
-        "size-full has-data-[layout=inset]:overflow-hidden has-data-[layout=inset]:rounded-2xl",
+        // Clip the slide strip; toolbar is a sibling so old has-data-[layout=inset] never matched the viewport.
+        "size-full min-w-0 overflow-hidden",
+        "group-has-[[data-slot=carousel-toolbar][data-layout=inset]]:rounded-2xl",
         "[clip-path:inset(-8px)]",
         orientation === "vertical" && "h-full",
         orientation === "horizontal" &&

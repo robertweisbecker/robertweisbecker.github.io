@@ -21,7 +21,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Card } from "@/components/ui/card";
 import { PopoverClose, PopoverFooter, PopoverHeader, PopoverTitle } from "@/components/ui/popover";
-import { IconChevronLeft, IconChevronRight, IconX } from "@tabler/icons-react";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { ArrowSvg } from "@/components/icons";
 import { ButtonGroup } from "@/components/ui/button-group";

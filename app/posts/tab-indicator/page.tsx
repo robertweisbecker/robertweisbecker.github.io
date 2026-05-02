@@ -15,8 +15,6 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
 import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
-import { IconArrowRight } from "@tabler/icons-react";
-
 const baseButton =
   "relative px-4 h-button font-medium border bg-background items-center justify-center inline-flex cursor-pointer rounded-md text-sm w-fit hover:bg-accent text-muted-foreground data-pressed:bg-secondary hover:text-foreground data-pressed:text-secondary-foreground border-dashed -mx-[0.5px]";
 
@@ -64,7 +62,7 @@ export default function TabIndicatorPostPage() {
                 Tab 1
               </TabsPrimitive.Tab>
               <TabsPrimitive.Tab value="2" className={tabTriggerIndicatorClasses}>
-                Tab 2 with a longer label
+                Tab 2
               </TabsPrimitive.Tab>
               <TabsPrimitive.Tab value="3" className={tabTriggerIndicatorClasses}>
                 Tab 3
@@ -95,8 +93,10 @@ export default function TabIndicatorPostPage() {
       </p>
       <p>
         Basically, we want each tab to have its own indicator element. When the tab is active, the indicator lines up
-        with its parent. And when a different tab is active, we move the indicator to line up with <em>that</em> tab. If
-        we sync them up correctly, the active tab's indicator will move toward the new tab at the same time the new
+        with its parent. And when a different tab is active, we move the indicator to line up with <em>that</em> tab.
+      </p>
+      <p>
+        If we sync them up correctly, the active tab's indicator will move toward the new tab at the same time the new
         tab's indicator does. When the two indicators meet, we crossfade them, and it looks like as if a single
         indicator is moving between siblings.
       </p>
@@ -120,18 +120,18 @@ export default function TabIndicatorPostPage() {
         <li>If a later sibling is active: lined up with the trigger&apos;s next sibling</li>
       </ol>
 
-      <div className="not-prose grid grid-cols-3 place-items-center gap-4 rounded-xl bg-muted p-4">
-        <p>Previous active:</p>
-        <p>Active:</p>
-        <p>Later active:</p>
-        <div className="flex items-center gap-1">
-          <div className={"rounded-md bg-muted p-2 font-pixel text-[11px] text-muted-foreground/50"}>Indicator</div>
-          <IconArrowRight className="size-4" />
-        </div>
-        <div className={`${baseButton}`}>Trigger</div>
-        <div className="grid-stack w-20 rounded-md bg-card p-2 text-xs text-muted-foreground/50 shadow-border-xs">
-          Indicator
-        </div>
+      <div className="not-prose rounded-xl bg-muted p-4">
+        <pre className="overflow-x-auto font-mono text-[11px] leading-none whitespace-pre text-foreground">
+          {`
+
+   ▒▒2▒▒  →             │          ░░2░░         │               ▒▒2░░
+                        │                        │                    
+   ╔═══╗ ┌ ─ ┐ ┌ ─ ┐    │    ┌ ─ ┐ ╔═══╗ ┌ ─ ┐   │   ┌ ─ ┐ ┌ ─ ┐ ╔═══╗
+   ║ 1 ║ | 2 | | 3 |    │    │ 1 │ ║ 2 ║ │ 3 │   │   │ 1 │ │ 2 │ ║ 3 ║
+   ╚═══╝ └ ─ ┘ └ ─ ┘    │    └ ─ ┘ ╚═══╝ └ ─ ┘   │   └ ─ ┘ └ ─ ┘ ╚═══╝
+
+  parked left at Tab 1      lined up with Tab 2      parked right at Tab 3`}
+        </pre>
       </div>
       <p>
         Style a pseudo-element as the indicator and park it past the right edge with <code>translate-x-full</code>. Add{" "}
@@ -207,12 +207,12 @@ export default function TabIndicatorPostPage() {
       </p>
       <div className="not-prose flex flex-wrap justify-center gap-4 rounded-xl border bg-muted/50 p-4">
         <ToggleGroupPrimitive>
-          <TogglePrimitive value="1" className={`${baseButton} peer z-1`}>
-            Peer Trigger
+          <TogglePrimitive value="1" className={`${baseButton} peer`}>
+            Peer
           </TogglePrimitive>
           <TogglePrimitive
             value="2"
-            className={`${afterTransition} ${baseButton} relative rounded-s-none after:pointer-events-none after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-[inherit] after:outline-2 after:outline-primary/60 after:select-none peer-data-pressed:after:-translate-x-full data-pressed:after:translate-x-0`}
+            className={`${afterTransition} ${baseButton} after:pointer-events-none after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-[inherit] after:outline-2 after:outline-primary/60 after:select-none peer-data-pressed:after:-translate-x-full data-pressed:after:translate-x-0`}
           >
             Trigger
           </TogglePrimitive>
@@ -222,12 +222,12 @@ export default function TabIndicatorPostPage() {
       <p>Let&apos;s refine this by adding a transition to our indicator, and have it fade in/out as it moves.</p>
       <div className="not-prose flex flex-wrap justify-center gap-4 rounded-xl border bg-muted/50 p-4">
         <ToggleGroupPrimitive defaultValue={["1"]}>
-          <TogglePrimitive value="1" className="peer">
+          <TogglePrimitive value="1" className={`${baseButton} peer`}>
             Peer
           </TogglePrimitive>
           <TogglePrimitive
             value="2"
-            className={`${afterTransition} relative after:pointer-events-none after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-sm after:opacity-0 after:outline-2 after:outline-primary/60 after:select-none peer-data-pressed:after:-translate-x-full data-pressed:after:translate-x-0 data-pressed:after:opacity-100`}
+            className={`${afterTransition} ${baseButton} after:pointer-events-none after:absolute after:inset-0 after:origin-right after:translate-x-full after:rounded-[inherit] after:opacity-0 after:outline-2 after:outline-primary/60 after:select-none peer-data-pressed:after:-translate-x-full data-pressed:after:translate-x-0 data-pressed:after:opacity-100`}
           >
             Trigger
           </TogglePrimitive>
@@ -375,7 +375,7 @@ export default function TabIndicatorPostPage() {
                 Tab 1
               </TabsPrimitive.Tab>
               <TabsPrimitive.Tab value="2" className={tabTriggerIndicatorClasses}>
-                Tab 2 with a longer label
+                Tab 2
               </TabsPrimitive.Tab>
               <TabsPrimitive.Tab value="3" className={tabTriggerIndicatorClasses}>
                 Tab 3

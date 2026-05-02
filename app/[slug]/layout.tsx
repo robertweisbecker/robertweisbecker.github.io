@@ -1,5 +1,4 @@
 import * as React from "react";
-import { TextReveal } from "@/components/animations";
 import { BackButton } from "@/components/back-button";
 import { Pagination } from "@/components/pagination";
 import { ProjectMeta } from "@/components/project-meta";

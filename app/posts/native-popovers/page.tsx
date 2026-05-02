@@ -3,71 +3,114 @@
 import { Demo } from "@/components/demo";
 import { Button } from "@/components/ui/button";
 import { Code } from "@/components/ui/code";
-import { Heading } from "@/components/ui/heading";
 import { Badge } from "@/components/ui/badge";
 import { IconAlertCircle, IconArrowUpRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { Separator } from "@base-ui/react";
 
-const backdropPopoverCode = `<Button popoverTarget="popover-backdrop" variant="outline" className="relative">
-  Popover with backdrop
-</Button>
-<div
-  popover="auto"
-  id="popover-backdrop"
-  aria-labelledby="popover-backdrop-title"
-  aria-describedby="popover-backdrop-desc"
-  className="bg-card not-prose fixed inset-y-0 mx-auto my-auto transform overflow-hidden rounded-lg border p-4 opacity-0 shadow-2xl transition-[opacity,transform,translate,scale] transition-discrete duration-300 backdrop:bg-transparent backdrop:transition-colors open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/30 sm:w-full sm:max-w-96 starting:open:translate-y-4 starting:open:scale-95 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
->
-  <h2 id="popover-backdrop-title" className="mt-0 mb-3 text-base! font-medium text-pretty">
-    This is a native HTML popover. You can read up on{" "}
-    <a
-      href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API"
-      target="_blank"
-      rel="noreferrer"
-      className="link"
-    >
-      MDN
-      <IconArrowUpRight />
-    </a>
-    .
-  </Heading>
-  <p id="popover-backdrop-desc">
-    Click outside or press <Code>Esc</Code> to dismiss.
-  </p>
-</div>`;
+/** … in snippets omits body copy and illustrative custom markup only; popover/trigger classNames stay verbatim. */
+const demoCode = { language: "tsx" as const, collapsible: true };
 
 const anchoredPopoverCode = `<Button
   popoverTarget="popover-anchor"
   variant="outline"
   className="[anchor-name:--trigger2]"
 >
-  Anchor, no backdrop
+  Open popover
 </Button>
 <div
   popover="auto"
   id="popover-anchor"
   aria-labelledby="popover-anchor-title"
   aria-describedby="popover-anchor-desc"
-  className="not-prose bg-card [position-anchor]:--trigger2 absolute inset-y-[unset] bottom-[anchor(top)] z-50 mb-1 max-w-3xs transform overflow-hidden rounded-lg border px-3 py-2 opacity-0 shadow-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out open:translate-y-0 open:scale-100 open:opacity-100 starting:open:translate-y-1 starting:open:scale-90 starting:open:opacity-0"
+  className="[position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
 >
-  <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">
-    Howdy!
-  </h3>
-  <p id="popover-anchor-desc" className="text-sm">
-    This should be accessible without any additional config
-  </p>
+  <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">…</h3>
+  <p id="popover-anchor-desc" className="text-sm">…</p>
+</div>`;
+
+const toastPopoverCode = `<Button id="popover-toast-trigger" popoverTarget="popover-toast" popoverTargetAction="show">…</Button>
+<div
+  popover="manual"
+  id="popover-toast"
+  aria-labelledby="popover-toast-title"
+  aria-describedby="popover-toast-desc"
+  className={cn(
+    "fixed mx-auto grid origin-bottom transform auto-rows-min grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] gap-2 rounded-lg bg-[canvas] p-3 shadow-lg outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-200 ease-out dark:-outline-offset-1",
+    "inset-x-8 top-auto bottom-8 w-auto max-w-full",
+    "md:right-8 md:left-auto md:max-w-96",
+    "translate-y-2 scale-100 opacity-0",
+    "starting:open:translate-y-1 starting:open:scale-90 starting:open:opacity-0",
+    "open:translate-y-0 open:scale-100 open:opacity-100"
+  )}
+>
+  <IconAlertCircle … />
+  <h2 className="col-2 row-1 m-0 text-sm font-medium" id="popover-toast-title">…</h2>
+  <p id="popover-toast-desc" className="col-2 row-2 text-sm">…</p>
+  <Button
+    popoverTarget="popover-toast"
+    id="popover-toast-close"
+    popoverTargetAction="hide"
+    className="col-3 row-span-2 row-start-1"
+  >
+    Close
+  </Button>
+</div>`;
+
+const backdropPopoverCode = `<Button popoverTarget="popover-backdrop" variant="outline">
+  With backdrop
+</Button>
+<div
+  popover="auto"
+  id="popover-backdrop"
+  aria-labelledby="popover-backdrop-title"
+  aria-describedby="popover-backdrop-desc"
+  className={cn(
+    "fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-98 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/15 sm:w-full sm:max-w-96 dark:-outline-offset-1 dark:open:backdrop:bg-black/50 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
+  )}
+>
+  <h2 className="mb-3 text-base font-medium text-pretty" id="popover-backdrop-title">…</h2>
+  <p id="popover-backdrop-desc">…</p>
+</div>`;
+
+const dangerPopoverCode = `<Button
+  popoverTarget="popover-backdrop-2"
+  id="popover-backdrop-2-trigger"
+  popoverTargetAction="show"
+>
+  Danger ahead
+</Button>
+<div
+  popover="manual"
+  id="popover-backdrop-2"
+  aria-labelledby="popover-backdrop-2-title"
+  aria-describedby="popover-backdrop-2-desc"
+  className={cn(
+    "fixed inset-y-0 mx-auto mt-auto mb-8 flex w-full max-w-dialog origin-top translate-y-10 scale-98 transform flex-col gap-2 overflow-hidden rounded-2xl bg-error p-6 pt-10 text-center text-foreground opacity-0 shadow-2xl outline outline-destructive transition-[opacity,transform,translate,scale] transition-discrete duration-300 backdrop:bg-border backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-destructive/30 sm:max-w-96 dark:-outline-offset-1 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent",
+    "items-center not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-[repeating-linear-gradient(315deg,var(--error)_0,var(--error)_1px,transparent_0,transparent_50%)] backdrop:bg-size-[10px_10px] backdrop:bg-fixed"
+  )}
+>
+  <svg>…</svg>
+  <h2 id="popover-backdrop-2-title">…</h2>
+  <p id="popover-backdrop-2-desc">…</p>
+  <Separator />
+  <Button
+    popoverTarget="popover-backdrop-2"
+    id="popover-backdrop-2-close"
+    popoverTargetAction="hide"
+  >
+    Flee
+  </Button>
 </div>`;
 
 export default function NativePopoversAnchoringPage() {
   return (
-    <div className="prose mx-auto w-full">
+    <div className="mx-auto w-full max-w-xl space-y-8">
       <p>
         Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and{" "}
         <Code>starting-style</Code>.
       </p>
-
-      <Demo title="Anchored" code={{ value: anchoredPopoverCode, language: "tsx" }} centerContent={true}>
+      <Demo title="Anchored" code={{ ...demoCode, value: anchoredPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-anchor" variant="outline" className="[anchor-name:--trigger2]">
             Open popover
@@ -77,7 +120,7 @@ export default function NativePopoversAnchoringPage() {
             id="popover-anchor"
             aria-labelledby="popover-anchor-title"
             aria-describedby="popover-anchor-desc"
-            className="not-prose [position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
+            className="[position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out not-open:pointer-events-none backdrop:pointer-events-none open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
           >
             <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">
               Howdy!
@@ -88,8 +131,12 @@ export default function NativePopoversAnchoringPage() {
           </div>
         </div>
       </Demo>
-      <Demo title="Centered native popover" code={{ value: backdropPopoverCode, language: "tsx" }} centerContent={true}>
-        <div className="not-prose grid min-h-48 place-items-center">
+      <p>
+        Here{"'"}s a toast-y popover. In some countries, that{"'"}s a meal. Regardless, you need to close this one
+        manually rather than by clicking outside.
+      </p>
+      <Demo title="Toast-like" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
+        <div className="grid min-h-48 place-items-center">
           <Button
             popoverTarget="popover-toast"
             variant="outline"
@@ -108,20 +155,21 @@ export default function NativePopoversAnchoringPage() {
             aria-labelledby="popover-toast-title"
             aria-describedby="popover-toast-desc"
             className={cn(
-              "not-prose fixed mx-auto grid origin-bottom transform auto-rows-min grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] gap-2 rounded-lg bg-[canvas] p-3 shadow-lg outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-200 ease-out dark:-outline-offset-1",
-              "inset-x-8 top-auto bottom-8 w-auto max-w-full",
-              "md:right-8 md:left-auto md:max-w-96",
+              "fixed mx-auto grid origin-bottom transform auto-rows-min grid-cols-[auto_1fr_auto] grid-rows-[auto_auto] gap-2 rounded-lg bg-[canvas] p-3 shadow-lg outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-200 ease-out dark:-outline-offset-1",
               "translate-y-2 scale-100 opacity-0",
               "starting:open:translate-y-1 starting:open:scale-90 starting:open:opacity-0",
-              "open:translate-y-0 open:scale-100 open:opacity-100"
+              "open:translate-y-0 open:scale-100 open:opacity-100",
+              "not-open:pointer-events-none backdrop:pointer-events-none",
+              "inset-x-8 top-auto bottom-8 w-auto max-w-full",
+              "md:right-8 md:left-auto md:max-w-96"
             )}
           >
-            <IconAlertCircle className="col-1 row-1 row-start-1 size-4 text-destructive" />
+            <IconAlertCircle className="col-1 row-1 row-start-1 size-5 fill-error text-destructive" />
             <h2 className="col-2 row-1 m-0 text-sm font-medium" id="popover-toast-title">
-              Uh oh — I'm exposed!
+              Uh oh — I{"'"}m exposed!
             </h2>
             <p id="popover-toast-desc" className="col-2 row-2 text-sm">
-              I'm set to <Code>popover="manual"</Code> so only this button will hide me.
+              I{"'"}m set to <Code>popover=&quot;manual&quot;</Code> so only the button in here will close me.
             </p>
             <Button
               popoverTarget="popover-toast"
@@ -136,7 +184,12 @@ export default function NativePopoversAnchoringPage() {
           </div>
         </div>
       </Demo>
-      <Demo title="With backdrop" code={{ value: backdropPopoverCode, language: "tsx" }} centerContent={true}>
+      <p>
+        The next one has a backdrop just to see how it works. But don{"'"}t be fooled, it{"'"}s not modal, nor does it
+        lock scroll position or focus. In reality, you might use a <Code>{"<dialog>"}</Code> here if you{"'"}re going
+        native.
+      </p>
+      <Demo title="With backdrop" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-backdrop" variant="outline" className="relative">
             With backdrop
@@ -147,7 +200,7 @@ export default function NativePopoversAnchoringPage() {
             aria-labelledby="popover-backdrop-title"
             aria-describedby="popover-backdrop-desc"
             className={cn(
-              "not-prose fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-98 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/5 sm:w-full sm:max-w-96 dark:-outline-offset-1 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
+              "fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-98 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/15 sm:w-full sm:max-w-96 dark:-outline-offset-1 dark:open:backdrop:bg-black/50 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
             )}
           >
             <h2 className="mt-0 mb-3 text-base font-medium text-pretty" id="popover-backdrop-title">
@@ -169,7 +222,7 @@ export default function NativePopoversAnchoringPage() {
           </div>
         </div>
       </Demo>
-      <Demo title="With backdrop" code={{ value: backdropPopoverCode, language: "tsx" }} centerContent={true}>
+      <Demo title="Danger (manual)" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button
             popoverTarget="popover-backdrop-2"
@@ -186,7 +239,7 @@ export default function NativePopoversAnchoringPage() {
             aria-labelledby="popover-backdrop-2-title"
             aria-describedby="popover-backdrop-2-desc"
             className={cn(
-              "not-prose fixed inset-y-0 mx-auto mt-auto mb-8 flex w-full max-w-dialog origin-top translate-y-10 scale-98 transform flex-col gap-2 overflow-hidden rounded-2xl bg-error p-6 pt-10 text-center text-error-foreground opacity-0 shadow-2xl outline outline-destructive transition-[opacity,transform,translate,scale] transition-discrete duration-300 backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-destructive/30 sm:max-w-96 dark:-outline-offset-1 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent",
+              "fixed inset-y-0 mx-auto mt-auto mb-8 flex w-full max-w-dialog origin-top translate-y-10 scale-98 transform flex-col gap-2 overflow-hidden rounded-2xl bg-error p-6 pt-10 text-center text-foreground opacity-0 shadow-2xl outline outline-destructive transition-[opacity,transform,translate,scale] transition-discrete duration-300 backdrop:bg-border backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-destructive/30 sm:max-w-96 dark:-outline-offset-1 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent",
               "items-center not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-[repeating-linear-gradient(315deg,var(--error)_0,var(--error)_1px,transparent_0,transparent_50%)] backdrop:bg-size-[10px_10px] backdrop:bg-fixed"
             )}
           >
@@ -196,7 +249,7 @@ export default function NativePopoversAnchoringPage() {
               id="Interface-Essential-File-Error--Streamline-Pixel"
               height="32"
               width="32"
-              className="mb-2 animate-bounce"
+              className="mb-2 animate-bounce text-error-foreground"
             >
               <desc>Interface Essential File Error Streamline Icon: https://streamlinehq.com</desc>
               <title>interface-essential-file-error</title>
@@ -227,7 +280,9 @@ export default function NativePopoversAnchoringPage() {
             <h2 className="m-0 text-2xl font-bold text-inherit" id="popover-backdrop-2-title">
               The Danger Zone
             </h2>
-            <p id="popover-backdrop-2-desc">Did you try unplugging it?</p>
+            <p id="popover-backdrop-2-desc">
+              A use of the passive voice has occurred. <br /> A backdrop click will do you no good here.
+            </p>
             <Separator />
             <Button
               popoverTarget="popover-backdrop-2"
@@ -236,7 +291,7 @@ export default function NativePopoversAnchoringPage() {
               id="popover-backdrop-2-close"
               popoverTargetAction="hide"
             >
-              Surrender
+              Flee
             </Button>
           </div>
         </div>

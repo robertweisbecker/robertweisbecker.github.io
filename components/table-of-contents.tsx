@@ -16,7 +16,6 @@ function useActiveItem(ids: string[]) {
         const first = entries.find((entry) => entry.isIntersecting);
         if (first) {
           setActiveId(first.target.id);
-          window.history.replaceState(null, "", `#${first.target.id}`);
         }
       },
       { rootMargin: "0% 0% -80% 0%" }

@@ -2,7 +2,7 @@
 
 import { CodeBlock } from "@/components/code-block";
 import { Demo } from "@/components/demo";
-import { CheckIconStraight, InfoIcon2 } from "@/components/icons";
+import { CheckIconStraight } from "@/components/icons";
 import { Theme } from "@/components/theme";
 import { ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme-settings";
 import { Alert } from "@/components/ui/alert";
@@ -12,7 +12,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Code } from "@/components/ui/code";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
-import { IconHeart, IconHeartFilled, IconSend, IconSettings, IconTrash } from "@tabler/icons-react";
+import { IconHeartFilled, IconSend, IconSettings, IconTrash } from "@tabler/icons-react";
 import Link from "next/link";
 
 function ThemeDemo() {
@@ -175,7 +175,7 @@ export default function ThemingPostPage() {
             ramp to the alias variables that feed into the theme. These will cascade down from any ancestor, so you can
             scope overrides to a section of the page.
           </p>
-          <pre className="overflow-x-auto font-mono text-[11px] leading-[1.25] whitespace-pre-wrap text-foreground">
+          <pre className="overflow-x-auto font-mono text-[11px] whitespace-pre-wrap text-foreground">
             {`                    
             ╔──────────────────╗
             │    colors.css    │

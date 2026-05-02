@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { IconChevronRight, IconLine, IconVectorBezier2, IconVectorSpline, IconX } from "@tabler/icons-react";
+import { IconLine, IconVectorBezier2, IconVectorSpline, IconX } from "@tabler/icons-react";
 
 export default function ClipPathCurvePage() {
   return (
