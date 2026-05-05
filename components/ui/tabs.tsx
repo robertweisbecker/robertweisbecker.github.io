@@ -40,12 +40,7 @@ function TabsList({
   ...props
 }: TabsPrimitive.List.Props & VariantProps<typeof tabsListVariants>) {
   return (
-    <TabsPrimitive.List
-      data-slot="tabs-list"
-      data-variant={variant}
-      className={cn(tabsListVariants({ variant }), className)}
-      {...props}
-    >
+    <TabsPrimitive.List data-slot="tabs-list" data-variant={variant} className={cn(tabsListVariants({ variant }), className)} {...props}>
       {children}
       <TabsPrimitive.Indicator
         data-slot="tabs-indicator"
@@ -53,8 +48,7 @@ function TabsList({
           "absolute bottom-0 left-0 translate-x-(--active-tab-left) -translate-y-(--active-tab-bottom) transition-[width,translate] duration-200 ease-in-out will-change-transform",
           variant === "line" &&
             "z-10 w-[calc(var(--active-tab-width)-var(--tab-padding-x)*2)] translate-x-[calc(var(--active-tab-left)+var(--tab-padding-x))] rounded-full bg-primary/80 data-[orientation=horizontal]:h-[3px] data-[orientation=horizontal]:translate-y-px data-[orientation=vertical]:w-[3px] data-[orientation=vertical]:-translate-x-px",
-          variant === "pill" &&
-            "-z-1 h-(--active-tab-height) w-(--active-tab-width) rounded-(--tabs-radius) bg-secondary",
+          variant === "pill" && "-z-1 h-(--active-tab-height) w-(--active-tab-width) rounded-(--tabs-radius) bg-secondary",
           variant === "default" &&
             "-z-1 h-(--active-tab-height) w-(--active-tab-width) rounded-[calc(var(--tabs-radius)-2px)] bg-card shadow-border-xs"
         )}
@@ -97,8 +91,8 @@ function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
       data-slot="tabs-content"
       className={cn(
         "w-full max-w-full min-w-0 flex-1 overflow-hidden outline-none",
-        "transition-opacity duration-500 data-ending-style:opacity-100 data-starting-style:opacity-50",
-        "data-ending-style:ease-in data-starting-style:ease-out",
+        // "transition-opacity duration-500 data-ending-style:opacity-100 data-starting-style:opacity-50",
+        // "data-ending-style:ease-in data-starting-style:ease-out",
 
         className
       )}

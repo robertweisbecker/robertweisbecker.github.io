@@ -10,7 +10,11 @@ export function ColorDiagrams({
     <figure className={cn("not-prose flex flex-col gap-4", className)} {...props}>
       {type === "luminance" && <AvgLum />}
       {type === "chroma" && <AvgChroma />}
-      {caption && <figcaption className="p-2 text-sm text-muted-foreground">{caption}</figcaption>}
+      {caption && (
+        <figcaption className="px-2 text-center text-2xs text-muted-foreground">
+          <em>fig.</em> 33{caption}
+        </figcaption>
+      )}
     </figure>
   );
 }
@@ -19,13 +23,7 @@ function AvgLum() {
   return (
     <section className="card">
       <div className="svg-wrap">
-        <svg
-          viewBox="0 0 900 420"
-          width="100%"
-          role="img"
-          aria-label="Average lightness by step"
-          className="w-full font-pixel"
-        >
+        <svg viewBox="0 0 900 420" width="100%" role="img" aria-label="Average lightness by step" className="w-full font-pixel">
           {/* <!-- legend --> */}
           <rect x="70" y="2" width="11" height="11" fill="var(--neutral-400)" />
           <text x="88" y="13" fontSize="16.5" fill="var(--foreground)">
@@ -41,36 +39,15 @@ function AvgLum() {
             0
           </text>
           <line x1="70" y1="286.25" x2="880" y2="286.25" stroke="var(--border)" strokeWidth="1" />
-          <text
-            x="60"
-            y="290.25"
-            textAnchor="middle"
-            fontSize="11"
-            fill="var(--muted-foreground)"
-            transform="rotate(-90 60 290.25)"
-          >
+          <text x="60" y="290.25" textAnchor="middle" fontSize="11" fill="var(--muted-foreground)" transform="rotate(-90 60 290.25)">
             25
           </text>
           <line x1="70" y1="207.50" x2="880" y2="207.50" stroke="var(--border)" strokeWidth="1" />
-          <text
-            x="60"
-            y="211.50"
-            textAnchor="middle"
-            fontSize="11"
-            fill="var(--muted-foreground)"
-            transform="rotate(-90 60 211.50)"
-          >
+          <text x="60" y="211.50" textAnchor="middle" fontSize="11" fill="var(--muted-foreground)" transform="rotate(-90 60 211.50)">
             50
           </text>
           <line x1="70" y1="128.75" x2="880" y2="128.75" stroke="var(--border)" strokeWidth="1" />
-          <text
-            x="60"
-            y="132.75"
-            textAnchor="middle"
-            fontSize="11"
-            fill="var(--muted-foreground)"
-            transform="rotate(-90 60 132.75)"
-          >
+          <text x="60" y="132.75" textAnchor="middle" fontSize="11" fill="var(--muted-foreground)" transform="rotate(-90 60 132.75)">
             75
           </text>
           <line x1="70" y1="50.00" x2="880" y2="50.00" stroke="var(--border)" strokeWidth="1" />
@@ -208,14 +185,7 @@ function AvgLum() {
           <text x="475.00" y="408" textAnchor="middle" fontSize="12" fill="var(--muted-foreground)">
             STEP
           </text>
-          <text
-            x="18"
-            y="207.50"
-            transform="rotate(-90 18 207.50)"
-            textAnchor="middle"
-            fontSize="12"
-            fill="var(--muted-foreground)"
-          >
+          <text x="18" y="207.50" transform="rotate(-90 18 207.50)" textAnchor="middle" fontSize="12" fill="var(--muted-foreground)">
             L% [&mu;]
           </text>
         </svg>
@@ -228,13 +198,7 @@ function AvgChroma() {
   return (
     <section className="card">
       <div className="svg-wrap">
-        <svg
-          viewBox="0 0 900 420"
-          width="100%"
-          xmlns="http://www.w3.org/2000/svg"
-          role="img"
-          aria-label="Average chroma by step"
-        >
+        <svg viewBox="0 0 900 420" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Average chroma by step">
           <text x="70" y="28" fontSize="20" fontWeight="700" fill="var(--neutral-400)">
             Average chroma by step
           </text>
@@ -397,14 +361,7 @@ function AvgChroma() {
           <text x="475.00" y="408" textAnchor="middle" fontSize="12" fill="var(--muted-foreground)">
             Step
           </text>
-          <text
-            x="18"
-            y="207.50"
-            transform="rotate(-90 18 207.50)"
-            textAnchor="middle"
-            fontSize="12"
-            fill="var(--muted-foreground)"
-          >
+          <text x="18" y="207.50" transform="rotate(-90 18 207.50)" textAnchor="middle" fontSize="12" fill="var(--muted-foreground)">
             Average OKLCH Chroma
           </text>
         </svg>

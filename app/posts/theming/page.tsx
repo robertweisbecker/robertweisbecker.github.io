@@ -5,7 +5,7 @@ import { Demo } from "@/components/demo";
 import { CheckIconStraight } from "@/components/icons";
 import { Theme } from "@/components/theme";
 import { ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme-settings";
-import { Alert } from "@/components/ui/alert";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -110,15 +110,23 @@ export default function ThemingPostPage() {
             <Link href="/projects/oklch" className="link">
               writeup
             </Link>{" "}
-            of the okLCH color system I made. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the
-            same thinking to this site, so we end up with a pretty close approximation.
+            of the okLCH color system I made. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to
+            this site, so we end up with a pretty close approximation.
           </p>
           <p>
-            You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the
-            page, but you can always change the whole site&apos;s theme in the header if you land on something you like.
+            You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the page, but you can always
+            change the whole site&apos;s theme in the header if you land on something you like.
           </p>
         </section>
-        <section className="flex flex-col gap-2"></section>
+        <section className="flex flex-col gap-2">
+          <Alert>
+            <AlertTitle>Note</AlertTitle>
+            <AlertDescription>
+              I guess Tailwind now converts oklch to okLab when compiling (as of v4.2 or so?), so inspected values may not match what's in
+              the code. Shouldn't really matter though, since the two convert cleanly, but just FYI.
+            </AlertDescription>
+          </Alert>
+        </section>
       </div>
 
       <Theme className="relative flex w-full flex-col gap-2 border border-dashed border-purple-500 bg-[canvas]">
@@ -165,15 +173,12 @@ export default function ThemingPostPage() {
           <Heading level={2}>
             How it works<span className="text-muted-foreground">*</span>
           </Heading>
-          <small className="m-2 block ps-10 text-xs text-muted-foreground italic">
-            * just on this site, not the actual project
-          </small>
+          <small className="m-2 block ps-10 text-xs text-muted-foreground italic">* just on this site, not the actual project</small>
           <br />
           <p>
-            Colors are controlled by <Code variant="plain">data-hue</Code> and <Code variant="plain">data-neutral</Code>{" "}
-            attributes on the <Code variant="plain">{`<Theme>`}</Code> component, each of which assigns a given color
-            ramp to the alias variables that feed into the theme. These will cascade down from any ancestor, so you can
-            scope overrides to a section of the page.
+            Colors are controlled by <Code variant="plain">data-hue</Code> and <Code variant="plain">data-neutral</Code> attributes on the{" "}
+            <Code variant="plain">{`<Theme>`}</Code> component, each of which assigns a given color ramp to the alias variables that feed
+            into the theme. These will cascade down from any ancestor, so you can scope overrides to a section of the page.
           </p>
           <pre className="overflow-x-auto font-mono text-[11px] whitespace-pre-wrap text-foreground">
             {`                    
@@ -209,15 +214,13 @@ export default function ThemingPostPage() {
 
           <div className="flex flex-col gap-4">
             <p>
-              Raw oklch palettes are registered with Tailwind in <Code variant="plain">colors.css</Code>, making them
-              available as both CSS variables and utility classes (<Code variant="plain">bg-ruby-500</Code>,{" "}
-              <Code variant="plain">text-sand-200</Code>, etc.).
+              Raw oklch palettes are registered with Tailwind in <Code variant="plain">colors.css</Code>, making them available as both CSS
+              variables and utility classes (<Code variant="plain">bg-ruby-500</Code>, <Code variant="plain">text-sand-200</Code>, etc.).
             </p>
             <p>
-              Two alias scales — <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code> — act
-              as indirection layers. By default they point to the <Code variant="plain">sand</Code> palette, but setting{" "}
-              <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps
-              the entire scale.
+              Two alias scales — <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code> — act as indirection
+              layers. By default they point to the <Code variant="plain">sand</Code> palette, but setting{" "}
+              <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps the entire scale.
             </p>
             <Heading level={4}>File structure</Heading>
             <CodeBlock
@@ -252,14 +255,14 @@ components/
             />
             <Heading level={4}>Semantic tokens</Heading>
             <p>
-              Semantic tokens like <Code variant="plain">--primary</Code>, <Code variant="plain">--background</Code>,
-              and <Code variant="plain">--ring</Code> are declared on <Code variant="plain">:root, [data-theme]</Code>{" "}
-              and reference these aliases. Because <Code variant="plain">[data-theme]</Code> is in the selector, the
-              tokens re-evaluate whenever hue or neutral variables are overridden on a descendant.
+              Semantic tokens like <Code variant="plain">--primary</Code>, <Code variant="plain">--background</Code>, and{" "}
+              <Code variant="plain">--ring</Code> are declared on <Code variant="plain">:root, [data-theme]</Code> and reference these
+              aliases. Because <Code variant="plain">[data-theme]</Code> is in the selector, the tokens re-evaluate whenever hue or neutral
+              variables are overridden on a descendant.
             </p>
             <p>
-              (Despite my reservations, I'm using shadcn tokens on this site to see what the hype's about / how my
-              colors work with them; this isn't what's used in the actual project.)
+              (Despite my reservations, I'm using shadcn tokens on this site to see what the hype's about / how my colors work with them;
+              this isn't what's used in the actual project.)
             </p>
 
             <CodeBlock
@@ -280,18 +283,15 @@ components/
         {/* ── Radius ──────────────────────────────────────── */}
         <section className="flex flex-col gap-2">
           <Heading level={3}>Radius</Heading>
-          <p>
-            Just for fun, I made the base radius = 10 for easier math, and I also wanted to play with odd-numbered
-            radii.
-          </p>
+          <p>Just for fun, I made the base radius = 10 for easier math, and I also wanted to play with odd-numbered radii.</p>
           <p>
             So you have the <Code variant="plain">--radius</Code> base value with these odd multipliers. Instances of{" "}
-            <Code variant="plain">&lt;Theme&gt;</Code> will inject a new <Code variant="plain">--radius</Code> CSS
-            variable, so updated values cascade down and re-scale instances.
+            <Code variant="plain">&lt;Theme&gt;</Code> will inject a new <Code variant="plain">--radius</Code> CSS variable, so updated
+            values cascade down and re-scale instances.
           </p>
           <p>
-            I also capped the values with some eyeballing to avoid absurdly large radii; I'd prefer to use a more
-            precise approach, but this is a quick and dirty solution.
+            I also capped the values with some eyeballing to avoid absurdly large radii; I'd prefer to use a more precise approach, but this
+            is a quick and dirty solution.
           </p>
 
           <CodeBlock
@@ -313,9 +313,8 @@ components/
           />
 
           <p>
-            PS — If you're wondering what the <Code variant="plain">--ellipse-factor</Code> is for, it has nothing to do
-            with theming. I made a utility class for squircle corners, and that'll offset the radius variable to get the
-            desired effect.
+            PS — If you're wondering what the <Code variant="plain">--ellipse-factor</Code> is for, it has nothing to do with theming. I
+            made a utility class for squircle corners, and that'll offset the radius variable to get the desired effect.
           </p>
 
           <CodeBlock

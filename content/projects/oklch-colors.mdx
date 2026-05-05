@@ -1,7 +1,6 @@
 export const frontmatter = {
   title: "OkLCH Color Palettes",
-  subtitle:
-    "Creating perceptually-uniform color palettes for consistent contrast in theming, brand expression, and data visualization",
+  subtitle: "Creating perceptually-uniform color palettes for consistent contrast in theming, brand expression, and data visualization",
   role: "Design Lead",
   date: "2025—2026",
 };
@@ -14,9 +13,7 @@ import { ColorDiagrams } from "@/components/demos/color-diagrams";
 
 As the [UDL](/unified-design-language) project evolved, we needed an extended color system with underlying logic to make palettes plug and play for any of the dozen themes.
 
-This led me to the okLCH color space and the idea of re-balancing our colors into perceptually uniform palettes.
-
-What started as a side-of-desk project ended with 28 new color ramps, 365 colors, and a visual evolution of the brand.
+This led me to the okLCH color space and the idea of re-balancing our colors into perceptually uniform palettes. What started as a side-of-desk project ended with 28 new color ramps, 365 colors, and a visual evolution of the brand.
 
 Here's a high-level overview of the color system and how it works. A more in-depth post about the process is coming soon.
 
@@ -43,7 +40,7 @@ Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, an
 
 16 chromatic ramps for primary and status slots in a theme, these represent saturated hues covering the majority of the color spectrum.
 
-<div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
+<div className="grid w-full grid-cols-8 gap-2 sm:grid-cols-8">
   <ColorSwatch color="ruby-400" label="Ruby" />
   <ColorSwatch color="red-400" label="Red" />
   <ColorSwatch color="orange-400" label="Orange" />
@@ -90,26 +87,15 @@ Neutrals are for icons, text, borders, and other relatively monochromatic elemen
   <ColorSwatch color="steel-500" label="Steel" />
 </div>
 
-`Black` is a pure gray scale from white to black. The next three are subtly modulated with color temperature: `gray` is cool, `zinc` is warmer, and `ash` is a blend of the two. These have a natural teal-to-purple bias to harmonize with the default brand colors.
+`Black` is a pure gray scale from white to black. The next three have a subtle color temperature: `gray` is cool, `zinc` is warmer, and `ash` is a blend of the two. These have a natural teal-to-purple bias to harmonize with the default brand colors.
 
-The latter four are more opinionated with their chroma, tinted with red (`plum`), yellow (`sand`), green (`sage`), and blue (`steel`). You're making a bit of a statement choosing these, but they're available to designers who want to _lean_ into their primary hue or illustration palette, something we regularly see in more immersive K-12 products.
+The latter four are more opinionated in terms of chroma: tinted with red (`plum`), yellow (`sand`), green (`sage`), and blue (`steel`). You're making a bit of a statement choosing these, but they're available to designers who want to _lean_ into their primary hue or illustration palette, something we regularly see in more immersive K-12 products.
 
-1. `black`: white to black, 0 chroma
-2. `gray`: cool, default gray
-3. `ash`: temperate gray
-4. <MarkNote note="Yes, I borrowed this name from Tailwind. I'm in the market for a different one, hmu">
-     `zinc`: warm gray
-   </MarkNote>
-5. `plum`: tinted red 🌶️
-6. `sand`: tinted yellow 🌶️
-7. `sage`: tinted green 🌶️
-8. `steel`: tinted blue 🌶️
-
-A key thread between the neutral ramps is their more dramatic luminance curve than the ROYGBIV ramps. This means the middle steps meant for foregrounds have a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast with `200`, instead of `100`, so text stays legible on varied surfaces.
+A key feature of the neutral ramps is their more dramatic luminance curve relative to the ROYGBIV ramps. This gives the middle steps a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast with `200`, instead of `100`, so workhorse foreground colors remain legible on more surfaces.
 
 <ColorDiagrams type="luminance" caption="Average luminance by step" />
 
-Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maybe spot this in the chart above. This also lets us keep the scale balanced and nudge the opposite end down in luminance for a more nuanced dark mode.
+Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maaaaaybe spot this in the chart above. This also lets us keep the scale balanced and nudge the opposite end down in luminance for a more nuanced dark mode.
 
 ### Alpha Colors
 
@@ -237,12 +223,7 @@ Here's a little tool I made to test and ship our dataviz palettes:
 
 ## Demo
 
-For a simulated demo of the color system in action, check out my [Theming Demo post](/posts/theming), or fiddle around with the theme settings in the header. I've used the same color palettes on this site, and though the components are different, it might give you a sense of how the colors work together.
-
-<Alert>
-  <AlertTitle>Note</AlertTitle>
-  <AlertDescription>Tailwind converts</AlertDescription>
-</Alert>
+For a simulated demo of the color system in action, check out the [Theming Demo](/posts/theming), or fiddle around with the theme settings in the header. I've used the same color palettes on this site, and though the components are different, it might give you a sense of how the colors work together.
 
 ## Further reading
 

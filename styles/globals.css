@@ -116,12 +116,11 @@
 }
 
 :root {
-  /* Custom */
+  /* Not theme-able */
   --button-xs: --spacing(6);
   --button-sm: --spacing(8);
   --button-md: --spacing(9);
   --button-lg: --spacing(10);
-
   --article-gap-x: --spacing(8);
   --article-prose-width: var(--container-xl);
   --article-sidebar-width: calc(var(--container-3xs) - var(--article-gap-x));
@@ -199,6 +198,7 @@
   --shadow-button-inset-pressed: inset 0 2px 0 0px hsl(0 0 0% / 10%), inset 0 0 0 1px hsl(0 0 0% / 10%);
 }
 
+/* When hue is neutral, darken primary  */
 [data-hue="black"],
 [data-hue="gray"],
 [data-hue="ash"],
@@ -224,7 +224,7 @@
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
   --muted: --alpha(var(--color-neutral-800) / 20%);
-  --muted-foreground: var(--neutral-400);
+  --muted-foreground: var(--neutral-300);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
   --destructive: var(--error-600);
@@ -267,22 +267,29 @@
     inset 0 2px 4px 1px hsl(0 0 0% / 32%);
 }
 
-.dark [data-hue="black"],
-.dark [data-hue="gray"],
-.dark [data-hue="ash"],
-.dark [data-hue="zinc"],
-.dark [data-hue="plum"],
-.dark [data-hue="sand"],
-.dark [data-hue="sage"],
-.dark [data-hue="steel"] {
-  --primary: var(--hue-100);
-  --primary-foreground: var(--hue-900);
+/* ..and then lighten them in dark mode. TODO: move to Button.tsx? */
+.dark {
+  [data-hue="black"],
+  [data-hue="gray"],
+  [data-hue="ash"],
+  [data-hue="zinc"],
+  [data-hue="plum"],
+  [data-hue="sand"],
+  [data-hue="sage"],
+  [data-hue="steel"] {
+    --primary: var(--hue-100);
+    --primary-foreground: var(--hue-900);
+  }
 }
 
 @layer base {
   * {
     @apply border-border outline-ring selection:bg-primary selection:text-primary-foreground;
     interpolate-size: allow-keywords;
+  }
+  .root {
+    @apply relative isolate;
+    scroll-behavior: smooth;
   }
   body {
     @apply relative bg-background text-foreground dark:bg-background;
@@ -300,12 +307,12 @@
     @apply font-heading text-3xl leading-none -tracking-[0.005em] text-balance;
   }
   em {
-    /* @apply relative -top-[1%] font-serif text-[98%]; Settings for Georgia  */
-    @apply font-heading text-[95%] tracking-normal text-foreground not-italic;
+    /*  Settings for Georgia if reverting: @apply relative -top-[1%] font-serif text-[98%]  */
+    @apply font-heading tracking-normal text-foreground not-italic;
     font-variation-settings:
       "wght" 540,
       "slnt" -10,
-      "SERF" 60;
+      "SERF" 40;
     font-feature-settings:
       "ss01" 0,
       "ss02",
@@ -315,18 +322,14 @@
       "ccmp",
       "kern";
   }
-
-  .root {
-    @apply relative isolate;
-  }
 }
 
 @utility text-h1 {
   :where(&) {
-    @apply font-heading text-3xl leading-tight -tracking-[0.005em] text-balance;
+    @apply font-heading text-2xl leading-tight -tracking-[0.005em] text-balance md:text-3xl;
     font-variation-settings:
       "SERF" 25,
-      "slnt" -10,
+      "slnt" -5,
       "wght" 720;
   }
 }
@@ -369,7 +372,7 @@
 
 @utility link {
   :where(&) {
-    @apply relative isolate inline wrap-break-word break-all underline decoration-current/30 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
+    @apply relative isolate inline wrap-break-word break-all underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
     svg {
       @apply inline max-h-[1em] max-w-[1em];
     }

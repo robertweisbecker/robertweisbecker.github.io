@@ -24,7 +24,7 @@ export const LinkOut = React.forwardRef<HTMLAnchorElement, LinkOutProps>(functio
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group/link link relative mx-px inline-flex items-center gap-[0.25em] space-x-1 text-[1em] leading-[inherit] text-foreground",
+        "group/link link relative mx-px inline-flex items-center gap-[0.25em] space-x-1 text-[1em] leading-[inherit]",
         src && "ps-[1.25em]",
         className,
         linkClass

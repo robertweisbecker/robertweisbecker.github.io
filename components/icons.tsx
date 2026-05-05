@@ -58,15 +58,7 @@ export function EverfiIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      stroke="currentColor"
-      fill="currentColor"
-      strokeWidth="0"
-      viewBox="0 0 448 512"
-      width={16}
-      height={16}
-      {...props}
-    >
+    <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 448 512" width={16} height={16} {...props}>
       <path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"></path>
     </svg>
   );
@@ -146,13 +138,7 @@ export function ShadcnIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path fill="none" d="M0 0h256v256H0z" />
-      <path
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="25"
-        strokeLinecap="round"
-        d="M208 128l-80 80M192 40L40 192"
-      />
+      <path fill="none" stroke="currentColor" strokeWidth="25" strokeLinecap="round" d="M208 128l-80 80M192 40L40 192" />
     </svg>
   );
 }
@@ -169,10 +155,7 @@ export function FigmaIcon(props: React.SVGProps<SVGSVGElement>) {
           d="M0 39.9998C0 32.6398 5.97333 26.6665 13.3333 26.6665H26.6667V53.3332H13.3333C5.97333 53.3332 0 47.3598 0 39.9998Z"
           fill="#A259FF"
         />
-        <path
-          d="M0 13.3333C0 5.97333 5.97333 0 13.3333 0H26.6667V26.6667H13.3333C5.97333 26.6667 0 20.6933 0 13.3333Z"
-          fill="#F24E1E"
-        />
+        <path d="M0 13.3333C0 5.97333 5.97333 0 13.3333 0H26.6667V26.6667H13.3333C5.97333 26.6667 0 20.6933 0 13.3333Z" fill="#F24E1E" />
         <path
           d="M26.6667 0H40.0001C47.3601 0 53.3334 5.97333 53.3334 13.3333C53.3334 20.6933 47.3601 26.6667 40.0001 26.6667H26.6667V0Z"
           fill="#FF7262"
@@ -212,15 +195,7 @@ export function CheckIconStraight(props: React.SVGProps<SVGSVGElement>) {
 
 export function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-      strokeWidth="1.5"
-    >
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" {...props} strokeWidth="1.5">
       <path
         d="M2 6.98442L5.29634 9.93486C5.33132 9.96617 5.38739 9.95103 5.40391 9.90708C7.60044 4.06139 9.78662 2.2107 10 2"
         stroke="currentColor"
@@ -306,14 +281,7 @@ export function ArrowSvg(props: React.ComponentProps<"svg">) {
 
 export function InfoIcon(props: React.ComponentProps<"svg">) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="22"
-      viewBox="9 7 13.13 13.13"
-      fill="currentColor"
-      {...props}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22" viewBox="9 7 13.13 13.13" fill="currentColor" {...props}>
       <path d="M15.563 20.127c3.6 0 6.57-2.97 6.57-6.564C22.133 9.971 19.156 7 15.557 7 11.964 7 9 9.97 9 13.563c0 3.593 2.97 6.564 6.563 6.564Zm0-1.308a5.231 5.231 0 0 1-5.243-5.256 5.225 5.225 0 0 1 5.237-5.249 5.246 5.246 0 0 1 5.262 5.25 5.238 5.238 0 0 1-5.256 5.255Zm-.038-7.401a.86.86 0 0 0 .87-.863.86.86 0 0 0-.87-.876.863.863 0 0 0-.863.876c0 .476.387.863.863.863Zm1.492 5.599c.286 0 .514-.204.514-.496a.499.499 0 0 0-.514-.488h-.704v-2.996c0-.381-.19-.635-.546-.635h-1.213a.493.493 0 0 0-.508.489c0 .292.223.501.508.501h.648v2.64h-.762a.497.497 0 0 0-.508.49.49.49 0 0 0 .508.495h2.577Z"></path>
     </svg>
   );
@@ -392,36 +360,9 @@ export function ClipCornerIcon(props: React.ComponentProps<"svg">) {
         strokeWidth={1}
         strokeLinejoin="round"
       />
-      <rect
-        x={18}
-        y={2}
-        width={4}
-        height={4}
-        rx={2}
-        fill="var(--background)"
-        stroke="var(--foreground)"
-        strokeWidth={1}
-      />
-      <rect
-        x={2}
-        y={2}
-        width={4}
-        height={4}
-        rx={2}
-        fill="var(--background)"
-        stroke="var(--foreground)"
-        strokeWidth={1}
-      />
-      <rect
-        x={2}
-        y={18}
-        width={4}
-        height={4}
-        rx={2}
-        fill="var(--background)"
-        stroke="var(--foreground)"
-        strokeWidth={1}
-      />
+      <rect x={18} y={2} width={4} height={4} rx={2} fill="var(--background)" stroke="var(--foreground)" strokeWidth={1} />
+      <rect x={2} y={2} width={4} height={4} rx={2} fill="var(--background)" stroke="var(--foreground)" strokeWidth={1} />
+      <rect x={2} y={18} width={4} height={4} rx={2} fill="var(--background)" stroke="var(--foreground)" strokeWidth={1} />
     </svg>
   );
 }
@@ -589,11 +530,7 @@ export function TreeIconFile({ className, ...props }: React.ComponentProps<"svg"
         className="bg"
         opacity=".5"
       />
-      <path
-        fill="currentColor"
-        d="M9.5 1a.5.5 0 0 1 .354.146l4 4A.5.5 0 0 1 14 5.5V6h-3a2 2 0 0 1-2-2V1z"
-        className="fg"
-      />
+      <path fill="currentColor" d="M9.5 1a.5.5 0 0 1 .354.146l4 4A.5.5 0 0 1 14 5.5V6h-3a2 2 0 0 1-2-2V1z" className="fg" />
     </svg>
   );
 }
@@ -637,12 +574,7 @@ export function TreeIconTypescript({ className, ...props }: React.ComponentProps
       className={cn("not-[class^='text-']:text-[#1a85d4] dark:not-[class^='text-']:text-[#69b1ff]", className)}
       {...props}
     >
-      <path
-        fill="currentColor"
-        d="M8 1C2.24 1 1 2.24 1 8s1.24 7 7 7 7-1.24 7-7-1.24-7-7-7"
-        className="bg"
-        opacity=".2"
-      />
+      <path fill="currentColor" d="M8 1C2.24 1 1 2.24 1 8s1.24 7 7 7 7-1.24 7-7-1.24-7-7-7" className="bg" opacity=".2" />
       <path
         fill="currentColor"
         d="M8.1 9.64h.95c.04.62.28.76 1.28.76s1.2-.14 1.2-.85c0-.66-.2-.85-1.2-1.07-1.79-.38-2.18-.7-2.18-1.86C8.15 5.3 8.54 5 10.31 5c1.67 0 2.04.26 2.07 1.42h-.95c-.02-.43-.23-.53-1.1-.53-1 0-1.22.14-1.22.74 0 .52.22.7 1.24.92 1.76.38 2.15.73 2.15 2 0 1.44-.4 1.75-2.24 1.75-1.8 0-2.18-.3-2.15-1.66m-3 1.57V5.99H3.5v-.9h4.21v.9H6.1v5.22z"
@@ -694,12 +626,7 @@ export function TreeIconHtml({ className, ...props }: React.ComponentProps<"svg"
       className={cn("not-[class^='text-']:text-[#d47628] dark:not-[class^='text-']:text-[#ffa359]", className)}
       {...props}
     >
-      <path
-        fill="currentColor"
-        d="M8 1C2.24 1 1 2.24 1 8s1.24 7 7 7 7-1.24 7-7-1.24-7-7-7"
-        className="bg"
-        opacity=".2"
-      />
+      <path fill="currentColor" d="M8 1C2.24 1 1 2.24 1 8s1.24 7 7 7 7-1.24 7-7-1.24-7-7-7" className="bg" opacity=".2" />
       <path
         fill="currentColor"
         d="M10.48 3.76a.5.5 0 0 1 .4.58L10.6 5.8h1.14a.5.5 0 0 1 0 1h-1.32L10 9.2h1.08a.5.5 0 0 1 0 1H9.8l-.3 1.64a.5.5 0 1 1-.98-.18l.27-1.46H6.4l-.3 1.64a.5.5 0 1 1-.98-.18l.27-1.46H4.25a.5.5 0 0 1 0-1h1.32L6 6.8H4.93a.5.5 0 0 1 0-1H6.2l.3-1.64a.5.5 0 1 1 .98.18L7.2 5.8h2.4l.3-1.64a.5.5 0 0 1 .58-.4M6.58 9.2h2.4l.44-2.4h-2.4z"
