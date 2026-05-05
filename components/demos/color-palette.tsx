@@ -68,7 +68,7 @@ function ColorSwatch({ color, label, className, showLabel = true, swatchClass }:
               "repeating-linear-gradient(45deg,transparent,transparent 7px,var(--border) 7px,var(--border) 8px)",
           }}
         />
-        <div className={` bg-${color} size-full rounded-[clamp(2px,.4vw,var(--radius-md))] border`} />
+        <div data-slot="fill" className={`bg-${color} size-full rounded-[clamp(2px,.4vw,var(--radius-md))] border`} />
       </div>
       {showLabel && label && <div className="font-pixel text-[11px]">{label}</div>}
     </div>
@@ -104,8 +104,10 @@ function ColorRamp({ name, label, showLabels = true, className, attached = true 
             label={String(step)}
             showLabel={showLabels}
             className={cn(
-              attached &&
-                "first:**:data-[slot=swatch]:border-e-none not-first:**:data-[slot=swatch]:border-s-none not-first:not-last:**:data-[slot=swatch]:rounded-none first:**:data-[slot=swatch]:rounded-e-none last:**:data-[slot=swatch]:rounded-s-none"
+              attached && [
+                "first:**:rounded-e-none last:**:rounded-s-none",
+                "not-first:**:data-[slot=fill]:border-s-[0.5px]! not-last:**:data-[slot=fill]:border-e-[0.5px]!",
+              ]
             )}
           />
         ))}

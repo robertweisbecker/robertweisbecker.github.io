@@ -1,50 +1,48 @@
+import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
-interface LinkOutProps {
-  text: string;
+interface LinkOutProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "children"> {
+  text?: React.ReactNode;
   href: string;
   src?: string;
   icon?: React.ReactNode;
   className?: string;
   linkClass?: string;
+  children?: React.ReactNode;
 }
 
-export function LinkOut({ text, href, src, icon, className, linkClass }: LinkOutProps) {
+export const LinkOut = React.forwardRef<HTMLAnchorElement, LinkOutProps>(function LinkOut(
+  { text, href, src, icon, className, linkClass, children, ...props },
+  ref
+) {
   return (
-    <span
+    <a
+      ref={ref}
+      data-component="link-out"
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className={cn(
-        "group/link link relative mx-px space-x-1 text-[1em] leading-[inherit] text-info-foreground",
+        "group/link link relative mx-px inline-flex items-center gap-[0.25em] space-x-1 text-[1em] leading-[inherit] text-foreground",
         src && "ps-[1.25em]",
-        className
+        className,
+        linkClass
       )}
+      {...props}
     >
       {src && (
         <Avatar className="absolute size-[1em] rounded">
           <AvatarImage src={src} alt={`${text} Logo`} />
-          <AvatarFallback>{text.charAt(0)}</AvatarFallback>
+          <AvatarFallback>{text?.toString().charAt(0)}</AvatarFallback>
         </Avatar>
-        // <img
-        //   src={src}
-        //   alt={`${text} Logo`}
-        //   className="-my-[.25em] inline aspect-square size-[1lh] rounded-sm bg-background/50 ring ring-border"
-        // />
       )}
-      <a
-        data-component="link-out"
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={cn("relative inline-flex items-center gap-[0.25em] leading-[inherit]", linkClass)}
-      >
-        {/* <Avatar className="size-[1em]">{icon}</Avatar> */}
-        {icon && <span className="-my-1 ms-0.5 size-[1em] opacity-50 group-hover/link:opacity-72">{icon}</span>}
-        {text}
-        <LinkOutIcon className="absolute -top-[.25em] -right-[.5em] size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:translate-x-[0.125em] group-hover/link:-translate-y-[0.125em] group-hover/link:opacity-100 group-focus-visible:hidden" />
-      </a>
-    </span>
+      {icon && <span className="-my-1 ms-0.5 size-[1em] opacity-50 group-hover/link:opacity-72">{icon}</span>}
+      {text || children}
+      <LinkOutIcon className="absolute -top-[.25em] -right-[.5em] size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:translate-x-[0.125em] group-hover/link:-translate-y-[0.125em] group-hover/link:opacity-100 group-focus-visible:hidden" />
+    </a>
   );
-}
+});
 
 function LinkOutIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

@@ -14,7 +14,7 @@ const buttonVariants = cva(
     "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] has-data-[icon=inline-end]:pe-[calc(var(--button-y)+2px)] has-data-[icon=inline-start]:ps-[calc(var(--button-y)*1.5)] ",
     "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:text-muted-foreground ",
     "not-[.w-full]:active:scale-[0.98] not-[.w-full]:will-change-transform",
-    "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[450]",
+    "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[475]",
     iconClasses,
   ],
   {
@@ -68,7 +68,7 @@ const buttonVariants = cva(
         md: "[--button-x:--spacing(3.5)] [--button-y:--spacing(2)] h-button",
         xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-sm)] text-[0.6875rem]/4 ",
         sm: "h-button-sm [--button-x:--spacing(2)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)] text-[0.8125rem]  ",
-        lg: "h-button-lg [--button-x:--spacing(4)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-[0.9375rem]",
+        lg: "h-button-lg [--button-x:--spacing(4)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-base",
         icon: "size-button [&_svg:not([class*='size-'])]:size-4",
         "icon-xs": "size-button-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-xs)]",
         "icon-sm": "size-button-sm [--button-radius:var(--radius-sm)] [&_svg:not([class*='size-'])]:size-3.5",

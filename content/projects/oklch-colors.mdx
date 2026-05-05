@@ -41,9 +41,7 @@ Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, an
 
 ### Spectrum Colors
 
-<Image src="/assets/oklch/wheel-hue.png" />
-
-16 chromatic ramps for primary and status slots in a theme. Includes alternate ramps for common hues (red, green, yellow, etc) to let you find a harmonious status palette to pair with your primary.
+16 chromatic ramps for primary and status slots in a theme, these represent saturated hues covering the majority of the color spectrum.
 
 <div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
   <ColorSwatch color="ruby-400" label="Ruby" />
@@ -64,13 +62,22 @@ Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, an
   <ColorSwatch color="pink-400" label="Pink" />
 </div>
 
-In these saturated palettes, ramps are based around the `500` step, which has minimum 5:1 contrast vs. white, a target derived from our brand teal <ColorCode value="#0d7977" />. Each multiple of 100 has minimum AA contrast with steps five spots away in either direction, and 3:1 contrast vs. those four spots away.
+For these color ramps, the `500` step has minimum 5:1 contrast vs. white, a target derived from our brand teal <ColorCode value="#0d7977" />. Each multiple of 100 has minimum AA contrast with steps five spots away in either direction, and 3:1 contrast vs. those four spots away.
 
 <ColorRamp name="teal" className="**:rounded-none" />
 
+The diagram below shows the hue range for each ramp mapped to the color wheel. Keen eyes may notice that a good number either overlap or abut their neighbors.
+
+These "sibling" colors aren't meant to be used together in a single theme. The point from a systems perspective is to provide designers with alternate options for common canonical status colors (red, green, blue, yellow, etc), so they can find suitable pairings that are visually distinguishable from their primary color.
+
+<Image
+  src="/assets/oklch/wheel-hue.png"
+  alt="Diagram of color wheel with hue ranges for each ramp: red 350-7°, orange 16-33°, yellow 31-53°, gold 50-80°, lime 94-119°, green 136-151°, jade 154-180°, teal 171-193°, cyan 185-205°, blue 200-220°, indigo 224-246°, purple 247-264°, magenta 284-322°, pink 312-342°."
+/>
+
 ### Neutral Colors
 
-Neutrals are for icons, text, borders, and other relatively monochromatic elements. There are two informal subsets of neutrals: grays and…spicier grays.
+Neutrals are for icons, text, borders, and other relatively monochromatic elements. Here we have two informal subsets: basic grays and… _spicy_ grays.
 
 <div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
   <ColorSwatch color="black-500" label="Black" />
@@ -83,8 +90,12 @@ Neutrals are for icons, text, borders, and other relatively monochromatic elemen
   <ColorSwatch color="steel-500" label="Steel" />
 </div>
 
-1. `black`: pure white → black
-2. `gray`: cool gray
+`Black` is a pure gray scale from white to black. The next three are subtly modulated with color temperature: `gray` is cool, `zinc` is warmer, and `ash` is a blend of the two. These have a natural teal-to-purple bias to harmonize with the default brand colors.
+
+The latter four are more opinionated with their chroma, tinted with red (`plum`), yellow (`sand`), green (`sage`), and blue (`steel`). You're making a bit of a statement choosing these, but they're available to designers who want to _lean_ into their primary hue or illustration palette, something we regularly see in more immersive K-12 products.
+
+1. `black`: white to black, 0 chroma
+2. `gray`: cool, default gray
 3. `ash`: temperate gray
 4. <MarkNote note="Yes, I borrowed this name from Tailwind. I'm in the market for a different one, hmu">
      `zinc`: warm gray
@@ -94,28 +105,39 @@ Neutrals are for icons, text, borders, and other relatively monochromatic elemen
 7. `sage`: tinted green 🌶️
 8. `steel`: tinted blue 🌶️
 
-Neutral colors have a more dramatic luminance curve than the ROYGBIV ramps. This means the middle steps meant for foregrounds have a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast with `200`, instead of `100`.
+A key thread between the neutral ramps is their more dramatic luminance curve than the ROYGBIV ramps. This means the middle steps meant for foregrounds have a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast with `200`, instead of `100`, so text stays legible on varied surfaces.
 
 <ColorDiagrams type="luminance" caption="Average luminance by step" />
 
-Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maybe spot this in the chart above.
+Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maybe spot this in the chart above. This also lets us keep the scale balanced and nudge the opposite end down in luminance for a more nuanced dark mode.
 
 ### Alpha Colors
 
 Black and white aphas take the luminance curve of the `black` ramp and apply it to their respective alpha values.
 
-**black**
+<figure className="space-y-2">
+  <ColorRamp name="black" className="**:rounded-none" showLabels={false} />
+  <div className="bg-white">
+    <ColorRamp name="black-alpha" className="**:rounded-none" showLabels={false} />
+  </div>
+  <div className="bg-black">
+    <ColorRamp name="white-alpha" className="**:rounded-none" showLabels={false} />
+  </div>
 
-<ColorRamp name="black" className="**:rounded-none" showLabels={false} />
-**black-alpha** (on white)
-<div className="bg-white">
-  <ColorRamp name="black-alpha" className="**:rounded-none" showLabels={false} />
-</div>
-<div className="bg-black">
-  <ColorRamp name="white-alpha" className="**:rounded-none" showLabels={false} />
-</div>
+<figcaption>Top: `black`; middle: `blackAlpha` on white; bottom: `whiteAlpha` on black</figcaption>
 
+</figure>
 The system also currently supports an alpha ramp for the default `gray`, which visually mimics the opaque version.
+
+<figure className="space-y-2">
+  <div className="bg-white">
+    <ColorRamp name="gray-alpha" className="**:rounded-none" showLabels={false} />
+  </div>
+  <ColorRamp name="gray" className="**:rounded-none" showLabels={false} />
+
+<figcaption>Top: `grayAlpha` on white; bottom: `gray`</figcaption>
+
+</figure>
 
 ---
 
@@ -138,9 +160,45 @@ For example, step 400 has a 3:1 contrast ratio vs. white through 100 and 4.5:1 v
 
 ## Usage
 
-Themes include slots for brand, neutral, info, success, warning, error, and highlight palettes. Semantic tokens like `bg-primary` point to default aliases like `colors.brand.500` so you only need to define which ramp you want to use for each slot to get up and running.
+Themes include slots for brand, neutral, info, success, warning, error, and highlight palettes. Semantic tokens like `bg-primary` point to aliases like `colors.brand.500` so you only need to define which primitive ramp you want to use for each slot to get up and running. It looks something like this:
 
-You can then override individual tokens as needed, but have to ensure contrast ratios are maintained, since the system assigns foreground and background colors based on the step number by default.
+```typescript
+const theme = {
+  colors: {
+    brand: ...colors.indigo,
+    neutral: ...colors.gray,
+    info: ...colors.cyan,
+    success: ...colors.lime,
+    warning: ...colors.yellow,
+    error: ...colors.red,
+    highlight: ...colors.purple,
+  },
+  // ...
+};
+```
+
+You _can_ override individual tokens for specific needs but must make sure contrast is maintained, since the system assigns foreground and background tokens based on expected step values by default (the step being a proxy for luminance).
+
+It sounds manual, but it can just be a matter of shifting a few tokens up or down the scale.
+
+```typescript
+const yellowTheme = {
+  colors: {
+    brand: ...colors.yellow,
+    warning: ...colors.orange,
+    error: ...colors.ruby,
+    // ...
+  },
+  semanticTokens: {
+    colors: {
+      "bg-primary": colors.brand.300, // default 500
+      "bg-primary-hover": colors.brand.400, // default 600
+      "bg-primary-active": colors.brand.500, // default 700
+      "text-on-primary": colors.black, // default white
+    },
+  },
+};
+```
 
 ### Theming
 

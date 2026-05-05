@@ -196,6 +196,14 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
   border-radius: 0.75rem;
   padding: 0.85em 1.15em;
   background: var(--prose-code-bg);
+
+  /* font-variation-settings:
+    "wght" 750,
+    "opsz" 20,
+    "GRAD" 400,
+    "YAXS" 400; */
+
+  /* font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern"; */
 }
 .prose pre code:where(:not(.not-prose, .not-prose *)) {
   background: transparent;

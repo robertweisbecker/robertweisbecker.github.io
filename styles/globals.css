@@ -11,7 +11,10 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --default-font-feature-settings: "ss01", "ss03", "cv01", "cv11";
+  /* --default-font-variation-settings: "wght" 425, "GRAD" 450, "YAXS" 900; */
+  /* --default-font-variation-settings: "wght" 425; */
+  --font-sans: system-ui, ui-sans-serif, sans-serif;
   --font-heading: var(--font-display), var(--font-sans);
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
@@ -159,15 +162,15 @@
   --accent-foreground: var(--neutral-950);
   --destructive: var(--error-500);
   --destructive-foreground: var(--error-25);
-  --error: var(--error-50);
+  --error: var(--error-25);
   --error-foreground: var(--error-600);
-  --info: var(--info-50);
+  --info: var(--info-25);
   --info-primary: var(--info-500);
   --info-foreground: var(--info-600);
-  --success: var(--success-50);
+  --success: var(--success-25);
   --success-primary: var(--success-500);
   --success-foreground: var(--success-700);
-  --warning: var(--warning-50);
+  --warning: var(--warning-25);
   --warning-primary: var(--warning-500);
   --warning-foreground: var(--warning-600);
   --border: --alpha(var(--neutral-600) / 20%);
@@ -192,7 +195,7 @@
     0 4px 28px hsl(0 0 0% / 25%), var(--shadow-xl);
   --shadow-button-inset:
     inset 0 1.5px 0 0 --alpha(currentColor / 20%), inset 0 0 0 1.5px --alpha(currentColor / 10%),
-    inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, hsl(0 0 0% / 50%));
+    inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, hsl(0 0 0% / 30%));
   --shadow-button-inset-pressed: inset 0 2px 0 0px hsl(0 0 0% / 10%), inset 0 0 0 1px hsl(0 0 0% / 10%);
 }
 
@@ -287,7 +290,7 @@
     scroll-behavior: smooth;
     font-synthesis: none;
     .font-sans {
-      font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern";
+      /* font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern"; */
     }
     .font-heading {
       font-feature-settings: "ss01", "ss02", "ss03", "calt", "liga", "ccmp", "kern";
@@ -303,7 +306,14 @@
       "wght" 540,
       "slnt" -10,
       "SERF" 60;
-    font-feature-settings: "ss01", "ss02", "ss03", "calt", "liga", "ccmp", "kern";
+    font-feature-settings:
+      "ss01" 0,
+      "ss02",
+      "ss03",
+      "calt",
+      "liga",
+      "ccmp",
+      "kern";
   }
 
   .root {
@@ -359,7 +369,10 @@
 
 @utility link {
   :where(&) {
-    @apply relative isolate inline-flex flex-wrap gap-1 wrap-break-word break-all underline decoration-current/30 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
+    @apply relative isolate inline wrap-break-word break-all underline decoration-current/30 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
+    svg {
+      @apply inline max-h-[1em] max-w-[1em];
+    }
     & span {
       @apply inline-block decoration-transparent;
     }
@@ -381,7 +394,7 @@
 
 @utility max-w-dialog {
   :where(&) {
-    @apply max-w-[calc(100%-2rem)];
+    @apply max-w-[calc(100%-1rem)] md:max-w-[calc(100%-2rem)];
   }
 }
 

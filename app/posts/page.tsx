@@ -1,3 +1,4 @@
+import { Alert, AlertTitle, AlertDescription, AlertContent } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import {
   Item,
@@ -27,6 +28,15 @@ export default function PostsPage() {
         <h1 className="text-h1">Posts</h1>
         <p className="text-lg text-balance text-muted-foreground">Code experiments and small tools.</p>
       </div>
+
+      <Alert variant="warning">
+        <AlertContent>
+          <AlertTitle>Heads up!</AlertTitle>
+          <AlertDescription>
+            Some of the posts below use new or experimental features that may not work in all browsers or devices.
+          </AlertDescription>
+        </AlertContent>
+      </Alert>
 
       <ItemGroup className="">
         {posts.map((post, index) => (

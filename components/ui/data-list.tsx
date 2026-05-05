@@ -72,7 +72,7 @@ function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
       data-slot="data-list-label"
       className={cn(
         "flex min-w-0 text-muted-foreground/80",
-        orientation === "horizontal" && size === "sm" ? "min-w-[12ch]" : "min-w-[20ch]",
+        orientation === "horizontal" && size === "sm" ? "min-w-[12ch]" : "min-w-[28ch]",
         orientation === "vertical" && "min-w-0",
         className
       )}

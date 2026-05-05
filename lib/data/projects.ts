@@ -27,7 +27,7 @@ export const projects = [
     id: 2,
     title: "Unified Design Language",
     nickname: "Everfi UDL",
-    icon: "/assets/logos/udl-icon.png",
+    icon: "/assets/logos/udl-icon.svg",
     heroImage: "/assets/thumb/everfi-thumb.png",
     date: "2023",
     path: "/unified-design-language",

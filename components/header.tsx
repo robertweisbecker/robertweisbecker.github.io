@@ -54,7 +54,7 @@ export function Header() {
           </span>
         </LinkButton>
 
-        <LinkButton
+        {/* <LinkButton
           href="/about"
           variant="ghost"
           size="sm"
@@ -62,7 +62,7 @@ export function Header() {
           className="aria-current:bg-accent aria-current:text-accent-foreground max-md:hidden"
         >
           About
-        </LinkButton>
+        </LinkButton> */}
         {process.env.NODE_ENV === "development" && (
           <>
             <HeaderButton

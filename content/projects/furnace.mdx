@@ -17,27 +17,19 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleIcon } 
 
 ## Background
 
-Everfi has a large portfolio of e-learning courses, ranging in subject from _Early Literacy_ to _Workplace Inclusivity_ to the crowd favorite, _Bloodborne Pathogen Training_. Historically, courses were one-offs designed by individual teams using building blocks provided by our SDK, styling and composing them in unique ways. However, there was no feedback loop to collate these stylesheets, templates, and interactions for later reuse, so each new course build started from scratch.
+Beginning in 2018, I led the creation of our product org's first design system, shepherding its transition from an unstyled SDK into an accessible component library with theming and tooling to support 80+ courses across a dozen branded product lines.
 
-Around 2018, as the company began to scale, there was a well-intentioned effort to do just that. Components were gathered from existing courses, their styles turned into variables, and custom stylesheets became themes that could be reused across product families. In theory.
+{/* Everfi has a large portfolio of e-learning courses, ranging in subject from _Early Literacy_ to _Workplace Inclusivity_ to the crowd favorite, _Bloodborne Pathogen Training_. Historically, courses were one-offs designed by individual teams using building blocks provided by our SDK, styling and composing them in unique ways. However, there was no feedback loop to collate these stylesheets, templates, and interactions for later reuse, so each new course build started from scratch. */}
 
-Unfortunately, we ended up with components were hyper-specific and inflexible. Styles were incomplete and context-dependent: font sizes were often hard-coded, a padding variable was available on one button but not another; somehow, accordion chevrons were always pink.
+{/* Around 2018, as the company began to scale, there was a well-intentioned effort to do just that. Components were gathered from existing courses, their styles turned into variables, and custom stylesheets became themes that could be reused across product families. In theory. */}
 
-For the next year, we tried to make do, but without a style or UX foundation in place, designers and writers struggled to make square pegs designed in the past fit into round holes posed by a new audience or topic.
+{/* Unfortunately, we ended up with components were hyper-specific and inflexible. Styles were incomplete and context-dependent: font sizes were often hard-coded, a padding variable was available on one button but not another; somehow, accordion chevrons were always pink. */}
 
-It became difficult to maintain, impossible to fully document, and risky to make even minor changes to. We'd have to break everything in order to fix it, so, in early 2019, I began working on a proposal to rethink it from the ground up. By the end of the year, we'd built it.
+{/* For the next year, we tried to make do, but without a style or UX foundation in place, designers and writers struggled to make square pegs designed in the past fit into round holes posed by a new audience or topic. */}
+
+{/* It became difficult to maintain, impossible to fully document, and risky to make even minor changes to. We'd have to break everything in order to fix it, so, in early 2019, I began working on a proposal to rethink it from the ground up. By the end of the year, we'd built it. */}
 
 ### Goals
-
-<Collapsible>
-  <CollapsibleTrigger>
-    Show <CollapsibleIcon side="inline-end" />
-
-  </CollapsibleTrigger>
-  <CollapsibleContent>
-    <p>Hello</p>
-  </CollapsibleContent>
-</Collapsible>
 
 - **A centralized style system that supported widespread theming.** No more one-off component variables or CSS seeping in from other courses.
 - **A fully-styled base theme with smart defaults.** Documentation and QA were nearly impossible because we had no underlying styles for the components.

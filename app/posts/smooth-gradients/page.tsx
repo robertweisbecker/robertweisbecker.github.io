@@ -75,11 +75,12 @@ function ImageOverlayDemo() {
         className="bg-[url('https://images.unsplash.com/photo-1611706314453-9e1a6706b1a2?w=640&q=80')] bg-cover bg-center brightness-150 grayscale"
       >
         <div className="absolute inset-0 rounded-[inherit] bg-linear-to-b from-black/0 to-black" />
-        <span className="absolute inset-x-1 bottom-2">
+        <span className="absolute inset-x-1 bottom-2 text-2xs text-white/50">
+          Source:{" "}
           <LinkOut
-            href="https://unsplash.com/photos/a-football-stadium-full-of-fans-and-a-football-field-gpxbCttkrYI"
-            text="Aditi Bhanushali ∙ Unsplash"
-            className="text-2xs text-white"
+            href="https://unsplash.com/photos/yellow-and-black-sports-car-on-road-FSq5Btb18a4"
+            text="Unsplash"
+            className="text-white"
           />
         </span>
       </GradientSquare>
@@ -88,11 +89,12 @@ function ImageOverlayDemo() {
         className="bg-[url('https://images.unsplash.com/photo-1611706314453-9e1a6706b1a2?w=640&q=80')] bg-cover bg-center brightness-150 grayscale"
       >
         <div className="via-smooth absolute inset-0 rounded-[inherit] bg-linear-to-b from-black/0 to-black" />
-        <span className="absolute inset-x-1 bottom-2">
+        <span className="absolute inset-x-1 bottom-2 text-2xs text-white/50">
+          Source:{" "}
           <LinkOut
-            href="https://unsplash.com/photos/a-football-stadium-full-of-fans-and-a-football-field-gpxbCttkrYI"
-            text="Aditi Bhanushali ∙ Unsplash"
-            className="text-2xs text-white"
+            href="https://unsplash.com/photos/yellow-and-black-sports-car-on-road-FSq5Btb18a4"
+            text="Unsplash"
+            className="text-white"
           />
         </span>
       </GradientSquare>

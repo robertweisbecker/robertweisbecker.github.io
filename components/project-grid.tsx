@@ -38,7 +38,7 @@ function renderMedia(icon: ProjectGridItem["icon"]) {
   if (typeof icon === "string") {
     return (
       <ItemMedia variant="image" className="p-0.5">
-        <img src={icon} alt="" />
+        <img src={icon} alt="" className="rounded-[2px] object-contain mix-blend-plus-darker" />
       </ItemMedia>
     );
   }

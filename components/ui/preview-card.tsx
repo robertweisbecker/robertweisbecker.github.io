@@ -200,7 +200,7 @@ export function PreviewCardPopup({
       >
         <PreviewCardPrimitive.Popup
           className={cn(
-            "relative flex w-64 origin-(--transform-origin) ui-popup rounded-lg p-1 text-sm transition-[scale,opacity] duration-150 before:pointer-events-none data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
+            "relative flex w-64 origin-(--transform-origin) gap-2 ui-popup rounded-lg p-1 text-sm transition-[scale,opacity] duration-150 data-ending-style:scale-90 data-ending-style:opacity-0 data-starting-style:scale-90 data-starting-style:opacity-0",
             className
           )}
           data-slot="preview-card-content"

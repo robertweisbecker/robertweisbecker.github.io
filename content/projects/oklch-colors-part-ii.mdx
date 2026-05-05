@@ -1,11 +1,141 @@
 export const frontmatter = {
-  title: "okLCH Colors, Part II",
+  title: "Lessons in color-picking",
   subtitle: "Extending perceptual palettes—contrast, semantics, and rollout after the foundations in Part I",
   role: "Design Lead",
   date: "2026",
 };
 
 This case study continues from [Perceptual palettes with okLCH](/oklch-colors), where we defined ramps, luminance-aligned steps, and semantic slotting for the UDL color system.
+
+# Manipulating Chroma in okLCH
+
+## Education
+
+**M.S. in Computer Science**
+: **Sep 2021 - Jan 2023**
+
+University of Charles River
+: Boston, MA
+
+**B.Eng. in Software Engineering**
+: **Sep 2016 - Jul 2020**
+
+Huangdu Institute of Technology
+: Shanghai, China
+
+**strong**
+: **text**
+
+When it comes to okLCH, luminance is the easy part. It's predictable: Zero light is pitch black, 100% is fully white.
+
+Hue is the same as in HSL or HSV. The color wheel is a circle starting at R (red = 0º) and moving through the spectrum through OYGBIV . Your hue value is the angle on the color wheel.
+
+Chroma, however, is not.
+
+Here's a map of the chroma shape across hues at a fixed luminance:
+
+I found it useful to think of these as peaks and valleys for each hue. Each hue value has a maximum chroma value (which we'll call `Cmax`), 0 of course is minimum and gives us gray. When we start to increase or decrease luminance, we will likely need to rotate our hue warmer or cooler to maintain a relatively consistent chroma across steps.
+
+Some of these decisions can be made with common sense,
+
+Even if you aren't well-versed in color theory, you can intuit a lot about color cognition just from everyday experience. For example, we associate light and heat and fire with reds, oranges, and yellows, because that's just what color those things are. In the same way, we _know_ that ice is cold and blue.
+
+Have a look at Frosty the Snowman. The
+https://m.media-amazon.com/images/I/811RjQaNsIL._AC_UF1000,1000_QL80_.jpg
+
+Painters use this to their advantage. Take the [Hudson River School](https://en.wikipedia.org/wiki/Hudson_River_School) painters, who painted elaborately detailed landscapes of the Hudson Valley wilderness in the late 19th century.
+
+<Image
+  caption="A Gorge In The Mountains - Kauterskill Falls (1862) | Sanford Robinson Gifford"
+  src="https://upload.wikimedia.org/wikipedia/commons/9/96/Gifford_Sanford_Robinson_A_Gorge_In_The_Mountains.jpg"
+/>
+
+<Image
+  caption={
+    <span className="flex max-w-full items-center justify-between gap-2">
+      <span>Wayne Thiebaud</span>
+      <span>
+        <em>Watermelon Slices</em>, 1961
+      </span>
+    </span>
+  }
+  src="https://sjmusart.org/sites/default/files/styles/wide/public/uploads/photos/thiebaud_watermelon_large.jpg?itok=snTyFed9"
+/>
+
+<Image
+  caption="Johannes Vermeer, The Milkmaid, ca. 1660, Rijksmuseum, Amsterdam
+"
+  src="https://www.mauritshuis.nl/media/lokfl0w2/johannes-vermeer-het-melkmeisje-rijksmuseum.jpg?width=1014&quality=70&v=1d794db4864c030"
+/>
+
+It can go little further than that, though you may not realize you already know these things. When you look into the horizon at a distant mountain range, what color do they seem? If you said blue, you'd be right. This is atmospheric perspective: molecules of air scatter shorter wavelengths (blue) more than longer ones (red), so distant objects appear bluer.
+
+If you weren't sure the answer, you might intuit that those things are far away, and faraway things are hazier or perhaps shadowed, so even if a hue like "blue!" didn't come to mind, you stil recognize that, fundamentally, objects in the distance are both less chromatic and cooler (in other words, bluer) than up close.
+
+Animals [instinctively](https://www.ovid.com/journals/jcapp/abstract/00004726-197012000-00007~attached-shadow-orientation-perceived-as-depth-by-chickens?redirectionsource=fulltextview) know these things. Humans perceive cooler or less saturated colors as receding into the distance, and warm colors or more saturated colors as closer. This is why some colors "vibrate". Our brains are telling us that this is an unnatural color pairing; we shouldn't have something so saturated amongst or enveloped in a field of desaturated colors.
+
+Here's another thought excercise. Picture neon green. Now envision moving around the color wheel to a new color that's just as strikingly saturated. Move left on the wheel (or counterclockwise) a bit, and you can picture pure yellow. Move right (or clockwise) from neon green, and a sky blue might seem like a good candidate. Congrats, you've found cyan.
+
+Try purple. What "color" is "neon purple"? Let's start by lightening purple in our heads. As we increase the white, we get something like a lavender. But it needs to be saturated too! Lavender isn't bursting with chroma like neon green or sky blue.
+
+So, a purple that's both _bright_ and _saturated_? To be more saturated, it needs to shift more toward the hue that has more "available" chroma or saturation...something like hot pink. Ok, inch along that color wheel toward pink and try to give your purple incrementally more and more chroma. Where you end up isn't really purple anymore, it's magenta.
+
+Think like this when you're choosing colors. Regarding hue shifts for changing chroma, here's a non-scientific method:
+
+1. Your first instinct is generally correct: when warm colors get darker, they want to shift cooler. Think of bricks in shadow. When cool colors get lighter, they more quickly become white than warm colors do.
+2. The most saturated colors you can envision are actually the most saturated: neon green, pure yellow, sky blue, hot pink, etc.
+3. When you can't decide where to curve a color, move toward a nearby peak in chroma.
+
+We can gather some general observations:
+
+- Reds have a gap in chroma at low luminosity so they either need to curve pink or orange
+- Likewise, orange needs to curve red in the middle
+- Yellows, predictably, have high chroma at low luminosity
+  - you need to be mindful about where you want to unload your chroma clip — need to thread the needle of including a "platonic" yellow (submarine) without either
+    - a) overpowering surrounding colors
+    - or b) wasting your ammo on a lightly-used state value
+- same goes for cyan and lime
+- choice to make: do you differentiate between icons and text — on one hand, hierarchy. On the other: token explosion
+  - do you then have hover, active, disabled for icons?
+  - and are they just one step behind your text?
+- you probably need one more color in dark mode than you have in light
+- Chroma
+  - It's not possible to maintain the same chroma across hues — attempting so is futile
+    - https://en.wikipedia.org/wiki/Helmholtz%E2%80%93Kohlrausch_effect
+  * what matters are the relative gradations in chroma within a given hue
+  * know that:
+    yellow -> cyan peak early
+    red peaks in the middle
+    indigoes peak after blues
+    greens fall off fast
+    magentas stay high (double check that one)
+    https://threadreaderapp.com/thread/1285646784929439744.html
+
+* Hue:
+  - as lights get lighter, pink/purple/indigo shift toward blue and teal/green/orange shift toward yellow
+  - as luminance decreases, the former colors want to shift toward red/violet, while the latter drift more toward green
+    - https://en.wikipedia.org/wiki/Bezold%E2%80%93Br%C3%BCcke_shift
+    - ![[Pasted image 20250103010053.png]]
+* Luminance:
+  - Moving from your darkest colors to the middle of your palette, you'll find that Increasing luminance increases perceived chroma
+    - https://en.wikipedia.org/wiki/Hunt_effect_%28color%29
+    - This leaves some wiggle room to fine-tune your dark colors, even if it means deviating from your chroma pattern
+    - Be careful not to let colors vibrate
+  - Don't simply increase luminance when choosing colors
+    - https://en.wikipedia.org/wiki/Abney_effect
+    - Adding white to a high chroma lime green leaves you with a teal if you don't also manipulate hue or chroma.
+      - Instead, this should curve toward yellow (think grassy)
+    - This also follows for other colors:
+      - A pure red at 50% luminance appears pink -> curve toward orange (or lean into it)
+      - Blue and indigo start to bleed together too — if you have both in your scale, curve the blue toward cyan as you go lighter. This will also give you more chroma to work with
+
+General Trends
+
+- Chroma peaks at 400
+- Luminosity slope accelerates in the middle, then tapers off
+- Dark colors have less contrast with one another when outside of the text zone — a single point of luminance is more visible at the lower end than in lights, especially when its surroundings are dark.
+  - What's more startling — when someone turns the lights on at night or when they go out in the day?
+-
 
 ## Hue
 
