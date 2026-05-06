@@ -66,7 +66,7 @@ const buttonVariants = cva(
       },
       size: {
         md: "[--button-x:--spacing(3.5)] [--button-y:--spacing(2)] h-button",
-        xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-sm)] text-[0.6875rem]/4 ",
+        xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-sm)] text-[0.6875rem]/4 gap-1",
         sm: "h-button-sm [--button-x:--spacing(2)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)] text-[0.8125rem]  ",
         lg: "h-button-lg [--button-x:--spacing(4)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-base",
         icon: "size-button [&_svg:not([class*='size-'])]:size-4",
@@ -129,26 +129,14 @@ function Button({
           data-slot="loader"
           className="absolute animate-spin text-(--button-color)"
         >
-          <path
-            d="M9.74524 4.32328L12.0952 1.08728L13.309 1.96869L10.959 5.20469L9.74524 4.32328Z"
-            fill="currentColor"
-            fillOpacity="0.1"
-          />
-          <path
-            d="M15.3763 4.8147L11.5723 6.0507L12.0358 7.47728L15.8398 6.24128L15.3763 4.8147Z"
-            fill="currentColor"
-            fillOpacity="0.2"
-          />
+          <path d="M9.74524 4.32328L12.0952 1.08728L13.309 1.96869L10.959 5.20469L9.74524 4.32328Z" fill="currentColor" fillOpacity="0.1" />
+          <path d="M15.3763 4.8147L11.5723 6.0507L12.0358 7.47728L15.8398 6.24128L15.3763 4.8147Z" fill="currentColor" fillOpacity="0.2" />
           <path
             d="M15.8398 9.75871L12.0358 8.52271L11.5723 9.94929L15.3763 11.1853L15.8398 9.75871Z"
             fill="currentColor"
             fillOpacity="0.3"
           />
-          <path
-            d="M13.309 14.0313L10.959 10.7953L9.74524 11.6767L12.0952 14.9127L13.309 14.0313Z"
-            fill="currentColor"
-            fillOpacity="0.4"
-          />
+          <path d="M13.309 14.0313L10.959 10.7953L9.74524 11.6767L12.0952 14.9127L13.309 14.0313Z" fill="currentColor" fillOpacity="0.4" />
           <path d="M8.75 12V16H7.25V12H8.75Z" fill="currentColor" fillOpacity="0.5" />
           <path
             d="M6.25488 11.6767L3.90488 14.9127L2.69116 14.0313L5.04116 10.7953L6.25488 11.6767Z"

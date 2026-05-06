@@ -12,7 +12,7 @@ const avatarVariants = cva(
     variants: {
       size: {
         default: "-my-1 text-[13px]",
-        sm: "-my-0.5 [--avatar-radius:var(--radius-sm)] [--avatar-size:--spacing(5)] text-[11px]",
+        sm: "-my-0.5 [--avatar-radius:var(--radius-sm)] [--avatar-size:--spacing(4)] text-[11px]",
         lg: "-my-2 [--avatar-radius:var(--radius-lg)] [--avatar-size:--spacing(8)] text-[15px]",
       },
       defaultVariants: {
@@ -23,14 +23,7 @@ const avatarVariants = cva(
 );
 
 function Avatar({ className, size, ...props }: AvatarPrimitive.Root.Props & VariantProps<typeof avatarVariants>) {
-  return (
-    <AvatarPrimitive.Root
-      data-slot="avatar"
-      data-size={size}
-      className={cn(avatarVariants({ size }), className)}
-      {...props}
-    />
-  );
+  return <AvatarPrimitive.Root data-slot="avatar" data-size={size} className={cn(avatarVariants({ size }), className)} {...props} />;
 }
 
 function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
@@ -47,10 +40,7 @@ function AvatarFallback({ className, ...props }: AvatarPrimitive.Fallback.Props)
   return (
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
-      className={cn(
-        "grid-stack size-full overflow-hidden rounded-(--avatar-radius) font-pixel text-[11px] [&_svg]:size-4",
-        className
-      )}
+      className={cn("grid-stack size-full overflow-hidden rounded-(--avatar-radius) font-pixel text-[11px] [&_svg]:size-4", className)}
       {...props}
     />
   );
@@ -76,10 +66,7 @@ function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group"
-      className={cn(
-        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-card",
-        className
-      )}
+      className={cn("group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-card", className)}
       {...props}
     />
   );

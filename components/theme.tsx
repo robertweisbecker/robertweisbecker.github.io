@@ -59,13 +59,13 @@ export const HUE_OPTIONS: ColorOption<HueName>[] = [
 
 export const NEUTRAL_OPTIONS: ColorOption<NeutralName>[] = [
   { value: "black", label: "Black", preview: "var(--color-black-400)" },
+  { value: "gray", label: "Gray", preview: "var(--color-gray-400)" },
+  { value: "ash", label: "Ash", preview: "var(--color-ash-400)" },
+  { value: "zinc", label: "Zinc", preview: "var(--color-zinc-400)" },
   { value: "plum", label: "Plum", preview: "var(--color-plum-400)" },
   { value: "sand", label: "Sand", preview: "var(--color-sand-400)" },
   { value: "sage", label: "Sage", preview: "var(--color-sage-400)" },
-  { value: "gray", label: "Gray", preview: "var(--color-gray-400)" },
-  { value: "ash", label: "Ash", preview: "var(--color-ash-400)" },
   { value: "steel", label: "Steel", preview: "var(--color-steel-400)" },
-  { value: "zinc", label: "Zinc", preview: "var(--color-zinc-400)" },
 ];
 
 export const ALL_HUE_OPTIONS: ColorOption<HueName>[] = [...HUE_OPTIONS, ...NEUTRAL_OPTIONS];
@@ -147,8 +147,7 @@ export function Theme({
 
   React.useEffect(() => {
     if (isRoot) return;
-    const matches =
-      settings.hue === parentHue && settings.neutral === parentNeutral && settings.radius === parentRadius;
+    const matches = settings.hue === parentHue && settings.neutral === parentNeutral && settings.radius === parentRadius;
     if (matches) setHasLocalOverrides(false);
   }, [isRoot, settings.hue, settings.neutral, settings.radius, parentHue, parentNeutral, parentRadius]);
 
@@ -177,8 +176,7 @@ export function Theme({
   const baselineNeutral = isRoot ? defaultNeutralProp : parentNeutral!;
   const baselineRadius = isRoot ? defaultRadiusProp : parentRadius!;
 
-  const isDirty =
-    settings.hue !== baselineHue || settings.neutral !== baselineNeutral || settings.radius !== baselineRadius;
+  const isDirty = settings.hue !== baselineHue || settings.neutral !== baselineNeutral || settings.radius !== baselineRadius;
 
   const themeContext = React.useMemo<ThemeContextValue>(
     () => ({

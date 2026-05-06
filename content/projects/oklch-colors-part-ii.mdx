@@ -5,6 +5,12 @@ export const frontmatter = {
   date: "2026",
 };
 
+import oklchStatusInfo from "@/public/assets/oklch/status-info.png";
+import oklchStatusSuccess from "@/public/assets/oklch/status-success.png";
+import oklchStatusWarning from "@/public/assets/oklch/status-warning.png";
+import oklchStatusError from "@/public/assets/oklch/status-error.png";
+import oklchStatusHighlight from "@/public/assets/oklch/status-highlight.png";
+
 This case study continues from [Perceptual palettes with okLCH](/oklch-colors), where we defined ramps, luminance-aligned steps, and semantic slotting for the UDL color system.
 
 # Manipulating Chroma in okLCH
@@ -45,28 +51,47 @@ https://m.media-amazon.com/images/I/811RjQaNsIL._AC_UF1000,1000_QL80_.jpg
 
 Painters use this to their advantage. Take the [Hudson River School](https://en.wikipedia.org/wiki/Hudson_River_School) painters, who painted elaborately detailed landscapes of the Hudson Valley wilderness in the late 19th century.
 
-<Image
-  caption="A Gorge In The Mountains - Kauterskill Falls (1862) | Sanford Robinson Gifford"
-  src="https://upload.wikimedia.org/wikipedia/commons/9/96/Gifford_Sanford_Robinson_A_Gorge_In_The_Mountains.jpg"
-/>
+<figure className="not-prose relative my-10 flex flex-col items-center justify-center gap-1.5">
+  <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/9/96/Gifford_Sanford_Robinson_A_Gorge_In_The_Mountains.jpg"
+      alt=""
+      className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+    />
+  </div>
+  <figcaption className="mx-auto text-center text-xs text-muted-foreground">
+    A Gorge In The Mountains - Kauterskill Falls (1862) | Sanford Robinson Gifford
+  </figcaption>
+</figure>
 
-<Image
-  caption={
-    <span className="flex max-w-full items-center justify-between gap-2">
-      <span>Wayne Thiebaud</span>
-      <span>
-        <em>Watermelon Slices</em>, 1961
-      </span>
+<figure className="not-prose relative my-10 flex flex-col items-center justify-center gap-1.5">
+  <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+    <img
+      src="https://sjmusart.org/sites/default/files/styles/wide/public/uploads/photos/thiebaud_watermelon_large.jpg?itok=snTyFed9"
+      alt=""
+      className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+    />
+  </div>
+  <figcaption className="mx-auto flex max-w-full items-center justify-between gap-2 text-center text-xs text-muted-foreground">
+    <span>Wayne Thiebaud</span>
+    <span>
+      <em>Watermelon Slices</em>, 1961
     </span>
-  }
-  src="https://sjmusart.org/sites/default/files/styles/wide/public/uploads/photos/thiebaud_watermelon_large.jpg?itok=snTyFed9"
-/>
+  </figcaption>
+</figure>
 
-<Image
-  caption="Johannes Vermeer, The Milkmaid, ca. 1660, Rijksmuseum, Amsterdam
-"
-  src="https://www.mauritshuis.nl/media/lokfl0w2/johannes-vermeer-het-melkmeisje-rijksmuseum.jpg?width=1014&quality=70&v=1d794db4864c030"
-/>
+<figure className="not-prose relative my-10 flex flex-col items-center justify-center gap-1.5">
+  <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+    <img
+      src="https://www.mauritshuis.nl/media/lokfl0w2/johannes-vermeer-het-melkmeisje-rijksmuseum.jpg?width=1014&quality=70&v=1d794db4864c030"
+      alt=""
+      className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+    />
+  </div>
+  <figcaption className="mx-auto text-center text-xs text-muted-foreground">
+    Johannes Vermeer, The Milkmaid, ca. 1660, Rijksmuseum, Amsterdam
+  </figcaption>
+</figure>
 
 It can go little further than that, though you may not realize you already know these things. When you look into the horizon at a distant mountain range, what color do they seem? If you said blue, you'd be right. This is atmospheric perspective: molecules of air scatter shorter wavelengths (blue) more than longer ones (red), so distant objects appear bluer.
 
@@ -153,11 +178,11 @@ General Trends
 <ProjectCarousel
   variant="full"
   slides={[
-    { src: "/assets/oklch/status-info.png", alt: "Info status styling", caption: "Info" },
-    { src: "/assets/oklch/status-success.png", alt: "Success status styling", caption: "Success" },
-    { src: "/assets/oklch/status-warning.png", alt: "Warning status styling", caption: "Warning" },
-    { src: "/assets/oklch/status-error.png", alt: "Error status styling", caption: "Error" },
-    { src: "/assets/oklch/status-highlight.png", alt: "Highlight status styling", caption: "Highlight" },
+    { src: oklchStatusInfo, alt: "Info status styling", caption: "Info" },
+    { src: oklchStatusSuccess, alt: "Success status styling", caption: "Success" },
+    { src: oklchStatusWarning, alt: "Warning status styling", caption: "Warning" },
+    { src: oklchStatusError, alt: "Error status styling", caption: "Error" },
+    { src: oklchStatusHighlight, alt: "Highlight status styling", caption: "Highlight" },
   ]}
 />
 

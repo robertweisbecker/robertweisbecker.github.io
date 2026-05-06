@@ -81,10 +81,7 @@ function Carousel({
   const isInView = entry?.isIntersecting ?? false;
   const userPaused = React.useRef(false);
 
-  const builtInPlugins = [
-    ...(fadeEnabled ? [Fade()] : []),
-    ...(autoplayPlugin.current ? [autoplayPlugin.current] : []),
-  ];
+  const builtInPlugins = [...(fadeEnabled ? [Fade()] : []), ...(autoplayPlugin.current ? [autoplayPlugin.current] : [])];
 
   const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: orientation === "horizontal" ? "x" : "y" }, [
     ...builtInPlugins,
@@ -175,10 +172,7 @@ function Carousel({
       setIsPlaying(false);
       setAutoplayProgress(0);
     };
-    const onAutoplaySelect = (
-      emblaApi: EmblaCarouselType,
-      { detail }: { detail: { sourceSnap: number; targetSnap: number } }
-    ) => {
+    const onAutoplaySelect = (emblaApi: EmblaCarouselType, { detail }: { detail: { sourceSnap: number; targetSnap: number } }) => {
       setAutoplayProgress(0);
       // Non-loop: intercept autoplay's wrap from last→0 and stop on the last slide.
       // The library calls startAutoplay() right after this event fires, so defer via
@@ -267,8 +261,7 @@ function Carousel({
           "group relative",
           "[--carousel-height:var(--container-xs)]",
           "[--carousel-gap:--spacing(4)]",
-          orientation === "vertical" &&
-            "has-data-[slot=carousel-next]:pb-button-sm has-data-[slot=carousel-previous]:pt-button-sm",
+          orientation === "vertical" && "has-data-[slot=carousel-next]:pb-button-sm has-data-[slot=carousel-previous]:pt-button-sm",
           className
         )}
         role="region"
@@ -303,8 +296,7 @@ function CarouselViewport({ className, ...props }: React.ComponentProps<"div">) 
         className={cn(
           "flex min-w-0 has-[[class*='shadow-border']]:p-px",
           orientation === "horizontal" && "-ms-(--carousel-gap)",
-          orientation === "vertical" &&
-            "-mt-(--carousel-gap) h-[calc(var(--carousel-gap)+var(--carousel-height))] flex-col",
+          orientation === "vertical" && "-mt-(--carousel-gap) h-[calc(var(--carousel-gap)+var(--carousel-height))] flex-col",
           className
         )}
         {...props}
@@ -330,12 +322,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function CarouselPrevious({
-  className,
-  variant = "overlay",
-  size = "icon-sm",
-  ...props
-}: React.ComponentProps<typeof Button>) {
+function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
   const { orientation, goToPrev, canGoToPrev } = useCarousel();
   return (
     <Button
@@ -367,12 +354,7 @@ function CarouselPrevious({
   );
 }
 
-function CarouselNext({
-  className,
-  variant = "overlay",
-  size = "icon-sm",
-  ...props
-}: React.ComponentProps<typeof Button>) {
+function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
   const { orientation, goToNext, canGoToNext } = useCarousel();
   return (
     <Button
@@ -448,10 +430,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
               >
                 <Meter.Track className="size-full overflow-hidden rounded-full">
                   <Meter.Indicator
-                    className={cn(
-                      "min-w-px rounded-full bg-white duration-0",
-                      isFillingSlide ? "transition-[width]" : "transition-none"
-                    )}
+                    className={cn("min-w-px rounded-full bg-white duration-0", isFillingSlide ? "transition-[width]" : "transition-none")}
                     style={{ width: `${autoplayProgress}%` }}
                   />
                 </Meter.Track>
@@ -476,7 +455,7 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
       onClick={isFinished ? restartAutoplay : togglePlay}
       aria-label={isFinished ? "Restart" : isPlaying ? "Pause" : "Play"}
       className={cn(
-        buttonVariants({ variant: "overlay", size: "icon-sm" }),
+        buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }),
         orientation === "vertical" && "-rotate-90",
         className
       )}
@@ -504,11 +483,7 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
   );
 }
 
-function CarouselToolbar({
-  className,
-  inset = true,
-  ...props
-}: React.ComponentProps<typeof Toolbar.Root> & { inset?: boolean }) {
+function CarouselToolbar({ className, inset = true, ...props }: React.ComponentProps<typeof Toolbar.Root> & { inset?: boolean }) {
   const { orientation, autoplayEnabled } = useCarousel();
   const layout = inset ? "inset" : "default";
 

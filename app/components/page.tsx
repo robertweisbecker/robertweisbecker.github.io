@@ -5,6 +5,8 @@ import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
 import { FigmaIcon, GithubIcon } from "@/components/icons";
 import { ImageToggle } from "@/components/image-toggle";
+import forgeBefore from "@/public/assets/forge/forge-before.png";
+import forgeAfter from "@/public/assets/forge/forge-after.png";
 import { LinkOut } from "@/components/link-out";
 import {
   AlertDialog,
@@ -147,12 +149,12 @@ export default function ComponentsPage() {
             </ChromeTabs>
             <ImageToggle
               mode="comparison"
-              before="/assets/forge/forge-before.png"
-              after="/assets/forge/forge-after.png"
+              before={forgeBefore}
+              after={forgeAfter}
               tab1="Before"
               tab2="After"
             />
-            {/* <ImageToggle mode="slider" before="/assets/forge/forge-before.png" after="/assets/forge/forge-after.png" /> */}
+            {/* <ImageToggle mode="slider" before={forgeBefore} after={forgeAfter} /> */}
           </Section>
           <Section title="Button" className="gap-4">
             <div className="flex flex-wrap gap-2">

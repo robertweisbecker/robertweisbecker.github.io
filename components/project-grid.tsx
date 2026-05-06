@@ -1,13 +1,4 @@
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemSeparator,
-  ItemTitle,
-} from "@/components/ui/item";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/ui/item";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -23,9 +14,11 @@ export type ProjectGridItem = {
   /** String renders as <img> src. ReactNode renders as-is (e.g. an icon component). */
   icon?: string | React.ReactNode;
   /** Optional content rendered in the trailing actions slot (e.g. a Badge). */
-  category?: React.ReactNode;
+  tags?: React.ReactNode;
   /** Enables CSS view-transition on the title. Defaults to the title string. */
   viewTransitionName?: string;
+  /** Whether the item is published. Defaults to true. */
+  published?: boolean;
 };
 
 export type ProjectGridProps = {
@@ -37,13 +30,13 @@ export type ProjectGridProps = {
 function renderMedia(icon: ProjectGridItem["icon"]) {
   if (typeof icon === "string") {
     return (
-      <ItemMedia variant="image" className="p-0.5">
-        <img src={icon} alt="" className="rounded-[2px] object-contain mix-blend-plus-darker" />
+      <ItemMedia variant="image" className="">
+        <img src={icon} alt="" className="object-scale-down!" />
       </ItemMedia>
     );
   }
   if (icon) {
-    return <ItemMedia variant="image">{icon}</ItemMedia>;
+    return <ItemMedia variant="default">{icon}</ItemMedia>;
   }
   return (
     <ItemMedia variant="image">
@@ -59,12 +52,14 @@ const defaultItems: ProjectGridItem[] = projects.map((p) => ({
   date: p.date,
   path: p.path,
   icon: p.icon,
+  published: p.published,
 }));
 
 export function ProjectGrid({ items = defaultItems, className, itemClassName }: ProjectGridProps) {
+  const filteredItems = items.filter((item) => item.published ?? true);
   return (
     <ItemGroup className={className}>
-      {items.map((item, index) => (
+      {filteredItems.map((item, index) => (
         <React.Fragment key={item.id}>
           <Item
             render={<Link href={item.path} />}
@@ -77,9 +72,9 @@ export function ProjectGrid({ items = defaultItems, className, itemClassName }: 
               {item.description && <ItemDescription>{item.description}</ItemDescription>}
             </ItemContent>
             {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
-            {item.category && <ItemActions>{item.category}</ItemActions>}
+            {item.tags && <ItemActions>{item.tags}</ItemActions>}
           </Item>
-          {index !== items.length - 1 && <ItemSeparator />}
+          {index !== filteredItems.length - 1 && <ItemSeparator />}
         </React.Fragment>
       ))}
     </ItemGroup>

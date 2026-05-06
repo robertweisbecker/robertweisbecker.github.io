@@ -19,13 +19,17 @@ import {
   DialogPopup,
 } from "@/components/ui/dialog";
 import { Image } from "@/components/image";
+import { imageSrc } from "@/lib/image-src";
+import type { StaticImageData } from "next/image";
+
 const SPRING = { type: "spring" as const, damping: 28, stiffness: 220 };
 
-interface ImageModalProps {
-  src: string;
-  src2?: string;
-  caption?: string;
+export interface ImageModalProps {
+  src: StaticImageData;
+  src2?: StaticImageData;
+  caption?: React.ReactNode;
   portrait?: boolean;
+  className?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -66,18 +70,27 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
 // ---------------------------------------------------------------------------
 // Shared modal image with skeleton
 // ---------------------------------------------------------------------------
-function ModalImage({ src, alt, imgAspect }: { src: string; alt: string; imgAspect?: string }) {
+function ModalImage({
+  src,
+  alt,
+  imgAspect,
+}: {
+  src: StaticImageData | string;
+  alt: string;
+  imgAspect?: string;
+}) {
   const [loaded, setLoaded] = React.useState(false);
+  const url = imageSrc(src);
 
   React.useEffect(() => {
     setLoaded(false);
-  }, [src]);
+  }, [url]);
 
   return (
     <>
       {!loaded && imgAspect && <Skeleton className="inset-2 h-100 rounded-[20px]" />}
       <img
-        src={src}
+        src={url}
         alt={alt}
         onLoad={() => setLoaded(true)}
         style={{
@@ -96,12 +109,13 @@ function ModalImage({ src, alt, imgAspect }: { src: string; alt: string; imgAspe
   );
 }
 
-export function ImageModal({ src, caption }: ImageModalProps) {
+export function ImageModal({ src, caption, className }: ImageModalProps) {
+  const fullscreenUrl = imageSrc(src);
   return (
     <Dialog>
-      <figure className="group/figure my-0! block">
+      <figure className={cn("group/figure my-0! block", className)}>
         <div className="relative">
-          <Image src={src} alt={caption ?? ""} className="w-full" />
+          <Image src={src} alt={typeof caption === "string" ? caption : ""} className="w-full" />
           <DialogTrigger
             aria-label="View fullscreen image"
             className="absolute inset-e-2 bottom-2"
@@ -128,7 +142,11 @@ export function ImageModal({ src, caption }: ImageModalProps) {
             )}
           >
             <DialogBase.Title className="sr-only">{caption || "Image"}</DialogBase.Title>
-            <img src={src} alt={caption ?? ""} className="block h-auto w-full max-w-none object-contain" />
+            <img
+              src={fullscreenUrl}
+              alt={typeof caption === "string" ? caption : ""}
+              className="block h-auto w-full max-w-none object-contain"
+            />
           </DialogPopup>
         </DialogBase.Viewport>
       </DialogPortal>
@@ -163,8 +181,8 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
               <motion.img
                 layoutId={layoutId}
                 // transition={{ layout: SPRING }}
-                src={src}
-                alt={caption ?? ""}
+                src={imageSrc(src)}
+                alt={typeof caption === "string" ? caption : ""}
                 onLoad={handleImgLoad}
                 style={{
                   aspectRatio: imgAspect,
@@ -179,7 +197,7 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
             <div aria-hidden style={{ opacity: 0 }}>
               <div style={{ padding: 4, borderRadius: 12 }}>
                 <img
-                  src={src}
+                  src={imageSrc(src)}
                   alt=""
                   style={{
                     aspectRatio: imgAspect,
@@ -250,8 +268,8 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
                   <motion.img
                     layoutId={layoutId}
                     // transition={{ layout: SPRING }}
-                    src={src2 ?? src}
-                    alt={caption ?? ""}
+                    src={imageSrc(src2 ?? src)}
+                    alt={typeof caption === "string" ? caption : ""}
                     onLoad={handleImgLoad}
                     className="w-full max-w-none min-w-0"
                     style={{
@@ -306,8 +324,8 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
             }
           >
             <img
-              src={src}
-              alt={caption ?? ""}
+              src={imageSrc(src)}
+              alt={typeof caption === "string" ? caption : ""}
               onLoad={handleImgLoad}
               style={{
                 aspectRatio: imgAspect,
@@ -373,7 +391,7 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
                   > */}
                   <ModalImage
                     src={src2 ?? src}
-                    alt={caption ?? ""}
+                    alt={typeof caption === "string" ? caption : ""}
                     // imgAspect={imgAspect}
                   />
                   {/* </motion.div> */}
@@ -414,8 +432,8 @@ export function ImageModalPopover2({ src, src2, caption }: ImageModalProps) {
           <motion.img
             layoutId={layoutId}
             // transition={{ layout: SPRING }}
-            src={src}
-            alt={caption ?? ""}
+            src={imageSrc(src)}
+            alt={typeof caption === "string" ? caption : ""}
             onLoad={handleImgLoad}
             style={{
               // aspectRatio: imgAspect,
@@ -455,8 +473,8 @@ export function ImageModalPopover2({ src, src2, caption }: ImageModalProps) {
                     {state.open && (
                       <motion.img
                         layoutId={layoutId}
-                        src={src}
-                        alt={caption ?? ""}
+                        src={imageSrc(src)}
+                        alt={typeof caption === "string" ? caption : ""}
                         style={{
                           aspectRatio: imgAspect,
                         }}
@@ -541,8 +559,8 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
           aria-label="View fullscreen image"
         >
           <img
-            src={src}
-            alt={caption ?? ""}
+            src={imageSrc(src)}
+            alt={typeof caption === "string" ? caption : ""}
             onLoad={handleImgLoad}
             style={{
               aspectRatio: imgAspect,
@@ -594,7 +612,11 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
                       minHeight: "512px",
                     }}
                   >
-                    <ModalImage src={src2 ?? src} alt={caption ?? ""} imgAspect={imgAspect} />
+                    <ModalImage
+                      src={src2 ?? src}
+                      alt={typeof caption === "string" ? caption : ""}
+                      imgAspect={imgAspect}
+                    />
                   </motion.div>
                 </motion.div>
               </div>

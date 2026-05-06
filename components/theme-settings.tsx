@@ -1,30 +1,15 @@
 "use client";
-
+import { cn } from "@/lib/utils";
 import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-group";
 import { NumberSlider } from "@/components/number-slider";
-import {
-  ALL_HUE_OPTIONS,
-  COLOR_MAP,
-  HUE_OPTIONS,
-  NEUTRAL_OPTIONS,
-  useTheme,
-  type HueName,
-  type NeutralName,
-} from "@/components/theme";
+import { ALL_HUE_OPTIONS, COLOR_MAP, HUE_OPTIONS, NEUTRAL_OPTIONS, useTheme, type HueName, type NeutralName } from "@/components/theme";
 import { Button } from "@/components/ui/button";
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-} from "@/components/ui/field";
+import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
 import {
   Popover,
   PopoverContent,
   PopoverDescription,
+  PopoverFooter,
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
@@ -39,11 +24,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+
 import { IconRotate2, IconWheel } from "@tabler/icons-react";
-import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
+import { LinkButton } from "./ui/link-button";
 
 const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({
   value: opt.value,
@@ -99,7 +85,7 @@ export function ThemeResetAllButton({ variant = "ghost", size = "sm", ...props }
 
   return (
     <Button variant={variant} size={size} onClick={reset} disabled={!isDirty} {...props}>
-      Reset theme
+      Reset to defaults
     </Button>
   );
 }
@@ -125,23 +111,27 @@ export function ThemeSettings({ className }: { className?: string }) {
           className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720"
         />
       </PopoverTrigger>
-      <PopoverContent align="end" className="flex w-xs flex-col gap-0 overflow-hidden p-0">
-        <PopoverHeader className="px-4 pt-4 pb-2">
-          <div className="flex w-full items-start justify-between gap-2">
-            <PopoverTitle>Theme</PopoverTitle>
-          </div>
+      <PopoverContent align="end" className="w-xs overflow-hidden">
+        <PopoverHeader className="">
+          <PopoverTitle>Theme</PopoverTitle>
           <PopoverDescription>Adjust the theme to your heart&apos;s content.</PopoverDescription>
         </PopoverHeader>
-        <ThemeSettingsPanel className="px-4 pb-2" />
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border px-4 py-3 text-sm">
-          <Link href="/posts/theming" className="link text-secondary-foreground">
-            Learn more
-          </Link>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+          <LinkButton variant="link" href="/posts/theming">
+            How it works
+          </LinkButton>
           <span className="text-muted-foreground" aria-hidden>
             ∙
           </span>
-          <ThemeResetAllButton variant="link" size="md" className="h-auto min-h-0 p-0" />
+          <LinkButton variant="link" href="/oklch-colors#palettes">
+            View palettes
+          </LinkButton>
         </div>
+        <Separator />
+        <ThemeSettingsPanel className="" />
+        <PopoverFooter>
+          <ThemeResetAllButton variant="outline" size="md" className="w-full flex-1" />
+        </PopoverFooter>
       </PopoverContent>
     </Popover>
   );
@@ -170,14 +160,10 @@ export function ThemeSettingsPanel({
         <FieldLegend>Colors</FieldLegend>
         <FieldGroup>
           <Field>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 pe-1">
               <FieldLabel className="me-auto">Primary hue</FieldLabel>
 
-              <ThemeFieldReset
-                dirty={hueDirty}
-                onReset={() => set({ hue: defaultHue })}
-                aria-label="Reset hue to default"
-              />
+              <ThemeFieldReset dirty={hueDirty} onReset={() => set({ hue: defaultHue })} aria-label="Reset hue to default" />
               <span className="text-xs text-muted-foreground capitalize">{hue}</span>
             </div>
             {hueDisplay === "select" ? (
@@ -190,8 +176,8 @@ export function ThemeSettingsPanel({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Hues</SelectLabel>
-                    {HUE_OPTIONS.map((opt) => (
+                    <SelectLabel>Grays</SelectLabel>
+                    {NEUTRAL_OPTIONS.map((opt) => (
                       <SelectItem key={opt.value} value={opt.value}>
                         <HueSwatch hue={opt.value} />
                         {opt.label}
@@ -200,8 +186,8 @@ export function ThemeSettingsPanel({
                   </SelectGroup>
                   <SelectSeparator />
                   <SelectGroup>
-                    <SelectLabel>Grays</SelectLabel>
-                    {NEUTRAL_OPTIONS.map((opt) => (
+                    <SelectLabel>Hues</SelectLabel>
+                    {HUE_OPTIONS.map((opt) => (
                       <SelectItem key={opt.value} value={opt.value}>
                         <HueSwatch hue={opt.value} />
                         {opt.label}
@@ -221,7 +207,7 @@ export function ThemeSettingsPanel({
           </Field>
 
           <Field>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 pe-1">
               <FieldLabel className="me-auto">Neutral hue</FieldLabel>
               <ThemeFieldReset
                 dirty={neutralDirty}
@@ -267,11 +253,7 @@ export function ThemeSettingsPanel({
         label="Radius"
         labelAction={
           <>
-            <ThemeFieldReset
-              dirty={radiusDirty}
-              onReset={() => set({ radius: defaultRadius })}
-              aria-label="Reset radius to default"
-            />
+            <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" />
           </>
         }
         min={0}

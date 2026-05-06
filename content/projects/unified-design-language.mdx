@@ -11,6 +11,33 @@ export const frontmatter = {
   ],
 };
 
+import udlStylesFoundry from "@/public/assets/udl/styles-foundry.png";
+import udlStylesHomeroom from "@/public/assets/udl/styles-homeroom.png";
+import udlThemePreviews from "@/public/assets/furnace/theme-previews.png";
+import udlEcosystem from "@/public/assets/udl/ecosystem.png";
+import udlAudit from "@/public/assets/udl/audit.png";
+import udlOffBefore from "@/public/assets/udl/off-before.png";
+import udlOffAfter from "@/public/assets/udl/off-after.png";
+import udlLoginAfter from "@/public/assets/udl/login-after.png";
+import udlCreateAfter from "@/public/assets/udl/create-after.png";
+import udlEvaluationsAfter from "@/public/assets/udl/evaluations-after.png";
+import udlDataBefore from "@/public/assets/udl/data-before.png";
+import udlDataAfter from "@/public/assets/udl/data-after.png";
+import udlColorBefore from "@/public/assets/udl/color-before.png";
+import udlColorAfter from "@/public/assets/udl/color-after.png";
+import udlTypeBefore from "@/public/assets/udl/type-before.png";
+import udlTypeAfter from "@/public/assets/udl/type-after.png";
+import udlSpaceBefore from "@/public/assets/udl/space-before.png";
+import udlSpaceAfter from "@/public/assets/udl/space-after.png";
+import udlDocsTokens from "@/public/assets/udl/docs-tokens.png";
+import udlBaseTokens from "@/public/assets/udl/base-tokens.png";
+import udlSemanticTokens from "@/public/assets/udl/semantic-tokens.png";
+import udlDesignCode from "@/public/assets/udl/design-code.png";
+import udlStorybookColors from "@/public/assets/udl/storybook-colors.png";
+import udlStorybookTokens from "@/public/assets/udl/storybook-tokens.png";
+import udlFigma from "@/public/assets/udl/figma.png";
+import udlStorybook from "@/public/assets/udl/storybook.png";
+
 <div className="not-prose relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
   <div
     className="absolute inset-0 bg-cover bg-top bg-no-repeat dark:hidden"
@@ -35,29 +62,29 @@ We kicked it off with our own definition:
 The question "What does an Everfi button look like?" has a different answer depending on which of its products you're using.
 
 <ImageModal
-  src="/assets/udl/styles-foundry.png"
+  src={udlStylesFoundry}
   caption="Foundry, the assigned learning platform, is powered by its own React design system, Alloy, which takes cues from Material Design"
 />
 
 <ImageModal
-  src="/assets/udl/styles-homeroom.png"
+  src={udlStylesHomeroom}
   caption="Homeroom, the K12 platform, uses fully-custom styles that override its underlying legacy Bootstrap components. Its teacher-facing UI was redesigned in 2019, but other parts of the app remain untouched."
 />
 
 <ImageModal
-  src="/assets/furnace/theme-previews.png"
+  src={udlThemePreviews}
   caption="Everfi courses use Furnace, our product design system and SDK, to create custom themes that vary greatly depending on customer, audience, and learning style. The underlying base theme, Core, is a polished (and generic) theme that incorporates some aspects of Everfi's branding."
 />
 
 Multiply this kind of variation across multiple style guides and component sets, sprinkle in course theming, platform branding, and customer whitelabeling, and it was inevtiable that we'd find ourselves with disjointed experiences.
 
-<ImageModal src="/assets/udl/ecosystem.png" caption="Some of the many ways courses are displayed across products" />
+<ImageModal src={udlEcosystem} caption="Some of the many ways courses are displayed across products" />
 
 ## Discovery
 
 The next step was to establish an opinion — to coalesce around a general visual style that reflected our brands, best practices, and, to an extent, our taste as a group of designers.
 
-<ImageModal src="/assets/udl/audit.png" caption="A snippet of our UI audit & the system health report" />
+<ImageModal src={udlAudit} caption="A snippet of our UI audit & the system health report" />
 
 Many of the same components are used across platforms and in courses. These became opportunities to unify UI/UX.
 
@@ -71,11 +98,7 @@ platforms and products against one another, holding working sessions to dissect 
 - Establish an “Everfi” opinion on how things should look and behave by comparing styles & components side-by-side
 - Choose the best parts of each & coalesce around a shared visual and interaction design foundation
 
-<ImageToggle
-  before="/assets/udl/off-before.png"
-  after="/assets/udl/off-after.png"
-  caption="There can be only one ~~Highlander~~ popover"
-/>
+<ImageToggle before={udlOffBefore} after={udlOffAfter} />
 
 ## Concept
 
@@ -84,24 +107,24 @@ One system that supports three information density schemes to meet the varying a
 <ProjectImageCarousel
   slides={[
     {
-      src: "/assets/udl/login-after.png",
+      src: udlLoginAfter,
       alt: "One sign-in screen to rule them all",
       caption: "One sign-in screen to rule them all",
     },
     {
-      src: "/assets/udl/create-after.png",
+      src: udlCreateAfter,
       alt: "Aligning admin and K12 platform login flows",
       caption: "Aligning admin and K12 platform login flows",
     },
     {
-      src: "/assets/udl/evaluations-after.png",
+      src: udlEvaluationsAfter,
       alt: "Evaluations in platform and course contexts",
       caption: "Evaluations in platform and course contexts",
     },
   ]}
 />
 
-<ImageToggle before="/assets/udl/data-before.png" after="/assets/udl/data-after.png" />
+<ImageToggle before={udlDataBefore} after={udlDataAfter} />
 
 ## Foundations
 
@@ -112,11 +135,11 @@ The proof of concept helped to crystallize our new foundations. Key decisions in
 - Shifting from bespoke color palettes per theme to a curated collection of accessible palettes extrapolated from our brand colors
 - Introducing a layer of density theming, reflected in typography and spacing, to support varied tasks and content types across products and platforms
 
-<ImageToggle before="/assets/udl/color-before.png" after="/assets/udl/color-after.png" />
+<ImageToggle before={udlColorBefore} after={udlColorAfter} />
 
-<ImageToggle before="/assets/udl/type-before.png" after="/assets/udl/type-after.png" />
+<ImageToggle before={udlTypeBefore} after={udlTypeAfter} />
 
-<ImageToggle before="/assets/udl/space-before.png" after="/assets/udl/space-after.png" />
+<ImageToggle before={udlSpaceBefore} after={udlSpaceAfter} />
 
 ## Implementation
 
@@ -126,12 +149,12 @@ We continued iterating on our foundations, arriving at a family of comprehensive
 
 <ProjectImageCarousel
   slides={[
-    { src: "/assets/udl/docs-tokens.png", alt: "Figma token documentation" },
+    { src: udlDocsTokens, alt: "Figma token documentation" },
     {
-      src: "/assets/udl/base-tokens.png",
+      src: udlBaseTokens,
       alt: "Some of our base (global) tokens",
     },
-    { src: "/assets/udl/semantic-tokens.png", alt: "Semantic color tokens" },
+    { src: udlSemanticTokens, alt: "Semantic color tokens" },
   ]}
 />
 
@@ -139,12 +162,12 @@ To ensure that tokens served as a single source of truth, I migrated our Figma s
 
 For products that weren't quite ready for React migration (like Homeroom, the K12 platform), we also generated SCSS variables so that we could refresh their styles to match their updated siblings.
 
-<ImageModal src="/assets/udl/design-code.png" />
+<ImageModal src={udlDesignCode} />
 
-<ImageModal src="/assets/udl/storybook-colors.png" caption="Base color palette tokens in Storybook" />
+<ImageModal src={udlStorybookColors} caption="Base color palette tokens in Storybook" />
 
-<ImageModal src="/assets/udl/storybook-tokens.png" caption="Semantic color tokens in Storybook" />
+<ImageModal src={udlStorybookTokens} caption="Semantic color tokens in Storybook" />
 
-<ImageModal src="/assets/udl/figma.png" caption="Buttons in Figma" />
+<ImageModal src={udlFigma} caption="Buttons in Figma" />
 
-<ImageModal src="/assets/udl/storybook.png" caption="Buttons in Storybook" />
+<ImageModal src={udlStorybook} caption="Buttons in Storybook" />

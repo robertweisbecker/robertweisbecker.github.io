@@ -6,16 +6,33 @@ export const frontmatter = {
   team: [{ name: "Everfi Design", role: "Product & content partners" }],
 };
 
+import achieve1 from "@/public/assets/achieve/Whitelabel-1.png";
+import achieve2 from "@/public/assets/achieve/Whitelabel-2.png";
+import achieveStyleGuide from "@/public/assets/achieve/style-guide-01.jpg";
+import achieveStyleColor from "@/public/assets/achieve/style-color.png";
+import achieveTypography from "@/public/assets/achieve/typography-desktop.png";
+import achieveLayout from "@/public/assets/achieve/layout-desktop.png";
+import engage1 from "@/public/assets/engage/engage-1.png";
+import engageComponents from "@/public/assets/engage/engage-components.png";
+import engageBbva1 from "@/public/assets/engage/bbva-1.jpg";
+import engageThumb from "@/public/assets/engage/engage-thumb.png";
+import engageThumb2 from "@/public/assets/engage/engage-thumb-2.png";
+import dsFigmaChart from "@/public/assets/data-science/figma-chart.png";
+import dsAchievePie from "@/public/assets/data-science/achieve-pie.png";
+import dsDataBefore from "@/public/assets/data-science/data-before.png";
+import dsDataAfter from "@/public/assets/data-science/data-after.png";
+import dsEvaluations from "@/public/assets/data-science/evaluations.png";
+
 ## Everfi Achieve
 
 <ProjectImageCarousel
   slides={[
-    { src: "/assets/achieve/Whitelabel-1.png", alt: "Achieve whitelabel course chrome" },
-    { src: "/assets/achieve/Whitelabel-2.png", alt: "Achieve whitelabel layouts" },
-    { src: "/assets/achieve/style-guide-01.jpg", alt: "Achieve style guide spread" },
-    { src: "/assets/achieve/style-color.png", alt: "Achieve color styles" },
-    { src: "/assets/achieve/typography-desktop.png", alt: "Achieve desktop typography" },
-    { src: "/assets/achieve/layout-desktop.png", alt: "Achieve desktop layout" },
+    { src: achieve1, alt: "Achieve whitelabel course chrome" },
+    { src: achieve2, alt: "Achieve whitelabel layouts" },
+    { src: achieveStyleGuide, alt: "Achieve style guide spread" },
+    { src: achieveStyleColor, alt: "Achieve color styles" },
+    { src: achieveTypography, alt: "Achieve desktop typography" },
+    { src: achieveLayout, alt: "Achieve desktop layout" },
   ]}
 />
 
@@ -25,20 +42,20 @@ export const frontmatter = {
 <div class="text-sm">Hello</div>
 ```
 
-<Image src="/assets/engage/engage-1.png" alt="Engage product overview" />
-<Image src="/assets/engage/engage-components.png" alt="Engage Sketch component library" />
-<Image src="/assets/engage/bbva-1.jpg" alt="Engage workshop context" />
-<Image src="/assets/engage/engage-thumb.png" alt="Engage workshop context" />
-<Image src="/assets/engage/engage-thumb-2.png" alt="Engage workshop context" />
+<Image src={engage1} alt="Engage product overview" />
+<Image src={engageComponents} alt="Engage Sketch component library" />
+<Image src={engageBbva1} alt="Engage workshop context" />
+<Image src={engageThumb} alt="Engage workshop context" />
+<Image src={engageThumb2} alt="Engage workshop context" />
 
 ## Data Science
 
 <ProjectImageCarousel
   slides={[
-    { src: "/assets/data-science/figma-chart.png", alt: "Chart and data visualization exploration" },
-    { src: "/assets/data-science/achieve-pie.png", alt: "Interactive chart treatment in a lesson" },
-    { src: "/assets/data-science/data-before.png", alt: "Data presentation iteration" },
-    { src: "/assets/data-science/data-after.png", alt: "Refined data presentation" },
-    { src: "/assets/data-science/evaluations.png", alt: "Assessments and learner feedback" },
+    { src: dsFigmaChart, alt: "Chart and data visualization exploration" },
+    { src: dsAchievePie, alt: "Interactive chart treatment in a lesson" },
+    { src: dsDataBefore, alt: "Data presentation iteration" },
+    { src: dsDataAfter, alt: "Refined data presentation" },
+    { src: dsEvaluations, alt: "Assessments and learner feedback" },
   ]}
 />

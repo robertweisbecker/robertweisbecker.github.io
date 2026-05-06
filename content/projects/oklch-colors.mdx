@@ -6,12 +6,18 @@ export const frontmatter = {
 };
 import { MarkNote } from "@/components/mark-note";
 import { ColorDiagrams } from "@/components/demos/color-diagrams";
+import oklchGradient from "@/public/assets/oklch/oklch-gradient.png";
+import oklchLuminance from "@/public/assets/oklch/luminance.png";
+import oklchLuminanceBw from "@/public/assets/oklch/luminance-bw.png";
+import oklchWheelHue from "@/public/assets/oklch/wheel-hue.png";
+import { TreeIconFile } from "@/components/icons";
+import { Badge } from "@/components/ui/badge";
 
-<Image src="/assets/oklch/oklch-gradient.png" preload={true} />
+<Image src={oklchGradient} priority />
 
 ## Context
 
-As the [UDL](/unified-design-language) project evolved, we needed an extended color system with underlying logic to make palettes plug and play for any of the dozen themes.
+As the <Badge variant="link"  className="text-[15px] align-baseline">[Unified Design Language](/unified-design-language)<TreeIconFile data-icon="inline-end"/></Badge> evolved, we needed an extended color system with underlying logic to make palettes plug and play for any of the dozen themes.
 
 This led me to the okLCH color space and the idea of re-balancing our colors into perceptually uniform palettes. What started as a side-of-desk project ended with 28 new color ramps, 365 colors, and a visual evolution of the brand.
 
@@ -23,16 +29,7 @@ The primary goal was to expand our color offerings and ensure accessible contras
 
 Since steps are aligned to luminance, we can ensure consistent contrast no matter the combination.
 
-<ImageToggle
-  before="/assets/oklch/luminance.png"
-  after="/assets/oklch/luminance-bw.png"
-  imageProps={{
-    width: 576,
-    height: 324,
-  }}
-  tab1="Color"
-  tab2="Grayscale"
-/>
+<ImageToggle before={oklchLuminance} after={oklchLuminanceBw} tab1="Color" tab2="Grayscale" />
 
 Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, and Alphas.
 
@@ -68,7 +65,7 @@ The diagram below shows the hue range for each ramp mapped to the color wheel. K
 These "sibling" colors aren't meant to be used together in a single theme. The point from a systems perspective is to provide designers with alternate options for common canonical status colors (red, green, blue, yellow, etc), so they can find suitable pairings that are visually distinguishable from their primary color.
 
 <Image
-  src="/assets/oklch/wheel-hue.png"
+  src={oklchWheelHue}
   alt="Diagram of color wheel with hue ranges for each ramp: red 350-7°, orange 16-33°, yellow 31-53°, gold 50-80°, lime 94-119°, green 136-151°, jade 154-180°, teal 171-193°, cyan 185-205°, blue 200-220°, indigo 224-246°, purple 247-264°, magenta 284-322°, pink 312-342°."
 />
 

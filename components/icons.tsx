@@ -424,6 +424,43 @@ export function PixelSunIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
+export function PixelRedoIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg width="11" height="11" viewBox="0 0 11 11" {...props}>
+      <rect x="8" y="6" width="1" height="1" fill="currentColor" />
+      <rect x="8" y="5" width="1" height="1" fill="currentColor" />
+      <rect x="6" y="9" width="1" height="1" fill="currentColor" />
+      <rect x="5" y="9" width="1" height="1" fill="currentColor" />
+      <rect x="8" y="7" width="1" height="1" fill="currentColor" />
+      <rect x="7" y="8" width="1" height="1" fill="currentColor" />
+      <rect x="4" y="3" width="1" height="1" fill="currentColor" />
+      <rect x="5" y="3" width="1" height="1" fill="currentColor" />
+      <rect x="6" y="3" width="1" height="1" fill="currentColor" />
+      <rect x="7" y="4" width="1" height="1" fill="currentColor" />
+      <rect x="3" y="3" width="1" height="1" fill="currentColor" />
+      <rect x="2" y="3" width="1" height="1" fill="currentColor" />
+      <rect x="4" y="5" width="1" height="1" fill="currentColor" />
+      <rect x="3" y="2" width="1" height="1" fill="currentColor" />
+      <rect x="4" y="1" width="1" height="1" fill="currentColor" />
+      <rect x="3" y="4" width="1" height="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+export function PixelDropdownIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor" {...props}>
+      <rect x="8" y="4" width="1" height="1" />
+      <rect x="5" y="7" width="1" height="1" />
+      <rect x="7" y="5" width="1" height="1" />
+      <rect x="6" y="6" width="1" height="1" />
+      <rect x="4" y="6" width="1" height="1" />
+      <rect x="3" y="5" width="1" height="1" />
+      <rect x="2" y="4" width="1" height="1" />
+    </svg>
+  );
+}
+
 export function PixelMoonIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -725,6 +762,17 @@ export function TreeIconMarkdown({ className, ...props }: React.ComponentProps<"
       {...props}
     >
       <path fill="currentColor" d="M1 12V4h2l2 2.5L7 4h2v8H7V7.5l-2 2-2-2V12zm9-3 3 3.5L16 9h-2V4h-2v5z" />
+    </svg>
+  );
+}
+
+export function TreeIconRichText({ ...props }: React.ComponentProps<"svg">) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" {...props}>
+      <path d="M7.25 4C7.66421 4 8 4.33579 8 4.75C8 5.16421 7.66421 5.5 7.25 5.5H4.75C4.33579 5.5 4 5.16421 4 4.75C4 4.33579 4.33579 4 4.75 4H7.25Z" />
+      <path d="M11.25 11.5C11.6642 11.5 12 11.8358 12 12.25C12 12.6642 11.6642 13 11.25 13H4.75C4.33579 13 4 12.6642 4 12.25C4 11.8358 4.33579 11.5 4.75 11.5H11.25Z" />
+      <path d="M4 7.5C4 6.94772 4.44772 6.5 5 6.5H11C11.5523 6.5 12 6.94772 12 7.5V9.5C12 10.0523 11.5523 10.5 11 10.5H5C4.44772 10.5 4 10.0523 4 9.5V7.5Z" />
+      <path d="M10.75 0C10.9489 0 11.1396 0.0790743 11.2803 0.219727L14.7803 3.71973C14.9209 3.86038 15 4.05109 15 4.25V13.25C15 14.7688 13.7688 16 12.25 16H3.75C2.23122 16 1 14.7688 1 13.25V2.75C1 1.23122 2.23122 0 3.75 0H10.75ZM3.75 1.5C3.05964 1.5 2.5 2.05964 2.5 2.75V13.25C2.5 13.9404 3.05964 14.5 3.75 14.5H12.25C12.9404 14.5 13.5 13.9404 13.5 13.25V5H12.25C11.0074 5 10 3.99264 10 2.75V1.5H3.75Z" />
     </svg>
   );
 }

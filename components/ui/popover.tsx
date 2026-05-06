@@ -22,14 +22,12 @@ const popoverVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-popover text-popover-foreground shadow-popover w-72 rounded-xl  gap-2.5 [--popover-padding:--spacing(4)]",
+        default: "bg-popover text-popover-foreground shadow-popover w-72 rounded-xl  gap-2.5 [--popover-padding:--spacing(4)]",
         translucent:
           "bg-popover/12 backdrop-blur-xl text-popover-foreground shadow-popover w-72 rounded-xl  gap-2.5 [--popover-padding:--spacing(4)]",
         tooltip:
           "bg-popover text-popover-foreground shadow-border-lg drop-shadow-md/2 dark:shadow-black/50 max-w-3xs gap-1 has-data-[slot=popover-header]:rounded-lg rounded-lg [--popover-padding:--spacing(2)] text-sm",
-        annotation:
-          "bg-foreground text-foreground shadow-popover w-72 rounded-2xl gap-2 [--popover-padding:--spacing(3)]",
+        annotation: "bg-foreground text-background shadow-border-lg w-72 rounded-2xl gap-2 [--popover-padding:--spacing(3)]",
       },
     },
   }
@@ -102,7 +100,7 @@ function PopoverFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="popover-footer"
       className={cn(
-        "-mx-(--popover-padding) -mb-(--popover-padding) flex items-center gap-1 rounded-b-[inherit] bg-muted px-(--popover-padding) pt-[calc(var(--popover-padding)/1.5)] pb-(--popover-padding) text-popover-foreground/80 dark:inset-ring dark:inset-ring-border/50",
+        "-mx-(--popover-padding) -mb-(--popover-padding) flex items-center gap-1 rounded-b-[inherit] bg-muted px-(--popover-padding) pt-[calc(var(--popover-padding)/1.5)] pb-(--popover-padding) text-current/80",
         className
       )}
       {...props}
@@ -114,10 +112,7 @@ function PopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props) {
   return (
     <PopoverPrimitive.Title
       data-slot="popover-title"
-      className={cn(
-        "-mt-[0.25em] font-medium tracking-[-.01em] text-popover-foreground in-group-data-[variant=tooltip]/popover:mt-0",
-        className
-      )}
+      className={cn("-mt-[0.25em] font-medium tracking-[-.01em] in-group-data-[variant=tooltip]/popover:mt-0", className)}
       {...props}
     />
   );
@@ -128,7 +123,7 @@ function PopoverDescription({ className, ...props }: PopoverPrimitive.Descriptio
     <PopoverPrimitive.Description
       data-slot="popover-description"
       className={cn(
-        "text-sm text-popover-foreground/80 group-data-[variant=tooltip]/popover:text-[0.8125rem] [p+p]:mt-1 **:[strong,em]:text-popover-foreground",
+        "text-sm text-current/80 group-data-[variant=tooltip]/popover:text-[0.8125rem] [p+p]:mt-1 **:[strong,em]:text-current",
         className
       )}
       {...props}
@@ -175,13 +170,4 @@ function PopoverClose({ className, ...props }: PopoverPrimitive.Close.Props) {
   );
 }
 
-export {
-  Popover,
-  PopoverClose,
-  PopoverContent,
-  PopoverDescription,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTitle,
-  PopoverTrigger,
-};
+export { Popover, PopoverClose, PopoverContent, PopoverDescription, PopoverFooter, PopoverHeader, PopoverTitle, PopoverTrigger };

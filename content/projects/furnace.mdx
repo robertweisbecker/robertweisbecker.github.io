@@ -12,8 +12,26 @@ export const frontmatter = {
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Collapsible, CollapsibleTrigger, CollapsibleContent, CollapsibleIcon } from "@/components/ui/collapsible";
+import furnaceCore from "@/public/assets/furnace/core.png";
+import furnaceElementsPrimitives from "@/public/assets/furnace/elements-primitives.png";
+import furnaceColorsInteractive from "@/public/assets/furnace/colors-interactive.png";
+import furnaceColorsSemantic from "@/public/assets/furnace/colors-semantic.png";
+import furnaceColorsNeutral from "@/public/assets/furnace/colors-neutral.png";
+import furnaceColorsTransparent from "@/public/assets/furnace/colors-transparent.png";
+import furnaceColorRoles from "@/public/assets/furnace/color-roles.png";
+import furnaceColorRolesFlow from "@/public/assets/furnace/color-roles-flow.png";
+import furnaceGrid from "@/public/assets/furnace/grid.png";
+import furnaceGridTable from "@/public/assets/furnace/grid-table.png";
+import furnaceType from "@/public/assets/furnace/type.png";
+import furnaceElevation from "@/public/assets/furnace/elevation.png";
+import furnaceBorderWidth2 from "@/public/assets/furnace/border-width-2.png";
+import furnaceBorderRadius2 from "@/public/assets/furnace/border-radius-2.png";
+import furnaceElementsHome from "@/public/assets/furnace/elements-home.png";
+import furnaceDrawerBefore from "@/public/assets/furnace/drawer-before.png";
+import furnaceDrawerAfter from "@/public/assets/furnace/drawer-after.png";
+import furnaceInt from "@/public/assets/furnace/int.png";
 
-![Components](/assets/furnace/core.png)
+<Image src={furnaceCore} alt="Components" priority />
 
 ## Background
 
@@ -52,7 +70,7 @@ Changing one value affects all of its instances throughout the system, allowing 
 - Shadows
 - Layout
 
-<ImageModal src="/assets/furnace/elements-primitives.png" />
+<ImageModal src={furnaceElementsPrimitives} />
 
 ### Color
 
@@ -63,10 +81,10 @@ Baking smart defaults into the system simplifies configuration; a designer needs
 Each theme's color system is constructed using four color palettes, limited in scope. These colors are then assigned to specific roles to ensure sufficient contrast.
 
 <LayoutGrid variant="twoUp">
-  <ImageModal src="/assets/furnace/colors-interactive.png" caption="1. Interactive palette" />
-  <ImageModal src="/assets/furnace/colors-semantic.png" caption="2. Status colors" />
-  <ImageModal src="/assets/furnace/colors-neutral.png" caption="3. Neutrals" />
-  <ImageModal src="/assets/furnace/colors-transparent.png" caption="4. Transparents" />
+  <ImageModal src={furnaceColorsInteractive} caption="1. Interactive palette" />
+  <ImageModal src={furnaceColorsSemantic} caption="2. Status colors" />
+  <ImageModal src={furnaceColorsNeutral} caption="3. Neutrals" />
+  <ImageModal src={furnaceColorsTransparent} caption="4. Transparents" />
 </LayoutGrid>
 
 1. **Interactive Palette:**
@@ -88,9 +106,9 @@ Palette colors are almost never used directly inside components. Instead, they'r
 
 For each `$bg-[role]` in the SCSS, we have a corresponding `$text-on-[role]` mate. This is common practice now with design tokens, but we had to learn this the hard way.
 
-<ImageModal src="/assets/furnace/color-roles.png" caption="Available color role variables in a theme." />
+<ImageModal src={furnaceColorRoles} caption="Available color role variables in a theme." />
 <ImageModal
-  src="/assets/furnace/color-roles-flow.png"
+  src={furnaceColorRolesFlow}
   caption="Relationship between color palettes, color roles, and components."
 />
 
@@ -116,12 +134,12 @@ To replace them, we created two CSS Grid layouts: a classic Bootstrap-style 12-c
 
 <LayoutGrid variant="twoUp">
   <ImageModal
-    src="/assets/furnace/grid.png"
+    src={furnaceGrid}
     portrait={true}
     caption="Grid examples at the tablet breakpoint. Note that the Dynamic Grid maxes out at 8 columns, while the Static Grid displays 12."
   />
   <ImageModal
-    src="/assets/furnace/grid-table.png"
+    src={furnaceGridTable}
     portrait={true}
     caption="Documentation comparing responsive class behaviors within the two grids."
   />
@@ -197,7 +215,7 @@ Responsive typography was a priority for any new type system we implemented.
 This ended up only applying to headings, though. We found that since course pages aren't particularly dense, there was really no need to adjust the prose sizing. Might as well keep things legible.
 
 <ImageModal
-  src="/assets/furnace/type.png"
+  src={furnaceType}
   caption="Default type scale with responsive headings. The Core theme uses Lato, Everfi's brand typeface."
 />
 
@@ -238,7 +256,7 @@ Themes can customize these elevations, such as using `none` for a flat theme or 
 
 <ImageModal
   className="max-w-lg"
-  src="/assets/furnace/elevation.png"
+  src={furnaceElevation}
   caption="Shadow elevations and z-index guidance"
   portrait={true}
 />
@@ -248,24 +266,24 @@ Themes can customize these elevations, such as using `none` for a flat theme or 
 Primitive variables also included `border-width` and `border-radius` values. Border colors were applied using color palette variables and generated classes.
 
 <Image
-  src="/assets/furnace/border-width-2.png"
+  src={furnaceBorderWidth2}
   caption="We found that only three border-width values were sufficient."
 />
 
 <Image
-  src="/assets/furnace/border-radius-2.png"
+  src={furnaceBorderRadius2}
   caption="Radii variables were assigned according to a component's relative size."
 />
 
 ## Impact
 
-![Documentation site](/assets/furnace/elements-home.png)
+<Image src={furnaceElementsHome} alt="Documentation site" />
 
 Overall, we drastically simplified theming, while also elevating our visual design. Old themes contained 1,595 variables spread across 58 files — with Primitives in place, themes became a single file containing just 63 variables, while providing more comprehensive styling than we'd ever had.
 
 For the first time, we had a fully styled base theme, Core, that aligned 1:1 with our once-aspirational Figma component library.
 
-<ImageModal src="/assets/furnace/core.png" caption="Core theme with fully-styled base components" />
+<ImageModal src={furnaceCore} caption="Core theme with fully-styled base components" />
 
 This provided smart defaults for other designers and streamlined the creation of new themes, both in Figma and in code. With styles in Figma aligned to our primitive variable names, designers were empowered to plug those values into an SCSS theme template and ship it off to a developer to push.
 
@@ -275,7 +293,7 @@ Consistent theming with variables provided a baseline for regular visual, functi
 
 For a sense of the difference this made, compare the two images below from our pre- and post-primitives QA environments:
 
-<ImageToggle before="/assets/furnace/drawer-before.png" after="/assets/furnace/drawer-after.png" />
+<ImageToggle before={furnaceDrawerBefore} after={furnaceDrawerAfter} />
 
 Previously, if a course wanted to use a new component, they would manually add and update its unique SCSS variables to their theme, push it to the components repo, then wait for a release and bump just to get it styled.
 
@@ -291,7 +309,7 @@ We'd removed any hard-coded dimensions or spacing, so heights would always be de
 
 We also added RTL support to our grid, allowing it to flip based on the locale. Horizontal margin/padding also reverse in RTL, along with directional icons. Non-English languages swap the theme typeface to its Noto Sans counterpart, too.
 
-<ImageModal src="/assets/furnace/int.png" caption="Testing pseudo-localization in our QA environment" />
+<ImageModal src={furnaceInt} caption="Testing pseudo-localization in our QA environment" />
 
 ### Accessibility
 

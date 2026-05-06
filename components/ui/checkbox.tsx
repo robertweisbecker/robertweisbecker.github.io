@@ -12,10 +12,10 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
       data-slot="checkbox"
       className={cn(
         "size-4 shrink-0 touch-manipulation rounded bg-card transition-[background-color,outline-color,box-shadow] duration-100 ease-out",
-        "shadow-border-sm data-checked:shadow-border-xs",
-        "outline outline-input dark:-outline-offset-1",
+        "shadow-border-sm data-checked:shadow-border-sm",
+        "outline outline-border data-checked:outline-primary/72",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-        "hover:not-data-disabled:not-data-checked:outline-primary",
+        "hover:not-data-disabled:not-data-checked:outline-input",
         // "in-[label:hover]:not-data-disabled:not-data-checked:outline-destructive",
         // "[[data-slot=checkbox]:not([data-disabled]):not([data-checked])~label]]:hover:outline-success",
         "data-checked:bg-primary data-checked:text-primary-foreground",

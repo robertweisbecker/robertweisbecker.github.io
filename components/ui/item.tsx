@@ -26,10 +26,7 @@ function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Sepa
     <Separator
       data-slot="item-separator"
       orientation="horizontal"
-      className={cn(
-        "peer my-0 opacity-50 transition-opacity duration-100 has-[+_a[data-slot=item]:hover]:opacity-0",
-        className
-      )}
+      className={cn("peer my-0 opacity-50 transition-opacity duration-100 has-[+_a[data-slot=item]:hover]:opacity-0", className)}
       {...props}
     />
   );
@@ -86,10 +83,10 @@ function Item({
 const itemMediaVariants = cva("gap-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none squircle", {
   variants: {
     variant: {
-      default: "bg-transparent min-h-lh min-w-lh",
-      icon: " [&_svg:not([class*='size-'])]:size-3.5 grid-stack min-h-5 grid-stack min-w-5 bg-current/5 text-primary rounded-xs self-center",
+      default: "bg-transparent min-h-lh min-w-lh self-start",
+      icon: " [&_svg:not([class*='size-'])]:size-4 grid-stack min-h-6 grid-stack min-w-6 bg-current/5 text-primary rounded-xs self-start",
       image:
-        "size-10 bg-card overflow-hidden shadow-border-xs rounded-md group-data-[size=sm]/item:size-9 group-data-[size=sm]/item:rounded-md group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-contain [&_svg]:size-6 in-group-data-[variant=muted]/item:bg-muted in-group-data-[variant=muted]/item:shadow-none group-has-data-[slot=item-description]/item:self-start group-has-data-[slot=item-description]/item:translate-y-0.5",
+        "size-10 bg-card overflow-hidden shadow-border-xs rounded-md group-data-[size=sm]/item:size-9 group-data-[size=sm]/item:rounded-md group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-cover [&_svg]:size-6 in-group-data-[variant=muted]/item:bg-muted in-group-data-[variant=muted]/item:shadow-none group-has-data-[slot=item-description]/item:self-start group-has-data-[slot=item-description]/item:translate-y-0.5",
     },
   },
   defaultVariants: {
@@ -97,29 +94,15 @@ const itemMediaVariants = cva("gap-2 flex shrink-0 items-center justify-center [
   },
 });
 
-function ItemMedia({
-  className,
-  variant = "default",
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
-  return (
-    <div
-      data-slot="item-media"
-      data-variant={variant}
-      className={cn(itemMediaVariants({ variant, className }))}
-      {...props}
-    />
-  );
+function ItemMedia({ className, variant = "default", ...props }: React.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
+  return <div data-slot="item-media" data-variant={variant} className={cn(itemMediaVariants({ variant, className }))} {...props} />;
 }
 
 function ItemContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="item-content"
-      className={cn(
-        "flex flex-1 flex-col gap-1 group-data-[size=xs]/item:gap-0 [&+[data-slot=item-content]]:flex-none",
-        className
-      )}
+      className={cn("flex flex-1 flex-col gap-1 group-data-[size=xs]/item:gap-0 [&+[data-slot=item-content]]:flex-none", className)}
       {...props}
     />
   );
@@ -157,34 +140,11 @@ function ItemActions({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function ItemHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="item-header"
-      className={cn("flex basis-full items-center justify-between gap-2", className)}
-      {...props}
-    />
-  );
+  return <div data-slot="item-header" className={cn("flex basis-full items-center justify-between gap-2", className)} {...props} />;
 }
 
 function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="item-footer"
-      className={cn("flex basis-full items-center justify-between gap-2", className)}
-      {...props}
-    />
-  );
+  return <div data-slot="item-footer" className={cn("flex basis-full items-center justify-between gap-2", className)} {...props} />;
 }
 
-export {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemFooter,
-  ItemGroup,
-  ItemHeader,
-  ItemMedia,
-  ItemSeparator,
-  ItemTitle,
-};
+export { Item, ItemActions, ItemContent, ItemDescription, ItemFooter, ItemGroup, ItemHeader, ItemMedia, ItemSeparator, ItemTitle };

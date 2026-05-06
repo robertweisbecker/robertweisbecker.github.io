@@ -12,6 +12,11 @@ import {
   CursorIcon,
   TreeIconClaude,
   TreeIconMarkdown,
+  TreeIconReact,
+  ShadcnIcon,
+  PixelChevronsIcon,
+  PixelDropdownIcon,
+  TreeIconRichText,
 } from "@/components/icons";
 import Link from "next/link";
 import { LinkOut } from "@/components/link-out";
@@ -68,13 +73,31 @@ export default function Home() {
   const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
     <div className={cn("mx-auto grid max-w-2xl gap-12")}>
-      <div className="flex w-full items-baseline justify-between border-b border-dashed pb-4">
-        <h1 className="-mb-1 block text-h1 text-foreground">Robert Weisbecker</h1>
-        <p className="font-pixel text-[11px]">Systems & product design</p>
-      </div>
-      <div className="grid items-start gap-10 sm:grid-cols-[1fr_200px]">
-        <div className="w-full max-w-xs space-y-4 text-sm">
-          <p className="text-muted-foreground">
+      <h1 className="-ms-1 -mb-6 text-h1 text-foreground">
+        Robert
+        <br /> Weisbecker
+      </h1>
+      <div className="grid items-start gap-10 sm:grid-cols-[200px_1fr]">
+        <div className="relative">
+          <div className="group/pixel border-wavy relative size-50 overflow-hidden border-2 border-primary">
+            <Button
+              onClick={() => setIsDinoVisible((v) => !v)}
+              variant="ghost"
+              size="icon-xs"
+              className="md:blur-2xs absolute inset-s-1 top-1 z-1 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none md:-translate-y-1 md:opacity-0"
+            >
+              {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
+            </Button>
+            <PixelPortrait className="transition-all duration-300" />
+            {isDinoVisible && (
+              <PixelReveal className="absolute inset-0 size-50">
+                <PixelDino />
+              </PixelReveal>
+            )}
+          </div>
+        </div>
+        <div className="w-full max-w-xs space-y-3.5 text-sm">
+          <p className="">
             You can call me{" "}
             <Popover>
               <PopoverTrigger openOnHover className="link text-secondary-foreground decoration-dotted">
@@ -84,20 +107,27 @@ export default function Home() {
                 <PopoverDescription className="inline">We&apos;re all about efficiency here at bob dot fyi.</PopoverDescription>
               </PopoverContent>
             </Popover>
-            . I'm currently a principal designer at{" "}
-            <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" />.
+            .
           </p>
-          <p className="text-muted-foreground">
-            There, I work on products & systems to help drive social good through education. These things have&nbsp;
+          <p className="">
+            I'm a principal designer at <LinkOut href="https://everfi.com" text="Everfi" className="text-secondary-foreground" /> working on
+            products, tools, and systems to help drive social good through education.
+          </p>
+          <p>
+            These things have&nbsp;
             <PreviewCard>
-              <PreviewCardTrigger
-                render={
-                  <LinkOut href="https://everfi.com/press-releases/everfis-suite-of-k-12-educational-content-receives-prestigious-digital-promise-research-based-product-design-certification/#:~:text=Everfi%E2%80%99s%20Impact%2Das%2Da%2DServiceTM%C2%A0solution%20and%20digital%20educational%20content%20have%20reached%20more%20than%2045%20million%20learners%20globally." />
-                }
-              >
-                allegedly
-              </PreviewCardTrigger>
-
+              <mark className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text">
+                <PreviewCardTrigger
+                  render={
+                    <LinkOut
+                      href="https://everfi.com/press-releases/everfis-suite-of-k-12-educational-content-receives-prestigious-digital-promise-research-based-product-design-certification/#:~:text=Everfi%E2%80%99s%20Impact%2Das%2Da%2DServiceTM%C2%A0solution%20and%20digital%20educational%20content%20have%20reached%20more%20than%2045%20million%20learners%20globally."
+                      className="decoration-wavy"
+                    />
+                  }
+                >
+                  allegedly
+                </PreviewCardTrigger>
+              </mark>
               <PreviewCardPopup className="p-2" side="top" align="start">
                 <Avatar>
                   <AvatarImage src="/assets/logos/everfi-new-purp.png" alt="Everfi logo" />
@@ -124,52 +154,34 @@ export default function Home() {
               </PreviewCardPopup>
             </PreviewCard>
             &nbsp;reached more than 45 million learners globally.
-            <LinkButton href="#about" variant="link" size="sm" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-              More info <IconArrowDown data-icon="inline-end" />
-            </LinkButton>
           </p>
-          <p className="text-muted-foreground">
+          <p className="">
             This is my little slice of the internet.
             <br /> Have a look around.
           </p>
-        </div>
-        <div className="group/pixel relative order-first size-50 sm:order-last sm:ms-auto">
-          <Button
-            onClick={() => setIsDinoVisible((v) => !v)}
-            variant="ghost"
-            size="icon-xs"
-            className="md:blur-2xs absolute inset-s-1 top-1 z-1 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none md:-translate-y-1 md:opacity-0"
-          >
-            {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
-          </Button>
-          <PixelPortrait className="transition-all duration-300" />
-          {isDinoVisible && (
-            <PixelReveal className="absolute inset-0 size-50">
-              <PixelDino />
-            </PixelReveal>
-          )}
+          {/* <div className="flex gap-2">
+            <LinkButton href="#about" variant="elevated" size="xs">
+              More info <PixelDropdownIcon data-icon="inline-end" />
+            </LinkButton>
+          </div> */}
         </div>
       </div>
 
-      <Separator className="min-h-px max-w-20" />
       <div>
-        <h2 className="font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
+        <h2 className="mt-8 -mb-4 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
           ☆ Projects
         </h2>
       </div>
       <ProjectGrid />
-
       <Separator className="min-h-px max-w-14" />
       <h2 className="font-pixel text-[11px] uppercase" id="resources">
         ✧ Posts
       </h2>
       <ProjectGrid items={postItems} />
-
       <Separator className="max-w-20" />
       <h2 className="font-pixel text-[11px] uppercase" id="resources">
         ♥ Resources
       </h2>
-
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Card variant="muted" size="sm">
           <CardHeader>
@@ -217,246 +229,269 @@ export default function Home() {
         ))}
       </div>
       <Separator className="max-w-20" />
-      <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase" id="about">
-        ♦ About
-      </h2>
+      <section className="flex flex-col gap-4">
+        <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase" id="about">
+          ♦ About
+        </h2>
+        <LayoutGrid variant="twoUp">
+          <p className="max-w-prose text-sm/6 text-muted-foreground">
+            Since 2021, I&apos;ve led the implementation of a shared design system across admin, educator, and learner-facing products. Read
+            a bit about that process{" "}
+            <Link href="/unified-design-language" className="link">
+              here
+            </Link>
+            . Recently, I've been working on a new K12 platform, diving deep into color spaces, and learning about web animation. You may
+            notice some sprinkled throughout.
+          </p>
+          <p className="max-w-prose text-sm/6 text-muted-foreground">
+            Before that, I led product design on financial &amp; K12 products, including{" "}
+            <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
+            <Badge variant="link" render={<Link href="/everfi-engage" />}>
+              <TreeIconRichText data-icon="inline-start" className="opacity-50" />
+              Engage
+            </Badge>
+            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. the creation
+            of our product org&apos;s{" "}
+            <Link className="link" href="/unified-design-language">
+              first design system
+            </Link>
+            , shepherding its transition from an unstyled SDK into an accessible component library with theming and tooling to support 80+
+            courses across a dozen branded product lines.
+          </p>
+        </LayoutGrid>
+        <p className="max-w-prose text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
+        <ul className="max-w-prose list-disc space-y-4 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
+          <li>
+            Led product design efforts for financial &amp; K12 products, including{" "}
+            <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
+            <Badge variant="link" render={<Link href="/everfi-engage" />}>
+              <TreeIconRichText data-icon="inline-start" className="opacity-50" />
+              Engage
+            </Badge>
+            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />.{" "}
+          </li>
+          <li>
+            Worked on education products for customers like{" "}
+            <span className="whitespace-nowrap">
+              <GoogleIcon className="-mt-px inline-block size-3" /> Google
+            </span>
+            , <wbr />
+            <span className="whitespace-nowrap">
+              <MetaIcon className="-mt-px inline-block size-4" />
+               Meta
+            </span>
+            ,{" "}
+            <span className="whitespace-nowrap">
+              <LinkedinIcon className="-mt-px inline-block size-3.5" />
+               LinkedIn
+            </span>
+            , <wbr />
+            <span className="whitespace-nowrap">
+              <KrogerIcon className="-mt-1 inline-block size-4" /> Kroger
+            </span>
+            , <wbr />
+            <span className="whitespace-nowrap">
+              <BeyondMeatIcon className="-mt-px inline-block size-3.5" />
+               Beyond Meat
+            </span>
+            , <wbr />
+            <span className="whitespace-nowrap">
+              <TruistIcon className="-mt-0.5 inline-block size-3" />
+               Truist
+            </span>
+            , and more.
+          </li>
+          <li>
+            Delivered a (finally relevant!) thesis exploring chatbots and conversational interface design patterns.{" "}
+            <Badge variant="link" render={<Link href="/conversational-immigration-forms" />} className="text-sm">
+              <TreeIconRichText data-icon="inline-start" className="opacity-50" />
+              Case study
+            </Badge>
+          </li>
+          <li>
+            Built a{" "}
+            <Badge variant="link" render={<Link href="/npr-maps" />}>
+              <TreeIconRichText data-icon="inline-start" className="opacity-50" />
+              mapping application
+            </Badge>{" "}
+            at NPR when I wasn&apos;t busy <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background
+            of Tiny Desk recordings.
+          </li>
+          <li>
+            Designed web &amp; iOS screens, performed user testing, and made graphics for{" "}
+            <PreviewCard>
+              <PreviewCardTrigger
+                render={<LinkOut href="https://blog.spothero.com/spothero-acquires-parking-panda" text="Parking Panda" />}
+              />
+              <PreviewCardPopup className="flex-col">
+                <p className="font-medium">SpotHero Acquires Parking Panda</p>
 
-      <LayoutGrid variant="twoUp">
-        <p className="max-w-prose text-sm/6 text-muted-foreground">
-          Since 2021, I&apos;ve led the implementation of a shared design system across admin, educator, and learner-facing products. Read a
-          bit about that process{" "}
-          <Link href="/unified-design-language" className="link">
-            here
-          </Link>
-          . Recently, I've been working on a new K12 platform, diving deep into color spaces, and learning about web animation. You may
-          notice some sprinkled throughout.
-        </p>
-        <p className="max-w-prose text-sm/6 text-muted-foreground">
-          Beginning in 2018, I led the creation of our product org&apos;s{" "}
-          <Link className="link" href="/unified-design-language">
-            first design system
-          </Link>
-          , shepherding its transition from an unstyled SDK into an accessible component library with theming and tooling to support 80+
-          courses across a dozen branded product lines.
-        </p>
-      </LayoutGrid>
+                <p className="text-xs text-muted-foreground italic">
+                  SpotHero has acquired Parking Panda, the leader in US event parking reservations and the #1 parking reservation service in
+                  Canada.
+                </p>
+                <Badge variant="ghost">
+                  <IconCalendar data-icon="inline-start" className="opacity-50" /> April 13, 2017
+                </Badge>
+              </PreviewCardPopup>
+            </PreviewCard>{" "}
+            (acq. by SpotHero)
+          </li>
+        </ul>
+        <div>
+          <p className="mb-2 text-sm text-muted-foreground">You can find or reach me on the 'net here:</p>
+          <div className="flex flex-wrap justify-stretch gap-2 max-sm:flex-col">
+            <Button render={<a href="mailto:yo@bob.fyi" />} nativeButton={false} variant="elevated" size="sm">
+              <IconMailFilled data-icon="inline-start" />
+              yo@bob.fyi
+            </Button>
+            <Button
+              render={<a href="https://www.linkedin.com/in/robertweisbecker/" target="_blank" rel="noopener noreferrer" />}
+              nativeButton={false}
+              variant="elevated"
+              size="sm"
+            >
+              <LinkedinIcon data-icon="inline-start" />
+              LinkedIn
+            </Button>
+            <Button
+              render={<a href="https://github.com/robertweisbecker" target="_blank" rel="noopener noreferrer" />}
+              nativeButton={false}
+              variant="elevated"
+              size="sm"
+            >
+              <GithubIcon data-icon="inline-start" />
+              GitHub
+            </Button>
 
-      <p className="max-w-prose text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
-      <ul className="max-w-prose list-disc space-y-4 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
-        <li>
-          Led product design efforts for financial &amp; K12 products, including{" "}
-          <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
-          <Badge variant="link" render={<Link href="/everfi-engage" />}>
-            Engage
-            <IconLink data-icon="inline-end" className="opacity-50" />
-          </Badge>
-          , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />.{" "}
-        </li>
-        <li>
-          Worked on education products for customers like{" "}
-          <span className="whitespace-nowrap">
-            <GoogleIcon className="-mt-px inline-block size-3" /> Google
-          </span>
-          , <wbr />
-          <span className="whitespace-nowrap">
-            <MetaIcon className="-mt-px inline-block size-4" />
-             Meta
-          </span>
-          ,{" "}
-          <span className="whitespace-nowrap">
-            <LinkedinIcon className="-mt-px inline-block size-3.5" />
-             LinkedIn
-          </span>
-          , <wbr />
-          <span className="whitespace-nowrap">
-            <KrogerIcon className="-mt-1 inline-block size-4" /> Kroger
-          </span>
-          , <wbr />
-          <span className="whitespace-nowrap">
-            <BeyondMeatIcon className="-mt-px inline-block size-3.5" />
-             Beyond Meat
-          </span>
-          , <wbr />
-          <span className="whitespace-nowrap">
-            <TruistIcon className="-mt-0.5 inline-block size-3" />
-             Truist
-          </span>
-          , and more.
-        </li>
-        <li>
-          Delivered a (finally relevant!){" "}
-          <Badge variant="link" render={<Link href="/conversational-immigration-forms" />} className="text-sm">
-            thesis
-            <IconLink data-icon="inline-end" className="opacity-50" />
-          </Badge>{" "}
-          exploring chatbots and conversational interface design patterns as a means for reducing paperwork.{" "}
-        </li>
-        <li>
-          Built a{" "}
-          <Badge variant="link" render={<Link href="/npr-maps" />}>
-            mapping application
-            <IconLink data-icon="inline-end" className="opacity-50" />
-          </Badge>{" "}
-          at NPR when I wasn&apos;t busy <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background of
-          Tiny Desk recordings.
-        </li>
-        <li>
-          Designed web &amp; iOS screens, performed user testing, and made graphics for{" "}
-          <PreviewCard>
-            <PreviewCardTrigger
-              render={<LinkOut href="https://blog.spothero.com/spothero-acquires-parking-panda" text="Parking Panda" />}
-            />
-            <PreviewCardPopup className="flex-col">
-              <p className="font-medium">SpotHero Acquires Parking Panda</p>
-
-              <p className="text-xs text-muted-foreground italic">
-                SpotHero has acquired Parking Panda, the leader in US event parking reservations and the #1 parking reservation service in
-                Canada.
-              </p>
-              <Badge variant="ghost">
-                <IconCalendar data-icon="inline-start" className="opacity-50" /> April 13, 2017
-              </Badge>
-            </PreviewCardPopup>
-          </PreviewCard>{" "}
-          (acq. by SpotHero)
-        </li>
-      </ul>
-      <div>
-        <p className="mb-2 text-sm text-muted-foreground">You can find or reach me on the 'net here:</p>
-        <div className="flex flex-wrap justify-stretch gap-2 max-sm:flex-col">
-          <Button render={<a href="mailto:yo@bob.fyi" />} nativeButton={false} variant="elevated" size="sm">
-            <IconMailFilled data-icon="inline-start" />
-            yo@bob.fyi
-          </Button>
-          <Button
-            render={<a href="https://www.linkedin.com/in/robertweisbecker/" target="_blank" rel="noopener noreferrer" />}
-            nativeButton={false}
-            variant="elevated"
-            size="sm"
-          >
-            <LinkedinIcon data-icon="inline-start" />
-            LinkedIn
-          </Button>
-          <Button
-            render={<a href="https://github.com/robertweisbecker" target="_blank" rel="noopener noreferrer" />}
-            nativeButton={false}
-            variant="elevated"
-            size="sm"
-          >
-            <GithubIcon data-icon="inline-start" />
-            GitHub
-          </Button>
-
-          <Button
-            render={<a href="https://figma.com/@yobob" target="_blank" rel="noopener noreferrer" />}
-            nativeButton={false}
-            variant="elevated"
-            size="sm"
-          >
-            <FigmaIcon data-icon="inline-start" className="size-3.5 opacity-100!" />
-            Figma
-          </Button>
+            <Button
+              render={<a href="https://figma.com/@yobob" target="_blank" rel="noopener noreferrer" />}
+              nativeButton={false}
+              variant="elevated"
+              size="sm"
+            >
+              <FigmaIcon data-icon="inline-start" className="size-3.5 opacity-100!" />
+              Figma
+            </Button>
+          </div>
         </div>
-      </div>
+      </section>
       <Separator />
       <div className="flex w-full justify-between gap-2">
-        <h3 className="font-pixel text-[11px] uppercase">CV</h3>
+        <h3 className="font-pixel text-[11px] uppercase">Experience</h3>
         <LinkButton href="/BOB.md" variant="ghost" size="sm" className="-my-2 -me-(--button-x)">
           <TreeIconMarkdown data-icon="inline-start" />
           View BOB.md
         </LinkButton>
       </div>
+      <DescriptionList>
+        <DescriptionListLabel>
+          <span className="flex items-center gap-2 self-start">
+            <Avatar size="sm">
+              <AvatarImage src="/assets/logos/everfi-blue-icon.png" alt="Everfi" />
+            </Avatar>{" "}
+            Everfi /{" "}
+            <Avatar size="sm">
+              <AvatarImage src="/assets/logos/blackbaud-logo.png" alt="Blackbaud" />
+            </Avatar>{" "}
+            Blackbaud
+          </span>
+        </DescriptionListLabel>
+        <DescriptionListValue>
+          <DescriptionList>
+            <DescriptionListLabel>2024</DescriptionListLabel>
+            <DescriptionListValue>Principal UX Engineer, Design Systems</DescriptionListValue>
+            <DescriptionListLabel>2023</DescriptionListLabel>
+            <DescriptionListValue>Principal Designer, Design Systems</DescriptionListValue>
+            <DescriptionListLabel>2022</DescriptionListLabel>
+            <DescriptionListValue>Principal Designer, Platform</DescriptionListValue>
+          </DescriptionList>
+        </DescriptionListValue>
 
-      <DataList.Root>
-        <h3 className="font-medium">Experience</h3>
-        <DataList.Item>
-          <DataList.Label>Everfi</DataList.Label>
-          <DataList.Value>
-            Principal UX Engineer, Design Systems <span className="ms-auto text-end font-pixel text-[11px]">2024—Now</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item className="w-full">
-          <DataList.Label className="flex items-center gap-1">
-            Blackbaud{" "}
-            <InfoTip help title="If this seems confusing, it is.">
-              <PopoverDescription>
-                Everfi was acquired by Blackbaud in 2021;{" "}
-                <LinkOut href="https://www.sec.gov/newsroom/press-releases/2023-48" text="taken private" /> in 2024.
-              </PopoverDescription>
-            </InfoTip>
-          </DataList.Label>
-          <DataList.Value>
-            Principal Designer, Design Systems <span className="ms-auto text-end font-pixel text-[11px]">2024</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item className="w-full">
-          <DataList.Label className="flex items-center gap-1">Blackbaud</DataList.Label>
-          <DataList.Value>
-            Principal Designer, Platform UX <span className="ms-auto text-end font-pixel text-[11px]">2022</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item>
-          <DataList.Label>Everfi</DataList.Label>
-          <DataList.Value>
-            Sr. Interaction Designer <span className="ms-auto text-end font-pixel text-[11px]">2020</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item>
-          <DataList.Label>Everfi</DataList.Label>
-          <DataList.Value>
-            Interaction Designer <span className="ms-auto text-end font-pixel text-[11px]">2019</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item>
-          <DataList.Label>Everfi</DataList.Label>
-          <DataList.Value>
-            Product UX Designer <span className="ms-auto text-end font-pixel text-[11px]">2017</span>
-          </DataList.Value>
-        </DataList.Item>
+        <DescriptionListLabel className="flex items-center gap-2 self-start">
+          <Avatar size="sm">
+            <AvatarImage src="/assets/logos/everfi-icon.png" alt="Everfi" />
+          </Avatar>{" "}
+          Everfi
+        </DescriptionListLabel>
+        <DescriptionListValue>
+          <DescriptionList>
+            <DescriptionListLabel>2020</DescriptionListLabel>
+            <DescriptionListValue>Sr. Interaction Designer</DescriptionListValue>
+            <DescriptionListLabel>2019</DescriptionListLabel>
+            <DescriptionListValue>Interaction Designer</DescriptionListValue>
+            <DescriptionListLabel>2017</DescriptionListLabel>
+            <DescriptionListValue>Product UX Designer</DescriptionListValue>
+            <DescriptionListLabel>2017</DescriptionListLabel>
+            <DescriptionListValue>Product Design Intern</DescriptionListValue>
+          </DescriptionList>
+        </DescriptionListValue>
+        <DescriptionListLabel className="flex items-center gap-2 self-start">
+          <Avatar size="sm">
+            <AvatarImage src="/assets/thumb/npr-logo.png" alt="NPR" />
+          </Avatar>{" "}
+          NPR
+        </DescriptionListLabel>
 
-        <DataList.Item>
-          <DataList.Label>National Public Radio</DataList.Label>
-          <DataList.Value>
-            Design Intern, NPR Labs <span className="ms-auto text-end font-pixel text-[11px]">2017</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item>
-          <DataList.Label>Parking Panda</DataList.Label>
-          <DataList.Value>
-            Product Design Intern <span className="ms-auto text-end font-pixel text-[11px]">2015</span>
-          </DataList.Value>
-        </DataList.Item>
-        <h3 className="font-medium">Education</h3>
-        <DataList.Item>
-          <DataList.Label>Master&apos;s, UX Design</DataList.Label>
-          <DataList.Value>
-            MICA <span className="ms-auto text-end font-pixel text-[11px]">2016—2017</span>
-          </DataList.Value>
-        </DataList.Item>
-        <DataList.Item>
-          <DataList.Label>
-            BA, Cognitive Science;
-            <wbr />
-            <wbr />
-            Minor, Art &amp; Design
-          </DataList.Label>
-          <DataList.Value>
-            University of Michigan <span className="ms-auto text-end font-pixel text-[11px]">2012—2016</span>
-          </DataList.Value>
-        </DataList.Item>
-      </DataList.Root>
-
+        <DescriptionListValue>
+          <DescriptionList>
+            <DescriptionListLabel>2017</DescriptionListLabel>
+            <DescriptionListValue>Design Intern, Research & Development</DescriptionListValue>
+          </DescriptionList>
+        </DescriptionListValue>
+        <DescriptionListLabel>
+          <span className="flex items-center gap-2 self-start">
+            <Avatar size="sm">
+              <AvatarImage src="/assets/logos/parking-panda-logo.jpeg" alt="Parking Panda" />
+            </Avatar>{" "}
+            Parking Panda <InfoTip description="Acquired by SpotHero in 2017." />
+          </span>
+        </DescriptionListLabel>
+        <DescriptionListValue>
+          <DescriptionList>
+            <DescriptionListLabel>2015</DescriptionListLabel>
+            <DescriptionListValue>UX/Design Intern</DescriptionListValue>
+          </DescriptionList>
+        </DescriptionListValue>
+      </DescriptionList>
+      <h3 className="font-pixel text-[11px] uppercase">Education</h3>
+      <DescriptionList>
+        <DescriptionListLabel>Maryland Institute College of Art</DescriptionListLabel>
+        <DescriptionListValue>
+          <DescriptionList>
+            <DescriptionListLabel>2017</DescriptionListLabel>
+            <DescriptionListValue>Master&apos;s, UX Design</DescriptionListValue>
+          </DescriptionList>
+        </DescriptionListValue>
+        <DescriptionListLabel>University of Michigan</DescriptionListLabel>
+        <DescriptionListValue>
+          <DescriptionList>
+            <DescriptionListLabel>2016</DescriptionListLabel>
+            <DescriptionListValue>BA, Cognitive Science ∙ Minor, Art &amp; Design</DescriptionListValue>
+          </DescriptionList>
+        </DescriptionListValue>
+      </DescriptionList>
       <Separator className="max-w-14" />
       <h2 className="font-pixel text-[11px] uppercase">Colophon</h2>
       <DescriptionList className="not-prose">
         <DescriptionListLabel>Type</DescriptionListLabel>
         <DescriptionListValue>
-          <LinkOut href="https://display.net/typeface/season" text="Season Mix" />+ system-ui
+          <span>
+            <LinkOut href="https://displaay.net/typeface/season" text="Season Mix" />,{" "}
+            <LinkOut href="https://departuremono.com/" text="Departure Mono" />
+          </span>
         </DescriptionListValue>
-        <DescriptionListLabel>Framework</DescriptionListLabel>
+        <DescriptionListLabel>Hosting</DescriptionListLabel>
         <DescriptionListValue>
-          <NextJsIcon className="size-4" />
-          Next.js
+          <s className="text-muted-foreground/50">GitHub Pages</s>
+          <LinkOut href="https://vercel.com/" text="Vercel" />
+        </DescriptionListValue>
+        <DescriptionListLabel>Frameworks</DescriptionListLabel>
+        <DescriptionListValue>
+          <Badge variant="ghost">
+            <NextJsIcon data-icon="inline-start" />
+            Next.js
+          </Badge>
         </DescriptionListValue>
         <DescriptionListLabel>Components</DescriptionListLabel>
         <DescriptionListValue>
@@ -465,6 +500,22 @@ export default function Home() {
             <TreeIconTailwind className="size-4" />
             Tailwind
           </span>
+        </DescriptionListValue>
+        <DescriptionListLabel>Icons</DescriptionListLabel>
+        <DescriptionListValue>
+          <ul>
+            <li>
+              Placeholders: <LinkOut href="https://tabler.io" text="Tabler" />
+            </li>
+            <li>
+              Duotone: <LinkOut href="https://trees.software/" text="Trees" /> by{" "}
+              <LinkOut href="https://github.com/pierrecomputer/pierre" text="Pierre Co." />
+            </li>
+          </ul>
+        </DescriptionListValue>
+        <DescriptionListLabel>Logos</DescriptionListLabel>
+        <DescriptionListValue>
+          <LinkOut href="https://svgl.app/" text="svgl" />
         </DescriptionListValue>
         <DescriptionListLabel>Interns</DescriptionListLabel>
         <DescriptionListValue>
@@ -475,6 +526,20 @@ export default function Home() {
           </span>
         </DescriptionListValue>
       </DescriptionList>
+      <div>
+        <p className="text-xs font-medium">Misc.</p>
+        <p className="text-xs/6 text-muted-foreground">
+          Carousels use <LinkOut href="https://embla-carousel.com/" text="Embla" /> with styling inspired by{" "}
+          <LinkOut href="https://joshpuckett.me/pasito" text="Pasito" />. Resizing handled by{" "}
+          <LinkOut href="https://react-resizable-panels.vercel.app/" text="react-resizable-panels" />. Syntax highlighting courtesy of{" "}
+          <LinkOut href="https://github.com/huozhi/sugar-high" text="Sugar High" />. Motion is powered by, well,{" "}
+          <LinkOut href="https://motion.dev/" text="Motion" />.<br />
+          Shoutout to these essential reference manuals: <LinkOut href="https://animations.dev/" text="Animations.dev" />,{" "}
+          <LinkOut href="https://raunofrieberg.com/devouring-details" text="Devouring Details" />,{" "}
+          <LinkOut href="https://www.interfacecraft.dev/" text="Interface Craft" />, and{" "}
+          <LinkOut href="https://makingsoftware.com/" text="Making Software" />.
+        </p>
+      </div>
     </div>
   );
 }

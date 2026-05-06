@@ -16,6 +16,5 @@ export default async function Image({ params }: { params: Promise<{ slug: string
 
   return createOgCard({
     title: frontmatter.title,
-    description: frontmatter.subtitle,
   });
 }

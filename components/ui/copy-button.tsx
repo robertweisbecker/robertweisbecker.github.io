@@ -30,7 +30,7 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
             isCopied ? "blur-0 scale-100 opacity-100" : "scale-25 opacity-0 blur-xs"
           )}
         >
-          <CheckIcon2 className="size-[.75em]" />
+          <CheckIcon2 className="size-[.725em]" />
         </span>
         <span
           className={cn(

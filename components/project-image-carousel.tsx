@@ -2,10 +2,12 @@
 
 import { Image } from "@/components/image";
 import { Carousel, CarouselViewport, CarouselItem, CarouselToolbar } from "@/components/ui/carousel";
+import { imageSrc } from "@/lib/image-src";
 import { cn } from "@/lib/utils";
+import type { StaticImageData } from "next/image";
 
 export type ProjectImageCarouselSlide = {
-  src: string;
+  src: StaticImageData;
   alt: string;
   caption?: string;
 };
@@ -48,12 +50,12 @@ export function ProjectImageCarousel({
       >
         <CarouselViewport className={cn(orientation === "vertical" && "h-100!")}>
           {slides.map((slide) => (
-            <CarouselItem key={slide.src}>
+            <CarouselItem key={imageSrc(slide.src)}>
               {variant === "inset" ? (
                 <Image src={slide.src} alt={slide.alt} caption={slide.caption} />
               ) : (
                 <figure className="flex flex-col gap-2">
-                  <img src={slide.src} alt={slide.alt} className="h-auto w-full max-w-full" />
+                  <img src={imageSrc(slide.src)} alt={slide.alt} className="h-auto w-full max-w-full" />
                   {slide.caption && (
                     <figcaption className="mx-auto max-w-prose text-center text-xs text-muted-foreground">
                       {slide.caption}

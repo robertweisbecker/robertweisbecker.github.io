@@ -7,15 +7,17 @@ import * as React from "react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./ui/resizable";
 import { Badge } from "./ui/badge";
 import { Image, ImageProps } from "./image";
+import { imageSrc } from "@/lib/image-src";
+import type { StaticImageData } from "next/image";
 
 interface ImageToggleProps {
-  before: string;
-  after: string;
+  before: StaticImageData;
+  after: StaticImageData;
   tab1?: string;
   tab2?: string;
   mode?: "tabs" | "slider" | "comparison";
   description?: React.ReactNode;
-  imageProps?: ImageProps;
+  imageProps?: Omit<ImageProps, "src">;
 }
 
 export function ImageToggle({
@@ -29,6 +31,9 @@ export function ImageToggle({
 }: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
+  const beforeUrl = imageSrc(before);
+  const afterUrl = imageSrc(after);
+
   if (mode === "comparison") {
     return (
       <figure className="not-prose flex flex-col justify-center">
@@ -39,7 +44,7 @@ export function ImageToggle({
             maxSize="100%"
             className="squircle group relative rounded-s-xl rounded-e-xs"
           >
-            <img src={before} className="h-full w-auto object-cover object-left" />
+            <img src={beforeUrl} className="h-full w-auto object-cover object-left" alt="" />
             <Badge
               variant="outline"
               className="absolute top-2 left-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
@@ -54,7 +59,7 @@ export function ImageToggle({
             maxSize="100%"
             className="squircle group relative rounded-s-xs rounded-e-xl"
           >
-            <img src={after} className="h-full w-auto object-cover object-right" />
+            <img src={afterUrl} className="h-full w-auto object-cover object-right" alt="" />
             <Badge
               variant="outline"
               className="absolute top-2 right-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
@@ -71,8 +76,8 @@ export function ImageToggle({
     return (
       <figure className="not-prose flex flex-col justify-center">
         <div className="relative">
-          <img src={before} style={{ opacity: 1 - sliderValue / 100 }} alt="Before" />
-          <img src={after} className="absolute inset-0" style={{ opacity: sliderValue / 100 }} alt="After" />
+          <img src={beforeUrl} style={{ opacity: 1 - sliderValue / 100 }} alt="Before" />
+          <img src={afterUrl} className="absolute inset-0" style={{ opacity: sliderValue / 100 }} alt="After" />
         </div>
         <figcaption className="mx-auto grid w-full max-w-sm flex-1 grid-cols-[auto_1fr_auto] items-center gap-4 p-3 text-xs text-muted-foreground">
           <p>{tab1}</p>

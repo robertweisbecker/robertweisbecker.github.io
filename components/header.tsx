@@ -37,17 +37,12 @@ export function Header() {
   // const notHome = pathname !== "/";
   const previewHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const previewActions = React.useRef<PreviewCardPrimitive.Root.Actions | null>(null);
+  const filteredProjects = projects.filter((project) => project.published);
 
   return (
     <nav className={cn("sticky top-0 z-1")}>
       <div className="max-w-8xl mx-auto flex h-12 items-center gap-3 px-2 py-2 sm:px-4">
-        <LinkButton
-          href="/"
-          variant="ghost"
-          size="sm"
-          aria-current={pathname === "/" ? "true" : "false"}
-          className="me-2 font-pixel"
-        >
+        <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           <Favicon className="size-4 text-secondary-foreground" />
           <span>
             bob<span className="text-primary">.</span>fyi
@@ -63,25 +58,8 @@ export function Header() {
         >
           About
         </LinkButton> */}
-        {process.env.NODE_ENV === "development" && (
-          <>
-            <HeaderButton
-              label="Components"
-              icon={<IconComponents data-icon={isMobile ? null : "inline-start"} />}
-              hideTextOnMobile={true}
-              href="/components"
-              aria-current={pathname === "/components" ? "true" : "false"}
-            />
-          </>
-        )}
-        <PreviewCardGroup
-          side="right"
-          sideOffset={8}
-          handle={previewHandle}
-          actionsRef={previewActions}
-          align="start"
-          anchor={anchorRef}
-        >
+
+        <PreviewCardGroup side="right" sideOffset={8} handle={previewHandle} actionsRef={previewActions} align="start" anchor={anchorRef}>
           <DropdownMenu
             modal={false}
             onOpenChange={(open) => {
@@ -123,7 +101,7 @@ export function Header() {
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Projects</DropdownMenuLabel>
 
-                {projects.map((project) => (
+                {filteredProjects.map((project) => (
                   <PreviewCardTrigger
                     key={project.id}
                     delay={100}
@@ -138,24 +116,30 @@ export function Header() {
                           )}
                           <DataList.Root size="sm" className="px-4 py-2">
                             <DataListItem>
-                              <DataListLabel className="font-pixel text-[11px]">Title</DataListLabel>
+                              <DataListLabel>Title</DataListLabel>
                               <DataListValue className="font-medium">{project.title}</DataListValue>
                             </DataListItem>
                             <DataListItem>
-                              <DataListLabel className="font-pixel text-[11px]">Description</DataListLabel>
+                              <DataListLabel>Description</DataListLabel>
                               <DataListValue>{project.description}</DataListValue>
                             </DataListItem>
                             <DataListItem>
-                              <DataListLabel className="font-pixel text-[11px]">Date</DataListLabel>
+                              <DataListLabel>Date</DataListLabel>
                               <DataListValue>{project.date}</DataListValue>
                             </DataListItem>
 
-                            <DataListItem>
-                              <DataListLabel className="font-pixel text-[11px]">Tags</DataListLabel>
-                              <DataListValue>
-                                <Badge>{project.category}</Badge>
-                              </DataListValue>
-                            </DataListItem>
+                            {project.categories && project.categories.length > 0 && (
+                              <DataListItem>
+                                <DataListLabel>Tags</DataListLabel>
+                                <DataListValue className="flex flex-wrap gap-1">
+                                  {project.categories.map((category) => (
+                                    <Badge variant="inherit" size="sm" key={`${project.id}-${category}`}>
+                                      {category}
+                                    </Badge>
+                                  ))}
+                                </DataListValue>
+                              </DataListItem>
+                            )}
                           </DataList.Root>
                         </div>
                       </>
@@ -169,12 +153,19 @@ export function Header() {
                     }
                   >
                     {project.icon && (
-                      <Avatar className="size-[1lh] p-1 [--avatar-radius:var(--radius-sm)]">
-                        <AvatarImage src={project.icon} alt={project.nickname} className="object-contain" />
+                      <Avatar className="-ms-1 size-[1lh] self-start shadow-border-xs [--avatar-radius:var(--radius-sm)]">
+                        <AvatarImage src={project.icon} alt={project.nickname} className="object-scale-down" />
                       </Avatar>
                     )}
+
                     {project.nickname}
-                    <span className="ms-auto text-xs text-muted-foreground">{project.date}</span>
+                    <div className="ms-auto flex flex-wrap gap-1">
+                      {project.categories?.map((category) => (
+                        <Badge variant="inherit" className="rounded-full" size="sm" key={`${project.id}-${category}`}>
+                          {category}
+                        </Badge>
+                      ))}
+                    </div>
                   </PreviewCardTrigger>
                 ))}
               </DropdownMenuGroup>
@@ -191,6 +182,24 @@ export function Header() {
         />
         {/* <SiteSearch className="ml-auto" /> */}
         <div className="ms-auto" />
+        {process.env.NODE_ENV === "development" && (
+          <>
+            <HeaderButton
+              label="Components"
+              icon={<IconComponents data-icon={isMobile ? null : "inline-start"} />}
+              hideTextOnMobile={true}
+              href="/components"
+              aria-current={pathname === "/components" ? "true" : "false"}
+            />
+            <HeaderButton
+              label="Private"
+              icon={<IconBlobFilled data-icon={isMobile ? null : "inline-start"} />}
+              hideTextOnMobile={true}
+              href="/private"
+              aria-current={pathname === "/private" ? "true" : "false"}
+            />
+          </>
+        )}
         <ThemeSettings />
         <ModeToggle />
       </div>

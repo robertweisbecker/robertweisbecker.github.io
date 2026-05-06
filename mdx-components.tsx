@@ -11,7 +11,7 @@ import { ProjectImageCarousel } from "@/components/project-image-carousel";
 import { Stats } from "@/components/stats";
 import { Separator } from "@/components/ui/separator";
 import { Video } from "@/components/video";
-import { slugify } from "@/lib/utils";
+import { cn, slugify } from "@/lib/utils";
 import { IconLinkFilled } from "@tabler/icons-react";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
@@ -87,17 +87,9 @@ export function useMDXComponents(): MDXComponents {
     h3: createHeading(3),
     h4: createHeading(4),
     img: (props) => {
-      const { src, alt, width, height, ...rest } = props as React.ImgHTMLAttributes<HTMLImageElement>;
+      const { src, alt, className, ...rest } = props as React.ImgHTMLAttributes<HTMLImageElement>;
       if (!src || typeof src !== "string") return null;
-      return (
-        <Image
-          src={src}
-          alt={alt ?? ""}
-          width={width ? Number(width) : 1200}
-          height={height ? Number(height) : 630}
-          {...rest}
-        />
-      );
+      return <img src={src} alt={alt ?? ""} className={cn(className)} {...rest} />;
     },
     a: ({ href, children, ...props }) => {
       if (href?.startsWith("/")) {

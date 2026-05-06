@@ -191,7 +191,7 @@
     inset 0 1px 4px -2px --alpha(var(--color-foreground) / 12%), inset 0 0 0 0.5px --alpha(var(--color-border) / 50%);
   --popover-shadow:
     0 0 0 1px var(--border), inset 0 1px hsl(0 0 100% / 50%), inset 0 1px 2px 1px hsl(0 0 100% / 20%),
-    0 4px 28px hsl(0 0 0% / 25%), var(--shadow-xl);
+    0 10px 28px hsl(0 0 0% / 12%), 0 24px 68px hsl(0 0 0% / 0.08), var(--shadow-lg);
   --shadow-button-inset:
     inset 0 1.5px 0 0 --alpha(currentColor / 20%), inset 0 0 0 1.5px --alpha(currentColor / 10%),
     inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, hsl(0 0 0% / 30%));
@@ -326,7 +326,7 @@
 
 @utility text-h1 {
   :where(&) {
-    @apply font-heading text-2xl leading-tight -tracking-[0.005em] text-balance md:text-3xl;
+    @apply font-heading text-2xl/none -tracking-[0.0125em] text-balance md:text-3xl/[.9em];
     font-variation-settings:
       "SERF" 25,
       "slnt" -5,
@@ -372,7 +372,7 @@
 
 @utility link {
   :where(&) {
-    @apply relative isolate inline wrap-break-word break-all underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
+    @apply relative isolate inline wrap-break-word break-all text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
     svg {
       @apply inline max-h-[1em] max-w-[1em];
     }

@@ -9,8 +9,7 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: "bg-card text-card-foreground [&>svg]:text-muted-foreground ",
-        secondary:
-          "bg-(--hue-50) dark:bg-(--hue-900) text-secondary-foreground [&>svg]:text-primary outline-primary/20",
+        secondary: "bg-(--hue-50) dark:bg-(--hue-900) text-secondary-foreground [&>svg]:text-primary outline-primary/20",
         neutral: "bg-neutral-75 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72",
         info: "bg-info text-info-foreground outline-info-primary/20 [&>svg]:text-info-primary",
         success: "bg-success text-success-foreground outline-success-primary/20 [&>svg]:text-success-primary",
@@ -30,12 +29,7 @@ const alertVariants = cva(
   }
 );
 
-function Alert({
-  className,
-  variant,
-  inline,
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+function Alert({ className, variant, inline, ...props }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
   return (
     <div
       data-slot="alert"
@@ -47,26 +41,18 @@ function Alert({
 }
 
 function AlertContent({ className, ...props }: React.ComponentProps<"div">): React.ReactElement {
-  return (
-    <div
-      className={cn("flex flex-wrap gap-x-1 gap-y-2.5 [svg~&]:col-start-2", className)}
-      data-slot="alert-content"
-      {...props}
-    />
-  );
+  return <div className={cn("flex flex-wrap gap-x-1 gap-y-2.5 [svg~&]:col-start-2", className)} data-slot="alert-content" {...props} />;
 }
 
 function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div data-slot="alert-title" className={cn("font-medium [&_a]:link [svg~&]:col-start-2", className)} {...props} />
-  );
+  return <div data-slot="alert-title" className={cn("font-medium [&_a]:link [svg~&]:col-start-2", className)} {...props} />;
 }
 
 function AlertDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="alert-description"
-      className={cn("text-pretty wrap-break-word text-current/72 [svg~&]:col-start-2", className)}
+      className={cn("text-pretty wrap-break-word text-current/84 [svg~&]:col-start-2", className)}
       {...props}
     />
   );

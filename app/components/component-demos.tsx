@@ -17,6 +17,7 @@ import {
 } from "@/components/icons";
 import { Image } from "@/components/image";
 import { ImageModal } from "@/components/image-modal";
+import forgeBeforeDemo from "@/public/assets/forge/forge-before.png";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
 import { Mark, MarkNote } from "@/components/mark-note";
@@ -642,13 +643,13 @@ export function ComponentDemos() {
 
       <Section title="Image">
         <div className="max-w-md">
-          <Image src="/assets/forge/forge-before.png" alt="Sample image with card wrapper" />
+          <Image src={forgeBeforeDemo} alt="Sample image with card wrapper" />
         </div>
       </Section>
 
       <Section title="Image Modal">
         <div className="max-w-md">
-          <ImageModal src="/assets/forge/forge-before.png" caption="Click the expand icon to view fullscreen." />
+          <ImageModal src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
         </div>
       </Section>
 

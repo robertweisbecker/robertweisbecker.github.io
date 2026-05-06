@@ -7,8 +7,7 @@ import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/c
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import * as React from "react";
-
-const TEST_IMAGE = "/assets/oklch/oklch-gradient.png";
+import testImage from "@/public/assets/oklch/oklch-gradient.png";
 
 function PrototypeSection({
   title,
@@ -151,7 +150,7 @@ export default function ImageModalPostPage() {
         pros={["Full accessibility (focus trap, Escape, aria)", "Scrollable viewport", "Skeleton loading state"]}
         cons={["Conditional swap adds complexity", "Dialog wrapper hierarchy can interfere with Motion projection"]}
       >
-        <ImageModal src={TEST_IMAGE} caption="Dialog prototype" />
+        <ImageModal src={testImage} caption="Dialog prototype" />
       </PrototypeSection>
 
       <Separator />
@@ -163,7 +162,7 @@ export default function ImageModalPostPage() {
         pros={["No conditional swap needed", "Anchor-aware positioning", "Trigger stays in DOM"]}
         cons={["Fighting Popover's positioning model", "Extra Positioner wrapper in DOM"]}
       >
-        <ImageModalPopover src={TEST_IMAGE} caption="Popover prototype" />
+        <ImageModalPopover src={testImage} caption="Popover prototype" />
       </PrototypeSection>
 
       <Separator />
@@ -173,7 +172,7 @@ export default function ImageModalPostPage() {
         badge="Popover + layoutId (motion.div)"
         description="Base UI Popover with modal mode. Trigger stays in DOM (no swap). Positioner overridden to fixed-center. layoutId animates from anchor position to center."
       >
-        <ImageModalPopover2 src={TEST_IMAGE} caption="Popover prototype" />
+        <ImageModalPopover2 src={testImage} caption="Popover prototype" />
       </PrototypeSection>
 
       <Separator />
@@ -189,7 +188,7 @@ export default function ImageModalPostPage() {
         ]}
         cons={["Must handle accessibility manually", "No scroll-lock or focus-trap for free"]}
       >
-        <ImageModalMotion src={TEST_IMAGE} caption="Pure Motion prototype" />
+        <ImageModalMotion src={testImage} caption="Pure Motion prototype" />
       </PrototypeSection>
 
       <Separator />

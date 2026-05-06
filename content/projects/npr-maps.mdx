@@ -9,7 +9,11 @@ export const frontmatter = {
   ],
 };
 
-<ImageToggle before="/assets/npr/map-before.png" after="/assets/npr/map-after.png" />
+import nprMapBefore from "@/public/assets/npr/map-before.png";
+import nprMapAfter from "@/public/assets/npr/map-after.png";
+import nprMapUi from "@/public/assets/npr/map-ui.png";
+
+<ImageToggle before={nprMapBefore} after={nprMapAfter} />
 
 ## Background
 
@@ -31,7 +35,7 @@ Our main goals for this redesign effort were to overhaul the interface for bette
 
 At the time, NPR's mobile apps used a variation of Material Design. Since we were using Vue, we imported components from <LinkOut href="https://www.creative-tim.com/vuematerial/" text="Vue Material" /> and tailored them to our needs — re-theming them to match NPR's apps and composing them to create more complex application-specific components.
 
-![MAPS user interface](/assets/npr/map-ui.png)
+<Image src={nprMapUi} alt="MAPS user interface" priority />
 
 ### Station Cards
 

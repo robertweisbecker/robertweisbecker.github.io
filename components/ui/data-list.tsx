@@ -29,7 +29,7 @@ function DataListRoot({ orientation = "horizontal", size = "md", className, ...p
         className={cn(
           "text-start wrap-anywhere",
           // Orientation
-          orientation === "horizontal" && "grid grid-cols-[auto_1fr]",
+          orientation === "horizontal" && "grid grid-cols-[auto_1fr] max-sm:flex max-sm:flex-col",
           orientation === "vertical" && "flex flex-col",
           // Size
           size === "sm" && "gap-3 text-sm",
@@ -38,10 +38,14 @@ function DataListRoot({ orientation = "horizontal", size = "md", className, ...p
           // Trim: in horizontal mode, values pull in ±0.25em from neighboring rows
           // for optical baseline alignment. First and last items are exempt so values
           // don't bleed outside the container.
-          "[&[data-orientation=horizontal]>[data-slot=data-list-item]>[data-slot=data-list-value]]:-mt-[0.25em]",
-          "[&[data-orientation=horizontal]>[data-slot=data-list-item]>[data-slot=data-list-value]]:-mb-[0.25em]",
-          "[&[data-orientation=horizontal]>[data-slot=data-list-item]:first-child>[data-slot=data-list-value]]:mt-0",
-          "[&[data-orientation=horizontal]>[data-slot=data-list-item]:last-child>[data-slot=data-list-value]]:mb-0",
+          // "[&[data-orientation=horizontal]>[data-slot=data-list-item]>[data-slot=data-list-value]]:-mt-[0.25em]",
+          // "[&[data-orientation=horizontal]>[data-slot=data-list-item]>[data-slot=data-list-value]]:-mb-[0.25em]",
+          // "[&[data-orientation=horizontal]>[data-slot=data-list-item]:first-child>[data-slot=data-list-value]]:mt-0",
+          // "[&[data-orientation=horizontal]>[data-slot=data-list-item]:last-child>[data-slot=data-list-value]]:mb-0",
+          "[&[data-orientation=horizontal]>[data-slot=data-list-item]]:-mt-[0.25em]",
+          "[&[data-orientation=horizontal]>[data-slot=data-list-item]]:-mb-[0.25em]",
+          "[&[data-orientation=horizontal]>[data-slot=data-list-item]:first-child]:mt-0",
+          "[&[data-orientation=horizontal]>[data-slot=data-list-item]:last-child]:mb-0",
           className
         )}
         {...props}
@@ -56,7 +60,8 @@ function DataListItem({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="data-list-item"
       className={cn(
-        orientation === "horizontal" && "col-span-2 grid grid-cols-subgrid items-baseline",
+        orientation === "horizontal" &&
+          "col-span-2 grid grid-cols-subgrid items-baseline wrap-anywhere max-sm:flex max-sm:flex-col max-sm:gap-[.25em]",
         orientation === "vertical" && "flex flex-col gap-[.25em]",
         className
       )}
@@ -71,7 +76,7 @@ function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
     <dt
       data-slot="data-list-label"
       className={cn(
-        "flex min-w-0 text-muted-foreground/80",
+        "flex min-w-0 items-center gap-1 self-start text-muted-foreground",
         orientation === "horizontal" && size === "sm" ? "min-w-[12ch]" : "min-w-[28ch]",
         orientation === "vertical" && "min-w-0",
         className
@@ -82,7 +87,7 @@ function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
 }
 
 function DataListValue({ className, ...props }: React.ComponentProps<"dd">) {
-  return <dd data-slot="data-list-value" className={cn("flex min-w-0", className)} {...props} />;
+  return <dd data-slot="data-list-value" className={cn("min-w-0", className)} {...props} />;
 }
 
 const DataList = {

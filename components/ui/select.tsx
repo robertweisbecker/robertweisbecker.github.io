@@ -3,7 +3,7 @@
 import { Select as SelectPrimitive } from "@base-ui/react/select";
 import * as React from "react";
 
-import { CheckIcon } from "@/components/icons";
+import { CheckIcon, PixelChevronsIcon } from "@/components/icons";
 import { cn } from "@/lib/utils";
 import { IconChevronDown, IconChevronUp, IconSelector } from "@tabler/icons-react";
 
@@ -15,11 +15,7 @@ function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
 
 function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
   return (
-    <SelectPrimitive.Value
-      data-slot="select-value"
-      className={cn("flex flex-1 items-center gap-1.5 text-start", className)}
-      {...props}
-    />
+    <SelectPrimitive.Value data-slot="select-value" className={cn("flex flex-1 items-center gap-1.5 text-start", className)} {...props} />
   );
 }
 
@@ -42,9 +38,7 @@ function SelectTrigger({
       {...props}
     >
       {children}
-      <SelectPrimitive.Icon
-        render={<IconSelector strokeWidth={2} className="pointer-events-none size-4 text-muted-foreground" />}
-      />
+      <SelectPrimitive.Icon render={<PixelChevronsIcon className="pointer-events-none size-4 text-muted-foreground" />} />
     </SelectPrimitive.Trigger>
   );
 }
@@ -132,8 +126,7 @@ function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Prop
   );
 }
 
-const scrollButtonClasses =
-  "z-10 flex w-full cursor-default items-center justify-center py-1 [&_svg:not([class*='size-'])]:size-4";
+const scrollButtonClasses = "z-10 flex w-full cursor-default items-center justify-center py-1 [&_svg:not([class*='size-'])]:size-4";
 
 function SelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
   return (

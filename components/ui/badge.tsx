@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  " gap-1 px-1.5 py-px font-[450] transition-all **:data-[icon=inline-end]:-me-0.5 **:data-[icon=inline-start]:-ms-0.5 [&_svg:not([class*='size-'])]:size-3.5 inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive overflow-hidden group/badge align-[-2px] tracking-normal align-baseline",
+  " gap-1 px-1 py-px font-[450] transition-all **:data-[icon=inline-end]:-me-0.5 **:data-[icon=inline-start]:-ms-0.5 [&_svg:not([class*='size-'])]:size-[.875em] inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none focus-visible:outlin-2 focus-visible:outline-ring focus-visible:outline-offset-1 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive overflow-hidden group/badge  tracking-normal ",
   {
     variants: {
       variant: {
@@ -16,13 +16,14 @@ const badgeVariants = cva(
         error: "bg-error [a]:hover:bg-error/20 focus-visible:ring-error text-error-foreground ",
         success: "bg-success [a]:hover:bg-success/20 focus-visible:ring-success text-success-foreground ",
         info: "bg-info [a]:hover:bg-info/20 focus-visible:ring-info text-info-foreground",
-        beta: "bg-info [a]:hover:bg-accent border border-dashed border-info-primary font-medium text-info  text-info-foreground ",
-        inherit: "bg-current/8 [&_svg]:text-current/72 text-current",
+        beta: "bg-info border border-dashed border-info-primary font-mono text-info text-info-foreground ",
+        inherit:
+          "bg-current/8 [&_svg]:text-current/72 text-current text-[inherit] [a]:hover:underline [a]:hover:bg-current/12 [a]:hover:[&_svg]:text-current/84",
         warning: "bg-warning [a]:hover:bg-warning/20 focus-visible:ring-warning text-warning-foreground ",
         outline:
           "outline bg-card outline-border shadow-[0_-1px_hsl(0_0_100%_/_5%),0_1px_hsl(0_0%_0%_/_5%)] text-card-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground ",
         ghost: "[a]:hover:bg-accent text-foreground [a]:hover:text-accent-foreground -mx-1",
-        link: "text-foreground bg-secondary self-center underline-offset-4 [a]:hover:underline",
+        link: "text-foreground font-[450] bg-muted [font-size:inherit] self-center underline-offset-4 [a]:hover:bg-accent [a]:hover:text-accent-foreground",
       },
       size: {
         default: "text-xs/none rounded-sm h-5",

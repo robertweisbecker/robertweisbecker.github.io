@@ -12,9 +12,14 @@ export const frontmatter = {
   ],
 };
 
+import thesisOverview from "@/public/assets/thesis/thesis-1.png";
+import thesisTwineFlow from "@/public/assets/thesis/twine-flow.png";
+import thesisEmma from "@/public/assets/thesis/emma.png";
+import thesisTool from "@/public/assets/thesis/tool.png";
+
 In December 2017, I completed a Master's in User Experience Design at <LinkOut href="https://www.mica.edu/graduate-programs/ux-design-mps/" text="MICA" />. For my thesis project, I explored how to translate immigration application paperwork into a more user-friendly format via conversational interfaces.
 
-![Thesis project overview](/assets/thesis/thesis-1.png)
+<Image src={thesisOverview} alt="Thesis project overview" priority />
 
 ## Problem Space
 
@@ -69,7 +74,7 @@ I also employed <LinkOut href="https://twinery.org/" text="Twine" />, an open-so
   <source src="/assets/thesis/twine.mov" />
 </Video>
 
-<ImageModal src="/assets/thesis/twine-flow.png" caption="Twine interface with branching conditions" />
+<ImageModal src={thesisTwineFlow} caption="Twine interface with branching conditions" />
 
 ### Hybrid
 
@@ -148,6 +153,6 @@ In 2018, they released <LinkOut href="https://www.uscis.gov/tools/meet-emma-our-
 In September 2021, USCIS also released the <LinkOut href="https://www.uscis.gov/citizenship-resource-center/learn-about-citizenship/naturalization-eligibility" text="Naturalization Eligibility Tool" />, an interactive questionnaire that potential applicants can use to determine their eligibility criteria. And — you guessed it — the tool presents abridged versions of N-400 Eligibility Checklist questions in a wizard format.
 
 <LayoutGrid variant="oneThird">
-  <ImageModal src="/assets/thesis/emma.png" caption="Emma, USCIS's virtual assistant" />
-  <ImageModal src="/assets/thesis/tool.png" caption="Naturalization Eligibility Tool" />
+  <ImageModal src={thesisEmma} caption="Emma, USCIS's virtual assistant" />
+  <ImageModal src={thesisTool} caption="Naturalization Eligibility Tool" />
 </LayoutGrid>
