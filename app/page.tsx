@@ -242,7 +242,6 @@ export default function Home() {
           <p className="max-w-prose text-sm/6 text-muted-foreground">
             Before that, I worked on financial &amp; K12 products for Everfi, including{" "}
             <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
-            <LinkOut href="https://everfi.com/financial-education/consumers/engage/" text="Engage" />,
             <Badge variant="link" render={<Link href="/everfi-engage" />}>
               <TreeIconRichText data-icon="inline-start" className="opacity-50" />
               Engage
