@@ -32,7 +32,7 @@ export default async function MDXLayout({ children, params }: { children: React.
       </aside>
 
       <div id="content-max" className="col-start-2 min-w-0">
-        <div id="content-header" className="mx-auto flex max-w-xl flex-col items-start gap-2">
+        <div id="content-header" className="mx-auto flex max-w-xl flex-col items-start gap-4">
           <BackButton href="/#projects" className="mb-8 lg:hidden">
             Projects
           </BackButton>

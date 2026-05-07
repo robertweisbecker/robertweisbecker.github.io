@@ -30,8 +30,8 @@ export function Image(props: ImageProps) {
         })();
 
   return (
-    <figure data-media className={cn("relative my-10 flex flex-col items-center justify-center gap-1.5", className)}>
-      <div className="sm:squircle relative -mx-8 bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+    <figure data-media className={cn("relative my-10 flex w-full flex-col items-center justify-stretch gap-1.5", className)}>
+      <div className="sm:squircle -mx-8 w-full bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
         <NextImage
           src={src}
           alt={alt}
