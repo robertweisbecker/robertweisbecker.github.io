@@ -74,7 +74,7 @@ function Carousel({
   const fadeEnabled = !!fadeOption;
 
   const autoplayOpts = typeof autoplayOption === "object" ? autoplayOption : {};
-  const isLoop = opts?.loop ?? false;
+  const isLoop = opts?.loop ?? true;
   const autoplayPlugin = React.useRef(autoplayEnabled ? Autoplay({ delay: 4000, ...autoplayOpts }) : null);
 
   const [intersectionRef, entry] = useIntersectionObserver({ threshold: 0.3 });
@@ -83,7 +83,7 @@ function Carousel({
 
   const builtInPlugins = [...(fadeEnabled ? [Fade()] : []), ...(autoplayPlugin.current ? [autoplayPlugin.current] : [])];
 
-  const [carouselRef, api] = useEmblaCarousel({ ...opts, axis: orientation === "horizontal" ? "x" : "y" }, [
+  const [carouselRef, api] = useEmblaCarousel({ loop: true, ...opts, axis: orientation === "horizontal" ? "x" : "y" }, [
     ...builtInPlugins,
     ...(externalPlugins ?? []),
   ]);

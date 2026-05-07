@@ -82,9 +82,9 @@ export function Header() {
                 <DropdownMenuItem render={<Link href="/" />} nativeButton={false}>
                   Home
                 </DropdownMenuItem>
-                <DropdownMenuItem render={<Link href="/about" />} nativeButton={false}>
+                {/* <DropdownMenuItem render={<Link href="/about" />} nativeButton={false}>
                   About
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false}>
                   Posts
                 </DropdownMenuItem>

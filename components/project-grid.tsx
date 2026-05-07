@@ -69,7 +69,7 @@ export function ProjectGrid({ items = defaultItems, className, itemClassName }: 
             {renderMedia(item.icon)}
             <ItemContent>
               <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>{item.title}</ItemTitle>
-              {item.description && <ItemDescription>{item.description}</ItemDescription>}
+              {item.description && <ItemDescription className="hidden sm:block">{item.description}</ItemDescription>}
             </ItemContent>
             {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
             {item.tags && <ItemActions>{item.tags}</ItemActions>}

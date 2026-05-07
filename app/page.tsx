@@ -73,13 +73,13 @@ export default function Home() {
   const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
     <div className={cn("mx-auto grid max-w-2xl gap-12")}>
-      <h1 className="-ms-1 -mb-6 text-h1 text-foreground">
+      <h1 className="-ms-1 -mb-6 text-h1">
         Robert
         <br /> Weisbecker
       </h1>
-      <div className="grid items-start gap-10 sm:grid-cols-[200px_1fr]">
-        <div className="relative">
-          <div className="group/pixel border-wavy relative size-50 overflow-hidden border-2 border-primary">
+      <div className="grid items-start gap-10 sm:grid-cols-[auto_1fr]">
+        <div className="relative rounded-sm bg-card p-2 shadow-border-lg hover:-rotate-4">
+          <div className="group/pixel relative size-50 bg-muted">
             <Button
               onClick={() => setIsDinoVisible((v) => !v)}
               variant="ghost"
@@ -234,20 +234,21 @@ export default function Home() {
           ♦ About
         </h2>
         <LayoutGrid variant="twoUp">
-          <p className="max-w-prose text-sm/6 text-muted-foreground">
-            Since 2021, I&apos;ve led the implementation of a shared design system for e-learning admin, educator, and learner products.
-            Recently, I've been working on a new learning management platform, diving deep into color spaces, and playing with web
-            animation. You may notice some sprinkled throughout.
+          <p className="max-w-prose text-sm text-muted-foreground">
+            I'm from Baltimore, MD, and now live in southern CA. Since 2021, I&apos;ve led the implementation of a shared design system for
+            e-learning admin, educator, and learner-facing products. I also work on those products too! Get you a man who can do both diving
+            deep into color spaces, and playing with web animation. You may notice some sprinkled throughout.
           </p>
           <p className="max-w-prose text-sm/6 text-muted-foreground">
-            Before that, I designed financial &amp; K12 products for Everfi, including{" "}
+            Before that, I worked on financial &amp; K12 products for Everfi, including{" "}
             <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
+            <LinkOut href="https://everfi.com/financial-education/consumers/engage/" text="Engage" />,
             <Badge variant="link" render={<Link href="/everfi-engage" />}>
               <TreeIconRichText data-icon="inline-start" className="opacity-50" />
               Engage
             </Badge>
-            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. Plus a whole
-            bunch of others for partners like{" "}
+            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. Plus more
+            for partners like{" "}
             <span className="whitespace-nowrap">
               <GoogleIcon className="-mt-px inline-block size-3 grayscale" /> Google
             </span>
@@ -270,12 +271,7 @@ export default function Home() {
               <BeyondMeatIcon className="-mt-px inline-block size-3.5 fill-muted-foreground/50" />
                Beyond Meat
             </span>
-            ,{" "}
-            <span className="whitespace-nowrap">
-              <TruistIcon className="-mt-0.5 inline-block size-3 fill-muted-foreground/50" />
-               Truist
-            </span>
-            , and more.
+            , among others.
           </p>
         </LayoutGrid>
         <p className="max-w-prose text-sm text-muted-foreground">Some other things I&apos;ve done:</p>

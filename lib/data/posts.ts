@@ -80,7 +80,7 @@ export const posts: Post[] = [
   },
   {
     id: "native-popovers",
-    title: "Native Popovers",
+    title: "Native Popover Experiments",
     description: "HTML <popover>, anchoring, and starting-style",
     category: "Snippet",
     date: "08/26/2025",

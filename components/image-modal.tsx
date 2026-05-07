@@ -18,9 +18,8 @@ import {
   DialogPortal,
   DialogPopup,
 } from "@/components/ui/dialog";
-import { Image } from "@/components/image";
 import { imageSrc } from "@/lib/image-src";
-import type { StaticImageData } from "next/image";
+import NextImage, { type StaticImageData } from "next/image";
 
 const SPRING = { type: "spring" as const, damping: 28, stiffness: 220 };
 
@@ -113,18 +112,31 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
   const fullscreenUrl = imageSrc(src);
   return (
     <Dialog>
-      <figure className={cn("group/figure my-0! block", className)}>
-        <div className="relative">
-          <Image src={src} alt={typeof caption === "string" ? caption : ""} className="w-full" />
+      <figure
+        data-media
+        className={cn(
+          "group/figure not-prose relative my-10 flex flex-col items-center justify-center gap-1.5",
+          className
+        )}
+      >
+        <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+          <NextImage
+            src={src}
+            alt={typeof caption === "string" ? caption : ""}
+            sizes="(max-width: 768px) 100vw, 720px"
+            className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+          />
           <DialogTrigger
             aria-label="View fullscreen image"
-            className="absolute inset-e-2 bottom-2"
+            className="absolute inset-e-3 bottom-3"
             render={<Button variant="overlay" size="icon-sm" rounded />}
           >
             <IconArrowsDiagonal />
           </DialogTrigger>
         </div>
-        <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>
+        {caption && (
+          <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>
+        )}
       </figure>
       <DialogPortal>
         <DialogOverlay />

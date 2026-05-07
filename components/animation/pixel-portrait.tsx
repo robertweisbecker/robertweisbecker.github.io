@@ -9,11 +9,11 @@ const PIXEL_FG_CLASS = "fill-primary dark:fill-secondary";
 export function PixelPortrait({ className }: { className?: string }) {
   return (
     <div className={cn("relative size-50 overflow-clip", className)}>
-      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="size-50 transform-gpu hover:filter-[url(#warp)]">
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="size-50 transform-gpu hover:filter-[url(#static)]">
         <defs>
-          <filter id="warp">
+          <filter id="static">
             <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2">
-              <animate attributeName="seed" values="0;20" dur="5s" repeatCount="indefinite" />
+              <animate attributeName="seed" values="0;20;5" dur="5s" repeatCount="indefinite" />
             </feTurbulence>
             <feDisplacementMap in="SourceGraphic" scale="2" />
           </filter>

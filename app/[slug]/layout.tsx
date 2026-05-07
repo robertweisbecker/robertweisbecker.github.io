@@ -22,7 +22,7 @@ export default async function MDXLayout({
   const toc = getProjectToc(slug);
 
   const neighbors = resolveNeighbors(
-    projects.map((p) => ({ title: p.title, path: p.path })),
+    projects.filter((p) => p.published).map((p) => ({ title: p.title, path: p.path })),
     `/${slug}`,
     { title: "Projects", href: "/#projects" }
   );

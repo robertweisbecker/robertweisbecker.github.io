@@ -40,7 +40,7 @@ function ChromeTabsTab({ value, children, className, flush = true, ...props }: T
       )}
       {...props}
     >
-      <span className="flex flex-1 items-center gap-2 truncate px-4 py-2 before:absolute before:inset-1 before:-z-1 before:rounded-md before:transition-colors group-hover/tab:not-group-data-active/tab:before:bg-secondary/50 group-active/tab:before:bg-transparent group-data-active/tab:before:bg-transparent">
+      <span className="flex flex-1 items-center gap-2 truncate px-4 py-2 before:absolute before:inset-1 before:-z-1 before:rounded-md before:transition-colors group-hover/tab:not-group-data-active/tab:before:bg-accent group-active/tab:before:bg-transparent group-data-active/tab:before:bg-transparent">
         {children ?? value}
       </span>
     </TabsPrimitive.Tab>

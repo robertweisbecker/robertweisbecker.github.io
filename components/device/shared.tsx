@@ -80,20 +80,13 @@ export interface TimeProps extends React.ComponentProps<"span"> {
   size?: keyof typeof timeSize;
 }
 
-export const Time = React.forwardRef<HTMLSpanElement, TimeProps>(function Time(
-  { className, size = "phone", ...props },
-  ref
-) {
+export const Time = React.forwardRef<HTMLSpanElement, TimeProps>(function Time({ className, size = "phone", ...props }, ref) {
   const t = useCurrentTime();
   return (
     <span
       ref={ref}
       data-slot="device-time"
-      className={cn(
-        "relative inline-flex min-h-[1em] items-center justify-center font-[system-ui]",
-        timeSize[size],
-        className
-      )}
+      className={cn("relative inline-flex min-h-[1em] items-center justify-center font-[system-ui]", timeSize[size], className)}
       style={{ fontFeatureSettings: "normal" }}
       {...props}
     >
@@ -111,14 +104,7 @@ export interface BatteryDisplayProps extends React.ComponentProps<"div"> {
   size?: "phone" | "desktop";
 }
 
-export function BatteryDisplay({
-  className,
-  level,
-  charging,
-  loading = false,
-  size = "phone",
-  ...props
-}: BatteryDisplayProps) {
+export function BatteryDisplay({ className, level, charging, loading = false, size = "phone", ...props }: BatteryDisplayProps) {
   const batteryColor = level > 50 ? "var(--green-400)" : "var(--yellow-300)";
   const iconClass = size === "phone" ? "size-[7cqw] scale-x-120" : "size-[2.2cqw] scale-x-110 text-white/90";
 
@@ -175,14 +161,10 @@ export function SignalDisplay({ className, size = "phone", ...props }: SignalDis
 
 export function TrafficLights({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      data-slot="device-traffic-lights"
-      className={cn("flex shrink-0 items-center gap-1.5 self-start pe-1", className)}
-      {...props}
-    >
-      <div className="h-3 w-3 rounded-full bg-error inset-ring inset-ring-border" />
-      <div className="h-3 w-3 rounded-full bg-warning inset-ring inset-ring-border" />
-      <div className="h-3 w-3 rounded-full bg-success inset-ring inset-ring-border" />
+    <div data-slot="device-traffic-lights" className={cn("flex shrink-0 items-center gap-1.5 self-start pe-1", className)} {...props}>
+      <div className="size-3 rounded-full bg-red-400" />
+      <div className="size-3 rounded-full bg-yellow-300" />
+      <div className="size-3 rounded-full bg-lime-400" />
     </div>
   );
 }
@@ -190,59 +172,33 @@ export function TrafficLights({ className, ...props }: React.ComponentProps<"div
 export function SideButtons() {
   return (
     <>
-      <div
-        className="absolute top-[15%] -left-1 h-[3.5%] w-0.5 rounded-tl-full rounded-bl-full bg-neutral-700/50"
-        aria-hidden
-      />
-      <div
-        className="absolute top-[23.4%] -left-1 h-[7.1%] w-0.5 rounded-tl-full rounded-bl-full bg-neutral-700/50"
-        aria-hidden
-      />
-      <div
-        className="absolute top-[32.4%] -left-1 h-[7.1%] w-0.5 rounded-tl-full rounded-bl-full bg-neutral-700/50"
-        aria-hidden
-      />
-      <div
-        className="absolute top-[28.2%] -right-1 h-[11%] w-0.5 rounded-tr-full rounded-br-full bg-neutral-600/50"
-        aria-hidden
-      />
+      <div className="absolute top-[15%] -left-1 h-[3.5%] w-0.5 rounded-tl-full rounded-bl-full bg-neutral-700/50" aria-hidden />
+      <div className="absolute top-[23.4%] -left-1 h-[7.1%] w-0.5 rounded-tl-full rounded-bl-full bg-neutral-700/50" aria-hidden />
+      <div className="absolute top-[32.4%] -left-1 h-[7.1%] w-0.5 rounded-tl-full rounded-bl-full bg-neutral-700/50" aria-hidden />
+      <div className="absolute top-[28.2%] -right-1 h-[11%] w-0.5 rounded-tr-full rounded-br-full bg-neutral-600/50" aria-hidden />
     </>
   );
 }
 
-const shineVariants = cva(
-  "pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-[inherit] motion-reduce:animate-none",
-  {
-    variants: {
-      variant: {
-        sweep:
-          "bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.12)_50%,transparent_70%)] bg-[length:250%_250%] animate-[shine-sweep_8s_linear_infinite]",
-        glow: "bg-radial-[at_30%_20%,rgba(255,255,255,0.12),transparent_60%] animate-[shine-glow_5s_ease-in-out_infinite]",
-        ambient:
-          "after:pointer-events-none after:absolute after:inset-0 after:origin-center after:rounded-[inherit] after:bg-[conic-gradient(from_0deg,transparent,rgba(255,255,255,0.08),transparent_30%)] after:content-[''] after:animate-[shine-ambient_12s_linear_infinite]",
-        none: "",
-      },
+const shineVariants = cva("pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-[inherit] motion-reduce:animate-none", {
+  variants: {
+    variant: {
+      sweep:
+        "bg-[linear-gradient(115deg,transparent_30%,rgba(255,255,255,0.12)_50%,transparent_70%)] bg-[length:250%_250%] animate-[shine-sweep_8s_linear_infinite]",
+      glow: "bg-radial-[at_30%_20%,rgba(255,255,255,0.12),transparent_60%] animate-[shine-glow_5s_ease-in-out_infinite]",
+      ambient:
+        "after:pointer-events-none after:absolute after:inset-0 after:origin-center after:rounded-[inherit] after:bg-[conic-gradient(from_0deg,transparent,rgba(255,255,255,0.8),transparent_30%)] after:content-[''] after:animate-[shine-ambient_12s_linear_infinite]",
+      none: "",
     },
-    defaultVariants: {
-      variant: "sweep",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "sweep",
+  },
+});
 
 export interface ShineProps extends React.ComponentProps<"div">, VariantProps<typeof shineVariants> {}
 
-export const Shine = React.forwardRef<HTMLDivElement, ShineProps>(function Shine(
-  { className, variant, ...props },
-  ref
-) {
-  return (
-    <div
-      ref={ref}
-      data-slot="device-shine"
-      aria-hidden
-      className={cn(shineVariants({ variant }), className)}
-      {...props}
-    />
-  );
+export const Shine = React.forwardRef<HTMLDivElement, ShineProps>(function Shine({ className, variant, ...props }, ref) {
+  return <div ref={ref} data-slot="device-shine" aria-hidden className={cn(shineVariants({ variant }), className)} {...props} />;
 });
 Shine.displayName = "Device.Shine";
