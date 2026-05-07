@@ -89,6 +89,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
           // height="auto"
           slot="media"
           playsInline
+          autoPlay
           muted={!unmuted}
           preload="auto"
           src={src}

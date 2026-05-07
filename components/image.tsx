@@ -11,21 +11,10 @@ export type ImageProps =
   | (Common & { src: StaticImageData; width?: number; height?: number })
   | (Common & { src: string; width: number; height: number });
 
-const imgClassName =
-  "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]";
+const imgClassName = "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]";
 
 export function Image(props: ImageProps) {
-  const {
-    src,
-    alt = "",
-    caption,
-    className,
-    priority,
-    sizes: sizesProp,
-    quality,
-    placeholder,
-    loading,
-  } = props;
+  const { src, alt = "", caption, className, priority, sizes: sizesProp, quality, placeholder, loading } = props;
 
   const sizes = sizesProp ?? "(max-width: 768px) 100vw, 720px";
 
@@ -41,14 +30,8 @@ export function Image(props: ImageProps) {
         })();
 
   return (
-    <figure
-      data-media
-      className={cn(
-        "not-prose relative my-10 flex flex-col items-center justify-center gap-1.5",
-        className
-      )}
-    >
-      <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+    <figure data-media className={cn("relative my-10 flex flex-col items-center justify-center gap-1.5", className)}>
+      <div className="sm:squircle relative -mx-8 bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
         <NextImage
           src={src}
           alt={alt}
@@ -61,9 +44,7 @@ export function Image(props: ImageProps) {
           {...intrinsicDims}
         />
       </div>
-      {caption && (
-        <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>
-      )}
+      {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
     </figure>
   );
 }

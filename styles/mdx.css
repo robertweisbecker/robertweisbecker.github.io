@@ -32,7 +32,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 /* --- Paragraphs --- */
 .prose p:where(:not(.not-prose, .not-prose *)) {
-  @apply mt-6 mb-8 text-[13px]/4.5 text-pretty md:text-[15px]/5.5;
+  @apply mt-6 mb-8 text-md text-pretty;
   letter-spacing: -0.005em;
   font-weight: 450;
   color: var(--prose-body);
@@ -43,7 +43,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 .prose li:where(:not(.not-prose, .not-prose *)),
 .prose td:where(:not(.not-prose, .not-prose *)) {
-  @apply text-[13px]/4.5 text-pretty md:text-[15px]/5.5;
+  @apply text-md text-pretty;
   letter-spacing: -0.005em;
   font-weight: 450;
 }
@@ -67,7 +67,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 .prose h2 {
   color: var(--prose-headings);
-  @apply mt-16 mb-4 scroll-mt-12 text-[17px] font-[450] tracking-[-.02em];
+  @apply mt-16 mb-4 scroll-mt-12 text-base font-medium tracking-[-.02em];
 }
 
 .prose h3 {

@@ -29,12 +29,12 @@ function DataListRoot({ orientation = "horizontal", size = "md", className, ...p
         className={cn(
           "text-start wrap-anywhere",
           // Orientation
-          orientation === "horizontal" && "grid grid-cols-[auto_1fr] max-sm:flex max-sm:flex-col",
+          orientation === "horizontal" && "grid grid-cols-[auto_1fr]",
           orientation === "vertical" && "flex flex-col",
           // Size
-          size === "sm" && "gap-3 text-sm",
-          size === "md" && "gap-4 text-sm",
-          size === "lg" && "gap-5 text-base",
+          size === "sm" && "gap-4 text-sm",
+          size === "md" && "gap-5 text-sm",
+          size === "lg" && "gap-6 text-base",
           // Trim: in horizontal mode, values pull in ±0.25em from neighboring rows
           // for optical baseline alignment. First and last items are exempt so values
           // don't bleed outside the container.
@@ -60,8 +60,7 @@ function DataListItem({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="data-list-item"
       className={cn(
-        orientation === "horizontal" &&
-          "col-span-2 grid grid-cols-subgrid items-baseline wrap-anywhere max-sm:flex max-sm:flex-col max-sm:gap-[.25em]",
+        orientation === "horizontal" && "col-span-2 grid grid-cols-subgrid items-baseline wrap-anywhere",
         orientation === "vertical" && "flex flex-col gap-[.25em]",
         className
       )}
@@ -76,7 +75,7 @@ function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
     <dt
       data-slot="data-list-label"
       className={cn(
-        "flex min-w-0 items-center gap-1 self-start text-muted-foreground",
+        "flex min-w-0 items-center gap-1 font-pixel text-[11px] text-muted-foreground/72",
         orientation === "horizontal" && size === "sm" ? "min-w-[12ch]" : "min-w-[28ch]",
         orientation === "vertical" && "min-w-0",
         className

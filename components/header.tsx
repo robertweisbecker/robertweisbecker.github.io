@@ -77,7 +77,7 @@ export function Header() {
                 data-icon="inline-end"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" ref={anchorRef}>
+            <DropdownMenuContent align="end" ref={anchorRef}>
               <DropdownMenuGroup className="md:hidden">
                 <DropdownMenuItem render={<Link href="/" />} nativeButton={false}>
                   Home
@@ -159,13 +159,13 @@ export function Header() {
                     )}
 
                     {project.nickname}
-                    <div className="ms-auto flex flex-wrap gap-1">
+                    {/* <div className="flex flex-wrap gap-1">
                       {project.categories?.map((category) => (
                         <Badge variant="inherit" className="rounded-full" size="sm" key={`${project.id}-${category}`}>
                           {category}
                         </Badge>
                       ))}
-                    </div>
+                    </div> */}
                   </PreviewCardTrigger>
                 ))}
               </DropdownMenuGroup>
