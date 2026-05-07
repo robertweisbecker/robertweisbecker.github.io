@@ -78,7 +78,7 @@ export default function Home() {
         <br /> Weisbecker
       </h1>
       <div className="grid items-start gap-10 sm:grid-cols-[auto_1fr]">
-        <div className="relative rounded-sm bg-card p-2 shadow-border-lg hover:-rotate-4">
+        <div className="relative w-fit rounded-sm bg-card p-2 shadow-border-lg sm:-rotate-3">
           <div className="group/pixel relative size-50 bg-muted">
             <Button
               onClick={() => setIsDinoVisible((v) => !v)}
@@ -236,8 +236,8 @@ export default function Home() {
         <LayoutGrid variant="twoUp">
           <p className="max-w-prose text-sm text-muted-foreground">
             I'm from Baltimore, MD, and now live in southern CA. Since 2021, I&apos;ve led the implementation of a shared design system for
-            e-learning admin, educator, and learner-facing products. I also work on those products too! Get you a man who can do both diving
-            deep into color spaces, and playing with web animation. You may notice some sprinkled throughout.
+            e-learning admin, educator, and learner-facing products. Recently, I've been designing a new platform for educators, diving deep
+            into color spaces, exploring animation in React, and working with agents.
           </p>
           <p className="max-w-prose text-sm/6 text-muted-foreground">
             Before that, I worked on financial &amp; K12 products for Everfi, including{" "}
