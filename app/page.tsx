@@ -235,66 +235,51 @@ export default function Home() {
         </h2>
         <LayoutGrid variant="twoUp">
           <p className="max-w-prose text-sm/6 text-muted-foreground">
-            Since 2021, I&apos;ve led the implementation of a shared design system across admin, educator, and learner-facing products. Read
-            a bit about that process{" "}
-            <Link href="/unified-design-language" className="link">
-              here
-            </Link>
-            . Recently, I've been working on a new K12 platform, diving deep into color spaces, and learning about web animation. You may
-            notice some sprinkled throughout.
+            Since 2021, I&apos;ve led the implementation of a shared design system for e-learning admin, educator, and learner products.
+            Recently, I've been working on a new learning management platform, diving deep into color spaces, and playing with web
+            animation. You may notice some sprinkled throughout.
           </p>
           <p className="max-w-prose text-sm/6 text-muted-foreground">
-            Before that, I led product design on financial &amp; K12 products, including{" "}
+            Before that, I designed financial &amp; K12 products for Everfi, including{" "}
             <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
             <Badge variant="link" render={<Link href="/everfi-engage" />}>
               <TreeIconRichText data-icon="inline-start" className="opacity-50" />
               Engage
             </Badge>
-            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />.
-          </p>
-        </LayoutGrid>
-        <p className="max-w-prose text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
-        <ul className="max-w-prose list-disc space-y-4 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
-          <li>
-            Led product design efforts for financial &amp; K12 products, including{" "}
-            <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
-            <Badge variant="link" render={<Link href="/everfi-engage" />}>
-              <TreeIconRichText data-icon="inline-start" className="opacity-50" />
-              Engage
-            </Badge>
-            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />.{" "}
-          </li>
-          <li>
-            Worked on education products for customers like{" "}
+            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. Plus a whole
+            bunch of others for partners like{" "}
             <span className="whitespace-nowrap">
-              <GoogleIcon className="-mt-px inline-block size-3" /> Google
+              <GoogleIcon className="-mt-px inline-block size-3 grayscale" /> Google
             </span>
-            , <wbr />
+            ,{" "}
             <span className="whitespace-nowrap">
-              <MetaIcon className="-mt-px inline-block size-4" />
+              <MetaIcon className="-mt-px inline-block size-4 grayscale" />
                Meta
             </span>
             ,{" "}
             <span className="whitespace-nowrap">
-              <LinkedinIcon className="-mt-px inline-block size-3.5" />
+              <LinkedinIcon className="-mt-px inline-block size-3.5 fill-muted-foreground/50" />
                LinkedIn
             </span>
-            , <wbr />
+            ,{" "}
             <span className="whitespace-nowrap">
-              <KrogerIcon className="-mt-1 inline-block size-4" /> Kroger
+              <KrogerIcon className="-mt-1 inline-block size-4 fill-muted-foreground/50" /> Kroger
             </span>
-            , <wbr />
+            ,{" "}
             <span className="whitespace-nowrap">
-              <BeyondMeatIcon className="-mt-px inline-block size-3.5" />
+              <BeyondMeatIcon className="-mt-px inline-block size-3.5 fill-muted-foreground/50" />
                Beyond Meat
             </span>
-            , <wbr />
+            ,{" "}
             <span className="whitespace-nowrap">
-              <TruistIcon className="-mt-0.5 inline-block size-3" />
+              <TruistIcon className="-mt-0.5 inline-block size-3 fill-muted-foreground/50" />
                Truist
             </span>
             , and more.
-          </li>
+          </p>
+        </LayoutGrid>
+        <p className="max-w-prose text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
+        <ul className="max-w-prose list-disc space-y-4 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
           <li>
             Delivered a (finally relevant!) thesis exploring chatbots and conversational interface design patterns.{" "}
             <Badge variant="link" render={<Link href="/conversational-immigration-forms" />} className="text-sm">
@@ -333,7 +318,7 @@ export default function Home() {
           </li>
         </ul>
         <div>
-          <p className="mb-2 text-sm text-muted-foreground">You can find or reach me on the 'net here:</p>
+          <p className="mb-2 text-sm text-muted-foreground">You can hunt me down at these places:</p>
           <div className="flex flex-wrap justify-stretch gap-2 max-sm:flex-col">
             <Button render={<a href="mailto:yo@bob.fyi" />} nativeButton={false} variant="elevated" size="sm">
               <IconMailFilled data-icon="inline-start" />
@@ -664,12 +649,9 @@ function TruistIcon(props: React.ComponentProps<"svg">) {
 
 function BeyondMeatIcon(props: React.ComponentProps<"svg">) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257 257" width={16} height={16} {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257 257" width={16} height={16} {...props} fill="#6bc746">
       <g transform="matrix(.13333333 0 0 -.13333333 -352.63 424.27)">
-        <path
-          d="m4224.35 2206.98-3.24-.3c-9.09-.84-18.24-1.48-27.41-1.9-.47-.02-.94-.04-1.43-.06-4.06-.17-8.12-.32-12.17-.42-4.63-.1-9.28-.16-13.98-.16-.16 0-.32.01-.48.01-5.25 0-10.55.1-15.88.27-1.08.03-2.15.1-3.23.14-4.66.18-9.33.41-14.02.71-.77.05-1.54.12-2.32.17-11.25.79-22.59 1.92-33.95 3.44l-1.08.15-.91.06c-57.7 7.84-111.72 24.18-163.46 43.15-.2.08-.4.16-.6.24-6.53 2.58-13.05 5.23-19.63 7.91-13.81 5.68-27.59 11.47-41.37 17.25-47.32 19.89-96.26 40.45-146.57 56.3-37.85 11.94-76.61 18.3-115.2 19.05-.98.03-1.97.03-2.96.07-.32 0-.64.03-.96.03h-.29c-18.48.55-37.08-.42-55.88-3.27-21.48-2.69-43.22-7.11-65.09-13.2 6.51 8.22 12.94 16.54 19.21 24.96 11.89 15.92 21.21 36.06 28.48 61.55 2.58 9 8.56 29.96 1.22 50.71 1.4 1.27 2.77 2.57 4.18 3.83 11.9 7.66 22.56 16.46 31.98 26.45 35.58 27.19 74.58 49.91 116.36 67.21 64.28 26.59 141.92 43.79 229.69 34.95 233.02-23.49 322.83-72.96 487.12 108.7-165.45 262.58-457.93 437.08-791.22 437.08-373.88 0-696.43-219.58-845.86-536.79 41.21-39.82 124-79.35 285.46-43.08 32.19 17.42 69.01 27.33 108.18 27.33 39.12 0 75.94-9.86 108.13-27.33 279.43-62.77 323.55 101.41 323.55 101.41 0-116.18-46.36-167.4-116.64-188.74 6.03-2.35 11.06-4.75 15.14-7.38 14.99-9.58 17.63-22.09 10.98-45.29-5.08-17.79-12.26-36.24-23.19-50.88-26.7-35.83-56.18-69.63-84.57-104.22-.14-.27-.29-.13-.2-.93.6-5.78 5.51-8.66 10.78-6.2 1.54.72 3.06 1.45 4.57 2.18 47.8 23.11 96.57 38.76 146.14 44.95 17.01 2.15 34.14 3.17 51.39 2.97 36.12-.33 72.69-5.99 109.59-17.63 63.14-19.89 123.94-47.38 185.31-72.6 6.69-2.72 13.37-5.45 20.06-8.08 56.09-22.42 113.09-41.53 173.8-45.61 24.1-3.22 48.82-5.04 74.25-5.04 19.98 0 43.51.95 62.2 2.69.21-42.4.16-84.79 0-127.08v-417c.95-24.52-18.98-44.94-43.79-44.32-22.49.54-40.36 19.35-41.6 41.8l-2.81 50.32c-10.86 81.64-33.27 159.11-70.16 237.9-13.87-43.96-27.33-86.63-40.58-128.77-13.29-42.1-26.37-83.62-39.45-125.19l-14.61-49.15c-6.2-20.81-28.98-33.18-51.27-24.48-15.39 6.06-24.6 21.96-23.27 38.43 0 0 25.25 207.94 13.49 317.56-106.44-67.45-222.3-93.77-346.24-95.83-3.22-74.8-6.36-143.37-9.62-218.95v-4.67c0-23.14-19.77-41.51-43.13-39.44-18.78 1.68-33.43 17.12-35.86 35.77l-9.17 65.61c-7.89 50.6-15.68 100.75-23.48 150.82h-5.33c-6.81-48.59-13.62-97.25-20.59-146.81l-8.26-68.03c-2.76-22.82-24.14-39.13-47.5-34.91-18.91 3.39-32.44 20.3-33.17 39.5l-3.23 79.61c-2.61 54.11-5.21 107.43-8.14 160.72-.33 5.66-5.12 11.26-8.54 16.47-.17.25-.33.51-.5.76-31.78 48.08-56.26 100.6-72.75 155.82-11.97 40.09-25.75 86.46-34.89 117.84 30.5 11.81 59.07 34.59 63.03 41.19 4 6.62-4.05 13.84-11.93 9.13-9-5.66-33.85-15.8-45.61-16.8-28.02-2.39-56.38-1.44-84.57-1.08-34.5.46-56.09 22.79-57.33 57.3-.49 14.28.54 29.72-4.46 42.55-20.63 52.91-35.36 106.94-36.36 164.02-.2 11.11-3.75 15.93-11.55 17.42-21.51-.74-42.6-1.2-62.9-.9-95.48 1.41-174.78 19.12-208.88 98.57-44.21-108.65-68.63-227.47-68.63-352 0-516.14 418.42-934.56 934.57-934.56 516.14 0 934.56 418.42 934.56 934.56 0 41.22-2.69 81.8-7.87 121.61-67.94-56.83-171.6-118.36-311.6-132.12"
-          fill="#6bc746"
-        />
+        <path d="m4224.35 2206.98-3.24-.3c-9.09-.84-18.24-1.48-27.41-1.9-.47-.02-.94-.04-1.43-.06-4.06-.17-8.12-.32-12.17-.42-4.63-.1-9.28-.16-13.98-.16-.16 0-.32.01-.48.01-5.25 0-10.55.1-15.88.27-1.08.03-2.15.1-3.23.14-4.66.18-9.33.41-14.02.71-.77.05-1.54.12-2.32.17-11.25.79-22.59 1.92-33.95 3.44l-1.08.15-.91.06c-57.7 7.84-111.72 24.18-163.46 43.15-.2.08-.4.16-.6.24-6.53 2.58-13.05 5.23-19.63 7.91-13.81 5.68-27.59 11.47-41.37 17.25-47.32 19.89-96.26 40.45-146.57 56.3-37.85 11.94-76.61 18.3-115.2 19.05-.98.03-1.97.03-2.96.07-.32 0-.64.03-.96.03h-.29c-18.48.55-37.08-.42-55.88-3.27-21.48-2.69-43.22-7.11-65.09-13.2 6.51 8.22 12.94 16.54 19.21 24.96 11.89 15.92 21.21 36.06 28.48 61.55 2.58 9 8.56 29.96 1.22 50.71 1.4 1.27 2.77 2.57 4.18 3.83 11.9 7.66 22.56 16.46 31.98 26.45 35.58 27.19 74.58 49.91 116.36 67.21 64.28 26.59 141.92 43.79 229.69 34.95 233.02-23.49 322.83-72.96 487.12 108.7-165.45 262.58-457.93 437.08-791.22 437.08-373.88 0-696.43-219.58-845.86-536.79 41.21-39.82 124-79.35 285.46-43.08 32.19 17.42 69.01 27.33 108.18 27.33 39.12 0 75.94-9.86 108.13-27.33 279.43-62.77 323.55 101.41 323.55 101.41 0-116.18-46.36-167.4-116.64-188.74 6.03-2.35 11.06-4.75 15.14-7.38 14.99-9.58 17.63-22.09 10.98-45.29-5.08-17.79-12.26-36.24-23.19-50.88-26.7-35.83-56.18-69.63-84.57-104.22-.14-.27-.29-.13-.2-.93.6-5.78 5.51-8.66 10.78-6.2 1.54.72 3.06 1.45 4.57 2.18 47.8 23.11 96.57 38.76 146.14 44.95 17.01 2.15 34.14 3.17 51.39 2.97 36.12-.33 72.69-5.99 109.59-17.63 63.14-19.89 123.94-47.38 185.31-72.6 6.69-2.72 13.37-5.45 20.06-8.08 56.09-22.42 113.09-41.53 173.8-45.61 24.1-3.22 48.82-5.04 74.25-5.04 19.98 0 43.51.95 62.2 2.69.21-42.4.16-84.79 0-127.08v-417c.95-24.52-18.98-44.94-43.79-44.32-22.49.54-40.36 19.35-41.6 41.8l-2.81 50.32c-10.86 81.64-33.27 159.11-70.16 237.9-13.87-43.96-27.33-86.63-40.58-128.77-13.29-42.1-26.37-83.62-39.45-125.19l-14.61-49.15c-6.2-20.81-28.98-33.18-51.27-24.48-15.39 6.06-24.6 21.96-23.27 38.43 0 0 25.25 207.94 13.49 317.56-106.44-67.45-222.3-93.77-346.24-95.83-3.22-74.8-6.36-143.37-9.62-218.95v-4.67c0-23.14-19.77-41.51-43.13-39.44-18.78 1.68-33.43 17.12-35.86 35.77l-9.17 65.61c-7.89 50.6-15.68 100.75-23.48 150.82h-5.33c-6.81-48.59-13.62-97.25-20.59-146.81l-8.26-68.03c-2.76-22.82-24.14-39.13-47.5-34.91-18.91 3.39-32.44 20.3-33.17 39.5l-3.23 79.61c-2.61 54.11-5.21 107.43-8.14 160.72-.33 5.66-5.12 11.26-8.54 16.47-.17.25-.33.51-.5.76-31.78 48.08-56.26 100.6-72.75 155.82-11.97 40.09-25.75 86.46-34.89 117.84 30.5 11.81 59.07 34.59 63.03 41.19 4 6.62-4.05 13.84-11.93 9.13-9-5.66-33.85-15.8-45.61-16.8-28.02-2.39-56.38-1.44-84.57-1.08-34.5.46-56.09 22.79-57.33 57.3-.49 14.28.54 29.72-4.46 42.55-20.63 52.91-35.36 106.94-36.36 164.02-.2 11.11-3.75 15.93-11.55 17.42-21.51-.74-42.6-1.2-62.9-.9-95.48 1.41-174.78 19.12-208.88 98.57-44.21-108.65-68.63-227.47-68.63-352 0-516.14 418.42-934.56 934.57-934.56 516.14 0 934.56 418.42 934.56 934.56 0 41.22-2.69 81.8-7.87 121.61-67.94-56.83-171.6-118.36-311.6-132.12" />
       </g>
     </svg>
   );
