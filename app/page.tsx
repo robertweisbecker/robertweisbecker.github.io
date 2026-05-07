@@ -250,13 +250,7 @@ export default function Home() {
               <TreeIconRichText data-icon="inline-start" className="opacity-50" />
               Engage
             </Badge>
-            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. the creation
-            of our product org&apos;s{" "}
-            <Link className="link" href="/unified-design-language">
-              first design system
-            </Link>
-            , shepherding its transition from an unstyled SDK into an accessible component library with theming and tooling to support 80+
-            courses across a dozen branded product lines.
+            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />.
           </p>
         </LayoutGrid>
         <p className="max-w-prose text-sm text-muted-foreground">Some other things I&apos;ve done:</p>

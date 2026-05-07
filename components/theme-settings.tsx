@@ -30,6 +30,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { LinkButton } from "./ui/link-button";
+import { PixelRedoIcon } from "./icons";
 
 const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({
   value: opt.value,
@@ -63,7 +64,7 @@ function ThemeFieldReset({
             variant="ghost"
             size="icon-xs"
             className={cn(
-              "-my-1 shrink-0 text-muted-foreground opacity-100 transition-opacity",
+              "-m-1 shrink-0 text-muted-foreground opacity-100 transition-opacity",
               !dirty && "pointer-events-none opacity-0!",
               className
             )}
@@ -73,7 +74,29 @@ function ThemeFieldReset({
           />
         }
       >
-        <IconRotate2 />
+        <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="5" width="1" height="1" />
+          <rect x="8" y="4" width="1" height="1" />
+          <rect x="6" y="8" width="1" height="1" />
+          <rect x="5" y="8" width="1" height="1" />
+          <rect x="4" y="8" width="1" height="1" />
+          <rect x="3" y="7" width="1" height="1" />
+          <rect x="7" y="7" width="1" height="1" />
+          <rect x="5" y="2" width="1" height="1" />
+          <rect x="6" y="2" width="1" height="1" />
+          <rect x="7" y="3" width="1" height="1" />
+          <rect x="4" y="2" width="1" height="1" />
+          <rect x="3" y="3" width="1" height="1" />
+          <rect x="2" y="4" width="1" height="1" />
+          <rect x="1" y="2" width="1" height="1" />
+          <rect x="1" y="3" width="1" height="1" />
+          <rect x="1" y="4" width="1" height="1" />
+          <rect x="8" y="6" width="1" height="1" />
+          <rect x="3" y="5" width="1" height="1" />
+          <rect x="4" y="5" width="1" height="1" />
+          <rect x="2" y="5" width="1" height="1" />
+          <rect x="1" y="5" width="1" height="1" />
+        </svg>
       </TooltipTrigger>
       <TooltipContent>Reset</TooltipContent>
     </Tooltip>
@@ -85,7 +108,7 @@ export function ThemeResetAllButton({ variant = "ghost", size = "sm", ...props }
 
   return (
     <Button variant={variant} size={size} onClick={reset} disabled={!isDirty} {...props}>
-      Reset to defaults
+      Reset to default
     </Button>
   );
 }
