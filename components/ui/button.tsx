@@ -13,7 +13,7 @@ const buttonVariants = cva(
   [
     "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] has-data-[icon=inline-end]:pe-[calc(var(--button-y)+2px)] has-data-[icon=inline-start]:ps-[calc(var(--button-y)*1.5)] ",
     "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:text-muted-foreground ",
-    "not-[.w-full]:active:scale-[0.98] not-[.w-full]:will-change-transform",
+    "not-[.w-full]:active:scale-[0.98] will-change-transform",
     "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[475]",
     iconClasses,
   ],
@@ -37,7 +37,7 @@ const buttonVariants = cva(
           "[--button-color:white] [--button-bg:var(--destructive)] bg-linear-to-b from-current/15 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--destructive)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground active:shadow-xs active:inset-shadow-button-pressed focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
         success:
           "[--button-color:white] bg-success-primary hover:bg-[oklch(from_var(--success-primary)_calc(l*.95)_calc(c*1.05)_h)] focus-visible:outline-success-primary focus-visible:outline-offset-2 text-white shadow-[color-mix(in_oklch,var(--success-primary),black)]/20 inset-shadow-button shadow-sm active:inset-shadow-button-pressed active:shadow-xs",
-        link: "[--button-color:var(--secondary-foreground)] link disabled:bg-transparent cursor-pointer px-0.5 aria-expanded:text-accent-foreground aria-expanded:decoration-current has-data-[icon=inline-start]:ps-0 has-data-[icon=inline-end]:pe-0 has-data-icon:[&_svg]:opacity-50 has-data-icon:hover:[&_svg]:opacity-100  text-secondary-foreground after:absolute after:inset-y-2 font-normal",
+        link: "[--button-color:var(--foreground)] link disabled:bg-transparent cursor-pointer px-0.5 aria-expanded:text-accent-foreground aria-expanded:decoration-current has-data-[icon=inline-start]:ps-0 has-data-[icon=inline-end]:pe-0 has-data-icon:[&_svg]:opacity-50 has-data-icon:hover:[&_svg]:opacity-100  text-secondary-foreground after:absolute after:inset-y-2 font-normal",
         "elevated-old":
           "[--button-color:var(--foreground)] text-foreground active:shadow-border-xs bg-card backdrop-blur-xs hover:bg-[color-mix(in_oklch,_var(--accent)_50%,var(--card))] active:bg-muted data-pressed:bg-muted shadow-border-sm data-pressed:inset-shadow-sm data-pressed:inset-ring data-pressed:inset-ring-border data-pressed:shadow-none aria-expanded:text-foreground inset-shadow-none transition-shadows",
         elevated: [
@@ -71,7 +71,7 @@ const buttonVariants = cva(
         lg: "h-button-lg [--button-x:--spacing(4)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-base",
         icon: "size-button [&_svg:not([class*='size-'])]:size-4",
         "icon-xs": "size-button-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-xs)]",
-        "icon-sm": "size-button-sm [--button-radius:var(--radius-sm)] [&_svg:not([class*='size-'])]:size-3.5",
+        "icon-sm": "size-button-sm [--button-radius:var(--radius-md)] [&_svg:not([class*='size-'])]:size-3.5",
         "icon-lg": "size-button-lg [--button-radius:var(--radius-lg)] [&_svg:not([class*='size-'])]:size-5",
       },
       rounded: {

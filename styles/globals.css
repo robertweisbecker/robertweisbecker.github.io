@@ -326,7 +326,7 @@
 
 @utility text-h1 {
   :where(&) {
-    @apply font-heading text-3xl/[.9em] -tracking-[0.0125em] text-balance;
+    @apply animate-in animate-variable-weight font-heading text-3xl/[.9em] -tracking-[0.0125em] text-balance;
     font-variation-settings:
       "SERF" 25,
       "slnt" -5,

@@ -114,7 +114,7 @@ export default function ComponentPlaygroundPage() {
           <SiteSearch className="w-full max-w-xs" />
         </Demo>
 
-        <h2>Chrome &amp; preview</h2>
+        <h2>Utilities</h2>
 
         <Demo title="Color swatch group" centerContent>
           <ColorSwatchGroupDemo />
@@ -138,8 +138,8 @@ export default function ComponentPlaygroundPage() {
         </Demo>
         <h2>Devices</h2>
         <p>
-          A remix of Geist's <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color
-          mode and uses your device's clock and battery status.
+          A remix of Geist's <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color mode and uses your
+          device's clock and battery status.
         </p>
         <Demo title="Device frame — phone" overflowBehavior="resize" centerContent>
           <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">

@@ -1,15 +1,6 @@
 import { Alert, AlertTitle, AlertDescription, AlertContent } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemGroup,
-  ItemMedia,
-  ItemSeparator,
-  ItemTitle,
-} from "@/components/ui/item";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/ui/item";
 import { postIcons, posts, type PostIconName } from "@/lib/data/posts";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@tabler/icons-react";
@@ -25,16 +16,14 @@ export default function PostsPage() {
   return (
     <div className="mx-auto grid gap-12">
       <div>
-        <h1 className="text-h1">Posts</h1>
-        <p className="text-lg text-balance text-muted-foreground">Code experiments and small tools.</p>
+        <h1 className="mb-4 text-h1">Posts</h1>
+        <p className="text-sm text-balance">Code experiments and small tools.</p>
       </div>
 
       <Alert variant="warning">
         <AlertContent>
           <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>
-            Some of the posts below use new or experimental features that may not work in all browsers or devices.
-          </AlertDescription>
+          <AlertDescription>Some of the posts below use new or experimental features that may not work in all browsers.</AlertDescription>
         </AlertContent>
       </Alert>
 

@@ -23,21 +23,11 @@ type ExternalLinkButtonProps = LinkButtonBaseProps &
 
 type LinkButtonProps = InternalLinkButtonProps | ExternalLinkButtonProps;
 
-function LinkButton({
-  className,
-  variant = "default",
-  size = "md",
-  rounded = false,
-  isExternal,
-  ...props
-}: LinkButtonProps) {
-  const classes = cn(buttonVariants({ variant, size, rounded, className }));
+function LinkButton({ className, variant = "default", size = "md", rounded = false, isExternal, ...props }: LinkButtonProps) {
+  const classes = cn(buttonVariants({ variant, size, rounded }), className);
 
   if (isExternal) {
-    const { children, ...rest } = props as Omit<
-      ExternalLinkButtonProps,
-      "className" | "variant" | "size" | "rounded" | "isExternal"
-    >;
+    const { children, ...rest } = props as Omit<ExternalLinkButtonProps, "className" | "variant" | "size" | "rounded" | "isExternal">;
     return (
       <a data-slot="link-button" className={classes} target="_blank" rel="noopener noreferrer" {...rest}>
         {children}
@@ -45,10 +35,7 @@ function LinkButton({
     );
   }
 
-  const { children, ...rest } = props as Omit<
-    InternalLinkButtonProps,
-    "className" | "variant" | "size" | "rounded" | "isExternal"
-  >;
+  const { children, ...rest } = props as Omit<InternalLinkButtonProps, "className" | "variant" | "size" | "rounded" | "isExternal">;
   return (
     <Link data-slot="link-button" className={classes} {...rest}>
       {children}
