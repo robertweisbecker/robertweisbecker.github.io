@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { IconComponents, IconFile, IconFlask, IconHome, IconNews, IconSearch, IconUser } from "@tabler/icons-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
+import { matchSorter } from "match-sorter";
 import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
@@ -29,9 +30,11 @@ import { Kbd } from "./ui/kbd";
 import { DialogClose } from "./ui/dialog";
 import { Dialog } from "@base-ui/react/dialog";
 import { Badge } from "./ui/badge";
-import { TreeIconFile, Favicon } from "./icons";
+import { TreeIconFile, Favicon, PixelNewsIcon, PixelFinderIcon, FolderIcon, CursorIcon } from "./icons";
 import { Separator } from "./ui/separator";
 import { Item, ItemTitle, ItemContent, ItemMedia, ItemDescription, ItemActions } from "./ui/item";
+import { Toolbar } from "./ui/toolbar";
+import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
 
 type SearchItem = {
   value: string;
@@ -40,12 +43,44 @@ type SearchItem = {
   date?: string;
   icon?: ReactNode;
   category?: string;
+  group?: string;
 };
 
 type SearchGroup = {
   value: string;
+  icon?: ReactNode;
   items: SearchItem[];
 };
+
+type FilterTab = "All" | "Projects" | "Posts" | "Private";
+
+const FILTER_TABS: { value: FilterTab; icon?: React.ReactNode }[] = [
+  { value: "All" },
+  {
+    value: "Projects",
+    icon: (
+      <>
+        <svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M144 118C144 124.627 138.627 130 132 130H20C13.3726 130 8 124.627 8 118V35C8 28.3726 13.3726 23 20 23H48.5836C53.1289 23 57.284 25.568 59.3167 29.6334L60.6833 32.3666C62.716 36.432 66.8711 39 71.4164 39H132C138.627 39 144 44.3726 144 51V118Z"
+            fill="#66BAFF"
+          />
+          <rect x="10" y="41" width="132" height="87" rx="10" fill="#A8D9FF" />
+        </svg>
+      </>
+    ),
+  },
+  { value: "Posts", icon: <PixelNewsIcon /> },
+  { value: "Private", icon: <CursorIcon /> },
+];
+
+function fuzzyFilter(item: SearchItem, query: string): boolean {
+  if (!query) return true;
+  const results = matchSorter([item], query, {
+    keys: ["label", "category", { key: "group", threshold: matchSorter.rankings.CONTAINS }],
+  });
+  return results.length > 0;
+}
 
 function itemIcon(Icon: React.ComponentType<{ className?: string }>): ReactNode {
   return (
@@ -69,9 +104,9 @@ function itemAvatar(src: string, label: string): ReactNode {
 }
 
 const staticPages: SearchItem[] = [
-  { value: "home", label: "Home", path: "/", icon: itemIcon(IconHome) },
-  { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser) },
-  { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(IconNews) },
+  { value: "home", label: "Home", path: "/", icon: itemIcon(IconHome), group: "Pages" },
+  { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
+  { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(IconNews), group: "Pages" },
 ];
 
 const privatePages: SearchItem[] = [
@@ -81,6 +116,7 @@ const privatePages: SearchItem[] = [
     path: "/components",
     icon: itemIcon(IconComponents),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-index",
@@ -88,6 +124,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-carousel",
@@ -95,6 +132,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing/carousel",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-direction-a",
@@ -102,6 +140,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing/direction-a",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-direction-b",
@@ -109,6 +148,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing/direction-b",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-direction-c",
@@ -116,6 +156,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing/direction-c",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-direction-d",
@@ -123,6 +164,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing/direction-d",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "testing-direction-e",
@@ -130,6 +172,7 @@ const privatePages: SearchItem[] = [
     path: "/private/testing/direction-e",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
   {
     value: "device",
@@ -137,6 +180,7 @@ const privatePages: SearchItem[] = [
     path: "/private/device",
     icon: itemIcon(IconFlask),
     category: "Testing",
+    group: "Private",
   },
 ];
 
@@ -144,25 +188,31 @@ const isDev = process.env.NODE_ENV === "development";
 
 export function SiteSearch({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<FilterTab>("All");
+  const { push } = useRouter();
   const pathname = usePathname();
 
-  const groupedItems = useMemo<SearchGroup[]>(
+  const allGroups = useMemo<SearchGroup[]>(
     () => [
       { value: "Pages", items: staticPages },
       {
         value: "Projects",
-        items: projects.map((p) => ({
-          value: String(p.id),
-          label: p.nickname,
-          path: p.path,
-          date: p.date,
-          icon: p.icon ? itemAvatar(p.icon, p.nickname) : undefined,
-          category: p.category,
-        })),
+        icon: <FolderIcon />,
+        items: projects
+          .filter((p) => isDev || p.published !== false)
+          .map((p) => ({
+            value: String(p.id),
+            label: p.nickname,
+            path: p.path,
+            date: p.date,
+            icon: p.icon ? itemAvatar(p.icon, p.nickname) : undefined,
+            category: p.category,
+            group: "Projects",
+          })),
       },
       {
         value: "Posts",
+        icon: <PixelNewsIcon />,
         items: posts.map((p) => ({
           value: p.id,
           label: p.title,
@@ -170,26 +220,42 @@ export function SiteSearch({ className }: { className?: string }) {
           date: p.date,
           icon: p.icon ? itemIcon(postIcons[p.icon]) : undefined,
           category: p.category,
+          group: "Posts",
         })),
       },
-      ...(isDev ? [{ value: "Private", items: privatePages }] : []),
+      ...(isDev ? [{ icon: <CursorIcon />, value: "Private", items: privatePages }] : []),
     ],
     []
   );
+
+  const groupedItems = useMemo<SearchGroup[]>(() => {
+    if (activeTab === "All") return allGroups;
+    if (activeTab === "Projects") return allGroups.filter((g) => g.value === "Projects");
+    if (activeTab === "Posts") return allGroups.filter((g) => g.value === "Posts");
+    if (activeTab === "Private") return allGroups.filter((g) => g.value === "Private");
+    return allGroups;
+  }, [allGroups, activeTab]);
 
   useKeyPress("/", () => setOpen((prev) => !prev), { mod: true });
 
   const navigate = useCallback(
     (path: string) => {
       setOpen(false);
-      router.push(path);
+      push(path);
     },
-    [router]
+    [push]
   );
 
   return (
     <>
-      <CommandDialog open={open} onOpenChange={setOpen} modal={false}>
+      <CommandDialog
+        open={open}
+        onOpenChange={(next) => {
+          setOpen(next);
+          if (!next) setActiveTab("All");
+        }}
+        modal={false}
+      >
         <CommandDialogTrigger
           className={cn(
             "ease flex h-button-sm items-center justify-start gap-2 rounded-md bg-muted ps-2 pe-3 text-sm text-muted-foreground inset-shadow-border duration-100 hover:bg-accent hover:text-accent-foreground",
@@ -205,8 +271,26 @@ export function SiteSearch({ className }: { className?: string }) {
         </CommandDialogTrigger>
 
         <CommandDialogPopup aria-label="Search pages">
-          <Command items={groupedItems}>
+          <Command items={groupedItems} filter={fuzzyFilter}>
             <CommandInput placeholder="Search pages…" />
+            <Toolbar.Root className="px-2 pt-2">
+              <Toolbar.Group render={<ToggleGroup spacing={1} />}>
+                {FILTER_TABS.filter((tab) => isDev || tab.value !== "Private").map((tab) => (
+                  <Toolbar.Button
+                    key={`command-tab-${String(tab.value)}`}
+                    render={<ToggleGroupItem value={tab.value} size="xs" />}
+                    onClick={() => setActiveTab(tab.value)}
+                  >
+                    {tab.icon}
+                    {tab.value}
+                  </Toolbar.Button>
+                ))}
+              </Toolbar.Group>
+              <Toolbar.Separator />
+              <Toolbar.Link href="/" onClick={() => setOpen(false)}>
+                Home
+              </Toolbar.Link>
+            </Toolbar.Root>
 
             <CommandList>
               {(group: SearchGroup) => (
@@ -257,7 +341,10 @@ export function SiteSearch({ className }: { className?: string }) {
                 </CommandGroup>
               )}
             </CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty className="flex flex-col items-center justify-center gap-2">
+              <FolderIcon className="size-20" />
+              No results found.
+            </CommandEmpty>
 
             <CommandFooter className="text-xs font-medium">
               <span className="flex items-center gap-1">

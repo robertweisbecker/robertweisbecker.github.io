@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { createContext, useContext, useEffect, useId, useState } from "react";
+import { createContext, useContext, useId, useMemo } from "react";
 
 type MarkNoteContextValue = {
   noteId: string;
@@ -19,10 +19,13 @@ export function MarkNote({ note, children, className }: MarkNoteProps) {
   const rawId = useId();
   const noteId = `mn-${rawId}`;
   const anchorName = `--${noteId}`;
-  const [randomScale, setRandomScale] = useState<number | null>(null);
-  useEffect(() => {
-    setRandomScale(Math.random() * (10 - 5) + 5);
-  }, []);
+  /** Deterministic pseudo-random from id (avoids SSR/client mismatch vs Math.random in effects). */
+  const randomScale = useMemo(() => {
+    const seed = rawId.replace(/[^a-z0-9]/gi, "");
+    let h = 0;
+    for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+    return 5 + (h % 500) / 100;
+  }, [rawId]);
 
   return (
     <MarkNoteContext.Provider value={{ noteId }}>
@@ -82,8 +85,8 @@ export function MarkNote({ note, children, className }: MarkNoteProps) {
         >
           <defs>
             <filter id={`noise-${noteId}`} filterUnits="userSpaceOnUse" height={"100%"}>
-              <feTurbulence baseFrequency={(randomScale ?? 3) / 10} />
-              <feDisplacementMap in="SourceGraphic" scale={randomScale ?? 7} />
+              <feTurbulence baseFrequency={randomScale / 10} />
+              <feDisplacementMap in="SourceGraphic" scale={randomScale} />
             </filter>
           </defs>
           <g filter={`url(#noise-${noteId})`} className="max-lg:hidden" vectorEffect="non-scaling-stroke">
@@ -113,7 +116,7 @@ export function MarkNote({ note, children, className }: MarkNoteProps) {
           </g>
         </svg>
 
-        <div role="note" id={`note-${rawId}`} className="font-pixel text-[11px]/4 text-balance text-info-foreground">
+        <div role="note" id={noteId} className="font-pixel text-[11px]/4 text-balance text-info-foreground">
           {note}
         </div>
       </div>

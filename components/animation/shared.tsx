@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
 import { ArrowRotateLeft } from "@gravity-ui/icons";
+import { textRevealCharSegmenter, textRevealWordSegmenter } from "@/lib/text-reveal-segmenters";
 
 export function TextReveal({
   children,
@@ -29,10 +30,7 @@ export function TextReveal({
 
   const text = typeof children === "string" ? children : children?.toString() || "";
 
-  const wordSegmenter = new Intl.Segmenter(undefined, { granularity: "word" });
-  const charSegmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
-
-  const words = [...wordSegmenter.segment(text)];
+  const words = [...textRevealWordSegmenter.segment(text)];
 
   let charIndex = 0;
 
@@ -51,14 +49,15 @@ export function TextReveal({
       >
         {words.map((word) => (
           <span key={word.index} className="inline-block">
-            {[...charSegmenter.segment(word.segment)].map((char) => {
-              const i = charIndex++;
+            {[...textRevealCharSegmenter.segment(word.segment)].map((char) => {
+              const stableKey = `${word.index}-${char.index}`;
+              const indexForCss = charIndex++;
               return (
                 <span
-                  id={`${id}-char-${i}`}
+                  id={`${id}-char-${stableKey}`}
                   className="character"
-                  key={i}
-                  style={{ "--index": i } as React.CSSProperties}
+                  key={stableKey}
+                  style={{ "--index": indexForCss } as React.CSSProperties}
                   aria-hidden
                 >
                   {char.segment}
@@ -71,7 +70,7 @@ export function TextReveal({
       </h1>
       {debug && (
         <Button
-          onClick={() => setReset(reset + 1)}
+          onClick={() => setReset((r) => r + 1)}
           className="ease absolute top-1.5 right-0 m-1 translate-y-1 font-pixel text-[11px] opacity-0 transition-[opacity,translate] duration-100 group-hover/textReveal:translate-y-0 group-hover/textReveal:opacity-100"
           size="icon-xs"
           variant="ghost"

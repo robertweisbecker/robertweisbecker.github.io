@@ -4,8 +4,14 @@ import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, 
 import { postIcons, posts, type PostIconName } from "@/lib/data/posts";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@tabler/icons-react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import * as React from "react";
+
+export const metadata: Metadata = {
+  title: "Posts",
+  description: "Code experiments, demos, and small tools from bob.fyi.",
+};
 
 function PostListIcon({ name }: { name?: PostIconName }) {
   const Icon = name ? postIcons[name] : IconFile;

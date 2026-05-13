@@ -7,28 +7,20 @@ import { LinkButton } from "./ui/link-button";
 
 export function Footer() {
   return (
-    <footer className="mx-auto max-w-5xl border-t py-3 sm:ps-8 sm:pe-3">
+    <footer className="mx-auto max-w-4xl py-3">
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
-        <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Robert Weisbecker</p>
+        <p className="text-xs text-muted-foreground" suppressHydrationWarning>
+          &copy; {new Date().getFullYear()} Robert Weisbecker
+        </p>
 
         <div className="flex gap-1">
-          <LinkButton
-            variant="ghost"
-            size="icon"
-            href="https://www.linkedin.com/in/robertweisbecker/"
-            aria-label="LinkedIn"
-          >
+          <LinkButton variant="ghost" size="icon" href="https://www.linkedin.com/in/robertweisbecker/" aria-label="LinkedIn">
             <LinkedinIcon />
           </LinkButton>
           <LinkButton href="https://github.com/robertweisbecker" aria-label="GitHub" variant="ghost" size="icon">
             <GithubIcon />
           </LinkButton>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            aria-label="Scroll to top"
-          >
+          <Button variant="ghost" size="icon" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Scroll to top">
             {/* <IconCircleArrowUp /> */}
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
               <path d="M8 21h8v-2H8zm0-4h8v-2H8z" />

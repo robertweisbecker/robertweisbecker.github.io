@@ -8,12 +8,12 @@ import { Code } from "@/components/ui/code";
 import { Heading } from "@/components/ui/heading";
 import { GithubIcon } from "@/components/icons";
 
-const colorGradientCode = `<div class="bg-linear-to-r/oklch from-yellow-300 to-pink-500" />
-<div class="bg-linear-to-r/oklch from-yellow-300 to-pink-500 via-smooth" />
+const colorGradientCode = `<div class="bg-linear-to-r from-yellow-300 to-pink-500" />
+<div class="bg-linear-to-r from-yellow-300 to-pink-500 via-smooth" />
 `;
 
-const colorGradientCode2 = `<div class="bg-linear-to-r/oklch from-blue-500 to-green-500" />
-<div class="bg-linear-to-r/oklch from-blue-500 to-green-500 via-smooth" />
+const colorGradientCode2 = `<div class="bg-linear-to-r from-blue-300 from-20% to-green-500 to-80%" />
+<div class="bg-linear-to-r from-blue-300 to-green-500 via-smooth" />
 `;
 
 const imageOverlayCode = `<div class="bg-[url('https://images.unsplash.com/photo-1654177117778-31d19dba77e6?w=640&q=80')] bg-cover bg-center relative overflow-hidden rounded h-48 w-full">
@@ -50,15 +50,7 @@ const utilityCode = `@layer utilities {
   }
 }`;
 
-function GradientSquare({
-  label,
-  className,
-  children,
-}: {
-  label: string;
-  className: string;
-  children?: React.ReactNode;
-}) {
+function GradientSquare({ label, className, children }: { label: string; className: string; children?: React.ReactNode }) {
   return (
     <div className="grid gap-2 text-center">
       <div className={`relative h-32 w-full overflow-hidden rounded sm:h-48 ${className}`}>{children}</div>
@@ -85,7 +77,7 @@ function ImageOverlayDemo() {
         </span>
       </GradientSquare>
       <GradientSquare
-        label="+ via-smooth"
+        label="Eased (via-smooth)"
         className="bg-[url('https://images.unsplash.com/photo-1611706314453-9e1a6706b1a2?w=640&q=80')] bg-cover bg-center brightness-150 grayscale"
       >
         <div className="via-smooth absolute inset-0 rounded-[inherit] bg-linear-to-b from-black/0 to-black" />
@@ -106,15 +98,14 @@ export default function SmoothGradientsPage() {
   return (
     <div className="prose mx-auto w-full max-w-3xl">
       <p>
-        Linear gradients can be finicky and difficult to get right. More often than not, you'll end up with banding or
-        muddy middles where two colors mix. So, here's a little Tailwind utility to smooth things out.
+        Linear gradients can be finicky and difficult to get right. More often than not, you'll end up with banding or muddy middles where
+        two colors mix. So, here's a little Tailwind utility to smooth things out.
       </p>
       <p>
         {" "}
-        Based on Andreas Larsen's{" "}
-        <LinkOut href="https://larsenwork.com/easing-gradients/" text="Easing Gradients tool" />, the snippet below adds
-        a <Code>.via-smooth</Code> class you can use alongside linear gradients for smooth ease-in-out transitions, as
-        an alternative to manually fiddling with color stops and positions.
+        Based on Andreas Larsen's <LinkOut href="https://larsenwork.com/easing-gradients/" text="Easing Gradients tool" />, the snippet
+        below adds a <Code>.via-smooth</Code> class you can use alongside linear gradients for smooth ease-in-out transitions, as an
+        alternative to manually fiddling with color stops and positions.
       </p>
 
       <CodeBlock filename="globals.css" language="css" code={utilityCode} collapsible={true} />
@@ -135,13 +126,12 @@ export default function SmoothGradientsPage() {
 
       <Heading level={2}>Examples</Heading>
       <p>
-        Linear gradients can have abrupt shifts or muddy middles where the two hues meet. You can see this in the first
-        example: note how the orange-ish transitional middle occupies the majority of the space relative to the stop
-        colors.
+        Linear gradients can have abrupt shifts or muddy middles where the two hues meet. You can see this in the first example below left:
+        note how the orange-ish transitional middle occupies the majority of the space relative to the stop colors.
       </p>
       <p>
-        Adding <Code variant="inline">via-smooth</Code> packs more color to the center of the gradient while still
-        keeping the transition perceptually even.
+        On the other hand, the smoothed example on the right packs more color to the center of the gradient. You get more pure color at the
+        stops, with a smaller (but not abrupt) transition.
       </p>
 
       <Demo
@@ -153,9 +143,10 @@ export default function SmoothGradientsPage() {
         <GradientSquare label="Linear (default)" className="bg-linear-to-b from-yellow-200 to-pink-500" />
         <GradientSquare label="Eased (via-smooth)" className="via-smooth bg-linear-to-b from-yellow-200 to-pink-500" />
       </Demo>
+
       <p>
-        Even if you manipulate the color stops on a basic linear gradient, you can still end up with banding, like in
-        the example below. To fix this, you'd likely need to add an intermediate color stop with{" "}
+        Even if you manipulate the color stops on a basic linear gradient, you can still end up with banding, like in the example below. To
+        fix this, you'd likely need to add an intermediate color stop with{" "}
         <Code>
           via-[<var className="italic opacity-72">color</var>]
         </Code>{" "}
@@ -163,8 +154,7 @@ export default function SmoothGradientsPage() {
         <Code>
           via-[<var className="italic opacity-72">percentage</var>]
         </Code>{" "}
-        to smooth things out. And your mileage may vary depending on the difference in intensity and lightness of the
-        colors.
+        to smooth things out. And your mileage may vary depending on the difference in intensity and lightness of the colors.
       </p>
       <Demo
         title="Example 2"
@@ -172,21 +162,11 @@ export default function SmoothGradientsPage() {
         centerContent={false}
         innerClass="grid w-full grid-cols-2 gap-4"
       >
-        <GradientSquare
-          label="Linear (from-20% to-80%)"
-          className="bg-linear-to-b/oklch from-blue-500 from-20% to-green-500 to-80%"
-        />
-        <GradientSquare
-          label="Eased (via-smooth)"
-          className="via-smooth bg-linear-to-b/oklch from-blue-500 to-green-500"
-        />
+        <GradientSquare label="Linear (from-20% to-80%)" className="bg-linear-to-b from-blue-300 from-20% to-green-500 to-80%" />
+        <GradientSquare label="Eased (via-smooth)" className="via-smooth bg-linear-to-b from-blue-300 to-green-500" />
       </Demo>
 
-      <p>
-        The difference is more apparent when transitioning from transparent to opaque, like with image overlays. You can
-        try to fiddle with various <Code>via-[%] via-[color]</Code> combinations to get it right, or just use{" "}
-        <Code>via-smooth</Code>.
-      </p>
+      <p>The difference is most apparent when transitioning from transparent to opaque, like with image overlays:</p>
 
       <Demo
         title="Image overlay"
@@ -198,23 +178,22 @@ export default function SmoothGradientsPage() {
       </Demo>
       <Heading level={2}>Usage</Heading>
       <p>
-        Just drop the snippet into your theme file. The class overrides Tailwind's default linear{" "}
-        <Code variant="plain">--tw-gradient-stops</Code> variable with fifteen intermediate stops that follow an
-        approximate ease-in-out curve. If you want a different curve, you can swap the percentages with new ones from{" "}
+        Just drop the snippet into wherever your Tailwind theme is defined, like <Code>globals.css</Code>. The class overrides Tailwind's
+        default linear <Code>--tw-gradient-stops</Code> variable with fifteen intermediate stops that follow an approximate ease-in-out
+        curve. If you want a different curve, you can swap the percentages with new ones from{" "}
         <LinkOut href="https://larsenwork.com/easing-gradients/" text="Easing Gradients" />.
       </p>
 
       <p>
-        Since the class only overrides the one variable, it works with different gradient angles and with any{" "}
-        <Code variant="plain">to-*</Code> / <Code variant="plain">from-*</Code> positions, using a touch of
-        ✨&nbsp;math&nbsp;✨ to scale the curve proportionally within your range.
+        Since the class only overrides the one variable, it works with different gradient angles and with any <Code>to-*</Code> /{" "}
+        <Code>from-*</Code> positions, using a touch of ✨&nbsp;math&nbsp;✨ to scale the curve proportionally within your range.
       </p>
 
       <Heading level={3}>When to use it</Heading>
       <ul>
         <li>Hero scrims and image overlays that should feather naturally</li>
         <li>
-          Any place you&apos;d normally sprinkle manual <Code variant="plain">via-[color]/[pct]</Code> stops
+          Any place you&apos;d normally sprinkle manual <Code>via-[color]/[pct]</Code> stops
         </li>
         <li>Accent-to-accent gradients that would otherwise grey out (if using srgb interpolation)</li>
       </ul>

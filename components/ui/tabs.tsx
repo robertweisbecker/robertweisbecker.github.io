@@ -50,7 +50,7 @@ function TabsList({
             "z-10 w-[calc(var(--active-tab-width)-var(--tab-padding-x)*2)] translate-x-[calc(var(--active-tab-left)+var(--tab-padding-x))] rounded-full bg-primary/80 data-[orientation=horizontal]:h-[3px] data-[orientation=horizontal]:translate-y-px data-[orientation=vertical]:w-[3px] data-[orientation=vertical]:-translate-x-px",
           variant === "pill" && "-z-1 h-(--active-tab-height) w-(--active-tab-width) rounded-(--tabs-radius) bg-secondary",
           variant === "default" &&
-            "-z-1 h-(--active-tab-height) w-(--active-tab-width) rounded-[calc(var(--tabs-radius)-2px)] bg-card shadow-border-xs"
+            "-z-1 h-(--active-tab-height) w-(--active-tab-width) rounded-[calc(var(--tabs-radius)-2px)] bg-card shadow-border-xs dark:bg-popover"
         )}
       />
     </TabsPrimitive.List>

@@ -104,17 +104,11 @@ export function CodeBlock({
                 </motion.div>
               ) : null}
             </AnimatePresence>
-            <CopyButton value={code} size="icon-xs" variant="ghost" disabled={isUpdating} />
+            <CopyButton value={code} size="icon-xs" variant="ghost" disabled={isUpdating} className="-me-0.5 -mt-0.5" />
           </CardAction>
         </CardHeader>
       ) : (
-        <CopyButton
-          value={code}
-          size="icon-xs"
-          variant="ghost"
-          disabled={isUpdating}
-          className="absolute top-3 right-2 z-1"
-        />
+        <CopyButton value={code} size="icon-xs" variant="ghost" disabled={isUpdating} className="absolute top-3 right-2 z-1" />
       )}
       {collapsible ? (
         <Collapsible>
@@ -123,8 +117,7 @@ export function CodeBlock({
               className="relative overflow-hidden data-open:h-(--collapsible-panel-height) data-closed:h-(--initial-height)!"
               style={
                 {
-                  "--initial-height":
-                    initialHeight !== undefined ? `${initialHeight}px` : COLLAPSED_MAX_HEIGHT_FALLBACK,
+                  "--initial-height": initialHeight !== undefined ? `${initialHeight}px` : COLLAPSED_MAX_HEIGHT_FALLBACK,
                 } as React.CSSProperties
               }
               keepMounted

@@ -4,6 +4,7 @@ import { Image } from "@/components/image";
 import { Carousel, CarouselViewport, CarouselItem, CarouselToolbar } from "@/components/ui/carousel";
 import { imageSrc } from "@/lib/image-src";
 import { cn } from "@/lib/utils";
+import NextImage from "next/image";
 import type { StaticImageData } from "next/image";
 
 export type ProjectImageCarouselSlide = {
@@ -55,7 +56,7 @@ export function ProjectImageCarousel({
                 <Image src={slide.src} alt={slide.alt} caption={slide.caption} />
               ) : (
                 <figure className="flex flex-col gap-2">
-                  <img src={imageSrc(slide.src)} alt={slide.alt} className="h-auto w-full max-w-full" />
+                  <NextImage src={slide.src} alt={slide.alt} className="h-auto w-full max-w-full" sizes="(max-width: 1024px) 100vw, 768px" />
                   {slide.caption && (
                     <figcaption className="mx-auto max-w-prose text-center text-xs text-muted-foreground">
                       {slide.caption}

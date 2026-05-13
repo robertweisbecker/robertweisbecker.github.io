@@ -1,9 +1,8 @@
 "use client";
+import * as React from "react";
 import {
   BaseUiIcon,
   FigmaIcon,
-  BoxArrowUpRightIcon,
-  BoxArrowRightIcon,
   GithubIcon,
   LinkedinIcon,
   NextJsIcon,
@@ -11,12 +10,9 @@ import {
   TreeIconTailwind,
   CursorIcon,
   TreeIconClaude,
-  TreeIconMarkdown,
-  TreeIconReact,
-  ShadcnIcon,
-  PixelChevronsIcon,
-  PixelDropdownIcon,
   TreeIconRichText,
+  MarkdownIcon,
+  VercelIcon,
 } from "@/components/icons";
 import Link from "next/link";
 import { LinkOut } from "@/components/link-out";
@@ -29,17 +25,16 @@ import { resources } from "@/lib/data/resources";
 import { PixelReveal } from "@/components/animation/shared";
 import { PixelPortrait } from "@/components/animation/pixel-portrait";
 import { PixelDino } from "@/components/animation/pixel-dino";
+import { Float } from "@/components/animation/float";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "@gravity-ui/icons";
 import { posts, postIcons } from "@/lib/data/posts";
-import { IconArrowDown, IconCalendar, IconFile, IconLink, IconMailFilled } from "@tabler/icons-react";
+import { IconCalendar, IconFile, IconLink } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import * as React from "react";
 import { PixelShuffleIcon } from "@/components/icons";
 import { LayoutGrid } from "@/components/layout-grid";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import { LinkButton } from "@/components/ui/link-button";
-import { DataList } from "@/components/ui/data-list";
 import { InfoTip } from "@/components/info-tip";
 import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@/components/ui/preview-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -79,24 +74,29 @@ export default function Home() {
         <br /> Weisbecker
       </h1>
       <div className="grid items-start gap-10 sm:grid-cols-[auto_1fr]">
-        <div className="relative w-fit rounded-sm bg-card p-2 shadow-border-lg sm:-rotate-3">
-          <div className="group/pixel relative size-50 bg-muted">
-            <Button
-              onClick={() => setIsDinoVisible((v) => !v)}
-              variant="ghost"
-              size="icon-xs"
-              className="md:blur-2xs absolute inset-s-1 top-1 z-1 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none md:-translate-y-1 md:opacity-0"
-            >
-              {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
-            </Button>
-            <PixelPortrait className="transition-all duration-300" />
+        <Float
+          className="group/pixel relative isolate w-fit rounded-xs bg-card p-1 shadow-border-lg"
+          speed={0.38}
+          amplitude={[2, 8, 4]}
+          rotationRange={[0, 0, 3]}
+        >
+          <div className="relative size-50 bg-background">
+            <PixelPortrait className="outline-2 outline-card transition-all duration-300" />
             {isDinoVisible && (
               <PixelReveal className="absolute inset-0 size-50">
                 <PixelDino />
               </PixelReveal>
             )}
           </div>
-        </div>
+          <Button
+            onClick={() => setIsDinoVisible((v) => !v)}
+            variant="ghost"
+            size="icon-xs"
+            className="md:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none md:-translate-y-1 md:opacity-0"
+          >
+            {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
+          </Button>
+        </Float>
         <div className="w-full max-w-xs space-y-3.5 text-sm">
           <p className="">
             You can call me{" "}
@@ -143,8 +143,8 @@ export default function Home() {
                     className="mb-3 block text-xs text-muted-foreground [quotes:initial]"
                     cite="https://everfi.com/press-releases/everfis-suite-of-k-12-educational-content-receives-prestigious-digital-promise-research-based-product-design-certification/#:~:text=Everfi%E2%80%99s%20Impact%2Das%2Da%2DServiceTM%C2%A0solution%20and%20digital%20educational%20content%20have%20reached%20more%20than%2045%20million%20learners%20globally."
                   >
-                    “Founded in 2008, Everfi’s Impact-as-a-Service™ solution and digital educational content have reached more than 45
-                    million learners globally.”
+                    “Founded in 2008, Everfi’s Impact-as-a-Service™ solution and digital educational content have reached more than{" "}
+                    <mark>45 million</mark> learners globally.”
                   </blockquote>
                   <span className="flex items-center gap-1 text-2xs">
                     <IconLink className="size-3" /> everfi.com
@@ -220,7 +220,7 @@ export default function Home() {
               <img
                 src={resource.thumbnail}
                 alt=""
-                className="m-px aspect-video w-[calc(100%-2px)] rounded-md object-contain shadow-border-xs -outline-offset-1 dark:brightness-50 dark:grayscale-50"
+                className="pointer-events-none m-px aspect-video w-[calc(100%-2px)] rounded-md object-contain shadow-border-xs -outline-offset-1 dark:brightness-50 dark:grayscale-50"
                 data-slot="media"
               />
             )}
@@ -342,8 +342,8 @@ export default function Home() {
       <section className="flex flex-col gap-6">
         <div className="flex w-full justify-between gap-2">
           <h3 className="font-pixel text-[11px] uppercase">Experience</h3>
-          <LinkButton href="/BOB.md" variant="ghost" size="sm" className="-me-(--button-x)">
-            <TreeIconMarkdown data-icon="inline-start" />
+          <LinkButton href="/BOB.md" variant="ghost" size="sm" className="-me-(--button-x) -mt-(--button-y)">
+            <MarkdownIcon data-icon="inline-start" />
             View BOB.md
           </LinkButton>
         </div>
@@ -448,19 +448,17 @@ export default function Home() {
           </DescriptionListValue>
           <DescriptionListLabel>Hosting</DescriptionListLabel>
           <DescriptionListValue>
-            <s className="text-muted-foreground/50">GitHub Pages</s>
-            <LinkOut href="https://vercel.com/" text="Vercel" />
+            <VercelIcon className="size-4" />
+            Vercel
           </DescriptionListValue>
-          <DescriptionListLabel>Frameworks</DescriptionListLabel>
+          <DescriptionListLabel>Framework</DescriptionListLabel>
           <DescriptionListValue>
-            <Badge variant="ghost">
-              <NextJsIcon data-icon="inline-start" />
-              Next.js
-            </Badge>
+            <NextJsIcon className="size-4" />
+            <LinkOut href="https://nextjs.com/" text="Next.js" />
           </DescriptionListValue>
           <DescriptionListLabel>Components</DescriptionListLabel>
           <DescriptionListValue>
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1.5">
               <BaseUiIcon className="size-4" /> Base UI +
               <TreeIconTailwind className="size-4" />
               Tailwind
@@ -482,9 +480,9 @@ export default function Home() {
           <DescriptionListValue>
             <LinkOut href="https://svgl.app/" text="svgl" />
           </DescriptionListValue>
-          <DescriptionListLabel>Interns</DescriptionListLabel>
+          <DescriptionListLabel>Clankers</DescriptionListLabel>
           <DescriptionListValue>
-            <span className="flex items-center gap-1">
+            <span className="flex items-center gap-1.5">
               <CursorIcon className="size-4" /> Cursor &
               <TreeIconClaude className="size-4" />
               Claude

@@ -6,6 +6,7 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconTemplateFilled } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Favicon, PixelChevronDownIcon, PixelNewsIcon } from "./icons";
@@ -44,6 +45,7 @@ export function Header() {
       <div className="max-w-8xl mx-auto flex h-12 items-center gap-3 px-2 py-2 sm:px-4">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           <Favicon className="size-4 text-secondary-foreground" />
+
           <span>
             bob<span className="text-primary">.</span>fyi
           </span>
@@ -109,10 +111,15 @@ export function Header() {
                       <>
                         <div className="flex w-64 flex-col p-1 md:w-sm">
                           {project.heroImage && (
-                            <img
-                              src={project.heroImage}
-                              className="via-smooth aspect-video w-full rounded-lg bg-linear-to-b to-popover object-cover object-top"
-                            />
+                            <div className="via-smooth relative aspect-video w-full overflow-hidden rounded-lg bg-linear-to-b to-popover">
+                              <Image
+                                src={project.heroImage}
+                                alt={`${project.title} hero preview`}
+                                fill
+                                sizes="(max-width: 768px) 100vw, 320px"
+                                className="object-cover object-top"
+                              />
+                            </div>
                           )}
                           <DataList.Root size="sm" className="px-4 py-2">
                             <DataListItem>

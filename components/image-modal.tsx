@@ -4,6 +4,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Dialog as DialogBase } from "@base-ui/react/dialog";
+import { Drawer as DrawerBase } from "@base-ui/react/drawer";
 import { Popover } from "@base-ui/react/popover";
 import { Xmark } from "@gravity-ui/icons";
 import { IconArrowsDiagonal } from "@tabler/icons-react";
@@ -11,13 +12,7 @@ import { AnimatePresence, HTMLMotionProps, LayoutGroup, motion } from "motion/re
 import * as React from "react";
 import { createPortal } from "react-dom";
 
-import {
-  Dialog,
-  DialogTrigger,
-  DialogOverlay,
-  DialogPortal,
-  DialogPopup,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogOverlay, DialogPortal, DialogPopup } from "@/components/ui/dialog";
 import { imageSrc } from "@/lib/image-src";
 import NextImage, { type StaticImageData } from "next/image";
 
@@ -69,15 +64,7 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
 // ---------------------------------------------------------------------------
 // Shared modal image with skeleton
 // ---------------------------------------------------------------------------
-function ModalImage({
-  src,
-  alt,
-  imgAspect,
-}: {
-  src: StaticImageData | string;
-  alt: string;
-  imgAspect?: string;
-}) {
+function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; alt: string; imgAspect?: string }) {
   const [loaded, setLoaded] = React.useState(false);
   const url = imageSrc(src);
 
@@ -114,13 +101,11 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
     <Dialog>
       <figure
         data-media
-        className={cn(
-          "group/figure not-prose relative my-10 flex flex-col items-center justify-center gap-1.5",
-          className
-        )}
+        className={cn("group/figure not-prose relative my-10 flex flex-col items-center justify-center gap-1.5", className)}
       >
         <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
           <NextImage
+            placeholder="blur"
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             sizes="(max-width: 768px) 100vw, 720px"
@@ -134,9 +119,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             <IconArrowsDiagonal />
           </DialogTrigger>
         </div>
-        {caption && (
-          <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>
-        )}
+        {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
       </figure>
       <DialogPortal>
         <DialogOverlay />
@@ -154,7 +137,9 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             )}
           >
             <DialogBase.Title className="sr-only">{caption || "Image"}</DialogBase.Title>
-            <img
+            <NextImage
+              placeholder="blur"
+              sizes="(max-width: 768px) 100vw, 960px"
               src={fullscreenUrl}
               alt={typeof caption === "string" ? caption : ""}
               className="block h-auto w-full max-w-none object-contain"
@@ -163,6 +148,52 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
         </DialogBase.Viewport>
       </DialogPortal>
     </Dialog>
+  );
+}
+
+export function ImageModalDrawer({ src, src2, caption }: ImageModalProps) {
+  return (
+    <DrawerBase.Provider>
+      <div className="relative w-full overflow-hidden rounded-xl shadow-border-sm">
+        <DrawerBase.IndentBackground className="absolute inset-0 bg-muted" />
+        <DrawerBase.Indent className="relative origin-center [transform:scale(1)_translateY(0)] bg-card p-1 [transition-duration:calc(400ms*var(--indent-transition)),calc(250ms*var(--indent-transition))] will-change-transform [--indent-progress:var(--drawer-swipe-progress)] [--indent-radius:calc(var(--radius-xl)*(1-var(--indent-progress)))] [--indent-transition:calc(1-clamp(0,calc(var(--drawer-swipe-progress)*100000),1))] [transition:transform_0.4s_cubic-bezier(0.32,0.72,0,1),border-radius_0.25s_cubic-bezier(0.32,0.72,0,1)] data-active:[transform:scale(calc(0.98+(0.02*var(--indent-progress))))] data-active:rounded-(--indent-radius)">
+          <DrawerBase.Root>
+            <DrawerBase.Trigger className="w-full">
+              <NextImage
+                placeholder="blur"
+                src={src}
+                alt={typeof caption === "string" ? caption : ""}
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+              />
+            </DrawerBase.Trigger>
+            <DrawerBase.Portal>
+              <DrawerBase.Backdrop className="fixed inset-0 min-h-dvh bg-linear-to-b from-background/50 to-background/100 opacity-[calc(var(--backdrop-opacity)*(1-var(--drawer-swipe-progress)))] transition-opacity duration-[450ms] ease-out-quart [--backdrop-opacity:1] data-ending-style:opacity-0 data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:opacity-0 data-swiping:duration-0 supports-[-webkit-touch-callout:none]:absolute" />
+              <DrawerBase.Viewport className="fixed inset-0 flex items-end justify-center">
+                <DrawerBase.Popup className="-mb-[3rem] max-h-[calc(100vh-3rem)] w-full [transform:translateY(var(--drawer-swipe-movement-y))] touch-auto overflow-y-auto overscroll-contain p-4 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px)+3rem)] transition-transform duration-[450ms] ease-out-quart outline-none data-ending-style:[transform:translateY(calc(100%-3rem+2px))] data-ending-style:duration-[calc(var(--drawer-swipe-strength)*400ms)] data-starting-style:[transform:translateY(calc(100%-3rem+2px))] data-swiping:select-none">
+                  <div className="mx-auto mb-4 h-1 w-12 rounded-full bg-input" />
+                  <DrawerBase.Close
+                    className={cn(buttonVariants({ variant: "ghost", size: "sm", rounded: true }), "absolute top-4 right-4")}
+                  >
+                    Close
+                  </DrawerBase.Close>
+                  <DrawerBase.Content className="pointer-events-none mx-auto w-full max-w-7xl overflow-hidden rounded-xl shadow-popover">
+                    <DrawerBase.Title className="sr-only">Image Detail</DrawerBase.Title>
+                    <NextImage
+                      placeholder="blur"
+                      src={src}
+                      alt={typeof caption === "string" ? caption : ""}
+                      sizes="(max-width: 768px) 100vw, 720px"
+                      className="pointer-events-none aspect-video h-auto w-full"
+                    />
+                  </DrawerBase.Content>
+                </DrawerBase.Popup>
+              </DrawerBase.Viewport>
+            </DrawerBase.Portal>
+          </DrawerBase.Root>
+        </DrawerBase.Indent>
+      </div>
+    </DrawerBase.Provider>
   );
 }
 
@@ -605,10 +636,7 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
                   onClick={() => setOpen(false)}
                 />
 
-                <motion.div
-                  className="relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
-                  layout
-                >
+                <motion.div className="relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]" layout>
                   <CloseButton onClick={() => setOpen(false)} />
 
                   <motion.div
@@ -624,11 +652,7 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
                       minHeight: "512px",
                     }}
                   >
-                    <ModalImage
-                      src={src2 ?? src}
-                      alt={typeof caption === "string" ? caption : ""}
-                      imgAspect={imgAspect}
-                    />
+                    <ModalImage src={src2 ?? src} alt={typeof caption === "string" ? caption : ""} imgAspect={imgAspect} />
                   </motion.div>
                 </motion.div>
               </div>

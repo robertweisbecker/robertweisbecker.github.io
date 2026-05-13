@@ -23,7 +23,7 @@ const badgeVariants = cva(
         outline:
           "outline bg-card outline-border shadow-[0_-1px_hsl(0_0_100%_/_5%),0_1px_hsl(0_0%_0%_/_5%)] text-card-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground ",
         ghost: "[a]:hover:bg-accent text-foreground [a]:hover:text-accent-foreground -mx-1",
-        link: "bg-muted [font-size:inherit] text-foreground hover:underline underline-offset-4 [a]:hover:bg-accent [a]:hover:text-accent-foreground",
+        link: "bg-muted dark:bg-white/10 [font-size:inherit] text-foreground hover:underline underline-offset-4 [a]:hover:bg-accent [a]:hover:text-accent-foreground",
       },
       size: {
         default: "text-xs/none rounded-sm h-5",

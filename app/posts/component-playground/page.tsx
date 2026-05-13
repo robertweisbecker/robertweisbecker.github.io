@@ -109,6 +109,17 @@ export default function ComponentPlaygroundPage() {
           <ChromeTabsDemo />
         </Demo>
 
+        <Demo title="Mark">
+          <p className="text-sm text-muted-foreground">
+            This is a <mark>marked</mark> paragraph.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Reprehenderit labore magna incididunt duis amet id nisi est elit in.{" "}
+            <mark>Et fugiat duis ipsum sunt et officia Lorem veniam qui id.</mark> Sunt proident incididunt eu nulla dolore aliqua elit
+            ipsum id laborum quis ex ipsum ullamco. Pariatur ea voluptate eu quis officia deserunt ipsum tempor.
+          </p>
+        </Demo>
+
         <h2>Raycast-y</h2>
         <Demo title="Site Search" centerContent>
           <SiteSearch className="w-full max-w-xs" />
@@ -122,9 +133,9 @@ export default function ComponentPlaygroundPage() {
 
         <Demo title="Copy button">
           <div className="grid gap-2 md:grid-cols-2">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm text-muted-foreground">Copy &quot;Hello, world!&quot;</span>
-              <CopyButton value="Hello, world!" />
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-sm text-foreground">Copy &quot;Hello, world!&quot;</span>
+              <CopyButton value="Hello, world!" size="icon" />
             </div>
             <Field className="max-w-3xs">
               <FieldLabel>Paste to test:</FieldLabel>
@@ -139,7 +150,7 @@ export default function ComponentPlaygroundPage() {
         <h2>Devices</h2>
         <p>
           A remix of Geist's <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color mode and uses your
-          device's clock and battery status.
+          device's clock and battery level (non-iOS).
         </p>
         <Demo title="Device frame — phone" overflowBehavior="resize" centerContent>
           <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">

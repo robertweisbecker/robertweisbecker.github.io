@@ -10,12 +10,14 @@ import {
   ClipPathEditorStyle,
 } from "@/components/demos/clip-path-editor";
 import { InfoTip } from "@/components/info-tip";
+import { LinkOut } from "@/components/link-out";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Separator } from "@/components/ui/separator";
 import { IconLine, IconVectorBezier2, IconVectorSpline, IconX } from "@tabler/icons-react";
 
 export default function ClipPathCurvePage() {
@@ -49,8 +51,8 @@ export default function ClipPathCurvePage() {
             function.
           </p>
           <p className="">
-            Generate code as a Tailwind class, CSS, or a computed SVG. Use it for rounded corner cutouts or button
-            addons as an alternative to masks.
+            Generate code as a Tailwind class, CSS, or a computed SVG. Use it for rounded corner cutouts or button addons as an alternative
+            to masks.
           </p>
           <p className="">Here are some examples:</p>
         </section>
@@ -128,17 +130,17 @@ export default function ClipPathCurvePage() {
             <ul className="">
               <li>
                 <strong>Start with a corner. </strong>
-                For simple curves, choose an origin to quickly set the start point to a given corner. The end point will
-                automatically adjust to the opposing corner to give you a diagonal starting shape.
+                For simple curves, choose an origin to quickly set the start point to a given corner. The end point will automatically
+                adjust to the opposing corner to give you a diagonal starting shape.
               </li>
               <li>
                 <strong>Set the curve mode. </strong>
-                Choose between three different path types. Modes give you different control points with which to tweak
-                curve strength and direction.
+                Choose between three different path types. Modes give you different control points with which to tweak curve strength and
+                direction.
                 <ol>
                   <li>
-                    <IconLine className="inline-block size-5 rounded bg-accent px-1 text-muted-foreground" />{" "}
-                    <strong>Linear</strong>: no curve, a straight path from start to end
+                    <IconLine className="inline-block size-5 rounded bg-accent px-1 text-muted-foreground" /> <strong>Linear</strong>: no
+                    curve, a straight path from start to end
                   </li>
                   <li>
                     <IconVectorSpline className="inline-block size-5 rounded bg-accent px-1 text-muted-foreground" />{" "}
@@ -149,13 +151,11 @@ export default function ClipPathCurvePage() {
                     <strong>Cubic</strong>: bézier with two control points, replicates easing
                   </li>
                 </ol>
-                Quadratic works best for symmetrical curves that mimic border-radius, while cubic beziers can produce
-                more organic curves.
+                Quadratic works best for symmetrical curves that mimic border-radius, while cubic beziers can produce more organic curves.
               </li>
               <li>
                 <strong>Custom coordinates: </strong>
-                Use the <strong>Advanced</strong> settings to specify exact coordinates for the start, control, and end
-                points.
+                Use the <strong>Advanced</strong> settings to specify exact coordinates for the start, control, and end points.
               </li>
             </ul>
             <p>...or, just drag the points around the canvas. Go nuts.</p>
@@ -198,6 +198,30 @@ export default function ClipPathCurvePage() {
         </div>
         <ClipPathEditorOutput />
       </ClipPathEditor>
+      <Separator variant="dotted" />
+      <section className="prose">
+        <h2 className="">Resources</h2>
+        <ul>
+          <li>
+            <LinkOut href="https://bennettfeely.com/clippy/" text="Clippy" />, a CSS Clip-Path Generator by Bennett Feely
+          </li>
+          <li>
+            <LinkOut href="https://frontendmasters.com/blog/modern-css-round-out-tabs/" text="Modern CSS Round-Out Tabs" /> by Chris Coyier
+          </li>
+          <li>
+            <LinkOut
+              href="https://css-tricks.com/better-css-shapes-using-shape-part-1-lines-and-arcs/"
+              text="Better CSS Shapes Using shape() — Part 1: Lines and Arcs
+"
+            />{" "}
+            from CSS Tricks
+          </li>
+          <li>
+            <LinkOut href="https://www.joshwcomeau.com/svg/interactive-guide-to-paths/" text="An Interactive Guide to SVG Paths" /> and{" "}
+            <LinkOut href="https://www.joshwcomeau.com/animation/dynamic-bezier-curves/" text="Dynamic Bézier Curves" /> by Josh Comeau
+          </li>
+        </ul>
+      </section>
     </>
   );
 }

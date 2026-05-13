@@ -66,7 +66,15 @@ const backdropPopoverCode = `<Button popoverTarget="popover-backdrop" variant="o
   aria-labelledby="popover-backdrop-title"
   aria-describedby="popover-backdrop-desc"
   className={cn(
-    "fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-98 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/15 sm:w-full sm:max-w-96 dark:-outline-offset-1 dark:open:backdrop:bg-black/50 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
+    "fixed inset-y-0 mx-auto my-auto overflow-hidden rounded-lg bg-[canvas] p-4 shadow-2xl outline outline-current/10 sm:w-full sm:max-w-96 dark:-outline-offset-1",
+    "not-open:pointer-events-none",
+    "transition-all transition-discrete duration-300",
+    "origin-top translate-y-10 scale-92 opacity-0",
+    "starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0",
+    "open:translate-y-0 open:scale-100 open:opacity-100",
+    "backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 backdrop:pointer-events-none", 
+    "starting:open:backdrop:bg-transparent"
+    "open:backdrop:bg-black/15 dark:open:backdrop:bg-black/50",
   )}
 >
   <h2 className="mb-3 text-base font-medium text-pretty" id="popover-backdrop-title">…</h2>
@@ -107,8 +115,7 @@ export default function NativePopoversAnchoringPage() {
   return (
     <div className="mx-auto w-full max-w-xl space-y-8">
       <p>
-        Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and{" "}
-        <Code>starting-style</Code>.
+        Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and <Code>starting-style</Code>.
       </p>
       <Demo title="Anchored" code={{ ...demoCode, value: anchoredPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
@@ -120,7 +127,7 @@ export default function NativePopoversAnchoringPage() {
             id="popover-anchor"
             aria-labelledby="popover-anchor-title"
             aria-describedby="popover-anchor-desc"
-            className="[position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-[opacity,transform,translate,scale] transition-discrete duration-50 ease-out not-open:pointer-events-none backdrop:pointer-events-none open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
+            className="[position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-all transition-discrete duration-50 ease-out not-open:pointer-events-none backdrop:pointer-events-none open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
           >
             <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">
               Howdy!
@@ -132,8 +139,12 @@ export default function NativePopoversAnchoringPage() {
         </div>
       </Demo>
       <p>
-        Here{"'"}s a toast-y popover. In some countries, that{"'"}s a meal. Regardless, you need to close this one
-        manually rather than by clicking outside.
+        One thing I noticed: you seem to need <Code>transition-all</Code> on the popover content to get the exit transition working;{" "}
+        <Code>transition-[properties]</Code> doesn't work, at least with Tailwind.
+      </p>
+      <p>
+        Here{"'"}s a toast-y popover. In some countries, that{"'"}s a meal. Regardless, you need to close this one manually rather than by
+        clicking outside.
       </p>
       <Demo title="Toast-like" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
@@ -185,9 +196,8 @@ export default function NativePopoversAnchoringPage() {
         </div>
       </Demo>
       <p>
-        The next one has a backdrop just to see how it works. But don{"'"}t be fooled, it{"'"}s not modal, nor does it
-        lock scroll position or focus. In reality, you might use a <Code>{"<dialog>"}</Code> here if you{"'"}re going
-        native.
+        The next one has a backdrop just to see how it works. But don{"'"}t be fooled, it{"'"}s not modal, nor does it lock scroll position
+        or focus. In reality, you might use a <Code>{"<dialog>"}</Code> here if you{"'"}re going native.
       </p>
       <Demo title="With backdrop" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
@@ -200,7 +210,7 @@ export default function NativePopoversAnchoringPage() {
             aria-labelledby="popover-backdrop-title"
             aria-describedby="popover-backdrop-desc"
             className={cn(
-              "fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-98 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-[opacity,transform,translate,scale] transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/15 sm:w-full sm:max-w-96 dark:-outline-offset-1 dark:open:backdrop:bg-black/50 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
+              "fixed inset-y-0 mx-auto my-auto origin-top translate-y-10 scale-92 transform overflow-hidden rounded-lg bg-[canvas] p-4 opacity-0 shadow-2xl outline outline-current/10 transition-all transition-discrete duration-300 not-open:pointer-events-none backdrop:pointer-events-none backdrop:bg-transparent backdrop:transition-colors backdrop:duration-300 open:translate-y-0 open:scale-100 open:opacity-100 open:backdrop:bg-black/15 sm:w-full sm:max-w-96 dark:-outline-offset-1 dark:open:backdrop:bg-black/50 starting:open:translate-y-10 starting:open:scale-92 starting:open:opacity-0 starting:open:backdrop:bg-transparent"
             )}
           >
             <h2 className="mt-0 mb-3 text-base font-medium text-pretty" id="popover-backdrop-title">
@@ -222,6 +232,7 @@ export default function NativePopoversAnchoringPage() {
           </div>
         </div>
       </Demo>
+      <p>You can have some fun with the backdrops too. This one also requires an explicit close.</p>
       <Demo title="Danger (manual)" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button

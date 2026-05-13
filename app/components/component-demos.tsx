@@ -16,7 +16,7 @@ import {
   TailwindIcon,
 } from "@/components/icons";
 import { Image } from "@/components/image";
-import { ImageModal } from "@/components/image-modal";
+import { ImageModal, ImageModalDrawer } from "@/components/image-modal";
 import forgeBeforeDemo from "@/public/assets/forge/forge-before.png";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
@@ -32,27 +32,15 @@ import { Carousel, CarouselViewport, CarouselItem, CarouselToolbar } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { Code } from "@/components/ui/code";
 import { ColorCode } from "@/components/ui/color-code";
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from "@/components/ui/combobox";
+import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@/components/ui/combobox";
 import { CopyButton } from "@/components/ui/copy-button";
+import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { Heading } from "@/components/ui/heading";
 import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
-import {
-  NumberField,
-  NumberFieldDecrement,
-  NumberFieldGroup,
-  NumberFieldIncrement,
-  NumberFieldInput,
-} from "@/components/ui/number-field";
+import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@/components/ui/number-field";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -132,15 +120,7 @@ function NumberSliderDemo() {
 
   return (
     <div className="max-w-sm">
-      <NumberSlider
-        label="Opacity"
-        min={0}
-        max={100}
-        step={1}
-        value={value}
-        onValueChange={setValue}
-        format="percent"
-      />
+      <NumberSlider label="Opacity" min={0} max={100} step={1} value={value} onValueChange={setValue} format="percent" />
     </div>
   );
 }
@@ -301,18 +281,24 @@ export function ComponentDemos() {
 
       <Section title="Checkbox">
         <div className="space-y-3">
-          <label className="flex items-center gap-2 text-sm">
-            <Checkbox defaultChecked />
-            Accept terms and conditions
-          </label>
-          <label className="flex items-center gap-2 text-sm">
-            <Checkbox />
-            Send me marketing emails
-          </label>
-          <label className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Checkbox disabled />
-            Disabled option
-          </label>
+          <Field orientation="horizontal" className="flex w-auto items-center gap-2 text-sm">
+            <FieldLabel>
+              <Checkbox defaultChecked />
+              <FieldContent>Accept terms and conditions</FieldContent>
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal" className="flex w-auto items-center gap-2 text-sm">
+            <FieldLabel>
+              <Checkbox />
+              <FieldContent>Send me marketing emails</FieldContent>
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal" className="flex w-auto items-center gap-2 text-sm text-muted-foreground">
+            <FieldLabel>
+              <Checkbox disabled />
+              <FieldContent>Disabled option</FieldContent>
+            </FieldLabel>
+          </Field>
         </div>
       </Section>
 
@@ -323,8 +309,8 @@ export function ComponentDemos() {
           <Code variant="plain">variant=&quot;plain&quot;</Code>
         </div>
         <p className="text-sm">
-          Use the <Code variant="inline">cn()</Code> utility for class merging. The <Code variant="inline">inline</Code>{" "}
-          variant wraps text in backticks. Or use the color code component for inline HEX <ColorCode value="#000000" />.
+          Use the <Code variant="inline">cn()</Code> utility for class merging. The <Code variant="inline">inline</Code> variant wraps text
+          in backticks. Or use the color code component for inline HEX <ColorCode value="#000000" />.
         </p>
       </Section>
 
@@ -432,18 +418,24 @@ export function ComponentDemos() {
 
       <Section title="Switch">
         <div className="space-y-4">
-          <label className="flex items-center gap-3 text-sm">
-            <Switch defaultChecked />
-            Airplane mode
-          </label>
-          <label className="flex items-center gap-3 text-sm">
-            <Switch size="sm" />
-            Small switch
-          </label>
-          <label className="flex items-center gap-3 text-sm text-muted-foreground">
-            <Switch disabled />
-            Disabled
-          </label>
+          <Field orientation="horizontal" className="flex w-auto items-center gap-3 text-sm">
+            <FieldLabel>
+              <Switch defaultChecked />
+              <FieldContent>Airplane mode</FieldContent>
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal" className="flex w-auto items-center gap-3 text-sm">
+            <FieldLabel>
+              <Switch size="sm" />
+              <FieldContent>Small switch</FieldContent>
+            </FieldLabel>
+          </Field>
+          <Field orientation="horizontal" className="flex w-auto items-center gap-3 text-sm text-muted-foreground">
+            <FieldLabel>
+              <Switch disabled />
+              <FieldContent>Disabled</FieldContent>
+            </FieldLabel>
+          </Field>
         </div>
       </Section>
 
@@ -580,10 +572,7 @@ export function ComponentDemos() {
       <Section title="Info Tip">
         <div className="flex items-center gap-2 text-sm">
           <span>Hover for more info</span>
-          <InfoTip
-            title="Info Tip"
-            description="This is a small popover that appears on hover, useful for inline help text."
-          />
+          <InfoTip title="Info Tip" description="This is a small popover that appears on hover, useful for inline help text." />
         </div>
         <div className="flex items-center gap-2 text-sm">
           <span>Help variant</span>
@@ -650,6 +639,8 @@ export function ComponentDemos() {
       <Section title="Image Modal">
         <div className="max-w-md">
           <ImageModal src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
+
+          <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
         </div>
       </Section>
 
@@ -660,8 +651,8 @@ export function ComponentDemos() {
           </MarkNote>
           <MarkNote note="still can't believe we made this">
             <Mark>
-              This approach to reactions led users to discover &lsquo;emoji battles&rsquo;, a spontaneous game hidden as
-              a fun easter egg that a tiny physics engine drives on screen.
+              This approach to reactions led users to discover &lsquo;emoji battles&rsquo;, a spontaneous game hidden as a fun easter egg
+              that a tiny physics engine drives on screen.
             </Mark>{" "}
             Friends intentionally caused these collisions, transforming reactions into something totally different.
           </MarkNote>
@@ -670,8 +661,8 @@ export function ComponentDemos() {
 
       <Section title="Video">
         <p className="text-sm text-muted-foreground">
-          Custom video player built on <Code variant="inline">media-chrome</Code> with themed toolbar controls,
-          play/pause overlay, fullscreen, and optional volume.
+          Custom video player built on <Code variant="inline">media-chrome</Code> with themed toolbar controls, play/pause overlay,
+          fullscreen, and optional volume.
         </p>
         <div className="max-w-lg">
           <Video

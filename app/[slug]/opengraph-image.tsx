@@ -12,6 +12,7 @@ export function generateStaticParams() {
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  // Template import: slug is from generateStaticParams only (dynamicParams = false).
   const { frontmatter } = await import(`@/content/projects/${slug}.mdx`);
 
   return createOgCard({

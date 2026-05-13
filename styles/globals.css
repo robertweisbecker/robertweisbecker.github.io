@@ -215,15 +215,15 @@
 .dark [data-theme] {
   --background: var(--neutral-975);
   --foreground: var(--neutral-50);
-  --card: var(--neutral-950);
+  --card: var(--neutral-900);
   --card-foreground: var(--neutral-300);
-  --popover: var(--neutral-900);
+  --popover: var(--neutral-800);
   --popover-foreground: var(--neutral-50);
   --primary: var(--hue-500);
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-neutral-800) / 20%);
+  --muted: --alpha(var(--color-neutral-600) / 10%);
   --muted-foreground: var(--neutral-300);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
@@ -310,9 +310,9 @@
     /*  Settings for Georgia if reverting: @apply relative -top-[1%] font-serif text-[98%]  */
     @apply font-heading tracking-normal text-foreground not-italic;
     font-variation-settings:
-      "wght" 540,
+      "wght" 560,
       "slnt" -10,
-      "SERF" 40;
+      "SERF" 25;
     font-feature-settings:
       "ss01" 0,
       "ss02",
@@ -322,11 +322,14 @@
       "ccmp",
       "kern";
   }
+  mark {
+    @apply rounded-[70%/1.3em_.2em_1.1em_.3em] bg-transparent bg-radial-[at_-50%_50%] from-info-primary/50 from-4% via-info via-26% to-info-primary/30 to-90% box-decoration-clone ps-0.5 pe-1 pt-0 pb-1 text-foreground bg-blend-multiply [corner-shape:squircle_bevel] text-shadow-2xs text-shadow-background/50 dark:bg-blend-lighten;
+  }
 }
 
 @utility text-h1 {
   :where(&) {
-    @apply animate-in animate-variable-weight font-heading text-3xl/[.9em] -tracking-[0.0125em] text-balance;
+    @apply font-heading text-3xl/[.9em] -tracking-[0.0125em] text-balance;
     font-variation-settings:
       "SERF" 25,
       "slnt" -5,
@@ -372,7 +375,7 @@
 
 @utility link {
   :where(&) {
-    @apply relative isolate inline wrap-break-word break-all text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:inset-y-0 after:-z-1 after:rounded-[.25em];
+    @apply relative isolate inline wrap-break-word break-all text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none after:absolute after:-inset-x-0.5 after:-inset-y-px after:-z-1 after:rounded-[.25em];
     svg {
       @apply inline max-h-[1em] max-w-[1em];
     }
@@ -381,7 +384,7 @@
     }
 
     @variant hover {
-      @apply decoration-current after:bg-current/5;
+      @apply decoration-current after:bg-accent;
     }
     @variant focus-visible {
       @apply after:rounded after:outline-2 after:outline-offset-2 after:outline-ring;

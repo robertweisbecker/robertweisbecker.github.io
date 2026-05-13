@@ -5,6 +5,7 @@ import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/utils";
 import { IconClipboard } from "@tabler/icons-react";
 import { CheckIcon2 } from "../icons";
+import { AnimatePresence, motion } from "motion/react";
 
 interface CopyButtonProps extends Omit<React.ComponentProps<typeof Button>, "children"> {
   value: string;
@@ -23,24 +24,34 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
       aria-label={isCopied ? "Copied" : "Copy to clipboard"}
       {...props}
     >
-      <div className="relative">
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.div
+          key={isCopied ? "check" : "copy"}
+          initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+          transition={{
+            type: "spring",
+            duration: 0.3,
+            bounce: 0,
+          }}
+        >
+          {isCopied ? <CheckIcon2 className="size-[.725em]" /> : <IconClipboard className="size-[1em]" />}
+        </motion.div>
+      </AnimatePresence>
+      {/* <div className="relative">
         <span
           className={cn(
-            "absolute inset-0 flex items-center justify-center transition-[opacity,filter,scale] duration-300 ease-in-out will-change-[opacity,filter,scale]",
-            isCopied ? "blur-0 scale-100 opacity-100" : "scale-25 opacity-0 blur-xs"
+            "absolute inset-0 flex items-center justify-center transition-all duration-300 ease-in-out",
+            isCopied ? "scale-100 opacity-100" : "hidden scale-25 opacity-0"
           )}
         >
-          <CheckIcon2 className="size-[.725em]" />
+          
         </span>
-        <span
-          className={cn(
-            "transition-[opacity,filter,scale] duration-300 ease-in-out will-change-[opacity,filter,scale]",
-            isCopied ? "scale-25 opacity-0 blur-xs" : "blur-0 scale-100 opacity-100"
-          )}
-        >
-          <IconClipboard className="size-[1em]" />
+        <span className={cn("transition-all duration-300 ease-in-out", isCopied ? "hidden scale-25 opacity-0" : "scale-100 opacity-100")}>
+          
         </span>
-      </div>
+      </div> */}
     </Button>
   );
 }

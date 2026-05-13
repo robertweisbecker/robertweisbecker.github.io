@@ -8,6 +8,7 @@ export const dynamicParams = false;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  // Template import: slug is from generateStaticParams only (dynamicParams = false); MDX is resolved at build time.
   const { frontmatter } = await import(`@/content/projects/${slug}.mdx`);
   return {
     title: frontmatter.title,
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  // Template import: slug is from generateStaticParams only (dynamicParams = false).
   const { default: Post } = await import(`@/content/projects/${slug}.mdx`);
   return <Post />;
 }

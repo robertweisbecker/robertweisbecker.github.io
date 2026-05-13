@@ -14,6 +14,7 @@ import { Video } from "@/components/video";
 import { cn, slugify } from "@/lib/utils";
 import { IconLinkFilled } from "@tabler/icons-react";
 import type { MDXComponents } from "mdx/types";
+import NextImage from "next/image";
 import Link from "next/link";
 import React from "react";
 import { CodeBlock, type CodeBlockProps } from "./components/code-block";
@@ -87,9 +88,33 @@ export function useMDXComponents(): MDXComponents {
     h3: createHeading(3),
     h4: createHeading(4),
     img: (props) => {
-      const { src, alt, className, ...rest } = props as React.ImgHTMLAttributes<HTMLImageElement>;
+      const { src, alt, className, width, height, loading } = props as React.ImgHTMLAttributes<HTMLImageElement>;
       if (!src || typeof src !== "string") return null;
-      return <img src={src} alt={alt ?? ""} className={cn(className)} {...rest} />;
+      const w = typeof width === "number" && width > 0 ? width : undefined;
+      const h = typeof height === "number" && height > 0 ? height : undefined;
+      if (w != null && h != null) {
+        return (
+          <NextImage
+            src={src}
+            alt={alt ?? ""}
+            width={w}
+            height={h}
+            className={cn(className)}
+            loading={loading === "eager" ? "eager" : "lazy"}
+          />
+        );
+      }
+      return (
+        <NextImage
+          src={src}
+          alt={alt ?? ""}
+          width={1200}
+          height={800}
+          className={cn("h-auto w-full max-w-full", className)}
+          sizes="(max-width: 768px) 100vw, min(720px, 100vw)"
+          loading="lazy"
+        />
+      );
     },
     a: ({ href, children, ...props }) => {
       if (href?.startsWith("/")) {

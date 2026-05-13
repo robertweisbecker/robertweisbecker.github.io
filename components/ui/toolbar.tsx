@@ -2,18 +2,35 @@
 
 import { cn } from "@/lib/utils";
 import { Toolbar as ToolbarPrimitive } from "@base-ui/react/toolbar";
-import { VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 import { buttonVariants } from "./button";
 
-function ToolbarRoot({ className, orientation = "horizontal", ...props }: ToolbarPrimitive.Root.Props) {
+const toolbarVariants = cva("flex items-center data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col", {
+  variants: {
+    variant: {
+      outline: "outline outline-border p-1 rounded-md",
+      muted: "bg-muted border-transparent p-1 rounded-md",
+      elevated: "rounded-md bg-popover shadow-border-xs p-1",
+      minimal: "",
+    },
+  },
+  defaultVariants: {
+    variant: "minimal",
+  },
+});
+
+function ToolbarRoot({
+  className,
+  variant,
+  orientation = "horizontal",
+  ...props
+}: ToolbarPrimitive.Root.Props & VariantProps<typeof toolbarVariants>) {
   return (
     <ToolbarPrimitive.Root
       data-slot="toolbar"
+      data-variant={variant}
       orientation={orientation}
-      className={cn(
-        "inline-flex items-center gap-1 rounded-md bg-popover p-1 shadow-border-xs data-[orientation=horizontal]:flex-row data-[orientation=vertical]:flex-col",
-        className
-      )}
+      className={cn(toolbarVariants({ variant }), className)}
       {...props}
     />
   );
@@ -50,7 +67,7 @@ function ToolbarLink({ className, ...props }: ToolbarPrimitive.Link.Props) {
     <ToolbarPrimitive.Link
       data-slot="toolbar-link"
       className={cn(
-        "inline-flex shrink-0 items-center justify-center gap-1 px-1 text-sm text-foreground underline-offset-4 hover:underline",
+        "inline-flex shrink-0 items-center justify-center gap-1 px-1 text-xs text-muted-foreground underline-offset-4 hover:text-primary hover:underline",
         "focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-ring",
         "data-[orientation=vertical]:w-full data-[orientation=vertical]:justify-start",
         "[&_svg]:size-4 [&_svg]:shrink-0",
@@ -77,11 +94,7 @@ function ToolbarSeparator({ className, orientation, ...props }: ToolbarPrimitive
   );
 }
 
-function ToolbarInput({
-  size = "sm",
-  className,
-  ...props
-}: Omit<ToolbarPrimitive.Input.Props, "size"> & { size?: "md" | "sm" }) {
+function ToolbarInput({ size = "sm", className, ...props }: Omit<ToolbarPrimitive.Input.Props, "size"> & { size?: "md" | "sm" }) {
   return (
     <ToolbarPrimitive.Input
       data-slot="toolbar-input"

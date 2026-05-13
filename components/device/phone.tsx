@@ -20,10 +20,16 @@ export interface PhoneProps extends React.ComponentProps<"div"> {
   gutter?: boolean;
 }
 
-export const Phone = React.forwardRef<HTMLDivElement, PhoneProps>(function Phone(
-  { className, children, island = true, toolbar = true, address = "bob.fyi", gutter = false, ...props },
-  ref
-) {
+export function Phone({
+  className,
+  children,
+  island = true,
+  toolbar = true,
+  address = "bob.fyi",
+  gutter = false,
+  ref,
+  ...props
+}: PhoneProps) {
   const hasTopGutter = gutter && island;
   const hasBottomGutter = gutter && toolbar;
   const { supported, level, charging } = useBatteryStatus();
@@ -91,7 +97,7 @@ export const Phone = React.forwardRef<HTMLDivElement, PhoneProps>(function Phone
                 />
               </div>
               <div className={glassClass}>
-                <IconDots className="h-[6cqw] w-[6cqw]" aria-hidden />
+                <IconDots className="size-[6cqw]" aria-hidden />
               </div>
             </div>
           )}
@@ -101,5 +107,5 @@ export const Phone = React.forwardRef<HTMLDivElement, PhoneProps>(function Phone
       </div>
     </div>
   );
-});
+}
 Phone.displayName = "Device.Phone";

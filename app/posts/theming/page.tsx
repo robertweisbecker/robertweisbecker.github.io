@@ -237,18 +237,19 @@ components/
             <CodeBlock
               filename="hues.css"
               language="css"
-              code={`:where(:root) {
+              code={`/* Default */
+:where(:root) {
   --neutral-25:  var(--color-sand-25);
   /* … */
   --neutral-975: var(--color-sand-975);
 
-  --hue-50:  var(--neutral-50);
-  /* … hues range 50—975 */
+  --hue-25:  var(--neutral-25);
+  /* … */
   --hue-975: var(--neutral-975);
 }
-
+/* Override */
 [data-hue="blue"] {
-  --hue-50:  var(--color-blue-50);
+  --hue-25:  var(--color-blue-25);
   /* … */
   --hue-975: var(--color-blue-975);
 }`}

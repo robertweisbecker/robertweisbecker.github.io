@@ -18,10 +18,7 @@ export interface BrowserNavBarProps extends React.ComponentProps<"div"> {
   layout?: "flex-1" | "standalone";
 }
 
-export const BrowserNavBar = React.forwardRef<HTMLDivElement, BrowserNavBarProps>(function BrowserNavBar(
-  { className, address = "vercel.com", layout = "flex-1", ...props },
-  ref
-) {
+export function BrowserNavBar({ className, address = "vercel.com", layout = "flex-1", ref, ...props }: BrowserNavBarProps) {
   return (
     <div
       ref={ref}
@@ -49,7 +46,7 @@ export const BrowserNavBar = React.forwardRef<HTMLDivElement, BrowserNavBarProps
       <IconDots className="hidden size-4 shrink-0 text-muted-foreground @[360px]:inline-block" aria-hidden />
     </div>
   );
-});
+}
 BrowserNavBar.displayName = "Device.Browser.NavBar";
 
 export interface BrowserWindowProps extends React.ComponentProps<"div"> {
@@ -71,10 +68,16 @@ export interface BrowserWindowProps extends React.ComponentProps<"div"> {
  * The NavBar sits on `bg-card` (so active tabs merge into it); the content
  * area sits on `bg-background` (matches non-tabbed Browser visual).
  */
-export const BrowserWindow = React.forwardRef<HTMLDivElement, BrowserWindowProps>(function BrowserWindow(
-  { className, toolbar = true, address = "vercel.com", gutter = false, chrome, children, ...props },
-  ref
-) {
+export function BrowserWindow({
+  className,
+  toolbar = true,
+  address = "vercel.com",
+  gutter = false,
+  chrome,
+  children,
+  ref,
+  ...props
+}: BrowserWindowProps) {
   return (
     <div
       ref={ref}
@@ -92,7 +95,7 @@ export const BrowserWindow = React.forwardRef<HTMLDivElement, BrowserWindowProps
       <div className={cn("min-h-0 flex-1 bg-background", gutter && "p-6")}>{children}</div>
     </div>
   );
-});
+}
 BrowserWindow.displayName = "Device.Browser.Window";
 
 export interface BrowserProps extends React.ComponentProps<"div"> {
@@ -111,10 +114,17 @@ export interface BrowserProps extends React.ComponentProps<"div"> {
   chrome?: React.ReactNode;
 }
 
-const BrowserRoot = React.forwardRef<HTMLDivElement, BrowserProps>(function Browser(
-  { className, children, toolbar = true, address = "vercel.com", gutter = false, tabs, chrome, ...props },
-  ref
-) {
+function BrowserRoot({
+  className,
+  children,
+  toolbar = true,
+  address = "vercel.com",
+  gutter = false,
+  tabs,
+  chrome,
+  ref,
+  ...props
+}: BrowserProps) {
   return (
     <div ref={ref} data-slot="device-browser" className={cn("w-full", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
@@ -145,7 +155,7 @@ const BrowserRoot = React.forwardRef<HTMLDivElement, BrowserProps>(function Brow
       </div>
     </div>
   );
-});
+}
 
 BrowserRoot.displayName = "Device.Browser";
 

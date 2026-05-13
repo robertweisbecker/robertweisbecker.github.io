@@ -23,7 +23,7 @@ const toggleVariants = cva(
       size: {
         default: "min-h-button min-w-button px-2.5 rounded-md gap-1.5",
         xs: "min-h-button-xs min-w-button-xs rounded px-1 text-[0.6875rem] gap-1 [&_svg:not([class*='size-'])]:size-3",
-        sm: "min-h-button-sm min-w-button-sm rounded-md px-2 text-sm gap-1.5 [&_svg:not([class*='size-'])]:size-3.5",
+        sm: "min-h-button-sm min-w-button-sm rounded-md px-2.5 text-sm gap-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "min-h-button-lg min-w-button-lg rounded-lg px-3 gap-2",
       },
     },

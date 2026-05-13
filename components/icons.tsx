@@ -48,6 +48,14 @@ export function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+export function VercelIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 256 222" preserveAspectRatio="xMidYMid" {...props}>
+      <path fill="currentColor" d="m128 0 128 221.705H0z" />
+    </svg>
+  );
+}
+
 export function EverfiIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 18 18" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -367,6 +375,20 @@ export function ClipCornerIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
+export function MarkdownIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg viewBox="0 0 208 128" {...props}>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="10"
+        d="M15 5h178a10 10 0 0 1 10 10v98a10 10 0 0 1-10 10H15a10 10 0 0 1-10-10V15A10 10 0 0 1 15 5z"
+      />
+      <path fill="currentColor" d="M30 98V30h20l20 25 20-25h20v68H90V59L70 84 50 59v39H30zm125 0-30-33h20V30h20v35h20l-30 33z" />
+    </svg>
+  );
+}
+
 export function FolderIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -380,6 +402,14 @@ export function FolderIcon(props: React.ComponentProps<"svg">) {
       <rect x="8" y="12" width="4" height="1" fill="var(--background)" />
       <rect x="7" y="8" width="1" height="2" fill="var(--background)" />
       <rect x="12" y="8" width="1" height="2" fill="var(--background)" />
+    </svg>
+  );
+}
+
+export function PixelFinderIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M9 11H11V12H9V13H13V14H3V13H8V12H5V11H8V10H9V11ZM3 13H2V4H3V13ZM14 13H13V4H14V13ZM5 11H4V10H5V11ZM12 11H11V10H12V11ZM8 10H7V7H8V10ZM6 8H5V6H6V8ZM11 8H10V6H11V8ZM9 7H8V5H9V7ZM13 4H10V5H9V4H3V3H13V4Z" />
     </svg>
   );
 }

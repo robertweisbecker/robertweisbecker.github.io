@@ -80,7 +80,7 @@ export interface TimeProps extends React.ComponentProps<"span"> {
   size?: keyof typeof timeSize;
 }
 
-export const Time = React.forwardRef<HTMLSpanElement, TimeProps>(function Time({ className, size = "phone", ...props }, ref) {
+export function Time({ className, size = "phone", ref, ...props }: TimeProps) {
   const t = useCurrentTime();
   return (
     <span
@@ -93,7 +93,7 @@ export const Time = React.forwardRef<HTMLSpanElement, TimeProps>(function Time({
       {t ?? <Skeleton className={size === "phone" ? "mx-auto h-4 w-[3.5ch]" : "h-[1em] w-[3ch]"} />}
     </span>
   );
-});
+}
 Time.displayName = "Device.Time";
 
 export interface BatteryDisplayProps extends React.ComponentProps<"div"> {
@@ -112,8 +112,8 @@ export function BatteryDisplay({ className, level, charging, loading = false, si
     <div data-slot="device-battery" className={cn("grid-stack", className)} {...props}>
       <div
         className={cn(
-          "z-1 -me-[.125em] flex items-center font-[system-ui] font-bold tracking-tighter",
-          size === "phone" ? "text-[2.4cqw] text-white" : "text-[1.15cqw] text-white"
+          "z-1 -me-[.125em] flex items-center font-[system-ui] font-medium tracking-tighter",
+          size === "phone" ? "text-[2.4cqw] text-white" : "text-[.9cqw] text-white"
         )}
       >
         {loading ? (
@@ -198,7 +198,7 @@ const shineVariants = cva("pointer-events-none absolute inset-0 z-10 overflow-hi
 
 export interface ShineProps extends React.ComponentProps<"div">, VariantProps<typeof shineVariants> {}
 
-export const Shine = React.forwardRef<HTMLDivElement, ShineProps>(function Shine({ className, variant, ...props }, ref) {
+export function Shine({ className, variant, ref, ...props }: ShineProps) {
   return <div ref={ref} data-slot="device-shine" aria-hidden className={cn(shineVariants({ variant }), className)} {...props} />;
-});
+}
 Shine.displayName = "Device.Shine";

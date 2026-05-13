@@ -2,6 +2,7 @@
 
 import { BackButton } from "@/components/back-button";
 import { posts } from "@/lib/data/posts";
+import { formatPostDateForDisplay } from "@/lib/parse-post-date";
 import { usePathname } from "next/navigation";
 import { PostPagination } from "./post-pagination";
 
@@ -39,9 +40,7 @@ function PostTopBar({ date }: { date?: string }) {
       <BackButton href="/posts">Posts</BackButton>
       {date ? (
         <time className="font-pixel text-sm text-[11px] text-muted-foreground" dateTime={date}>
-          {Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(
-            new Date(date || new Date())
-          )}
+          {formatPostDateForDisplay(date)}
         </time>
       ) : (
         "∞"

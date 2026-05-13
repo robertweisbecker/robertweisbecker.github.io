@@ -2,6 +2,7 @@ import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, 
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import * as React from "react";
 import { TreeIconFile } from "./icons";
 
@@ -31,7 +32,7 @@ function renderMedia(icon: ProjectGridItem["icon"]) {
   if (typeof icon === "string") {
     return (
       <ItemMedia variant="image" className="">
-        <img src={icon} alt="" className="object-scale-down!" />
+        <Image src={icon} alt="" width={40} height={40} className="object-scale-down!" />
       </ItemMedia>
     );
   }

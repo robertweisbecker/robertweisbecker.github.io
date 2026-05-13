@@ -232,27 +232,47 @@ function Carousel({
     [goToPrev, goToNext]
   );
 
+  const carouselContextValue = React.useMemo<CarouselContextProps>(
+    () => ({
+      carouselRef,
+      api,
+      orientation,
+      goTo,
+      goToPrev,
+      goToNext,
+      canGoToPrev,
+      canGoToNext,
+      snaps,
+      selectedSnap,
+      isPlaying,
+      togglePlay,
+      autoplayProgress,
+      autoplayEnabled,
+      isFinished,
+      restartAutoplay,
+    }),
+    [
+      carouselRef,
+      api,
+      orientation,
+      goTo,
+      goToPrev,
+      goToNext,
+      canGoToPrev,
+      canGoToNext,
+      snaps,
+      selectedSnap,
+      isPlaying,
+      togglePlay,
+      autoplayProgress,
+      autoplayEnabled,
+      isFinished,
+      restartAutoplay,
+    ]
+  );
+
   return (
-    <CarouselContext.Provider
-      value={{
-        carouselRef,
-        api,
-        orientation,
-        goTo,
-        goToPrev,
-        goToNext,
-        canGoToPrev,
-        canGoToNext,
-        snaps,
-        selectedSnap,
-        isPlaying,
-        togglePlay,
-        autoplayProgress,
-        autoplayEnabled,
-        isFinished,
-        restartAutoplay,
-      }}
-    >
+    <CarouselContext.Provider value={carouselContextValue}>
       <div
         ref={autoplayEnabled ? intersectionRef : undefined}
         onKeyDownCapture={handleKeyDown}

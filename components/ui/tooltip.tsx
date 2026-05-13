@@ -10,10 +10,7 @@ const TooltipGroupContext = React.createContext<{
   handle: TooltipPrimitive.Handle<React.ReactNode>;
 } | null>(null);
 
-export type TooltipGroupProps = Pick<
-  TooltipPrimitive.Positioner.Props,
-  "side" | "sideOffset" | "align" | "alignOffset"
-> &
+export type TooltipGroupProps = Pick<TooltipPrimitive.Positioner.Props, "side" | "sideOffset" | "align" | "alignOffset"> &
   Pick<TooltipPrimitive.Provider.Props, "delay" | "closeDelay" | "timeout"> & {
     /** Additional class names for the popup element. */
     popupClassName?: string;
@@ -161,8 +158,7 @@ function TooltipContent({
   alignOffset = 0,
   children,
   ...props
-}: TooltipPrimitive.Popup.Props &
-  Pick<TooltipPrimitive.Positioner.Props, "align" | "alignOffset" | "side" | "sideOffset">) {
+}: TooltipPrimitive.Popup.Props & Pick<TooltipPrimitive.Positioner.Props, "align" | "alignOffset" | "side" | "sideOffset">) {
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Positioner

@@ -1,19 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "motion/react";
 
 export function ModeToggle(props: React.ComponentProps<typeof TooltipTrigger>) {
   const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const icon = mounted ? (resolvedTheme === "dark" ? "moon" : "sun") : "sun";
 
@@ -66,6 +66,7 @@ const RECT_MAP: Array<[number, number, number, number]> = [
 ];
 
 function SunMoonIcon({ icon = "sun", className }: { icon?: "sun" | "moon"; className?: string }) {
+  const reduceMotion = useReducedMotion();
   return (
     <svg
       width={11}
@@ -88,9 +89,9 @@ function SunMoonIcon({ icon = "sun", className }: { icon?: "sun" | "moon"; class
             y: icon === "moon" ? my : sy,
           }}
           transition={{
-            duration: 0.45,
+            duration: reduceMotion ? 0 : 0.45,
             ease: "linear",
-            delay: i * 0.01,
+            delay: reduceMotion ? 0 : i * 0.01,
           }}
         />
       ))}

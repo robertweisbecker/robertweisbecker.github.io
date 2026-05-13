@@ -33,8 +33,7 @@ type DemoProps = React.ComponentProps<"figure"> & {
   code?: DemoCodeConfig;
 };
 
-const card =
-  "rounded-[calc(var(--radius-xl)-1px)] bg-card dark:bg-card shadow-border-xs w-[calc(100%-3px)] mx-auto mb-px";
+const card = "rounded-[calc(var(--radius-xl)-1px)] bg-card shadow-border-xs max-w-[calc(100%-2px)] mx-px mb-px";
 
 function DemoBody({
   children,
@@ -95,11 +94,7 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure
-      data-demo
-      className={cn("not-prose overflow-hidden rounded-xl bg-muted dark:outline dark:outline-border/50", className)}
-      {...props}
-    >
+    <figure data-demo className={cn("not-prose overflow-hidden rounded-xl bg-muted", className)} {...props}>
       {hasHeader ? (
         <header
           className={cn(
@@ -116,9 +111,7 @@ export function Demo({
         {children}
       </DemoBody>
 
-      {caption ? (
-        <figcaption className={cn("p-2 text-sm text-muted-foreground", captionClassName)}>{caption}</figcaption>
-      ) : null}
+      {caption ? <figcaption className={cn("p-2 text-sm text-muted-foreground", captionClassName)}>{caption}</figcaption> : null}
 
       {hasCode ? (
         <CodeBlock

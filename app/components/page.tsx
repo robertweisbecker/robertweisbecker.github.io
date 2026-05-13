@@ -84,7 +84,7 @@ import { Section } from "./section";
 
 const ComponentDemos = dynamic(
   () => import("./component-demos").then((module) => ({ default: module.ComponentDemos })),
-  { loading: () => <p className="text-sm text-muted-foreground">Loading additional component demos...</p> }
+  { loading: () => <p className="text-sm text-muted-foreground">Loading additional component demos…</p> }
 );
 
 export default function ComponentsPage() {

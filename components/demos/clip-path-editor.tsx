@@ -413,9 +413,7 @@ function ResetButton({ onReset }: { onReset: () => void }) {
     <Tooltip>
       <TooltipProvider delay={0}>
         <TooltipTrigger
-          render={
-            <Button variant="ghost" size="icon-sm" className="hover:[&>svg]:-rotate-90 active:[&>svg]:animate-spin" />
-          }
+          render={<Button variant="ghost" size="icon-sm" className="hover:[&>svg]:-rotate-90 active:[&>svg]:animate-spin" />}
           onClick={onReset}
         >
           <IconRestore className="rotate-45 transition-[transform,rotate] delay-100 duration-150 ease-in-out" />
@@ -565,12 +563,7 @@ export function ClipPathEditorCanvas({ className }: React.ComponentProps<"div">)
         {/* <AxisLabels ticks={AXIS_TICKS} axis="x" className="inset-x-3" />
         <AxisLabels ticks={AXIS_TICKS} axis="y" className="top-6 -left-6 pt-6" /> */}
         <div className="absolute top-6 right-0 bottom-0 left-0">
-          <svg
-            viewBox="0 0 100 100"
-            className="block size-full overflow-visible"
-            style={{ touchAction: "none" }}
-            ref={svgRef}
-          >
+          <svg viewBox="0 0 100 100" className="block size-full overflow-visible" style={{ touchAction: "none" }} ref={svgRef}>
             <SvgGrid intervals={AXIS_TICKS} showGrid={true} showDots={true} />
             {/* Layer 2: Clipped shape */}
             <path d={fillPathD} fill={state.color} strokeWidth={0.5} />
@@ -846,21 +839,14 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
                           value={presetKey}
                           aria-label={CORNER_PRESETS[presetKey].label}
                           shape="default"
-                          className={cn(
-                            "h-full min-h-0 w-full",
-                            presetKey === lastSelectedPreset ? "bg-card/50 dark:bg-popover/50" : ""
-                          )}
+                          className={cn("h-full min-h-0 w-full", presetKey === lastSelectedPreset ? "bg-card/50 dark:bg-popover/50" : "")}
                         />
                       }
                     >
                       {CORNER_PRESETS[presetKey].icon}
                     </TooltipTrigger>
                     {isPresetModified && presetKey === lastSelectedPreset ? (
-                      <IconArrowBackUp
-                        className="absolute top-1 right-1.5 z-10 size-3 text-foreground/64"
-                        strokeWidth={1.5}
-                        aria-hidden
-                      />
+                      <IconArrowBackUp className="absolute top-1 right-1.5 z-10 size-3 text-foreground/64" strokeWidth={1.5} aria-hidden />
                     ) : null}
                   </div>
                 ))}
@@ -1033,11 +1019,7 @@ export function ClipPathEditorStyle({ className }: React.ComponentProps<"div">) 
     <div className={cn("grid gap-4", className)}>
       <Field className="grid gap-2">
         <FieldLabel className="text-sm">Fill</FieldLabel>
-        <ColorSwatchGroup
-          colors={SWATCHES}
-          value={state.color}
-          onValueChange={(color) => dispatch({ type: "set-color", color })}
-        />
+        <ColorSwatchGroup colors={SWATCHES} value={state.color} onValueChange={(color) => dispatch({ type: "set-color", color })} />
       </Field>
 
       <NumberSlider
@@ -1094,7 +1076,7 @@ export function ClipPathEditorOutput({ className }: React.ComponentProps<"div">)
         };
       case "svg":
         return {
-          code: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="${committedState.color}">\n  <path d="${pathD}" />\n</svg>`,
+          code: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="${committedState.shapeSize}"  height="${committedState.shapeSize}" fill="${committedState.color}">\n  <path d="${pathD}" />\n</svg>`,
           filename: "path.svg",
           language: "html" as const,
         };

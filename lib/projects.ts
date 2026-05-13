@@ -6,10 +6,11 @@ import { slugify } from "./utils";
 const projectsDir = path.join(process.cwd(), "content", "projects");
 
 export function getProjectSlugs(): string[] {
-  return fs
-    .readdirSync(projectsDir)
-    .filter((file) => file.endsWith(".mdx"))
-    .map((file) => path.basename(file, ".mdx"));
+  const slugs: string[] = [];
+  for (const file of fs.readdirSync(projectsDir)) {
+    if (file.endsWith(".mdx")) slugs.push(path.basename(file, ".mdx"));
+  }
+  return slugs;
 }
 
 export function getProjectToc(slug: string): TocItem[] {

@@ -80,7 +80,7 @@ export function SvgGrid({
   className,
   ...props
 }: SvgGridProps) {
-  const sortedIntervals = React.useMemo(() => [...new Set(intervals)].sort((a, b) => a - b), [intervals]);
+  const sortedIntervals = React.useMemo(() => [...new Set(intervals)].toSorted((a, b) => a - b), [intervals]);
   const dotTicks = React.useMemo(() => {
     if (sortedIntervals.length >= 2) {
       return sortedIntervals.flatMap((start, index) => {

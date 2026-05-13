@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
-interface LinkOutProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "children"> {
+type LinkOutProps = Omit<React.ComponentProps<"a">, "children" | "href"> & {
   text?: React.ReactNode;
   href: string;
   src?: string;
@@ -10,12 +10,9 @@ interface LinkOutProps extends Omit<React.AnchorHTMLAttributes<HTMLAnchorElement
   className?: string;
   linkClass?: string;
   children?: React.ReactNode;
-}
+};
 
-export const LinkOut = React.forwardRef<HTMLAnchorElement, LinkOutProps>(function LinkOut(
-  { text, href, src, icon, className, linkClass, children, ...props },
-  ref
-) {
+export function LinkOut({ text, href, src, icon, className, linkClass, children, ref, ...props }: LinkOutProps) {
   return (
     <a
       ref={ref}
@@ -24,7 +21,7 @@ export const LinkOut = React.forwardRef<HTMLAnchorElement, LinkOutProps>(functio
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group/link link relative mx-px inline-flex items-center gap-[0.25em] space-x-1 text-[1em] leading-[inherit]",
+        "group/link link relative mx-px inline-block space-x-1 text-[1em] leading-[inherit]",
         src && "ps-[1.25em]",
         className,
         linkClass
@@ -37,12 +34,12 @@ export const LinkOut = React.forwardRef<HTMLAnchorElement, LinkOutProps>(functio
           <AvatarFallback>{text?.toString().charAt(0)}</AvatarFallback>
         </Avatar>
       )}
-      {icon && <span className="-my-1 ms-0.5 size-[1em] opacity-50 group-hover/link:opacity-72">{icon}</span>}
+      {icon && <span className="-my-1 size-[1em] opacity-50 group-hover/link:opacity-72 [&_svg]:inline">{icon}</span>}
       {text || children}
-      <LinkOutIcon className="absolute -top-[.25em] -right-[.5em] size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:translate-x-[0.125em] group-hover/link:-translate-y-[0.125em] group-hover/link:opacity-100 group-focus-visible:hidden" />
+      <LinkOutIcon className="absolute -top-[.167em] -right-[.33em] size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:translate-x-[0.125em] group-hover/link:-translate-y-[0.125em] group-hover/link:opacity-100 group-focus-visible:hidden" />
     </a>
   );
-});
+}
 
 function LinkOutIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

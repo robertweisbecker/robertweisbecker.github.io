@@ -11,12 +11,13 @@ import { Separator } from "@/components/ui/separator";
 
 export default async function MDXLayout({ children, params }: { children: React.ReactNode; params: Promise<{ slug: string }> }) {
   const { slug } = await params;
+  // Template import: slug is from generateStaticParams only (dynamicParams = false).
   const { frontmatter } = await import(`@/content/projects/${slug}.mdx`);
   const fm = frontmatter as ProjectFrontmatter;
   const toc = getProjectToc(slug);
 
   const neighbors = resolveNeighbors(
-    projects.filter((p) => p.published).map((p) => ({ title: p.title, path: p.path })),
+    projects.flatMap((p) => (p.published ? [{ title: p.title, path: p.path }] : [])),
     `/${slug}`,
     { title: "Projects", href: "/#projects" }
   );
