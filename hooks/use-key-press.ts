@@ -28,11 +28,7 @@ export type KeyPressOptions = {
  * useKeyPress("/", () => setOpen((o) => !o), { mod: true });
  * useKeyPress(["Escape"], () => setOpen(false));
  */
-export function useKeyPress(
-  key: string | readonly string[],
-  handler: (event: KeyboardEvent) => void,
-  options: KeyPressOptions = {}
-): void {
+export function useKeyPress(key: string | readonly string[], handler: (event: KeyboardEvent) => void, options: KeyPressOptions = {}): void {
   const handlerRef = useRef(handler);
   handlerRef.current = handler;
 

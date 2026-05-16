@@ -6,6 +6,7 @@ import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
+import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
 import { Code } from "@/components/ui/code";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Slider } from "@/components/ui/slider";
@@ -69,7 +70,7 @@ function SliderDemo() {
 
 function ChromeTabsDemo() {
   return (
-    <ChromeTabs defaultValue="preview">
+    <ChromeTabs defaultValue="preview" className="border">
       <ChromeTabs.List>
         <ChromeTabs.Tab value="preview">Preview</ChromeTabs.Tab>
         <ChromeTabs.Tab value="code">Code</ChromeTabs.Tab>
@@ -103,13 +104,24 @@ export default function ComponentPlaygroundPage() {
           <SliderDemo />
         </Demo>
 
+        <Demo title="Emoji feedback">
+          <EmojiFeedbackDemo />
+        </Demo>
+
         <h2>Curvy</h2>
 
         <Demo title="Chrome Tabs">
           <ChromeTabsDemo />
         </Demo>
 
-        <Demo title="Mark">
+        <Demo
+          title="Mark"
+          caption={
+            <>
+              Attempting a realistic highlighter effect with <Code>corner-shape</Code>.
+            </>
+          }
+        >
           <p className="text-sm text-muted-foreground">
             This is a <mark>marked</mark> paragraph.
           </p>
@@ -149,8 +161,8 @@ export default function ComponentPlaygroundPage() {
         </Demo>
         <h2>Devices</h2>
         <p>
-          A remix of Geist's <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color mode and uses your
-          device's clock and battery level (non-iOS).
+          A remix of Geist&apos;s <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color mode and uses
+          your device&apos;s clock and battery level (non-iOS).
         </p>
         <Demo title="Device frame — phone" overflowBehavior="resize" centerContent>
           <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">

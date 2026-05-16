@@ -10,6 +10,7 @@ const privateLinks = [
   ["/private/device", "Device"],
   ["/private/image-modal", "Image modal"],
   ["/private/og-preview", "OG preview"],
+  ["/private/cambio", "Cambio examples"],
 ] as const;
 
 const testingLinks = [

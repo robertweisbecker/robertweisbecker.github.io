@@ -31,13 +31,7 @@ function Card({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof cardVariants>) {
   return (
-    <div
-      data-slot="card"
-      data-size={size}
-      data-variant={variant}
-      className={cn(cardVariants({ variant, size }), className)}
-      {...props}
-    />
+    <div data-slot="card" data-size={size} data-variant={variant} className={cn(cardVariants({ variant, size }), className)} {...props} />
   );
 }
 

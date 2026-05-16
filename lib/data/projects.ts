@@ -1,8 +1,8 @@
 export const projects = [
   {
     id: 1,
-    title: "okLCH Color System",
-    nickname: "okLCH Colors",
+    title: "OkLCH Color System",
+    nickname: "OkLCH Colors",
     icon: "/assets/logos/oklch-icon.svg",
     heroImage: "/assets/oklch/oklch-gradient.png",
     date: "2025",
@@ -30,7 +30,7 @@ export const projects = [
     title: "Unified Design Language",
     nickname: "Unified Design Language",
     icon: "/assets/logos/udl-icon.svg",
-    heroImage: "/assets/thumb/everfi-thumb.png",
+    heroImage: "/assets/udl/foundry-light.png",
     date: "2023",
     path: "/unified-design-language",
     description: "Consolidating multiple design systems & brands",

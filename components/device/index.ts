@@ -10,16 +10,7 @@ export type { DesktopProps } from "./desktop";
 export { Desktop } from "./desktop";
 
 export type { ShineProps } from "./shared";
-export {
-  BatteryDisplay,
-  DeviceProvider,
-  Shine,
-  SignalDisplay,
-  Time,
-  TrafficLights,
-  useBatteryStatus,
-  useCurrentTime,
-} from "./shared";
+export { BatteryDisplay, DeviceProvider, Shine, SignalDisplay, Time, TrafficLights, useBatteryStatus, useCurrentTime } from "./shared";
 
 import { Browser, BrowserNavBar, BrowserWindow } from "./browser";
 import { Desktop } from "./desktop";

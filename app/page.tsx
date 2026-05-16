@@ -362,7 +362,7 @@ export default function Home() {
           </DescriptionListLabel>
           <DescriptionListValue>
             <DescriptionList>
-              <DescriptionListLabel>2024</DescriptionListLabel>
+              <DescriptionListLabel>2024—now</DescriptionListLabel>
               <DescriptionListValue>Principal UX Engineer, Design Systems</DescriptionListValue>
               <DescriptionListLabel>2023</DescriptionListLabel>
               <DescriptionListValue>Principal Designer, Design Systems</DescriptionListValue>
@@ -466,19 +466,19 @@ export default function Home() {
           </DescriptionListValue>
           <DescriptionListLabel>Icons</DescriptionListLabel>
           <DescriptionListValue>
-            <ul>
+            <ul className="space-y-1">
               <li>
-                Placeholders: <LinkOut href="https://tabler.io" text="Tabler" />
+                Default: <LinkOut href="https://tabler.io" text="Tabler" />
               </li>
               <li>
                 Duotone: <LinkOut href="https://trees.software/" text="Trees" /> by{" "}
                 <LinkOut href="https://github.com/pierrecomputer/pierre" text="Pierre Co." />
               </li>
+              <li>Pixel: me</li>
+              <li>
+                Logos: <LinkOut href="https://svgl.app/" text="svgl" />
+              </li>
             </ul>
-          </DescriptionListValue>
-          <DescriptionListLabel>Logos</DescriptionListLabel>
-          <DescriptionListValue>
-            <LinkOut href="https://svgl.app/" text="svgl" />
           </DescriptionListValue>
           <DescriptionListLabel>Clankers</DescriptionListLabel>
           <DescriptionListValue>
@@ -489,14 +489,14 @@ export default function Home() {
             </span>
           </DescriptionListValue>
         </DescriptionList>
-        <div className="text-sm text-muted-foreground">
+        <div className="text-xs text-muted-foreground">
           <p>
             Misc…Carousels use <LinkOut href="https://embla-carousel.com/" text="Embla" /> with styling inspired by{" "}
             <LinkOut href="https://joshpuckett.me/pasito" text="Pasito" />. Resizing handled by{" "}
             <LinkOut href="https://react-resizable-panels.vercel.app/" text="react-resizable-panels" />. Syntax highlighting courtesy of{" "}
             <LinkOut href="https://github.com/huozhi/sugar-high" text="Sugar High" />. Motion is powered by, well,{" "}
-            <LinkOut href="https://motion.dev/" text="Motion" />.<br />
-            Shoutout to these essential reference manuals: <LinkOut href="https://animations.dev/" text="Animations.dev" />,{" "}
+            <LinkOut href="https://motion.dev/" text="Motion" />. Shoutout to these essential reference manuals:{" "}
+            <LinkOut href="https://animations.dev/" text="Animations.dev" />,{" "}
             <LinkOut href="https://raunofrieberg.com/devouring-details" text="Devouring Details" />,{" "}
             <LinkOut href="https://www.interfacecraft.dev/" text="Interface Craft" />, and{" "}
             <LinkOut href="https://makingsoftware.com/" text="Making Software" />.

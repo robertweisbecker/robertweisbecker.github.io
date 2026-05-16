@@ -48,6 +48,26 @@ export function GithubIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+export function LetterboxdIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width={16} height={16} viewBox="0 0 16 16" fill="none" {...props}>
+      <g clip-path="url(#clip0_284_61933)">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M15.5 8C15.5 12.1421 12.1421 15.5 8 15.5C3.85786 15.5 0.5 12.1421 0.5 8C0.5 3.85786 3.85786 0.5 8 0.5C12.1421 0.5 15.5 3.85786 15.5 8ZM6.21654 9.11188C6.41837 8.78946 6.53503 8.40837 6.53503 8.00008C6.53503 7.59174 6.41835 7.21063 6.21649 6.88818C6.01462 7.21063 5.89795 7.59174 5.89795 8.00008C5.89795 8.4083 6.01456 8.78931 6.21632 9.1117C5.84483 9.70515 5.18479 10.0999 4.43244 10.0999C3.27134 10.0999 2.33008 9.1597 2.33008 7.9999C2.33008 6.8401 3.27134 5.8999 4.43244 5.8999C5.18482 5.8999 5.8449 6.29469 6.21637 6.88819C6.58785 6.29469 7.24792 5.8999 8.00031 5.8999C8.75237 5.8999 9.41219 6.29434 9.78376 6.88742C10.1553 6.29434 10.8151 5.8999 11.5672 5.8999C12.7283 5.8999 13.6696 6.8401 13.6696 7.9999C13.6696 9.1597 12.7283 10.0999 11.5672 10.0999C10.8151 10.0999 10.1553 9.70546 9.78376 9.11239C9.41219 9.70546 8.75237 10.0999 8.00031 10.0999C7.24804 10.0999 6.58805 9.70524 6.21654 9.11188ZM9.78387 6.88818C9.98574 7.21063 10.1024 7.59174 10.1024 8.00008C10.1024 8.40841 9.98574 8.78953 9.78387 9.11197C9.58201 8.78953 9.46533 8.40841 9.46533 8.00008C9.46533 7.59174 9.58201 7.21063 9.78387 6.88818Z"
+          fill="#202830"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_284_61933">
+          <rect width="15" height="15" fill="white" transform="translate(0.5 0.5)" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
 export function VercelIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 256 222" preserveAspectRatio="xMidYMid" {...props}>
@@ -60,6 +80,30 @@ export function EverfiIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 18 18" fill="currentcolor" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path d="M9.375 0C4.6095 0 0.75 3.8595 0.75 8.625C0.75 12.4418 3.219 15.6652 6.64725 16.8075C7.0785 16.8832 7.23975 16.6245 7.23975 16.398C7.23975 16.1933 7.22925 15.5145 7.22925 14.7915C5.0625 15.1905 4.50225 14.2635 4.32975 13.779C4.23225 13.5308 3.81225 12.765 3.44475 12.5602C3.14325 12.3982 2.712 11.9993 3.43425 11.9888C4.11375 11.9783 4.599 12.6142 4.761 12.873C5.53725 14.178 6.777 13.8105 7.27275 13.584C7.34775 13.0237 7.57425 12.6465 7.8225 12.4305C5.90325 12.2153 3.8985 11.4713 3.8985 8.172C3.8985 7.2345 4.23225 6.45825 4.782 5.8545C4.69575 5.6385 4.39425 4.75425 4.86825 3.5685C4.86825 3.5685 5.5905 3.342 7.2405 4.45275C7.9305 4.2585 8.66325 4.16175 9.39675 4.16175C10.1295 4.16175 10.863 4.25925 11.553 4.45275C13.203 3.3315 13.9245 3.5685 13.9245 3.5685C14.3993 4.75425 14.097 5.6385 14.0107 5.8545C14.5605 6.45825 14.895 7.22325 14.895 8.172C14.895 11.4818 12.879 12.2145 10.9598 12.4305C11.2725 12.7005 11.5417 13.218 11.5417 14.0265C11.5417 15.18 11.5312 16.107 11.5312 16.398C11.5312 16.6245 11.6933 16.8945 12.1238 16.8083C15.5318 15.6652 18 12.4305 18 8.625C18 3.8595 14.1405 0 9.375 0Z"></path>
+    </svg>
+  );
+}
+
+export function EverfiNewIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width={16} height={16} viewBox="0 0 32 32" fill="none" {...props}>
+      <path
+        d="M22.4589 26.6838C20.2845 26.6838 18.716 25.3014 18.4413 23.0108H29.6983C29.6983 18.9486 27.1658 15 22.405 15C18.2205 15 15 18.2878 15 22.4C15 26.7676 18.1667 30 22.4602 30C25.8477 30 28.7639 27.927 29.5071 24.6108H26.0106C25.4344 25.9095 23.9749 26.6838 22.4602 26.6838H22.4589ZM22.4333 18.1757C24.2482 18.1757 25.4882 19.1716 25.9258 20.8014H18.6608C19.1832 19.1716 20.6144 18.1757 22.432 18.1757H22.4333Z"
+        fill="#272763"
+      />
+      <path
+        d="M11.6093 16.6844C11.6093 15.9119 10.9894 15.2864 10.2257 15.2879H7.30322L4.38071 15.2922C3.61701 15.2922 2.99856 15.9192 3 16.6916V19.6476L3.00432 22.6035C3.00432 23.3759 3.6242 24.0015 4.3879 24H7.31041L10.2329 23.9956C10.9966 23.9956 11.6151 23.3687 11.6136 22.5962V19.6403L11.6093 16.6844ZM17.893 7.40926C16.9135 6.83174 12.9023 5.54871 12.058 7.01358C11.4871 8.00422 10.2185 12.0614 11.6668 12.9153C12.6463 13.4928 16.6575 14.7758 17.5018 13.3109C18.0728 12.3203 19.3413 8.26316 17.893 7.40926ZM26.5569 4.63225C26.137 3.90491 25.4437 3.34049 24.5765 3.10919C23.7092 2.8779 22.829 3.02482 22.1099 3.44813C21.3908 3.8729 20.8327 4.57406 20.6041 5.45124C20.3754 6.32988 20.5206 7.21869 20.9392 7.94604C21.3577 8.67338 22.0524 9.2378 22.9196 9.4691C23.7883 9.70039 24.6671 9.55347 25.3862 9.13015C26.1053 8.70684 26.6634 8.00422 26.892 7.12705C27.1207 6.24841 26.9755 5.3596 26.5569 4.63225Z"
+        fill="url(#paint0_linear_48_12928)"
+      />
+      <defs>
+        <linearGradient id="paint0_linear_48_12928" x1="-0.968101" y1="27.2891" x2="38.3248" y2="-9.34053" gradientUnits="userSpaceOnUse">
+          <stop offset="0.1" stopColor="#19A5CA" />
+          <stop offset="0.19" stopColor="#2AAABD" />
+          <stop offset="0.37" stopColor="#56B99B" />
+          <stop offset="0.62" stopColor="#9ED166" />
+          <stop offset="0.7" stopColor="#B9DA53" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }
@@ -402,6 +446,36 @@ export function FolderIcon(props: React.ComponentProps<"svg">) {
       <rect x="8" y="12" width="4" height="1" fill="var(--background)" />
       <rect x="7" y="8" width="1" height="2" fill="var(--background)" />
       <rect x="12" y="8" width="1" height="2" fill="var(--background)" />
+    </svg>
+  );
+}
+
+export function PixelScribbleIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <rect x="9" y="9" width="1" height="1" fill="currentColor" />
+      <rect x="8" y="9" width="1" height="1" fill="currentColor" />
+      <rect x="7" y="8" width="1" height="1" fill="currentColor" />
+      <rect x="9" y="6" width="1" height="1" fill="currentColor" />
+      <rect x="8" y="7" width="1" height="1" fill="currentColor" />
+      <rect x="9" y="5" width="1" height="1" fill="currentColor" />
+      <rect x="8" y="4" width="1" height="1" fill="currentColor" />
+      <rect x="7" y="4" width="1" height="1" fill="currentColor" />
+      <rect x="6" y="5" width="1" height="1" fill="currentColor" />
+      <rect x="5" y="6" width="1" height="1" fill="currentColor" />
+      <rect x="5" y="7" width="1" height="1" fill="currentColor" />
+      <path d="M4 8H5V9H4V8Z" fill="currentColor" />
+      <path d="M3 8H4V9H3V8Z" fill="currentColor" />
+      <path d="M2 7H3V8H2V7Z" fill="currentColor" />
+      <path d="M2 6H3V7H2V6Z" fill="currentColor" />
+      <path d="M3 5H4V6H3V5Z" fill="currentColor" />
+      <path d="M4 4H5V5H4V4Z" fill="currentColor" />
+      <path d="M5 3H6V4H5V3Z" fill="currentColor" />
+      <path d="M5 2H6V3H5V2Z" fill="currentColor" />
+      <path d="M4 1H5V2H4V1Z" fill="currentColor" />
+      <path d="M3 1H4V2H3V1Z" fill="currentColor" />
+      <path d="M2 2H3V3H2V2Z" fill="currentColor" />
+      <path d="M1 3H2V4H1V3Z" fill="currentColor" />
     </svg>
   );
 }

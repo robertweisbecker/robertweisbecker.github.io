@@ -52,6 +52,7 @@ function TooltipGroup({
   closeDelay = 200,
   timeout,
   trackCursorAxis,
+  actionsRef,
 }: TooltipPrimitive.Root.Props & TooltipGroupProps) {
   const handle = React.useMemo(() => TooltipPrimitive.createHandle<React.ReactNode>(), []);
 
@@ -59,7 +60,7 @@ function TooltipGroup({
     <TooltipProvider data-slot="tooltip-group-provider" delay={delay} closeDelay={closeDelay} timeout={timeout}>
       <TooltipGroupContext.Provider value={{ handle }}>
         {children}
-        <TooltipPrimitive.Root data-slot="tooltip-group" handle={handle} trackCursorAxis={trackCursorAxis}>
+        <TooltipPrimitive.Root data-slot="tooltip-group" handle={handle} trackCursorAxis={trackCursorAxis} actionsRef={actionsRef}>
           {({ payload }) => (
             <TooltipPrimitive.Portal>
               <TooltipPrimitive.Positioner

@@ -65,12 +65,13 @@ export default function RootLayout({
           >
             Skip to main content
           </a>
-
-          <Header />
-          <main id="main" className="root container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
-            {children}
-          </main>
-          <Footer />
+          <div className="root">
+            <Header />
+            <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
+              {children}
+            </main>
+            <Footer />
+          </div>
           {/* {process.env.NODE_ENV === "development" && <DevMeasurer />} */}
           {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
         </ThemeProvider>

@@ -79,12 +79,7 @@ export function BrowserWindow({
   ...props
 }: BrowserWindowProps) {
   return (
-    <div
-      ref={ref}
-      data-slot="device-browser-window"
-      className={cn("flex min-h-0 flex-1 flex-col", className)}
-      {...props}
-    >
+    <div ref={ref} data-slot="device-browser-window" className={cn("flex min-h-0 flex-1 flex-col", className)} {...props}>
       {toolbar ? (
         <div className="bg-card">
           <BrowserNavBar address={address} layout="standalone" />

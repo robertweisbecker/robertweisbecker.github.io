@@ -69,20 +69,11 @@ export function useMDXComponents(): MDXComponents {
     Separator,
     TextReveal,
     pre: ({ children, ...props }) => {
-      const codeElement = React.isValidElement<{ className?: string; children?: React.ReactNode }>(children)
-        ? children
-        : null;
+      const codeElement = React.isValidElement<{ className?: string; children?: React.ReactNode }>(children) ? children : null;
       const className = codeElement?.props?.className ?? "";
       const language = className.replace("language-", "") || undefined;
       const code = String(codeElement?.props?.children ?? "").replace(/\n$/, "");
-      return (
-        <CodeBlock
-          {...props}
-          code={code}
-          language={language as CodeBlockProps["language"]}
-          title={language as string}
-        />
-      );
+      return <CodeBlock {...props} code={code} language={language as CodeBlockProps["language"]} title={language as string} />;
     },
     h2: createHeading(2),
     h3: createHeading(3),

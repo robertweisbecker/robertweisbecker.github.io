@@ -22,11 +22,7 @@ export function Section({
       .replace(/(^-|-$)/g, "");
 
   return (
-    <section
-      id={sectionId}
-      className={cn("not-prose flex w-full min-w-0 flex-col items-start gap-2 not-last:mb-10", className)}
-      {...props}
-    >
+    <section id={sectionId} className={cn("not-prose flex w-full min-w-0 flex-col items-start gap-2 not-last:mb-10", className)} {...props}>
       <Heading level={2} className="w-full">
         {title}
       </Heading>

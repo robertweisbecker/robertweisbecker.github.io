@@ -12,7 +12,7 @@ export function ColorDiagrams({
       {type === "chroma" && <AvgChroma />}
       {caption && (
         <figcaption className="px-2 text-center text-2xs text-muted-foreground">
-          <em>fig.</em> 33{caption}
+          <em>fig. 1</em> {caption}
         </figcaption>
       )}
     </figure>

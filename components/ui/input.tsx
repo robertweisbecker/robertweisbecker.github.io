@@ -6,28 +6,21 @@ import { cn } from "@/lib/utils";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const inputVariants = cva(
-  ["transition-colors text-base", "file:bg-card file:inline-flex file:border-0 file:text-sm file:font-medium"],
-  {
-    variants: {
-      size: {
-        md: "h-button rounded-[var(--radius-md)] file:h-button sm:text-sm",
-        xs: "h-button-xs rounded-[var(--radius-xs)] text-xs file:h-button-xs sm:[&_input]:text-xs",
-        sm: "h-button-sm rounded-[var(--radius-sm)] text-[0.8125rem] file:h-button-sm sm:[&_input]:text-sm",
-        lg: "h-button-lg rounded-[var(--radius-lg)] text-[0.9375rem] file:h-button-lg sm:[&_input]:text-base",
-      },
+const inputVariants = cva(["transition-colors text-base", "file:bg-card file:inline-flex file:border-0 file:text-sm file:font-medium"], {
+  variants: {
+    size: {
+      md: "h-button rounded-[var(--radius-md)] file:h-button sm:text-sm",
+      xs: "h-button-xs rounded-[var(--radius-xs)] text-xs file:h-button-xs sm:[&_input]:text-xs",
+      sm: "h-button-sm rounded-[var(--radius-sm)] text-[0.8125rem] file:h-button-sm sm:[&_input]:text-sm",
+      lg: "h-button-lg rounded-[var(--radius-lg)] text-[0.9375rem] file:h-button-lg sm:[&_input]:text-base",
     },
-    defaultVariants: {
-      size: "md",
-    },
-  }
-);
+  },
+  defaultVariants: {
+    size: "md",
+  },
+});
 
-function Input({
-  className,
-  size = "md",
-  ...props
-}: Omit<InputPrimitive.Props, "size"> & VariantProps<typeof inputVariants>) {
+function Input({ className, size = "md", ...props }: Omit<InputPrimitive.Props, "size"> & VariantProps<typeof inputVariants>) {
   return (
     <InputPrimitive
       data-slot="input"
@@ -41,11 +34,7 @@ function Input({
   );
 }
 
-function NumberInput({
-  className,
-  size = "md",
-  ...props
-}: NumberPrimitive.Root.Props & VariantProps<typeof inputVariants>) {
+function NumberInput({ className, size = "md", ...props }: NumberPrimitive.Root.Props & VariantProps<typeof inputVariants>) {
   return (
     <NumberPrimitive.Root data-size={size} {...props}>
       <NumberPrimitive.Group className={cn(inputVariants({ size, className }), "ui-input")}>

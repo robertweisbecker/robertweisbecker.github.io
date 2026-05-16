@@ -275,11 +275,7 @@ function DropdownMenuSeparator({
 
 function DropdownMenuShortcut({ className, ...props }: React.ComponentProps<"kbd">) {
   return (
-    <kbd
-      data-slot="dropdown-menu-shortcut"
-      className={cn("ms-auto font-mono text-xs text-popover-foreground/60", className)}
-      {...props}
-    />
+    <kbd data-slot="dropdown-menu-shortcut" className={cn("ms-auto font-mono text-xs text-popover-foreground/60", className)} {...props} />
   );
 }
 

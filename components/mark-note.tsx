@@ -37,24 +37,8 @@ export function MarkNote({ note, children, className }: MarkNoteProps) {
           className="mb-1 block h-8 flex-1 text-current lg:hidden"
           preserveAspectRatio="xMidYMin"
         >
-          <line
-            x1="0"
-            y1="0.5"
-            x2="1000"
-            y2="0.5"
-            stroke="currentColor"
-            strokeWidth="1"
-            vectorEffect="non-scaling-stroke"
-          />
-          <line
-            x1="50%"
-            y1="0"
-            x2="50%"
-            y2="100%"
-            stroke="currentColor"
-            strokeWidth="2"
-            vectorEffect="non-scaling-stroke"
-          />
+          <line x1="0" y1="0.5" x2="1000" y2="0.5" stroke="currentColor" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+          <line x1="50%" y1="0" x2="50%" y2="100%" stroke="currentColor" strokeWidth="2" vectorEffect="non-scaling-stroke" />
         </svg>
       </div>
       <div

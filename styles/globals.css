@@ -11,11 +11,13 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --default-font-feature-settings: "ss01", "ss03", "cv01", "cv11";
+  /* --default-font-feature-settings: "ss01", "ss03", "cv01", "cv11"; */
   /* --default-font-variation-settings: "wght" 425, "GRAD" 450, "YAXS" 900; */
   /* --default-font-variation-settings: "wght" 425; */
   --font-sans: system-ui, ui-sans-serif, sans-serif;
   --font-heading: var(--font-display), var(--font-sans);
+  --font-heading--font-variation-settings: "SERF" 30, "wght" 600;
+  --font-heading--font-feature-settings: "ss01", "ss02", "calt", "dlig", "frac";
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
 
@@ -92,7 +94,6 @@
   --spacing-button-lg: var(--button-lg);
   --spacing-thumb: --spacing(5);
 
-  /* --shadow-border: var(--border-shadow); */
   --shadow-border-xs: var(--border-shadow), var(--shadow-xs);
   --shadow-border-sm: var(--border-shadow), var(--shadow-sm);
   --shadow-border-md: var(--border-shadow), var(--shadow-md);
@@ -101,7 +102,6 @@
   --shadow-border-2xl: var(--border-shadow), var(--shadow-2xl);
 
   --inset-shadow-border: var(--inner-border-shadow);
-
   --inset-shadow-button: var(--shadow-button-inset);
   --inset-shadow-button-pressed: var(--shadow-button-inset-pressed);
   --shadow-popover: var(--popover-shadow);
@@ -116,7 +116,7 @@
 }
 
 :root {
-  /* Not theme-able */
+  /* Not themeable, so not regenerated under data-theme */
   --button-xs: --spacing(6);
   --button-sm: --spacing(8);
   --button-md: --spacing(9);
@@ -125,7 +125,8 @@
   --article-prose-width: var(--container-xl);
   --article-sidebar-width: calc(var(--container-3xs) - var(--article-gap-x));
 
-  /* @media (prefers-reduced-motion: no-preference) {
+  /* TODO: figure out why this errors
+  @media (prefers-reduced-motion: no-preference) {
     @view-transition {
       navigation: auto;
     }
@@ -174,7 +175,7 @@
   --warning-foreground: var(--warning-600);
   --border: --alpha(var(--neutral-600) / 20%);
   --input: --alpha(var(--neutral-600) / 40%);
-  --ring: var(--hue-400);
+  --ring: var(--info-400);
   --sidebar: var(--neutral-50);
   --sidebar-foreground: color-mix(in srgb, var(--neutral-800) 64%, var(--sidebar));
   --sidebar-primary: var(--neutral-800);
@@ -223,7 +224,7 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-neutral-600) / 10%);
+  --muted: --alpha(var(--color-neutral-700) / 15%);
   --muted-foreground: var(--neutral-300);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
@@ -242,7 +243,7 @@
   --warning-primary: var(--warning-500);
   --border: --alpha(var(--color-white) / 14%);
   --input: --alpha(var(--color-white) / 24%);
-  --ring: var(--hue-300);
+  --ring: var(--info-300);
   --sidebar: color-mix(in srgb, var(--neutral-950) 97%, var(--color-white));
   --sidebar-foreground: color-mix(in srgb, var(--neutral-100) 64%, var(--sidebar));
   --sidebar-primary: var(--neutral-100);
@@ -252,8 +253,8 @@
   --sidebar-border: --alpha(var(--color-white) / 5%);
   --sidebar-ring: var(--ring);
   --border-shadow:
-    inset 0 0 0 1px --alpha(var(--border) / 50%), inset 0 1px --alpha(var(--border) / 25%),
-    0 0.5px 1px --alpha(var(--border) / 40%), 0 0 0 0.5px hsl(0 0 0% / 50%);
+    inset 0 0 0 1px --alpha(var(--border) / 10%), inset 0 1px --alpha(var(--border) / 25%),
+    inset 0 0.5px 1px --alpha(var(--border) / 40%), 0 0 0 0.5px hsl(0 0 0% / 50%);
   --popover-shadow:
     0 0 1px 1px hsl(0 0 0% / 90%), inset 0 1px 0 0 hsl(0 0 100% / 10%), inset 0 0 0 1px hsl(0 0 100% / 5%),
     0 4px 40px 20px hsl(0 0 0% / 55%);
@@ -296,15 +297,24 @@
     font-optical-sizing: auto;
     scroll-behavior: smooth;
     font-synthesis: none;
-    .font-sans {
-      /* font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern"; */
-    }
-    .font-heading {
-      font-feature-settings: "ss01", "ss02", "ss03", "calt", "liga", "ccmp", "kern";
-    }
+    /* .font-sans {
+      font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern";
+    } */
   }
+}
+
+@layer components {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    --font-heading--font-variation-settings: "wght" 560, "slnt" -10, "SERF" 25;
+  }
+
   h1 {
-    @apply font-heading text-3xl leading-none -tracking-[0.005em] text-balance;
+    @apply text-h1 font-heading leading-none -tracking-[0.005em] text-balance;
   }
   em {
     /*  Settings for Georgia if reverting: @apply relative -top-[1%] font-serif text-[98%]  */
@@ -323,7 +333,15 @@
       "kern";
   }
   mark {
-    @apply rounded-[70%/1.3em_.2em_1.1em_.3em] bg-transparent bg-radial-[at_-50%_50%] from-info-primary/50 from-4% via-info via-26% to-info-primary/30 to-90% box-decoration-clone ps-0.5 pe-1 pt-0 pb-1 text-foreground bg-blend-multiply [corner-shape:squircle_bevel] text-shadow-2xs text-shadow-background/50 dark:bg-blend-lighten;
+    @apply rounded-[70%/1.9em_.8em_.9em_.3em] bg-transparent bg-radial-[at_-50%_50%] from-info-primary/50 from-4% via-info via-26% to-info-primary/30 to-90% box-decoration-clone ps-0.5 pe-1 pt-0 pb-1 text-foreground bg-blend-multiply [corner-shape:squircle_bevel] text-shadow-2xs text-shadow-background/50 dark:bg-blend-lighten;
+  }
+}
+
+@utility border-hairline {
+  border-width: 1px;
+
+  @media (min-resolution: 2x) {
+    border-width: 0.5px;
   }
 }
 
@@ -564,4 +582,32 @@
       var(--tw-gradient-to) var(--tw-gradient-to-position, 100%);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
   }
+}
+
+@utility line-t {
+  @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:bg-border;
+}
+
+@utility line-b {
+  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:bg-border;
+}
+
+@utility line-y {
+  @apply relative;
+  @apply before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:bg-border;
+  @apply after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:bg-border;
+}
+
+@utility line-t/half {
+  @apply relative before:absolute before:top-0 before:right-0 before:h-px before:w-screen before:bg-border;
+}
+
+@utility line-b/half {
+  @apply relative after:absolute after:right-0 after:bottom-0 after:h-px after:w-screen after:bg-border;
+}
+
+@utility line-y/half {
+  @apply relative;
+  @apply before:absolute before:top-0 before:right-0 before:h-px before:w-screen before:bg-border;
+  @apply after:absolute after:right-0 after:bottom-0 after:h-px after:w-screen after:bg-border;
 }

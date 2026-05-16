@@ -14,7 +14,7 @@ const switchVariants = cva(
     "transition-colors",
     // State-specific classes
     "data-unchecked:bg-border",
-    "hover:not-data-disabled:inset-ring-input hover:not-data-disabled:data-unchecked:bg-accent",
+    "hover:not-data-disabled:inset-ring-input hover:not-data-disabled:data-unchecked:bg-input",
     "data-unchecked:active:not-data-disabled:bg-input",
     "data-checked:bg-(--hue-500)",
     "data-checked:justify-end data-checked:active:not-data-disabled:bg-(--hue-600)",

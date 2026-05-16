@@ -58,13 +58,7 @@ export default function DevicePreviewPage() {
           >
             <Device.Phone>
               <div className="relative size-full min-h-[200px]">
-                <Image
-                  src="/assets/forge/forge-before.png"
-                  alt=""
-                  fill
-                  className="object-cover object-top"
-                  sizes="400px"
-                />
+                <Image src="/assets/forge/forge-before.png" alt="" fill className="object-cover object-top" sizes="400px" />
               </div>
             </Device.Phone>
           </Scenario>
@@ -137,10 +131,7 @@ export default function DevicePreviewPage() {
           </Scenario>
 
           {/* 8 */}
-          <Scenario
-            title="Desktop · wallpaper only"
-            description="Gradient wallpaper; no extra chrome beyond menu + notch."
-          >
+          <Scenario title="Desktop · wallpaper only" description="Gradient wallpaper; no extra chrome beyond menu + notch.">
             <DesktopWallpaper />
           </Scenario>
 
@@ -162,20 +153,9 @@ export default function DevicePreviewPage() {
           <Scenario title="Desktop · nested Browser" description="Browser chrome inside macOS desktop frame.">
             <Device.Desktop appName="Finder" gutter toolbar island className="min-h-[320px]">
               <div className="relative flex min-h-0 flex-1 flex-col px-3 pt-1 pb-3">
-                <Device.Browser
-                  toolbar
-                  address="bob.fyi"
-                  gutter
-                  className="flex min-h-0 flex-1 flex-col overflow-hidden shadow-lg"
-                >
+                <Device.Browser toolbar address="bob.fyi" gutter className="flex min-h-0 flex-1 flex-col overflow-hidden shadow-lg">
                   <div className="relative min-h-[220px] flex-1 overflow-hidden rounded-[inherit] bg-background">
-                    <Image
-                      src="/assets/forge/course-edit-after.png"
-                      alt=""
-                      fill
-                      className="object-cover object-top"
-                      sizes="900px"
-                    />
+                    <Image src="/assets/forge/course-edit-after.png" alt="" fill className="object-cover object-top" sizes="900px" />
                   </div>
                 </Device.Browser>
               </div>
@@ -185,25 +165,14 @@ export default function DevicePreviewPage() {
           {/* 11 */}
           <Scenario title="Desktop · video" description="Poster + controls inside desktop content area.">
             <Device.Desktop appName="QuickTime Player" gutter>
-              <video
-                className="absolute inset-0 size-full object-cover"
-                controls
-                playsInline
-                poster="/assets/forge/forge-before.png"
-              >
-                <source
-                  src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-                  type="video/mp4"
-                />
+              <video className="absolute inset-0 size-full object-cover" controls playsInline poster="/assets/forge/forge-before.png">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4" type="video/mp4" />
               </video>
             </Device.Desktop>
           </Scenario>
 
           {/* 12 */}
-          <Scenario
-            title="Minimal chrome · Phone / Browser / Desktop"
-            description="No island, no toolbar — frames only."
-          >
+          <Scenario title="Minimal chrome · Phone / Browser / Desktop" description="No island, no toolbar — frames only.">
             <div className="grid gap-8 md:grid-cols-3">
               <Device.Phone island={false} toolbar={false}>
                 <div className="flex items-center justify-center p-8 text-xs text-muted-foreground">Screen</div>
@@ -212,9 +181,7 @@ export default function DevicePreviewPage() {
                 <p className="text-xs text-muted-foreground">{LOREM}</p>
               </Device.Browser>
               <Device.Desktop island={false} toolbar={false}>
-                <div className="flex items-center justify-center bg-muted/30 p-8 text-xs text-muted-foreground">
-                  Wallpaper
-                </div>
+                <div className="flex items-center justify-center bg-muted/30 p-8 text-xs text-muted-foreground">Wallpaper</div>
               </Device.Desktop>
             </div>
           </Scenario>
@@ -228,9 +195,7 @@ export default function DevicePreviewPage() {
                     <div className="absolute inset-0 bg-linear-to-br from-neutral-900 via-neutral-800 to-neutral-950" />
                     <Device.Shine variant={variant} />
                   </Device.Desktop>
-                  <figcaption className="text-center font-pixel text-[10px] text-muted-foreground">
-                    {variant}
-                  </figcaption>
+                  <figcaption className="text-center font-pixel text-[10px] text-muted-foreground">{variant}</figcaption>
                 </figure>
               ))}
             </div>
@@ -254,15 +219,7 @@ function DesktopWallpaper() {
   );
 }
 
-function Scenario({
-  title,
-  description,
-  children,
-}: {
-  title: string;
-  description?: string;
-  children: React.ReactNode;
-}) {
+function Scenario({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
   return (
     <section className="scroll-mt-10 space-y-3">
       <div>

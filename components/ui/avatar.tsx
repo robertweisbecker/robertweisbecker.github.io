@@ -7,13 +7,13 @@ import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
 const avatarVariants = cva(
-  "group/avatar relative flex shrink-0 rounded-(--avatar-radius) bg-card text-card-foreground select-none size-(--avatar-size) [--avatar-radius:var(--radius-md)] [--avatar-size:--spacing(6)]",
+  "group/avatar relative flex shrink-0 rounded-(--avatar-radius) bg-card text-card-foreground select-none size-(--avatar-size) [--avatar-radius:var(--radius-sm)] [--avatar-size:--spacing(6)]",
   {
     variants: {
       size: {
         default: "-my-1 text-[13px]",
-        sm: "-my-0.5 [--avatar-radius:var(--radius-sm)] [--avatar-size:--spacing(4)] text-[11px]",
-        lg: "-my-2 [--avatar-radius:var(--radius-lg)] [--avatar-size:--spacing(8)] text-[15px]",
+        sm: "-my-0.5 [--avatar-radius:var(--radius-xs)] [--avatar-size:--spacing(4)] text-[11px]",
+        lg: "-my-2 [--avatar-radius:var(--radius-md)] [--avatar-size:--spacing(8)] text-[15px]",
       },
       defaultVariants: {
         size: "default",

@@ -140,9 +140,7 @@ function AnnotationPopoverContent({
         </PopoverTitle>
         <PopoverClose className="absolute top-0 right-0" onClick={onClose} />
       </PopoverHeader>
-      <Popover.Description className="text-xs leading-relaxed text-popover-foreground/70">
-        {annotation.body}
-      </Popover.Description>
+      <Popover.Description className="text-xs leading-relaxed text-popover-foreground/70">{annotation.body}</Popover.Description>
 
       <PopoverFooter className="flex items-center justify-between">
         <span className="font-pixel text-[11px] tabular-nums">
@@ -193,8 +191,7 @@ function Variation1() {
     <div>
       <h2 className="mb-1 text-xl font-semibold">Variation 1 — Dot annotations</h2>
       <p className="mb-6 text-sm text-muted-foreground">
-        Numbered dots on the image. Click any to open the shared popover — it smoothly re-anchors and cross-fades
-        content as you navigate.
+        Numbered dots on the image. Click any to open the shared popover — it smoothly re-anchors and cross-fades content as you navigate.
       </p>
 
       <div className="flex flex-col gap-6">
@@ -391,8 +388,7 @@ function Variation2() {
     <div>
       <h2 className="mb-1 text-xl font-semibold">Variation 2 — Sidebar list</h2>
       <p className="mb-6 text-sm text-muted-foreground">
-        Annotation labels in a fixed sidebar. Clicking one highlights the target on the image with an outline and a
-        dashed SVG line.
+        Annotation labels in a fixed sidebar. Clicking one highlights the target on the image with an outline and a dashed SVG line.
       </p>
 
       {/* Relative container so SVG overlay can fill it */}

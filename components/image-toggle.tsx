@@ -20,15 +20,7 @@ interface ImageToggleProps {
   imageProps?: Omit<ImageProps, "src">;
 }
 
-export function ImageToggle({
-  before,
-  after,
-  tab1 = "Before",
-  tab2 = "After",
-  mode = "tabs",
-  description,
-  imageProps,
-}: ImageToggleProps) {
+export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mode = "tabs", description, imageProps }: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
   const beforeUrl = imageSrc(before);
@@ -38,12 +30,7 @@ export function ImageToggle({
     return (
       <figure className="not-prose flex flex-col justify-center">
         <ResizablePanelGroup className="squircle relative aspect-video rounded-xl" orientation="horizontal">
-          <ResizablePanel
-            defaultSize="50%"
-            minSize="0%"
-            maxSize="100%"
-            className="squircle group relative rounded-s-xl rounded-e-xs"
-          >
+          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="squircle group relative rounded-s-xl rounded-e-xs">
             <img src={beforeUrl} className="h-full w-auto object-cover object-left" alt="" />
             <Badge
               variant="outline"
@@ -53,12 +40,7 @@ export function ImageToggle({
             </Badge>
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel
-            defaultSize="50%"
-            minSize="0%"
-            maxSize="100%"
-            className="squircle group relative rounded-s-xs rounded-e-xl"
-          >
+          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="squircle group relative rounded-s-xs rounded-e-xl">
             <img src={afterUrl} className="h-full w-auto object-cover object-right" alt="" />
             <Badge
               variant="outline"

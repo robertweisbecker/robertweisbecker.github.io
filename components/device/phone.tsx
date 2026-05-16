@@ -42,9 +42,7 @@ export function Phone({
         <div className="relative w-full bg-black p-[2.5%] shadow-lg outline-2 outline-neutral-600/40 [&]:rounded-[15cqw]">
           <div className="relative aspect-9/19.5 overflow-hidden [&]:rounded-[calc(15cqw-2.5cqw)]">
             <div className="border/50 absolute inset-0 rounded-[inherit] border bg-sidebar" />
-            <div className={cn("absolute inset-0", hasTopGutter && "pt-[10%]", hasBottomGutter && "pb-[15%]")}>
-              {children}
-            </div>
+            <div className={cn("absolute inset-0", hasTopGutter && "pt-[10%]", hasBottomGutter && "pb-[15%]")}>{children}</div>
             <div className="via-smooth pointer-events-none absolute inset-x-0 bottom-0 h-[20%] w-full bg-linear-to-b from-transparent via-black/10 via-30% to-black/25 bg-blend-multiply" />
           </div>
 
@@ -54,12 +52,7 @@ export function Phone({
                 <Time size="phone" className="w-[25%] text-center text-white" />
                 <div className="flex items-center gap-1">
                   <SignalDisplay size="phone" />
-                  <BatteryDisplay
-                    size="phone"
-                    level={batteryLevel}
-                    charging={Boolean(charging)}
-                    loading={batteryLoading}
-                  />
+                  <BatteryDisplay size="phone" level={batteryLevel} charging={Boolean(charging)} loading={batteryLoading} />
                 </div>
               </div>
               <div

@@ -5,11 +5,7 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import * as React from "react";
 
-function ColorCode({
-  value,
-  className,
-  ...props
-}: Omit<React.ComponentProps<"button">, "children"> & { value: string }) {
+function ColorCode({ value, className, ...props }: Omit<React.ComponentProps<"button">, "children"> & { value: string }) {
   const { copyToClipboard, isCopied } = useCopyToClipboard({ timeout: 1000 });
 
   return (

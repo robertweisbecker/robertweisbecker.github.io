@@ -4,12 +4,10 @@ import { useKeyPress } from "@/hooks/use-key-press";
 import { posts, postIcons } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconComponents, IconFile, IconFlask, IconHome, IconNews, IconSearch, IconUser } from "@tabler/icons-react";
+import { IconComponents, IconFile, IconFlask, IconHome, IconNews, IconPalette, IconUser } from "@tabler/icons-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { matchSorter } from "match-sorter";
-import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
 import {
   Command,
   CommandCollection,
@@ -27,7 +25,6 @@ import {
   CommandShortcut,
 } from "./ui/command";
 import { Kbd } from "./ui/kbd";
-import { DialogClose } from "./ui/dialog";
 import { Dialog } from "@base-ui/react/dialog";
 import { Badge } from "./ui/badge";
 import { TreeIconFile, Favicon, PixelNewsIcon, PixelFinderIcon, FolderIcon, CursorIcon } from "./icons";
@@ -42,6 +39,7 @@ type SearchItem = {
   path: string;
   date?: string;
   icon?: ReactNode;
+  mediaVariant?: "icon" | "image";
   category?: string;
   group?: string;
 };
@@ -83,30 +81,18 @@ function fuzzyFilter(item: SearchItem, query: string): boolean {
 }
 
 function itemIcon(Icon: React.ComponentType<{ className?: string }>): ReactNode {
-  return (
-    <Avatar size="sm" className="object-contain">
-      <AvatarFallback className="opacity-50">
-        <Icon className="size-4 text-muted-foreground" />
-      </AvatarFallback>
-    </Avatar>
-  );
+  return <Icon className="size-4 text-muted-foreground" />;
 }
 
-function itemAvatar(src: string, label: string): ReactNode {
-  return (
-    <Avatar size="sm">
-      <AvatarImage src={src} alt="" className="object-contain" />
-      <AvatarFallback>
-        <TreeIconFile className="size-4 text-muted-foreground" />
-      </AvatarFallback>
-    </Avatar>
-  );
+function itemImage(src: string): ReactNode {
+  return <img src={src} alt="" />;
 }
 
 const staticPages: SearchItem[] = [
   { value: "home", label: "Home", path: "/", icon: itemIcon(IconHome), group: "Pages" },
   { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
   { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(IconNews), group: "Pages" },
+  { value: "art", label: "Art", path: "/art", icon: itemIcon(IconPalette), group: "Pages" },
 ];
 
 const privatePages: SearchItem[] = [
@@ -182,6 +168,14 @@ const privatePages: SearchItem[] = [
     category: "Testing",
     group: "Private",
   },
+  {
+    value: "cambio-examples",
+    label: "Cambio examples",
+    path: "/private/cambio",
+    icon: itemIcon(IconFlask),
+    category: "Testing",
+    group: "Private",
+  },
 ];
 
 const isDev = process.env.NODE_ENV === "development";
@@ -205,7 +199,8 @@ export function SiteSearch({ className }: { className?: string }) {
             label: p.nickname,
             path: p.path,
             date: p.date,
-            icon: p.icon ? itemAvatar(p.icon, p.nickname) : undefined,
+            icon: p.icon ? itemImage(p.icon) : undefined,
+            mediaVariant: p.icon ? "image" : "icon",
             category: p.category,
             group: "Projects",
           })),
@@ -258,13 +253,14 @@ export function SiteSearch({ className }: { className?: string }) {
       >
         <CommandDialogTrigger
           className={cn(
-            "ease flex h-button-sm items-center justify-start gap-2 rounded-md bg-muted ps-2 pe-3 text-sm text-muted-foreground inset-shadow-border duration-100 hover:bg-accent hover:text-accent-foreground",
+            "ease squircle flex h-button-sm items-center justify-start gap-2 rounded-md bg-muted ps-2 pe-3 text-sm text-muted-foreground inset-shadow-border duration-100 hover:bg-accent hover:text-accent-foreground",
             className
           )}
           onClick={() => setOpen(true)}
         >
-          <IconSearch data-icon="inline-start" className="size-3.5 stroke-1 text-muted-foreground" />
-          <span className="text-xs text-muted-foreground">Search</span>
+          <PixelFinderIcon className="size-[11px]" data-icon={"inline-start"} />
+          {/* <IconSearch data-icon="inline-start" className="size-3.5 stroke-1 text-muted-foreground" /> */}
+          <span className="text-xs text-muted-foreground">Find something…</span>
           <Kbd className="-me-1.5 ml-auto hidden md:block" variant="elevated">
             ⌘ /
           </Kbd>
@@ -307,7 +303,7 @@ export function SiteSearch({ className }: { className?: string }) {
                           className={cn(isCurrent && "text-foreground")}
                         >
                           <Item size="sm" className="p-0">
-                            <ItemMedia variant="icon" className="relative object-contain">
+                            <ItemMedia variant={"icon"} className="squircle relative size-5 rounded-md bg-card shadow-border-xs">
                               {item.icon ? item.icon : <TreeIconFile className="size-4 opacity-64" />}
                               {isCurrent && (
                                 <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />

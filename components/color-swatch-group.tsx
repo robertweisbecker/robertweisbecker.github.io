@@ -135,13 +135,7 @@ export function ColorSwatchGroup({
                     <TooltipTrigger
                       tooltip="Add…"
                       render={
-                        <Button
-                          variant="elevated"
-                          size="icon-sm"
-                          aria-label="Add color option"
-                          rounded
-                          className="my-1"
-                        >
+                        <Button variant="elevated" size="icon-sm" aria-label="Add color option" rounded className="my-1">
                           <IconPlus />
                         </Button>
                       }
@@ -150,9 +144,7 @@ export function ColorSwatchGroup({
                 />
                 <PopoverContent initialFocus={false} className="container w-96">
                   <PopoverHeader>
-                    <PopoverTitle className="text-xs text-muted-foreground">
-                      Enter a new color in CSS format
-                    </PopoverTitle>
+                    <PopoverTitle className="text-xs text-muted-foreground">Enter a new color in CSS format</PopoverTitle>
                   </PopoverHeader>
                   <Form
                     onSubmit={(event) => {

@@ -33,8 +33,7 @@ function collectOgPreviewItems(): { key: string; src: string; label: string }[] 
             out.push({ key: href, src: href, label: href });
           }
         } else {
-          const href =
-            segments.length === 0 ? "/opengraph-image" : `/${segments.join("/")}/opengraph-image`;
+          const href = segments.length === 0 ? "/opengraph-image" : `/${segments.join("/")}/opengraph-image`;
           out.push({ key: href, src: href, label: href });
         }
       }
@@ -53,15 +52,13 @@ export default function OgPreviewPage() {
       <Heading level={1} className="mb-2">
         Open Graph preview
       </Heading>
-      <p className="text-muted-foreground mb-2 max-w-2xl text-sm leading-relaxed">
-        Each route below is served by an{" "}
-        <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">opengraph-image.tsx</code>{" "}
+      <p className="mb-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        Each route below is served by an <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">opengraph-image.tsx</code>{" "}
         file. In dev or production you can also paste the URL in a new tab to inspect only the PNG.
       </p>
       <ul className="mb-10 list-disc space-y-1 pl-5 text-sm text-muted-foreground">
         <li>
-          <strong className="font-medium text-foreground">Home:</strong>{" "}
-          <code className="font-mono text-[0.85em]">/opengraph-image</code>
+          <strong className="font-medium text-foreground">Home:</strong> <code className="font-mono text-[0.85em]">/opengraph-image</code>
         </li>
         <li>
           <strong className="font-medium text-foreground">Post:</strong>{" "}
@@ -76,16 +73,9 @@ export default function OgPreviewPage() {
       <div className="grid gap-12 lg:grid-cols-2">
         {items.map((item) => (
           <figure key={item.key} className="grid gap-3">
-            <figcaption className="break-all font-mono text-xs text-muted-foreground">{item.label}</figcaption>
+            <figcaption className="font-mono text-xs break-all text-muted-foreground">{item.label}</figcaption>
             <div className="overflow-hidden rounded-md border border-border bg-muted/30">
-              <Image
-                src={item.src}
-                alt=""
-                width={1200}
-                height={630}
-                className="h-auto w-full"
-                unoptimized
-              />
+              <Image src={item.src} alt="" width={1200} height={630} className="h-auto w-full" unoptimized />
             </div>
           </figure>
         ))}

@@ -71,11 +71,7 @@ const fieldVariants = cva("data-[invalid=true]:text-destructive gap-1 group/fiel
   },
 });
 
-function Field({
-  className,
-  orientation = "vertical",
-  ...props
-}: FieldPrimitive.Root.Props & VariantProps<typeof fieldVariants>) {
+function Field({ className, orientation = "vertical", ...props }: FieldPrimitive.Root.Props & VariantProps<typeof fieldVariants>) {
   return (
     <FieldPrimitive.Root
       role="group"
@@ -89,11 +85,7 @@ function Field({
 
 function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <div
-      data-slot="field-content"
-      className={cn("group/field-content flex flex-1 flex-col gap-0.5 leading-snug", className)}
-      {...props}
-    />
+    <div data-slot="field-content" className={cn("group/field-content flex flex-1 flex-col gap-0.5 leading-snug", className)} {...props} />
   );
 }
 
@@ -168,10 +160,7 @@ function FieldSeparator({
     >
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
-        <span
-          className="relative mx-auto block w-fit bg-background px-2 text-muted-foreground"
-          data-slot="field-separator-content"
-        >
+        <span className="relative mx-auto block w-fit bg-background px-2 text-muted-foreground" data-slot="field-separator-content">
           {children}
         </span>
       )}
@@ -214,12 +203,7 @@ function FieldError({
   }
 
   return (
-    <div
-      role="alert"
-      data-slot="field-error"
-      className={cn("text-sm font-normal text-destructive", className)}
-      {...props}
-    >
+    <div role="alert" data-slot="field-error" className={cn("text-sm font-normal text-destructive", className)} {...props}>
       {content}
     </div>
   );

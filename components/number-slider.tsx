@@ -63,8 +63,7 @@ export function NumberSlider({
   unit,
   "aria-label": ariaLabel,
 }: NumberSliderProps) {
-  const numberFieldFormat =
-    format === "percent" ? PERCENT_FORMAT : typeof format === "object" ? format : DEFAULT_FORMAT;
+  const numberFieldFormat = format === "percent" ? PERCENT_FORMAT : typeof format === "object" ? format : DEFAULT_FORMAT;
 
   const handleSliderChange = React.useCallback(
     (next: number | readonly number[]) => {

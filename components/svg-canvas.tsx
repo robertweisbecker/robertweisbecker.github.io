@@ -393,11 +393,7 @@ export function DraggablePoint({
         stroke="none"
         className={cn(
           "outline-none",
-          disabled
-            ? "pointer-events-none cursor-not-allowed opacity-50"
-            : isDragging
-              ? "cursor-grabbing"
-              : "cursor-grab",
+          disabled ? "pointer-events-none cursor-not-allowed opacity-50" : isDragging ? "cursor-grabbing" : "cursor-grab",
           className
         )}
         style={{ touchAction: "none" }}

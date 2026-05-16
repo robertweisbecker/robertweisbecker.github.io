@@ -71,14 +71,10 @@ export default function TestingExplorationsIndex() {
           / explorations
         </p>
         <h1 className="mb-3 text-2xl font-semibold tracking-tight">Project page directions</h1>
-        <p className="mb-12 text-muted-foreground">
-          Five explorations of a photo-first project page layout. Pick one to develop further.
-        </p>
+        <p className="mb-12 text-muted-foreground">Five explorations of a photo-first project page layout. Pick one to develop further.</p>
 
         <div className="mb-10 flex flex-col gap-4">
-          <p className="font-pixel text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
-            Component previews
-          </p>
+          <p className="font-pixel text-[11px] font-medium tracking-wide text-muted-foreground uppercase">Component previews</p>
           {previews.map((dir) => (
             <Link
               key={dir.href}

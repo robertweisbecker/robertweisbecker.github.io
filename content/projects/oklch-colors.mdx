@@ -10,6 +10,7 @@ import oklchGradient from "@/public/assets/oklch/oklch-gradient.png";
 import oklchLuminance from "@/public/assets/oklch/luminance.png";
 import oklchLuminanceBw from "@/public/assets/oklch/luminance-bw.png";
 import oklchWheelHue from "@/public/assets/oklch/wheel-hue.png";
+import oklchDataviz from "@/public/assets/oklch/dataviz.png";
 import { TreeIconRichText } from "@/components/icons";
 import { Badge } from "@/components/ui/badge";
 
@@ -62,12 +63,14 @@ For these color ramps, the `500` step has minimum 5:1 contrast vs. white, a targ
 
 The diagram below shows the hue range for each ramp mapped to the color wheel. Keen eyes may notice that a good number either overlap or abut their neighbors.
 
-These "sibling" colors aren't meant to be used together in a single theme. The point from a systems perspective is to provide designers with alternate options for common canonical status colors (red, green, blue, yellow, etc), so they can find suitable pairings that are visually distinguishable from their primary color.
-
 <Image
   src={oklchWheelHue}
   alt="Diagram of color wheel with hue ranges for each ramp: red 350-7°, orange 16-33°, yellow 31-53°, gold 50-80°, lime 94-119°, green 136-151°, jade 154-180°, teal 171-193°, cyan 185-205°, blue 200-220°, indigo 224-246°, purple 247-264°, magenta 284-322°, pink 312-342°."
 />
+
+These "sibling" colors aren't meant to be used together; they're chosen as alternate options for common canonical status colors (red, green, blue, yellow, etc). This way you can find suitable pairings if your primary color uses a hue that's typically used for statuses.
+
+And that leads us to the next group…which also offers variants. Nice segue!
 
 ### Neutral Colors
 
@@ -92,7 +95,7 @@ A key feature of the neutral ramps is their more dramatic luminance curve relati
 
 <ColorDiagrams type="luminance" caption="Average luminance by step" />
 
-Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maaaaaybe spot this in the chart above. This also lets us keep the scale balanced and nudge the opposite end down in luminance for a more nuanced dark mode.
+Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maaaaaybe spot this in the chart above. This also helps balance the scale, nudging the darks lowers for a more nuanced dark mode.
 
 ### Alpha Colors
 
@@ -148,12 +151,12 @@ Themes include slots for brand, neutral, info, success, warning, error, and high
 ```typescript
 const theme = {
   colors: {
-    brand: ...colors.indigo,
-    neutral: ...colors.gray,
-    info: ...colors.cyan,
-    success: ...colors.lime,
-    warning: ...colors.yellow,
-    error: ...colors.red,
+    brand:     ...colors.indigo,
+    neutral:   ...colors.gray,
+    info:      ...colors.cyan,
+    success:   ...colors.lime,
+    warning:   ...colors.yellow,
+    error:     ...colors.red,
     highlight: ...colors.purple,
   },
   // ...
@@ -199,6 +202,8 @@ Most components also support raw `colorScheme` props to use a specific color fro
 
 The final piece of the puzzle is a dataviz palette designed with contrast and visual differences in mind. The range of colors now available allowed us to replace one-off or hardcoded colors with intentional choices.
 
+<Image src={oklchDataviz} alt="Dataviz palette" />
+
 Here's a little tool I made to test and ship our dataviz palettes:
 
 <Demo
@@ -222,9 +227,9 @@ Here's a little tool I made to test and ship our dataviz palettes:
 
 For a simulated demo of the color system in action, check out the [Theming Demo](/posts/theming), or fiddle around with the theme settings in the header. I've used the same color palettes on this site, and though the components are different, it might give you a sense of how the colors work together.
 
-## Further reading
+## Resources
 
-Some resources I found useful when building out the color system:
+If this kind of thing interests you, here are some resources I found useful when building out the color system:
 
 Tools
 

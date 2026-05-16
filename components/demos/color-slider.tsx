@@ -73,9 +73,7 @@ function HueSlider({
           </SliderPrimitive.Thumb>
         ))}
       </SliderPrimitive.Control>
-      {showValue && props.orientation === "horizontal" && (
-        <SliderPrimitive.Value className="text-xs text-muted-foreground tabular-nums" />
-      )}
+      {showValue && props.orientation === "horizontal" && <SliderPrimitive.Value className="text-xs text-muted-foreground tabular-nums" />}
     </SliderPrimitive.Root>
   );
 }

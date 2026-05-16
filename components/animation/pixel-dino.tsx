@@ -68,14 +68,7 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
             />
           </line>
 
-          <line
-            y1="33.5"
-            x2="200"
-            y2="33.5"
-            stroke="var(--muted-foreground)"
-            strokeDashoffset="1"
-            strokeDasharray="2 2"
-          >
+          <line y1="33.5" x2="200" y2="33.5" stroke="var(--muted-foreground)" strokeDashoffset="1" strokeDasharray="2 2">
             <animate
               attributeName="stroke-dashoffset"
               values="2;205"

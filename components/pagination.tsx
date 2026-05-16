@@ -28,10 +28,7 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
   }
 
   return (
-    <nav
-      aria-label="pagination"
-      className="mx-auto mt-12 grid w-full max-w-5xl grid-cols-[1fr_1fr] border-t border-dashed pt-6"
-    >
+    <nav aria-label="pagination" className="mx-auto mt-12 grid w-full max-w-5xl grid-cols-[1fr_1fr] border-t border-dashed pt-6">
       {previous ? (
         <Link
           href={previous.href}
@@ -46,10 +43,7 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
           </span>
           <span className="col-start-2 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Previous</span>
 
-          <span
-            className="col-start-2 truncate font-heading text-lg"
-            style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}
-          >
+          <span className="col-start-2 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
             {previous.title}
           </span>
         </Link>
@@ -64,10 +58,7 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
           className="group grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-3 text-end"
         >
           <span className="col-start-1 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Next</span>
-          <span
-            className="col-start-1 truncate font-heading text-lg"
-            style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}
-          >
+          <span className="col-start-1 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
             {next.title}
           </span>
           <span

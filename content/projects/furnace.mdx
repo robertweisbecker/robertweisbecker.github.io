@@ -23,7 +23,6 @@ import furnaceColorRolesFlow from "@/public/assets/furnace/color-roles-flow.png"
 import furnaceGrid from "@/public/assets/furnace/grid.png";
 import furnaceGridTable from "@/public/assets/furnace/grid-table.png";
 import furnaceType from "@/public/assets/furnace/type.png";
-import furnaceElevation from "@/public/assets/furnace/elevation.png";
 import furnaceBorderWidth2 from "@/public/assets/furnace/border-width-2.png";
 import furnaceBorderRadius2 from "@/public/assets/furnace/border-radius-2.png";
 import furnaceElementsHome from "@/public/assets/furnace/elements-home.png";
@@ -107,10 +106,7 @@ Palette colors are almost never used directly inside components. Instead, they'r
 For each `$bg-[role]` in the SCSS, we have a corresponding `$text-on-[role]` mate. This is common practice now with design tokens, but we had to learn this the hard way.
 
 <ImageModal src={furnaceColorRoles} caption="Available color role variables in a theme." />
-<ImageModal
-  src={furnaceColorRolesFlow}
-  caption="Relationship between color palettes, color roles, and components."
-/>
+<ImageModal src={furnaceColorRolesFlow} caption="Relationship between color palettes, color roles, and components." />
 
 **For example:**
 
@@ -138,11 +134,7 @@ To replace them, we created two CSS Grid layouts: a classic Bootstrap-style 12-c
     portrait={true}
     caption="Grid examples at the tablet breakpoint. Note that the Dynamic Grid maxes out at 8 columns, while the Static Grid displays 12."
   />
-  <ImageModal
-    src={furnaceGridTable}
-    portrait={true}
-    caption="Documentation comparing responsive class behaviors within the two grids."
-  />
+  <ImageModal src={furnaceGridTable} portrait={true} caption="Documentation comparing responsive class behaviors within the two grids." />
 </LayoutGrid>
 
 <Tabs>
@@ -214,10 +206,7 @@ Responsive typography was a priority for any new type system we implemented.
 
 This ended up only applying to headings, though. We found that since course pages aren't particularly dense, there was really no need to adjust the prose sizing. Might as well keep things legible.
 
-<ImageModal
-  src={furnaceType}
-  caption="Default type scale with responsive headings. The Core theme uses Lato, Everfi's brand typeface."
-/>
+<ImageModal src={furnaceType} caption="Default type scale with responsive headings. The Core theme uses Lato, Everfi's brand typeface." />
 
 Resize the pen below to see how responsive type and spacing work together:
 
@@ -240,40 +229,19 @@ Themes can customize these elevations, such as using `none` for a flat theme or 
 
 <div className="grid h-20 grid-cols-5 gap-2">
   <div className="grid-stack rounded-xs bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.16),0_1px_1px_rgba(0,0,0,0.12)]">1</div>
-  <div className="grid-stack rounded-sm bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.16),0_4px_8px_-2px_rgba(0,0,0,0.16)]">
-    2
-  </div>
-  <div className="grid-stack rounded-md bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.24),0_8px_16px_-4px_rgba(0,0,0,0.24)]">
-    3
-  </div>
-  <div className="grid-stack rounded-lg bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.24),0_12px_24px_-6px_rgba(0,0,0,0.24)]">
-    4
-  </div>
-  <div className="grid-stack rounded-xl bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.32),0_20px_32px_-8px_rgba(0,0,0,0.24)]">
-    5
-  </div>
+  <div className="grid-stack rounded-sm bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.16),0_4px_8px_-2px_rgba(0,0,0,0.16)]">2</div>
+  <div className="grid-stack rounded-md bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.24),0_8px_16px_-4px_rgba(0,0,0,0.24)]">3</div>
+  <div className="grid-stack rounded-lg bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.24),0_12px_24px_-6px_rgba(0,0,0,0.24)]">4</div>
+  <div className="grid-stack rounded-xl bg-card shadow-[0_0_1px_0_rgba(0,0,0,0.32),0_20px_32px_-8px_rgba(0,0,0,0.24)]">5</div>
 </div>
-
-<ImageModal
-  className="max-w-lg"
-  src={furnaceElevation}
-  caption="Shadow elevations and z-index guidance"
-  portrait={true}
-/>
 
 ### Borders
 
 Primitive variables also included `border-width` and `border-radius` values. Border colors were applied using color palette variables and generated classes.
 
-<Image
-  src={furnaceBorderWidth2}
-  caption="We found that only three border-width values were sufficient."
-/>
+<Image src={furnaceBorderWidth2} caption="We found that only three border-width values were sufficient." />
 
-<Image
-  src={furnaceBorderRadius2}
-  caption="Radii variables were assigned according to a component's relative size."
-/>
+<Image src={furnaceBorderRadius2} caption="Radii variables were assigned according to a component's relative size." />
 
 ## Impact
 

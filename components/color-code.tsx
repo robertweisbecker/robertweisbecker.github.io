@@ -3,11 +3,7 @@
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/utils";
 
-function ColorCode({
-  value,
-  className,
-  ...props
-}: Omit<React.ComponentProps<"button">, "children"> & { value: string }) {
+function ColorCode({ value, className, ...props }: Omit<React.ComponentProps<"button">, "children"> & { value: string }) {
   const { copyToClipboard, isCopied } = useCopyToClipboard({ timeout: 1500 });
 
   return (
@@ -23,12 +19,7 @@ function ColorCode({
       )}
       {...props}
     >
-      <span
-        className={cn(
-          "transition-[opacity,filter] duration-200 ease-in-out",
-          isCopied ? "opacity-0 blur-xs" : "blur-0 opacity-100"
-        )}
-      >
+      <span className={cn("transition-[opacity,filter] duration-200 ease-in-out", isCopied ? "opacity-0 blur-xs" : "blur-0 opacity-100")}>
         {value}
       </span>
       <span

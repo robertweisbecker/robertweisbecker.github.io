@@ -11,14 +11,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogBody,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -167,12 +160,7 @@ function SectionDialogContent({ section }: { section: Section }) {
         {section.before && section.after && (
           <>
             <Separator className="my-1" />
-            <BeforeAfter
-              before={section.before}
-              after={section.after}
-              beforeLabel={section.beforeLabel}
-              afterLabel={section.afterLabel}
-            />
+            <BeforeAfter before={section.before} after={section.after} beforeLabel={section.beforeLabel} afterLabel={section.afterLabel} />
           </>
         )}
 
@@ -182,11 +170,7 @@ function SectionDialogContent({ section }: { section: Section }) {
 
             {section.images.map((img) => (
               <figure key={img.src} className="flex flex-col gap-1">
-                <img
-                  src={img.src}
-                  alt={img.caption ?? ""}
-                  className="w-full rounded-xl border border-border object-cover"
-                />
+                <img src={img.src} alt={img.caption ?? ""} className="w-full rounded-xl border border-border object-cover" />
                 {img.caption && <figcaption className="text-xs text-muted-foreground">{img.caption}</figcaption>}
               </figure>
             ))}
@@ -215,15 +199,7 @@ function DiagramLabel({ tag, headline }: { tag: string; headline: string }) {
 }
 
 /* ─── Mosaic tile ───────────────────────────────────────── */
-function MosaicTile({
-  section,
-  onClick,
-  className = "",
-}: {
-  section: Section;
-  onClick: () => void;
-  className?: string;
-}) {
+function MosaicTile({ section, onClick, className = "" }: { section: Section; onClick: () => void; className?: string }) {
   return (
     <div className={`flex flex-col ${className}`}>
       <button

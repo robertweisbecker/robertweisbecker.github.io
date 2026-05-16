@@ -1,23 +1,8 @@
 "use client";
 
-import {
-  Carousel,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  CarouselToolbar,
-  CarouselViewport,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselItem, CarouselNext, CarouselPrevious, CarouselToolbar, CarouselViewport } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
-import {
-  Item,
-  ItemActions,
-  ItemContent,
-  ItemDescription,
-  ItemHeader,
-  ItemMedia,
-  ItemTitle,
-} from "@/components/ui/item";
+import { Item, ItemActions, ItemContent, ItemDescription, ItemHeader, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   TreeIconClaude,
@@ -31,15 +16,7 @@ import {
 import { IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronUp } from "@tabler/icons-react";
 import * as React from "react";
 
-const TREE_ICONS = [
-  TreeIconImage,
-  TreeIconFile,
-  TreeIconReact,
-  TreeIconClaude,
-  TreeIconTypescript,
-  TreeIconTailwind,
-  TreeIconCss,
-] as const;
+const TREE_ICONS = [TreeIconImage, TreeIconFile, TreeIconReact, TreeIconClaude, TreeIconTypescript, TreeIconTailwind, TreeIconCss] as const;
 
 function CarouselTestSlide({ slideIndex = 0 }: { slideIndex?: number }) {
   const Icon = TREE_ICONS[slideIndex % TREE_ICONS.length]!;
@@ -75,15 +52,7 @@ function SlideItems({ carouselId, count = 4 }: { carouselId: string; count?: num
   );
 }
 
-function FakeScrollCarousel({
-  id,
-  axis,
-  snap = false,
-}: {
-  id: string;
-  axis: "horizontal" | "vertical";
-  snap?: boolean;
-}) {
+function FakeScrollCarousel({ id, axis, snap = false }: { id: string; axis: "horizontal" | "vertical"; snap?: boolean }) {
   const shellRef = React.useRef<HTMLDivElement>(null);
   const stride = axis === "horizontal" ? 224 : 164;
 
@@ -101,31 +70,15 @@ function FakeScrollCarousel({
   );
 
   const viewportSnapClass =
-    snap && axis === "horizontal"
-      ? "snap-x snap-mandatory"
-      : snap && axis === "vertical"
-        ? "snap-y snap-mandatory"
-        : undefined;
+    snap && axis === "horizontal" ? "snap-x snap-mandatory" : snap && axis === "vertical" ? "snap-y snap-mandatory" : undefined;
 
   return (
     <div id={id} ref={shellRef}>
       <div className="mb-2 flex gap-2">
-        <Button
-          type="button"
-          size="icon-sm"
-          variant="secondary"
-          onClick={() => scrollByDir(-1)}
-          aria-label="Scroll back"
-        >
+        <Button type="button" size="icon-sm" variant="secondary" onClick={() => scrollByDir(-1)} aria-label="Scroll back">
           {axis === "horizontal" ? <IconChevronLeft /> : <IconChevronUp />}
         </Button>
-        <Button
-          type="button"
-          size="icon-sm"
-          variant="secondary"
-          onClick={() => scrollByDir(1)}
-          aria-label="Scroll forward"
-        >
+        <Button type="button" size="icon-sm" variant="secondary" onClick={() => scrollByDir(1)} aria-label="Scroll forward">
           {axis === "horizontal" ? <IconChevronRight /> : <IconChevronDown />}
         </Button>
       </div>
@@ -142,13 +95,7 @@ function FakeScrollCarousel({
             <div
               key={`${id}-strip-${i}`}
               className={
-                axis === "horizontal"
-                  ? snap
-                    ? "w-72 shrink-0 snap-center"
-                    : "w-72 shrink-0"
-                  : snap
-                    ? "shrink-0 snap-start"
-                    : "shrink-0"
+                axis === "horizontal" ? (snap ? "w-72 shrink-0 snap-center" : "w-72 shrink-0") : snap ? "shrink-0 snap-start" : "shrink-0"
               }
             >
               <CarouselTestSlide slideIndex={i} />

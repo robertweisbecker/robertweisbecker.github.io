@@ -122,8 +122,7 @@ function DialogFooter({
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 rounded-b-[inherit] ps-2 sm:flex-row sm:justify-end",
-        variant === "muted" &&
-          "-mx-6 -mb-6 border-t bg-popover p-3 dark:-mx-[calc(--spacing(6)-1px)] dark:-mb-[calc(--spacing(6)-1px)]",
+        variant === "muted" && "-mx-6 -mb-6 border-t bg-popover p-3 dark:-mx-[calc(--spacing(6)-1px)] dark:-mb-[calc(--spacing(6)-1px)]",
         className
       )}
       {...props}
@@ -135,9 +134,7 @@ function DialogFooter({
 }
 
 function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
-  return (
-    <DialogPrimitive.Title data-slot="dialog-title" className={cn("pt-1 text-lg font-medium", className)} {...props} />
-  );
+  return <DialogPrimitive.Title data-slot="dialog-title" className={cn("pt-1 text-lg font-medium", className)} {...props} />;
 }
 
 function DialogDescription({ className, ...props }: DialogPrimitive.Description.Props) {

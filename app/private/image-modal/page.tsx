@@ -136,9 +136,9 @@ export default function ImageModalPostPage() {
     <div className="prose w-full">
       <h1 className="text-h1">Image Modal Prototypes</h1>
       <p>
-        Comparing three approaches to an image lightbox with smooth <Code variant="plain">layoutId</Code> transitions:
-        Base UI Dialog, Base UI Popover, and pure Motion. The goal is a seamless expand/collapse animation without
-        stretching, blank frames, or misalignment on first open.
+        Comparing three approaches to an image lightbox with smooth <Code variant="plain">layoutId</Code> transitions: Base UI Dialog, Base
+        UI Popover, and pure Motion. The goal is a seamless expand/collapse animation without stretching, blank frames, or misalignment on
+        first open.
       </p>
 
       <Separator />
@@ -181,11 +181,7 @@ export default function ImageModalPostPage() {
         title="C. Pure Motion"
         badge="Motion + portal"
         description="No Base UI dialog/popover primitives for layout. layoutId with AnimatePresence and createPortal. Manual accessibility handling. Follows Motion's documented shared layout animation pattern."
-        pros={[
-          "Simplest DOM tree",
-          "No wrapper interference with Motion projection",
-          "Motion has full control of FLIP math",
-        ]}
+        pros={["Simplest DOM tree", "No wrapper interference with Motion projection", "Motion has full control of FLIP math"]}
         cons={["Must handle accessibility manually", "No scroll-lock or focus-trap for free"]}
       >
         <ImageModalMotion src={testImage} caption="Pure Motion prototype" />
@@ -196,8 +192,7 @@ export default function ImageModalPostPage() {
       <section className="grid gap-4">
         <Heading level={2}>What we tried</Heading>
         <p className="text-muted-foreground">
-          A reference of every approach attempted across the full history of this component, documenting what worked,
-          what broke, and why.
+          A reference of every approach attempted across the full history of this component, documenting what worked, what broke, and why.
         </p>
 
         <DescriptionList className="not-prose">

@@ -7,7 +7,7 @@ function ChromeTabsRoot({ className, children, ...props }: TabsPrimitive.Root.Pr
   return (
     <TabsPrimitive.Root
       className={cn(
-        "flex w-full flex-col rounded-[calc(var(--radius-lg)+--spacing(0.5))] bg-background p-px drop-shadow-xs [&>div]:data-[slot=tabs-panel]:bg-card",
+        "flex w-full flex-col rounded-[calc(var(--radius-lg)+--spacing(0.5))] bg-muted p-px drop-shadow-xs [&>div]:data-[slot=tabs-panel]:bg-card",
         className
       )}
       {...props}

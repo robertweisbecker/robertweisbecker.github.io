@@ -79,12 +79,14 @@ export function CodeBlock({
     <Card size="sm" variant="muted" className={cn("not-prose relative pb-0", className)}>
       {filename ? (
         <CardHeader className="border-b border-dashed">
-          <CardDescription className="flex items-center gap-1 font-pixel text-[11px]">
+          <CardDescription className="flex items-center gap-1">
             {/* <IconFileCodeFilled data-icon="inline-start" className="size-4 opacity-64" /> */}
-            <span aria-hidden="true" className="mr-1">
-              {"</>"}
+            <span className="flex items-center gap-1 font-pixel text-[11px]">
+              <span aria-hidden="true" className="mr-1">
+                {"</>"}
+              </span>
+              {filename}
             </span>
-            {filename}
           </CardDescription>
 
           <CardAction className="gap-2">

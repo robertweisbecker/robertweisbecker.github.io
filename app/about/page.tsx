@@ -20,8 +20,7 @@ export default function About() {
             <p>
               I&apos;m currently a principal designer at&nbsp;
               <LinkOut href="https://everfi.com" text="Everfi" />
-              &nbsp;where I work on products & tooling to help drive social good through education. These things
-              have&nbsp;
+              &nbsp;where I work on products & tooling to help drive social good through education. These things have&nbsp;
               <LinkOut
                 href="https://www.blackbaud.com/newsroom/article/blackbaud-acquires-everfi-a-saas-leader-powering-corporate-esg-and-csr-initiatives-that-reach-millions-of-learners-each-year#:~:text=reached%20more%20than-,45%20million,-learners%20globally%2C%20in"
                 text="allegedly"
@@ -41,8 +40,8 @@ export default function About() {
               globally.
             </p>
             <p>
-              Since 2021, I&apos;ve led the implementation of a shared design system across admin, educator, and
-              learner-facing products. Read a bit about that process{" "}
+              Since 2021, I&apos;ve led the implementation of a shared design system across admin, educator, and learner-facing products.
+              Read a bit about that process{" "}
               <Link href="/unified-design-language" className="link">
                 here
               </Link>
@@ -59,9 +58,7 @@ export default function About() {
               yo@bob.fyi
             </Button>
             <Button
-              render={
-                <a href="https://www.linkedin.com/in/robertweisbecker/" target="_blank" rel="noopener noreferrer" />
-              }
+              render={<a href="https://www.linkedin.com/in/robertweisbecker/" target="_blank" rel="noopener noreferrer" />}
               nativeButton={false}
               variant="elevated"
               size="sm"
@@ -97,8 +94,8 @@ export default function About() {
           <Link className="link" href="/unified-design-language">
             first design system
           </Link>
-          , shepherding its transition from an unstyled SDK into an accessible component library with theming and
-          tooling to support 80+ courses across a dozen branded product lines.
+          , shepherding its transition from an unstyled SDK into an accessible component library with theming and tooling to support 80+
+          courses across a dozen branded product lines.
         </p>
         <p>Some other things I&apos;ve done:</p>
         <ul className="list-disc space-y-3 ps-5">
@@ -106,13 +103,9 @@ export default function About() {
             Led design efforts for financial &amp; K12 products at EVERFI, including{" "}
             <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
             <LinkOut href="https://everfi.com/financial-education/consumers/engage/" text="Engage" />, and{" "}
-            <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />
-            .
+            <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />.
           </li>
-          <li>
-            Worked on education products for customers such as Google, Meta, LinkedIn, Kroger, Beyond Meat, Truist, and
-            more.
-          </li>
+          <li>Worked on education products for customers such as Google, Meta, LinkedIn, Kroger, Beyond Meat, Truist, and more.</li>
           <li>
             Delivered a (now relevant!){" "}
             <Link className="link" href="/conversational-immigration-forms">
@@ -126,9 +119,8 @@ export default function About() {
             <Link className="link" href="/npr-maps">
               mapping application
             </Link>{" "}
-            at NPR when I wasn&apos;t busy{" "}
-            <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background of Tiny
-            Desk recordings
+            at NPR when I wasn&apos;t busy <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background
+            of Tiny Desk recordings
           </li>
           <li>
             Designed web &amp; iOS screens, performed user testing, and made graphics for{" "}

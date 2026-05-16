@@ -132,11 +132,7 @@ export function AutocompletePopup({
   );
 }
 
-export function AutocompleteItem({
-  className,
-  children,
-  ...props
-}: AutocompletePrimitive.Item.Props): React.ReactElement {
+export function AutocompleteItem({ className, children, ...props }: AutocompletePrimitive.Item.Props): React.ReactElement {
   return (
     <AutocompletePrimitive.Item
       className={cn(
@@ -151,10 +147,7 @@ export function AutocompleteItem({
   );
 }
 
-export function AutocompleteSeparator({
-  className,
-  ...props
-}: AutocompletePrimitive.Separator.Props): React.ReactElement {
+export function AutocompleteSeparator({ className, ...props }: AutocompletePrimitive.Separator.Props): React.ReactElement {
   return (
     <AutocompletePrimitive.Separator
       className={cn("mx-2 my-1 h-px bg-border last:hidden", className)}
@@ -165,19 +158,10 @@ export function AutocompleteSeparator({
 }
 
 export function AutocompleteGroup({ className, ...props }: AutocompletePrimitive.Group.Props): React.ReactElement {
-  return (
-    <AutocompletePrimitive.Group
-      className={cn("[[role=group]+&]:mt-1.5", className)}
-      data-slot="autocomplete-group"
-      {...props}
-    />
-  );
+  return <AutocompletePrimitive.Group className={cn("[[role=group]+&]:mt-1.5", className)} data-slot="autocomplete-group" {...props} />;
 }
 
-export function AutocompleteGroupLabel({
-  className,
-  ...props
-}: AutocompletePrimitive.GroupLabel.Props): React.ReactElement {
+export function AutocompleteGroupLabel({ className, ...props }: AutocompletePrimitive.GroupLabel.Props): React.ReactElement {
   return (
     <AutocompletePrimitive.GroupLabel
       className={cn("px-2 py-1.5 text-xs font-medium text-muted-foreground", className)}
@@ -246,11 +230,7 @@ export function AutocompleteCollection({ ...props }: AutocompletePrimitive.Colle
   return <AutocompletePrimitive.Collection data-slot="autocomplete-collection" {...props} />;
 }
 
-export function AutocompleteTrigger({
-  className,
-  children,
-  ...props
-}: AutocompletePrimitive.Trigger.Props): React.ReactElement {
+export function AutocompleteTrigger({ className, children, ...props }: AutocompletePrimitive.Trigger.Props): React.ReactElement {
   return (
     <AutocompletePrimitive.Trigger className={className} data-slot="autocomplete-trigger" {...props}>
       {children}

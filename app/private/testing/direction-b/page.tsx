@@ -150,9 +150,7 @@ function ChapterSection({
 
           {/* Caption bar */}
           <div className="via-smooth pointer-events-none absolute right-0 bottom-0 left-0 bg-linear-to-t from-black/60 to-transparent px-4 pt-10 pb-4">
-            <p
-              className={`text-xs text-white/80 transition-opacity duration-200 ${fading ? "opacity-0" : "opacity-100"}`}
-            >
+            <p className={`text-xs text-white/80 transition-opacity duration-200 ${fading ? "opacity-0" : "opacity-100"}`}>
               {displaySlide.caption}
             </p>
           </div>
@@ -249,16 +247,10 @@ function ChapterNav({ chapters, activeId }: { chapters: Chapter[]; activeId: str
               document.getElementById(`chapter-${ch.id}`)?.scrollIntoView({ behavior: "smooth" });
             }}
             className={`flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition-colors duration-100 ${
-              isActive
-                ? "bg-accent font-medium text-accent-foreground"
-                : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
+              isActive ? "bg-accent font-medium text-accent-foreground" : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
             }`}
           >
-            <span
-              className={`h-1 w-1 shrink-0 rounded-full transition-colors duration-150 ${
-                isActive ? "bg-primary" : "bg-border"
-              }`}
-            />
+            <span className={`h-1 w-1 shrink-0 rounded-full transition-colors duration-150 ${isActive ? "bg-primary" : "bg-border"}`} />
             <span className="font-pixel text-[11px]">{String(i + 1).padStart(2, "0")}</span>
             {ch.label}
           </a>
@@ -281,9 +273,7 @@ export default function DirectionB() {
     const observer = new IntersectionObserver(
       (entries) => {
         // Pick the entry that's most visible
-        const best = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        const best = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (best) {
           setActiveId(best.target.id.replace("chapter-", ""));
         }
@@ -311,19 +301,9 @@ export default function DirectionB() {
       <ChapterNav chapters={CHAPTERS} activeId={activeId} />
 
       {/* Scrollable container */}
-      <div
-        ref={scrollRef}
-        className="ms-0 mt-10 h-[calc(100svh-2.5rem)] overflow-y-auto xl:ms-48"
-        style={{ scrollbarWidth: "none" }}
-      >
+      <div ref={scrollRef} className="ms-0 mt-10 h-[calc(100svh-2.5rem)] overflow-y-auto xl:ms-48" style={{ scrollbarWidth: "none" }}>
         {CHAPTERS.map((ch, i) => (
-          <ChapterSection
-            key={ch.id}
-            chapter={ch}
-            index={i}
-            total={CHAPTERS.length}
-            nextChapterId={CHAPTERS[i + 1]?.id ?? null}
-          />
+          <ChapterSection key={ch.id} chapter={ch} index={i} total={CHAPTERS.length} nextChapterId={CHAPTERS[i + 1]?.id ?? null} />
         ))}
 
         <div className="flex h-20 items-center justify-center border-t border-border">

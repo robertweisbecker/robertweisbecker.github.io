@@ -17,13 +17,13 @@ export function ProjectMeta({ role, team, date, meta, ...props }: Props) {
     <DataList.Root orientation={isMobile ? "horizontal" : "vertical"} size="sm" {...props}>
       {role && (
         <DataList.Item>
-          <DataList.Label className="min-w-0 text-xs">Role</DataList.Label>
+          <DataList.Label className="text-[.75rem]">Role</DataList.Label>
           <DataList.Value>{role}</DataList.Value>
         </DataList.Item>
       )}
       {team && team.length > 0 && (
         <DataList.Item>
-          <DataList.Label className="min-w-0 text-xs">Team</DataList.Label>
+          <DataList.Label className="text-[.75rem]">Team</DataList.Label>
           <DataList.Value>
             <ul className="flex flex-col gap-1">
               {team.map((member) => (
@@ -44,13 +44,13 @@ export function ProjectMeta({ role, team, date, meta, ...props }: Props) {
       )}
       {date && (
         <DataList.Item>
-          <DataList.Label className="min-w-0 text-xs">When</DataList.Label>
+          <DataList.Label className="text-[.75rem]">When</DataList.Label>
           <DataList.Value className="tabular-nums">{date}</DataList.Value>
         </DataList.Item>
       )}
       {meta?.map(({ label, value }) => (
         <DataList.Item key={label}>
-          <DataList.Label className="min-w-0">{label}</DataList.Label>
+          <DataList.Label className="text-[.75rem]">{label}</DataList.Label>
           <DataList.Value>{value}</DataList.Value>
         </DataList.Item>
       ))}

@@ -56,21 +56,20 @@ type ColorSwatchProps = {
 
 function ColorSwatch({ color, label, className, showLabel = true, swatchClass }: ColorSwatchProps) {
   return (
-    <div className={cn("grid min-w-0 items-start gap-1", className)}>
+    <div className={cn("relative grid min-w-0 items-start", className)}>
       <div
-        className={cn("relative isolate aspect-square w-full rounded-[clamp(2px,.4vw,var(--radius-md))]", swatchClass)}
+        className={cn("relative isolate aspect-square w-full rounded-[clamp(2px,.4vw,var(--radius-xl))]", swatchClass)}
         data-slot="swatch"
       >
         <div
           className="absolute inset-px -z-1 rounded-[inherit]"
           style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg,transparent,transparent 7px,var(--border) 7px,var(--border) 8px)",
+            backgroundImage: "repeating-linear-gradient(45deg,transparent,transparent 7px,var(--border) 7px,var(--border) 8px)",
           }}
         />
-        <div data-slot="fill" className={`bg-${color} size-full rounded-[clamp(2px,.4vw,var(--radius-md))] border`} />
+        <div data-slot="fill" className={`size-full rounded-[inherit] border bg-${color}`} />
       </div>
-      {showLabel && label && <div className="font-pixel text-[11px]">{label}</div>}
+      {showLabel ? <div className="z-1 font-pixel text-[11px]">{label}</div> : null}
     </div>
   );
 }
@@ -94,7 +93,7 @@ function ColorRamp({ name, label, showLabels = true, className, attached = true 
     <div className={cn("flex flex-col gap-1", className)}>
       {label && <div className="text-xs font-medium capitalize">{label}</div>}
       <div
-        className={cn("grid w-full min-w-0 items-start gap-1", attached && "gap-0")}
+        className={cn("grid w-full min-w-0 items-start", !attached && "gap-1")}
         style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}
       >
         {steps.map((step) => (
@@ -134,17 +133,15 @@ function ColorPalette({ group = "all", showLabels = true, showNames = true, clas
   const sections: { title?: string; names: readonly ColorName[] }[] = [];
 
   if (group === "hues" || group === "all") sections.push({ title: group === "all" ? "Hues" : undefined, names: HUES });
-  if (group === "neutrals" || group === "all")
-    sections.push({ title: group === "all" ? "Neutrals" : undefined, names: NEUTRALS });
-  if (group === "alphas" || group === "all")
-    sections.push({ title: group === "all" ? "Alpha" : undefined, names: ALPHAS });
+  if (group === "neutrals" || group === "all") sections.push({ title: group === "all" ? "Neutrals" : undefined, names: NEUTRALS });
+  if (group === "alphas" || group === "all") sections.push({ title: group === "all" ? "Alpha" : undefined, names: ALPHAS });
 
   return (
     <div className={cn("flex flex-col gap-6", className)}>
       {sections.map((section) => (
         <div key={section.title ?? section.names[0]} className="flex flex-col gap-3">
           {section.title && <p className="text-base font-medium">{section.title}</p>}
-          <div className={cn("flex flex-col items-start gap-2")}>
+          <div className={cn("flex flex-col items-start gap-1")}>
             {section.names.map((name) => {
               const steps = stepsFor(name);
               return (
@@ -203,14 +200,4 @@ function PaletteRow({ name, steps, showName, showLabels, attached = false }: Pal
 }
 
 export { ColorPalette, ColorSwatch, ColorRamp, ALPHAS, HUES, HUE_STEPS, NEUTRALS, NEUTRAL_STEPS };
-export type {
-  AlphaName,
-  ColorName,
-  ColorPaletteProps,
-  ColorSwatchProps,
-  HueName,
-  ColorRampProps,
-  HueStep,
-  NeutralName,
-  NeutralStep,
-};
+export type { AlphaName, ColorName, ColorPaletteProps, ColorSwatchProps, HueName, ColorRampProps, HueStep, NeutralName, NeutralStep };

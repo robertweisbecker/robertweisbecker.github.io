@@ -49,10 +49,7 @@ export function NumberFieldGroup({ className, ...props }: NumberFieldPrimitive.G
   );
 }
 
-export function NumberFieldDecrement({
-  className,
-  ...props
-}: NumberFieldPrimitive.Decrement.Props): React.ReactElement {
+export function NumberFieldDecrement({ className, ...props }: NumberFieldPrimitive.Decrement.Props): React.ReactElement {
   return (
     <NumberFieldPrimitive.Decrement
       className={cn(
@@ -67,10 +64,7 @@ export function NumberFieldDecrement({
   );
 }
 
-export function NumberFieldIncrement({
-  className,
-  ...props
-}: NumberFieldPrimitive.Increment.Props): React.ReactElement {
+export function NumberFieldIncrement({ className, ...props }: NumberFieldPrimitive.Increment.Props): React.ReactElement {
   return (
     <NumberFieldPrimitive.Increment
       className={cn(

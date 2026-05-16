@@ -28,13 +28,7 @@ const kbdVariants = cva(
   }
 );
 
-function Kbd({
-  className,
-  variant,
-  pressed,
-  render,
-  ...props
-}: useRender.ComponentProps<"kbd"> & VariantProps<typeof kbdVariants>) {
+function Kbd({ className, variant, pressed, render, ...props }: useRender.ComponentProps<"kbd"> & VariantProps<typeof kbdVariants>) {
   return useRender({
     defaultTagName: "kbd",
     props: mergeProps<"kbd">(

@@ -32,7 +32,7 @@ function DataListRoot({ orientation = "horizontal", size = "md", className, ...p
           orientation === "horizontal" && "grid grid-cols-[auto_1fr]",
           orientation === "vertical" && "flex flex-col",
           // Size
-          size === "sm" && "gap-4 text-sm",
+          size === "sm" && "gap-4 text-xs",
           size === "md" && "gap-5 text-sm",
           size === "lg" && "gap-6 text-base",
           // Trim: in horizontal mode, values pull in ±0.25em from neighboring rows
@@ -75,7 +75,7 @@ function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
     <dt
       data-slot="data-list-label"
       className={cn(
-        "flex min-w-0 items-center gap-1 font-pixel text-[11px] text-muted-foreground/72",
+        "flex min-w-0 items-center gap-1 text-muted-foreground/72",
         orientation === "horizontal" && size === "sm" ? "min-w-[12ch]" : "min-w-[28ch]",
         orientation === "vertical" && "min-w-0",
         className

@@ -119,16 +119,7 @@ export function PixelFilter({ id = "pixel-filter", size = 16, crossLayers = fals
                 result="AVG"
               />
               <feFlood x="1" y="1" width="1" height="1" />
-              <feComposite
-                in2="SourceGraphic"
-                operator="arithmetic"
-                k1="0"
-                k2="1"
-                k3="0"
-                k4="0"
-                width={size / 2}
-                height={size}
-              />
+              <feComposite in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" width={size / 2} height={size} />
               <feTile result="TILE" />
               <feComposite in="AVG" in2="TILE" operator="in" k1="0" k2="1" k3="0" k4="0" />
               <feMorphology operator="dilate" radius={size / 2} result={"FALLBACKX"} />
@@ -140,16 +131,7 @@ export function PixelFilter({ id = "pixel-filter", size = 16, crossLayers = fals
                 result="AVG"
               />
               <feFlood x="1" y="1" width="1" height="1" />
-              <feComposite
-                in2="SourceGraphic"
-                operator="arithmetic"
-                k1="0"
-                k2="1"
-                k3="0"
-                k4="0"
-                width={size}
-                height={size / 2}
-              />
+              <feComposite in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="0" k4="0" width={size} height={size / 2} />
               <feTile result="TILE" />
               <feComposite in="AVG" in2="TILE" operator="in" k1="0" k2="1" k3="0" k4="0" />
               <feMorphology operator="dilate" radius={size / 2} result={"FALLBACKY"} />

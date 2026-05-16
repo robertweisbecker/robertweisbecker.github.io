@@ -29,13 +29,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import {
-  IconArrowsDiagonal,
-  IconArrowsDiagonalMinimize2,
-  IconChevronLeft,
-  IconChevronRight,
-  IconX,
-} from "@tabler/icons-react";
+import { IconArrowsDiagonal, IconArrowsDiagonalMinimize2, IconChevronLeft, IconChevronRight, IconX } from "@tabler/icons-react";
 
 /* ─── Data ───────────────────────────────────────────────── */
 type Slide = { src: string; alt: string; caption: string; label: string; detail: string };
@@ -46,48 +40,42 @@ const SLIDES: Slide[] = [
     alt: "Dark mode",
     label: "UI",
     caption: "Dark mode",
-    detail:
-      "Dark mode was a Day 1 requirement. The new neutral scale lets surfaces stack visually without relying on borders alone.",
+    detail: "Dark mode was a Day 1 requirement. The new neutral scale lets surfaces stack visually without relying on borders alone.",
   },
   {
     src: "/assets/forge/light.png",
     alt: "Light mode",
     label: "UI",
     caption: "Light mode",
-    detail:
-      "The warm neutral base feels intentional rather than washed-out. A common trap with auto-generated light themes.",
+    detail: "The warm neutral base feels intentional rather than washed-out. A common trap with auto-generated light themes.",
   },
   {
     src: "/assets/forge/colors-all.png",
     alt: "Color palette",
     label: "Color",
     caption: "Expanded palettes",
-    detail:
-      "Each palette spans 100–900. Every step shares a lightness range with its siblings — mix across scales confidently.",
+    detail: "Each palette spans 100–900. Every step shares a lightness range with its siblings — mix across scales confidently.",
   },
   {
     src: "/assets/forge/colors-neutral.png",
     alt: "Neutral ramp",
     label: "Color",
     caption: "Neutral scale",
-    detail:
-      "The original five neutrals topped out too quickly. The new scale resolves all contrast failures at a stroke.",
+    detail: "The original five neutrals topped out too quickly. The new scale resolves all contrast failures at a stroke.",
   },
   {
     src: "/assets/forge/density-compare.png",
     alt: "Density comparison",
     label: "Density",
     caption: "60% shorter",
-    detail:
-      "A strict 4px grid and dense type scale cut vertical footprint by 60%. The preview panel can finally breathe.",
+    detail: "A strict 4px grid and dense type scale cut vertical footprint by 60%. The preview panel can finally breathe.",
   },
   {
     src: "/assets/forge/buttons.png",
     alt: "Button variants",
     label: "Components",
     caption: "Standardized buttons",
-    detail:
-      "Every variant rebuilt with token-driven sizing and explicit states. No more one-off overrides accumulating.",
+    detail: "Every variant rebuilt with token-driven sizing and explicit states. No more one-off overrides accumulating.",
   },
   {
     src: "/assets/forge/fields.png",
@@ -101,16 +89,14 @@ const SLIDES: Slide[] = [
     alt: "Dialogs",
     label: "Components",
     caption: "Standardized dialogs",
-    detail:
-      "Single close target, clear action hierarchy, no competing CTAs. Anatomy is consistent across all dialog types.",
+    detail: "Single close target, clear action hierarchy, no competing CTAs. Anatomy is consistent across all dialog types.",
   },
   {
     src: "/assets/forge/nav.png",
     alt: "Toolbar",
     label: "Navigation",
     caption: "Surfaced toolbar actions",
-    detail:
-      "Page actions moved out of a hidden context menu into a persistent toolbar. Discoverability improved measurably.",
+    detail: "Page actions moved out of a hidden context menu into a persistent toolbar. Discoverability improved measurably.",
   },
 ];
 
@@ -247,12 +233,7 @@ function Variation1() {
               {activeSlide + 1} / {SLIDES.length}
             </span>
             <Separator orientation="vertical" className="h-3 bg-background/20" />
-            <span
-              className={cn(
-                "text-sm font-medium text-background/90 transition-opacity duration-150",
-                fading && "opacity-0"
-              )}
-            >
+            <span className={cn("text-sm font-medium text-background/90 transition-opacity duration-150", fading && "opacity-0")}>
               {SLIDES[activeSlide].caption}
             </span>
             <DialogClose
@@ -323,14 +304,10 @@ function Variation1() {
                     onClick={() => goTo(i)}
                     className={cn(
                       "flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-xs transition-colors",
-                      i === activeSlide
-                        ? "bg-white/10 text-white"
-                        : "text-white/40 hover:bg-white/5 hover:text-white/70"
+                      i === activeSlide ? "bg-white/10 text-white" : "text-white/40 hover:bg-white/5 hover:text-white/70"
                     )}
                   >
-                    <span className="font-pixel text-[9px] text-white/30 tabular-nums">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+                    <span className="font-pixel text-[9px] text-white/30 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                     {slide.caption}
                   </button>
                 ))}
@@ -547,11 +524,7 @@ function MinimizedCard({
       }}
       className="peer absolute top-1/2 left-1/2 grid place-items-center group-hover/fan:**:data-[slot=card]:bg-background peer-hover:**:data-[slot=card]:bg-background hover:**:data-[slot=card]:bg-card hover:**:data-[slot=card]:shadow-border-xl"
     >
-      <MotionCard
-        layoutId={ids.card}
-        size="sm"
-        className="ease h-full w-full shadow-border-sm transition-all duration-100"
-      >
+      <MotionCard layoutId={ids.card} size="sm" className="ease h-full w-full shadow-border-sm transition-all duration-100">
         <MotionCardHeader layoutId={ids.header}>
           <MotionCardTitle layoutId={ids.title} className="truncate">
             {slide.caption}
@@ -581,12 +554,7 @@ function MinimizedCard({
           }}
           // layoutId={ids.image}
         >
-          <img
-            src={slide.src}
-            alt={slide.alt}
-            className="aspect-square rounded-sm object-cover object-top"
-            draggable={false}
-          />
+          <img src={slide.src} alt={slide.alt} className="aspect-square rounded-sm object-cover object-top" draggable={false} />
         </MotionCardContent>
       </MotionCard>
     </motion.div>
@@ -746,9 +714,7 @@ function Variation3() {
       </LayoutGroup>
 
       <p className="mt-6 text-center font-pixel text-[10px] text-muted-foreground">
-        {expanded
-          ? "click outside or minimize to return"
-          : "hover a card to lift it · click Expand to open the carousel"}
+        {expanded ? "click outside or minimize to return" : "hover a card to lift it · click Expand to open the carousel"}
       </p>
     </div>
   );

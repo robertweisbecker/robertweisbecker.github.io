@@ -5,11 +5,11 @@ import { ThemeSettings } from "@/components/theme-settings";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconTemplateFilled } from "@tabler/icons-react";
+import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconPalette, IconBrush } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Favicon, PixelChevronDownIcon, PixelNewsIcon } from "./icons";
+import { Favicon, PixelChevronDownIcon, PixelNewsIcon, PixelScribbleIcon } from "./icons";
 import { SiteSearch } from "./site-search";
 import { Button } from "./ui/button";
 import {
@@ -45,8 +45,8 @@ export function Header() {
       <div className="max-w-8xl mx-auto flex h-12 items-center gap-3 px-2 py-2 sm:px-4">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           <Favicon className="size-4 text-secondary-foreground" />
-
           <span>
+            {" "}
             bob<span className="text-primary">.</span>fyi
           </span>
         </LinkButton>
@@ -84,11 +84,11 @@ export function Header() {
                 <DropdownMenuItem render={<Link href="/" />} nativeButton={false}>
                   Home
                 </DropdownMenuItem>
-                {/* <DropdownMenuItem render={<Link href="/about" />} nativeButton={false}>
-                  About
-                </DropdownMenuItem> */}
                 <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false}>
                   Posts
+                </DropdownMenuItem>
+                <DropdownMenuItem render={<Link href="/art" />} nativeButton={false}>
+                  Art
                 </DropdownMenuItem>
                 {process.env.NODE_ENV === "development" && (
                   <>
@@ -181,10 +181,18 @@ export function Header() {
         </PreviewCardGroup>
         <HeaderButton
           label="Posts"
-          icon={<PixelNewsIcon data-icon={isMobile ? null : "inline-start"} />}
-          hideTextOnMobile={true}
+          icon={<PixelNewsIcon className="size-[11px]" data-icon={"inline-start"} />}
+          hideTextOnMobile={false}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
+          className="max-md:hidden"
+        />
+        <HeaderButton
+          label="Art"
+          icon={<PixelScribbleIcon className="size-[11px]" data-icon={"inline-start"} />}
+          hideTextOnMobile={false}
+          href="/art"
+          aria-current={pathname === "/art" ? "true" : "false"}
           className="max-md:hidden"
         />
         {/* <SiteSearch className="ml-auto" /> */}

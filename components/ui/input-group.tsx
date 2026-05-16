@@ -8,11 +8,7 @@ import { Input, inputVariants } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-function InputGroup({
-  className,
-  size = "md",
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof inputVariants>) {
+function InputGroup({ className, size = "md", ...props }: React.ComponentProps<"div"> & VariantProps<typeof inputVariants>) {
   return (
     <div
       data-slot="input-group"
@@ -36,10 +32,8 @@ const inputGroupAddonVariants = cva(
       align: {
         "inline-start": "ps-[0.5em] has-[>button]:ms-[-0.25em] has-[>kbd]:ms-[-0.125em] order-first",
         "inline-end": "pe-[0.5em] has-[>button]:me-[-0.25em] has-[>kbd]:me-[-0.125em] order-last",
-        "block-start":
-          "px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-1 order-first w-full justify-start text-sm",
-        "block-end":
-          "px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-1 order-last w-full justify-start text-sm",
+        "block-start": "px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-1 order-first w-full justify-start text-sm",
+        "block-end": "px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-1 order-last w-full justify-start text-sm",
       },
     },
     defaultVariants: {

@@ -52,15 +52,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
@@ -69,23 +61,13 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Toolbar } from "@/components/ui/toolbar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible } from "@base-ui/react/collapsible";
-import {
-  IconAlignLeft,
-  IconAlignRight,
-  IconBold,
-  IconChevronDown,
-  IconCopy,
-  IconHome,
-  IconItalic,
-  IconTrash,
-} from "@tabler/icons-react";
+import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic, IconTrash } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 import { Section } from "./section";
 
-const ComponentDemos = dynamic(
-  () => import("./component-demos").then((module) => ({ default: module.ComponentDemos })),
-  { loading: () => <p className="text-sm text-muted-foreground">Loading additional component demos…</p> }
-);
+const ComponentDemos = dynamic(() => import("./component-demos").then((module) => ({ default: module.ComponentDemos })), {
+  loading: () => <p className="text-sm text-muted-foreground">Loading additional component demos…</p>,
+});
 
 export default function ComponentsPage() {
   const [isLoading, setLoading] = useState(false);
@@ -147,13 +129,7 @@ export default function ComponentsPage() {
                 <p>Tab 3 content</p>
               </ChromeTabs.Panel>
             </ChromeTabs>
-            <ImageToggle
-              mode="comparison"
-              before={forgeBefore}
-              after={forgeAfter}
-              tab1="Before"
-              tab2="After"
-            />
+            <ImageToggle mode="comparison" before={forgeBefore} after={forgeAfter} tab1="Before" tab2="After" />
             {/* <ImageToggle mode="slider" before={forgeBefore} after={forgeAfter} /> */}
           </Section>
           <Section title="Button" className="gap-4">
@@ -229,8 +205,7 @@ export default function ComponentsPage() {
                 <div className="space-y-4">
                   {Array.from({ length: 24 }, (_, i) => (
                     <p key={i} className="text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget nulla vitae nisl
-                      condimentum tempor.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget nulla vitae nisl condimentum tempor.
                     </p>
                   ))}
                 </div>
@@ -395,8 +370,7 @@ export default function ComponentsPage() {
                 <div
                   className="absolute bottom-0 left-full aspect-square h-[calc(var(--button-radius)+2px)] bg-destructive"
                   style={{
-                    clipPath:
-                      "shape(from bottom right, vline to 98%, curve to 2% 98% with 0% 100%, vline to 100%, hline to 100%)",
+                    clipPath: "shape(from bottom right, vline to 98%, curve to 2% 98% with 0% 100%, vline to 100%, hline to 100%)",
                   }}
                 />
               </Button>
@@ -412,9 +386,7 @@ export default function ComponentsPage() {
                 <DialogPopup>
                   <DialogHeader>
                     <DialogTitle>Dialog title</DialogTitle>
-                    <DialogDescription>
-                      This is a dialog. It has a title, description, and can contain any content.
-                    </DialogDescription>
+                    <DialogDescription>This is a dialog. It has a title, description, and can contain any content.</DialogDescription>
                   </DialogHeader>
                   <DialogBody>
                     <p>Dialog content goes here. Close with the X or the button below.</p>
@@ -433,9 +405,7 @@ export default function ComponentsPage() {
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete the item.
-                  </AlertDialogDescription>
+                  <AlertDialogDescription>This action cannot be undone. This will permanently delete the item.</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -503,10 +473,7 @@ export default function ComponentsPage() {
           <Section title="Collapsible">
             <Collapsible.Root className="grid w-full grid-cols-[1fr_auto_1fr] grid-rows-[auto_var(--collapsible-panel-height)] items-center">
               <Separator className="row-2 flex-1" />
-              <Collapsible.Trigger
-                render={<Button variant="outline" size="xs" />}
-                className="group row-2 justify-start rounded-full"
-              >
+              <Collapsible.Trigger render={<Button variant="outline" size="xs" />} className="group row-2 justify-start rounded-full">
                 <IconChevronDown
                   data-icon="inline-start"
                   className="transition-all delay-50 duration-200 ease-out group-data-panel-open:rotate-180"
@@ -541,15 +508,13 @@ export default function ComponentsPage() {
           <Section title="Scroll Area">
             <ScrollArea className="h-32 w-64 rounded-md border" innerClass="p-4">
               <p className="text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
               </p>
               <p className="mt-4 text-sm leading-relaxed">
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                laudantium.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
+                perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
               </p>
             </ScrollArea>
           </Section>

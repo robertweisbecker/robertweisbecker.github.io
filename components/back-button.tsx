@@ -15,10 +15,7 @@ export function BackButton({
       variant="link"
       href={href}
       size={size}
-      className={cn(
-        "group/back-button self-start font-pixel text-[11px] text-muted-foreground uppercase no-underline",
-        className
-      )}
+      className={cn("group/back-button self-start font-pixel text-[11px] text-muted-foreground uppercase no-underline", className)}
       {...rest}
     >
       {/* <IconArrowNarrowLeft
