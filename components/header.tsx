@@ -181,7 +181,7 @@ export function Header() {
         </PreviewCardGroup>
         <HeaderButton
           label="Posts"
-          icon={<PixelNewsIcon className="size-[11px]" data-icon={"inline-start"} />}
+          icon={<PixelNewsIcon className="size-3.5" data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
@@ -189,7 +189,7 @@ export function Header() {
         />
         <HeaderButton
           label="Art"
-          icon={<PixelScribbleIcon className="size-[11px]" data-icon={"inline-start"} />}
+          icon={<PixelScribbleIcon className="size-3.5" data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/art"
           aria-current={pathname === "/art" ? "true" : "false"}

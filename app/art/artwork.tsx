@@ -34,41 +34,24 @@ export function Artwork({
     <Cambio.Root dismissible>
       <figure className={cn("group relative mb-4 min-w-0", className)}>
         <Cambio.Trigger
-          className="relative w-full cursor-zoom-in overflow-hidden rounded-lg bg-red-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          className="relative w-full cursor-zoom-in overflow-hidden shadow-border-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           style={{ aspectRatio }}
         >
           <Image
             src={src}
             alt={title ? title : ""}
-            fill
+            // fill
             loading="lazy"
             placeholder="blur"
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="rounded-[inherit] object-contain shadow-border-xs"
+            className="object-contain"
           />
-          <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-            <rect x="6" y="4" width="1" height="1" fill="currentColor" />
-            <rect x="5" y="5" width="1" height="1" fill="currentColor" />
-            <rect x="4" y="6" width="1" height="1" fill="currentColor" />
-            <rect x="2" y="8" width="1" height="1" fill="currentColor" />
-            <rect x="3" y="8" width="1" height="1" fill="currentColor" />
-            <rect x="4" y="8" width="1" height="1" fill="currentColor" />
-            <rect x="2" y="6" width="1" height="1" fill="currentColor" />
-            <rect x="2" y="7" width="1" height="1" fill="currentColor" />
-            <rect x="8" y="2" width="1" height="1" fill="currentColor" />
-            <rect x="8" y="3" width="1" height="1" fill="currentColor" />
-            <rect x="8" y="4" width="1" height="1" fill="currentColor" />
-            <rect x="6" y="2" width="1" height="1" fill="currentColor" />
-            <rect x="7" y="2" width="1" height="1" fill="currentColor" />
-          </svg>
         </Cambio.Trigger>
 
         <figcaption className="pointer-events-none absolute inset-0 grid items-start duration-200 ease-out select-none *:px-1 *:opacity-0 *:transition-[transform,translate,opacity] *:group-hover:opacity-100">
-          <span className="w-fit -translate-y-1 self-start bg-background font-heading text-sm group-hover:translate-y-0">
-            &apos;{title}&apos;
-          </span>
-          <span className="h-fit translate-x-1 place-self-end bg-background font-pixel text-2xs capitalize [writing-mode:vertical-rl] group-hover:translate-x-0">
-            {medium ? `${medium}` : ""} {year}. {size ? `${size}` : ""}
+          <span className="w-fit -translate-y-1 self-start bg-background font-pixel text-2xs group-hover:translate-y-0">{title}</span>
+          <span className="h-fit translate-x-1 place-self-end bg-background font-pixel text-2xs [writing-mode:vertical-rl] group-hover:translate-x-0">
+            {medium ? `${medium},` : ""} {year} {size ? `∙ ${size}` : ""}
           </span>
         </figcaption>
       </figure>

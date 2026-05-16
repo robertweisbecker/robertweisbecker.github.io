@@ -70,7 +70,7 @@ function SliderDemo() {
 
 function ChromeTabsDemo() {
   return (
-    <ChromeTabs defaultValue="preview" className="border">
+    <ChromeTabs defaultValue="preview" className="outline outline-border/20 dark:bg-black">
       <ChromeTabs.List>
         <ChromeTabs.Tab value="preview">Preview</ChromeTabs.Tab>
         <ChromeTabs.Tab value="code">Code</ChromeTabs.Tab>
