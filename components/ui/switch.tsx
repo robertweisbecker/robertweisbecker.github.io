@@ -5,6 +5,8 @@ import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { cva, VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+const activeSelector = "in-[[role=switch]:active,[data-slot=label]:active,[data-slot=field-label]:active]";
+
 const switchVariants = cva(
   [
     // Default styles
@@ -20,7 +22,6 @@ const switchVariants = cva(
     "data-checked:justify-end data-checked:active:not-data-disabled:bg-(--hue-600)",
     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
     "data-disabled:cursor-not-allowed data-disabled:bg-muted data-disabled:inset-ring-border",
-    "",
   ],
   {
     variants: {
@@ -46,12 +47,9 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn([
-          "pointer-events-none absolute inset-s-(--switch-inset) top-1/2 origin-center -translate-y-1/2 ring-[0.5px] ring-border",
+          "pointer-events-none relative inset-s-(--switch-inset) top-1/2 origin-center -translate-y-1/2 rounded-full shadow-border-sm ring-[0.5px] ring-border",
           "h-[calc(var(--switch-height)-calc(var(--switch-inset)*2))] w-[calc(var(--switch-height)-calc(var(--switch-inset)*2))]",
 
-          "",
-          "shadow-border-sm",
-          "relative",
           "data-checked:bg-white",
           "bg-white bg-linear-to-b to-black/5 group-hover/switch:bg-white",
           "inset-ring-1 inset-ring-white",
@@ -59,7 +57,9 @@ function Switch({
           // "data-checked:h-[calc(var(--switch-height)-var(--switch-inset))] data-checked:w-[calc(var(--switch-height)-var(--switch-inset))] data-checked:translate-x-[calc(var(--switch-inset)/2)]",
           "data-checked:inset-s-auto data-checked:inset-e-px data-checked:h-[calc(var(--switch-height)-var(--switch-inset))] data-checked:w-[calc(var(--switch-height)-var(--switch-inset))]",
           "transition-[margin,translate,width,height] ease-out",
-          "rounded-full group-active/switch:not-data-disabled:w-[calc(var(--switch-height)+var(--switch-inset))]",
+          "group-active/switch:not-data-disabled:w-[calc(var(--switch-height)+var(--switch-inset))]",
+          // "in-[[role=switch]:active,[data-slot=label]:active,[data-slot=field-label]:active]:w-[calc(var(--switch-height)+var(--switch-inset))]",
+          "in-[[role=switch]:active,[data-slot=label]:active,[data-slot=field-label]:active]:w-[calc(var(--switch-height)+var(--switch-inset))]!",
           "data-disabled:bg-border! data-disabled:bg-none data-disabled:shadow-none data-disabled:inset-ring-0",
         ])}
       />

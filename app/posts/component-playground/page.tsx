@@ -16,6 +16,12 @@ import { Field, FieldLabel, FieldDescription, FieldContent, FieldTitle } from "@
 import { SiteSearch } from "@/components/site-search";
 import { Input } from "@/components/ui/input";
 import { LinkOut } from "@/components/link-out";
+import { IconTrash, IconTrashFilled } from "@tabler/icons-react";
+import { GithubIcon, VercelIcon } from "@/components/icons";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
+import { AnimatePresence, motion } from "framer-motion";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
 
 const DEMO_SWATCHES = [
   { value: "var(--color-red-500)", label: "Red", color: "var(--color-red-500)" },
@@ -50,9 +56,23 @@ function SwitchDemo() {
     <Field orientation="horizontal" className="flex w-auto items-center gap-3">
       <FieldLabel>
         <Switch checked={checked} onCheckedChange={setChecked} />
-        <FieldContent>
-          <FieldTitle>Label</FieldTitle>
-          <FieldDescription>{checked ? "On" : "Off"}</FieldDescription>
+        <FieldContent orientation="horizontal">
+          <FieldTitle>Switch</FieldTitle>
+          <FieldDescription>
+            <AnimatePresence mode="popLayout">
+              <motion.span
+                className="inline-block"
+                initial={{ opacity: 0, filter: "blur(1px)", x: checked ? -8 : 8 }}
+                animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+                exit={{ opacity: 0, filter: "blur(1px)", x: checked ? -4 : 4 }}
+                transition={{ duration: 0.2 }}
+                key={checked ? "onText" : "offText"}
+                style={{ color: checked ? "var(--success-foreground)" : "var(--error-foreground)" }}
+              >
+                {checked ? "On" : "Off"}
+              </motion.span>
+            </AnimatePresence>
+          </FieldDescription>
         </FieldContent>
       </FieldLabel>
     </Field>
@@ -70,11 +90,27 @@ function SliderDemo() {
 
 function ChromeTabsDemo() {
   return (
-    <ChromeTabs defaultValue="preview" className="outline outline-border/20 dark:bg-black">
+    <ChromeTabs defaultValue="preview" className="border border-border/50 dark:bg-black">
       <ChromeTabs.List>
-        <ChromeTabs.Tab value="preview">Preview</ChromeTabs.Tab>
-        <ChromeTabs.Tab value="code">Code</ChromeTabs.Tab>
-        <ChromeTabs.Tab value="output">Output</ChromeTabs.Tab>
+        <ChromeTabs.Tab value="preview">
+          <Avatar className="-mx-1 -ms-1.5 size-4.5 rounded-full">
+            <AvatarImage src="https://github.com/robertweisbecker.png" alt="@shadcn" />
+            <AvatarFallback>RW</AvatarFallback>
+          </Avatar>
+          Preview
+        </ChromeTabs.Tab>
+        <ChromeTabs.Tab value="code">
+          <Avatar className="-mx-1 -ms-1.5 size-4.5 rounded-full">
+            <GithubIcon className="size-4" />
+          </Avatar>
+          Code
+        </ChromeTabs.Tab>
+        <ChromeTabs.Tab value="output">
+          <Avatar className="-mx-1 -ms-1.5 size-4.5 rounded-full">
+            <VercelIcon className="size-3" />
+          </Avatar>
+          Deployment
+        </ChromeTabs.Tab>
       </ChromeTabs.List>
       <ChromeTabs.Panel value="preview" className="p-4">
         <p className="text-sm text-muted-foreground">This is the preview panel.</p>
@@ -89,76 +125,113 @@ function ChromeTabsDemo() {
   );
 }
 
+function DeleteButtonDemo() {
+  return (
+    <div className="wrapper">
+      <button className="group relative flex h-button items-center gap-2 rounded-full bg-muted px-4 text-sm font-medium text-foreground outline -outline-offset-1 outline-border/50 transition-all duration-100 ease-out-quad active:scale-98">
+        <div
+          className="absolute inset-0 flex h-button items-center gap-2 rounded-[inherit] bg-destructive px-4 text-white transition-[clip-path,background,color] duration-300 ease-out [clip-path:inset(0_100%_0_0)] group-active:duration-2000 group-active:ease-out-quad group-active:[clip-path:inset(0_0_0_0)]"
+          data-slot="inner"
+        >
+          <IconTrashFilled className="-ms-1 size-4" />
+          Hold to delete
+        </div>
+        <IconTrash className="-ms-1 size-4" />
+        Hold to delete
+      </button>
+    </div>
+  );
+}
+
 export default function ComponentPlaygroundPage() {
   return (
     <div className="flex w-full max-w-3xl flex-col gap-8">
       <div className="prose mx-auto w-full max-w-3xl">
         <p>Interactive demos of some components I thought were fun. Your mileage may vary.</p>
 
-        <h2>Squishy</h2>
-        <Demo title="Switch" centerContent>
+        <h2>Inputs</h2>
+        <Demo title="Squishy thumbs" innerClass="flex flex-col gap-4">
           <SwitchDemo />
-        </Demo>
-
-        <Demo title="Slider" centerContent>
+          <Separator />
           <SliderDemo />
         </Demo>
 
-        <Demo title="Emoji feedback">
-          <EmojiFeedbackDemo />
+        <Demo title="Color swatches" centerContent>
+          <ColorSwatchGroupDemo />
         </Demo>
 
-        <h2>Curvy</h2>
+        <h2>Clip-Path</h2>
+        <Demo title="Delete button">
+          <DeleteButtonDemo />
+        </Demo>
 
         <Demo title="Chrome Tabs">
           <ChromeTabsDemo />
         </Demo>
 
-        <Demo
-          title="Mark"
-          caption={
-            <>
-              Attempting a realistic highlighter effect with <Code>corner-shape</Code>.
-            </>
-          }
-        >
-          <p className="text-sm text-muted-foreground">
-            This is a <mark>marked</mark> paragraph.
-          </p>
-          <p className="text-sm text-muted-foreground">
-            Reprehenderit labore magna incididunt duis amet id nisi est elit in.{" "}
-            <mark>Et fugiat duis ipsum sunt et officia Lorem veniam qui id.</mark> Sunt proident incididunt eu nulla dolore aliqua elit
-            ipsum id laborum quis ex ipsum ullamco. Pariatur ea voluptate eu quis officia deserunt ipsum tempor.
-          </p>
-        </Demo>
-
-        <h2>Raycast-y</h2>
-        <Demo title="Site Search" centerContent>
-          <SiteSearch className="w-full max-w-xs" />
-        </Demo>
-
-        <h2>Utilities</h2>
-
-        <Demo title="Color swatch group" centerContent>
-          <ColorSwatchGroupDemo />
-        </Demo>
-
-        <Demo title="Copy button">
-          <div className="grid gap-2 md:grid-cols-2">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-sm text-foreground">Copy &quot;Hello, world!&quot;</span>
-              <CopyButton value="Hello, world!" size="icon" />
-            </div>
-            <Field className="max-w-3xs">
-              <FieldLabel>Paste to test:</FieldLabel>
-              <Input />
-            </Field>
-          </div>
+        <h2>Motion</h2>
+        <Demo title="Emoji feedback">
+          <EmojiFeedbackDemo />
         </Demo>
 
         <Demo title="Mode toggle" centerContent>
           <ModeToggle />
         </Demo>
+        <Demo title="Copy button">
+          <div className="grid items-center justify-center gap-2 md:grid-cols-2">
+            <div className="flex items-center gap-1">
+              <span className="font-pixel text-2xs text-foreground">Copy &rarr;</span>
+              <CopyButton value="Hello, world!" size="icon" variant="default" />
+            </div>
+            <Field className="max-w-3xs">
+              <Input aria-label="Paste to test" placeholder="Paste here…" className="w-auto" />
+            </Field>
+          </div>
+        </Demo>
+        <h2>Site</h2>
+
+        <Demo
+          title="Mark"
+          caption={
+            <>
+              A semi-realistic highlighter effect with <Code>corner-shape</Code>.
+            </>
+          }
+          innerClass="space-y-4 text-sm/6 text-muted-foreground"
+        >
+          <p>
+            A gray highlight? <mark>Boring!</mark>
+          </p>
+
+          <p>
+            No worries, we can slap a <Code variant="plain">data-hue</Code> attribute on it. Let's do some classic highligter colors, like{" "}
+            <mark data-hue="yellow">yellow</mark> or <mark data-hue="pink">pink</mark> or <mark data-hue="lime">lime</mark> or{" "}
+            <mark data-hue="magenta">magenta</mark> or <mark data-hue="cyan">cyan</mark>.
+          </p>
+
+          <p>
+            The highlight shape also plays nice with long strings.{" "}
+            <mark data-hue="indigo">
+              It's got{" "}
+              <Code variant="plain" className="inline wrap-anywhere">
+                box-decoration-clone
+              </Code>{" "}
+              applied to make the shape span line breaks.
+            </mark>{" "}
+            Notice how it also applied to the <Code variant="inline-component">code</Code> element too? I think that's a nice touch. Same
+            with changing its background color, which you probably didn't notice.
+          </p>
+          <strong>Custom overrides</strong>
+          <p>
+            Don't like the default values? Override with classes, like this{" "}
+            <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
+          </p>
+        </Demo>
+
+        <Demo title="Site Search" centerContent innerClass="flex flex-col gap-2">
+          <SiteSearch className="w-full max-w-xs" variant="input" />
+        </Demo>
+
         <h2>Devices</h2>
         <p>
           A remix of Geist&apos;s <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color mode and uses
@@ -172,13 +245,21 @@ export default function ComponentPlaygroundPage() {
           </DeviceFrame.Phone>
         </Demo>
 
-        <Demo title="Device frame — browser">
+        <Demo title="Device frame — browser" variant="outline">
           <DeviceFrame.Browser address="bob.fyi">
             <div className="flex items-center justify-center py-12 text-sm text-muted-foreground">
               <Favicon className="mr-2 size-4" />
               Browser frame preview
             </div>
           </DeviceFrame.Browser>
+        </Demo>
+        <Demo title="Keys" centerContent innerClass="flex flex-col gap-2">
+          <Kbd variant="elevated">⌘/</Kbd>
+          <Kbd>⌘I</Kbd>
+          <KbdGroup className="">
+            <Kbd variant="big">⌘</Kbd>
+            <Kbd variant="big">K</Kbd>
+          </KbdGroup>
         </Demo>
       </div>
     </div>

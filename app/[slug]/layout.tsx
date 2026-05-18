@@ -24,11 +24,14 @@ export default async function MDXLayout({ children, params }: { children: React.
 
   return (
     <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
-      <aside id="toc" className="not-prose self-start max-lg:hidden lg:sticky lg:top-24">
+      <aside
+        id="toc"
+        className="not-prose @stuck-top:*:bg-destructive @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-24"
+      >
         <BackButton href="/#projects" className="ms-1">
           Projects
         </BackButton>
-
+        <div className="@stuck-top/nav:text-destructive text-muted-foreground">Lorem</div>
         <TableOfContents toc={toc} />
       </aside>
 

@@ -12,34 +12,43 @@ export function useCopyToClipboard({
 }: {
   timeout?: number;
   onCopy?: () => void;
-} = {}): { copyToClipboard: (value: string) => void; isCopied: boolean } {
+} = {}): { copyToClipboard: (value: string) => Promise<boolean>; isCopied: boolean } {
   const [isCopied, setIsCopied] = React.useState(false);
   const timeoutIdRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  const copyToClipboard = (value: string): void => {
+  const copyToClipboard = async (value: string): Promise<boolean> => {
     if (typeof window === "undefined" || !navigator.clipboard.writeText) {
-      return;
+      return false;
     }
 
-    if (!value) return;
+    if (!value) {
+      return false;
+    }
 
-    navigator.clipboard.writeText(value).then(() => {
-      if (timeoutIdRef.current) {
-        clearTimeout(timeoutIdRef.current);
-      }
-      setIsCopied(true);
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
 
-      if (onCopy) {
-        onCopy();
-      }
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+    }
+    setIsCopied(true);
 
-      if (timeout !== 0) {
-        timeoutIdRef.current = setTimeout(() => {
-          setIsCopied(false);
-          timeoutIdRef.current = null;
-        }, timeout);
-      }
-    }, console.error);
+    if (onCopy) {
+      onCopy();
+    }
+
+    if (timeout !== 0) {
+      timeoutIdRef.current = setTimeout(() => {
+        setIsCopied(false);
+        timeoutIdRef.current = null;
+      }, timeout);
+    }
+
+    return true;
   };
 
   // Cleanup timeout on unmount

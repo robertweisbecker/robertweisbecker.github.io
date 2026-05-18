@@ -31,9 +31,9 @@ function ResizableHandle({
       data-slot="resizable-handle"
       className={cn(
         "group/resizable-handle relative flex w-2 items-center justify-center outline-none after:absolute after:inset-y-0 after:inset-s-1/2 after:w-px after:-translate-x-1/2 aria-[orientation=horizontal]:h-px aria-[orientation=horizontal]:w-full aria-[orientation=horizontal]:after:inset-s-0 aria-[orientation=horizontal]:after:h-6 aria-[orientation=horizontal]:after:w-full aria-[orientation=horizontal]:after:translate-x-0 aria-[orientation=horizontal]:after:-translate-y-1/2 rtl:after:translate-x-1/2 rtl:aria-[orientation=horizontal]:after:translate-x-0 [&[aria-orientation=horizontal]>div]:rotate-90",
-        "after:transition-colors hover:after:bg-border",
+        "after:transition-colors hover:after:bg-input",
         // "focus:bg-ring/10 focus:after:bg-ring focus-visible:outline-hidden",
-        "[--pattern-bg:var(--muted)] [--pattern-fg:var(--input)]",
+        "[--pattern-bg:var(--muted)] [--pattern-fg:var(--border)]",
         "hover:bg-(--pattern-bg) hover:bg-[repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)] hover:bg-size-[5px_5px]",
 
         // !withHandle && "focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-ring",

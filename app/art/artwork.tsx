@@ -32,7 +32,7 @@ export function Artwork({
 
   return (
     <Cambio.Root dismissible>
-      <figure className={cn("group relative mb-4 min-w-0", className)}>
+      <figure className={cn("group relative mb-4 flex min-w-0 flex-col gap-1", className)}>
         <Cambio.Trigger
           className="relative w-full cursor-zoom-in overflow-hidden shadow-border-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           style={{ aspectRatio }}
@@ -67,8 +67,9 @@ export function Artwork({
             alt={title ? title : ""}
             fill
             sizes="(max-width: 768px) 90vw, 60vw"
-            className="rounded-inherit pointer-events-none object-contain select-none"
-            style={{ borderRadius: 8 }}
+            className="rounded-inherit squircle pointer-events-none object-contain select-none"
+            style={{ borderRadius: 20 }}
+            preload
           />
           <div className="pointer-events-none absolute top-0 left-0 z-10 flex origin-top-left transform-[rotate(-90deg)_translateX(-100%)_translateY(-100%)] gap-1 font-pixel text-2xs text-white text-shadow-sm">
             <Cambio.Title className="h-fit px-1">{title}.</Cambio.Title>

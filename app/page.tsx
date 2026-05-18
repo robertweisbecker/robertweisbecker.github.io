@@ -1,5 +1,10 @@
 "use client";
 import * as React from "react";
+import Link from "next/link";
+import iconCharcoal from "@/public/art/charcoal-icon.png";
+import iconBrush from "@/public/art/brush-icon.png";
+
+import iconApplePencil from "@/public/art/apple-pencil-icon.png";
 import {
   BaseUiIcon,
   FigmaIcon,
@@ -12,9 +17,9 @@ import {
   TreeIconClaude,
   TreeIconRichText,
   MarkdownIcon,
+  PixelShuffleIcon,
   VercelIcon,
 } from "@/components/icons";
-import Link from "next/link";
 import { LinkOut } from "@/components/link-out";
 import { ProjectGrid, type ProjectGridItem } from "@/components/project-grid";
 import { Badge } from "@/components/ui/badge";
@@ -29,9 +34,8 @@ import { Float } from "@/components/animation/float";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "@gravity-ui/icons";
 import { posts, postIcons } from "@/lib/data/posts";
-import { IconCalendar, IconFile, IconLink } from "@tabler/icons-react";
+import { IconCalendar, IconFile, IconLink, IconMailFilled } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import { PixelShuffleIcon } from "@/components/icons";
 import { LayoutGrid } from "@/components/layout-grid";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import { LinkButton } from "@/components/ui/link-button";
@@ -39,6 +43,7 @@ import { InfoTip } from "@/components/info-tip";
 import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@/components/ui/preview-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
+import { ArtCards } from "@/components/demos/art-cards";
 
 const postItems: ProjectGridItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -68,12 +73,12 @@ const postItems: ProjectGridItem[] = posts.map((post) => {
 export default function Home() {
   const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
-    <div className={cn("mx-auto grid max-w-2xl gap-12")}>
+    <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-12 [--delay:50ms]")}>
       <h1 className="-ms-1 -mb-6 text-h1">
         Robert
         <br /> Weisbecker
       </h1>
-      <div className="grid items-start gap-10 sm:grid-cols-[auto_1fr]">
+      <section className="[--stagger:1 grid items-start gap-10 sm:grid-cols-[auto_1fr]">
         <Float
           className="group/pixel relative isolate w-fit rounded-xs bg-card p-1 shadow-border-lg"
           speed={0.38}
@@ -92,7 +97,7 @@ export default function Home() {
             onClick={() => setIsDinoVisible((v) => !v)}
             variant="ghost"
             size="icon-xs"
-            className="md:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none md:-translate-y-1 md:opacity-0"
+            className="pointer-fine:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none pointer-fine:-translate-y-1 pointer-fine:opacity-0"
           >
             {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
           </Button>
@@ -164,19 +169,21 @@ export default function Home() {
             </LinkButton>
           </div> */}
         </div>
-      </div>
-
-      <div>
-        <h2 className="mt-8 -mb-4 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
-          ☆ Projects
-        </h2>
-      </div>
+      </section>
+      <h2 className="mt-8 -mb-4 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
+        ☆ Projects
+      </h2>
       <ProjectGrid />
       <Separator className="min-h-px max-w-14" />
       <h2 className="font-pixel text-[11px] uppercase" id="resources">
         ✧ Posts
       </h2>
       <ProjectGrid items={postItems} />
+      <Separator className="max-w-20" />
+      <h2 className="font-pixel text-[11px] uppercase" id="about">
+        ~ Art
+      </h2>
+      <ArtCards />
       <Separator className="max-w-20" />
       <h2 className="font-pixel text-[11px] uppercase" id="resources">
         ♥ Resources
@@ -186,7 +193,7 @@ export default function Home() {
           <CardHeader>
             <CardTitle>Base UI Starter Kit</CardTitle>
             <CardAction>
-              <Badge variant="primary">Coming soon</Badge>
+              <Badge variant="secondary">Coming soon</Badge>
             </CardAction>
           </CardHeader>
           <div
@@ -266,78 +273,97 @@ export default function Home() {
             </span>
             , among others.
           </p>
+          <div>
+            <p className="mb-2 text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
+
+            <ul className="max-w-prose list-disc space-y-2 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
+              <li>
+                Delivered a (finally relevant!){" "}
+                <Badge variant="link" render={<Link href="/conversational-immigration-forms" />} className="text-sm">
+                  <TreeIconRichText data-icon="inline-start" className="opacity-50" />
+                  thesis
+                </Badge>{" "}
+                exploring chatbots and conversational interface design patterns.{" "}
+              </li>
+              <li>
+                Built a{" "}
+                <Badge variant="link" render={<Link href="/npr-maps" />}>
+                  <TreeIconRichText data-icon="inline-start" className="opacity-50" />
+                  mapping application
+                </Badge>{" "}
+                at NPR when I wasn&apos;t busy <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the
+                background of Tiny Desk recordings.
+              </li>
+              <li>
+                Designed web &amp; iOS screens, performed user testing, and made graphics for{" "}
+                <PreviewCard>
+                  <PreviewCardTrigger
+                    render={<LinkOut href="https://blog.spothero.com/spothero-acquires-parking-panda" text="Parking Panda" />}
+                  />
+                  <PreviewCardPopup className="flex-col">
+                    <p className="font-medium">SpotHero Acquires Parking Panda</p>
+
+                    <p className="text-xs text-muted-foreground italic">
+                      SpotHero has acquired Parking Panda, the leader in US event parking reservations and the #1 parking reservation
+                      service in Canada.
+                    </p>
+                    <Badge variant="ghost">
+                      <IconCalendar data-icon="inline-start" className="opacity-50" /> April 13, 2017
+                    </Badge>
+                  </PreviewCardPopup>
+                </PreviewCard>{" "}
+                (acq. by SpotHero)
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-2 text-sm text-muted-foreground">You can find or reach me here:</p>
+            <ul className="flex flex-col gap-2 ps-6 text-sm">
+              <li>
+                <span className="flex items-center gap-1">
+                  <IconMailFilled className="size-4" /> Email
+                  <span className="after-dots"></span>
+                  <LinkButton href="mailto:yo@bob.fyi" variant="link" size="sm">
+                    yo@bob.fyi
+                  </LinkButton>
+                  <CopyButton value="yo@bob.fyi" size="icon-xs" variant="ghost" />
+                </span>
+              </li>
+
+              <li>
+                <span className="flex items-center gap-1">
+                  <LinkedinIcon className="inline" />
+                  LinkedIn
+                  <span className="after-dots" />
+                  <LinkButton href="https://www.linkedin.com/in/robertweisbecker/" variant="link" size="sm">
+                    @robertweisbecker
+                  </LinkButton>
+                </span>
+              </li>
+
+              <li>
+                <span className="flex items-center gap-1">
+                  <GithubIcon /> GitHub
+                  <span className="after-dots" />
+                  <LinkButton href="https://github.com/robertweisbecker" variant="link" size="sm">
+                    @robertweisbecker
+                  </LinkButton>
+                </span>
+              </li>
+
+              <li>
+                <span className="flex items-center gap-1">
+                  <FigmaIcon className="size-4" />
+                  Figma
+                  <span className="after-dots" />
+                  <LinkButton href="https://figma.com/@yobob" variant="link" size="sm">
+                    @yobob
+                  </LinkButton>
+                </span>
+              </li>
+            </ul>
+          </div>
         </LayoutGrid>
-        <div>
-          <p className="mb-2 text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
-
-          <ul className="max-w-prose list-disc space-y-2 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
-            <li>
-              Delivered a (finally relevant!) thesis exploring chatbots and conversational interface design patterns.{" "}
-              <Badge variant="link" render={<Link href="/conversational-immigration-forms" />} className="text-sm">
-                <TreeIconRichText data-icon="inline-start" className="opacity-50" />
-                Case study
-              </Badge>
-            </li>
-            <li>
-              Built a{" "}
-              <Badge variant="link" render={<Link href="/npr-maps" />}>
-                <TreeIconRichText data-icon="inline-start" className="opacity-50" />
-                mapping application
-              </Badge>{" "}
-              at NPR when I wasn&apos;t busy <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the
-              background of Tiny Desk recordings.
-            </li>
-            <li>
-              Designed web &amp; iOS screens, performed user testing, and made graphics for{" "}
-              <PreviewCard>
-                <PreviewCardTrigger
-                  render={<LinkOut href="https://blog.spothero.com/spothero-acquires-parking-panda" text="Parking Panda" />}
-                />
-                <PreviewCardPopup className="flex-col">
-                  <p className="font-medium">SpotHero Acquires Parking Panda</p>
-
-                  <p className="text-xs text-muted-foreground italic">
-                    SpotHero has acquired Parking Panda, the leader in US event parking reservations and the #1 parking reservation service
-                    in Canada.
-                  </p>
-                  <Badge variant="ghost">
-                    <IconCalendar data-icon="inline-start" className="opacity-50" /> April 13, 2017
-                  </Badge>
-                </PreviewCardPopup>
-              </PreviewCard>{" "}
-              (acq. by SpotHero)
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className="mb-2 text-sm text-muted-foreground">You can find or reach me here:</p>
-          <ul className="flex flex-wrap items-center gap-2 text-sm">
-            <li className="flex items-center justify-center gap-0.5">
-              <LinkButton href="mailto:yo@bob.fyi" variant="link">
-                yo@bob.fyi
-              </LinkButton>
-              <CopyButton value="yo@bob.fyi" />
-            </li>
-            ∙
-            <li>
-              <LinkButton href="https://www.linkedin.com/in/robertweisbecker/" variant="link">
-                <LinkedinIcon /> LinkedIn
-              </LinkButton>
-            </li>
-            ∙
-            <li>
-              <LinkButton href="https://github.com/robertweisbecker" variant="link">
-                <GithubIcon /> GitHub
-              </LinkButton>
-            </li>
-            ∙
-            <li>
-              <LinkButton href="https://figma.com/@yobob" variant="link">
-                <FigmaIcon /> Figma
-              </LinkButton>
-            </li>
-          </ul>
-        </div>
       </section>
       <section className="flex flex-col gap-6">
         <div className="flex w-full justify-between gap-2">

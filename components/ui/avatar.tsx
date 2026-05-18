@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { cva, VariantProps } from "class-variance-authority";
 
 const avatarVariants = cva(
-  "group/avatar relative flex shrink-0 rounded-(--avatar-radius) bg-card text-card-foreground select-none size-(--avatar-size) [--avatar-radius:var(--radius-sm)] [--avatar-size:--spacing(6)]",
+  "group/avatar relative flex shrink-0 rounded-(--avatar-radius) bg-card text-card-foreground select-none size-(--avatar-size) [--avatar-radius:var(--radius-sm)] [--avatar-size:--spacing(6)] inset-ring-1 inset-ring-border overflow-hidden flex items-center justify-center",
   {
     variants: {
       size: {

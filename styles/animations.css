@@ -208,7 +208,102 @@
     }
   }
 
-  /* 10s cycle: invisible 9.5s (0–95%), visible 0.5s (95–100%). Opacity animates reliably on SVG <g>; visibility + step-end did not. */
+  @keyframes toast-wiggle-odd {
+    0%,
+    100% {
+      transform: translateX(0) scale(1);
+    }
+    35% {
+      transform: translateX(-4px) scale(1.04);
+    }
+    70% {
+      transform: translateX(4px) scale(1.02);
+    }
+  }
+
+  @keyframes toast-wiggle-even {
+    0%,
+    100% {
+      transform: translateX(0) scale(1);
+    }
+    35% {
+      transform: translateX(4px) scale(1.04);
+    }
+    70% {
+      transform: translateX(-4px) scale(1.02);
+    }
+  }
+
+  @keyframes toast-pulse-even {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+
+    50% {
+      transform: translateY(-2px) scale(1.1);
+    }
+  }
+
+  @keyframes toast-pulse-odd {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+
+    50% {
+      transform: translateY(-2px) scale(1.1);
+    }
+  }
+
+  @keyframes wiggle {
+    0% {
+      transform: rotate(0deg);
+    }
+    7.5% {
+      transform: rotate(20deg);
+    }
+    15% {
+      transform: rotate(-15deg);
+    }
+    22.5% {
+      transform: rotate(12.5deg);
+    }
+    30% {
+      transform: rotate(-10deg);
+    }
+    37.5% {
+      transform: rotate(10deg);
+    }
+    45% {
+      transform: rotate(-15deg);
+    }
+    52.5% {
+      transform: rotate(7.5deg);
+    }
+    60% {
+      transform: rotate(-10deg);
+    }
+    67.5% {
+      transform: rotate(10deg);
+    }
+    75% {
+      transform: rotate(-7.5deg);
+    }
+    82.5% {
+      transform: rotate(7.5deg);
+    }
+    90% {
+      transform: rotate(-5deg);
+    }
+    97.5% {
+      transform: rotate(5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
   @keyframes blip {
     0%,
     95% {
@@ -227,6 +322,13 @@
         "SERF" 0;
     }
   }
+  @keyframes stagger-enter {
+    from {
+      transform: translateY(8px);
+      filter: blur(8px);
+      opacity: 0;
+    }
+  }
   --animate-pulse-bounce: pulse-bounce 1s linear;
   --animate-pulse-bounce-alt: pulseBounce 1s ease-in-out infinite;
   --animate-fade-in: fadeIn 150ms ease-out;
@@ -239,8 +341,19 @@
   --animate-expand: expand 150ms ease-out;
   --animate-collapse: collapse 150ms ease-out;
   --animate-pixel-move-x: pixel-move-x 5s infinite step-end;
+  --animate-toast-wiggle-odd: toast-wiggle-odd 220ms ease-out;
+  --animate-toast-wiggle-even: toast-wiggle-even 220ms ease-out;
+  --animate-toast-pulse-even: toast-pulse-even 200ms var(--ease-in-out-quad);
+  --animate-toast-pulse-odd: toast-pulse-odd 200ms var(--ease-in-out-quad);
+  --animate-wiggle: wiggle 2s ease alternate infinite;
   --animate-blip: blip 4s linear infinite backwards;
   --animate-variable-weight: variable-weight 500ms ease-out;
+  --animate-stagger-enter: stagger-enter 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    calc(var(--delay, 0ms) * var(--stagger, 0)) both;
+  /* .animate-stagger-enter {
+    
+    animation-delay: ;
+  } */
 }
 
 @media (prefers-reduced-motion: reduce) {

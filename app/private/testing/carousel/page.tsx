@@ -130,8 +130,8 @@ export default function CarouselTestingPage() {
           <div id="carousel-testing-example-vertical" className="space-y-2">
             <p className="text-sm text-muted-foreground">Vertical + toolbar</p>
             <div className="h-80">
-              <Carousel orientation="vertical">
-                <CarouselViewport>
+              <Carousel orientation="vertical" className="h-64 bg-muted">
+                <CarouselViewport className="">
                   <SlideItems carouselId="carousel-testing-row-1-v" />
                 </CarouselViewport>
                 <CarouselToolbar />

@@ -32,7 +32,7 @@ export function CommandDialogBackdrop({ className, ...props }: CommandDialogPrim
   return (
     <CommandDialogPrimitive.Backdrop
       className={cn(
-        "fixed inset-0 bg-black opacity-10 transition-opacity duration-150 ease-[cubic-bezier(0.45,1.005,0,1.005)] data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute dark:opacity-30",
+        "fixed inset-0 bg-background opacity-10 transition-opacity duration-150 ease-[cubic-bezier(0.45,1.005,0,1.005)] data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute dark:opacity-30",
         className
       )}
       data-slot="command-dialog-backdrop"
@@ -65,7 +65,7 @@ export function CommandDialogPopup({
       <CommandDialogViewport>
         <CommandDialogPrimitive.Popup
           className={cn(
-            "squircle relative row-start-2 flex max-h-120 min-h-0 w-full max-w-3xl min-w-0 flex-col overflow-hidden ui-popup rounded-xl transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform outline-none data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0 **:data-[slot=scroll-area-viewport]:data-has-overflow-y:pe-1",
+            "squircle relative row-start-2 flex max-h-120 min-h-0 w-full max-w-3xl min-w-0 flex-col overflow-hidden ui-popup rounded-3xl transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform outline-none data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0 **:data-[slot=scroll-area-viewport]:data-has-overflow-y:pe-1",
             className
           )}
           data-slot="command-dialog-popup"

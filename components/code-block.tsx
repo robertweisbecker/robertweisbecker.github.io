@@ -65,7 +65,7 @@ export function CodeBlock({
 
   const codeContent = (
     <ScrollArea orientation="both" scrollbarGutter scrollFade>
-      <pre className={cn("min-h-0 px-1 text-xs/6", lineNumbers && "show-line-numbers", selectAll && "select-all")}>
+      <pre className={cn("min-h-0 px-1 text-xs/6", lineNumbers && "show-line-numbers", selectAll && "select-all", !filename && "pe-8")}>
         {highlightedHtml ? (
           <code className="font-mono" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
         ) : (
@@ -114,7 +114,7 @@ export function CodeBlock({
       )}
       {collapsible ? (
         <Collapsible>
-          <CardContent className={cn(contentPadding)}>
+          <CardContent>
             <CollapsibleContent
               className="relative overflow-hidden data-open:h-(--collapsible-panel-height) data-closed:h-(--initial-height)!"
               style={
@@ -137,7 +137,7 @@ export function CodeBlock({
           </CardFooter>
         </Collapsible>
       ) : (
-        <CardContent className={cn(contentPadding)}>{codeContent}</CardContent>
+        <CardContent>{codeContent}</CardContent>
       )}
     </Card>
   );

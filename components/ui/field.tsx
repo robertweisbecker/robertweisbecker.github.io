@@ -83,9 +83,21 @@ function Field({ className, orientation = "vertical", ...props }: FieldPrimitive
   );
 }
 
-function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
+function FieldContent({
+  orientation = "vertical",
+  className,
+  ...props
+}: React.ComponentProps<"div"> & { orientation?: "vertical" | "horizontal" }) {
   return (
-    <div data-slot="field-content" className={cn("group/field-content flex flex-1 flex-col gap-0.5 leading-snug", className)} {...props} />
+    <div
+      data-slot="field-content"
+      className={cn(
+        "group/field-content flex flex-1 flex-col gap-0.5 leading-snug",
+        orientation === "horizontal" && "flex-row gap-2 *:data-[slot=field-description]:text-sm",
+        className
+      )}
+      {...props}
+    />
   );
 }
 

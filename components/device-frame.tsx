@@ -116,7 +116,7 @@ function Phone({ className, children, island = true, toolbar = true, address = "
                   <IconWifi className="size-[1em]" strokeWidth={2.5} />
                   <div className="grid-stack aspect-square">
                     <div
-                      className="z-1 flex items-center self-center text-[3cqw] font-bold tracking-[-5%]"
+                      className="z-1 flex items-center self-center text-[2.5cqw] font-bold tracking-[-5%]"
                       style={{ color: charging ? "var(--color-foreground)" : "var(--color-background)" }}
                     >
                       {loading ? (
@@ -125,7 +125,7 @@ function Phone({ className, children, island = true, toolbar = true, address = "
                         </span>
                       ) : (
                         <>
-                          {batteryLevel} {charging && <IconBoltFilled className="size-[.875em] scale-y-110" />}
+                          {batteryLevel} {charging && <IconBoltFilled className="mx-[-0.08em] size-[.875em] scale-x-90 scale-y-120" />}
                         </>
                       )}
                     </div>
@@ -205,7 +205,7 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
   return (
     <div data-slot="device-frame" className={cn("w-full", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
-        <div className="squircle overflow-hidden rounded-2xl bg-popover shadow-border-sm">
+        <div className="squircle overflow-hidden rounded-2xl bg-popover shadow-border-md">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-2 py-2 md:px-3 md:py-2.5">
             <div className="flex shrink-0 items-center gap-1.5 self-start pe-1 md:self-center md:ps-1">
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border/50" />

@@ -9,6 +9,13 @@
 @import "./hues.css";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant @stuck-top {
+  @supports (container-type: scroll-state) {
+    @container scroll-state(stuck: top) {
+      @slot;
+    }
+  }
+}
 
 @theme inline {
   /* --default-font-feature-settings: "ss01", "ss03", "cv01", "cv11"; */
@@ -176,7 +183,7 @@
   --border: --alpha(var(--neutral-600) / 20%);
   --input: --alpha(var(--neutral-600) / 40%);
   --ring: var(--info-400);
-  --sidebar: var(--neutral-50);
+  --sidebar: var(--neutral-100);
   --sidebar-foreground: color-mix(in srgb, var(--neutral-800) 64%, var(--sidebar));
   --sidebar-primary: var(--neutral-800);
   --sidebar-primary-foreground: var(--neutral-50);
@@ -214,7 +221,7 @@
 
 .dark,
 .dark [data-theme] {
-  --background: var(--neutral-975);
+  --background: var(--neutral-950);
   --foreground: var(--neutral-50);
   --card: var(--neutral-900);
   --card-foreground: var(--neutral-300);
@@ -224,7 +231,7 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-neutral-700) / 15%);
+  --muted: --alpha(var(--color-neutral-975) / 50%);
   --muted-foreground: var(--neutral-300);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
@@ -242,9 +249,9 @@
   --warning-foreground: var(--warning-300);
   --warning-primary: var(--warning-500);
   --border: --alpha(var(--color-white) / 14%);
-  --input: --alpha(var(--color-white) / 24%);
+  --input: --alpha(var(--color-white) / 32%);
   --ring: var(--info-300);
-  --sidebar: color-mix(in srgb, var(--neutral-950) 97%, var(--color-white));
+  --sidebar: var(--neutral-975);
   --sidebar-foreground: color-mix(in srgb, var(--neutral-100) 64%, var(--sidebar));
   --sidebar-primary: var(--neutral-100);
   --sidebar-primary-foreground: var(--neutral-800);
@@ -256,7 +263,7 @@
     inset 0 0 0 1px --alpha(var(--border) / 10%), inset 0 1px --alpha(var(--border) / 25%),
     inset 0 0.5px 1px --alpha(var(--border) / 40%), 0 0 0 0.5px hsl(0 0 0% / 50%);
   --popover-shadow:
-    0 0 1px 1px hsl(0 0 0% / 90%), inset 0 1px 0 0 hsl(0 0 100% / 10%), inset 0 0 0 1px hsl(0 0 100% / 5%),
+    0 0 1px 1px hsl(0 0 0% / 90%), inset 0 1px 0 0 var(--border), inset 0 0 0 1px --alpha(var(--border) / 50%),
     0 4px 40px 20px hsl(0 0 0% / 55%);
   --shadow-button-inset:
     inset 0 1px 0 --alpha(white / 5%), 0 2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px --alpha(white / 2%);
@@ -297,9 +304,14 @@
     font-optical-sizing: auto;
     scroll-behavior: smooth;
     font-synthesis: none;
+    text-spacing-trim: space-first;
+    text-rendering: geometricPrecision;
     /* .font-sans {
       font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern";
     } */
+  }
+  .bg-card {
+    @apply backdrop-blur-xs;
   }
 }
 
@@ -333,7 +345,19 @@
       "kern";
   }
   mark {
-    @apply rounded-[70%/1.9em_.8em_.9em_.3em] bg-transparent bg-radial-[at_-50%_50%] from-info-primary/50 from-4% via-info via-26% to-info-primary/30 to-90% box-decoration-clone ps-0.5 pe-1 pt-0 pb-1 text-foreground bg-blend-multiply [corner-shape:squircle_bevel] text-shadow-2xs text-shadow-background/50 dark:bg-blend-lighten;
+    --mark-origin: -10% 0%;
+    --mark-radius: 60% 93% 1ch 55% / 37% 2ch 5ex 160%;
+    --mark-dark: var(--hue-700);
+    --mark-light: var(--hue-100);
+    @apply bg-blend-multiply [--mark-bg:var(--mark-light)] [--mark-fg:var(--mark-dark)];
+    @variant dark {
+      @apply bg-blend-screen [--mark-bg:var(--mark-dark)] [--mark-fg:var(--mark-light)];
+    }
+
+    @apply -mx-0.5 -mt-0.5 -mb-1 rounded-(--mark-radius) bg-transparent bg-radial-[at_var(--mark-origin)] from-(--mark-bg) from-4% via-(--mark-bg)/15 via-32% to-(--mark-bg)/65 to-92% box-decoration-clone bg-size-[100%_80%] ps-1 pe-1 pt-0.5 pb-1 font-[450] text-(--mark-fg) shadow-[inset_3px_-1px_3px_-2px_--alpha(var(--mark-bg)/90%)] [corner-shape:bevel_squircle] text-shadow-background/50 text-shadow-xs;
+  }
+  strong {
+    @apply font-[525] tracking-[-0.02em] text-foreground;
   }
 }
 
@@ -435,12 +459,12 @@
 }
 
 @utility ui-input {
-  @apply w-full min-w-0 rounded-md border border-input/50 bg-card/50 bg-clip-padding px-2.5 py-1 text-base text-foreground transition-[color,background-color,border-color,box-shadow] outline-none sm:text-sm;
+  @apply w-full min-w-0 rounded-md border border-input bg-card/50 bg-clip-padding px-2.5 py-1 text-base text-foreground transition-[color,background-color,border-color,box-shadow] outline-none sm:text-sm;
   @variant placeholder {
     @apply text-muted-foreground/50;
   }
   @variant hover {
-    @apply border-input not-focus:not-focus-within:not-disabled:bg-input/2.5;
+    @apply border-muted-foreground not-focus:not-focus-within:not-disabled:bg-input/2.5;
   }
   @variant active {
     @apply border-input;
@@ -610,4 +634,16 @@
   @apply relative;
   @apply before:absolute before:top-0 before:right-0 before:h-px before:w-screen before:bg-border;
   @apply after:absolute after:right-0 after:bottom-0 after:h-px after:w-screen after:bg-border;
+}
+
+@utility after-dots {
+  height: 1em;
+  flex: 1;
+  line-height: 1;
+  overflow: hidden;
+  word-spacing: 1ch;
+  &:after {
+    color: var(--border);
+    content: "······································································";
+  }
 }

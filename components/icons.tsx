@@ -197,7 +197,7 @@ export function ShadcnIcon(props: React.SVGProps<SVGSVGElement>) {
 
 export function FigmaIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 54 80" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg viewBox="0 0 54 80" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g clipPath="url(#figma__clip0_912_3)">
         <path
           d="M13.3333 80.0002C20.6933 80.0002 26.6667 74.0268 26.6667 66.6668V53.3335H13.3333C5.97333 53.3335 0 59.3068 0 66.6668C0 74.0268 5.97333 80.0002 13.3333 80.0002Z"
@@ -325,7 +325,12 @@ export function ArrowSvg(props: React.ComponentProps<"svg">) {
       />
       <path
         d="M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z"
-        className="dark:fill-border/50 dark:in-data-[side=bottom]:fill-white/12"
+        className="dark:fill-black/90"
+        transform="translate(0, -0.5)"
+      />
+      <path
+        d="M10.3333 3.34539L5.47654 7.71648C4.55842 8.54279 3.36693 9 2.13172 9H0V8H2.13172C3.11989 8 4.07308 7.63423 4.80758 6.97318L9.66437 2.60207C10.0447 2.25979 10.622 2.2598 11.0023 2.60207L15.8591 6.97318C16.5936 7.63423 17.5468 8 18.5349 8H20V9H18.5349C17.2998 9 16.1083 8.54278 15.1901 7.71648L10.3333 3.34539Z"
+        className="dark:fill-white/4 dark:in-data-[side=bottom]:fill-white/12"
       />
     </svg>
   );

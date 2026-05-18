@@ -281,7 +281,8 @@ function Carousel({
           "group relative",
           "[--carousel-height:var(--container-xs)]",
           "[--carousel-gap:--spacing(4)]",
-          orientation === "vertical" && "has-data-[slot=carousel-next]:pb-button-sm has-data-[slot=carousel-previous]:pt-button-sm",
+          orientation === "vertical" &&
+            "has-data-[slot=carousel-next]:not-has-data-[slot=carousel-toolbar]:pb-button-sm has-data-[slot=carousel-previous]:not-has-data-[slot=carousel-toolbar]:pt-button-sm has-data-[slot=carousel-toolbar]:not-has-data-[layout=inset]:ps-button-sm",
           className
         )}
         role="region"
@@ -353,7 +354,7 @@ function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ..
       render={<motion.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
-        orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
+        // orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
         // "not-in-data-[slot=carousel-toolbar]:absolute not-in-data-[slot=carousel-toolbar]:z-10",
         // orientation === "horizontal"
         //   ? "not-in-data-[slot=carousel-toolbar]:inset-s-0 not-in-data-[slot=carousel-toolbar]:top-1/2 not-in-data-[slot=carousel-toolbar]:-translate-y-1/2 md:not-in-data-[slot=carousel-toolbar]:-inset-s-(--carousel-gap)"
@@ -364,11 +365,8 @@ function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ..
       onClick={goToPrev}
       {...props}
     >
-      {orientation === "horizontal" ? (
-        <IconChevronLeft strokeWidth={3} className="-ms-px size-5 rtl:rotate-180" />
-      ) : (
-        <IconChevronUp strokeWidth={3} className="-mt-px size-5 rtl:rotate-180" />
-      )}
+      <IconChevronLeft strokeWidth={3} className="-ms-px size-5 rtl:rotate-180" />
+
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -385,7 +383,7 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
       render={<motion.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
-        orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
+        // orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
         // "not-in-data-[slot=carousel-toolbar]:absolute not-in-data-[slot=carousel-toolbar]:z-10",
         // orientation === "horizontal"
         //   ? "not-in-data-[slot=carousel-toolbar]:inset-e-0 not-in-data-[slot=carousel-toolbar]:top-1/2 not-in-data-[slot=carousel-toolbar]:-translate-y-1/2 md:not-in-data-[slot=carousel-toolbar]:-inset-e-(--carousel-gap)"
@@ -396,11 +394,8 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
       onClick={goToNext}
       {...props}
     >
-      {orientation === "horizontal" ? (
-        <IconChevronRight strokeWidth={3} className="-me-px size-4.5 rtl:rotate-180" />
-      ) : (
-        <IconChevronDown strokeWidth={3} className="-mb-px size-4.5 rtl:rotate-180" />
-      )}
+      <IconChevronRight strokeWidth={3} className="-me-px size-4.5 rtl:rotate-180" />
+
       <span className="sr-only">Next slide</span>
     </Button>
   );
@@ -414,7 +409,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
       role="tablist"
       className={cn(
         "flex h-button-sm shrink-0 items-center justify-center rounded-full border bg-neutral-700/60 px-2.5 py-1.5 backdrop-blur-xl",
-        orientation === "vertical" && "rotate-90",
+        // orientation === "vertical" && "h-auto rotate-90",
         className
       )}
       aria-label="Choose a slide to show."
@@ -476,7 +471,7 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
       aria-label={isFinished ? "Restart" : isPlaying ? "Pause" : "Play"}
       className={cn(
         buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }),
-        orientation === "vertical" && "-rotate-90",
+        // orientation === "vertical" && "-rotate-90",
         className
       )}
       render={<motion.button />}
@@ -515,10 +510,11 @@ function CarouselToolbar({ className, inset = true, ...props }: React.ComponentP
       className={cn(
         "z-10 flex shrink-0 items-center gap-3 text-white",
         orientation === "horizontal" && "w-fit flex-row",
-        orientation === "vertical" && "flex-col",
-        !inset && "m-2 mx-auto shrink-0",
+        orientation === "vertical" && "rotate-90",
         inset && orientation === "horizontal" && "absolute bottom-4 left-1/2 -translate-x-1/2",
-        inset && orientation === "vertical" && "inset-inline-s-0 absolute top-1/2 -translate-y-1/2",
+        inset && orientation === "vertical" && "absolute top-1/2 left-button-sm -translate-x-1/2 -translate-y-1/2",
+        !inset && orientation === "vertical" && "translate-x-[calc(50%-var(--button-sm)/2)]",
+        !inset && "m-2 mx-auto shrink-0",
         className
       )}
       {...props}

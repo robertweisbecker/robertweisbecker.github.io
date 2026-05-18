@@ -73,14 +73,14 @@ function TooltipGroup({
                   "transition-[top,left,right,bottom,transform]",
                   "duration-[0.35s]",
                   "ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  "data-instant:transition-none"
+                  "data-instant:duration-0"
                 )}
               >
                 <TooltipPrimitive.Popup
                   data-slot="tooltip-group-popup"
                   className={cn(
-                    "flex origin-(--transform-origin) flex-col",
-                    "h-(--popup-height,auto) w-(--popup-width,auto)",
+                    "flex origin-(--transform-origin) text-center",
+                    "h-(--popup-height,auto) w-(--popup-width,auto) min-w-10",
                     "rounded-md bg-popover text-[0.8125rem] text-popover-foreground",
                     "shadow-border-lg drop-shadow-md/2 dark:shadow-black/50",
                     "transition-[width,height,opacity,scale]",
@@ -88,7 +88,7 @@ function TooltipGroup({
                     "ease-[cubic-bezier(0.22,1,0.36,1)]",
                     "data-starting-style:scale-90 data-starting-style:opacity-0",
                     "data-ending-style:scale-90 data-ending-style:opacity-0",
-                    "data-instant:transition-none",
+                    "data-instant:duration-0",
                     "data-[side=left]:*:data-[slot=tooltip-arrow]:hidden data-[side=right]:*:data-[slot=tooltip-arrow]:hidden",
                     popupClassName
                   )}
@@ -112,8 +112,8 @@ function TooltipGroup({
                   <TooltipPrimitive.Viewport
                     data-slot="tooltip-group-viewport"
                     className={cn(
-                      "[--viewport-inline-padding:0.5rem]",
-                      "relative h-full w-full overflow-clip",
+                      "min-w-10 [--viewport-inline-padding:--spacing(1.5)]",
+                      "relative h-full w-full min-w-fit overflow-clip text-center",
                       "px-[var(--viewport-inline-padding)] py-1",
                       "[&_[data-previous]]:w-[calc(var(--popup-width)-2*var(--viewport-inline-padding))]",
                       "[&_[data-previous]]:translate-x-0",

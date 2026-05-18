@@ -4,7 +4,18 @@ import { useKeyPress } from "@/hooks/use-key-press";
 import { posts, postIcons } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconComponents, IconFile, IconFlask, IconHome, IconNews, IconPalette, IconUser } from "@tabler/icons-react";
+import {
+  IconBriefcaseFilled,
+  IconComponents,
+  IconFile,
+  IconFlask,
+  IconHome,
+  IconLayoutGridFilled,
+  IconNews,
+  IconPalette,
+  IconSearch,
+  IconUser,
+} from "@tabler/icons-react";
 import { useRouter, usePathname } from "next/navigation";
 import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { matchSorter } from "match-sorter";
@@ -24,7 +35,7 @@ import {
   CommandPanel,
   CommandShortcut,
 } from "./ui/command";
-import { Kbd } from "./ui/kbd";
+import { Kbd, KbdGroup } from "./ui/kbd";
 import { Dialog } from "@base-ui/react/dialog";
 import { Badge } from "./ui/badge";
 import { TreeIconFile, Favicon, PixelNewsIcon, PixelFinderIcon, FolderIcon, CursorIcon } from "./icons";
@@ -53,22 +64,32 @@ type SearchGroup = {
 type FilterTab = "All" | "Projects" | "Posts" | "Private";
 
 const FILTER_TABS: { value: FilterTab; icon?: React.ReactNode }[] = [
-  { value: "All" },
+  { value: "All", icon: <IconLayoutGridFilled /> },
   {
     value: "Projects",
     icon: (
       <>
-        <svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <IconBriefcaseFilled />
+        {/* <svg width="152" height="152" viewBox="0 0 152 152" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M144 118C144 124.627 138.627 130 132 130H20C13.3726 130 8 124.627 8 118V35C8 28.3726 13.3726 23 20 23H48.5836C53.1289 23 57.284 25.568 59.3167 29.6334L60.6833 32.3666C62.716 36.432 66.8711 39 71.4164 39H132C138.627 39 144 44.3726 144 51V118Z"
             fill="#66BAFF"
           />
           <rect x="10" y="41" width="132" height="87" rx="10" fill="#A8D9FF" />
-        </svg>
+        </svg> */}
       </>
     ),
   },
-  { value: "Posts", icon: <PixelNewsIcon /> },
+  {
+    value: "Posts",
+    icon: (
+      <img
+        src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-e0904rWYQ29GCwVnLKDYLOjvAXcSXy.png&w=1000&q=75"
+        alt="Posts"
+        className="size-4"
+      />
+    ),
+  },
   { value: "Private", icon: <CursorIcon /> },
 ];
 
@@ -180,7 +201,17 @@ const privatePages: SearchItem[] = [
 
 const isDev = process.env.NODE_ENV === "development";
 
-export function SiteSearch({ className }: { className?: string }) {
+export function SiteSearch({
+  className,
+  label = "Search…",
+  variant = "input",
+  showKbd = true,
+}: {
+  className?: string;
+  label?: string;
+  variant?: "button" | "input";
+  showKbd?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<FilterTab>("All");
   const { push } = useRouter();
@@ -253,17 +284,37 @@ export function SiteSearch({ className }: { className?: string }) {
       >
         <CommandDialogTrigger
           className={cn(
-            "ease squircle flex h-button-sm items-center justify-start gap-2 rounded-md bg-muted ps-2 pe-3 text-sm text-muted-foreground inset-shadow-border duration-100 hover:bg-accent hover:text-accent-foreground",
+            "ease squircle flex h-button-sm items-center justify-start gap-2 rounded-md ps-2 pe-3 text-sm transition-colors duration-100",
+            variant === "button" && "w-fit bg-muted hover:bg-accent hover:text-accent-foreground",
+            variant === "input" &&
+              "w-full bg-background text-muted-foreground inset-shadow-border outline -outline-offset-1 outline-border/50 hover:outline-input",
             className
           )}
           onClick={() => setOpen(true)}
         >
-          <PixelFinderIcon className="size-[11px]" data-icon={"inline-start"} />
-          {/* <IconSearch data-icon="inline-start" className="size-3.5 stroke-1 text-muted-foreground" /> */}
-          <span className="text-xs text-muted-foreground">Find something…</span>
-          <Kbd className="-me-1.5 ml-auto hidden md:block" variant="elevated">
-            ⌘ /
-          </Kbd>
+          {variant === "button" ? (
+            <PixelFinderIcon className="size-[11px] fill-muted-foreground/50" data-icon={"inline-start"} />
+          ) : (
+            <IconSearch data-icon="inline-start" className="stroke-1.5 size-3.5 text-muted-foreground" />
+          )}
+
+          {label && <span className={cn("text-xs text-muted-foreground", variant === "input" && "opacity-50")}>{label}</span>}
+          {showKbd ? (
+            variant === "input" ? (
+              <KbdGroup className="-me-1.5 ml-auto hidden md:block">
+                <Kbd className="" variant="elevated">
+                  ⌘
+                </Kbd>
+                <Kbd className="" variant="elevated">
+                  /
+                </Kbd>
+              </KbdGroup>
+            ) : (
+              <Kbd data-icon="inline-end" className="-me-1.5 ml-auto">
+                ⌘K
+              </Kbd>
+            )
+          ) : null}
         </CommandDialogTrigger>
 
         <CommandDialogPopup aria-label="Search pages">

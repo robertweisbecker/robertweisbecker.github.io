@@ -1,6 +1,18 @@
 "use client";
 
-import { IconMoodAngry, IconMoodEmpty, IconMoodHappy, IconMoodSad, IconMoodSmile, IconX } from "@tabler/icons-react";
+import {
+  IconMoodAngry,
+  IconMoodAngryFilled,
+  IconMoodEmpty,
+  IconMoodEmptyFilled,
+  IconMoodHappy,
+  IconMoodHappyFilled,
+  IconMoodSad,
+  IconMoodSadFilled,
+  IconMoodSmile,
+  IconMoodSmileFilled,
+  IconX,
+} from "@tabler/icons-react";
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip";
 import { useMeasure } from "@uidotdev/usehooks";
 import { AnimatePresence, LayoutGroup, motion, MotionConfig, useReducedMotion, type TargetAndTransition } from "motion/react";
@@ -18,30 +30,35 @@ const RATINGS = [
     value: "1",
     label: "Not at all",
     Icon: IconMoodAngry,
+    IconFilled: IconMoodAngryFilled,
     hue: "red",
   },
   {
     value: "2",
     label: "No",
     Icon: IconMoodSad,
+    IconFilled: IconMoodSadFilled,
     hue: "orange",
   },
   {
     value: "3",
     label: "Somewhat",
     Icon: IconMoodEmpty,
+    IconFilled: IconMoodEmptyFilled,
     hue: "gold",
   },
   {
     value: "4",
     label: "Yes",
     Icon: IconMoodSmile,
+    IconFilled: IconMoodSmileFilled,
     hue: "yellow",
   },
   {
     value: "5",
     label: "Extremely",
     Icon: IconMoodHappy,
+    IconFilled: IconMoodHappyFilled,
     hue: "green",
   },
 ];
@@ -59,7 +76,7 @@ export function EmojiFeedbackDemo() {
   const collapsedWidth = rowWidth === null ? "auto" : rowWidth + 8;
   const containerAnimation = {
     height: isOpen ? innerHeight : null,
-    width: isOpen ? "var(--container-md)" : collapsedWidth,
+    width: isOpen ? "var(--feedback-expanded-width)" : collapsedWidth,
     borderRadius: isOpen ? "var(--radius-lg)" : "var(--radius-3xl)",
   } as unknown as TargetAndTransition;
 
@@ -78,7 +95,10 @@ export function EmojiFeedbackDemo() {
       <motion.div
         layout={!shouldReduceMotion}
         data-state={isOpen ? "open" : "closed"}
-        className={cn("m-auto overflow-hidden bg-popover p-0 shadow-border-sm", isOpen ? "rounded-md" : "rounded-full")}
+        className={cn(
+          "m-auto overflow-hidden bg-popover p-0 shadow-border-sm [--feedback-expanded-width:min(22rem,calc(100vw-2rem))] sm:[--feedback-expanded-width:var(--container-md)]",
+          isOpen ? "rounded-md" : "rounded-full"
+        )}
         animate={containerAnimation}
       >
         <LayoutGroup>
@@ -97,7 +117,7 @@ export function EmojiFeedbackDemo() {
                     spacing={0.5}
                     size="sm"
                   >
-                    {RATINGS.map(({ value, label, Icon, hue }) => (
+                    {RATINGS.map(({ value, label, Icon, IconFilled, hue }) => (
                       <TooltipTrigger
                         key={value}
                         tooltip={label}
@@ -107,12 +127,38 @@ export function EmojiFeedbackDemo() {
                             value={value}
                             aria-label={label}
                             className={cn(
-                              "size-button-sm rounded-full data-pressed:bg-(--hue-50) data-pressed:text-(--hue-500) dark:data-pressed:bg-(--hue-800) dark:data-pressed:text-(--hue-300) data-pressed:[&_svg]:scale-120"
+                              "isolate size-button-sm rounded-full data-pressed:bg-transparent! data-pressed:text-(--hue-500) dark:data-pressed:text-(--hue-300) data-pressed:[&_svg]:scale-120"
                             )}
                           />
                         }
                       >
-                        <Icon className="size-4 transition-[fill,color,scale] [&_path]:fill-current/10" />
+                        {value === rating ? (
+                          <motion.div
+                            key={`emoji-feedback-indicator-${value}`}
+                            layoutId="emoji-feedback-indicator"
+                            className="absolute inset-0 -z-1 rounded-[inherit] bg-(--hue-100) dark:bg-(--hue-700)"
+                            transition={{ type: "spring", duration: 0.3, bounce: 0.15 }}
+                          />
+                        ) : null}
+
+                        <AnimatePresence mode="popLayout">
+                          {value === rating ? (
+                            <>
+                              <motion.div
+                                layoutId={`emoji-feedback-icon-${value}`}
+                                initial={{ scale: 1 }}
+                                animate={{ scale: 1.05 }}
+                                transition={{ type: "spring", duration: 0.15, delay: 0.05, bounce: 0.5 }}
+                              >
+                                <IconFilled className="size-4 text-(--hue-500) dark:text-(--hue-300)" />
+                              </motion.div>
+                            </>
+                          ) : (
+                            <motion.div layoutId={`emoji-feedback-icon-${value}`}>
+                              <Icon className="size-4" />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </TooltipTrigger>
                     ))}
                   </ToggleGroup>
@@ -147,9 +193,9 @@ export function EmojiFeedbackDemo() {
                   key="feedback-form"
                   layout={!shouldReduceMotion}
                   className="mx-auto w-full space-y-1 p-2 pt-1"
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 1, filter: "blur(4px)" }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 2, filter: "blur(4px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -5 }}
+                  exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -5, filter: "blur(4px)" }}
                 >
                   <label htmlFor={feedbackId} className="sr-only">
                     Feedback

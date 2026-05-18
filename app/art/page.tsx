@@ -31,8 +31,12 @@ import at2025 from "@/public/art/2025_at.jpeg";
 import br2025 from "@/public/art/2025_br.jpeg";
 import chi2025 from "@/public/art/2025_chi.jpeg";
 import ruth2025 from "@/public/art/2025_ruth.jpeg";
+import sprayBasquiat2010 from "@/public/art/2010_spray-basquiat.jpeg";
+import sprayCig2010 from "@/public/art/2010_spray-cig.jpeg";
 
 import { Artwork } from "./artwork";
+import { LinkOut } from "@/components/link-out";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export const metadata: Metadata = {
   title: "Artwork",
@@ -41,15 +45,52 @@ export const metadata: Metadata = {
 
 export default function ArtPage() {
   return (
-    <div className="container mx-auto max-w-6xl space-y-12">
-      <section>
-        <h1 className="mb-4 text-h1">Artwork</h1>
-        {/* <p className="text-sm text-balance text-muted-foreground">Mixed media / mixed messages</p> */}
-      </section>
+    <div className="container mx-auto max-w-6xl space-y-12 px-4">
+      {/* <ToggleGroup defaultValue={["people"]} className="md:*:size-20 md:*:h-auto md:*:flex-col" spacing={1}>
+        <ToggleGroupItem value="digital">
+          <img
+            src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-dgzgthbY1fTg7e1ziv14H8ePhGJ73U.png&w=1000&q=75"
+            className="-mx-1. size-5 md:size-8"
+          />
+          Digital
+        </ToggleGroupItem>
+        <ToggleGroupItem value="pencil">
+          <img
+            src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-YUEZ0IvV1QebqCy2NeJ36SQME8NGS1.png&w=1000&q=75"
+            className="-mx-1 size-5 md:size-8"
+          />
+          Pencil
+        </ToggleGroupItem>
+        <ToggleGroupItem value="charcoal">
+          <img src="/art/charcoal-icon.png" className="-mx-1 size-5 md:size-8" />
+          Charcoal
+        </ToggleGroupItem>
+        <ToggleGroupItem value="spraypaint">
+          <img
+            src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-b1arzaCW7ieTpMEVcgUaEsXhFAAgBr.png&w=1000&q=75"
+            className="-mx-1 size-5 md:size-8"
+          />
+          Spraypaint
+        </ToggleGroupItem>
+        <ToggleGroupItem value="oil">
+          <img
+            src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-hhVqFu1sg6v1QATWIeell81SyoAVC2.png&w=1000&q=75"
+            className="-mx-1 size-5 md:size-8"
+          />
+          Oil
+        </ToggleGroupItem>
+      </ToggleGroup> */}
+      <div className="grid w-full grid-cols-[auto_1fr] gap-4 sm:gap-12">
+        <h1 className="line-b mb-4 self-baseline text-h1">Artwork</h1>
+        <p className="mb-4 self-baseline text-sm text-balance text-muted-foreground">
+          Recent: iPad Pro with <LinkOut href="https://www.procreate.com" text="Procreate" className="underline-offset-1" />. Earlier:
+          pencil, charcoal, oil. 2009—now.
+        </p>
 
-      <div className="grid grid-cols-[auto_1fr] gap-12">
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">People</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+            People
+          </h2>
         </div>
         <section className="line-y columns-2 gap-4 md:columns-3">
           <Artwork year={2025} src={br2025} title="Brent and Nellie" medium="digital" />
@@ -84,7 +125,7 @@ export default function ArtPage() {
         <div className="relative">
           <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Portraits</h2>
         </div>
-        <section className="line-y columns-3 gap-4">
+        <section className="line-y columns-2 gap-4">
           <Artwork year={2018} src={self2018} title="Self" />
           <Artwork year={2016} src={selfEnhanced2016} title="Self" medium="charcoal" />
           <Artwork year={2011} src={self2011} title="Self with fronds" />
@@ -105,13 +146,15 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Paraphernalia</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Props</h2>
         </div>
-        <section className="line-y columns-4 gap-4">
+        <section className="line-y columns-2 gap-4">
           <Artwork year={2012} src={sculptureEnhanced2012} title="UMMA" medium="charcoal" />
           <Artwork year={2011} src={oilWarhol2011} title="Still life" medium="oil" />
           <Artwork year={2011} src={bike2011} title="Bicycle" medium="graphite" />
           <Artwork year={2009} src={donuts2009} medium="oil" />
+          <Artwork year={2010} src={sprayBasquiat2010} title="Basquiat" medium="spraypaint" />
+          <Artwork year={2011} src={sprayCig2010} title="Blue girl" medium="spraypaint" />
         </section>
       </div>
     </div>
