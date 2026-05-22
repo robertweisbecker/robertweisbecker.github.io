@@ -127,7 +127,7 @@ export default function NativePopoversAnchoringPage() {
             id="popover-anchor"
             aria-labelledby="popover-anchor-title"
             aria-describedby="popover-anchor-desc"
-            className="[position-anchor]:--trigger2 absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-all transition-discrete duration-50 ease-out not-open:pointer-events-none backdrop:pointer-events-none open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
+            className="absolute inset-y-[unset] right-0 bottom-[anchor(top)] z-50 max-w-3xs origin-bottom translate-y-2 transform [justify-self:anchor-center] overflow-hidden rounded-lg bg-[canvas] px-3 py-2 opacity-0 shadow-border-lg transition-all transition-discrete duration-50 ease-out [position-anchor:--trigger2] not-open:pointer-events-none backdrop:pointer-events-none open:mb-2 open:translate-y-0 open:scale-100 open:opacity-100 starting:open:mb-0 starting:open:translate-y-4 starting:open:scale-90 starting:open:opacity-0"
           >
             <h3 id="popover-anchor-title" className="mt-0 mb-1 text-sm font-medium">
               Howdy!

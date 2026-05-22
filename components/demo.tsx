@@ -21,7 +21,7 @@ type DemoCodeConfig = {
 
 type DemoOverflowBehavior = "wrap" | "scroll" | "resize";
 
-const demoContainerVariants = cva("rounded-[calc(var(--radius-xl)-1px)] max-w-[calc(100%-2px)] mx-px mb-px", {
+const demoContainerVariants = cva("rounded-[calc(var(--radius-xl)-1px)] max-w-[calc(100%-2px)] mx-px mb-px min-w-0 flex-1", {
   variants: {
     variant: {
       card: "bg-card shadow-border-xs",
@@ -118,7 +118,7 @@ export function Demo({
       {hasHeader ? (
         <header
           className={cn(
-            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-2 text-xs text-muted-foreground",
+            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-2 text-xs",
             headerClassName
           )}
         >
@@ -131,7 +131,9 @@ export function Demo({
         {children}
       </DemoBody>
 
-      {caption ? <figcaption className={cn("p-2 text-sm text-muted-foreground", captionClassName)}>{caption}</figcaption> : null}
+      {caption ? (
+        <figcaption className={cn("px-(--radius-xl) pt-1 pb-2 text-2xs text-muted-foreground", captionClassName)}>{caption}</figcaption>
+      ) : null}
 
       {hasCode ? (
         <CodeBlock
@@ -141,7 +143,7 @@ export function Demo({
           lineNumbers={code.lineNumbers}
           collapsible={code.collapsible}
           initialHeight={code.initialHeight}
-          className="-mx-px mt-px rounded-b-none bg-transparent"
+          className="-mx-px mt-px rounded-b-none border-y bg-transparent"
         />
       ) : null}
     </figure>

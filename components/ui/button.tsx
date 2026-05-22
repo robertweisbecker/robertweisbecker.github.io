@@ -4,14 +4,16 @@ import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
-import { PixelLoaderIcon } from "@/components/icons";
+import { PixelLoaderIcon } from "@/components/icons-pixel";
 
 const iconClasses =
   "[&_[data-icon]]:opacity-72 [&_[data-icon=inline-start]]:-ms-0.5 [&_[data-icon=inline-end]]:-me-0.5 [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0";
 
+// has-data-[icon=inline-end]:pe-[calc(var(--button-y)+2px)] has-data-[icon=inline-start]:ps-[calc(var(--button-y)*1.5)]
+
 const buttonVariants = cva(
   [
-    "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] has-data-[icon=inline-end]:pe-[calc(var(--button-y)+2px)] has-data-[icon=inline-start]:ps-[calc(var(--button-y)*1.5)] ",
+    "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] ",
     "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:text-muted-foreground ",
     "not-[.w-full]:active:scale-[0.98] will-change-transform",
     "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[475]",
@@ -21,7 +23,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-(--button-bg)/90 to-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground",
+          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-(--button-bg)/90 to-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground backdrop-blur-[1px]",
           "active:shadow-xs active:inset-shadow-button-pressed",
           "focus-visible:outline-offset-2  disabled:bg-none disabled:bg-muted",
         ],
@@ -75,7 +77,7 @@ const buttonVariants = cva(
         "icon-lg": "size-button-lg [--button-radius:var(--radius-lg)] [&_svg:not([class*='size-'])]:size-5",
       },
       rounded: {
-        true: "rounded-full",
+        true: "rounded-full before:rounded-full after:rounded-full",
         false: "rounded-(--button-radius)",
       },
     },
@@ -90,6 +92,11 @@ const buttonVariants = cva(
         rounded: true,
         className: "px-2 -ms-2",
       },
+      // {
+      //   size: ["xs", "sm", "md", "lg"],
+      //   rounded: true,
+      //   className: "px-[calc(var(--button-x)+var(--button-y))]",
+      // },
     ],
     defaultVariants: {
       variant: "default",

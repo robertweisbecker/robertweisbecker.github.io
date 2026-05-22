@@ -1,13 +1,13 @@
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
-import { ThemeProvider } from "@/components/theme-provider";
-import { Agentation } from "agentation";
+import "@/styles/globals.css";
+import Script from "next/script";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import Script from "next/script";
-import "@/styles/globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+// import { Agentation } from "agentation";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -57,7 +57,7 @@ export default function RootLayout({
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','UA-100486484-1',{send_page_view:false});`}
         </Script>
       </head>
-      <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
+      <body className="safe-area-inset-bottom root relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"
@@ -65,15 +65,15 @@ export default function RootLayout({
           >
             Skip to main content
           </a>
-          <div className="root">
-            <Header />
-            <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
-              {children}
-            </main>
-            <Footer />
-          </div>
+
+          <Header />
+          <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
+            {children}
+          </main>
+          <Footer />
+
           {/* {process.env.NODE_ENV === "development" && <DevMeasurer />} */}
-          {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
+          {/* {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />} */}
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

@@ -8,6 +8,8 @@ import {
   IconBriefcaseFilled,
   IconComponents,
   IconFile,
+  IconFilter2,
+  IconFilter2Search,
   IconFlask,
   IconHome,
   IconLayoutGridFilled,
@@ -38,11 +40,20 @@ import {
 import { Kbd, KbdGroup } from "./ui/kbd";
 import { Dialog } from "@base-ui/react/dialog";
 import { Badge } from "./ui/badge";
-import { TreeIconFile, Favicon, PixelNewsIcon, PixelFinderIcon, FolderIcon, CursorIcon } from "./icons";
+import { Favicon, FolderIcon, CursorIcon } from "./icons";
+import { PixelNewsIcon, PixelFinderIcon, PixelScribbleIcon } from "./icons-pixel";
+import { TreeIconFile } from "./icons-tree";
+import { MorphIcon } from "./morph-icon";
 import { Separator } from "./ui/separator";
 import { Item, ItemTitle, ItemContent, ItemMedia, ItemDescription, ItemActions } from "./ui/item";
 import { Toolbar } from "./ui/toolbar";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
+import { Label } from "./ui/label";
+import { Button } from "./ui/button";
+import { LinkButton } from "./ui/link-button";
+import { Toggle } from "./ui/toggle";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { Autocomplete } from "@base-ui/react";
 
 type SearchItem = {
   value: string;
@@ -112,8 +123,8 @@ function itemImage(src: string): ReactNode {
 const staticPages: SearchItem[] = [
   { value: "home", label: "Home", path: "/", icon: itemIcon(IconHome), group: "Pages" },
   { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
-  { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(IconNews), group: "Pages" },
-  { value: "art", label: "Art", path: "/art", icon: itemIcon(IconPalette), group: "Pages" },
+  { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(PixelNewsIcon), group: "Pages" },
+  { value: "art", label: "Art", path: "/art", icon: itemIcon(PixelScribbleIcon), group: "Pages" },
 ];
 
 const privatePages: SearchItem[] = [
@@ -213,7 +224,10 @@ export function SiteSearch({
   showKbd?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+
   const [activeTab, setActiveTab] = useState<FilterTab>("All");
+  const filterActive = activeTab !== "All" && !showFilters;
   const { push } = useRouter();
   const pathname = usePathname();
 
@@ -287,7 +301,7 @@ export function SiteSearch({
             "ease squircle flex h-button-sm items-center justify-start gap-2 rounded-md ps-2 pe-3 text-sm transition-colors duration-100",
             variant === "button" && "w-fit bg-muted hover:bg-accent hover:text-accent-foreground",
             variant === "input" &&
-              "w-full bg-background text-muted-foreground inset-shadow-border outline -outline-offset-1 outline-border/50 hover:outline-input",
+              "w-full bg-background text-destructive inset-shadow-border outline -outline-offset-1 outline-border/50 hover:outline-input",
             className
           )}
           onClick={() => setOpen(true)}
@@ -319,24 +333,83 @@ export function SiteSearch({
 
         <CommandDialogPopup aria-label="Search pages">
           <Command items={groupedItems} filter={fuzzyFilter}>
-            <CommandInput placeholder="Search pages…" />
-            <Toolbar.Root className="px-2 pt-2">
-              <Toolbar.Group render={<ToggleGroup spacing={1} />}>
-                {FILTER_TABS.filter((tab) => isDev || tab.value !== "Private").map((tab) => (
-                  <Toolbar.Button
-                    key={`command-tab-${String(tab.value)}`}
-                    render={<ToggleGroupItem value={tab.value} size="xs" />}
-                    onClick={() => setActiveTab(tab.value)}
-                  >
-                    {tab.icon}
-                    {tab.value}
-                  </Toolbar.Button>
-                ))}
-              </Toolbar.Group>
-              <Toolbar.Separator />
-              <Toolbar.Link href="/" onClick={() => setOpen(false)}>
-                Home
-              </Toolbar.Link>
+            <CommandInput placeholder="Search pages…" className="border-transparent" />
+            <Toolbar.Root className="min-h-button-sm px-2 pt-2 md:absolute md:top-1 md:right-1">
+              <LayoutGroup>
+                <Toolbar.Button
+                  render={
+                    <Toggle
+                      size="xs"
+                      aria-label="Show filters"
+                      pressed={showFilters}
+                      onPressedChange={setShowFilters}
+                      render={<motion.button className={cn("order-last transition-all", filterActive ? "w-auto" : "w-button-xs")} />}
+                    />
+                  }
+                >
+                  <MorphIcon from="filter" to="chevronRight" active={showFilters} />
+                  {/* <AnimatePresence mode="popLayout" initial={false}>
+                    {activeTab !== "All" && !showFilters ? (
+                      <>
+                        <motion.span
+                          key="filter-label"
+                          className="flex items-center gap-1 whitespace-nowrap"
+                          initial={{ opacity: 0, filter: "blur(8px)" }}
+                          animate={{ opacity: 1, filter: "blur(0px)" }}
+                          exit={{ opacity: 0, filter: "blur(8px)" }}
+                          // transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+                        >
+                          <Badge variant="outline" size="sm">
+                            {activeTab}
+                          </Badge>
+                          <IconFilter2Search aria-hidden data-icon="inline-start" className="shrink-0" />
+                        </motion.span>
+                      </>
+                    ) : (
+                      <motion.span key="filter-icon-default" animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <IconFilter2 className="shrink-0 opacity-72" aria-hidden />
+                      </motion.span>
+                    )}
+                  </AnimatePresence> */}
+                </Toolbar.Button>
+                <AnimatePresence mode="wait" initial={false}>
+                  {showFilters && (
+                    <>
+                      <motion.div
+                        key="filter-group"
+                        className="flex overflow-hidden"
+                        initial={{ opacity: 0, filter: "blur(8px)", width: 0, paddingInlineStart: 0 }}
+                        animate={{ opacity: 1, filter: "blur(0px)", width: "auto", paddingInlineStart: 4 }}
+                        exit={{ opacity: 0, filter: "blur(4px)", width: 0, paddingInlineStart: 0 }}
+                        transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}
+                      >
+                        <Toolbar.Group render={<ToggleGroup spacing={1} size="xs" defaultValue={["All"]} />} id="site-search-filters">
+                          <Label htmlFor="site-search-filters" className="sr-only">
+                            Filter by:
+                          </Label>
+                          {FILTER_TABS.filter((tab) => isDev || tab.value !== "Private").map((tab) => (
+                            <Toolbar.Button
+                              key={`command-tab-${String(tab.value)}`}
+                              render={<ToggleGroupItem value={tab.value} className="bg-transparent! font-normal!" />}
+                              onClick={() => setActiveTab(tab.value)}
+                            >
+                              {/* {tab.icon} */}
+                              {tab.value}
+                              {tab.value === activeTab && (
+                                <motion.div
+                                  layoutId="filter-tab-indicator"
+                                  className="absolute bottom-0 left-0 size-full rounded-[inherit] bg-accent"
+                                  transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
+                                />
+                              )}
+                            </Toolbar.Button>
+                          ))}
+                        </Toolbar.Group>
+                      </motion.div>
+                    </>
+                  )}
+                </AnimatePresence>
+              </LayoutGroup>
             </Toolbar.Root>
 
             <CommandList>
@@ -354,15 +427,18 @@ export function SiteSearch({
                           className={cn(isCurrent && "text-foreground")}
                         >
                           <Item size="sm" className="p-0">
-                            <ItemMedia variant={"icon"} className="squircle relative size-5 rounded-md bg-card shadow-border-xs">
+                            <ItemMedia
+                              variant={"icon"}
+                              className="squircle relative -my-0.5 -ms-0.5 size-5 rounded-sm bg-card shadow-border-xs"
+                            >
                               {item.icon ? item.icon : <TreeIconFile className="size-4 opacity-64" />}
                               {isCurrent && (
                                 <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />
                               )}
                             </ItemMedia>
                             <ItemContent>
-                              <ItemTitle>
-                                {item.label} <ItemDescription>{item.date}</ItemDescription>
+                              <ItemTitle className="grid grid-cols-2 font-normal">
+                                {item.label} <ItemDescription className="ps-1 opacity-50">{item.date}</ItemDescription>
                               </ItemTitle>
                             </ItemContent>
                             <ItemDescription>
@@ -393,18 +469,25 @@ export function SiteSearch({
               No results found.
             </CommandEmpty>
 
-            <CommandFooter className="text-xs font-medium">
-              <span className="flex items-center gap-1">
+            <CommandFooter className="px-2 pt-1 pb-2 text-xs font-medium shadow-none">
+              <LinkButton variant="elevated" rounded size="icon" href="/">
                 <Favicon className="size-4 opacity-50" />
-              </span>
-              <span className="flex items-center gap-4">
-                <span className="flex items-center gap-1">
+              </LinkButton>
+              <span className="flex h-button items-center gap-1 rounded-full bg-card p-1.5 shadow-border-xs">
+                <span className="flex items-center gap-1 ps-3 pe-2">
                   Go <Kbd>↵</Kbd>
                 </span>
                 <Separator orientation="vertical" />
-                <Dialog.Close className="after:squircle relative isolate flex items-center gap-1 after:absolute after:-inset-x-2 after:-z-1 after:h-button-sm after:rounded-sm after:transition-colors after:duration-100 after:ease-out hover:after:bg-accent">
+                {/* <Dialog.Close className="after:squircle relative isolate flex items-center gap-1 after:absolute after:-inset-x-2 after:-z-1 after:h-button-sm after:rounded-sm after:transition-colors after:duration-100 after:ease-out hover:after:bg-accent">
                   Close <Kbd className="-me-0.5">esc</Kbd>
-                </Dialog.Close>
+                </Dialog.Close> */}
+                <Dialog.Close
+                  render={
+                    <Button variant="ghost" rounded size="xs" className="text-[13px]">
+                      Close <Kbd className="-me-0.5">esc</Kbd>
+                    </Button>
+                  }
+                />
               </span>
             </CommandFooter>
           </Command>

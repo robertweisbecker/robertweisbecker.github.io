@@ -9,6 +9,8 @@
 @import "./hues.css";
 
 @custom-variant dark (&:is(.dark *));
+
+/* Used by sticky table-of-contents elements that rely on scroll-state containers. */
 @custom-variant @stuck-top {
   @supports (container-type: scroll-state) {
     @container scroll-state(stuck: top) {

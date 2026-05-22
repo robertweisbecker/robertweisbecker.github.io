@@ -9,7 +9,8 @@ import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconPalette,
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Favicon, PixelChevronDownIcon, PixelNewsIcon, PixelScribbleIcon } from "./icons";
+import { Favicon } from "./icons";
+import { PixelChevronDownIcon, PixelNewsIcon, PixelScribbleIcon } from "./icons-pixel";
 import { SiteSearch } from "./site-search";
 import { Button } from "./ui/button";
 import {
@@ -35,19 +36,30 @@ export function Header() {
   const isMobile = useMediaQuery("max-md");
   const pathname = usePathname();
   const anchorRef = React.useRef<HTMLDivElement>(null);
-  // const notHome = pathname !== "/";
+  const isHome = pathname === "/";
   const previewHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const previewActions = React.useRef<PreviewCardPrimitive.Root.Actions | null>(null);
   const filteredProjects = projects.filter((project) => project.published);
 
   return (
     <nav className={cn("sticky top-0 z-1")}>
-      <div className="max-w-8xl mx-auto flex h-12 items-center gap-3 px-2 py-2 sm:px-4">
+      <div className="max-w-8xl mx-auto flex h-12 items-center gap-1 px-2 py-2 sm:px-4">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
-          <Favicon className="size-4 text-secondary-foreground" />
-          <span>
+          {isHome ? (
+            <>
+              <Favicon className="size-4 text-secondary-foreground" />
+            </>
+          ) : (
+            <>
+              <PixelChevronDownIcon className="rotate-90" />
+            </>
+          )}
+
+          <span className="text-[11px]/[10px]">
             {" "}
-            bob<span className="text-primary">.</span>fyi
+            bob
+            <br />
+            <span className="text-primary/50">dot</span>fyi
           </span>
         </LinkButton>
 
@@ -71,11 +83,11 @@ export function Header() {
               }
             }}
           >
-            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="group/trigger">
+            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="group/trigger font-pixel text-[11px] uppercase">
               <span className="hidden md:block">Projects</span>
               <span className="md:hidden">Menu</span>
               <PixelChevronDownIcon
-                className={cn("rotate-0 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
+                className={cn("rotate-0 opacity-50 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
                 data-icon="inline-end"
               />
             </DropdownMenuTrigger>
@@ -244,8 +256,13 @@ function HeaderButton({
     <LinkButton
       {...props}
       variant="ghost"
-      size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "sm"}
-      className={cn("backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground", props.className)}
+      size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "xs"}
+      rounded
+      className={cn(
+        "font-pixel text-[11px] uppercase backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground",
+        "[&_svg]:size-2.75",
+        props.className
+      )}
     >
       {icon}
       <span className={cn(hideTextOnMobile && "max-md:sr-only")}>{label}</span>

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import * as React from "react";
-import { TreeIconFile } from "./icons";
+import { TreeIconFile } from "./icons-tree";
 
 export type ProjectGridItem = {
   id: string | number;

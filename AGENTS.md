@@ -4,24 +4,33 @@
 - Prefer Base UI + existing design-system wrappers (e.g., `Switch`, `Autocomplete`, `FieldSet`) over native inputs in this codebase.
 - When a "start corner" changes for clip-path curve generators, apply the full preset set of parameters (`from`, `destX/destY`, `ctrlX/ctrlY`) to avoid degenerate straight-line paths.
 - **Always add a demo to `app/components/component-demos.tsx` (and a sidebar link in `app/components/page.tsx` if not already present) whenever a new component is created or a major feature is added to an existing one.** For plugin-style features (e.g. carousel variants), add a labeled sub-example per variant inside the existing section rather than a new top-level section.
+- Do not remove valid Tailwind v4.3 custom/arbitrary variant patterns as a stale-CSS workaround; restore the intended syntax and verify the CSS graph instead.
 
 ## Learned Workspace Facts
 
+- This is a static Next.js 16 App Router site with MDX content, no database, no API routes, and no required environment variables.
+- Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, and `npm run format:check`.
+- `npm run build` produces the static site output, while `npm run dev:fresh` clears `.next` before starting dev.
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
 - `ToggleGrid` preserves intended toggle styling by extending `ToggleGroup` context with `grid?: boolean`.
 - The generator's "Show annotations" toggle controls only gridlines + axis label overlay, while the curve/handles/start marker remain visible.
+- Tailwind v4.3 custom variants such as `@stuck-top` are valid here; see **Known Bugs & Workarounds** for the Turbopack stale-CSS bug that makes errors persist past the fix.
+- The optional Agentation development toolbar adds a large dev-only client graph and can make reloads feel heavier; it is not required for local development.
+- `@vercel/analytics` and `@vercel/speed-insights` are no-ops locally and only activate on Vercel deployments.
+- The homepage doubles as the About page at `/`; there is no separate `/about` route in the nav.
+- `/oklch-colors` is heavier than many project routes because its MDX renders hundreds of color swatches/palette nodes plus a large inline SVG.
 
-## Cursor Cloud specific instructions
+## Known Bugs & Workarounds
 
-This is a static Next.js 16 site (App Router) with no database, no API routes, and no required environment variables.
+### Turbopack + Tailwind v4 Stale CSS Bug (open as of May 2026)
 
-**Commands** — see `README.md` and `package.json` scripts for the canonical list:
-- Dev server: `npm run dev` (port 3000)
-- Lint: `npm run lint` (ESLint; pre-existing warnings/errors exist — unused vars and unescaped entities)
-- Build: `npm run build` (static export to `out/`)
-- Format: `npm run format` / `npm run format:check` (Prettier)
-
-**Gotchas:**
-- The dev server connects to an optional "agentation" overlay on port 4747 — this is not required and can be ignored.
-- `@vercel/analytics` and `@vercel/speed-insights` are no-ops locally; they only activate on Vercel deployments.
-- The homepage doubles as the About page (no separate `/about` route in the nav — it renders at `/`).
+- **Root cause:** Turbopack double-invokes the PostCSS transform per save when `@tailwindcss/postcss` reports file dependencies. The first invocation gets stale content with a fresh mtime; the second gets correct content but an already-consumed mtime. Because `@tailwindcss/postcss` caches on `mtimeMs`, it serves stale output. A CSS syntax error (e.g. a malformed arbitrary selector) therefore poisons the cache and persists even after the source is fixed.
+- **Tracked upstream:** vercel/next.js #90563 ("Tailwind v4 persistent cache stuck on CSS syntax errors") and vercel/next.js #93052 ("Turbopack: CSS HMR sometimes lags one revision behind edits") — both open.
+- **Why this repo is especially vulnerable:** uses `@custom-variant @stuck-top` (registers extra file deps, raising the double-invocation chance); arbitrary selectors inside that variant (any typo creates invalid CSS); `globals.css` is the entry point for the entire CSS graph.
+- **Bug does not affect `--webpack` mode.**
+- **Partial fix landed** in Tailwind v4.1.3 (PRs #17514 and #17554, April 2025) but does not cover the general case.
+- **Workarounds (in order of preference):**
+  1. Touch `styles/globals.css` or `postcss.config.mjs` to force a CSS graph rebuild and clear the stale error.
+  2. Run `npm run dev:fresh` (`rm -rf .next && next dev`) for a full reset.
+  3. Run `next dev --webpack` for reliable CSS HMR when doing complex CSS work.
+  4. Do **not** use the prettier-plugin-tailwindcss canonical form `@stuck-top:**:data-[slot=title]:visible` — it produces invalid CSS with this custom variant. Always use the bracketed form `@stuck-top:[&_[data-slot=title]]:visible` and add `{/* prettier-ignore */}` to prevent rewriting.

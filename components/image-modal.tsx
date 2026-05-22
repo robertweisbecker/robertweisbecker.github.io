@@ -8,11 +8,11 @@ import { Drawer as DrawerBase } from "@base-ui/react/drawer";
 import { Popover } from "@base-ui/react/popover";
 import { Xmark } from "@gravity-ui/icons";
 import { IconArrowsDiagonal } from "@tabler/icons-react";
+import { Cambio } from "cambio";
 import { AnimatePresence, HTMLMotionProps, LayoutGroup, motion } from "motion/react";
 import * as React from "react";
 import { createPortal } from "react-dom";
 
-import { Dialog, DialogTrigger, DialogOverlay, DialogPortal, DialogPopup } from "@/components/ui/dialog";
 import { imageSrc } from "@/lib/image-src";
 import NextImage, { type StaticImageData } from "next/image";
 
@@ -96,58 +96,78 @@ function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; al
 }
 
 export function ImageModal({ src, caption, className }: ImageModalProps) {
-  const fullscreenUrl = imageSrc(src);
+  const aspectRatio = `${src.width} / ${src.height}`;
+  const popupStyle = {
+    "--image-ratio": src.width / src.height,
+    aspectRatio,
+  } as React.CSSProperties & { "--image-ratio": number };
+
   return (
-    <Dialog>
-      <figure
-        data-media
-        className={cn("group/figure not-prose relative my-10 flex flex-col items-center justify-center gap-1.5", className)}
-      >
-        <div className="sm:squircle relative -mx-8 overflow-hidden bg-card py-1 shadow-border-sm sm:-mx-1 sm:rounded-xl sm:px-1 dark:bg-muted">
+    <Cambio.Root dismissible>
+      <figure data-media className={cn("group/figure flex w-full flex-col items-center justify-center gap-1.5", className)}>
+        <Cambio.Trigger
+          aria-label="View fullscreen image"
+          className={cn(
+            "group/trigger block w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
+            "sm:squircle relative bg-card py-1 shadow-border-sm sm:rounded-xl sm:px-1 dark:bg-muted"
+          )}
+        >
           <NextImage
             placeholder="blur"
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             sizes="(max-width: 768px) 100vw, 720px"
-            className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+            className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)-(--spacing(1)))]"
           />
-          <DialogTrigger
-            aria-label="View fullscreen image"
-            className="absolute inset-e-3 bottom-3"
-            render={<Button variant="overlay" size="icon-sm" rounded />}
-          >
-            <IconArrowsDiagonal />
-          </DialogTrigger>
-        </div>
-        {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
-      </figure>
-      <DialogPortal>
-        <DialogOverlay />
-        <DialogBase.Viewport
-          className={cn(
-            "fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain outline-none",
-            "pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]",
-            "px-0 sm:px-4 sm:pt-6 sm:pb-10 lg:py-10"
-          )}
-        >
-          <DialogPopup
+          <span
+            aria-hidden
             className={cn(
-              "relative mx-auto my-0 w-full max-w-none overflow-hidden rounded-none p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
-              "sm:my-18 sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
+              buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }),
+              "pointer-events-none absolute inset-e-3 bottom-3"
             )}
           >
-            <DialogBase.Title className="sr-only">{caption || "Image"}</DialogBase.Title>
-            <NextImage
-              placeholder="blur"
-              sizes="(max-width: 768px) 100vw, 960px"
-              src={fullscreenUrl}
-              alt={typeof caption === "string" ? caption : ""}
-              className="block h-auto w-full max-w-none object-contain"
-            />
-          </DialogPopup>
-        </DialogBase.Viewport>
-      </DialogPortal>
-    </Dialog>
+            <IconArrowsDiagonal />
+          </span>
+        </Cambio.Trigger>
+
+        {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
+      </figure>
+      <Cambio.Portal
+        className={cn(
+          "fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain outline-none",
+          "pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]",
+          "px-0 sm:px-4 sm:pt-6 sm:pb-10 lg:py-10"
+        )}
+      >
+        <Cambio.Backdrop className="fixed inset-0 h-dvh w-dvw bg-black/40" />
+        <Cambio.Popup
+          className={cn(
+            "relative mx-auto my-0 max-h-dialog overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
+            "sm:my-16 sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
+          )}
+          style={popupStyle}
+        >
+          <Cambio.Title className="sr-only">{caption || "Image"}</Cambio.Title>
+          <NextImage
+            placeholder="blur"
+            sizes="(max-width: 768px) 100vw, 960px"
+            src={src}
+            alt={typeof caption === "string" ? caption : ""}
+            fill
+            className="pointer-events-none object-cover object-top select-none"
+            preload
+          />
+          <Cambio.Close
+            aria-label="Close image preview"
+            className="absolute inset-e-3 top-3 z-10"
+            render={<Button variant="overlay" size="icon-sm" rounded />}
+          >
+            <Xmark />
+          </Cambio.Close>
+          <div className="absolute top-2 left-1/2 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-neutral-400/60 shadow-border-xs ring-[0.5px] inset-shadow-xs inset-ring-[0.5px] ring-black/50 inset-shadow-white/10 inset-ring-white/2 backdrop-blur-md"></div>
+        </Cambio.Popup>
+      </Cambio.Portal>
+    </Cambio.Root>
   );
 }
 

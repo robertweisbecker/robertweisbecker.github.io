@@ -24,15 +24,12 @@ export default async function MDXLayout({ children, params }: { children: React.
 
   return (
     <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
-      <aside
-        id="toc"
-        className="not-prose @stuck-top:*:bg-destructive @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-24"
-      >
-        <BackButton href="/#projects" className="ms-1">
+      <aside id="toc" className="not-prose @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-32">
+        <BackButton href="/#projects" className="">
           Projects
         </BackButton>
-        <div className="@stuck-top/nav:text-destructive text-muted-foreground">Lorem</div>
-        <TableOfContents toc={toc} />
+
+        <TableOfContents toc={toc} title={fm.title} />
       </aside>
 
       <div id="content-max" className="col-start-2 min-w-0">
@@ -41,7 +38,7 @@ export default async function MDXLayout({ children, params }: { children: React.
             Projects
           </BackButton>
 
-          <h1 style={{ viewTransitionName: "title" }} className="scroll-mt-8 text-h1 text-balance">
+          <h1 style={{ viewTransitionName: "title" }} className="scroll-mt-16 text-h1 text-balance">
             {fm.title}
           </h1>
           <p className="mb-4 max-w-prose text-base leading-tight text-balance text-muted-foreground">{fm.subtitle}</p>
@@ -67,7 +64,7 @@ export default async function MDXLayout({ children, params }: { children: React.
       </div>
 
       <aside id="meta" className="not-prose max-lg:hidden max-md:order-2" style={{ anchorName: "--meta" }}>
-        <ProjectMeta role={fm.role} team={fm.team} date={fm.date} meta={fm.meta} />
+        <ProjectMeta role={fm.role} team={fm.team} date={fm.date} meta={fm.meta} className="mt-auto" />
       </aside>
     </div>
   );

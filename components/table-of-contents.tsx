@@ -32,7 +32,7 @@ function useActiveItem(ids: string[]) {
   return activeId;
 }
 
-export function TableOfContents({ toc, className }: { toc: TocItem[]; className?: string }) {
+export function TableOfContents({ toc, title, className }: { toc: TocItem[]; title?: string; className?: string }) {
   const ids = React.useMemo(() => toc.map((item) => item.id), [toc]);
   const activeId = useActiveItem(ids);
 
@@ -42,22 +42,28 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
     <nav
       className={cn(
         "my-4 grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-4 text-xs",
+        "[--inset:--spacing(3)]",
         className
       )}
     >
-      {/* <p className="flex items-center gap-1.5">
-        <IconMenuDeep className="size-3" />
-        Jump to:
-      </p> */}
-
       <ScrollArea scrollFade scrollbarGutter>
         <ul
           className={cn(
-            "group relative ms-(--inset) text-[0.8125rem]/5 [--inset:--spacing(3)]",
+            "group relative text-[0.8125rem]/5",
             // "before:absolute before:inset-s-0 before:top-1.5 before:bottom-1.5 before:w-px before:bg-border",
             className
           )}
         >
+          {title && (
+            <li
+              className="ease -translate-y-0.5 transform truncate pt-2 pb-1 text-xs opacity-0 transition-[translate,transform,opacity] delay-400 duration-200 @stuck-top:translate-y-0 @stuck-top:opacity-100"
+              data-slot="title"
+            >
+              <a href={"#"} data-active={activeId === ""}>
+                {title}
+              </a>
+            </li>
+          )}
           {toc.map((item) => (
             <li
               key={item.id}

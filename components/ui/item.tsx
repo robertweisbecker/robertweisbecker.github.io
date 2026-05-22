@@ -46,7 +46,7 @@ const itemVariants = cva(
         lg: "gap-4 p-5 rounded-2xl data-[variant=default]:-mx-5",
         default: "gap-4 px-4 py-3 data-[variant=default]:-mx-4",
         sm: "gap-3 px-3 py-2.5 has-data-[variant=default]:-mx-3 ",
-        xs: "gap-2.5 p-1.5 in-data-[slot=dropdown-menu-content]:p-0  data-[variant=default]:-mx-2.5",
+        xs: "gap-x-2.5 gap-y-1 p-1.5 in-data-[slot=dropdown-menu-content]:p-0  data-[variant=default]:-mx-2.5",
       },
     },
     defaultVariants: {
@@ -113,8 +113,8 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="item-title"
       className={cn(
-        "line-clamp-1 flex w-fit items-center gap-2 text-base leading-tight font-medium group-data-[size=sm]/item:text-sm/none",
-        "group-data-[size=xs]/item:text-sm",
+        "line-clamp-1 w-fit items-center text-base leading-tight font-medium group-data-[size=sm]/item:text-sm/none",
+        "group-data-[size=xs]/item:text-sm/none",
         className
       )}
       {...props}

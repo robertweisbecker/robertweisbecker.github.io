@@ -2,7 +2,7 @@
 
 import { Cambio } from "cambio";
 import { IconX } from "@tabler/icons-react";
-import Image, { type StaticImageData } from "next/image";
+import Image, { ImageProps, type StaticImageData } from "next/image";
 import type { CSSProperties } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,7 @@ export function Artwork({
   medium,
   size,
   className,
+  loading,
 }: {
   year: number;
   src: StaticImageData;
@@ -22,6 +23,7 @@ export function Artwork({
   medium?: "digital" | "graphite" | "oil" | "charcoal" | "spraypaint" | "mixed";
   className?: string;
   size?: string;
+  loading?: ImageProps["loading"];
 }) {
   const aspectRatio = `${src.width} / ${src.height}`;
   const popupStyle: CSSProperties & { "--art-ratio": number } = {
@@ -41,10 +43,10 @@ export function Artwork({
             src={src}
             alt={title ? title : ""}
             // fill
-            loading="lazy"
             placeholder="blur"
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-contain"
+            loading={loading}
           />
         </Cambio.Trigger>
 

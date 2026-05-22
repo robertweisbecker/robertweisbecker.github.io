@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image, { type StaticImageData } from "next/image";
 import * as React from "react";
 
-import { PixelChevronDownIcon } from "@/components/icons";
+import { PixelChevronDownIcon } from "@/components/icons-pixel";
 import { LinkButton } from "@/components/ui/link-button";
 import art2 from "@/public/art/2025_chi.jpeg";
 import art1 from "@/public/art/2025_br.jpeg";
@@ -34,7 +34,7 @@ function ArtCard({ src, index, count, left, top, rotate, zIndex, isHovered }: Ar
   const hoverLeft = 10 + (index / (count - 1)) * 80;
   return (
     <motion.div
-      className="absolute bg-card p-1"
+      className="absolute aspect-square bg-card p-1"
       style={{
         width: CARD_W,
         height: CARD_H,
@@ -52,7 +52,7 @@ function ArtCard({ src, index, count, left, top, rotate, zIndex, isHovered }: Ar
       }}
       transition={SPRING}
     >
-      <Image src={src} placeholder="blur" alt="" className="size-full rounded-[calc(var(--radius-lg)-(--spacing(1)))] object-contain" />
+      <Image src={src} placeholder="blur" fill alt="" className="inset-1 size-full rounded-[inherit] object-cover" />
     </motion.div>
   );
 }

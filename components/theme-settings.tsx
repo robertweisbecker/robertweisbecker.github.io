@@ -30,7 +30,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { LinkButton } from "./ui/link-button";
-import { PixelRedoIcon } from "./icons";
+import { PixelRedoIcon } from "./icons-pixel";
 
 const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({
   value: opt.value,

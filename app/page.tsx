@@ -5,21 +5,9 @@ import iconCharcoal from "@/public/art/charcoal-icon.png";
 import iconBrush from "@/public/art/brush-icon.png";
 
 import iconApplePencil from "@/public/art/apple-pencil-icon.png";
-import {
-  BaseUiIcon,
-  FigmaIcon,
-  GithubIcon,
-  LinkedinIcon,
-  NextJsIcon,
-  TreeIconFile,
-  TreeIconTailwind,
-  CursorIcon,
-  TreeIconClaude,
-  TreeIconRichText,
-  MarkdownIcon,
-  PixelShuffleIcon,
-  VercelIcon,
-} from "@/components/icons";
+import { BaseUiIcon, FigmaIcon, GithubIcon, LinkedinIcon, NextJsIcon, CursorIcon, MarkdownIcon, VercelIcon } from "@/components/icons";
+import { PixelDropdownIcon, PixelShuffleIcon } from "@/components/icons-pixel";
+import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
 import { ProjectGrid, type ProjectGridItem } from "@/components/project-grid";
 import { Badge } from "@/components/ui/badge";
@@ -44,6 +32,7 @@ import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@/components/
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { ArtCards } from "@/components/demos/art-cards";
+import { Letterboxd } from "@/components/demos/letterboxd";
 
 const postItems: ProjectGridItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -81,9 +70,9 @@ export default function Home() {
       <section className="[--stagger:1 grid items-start gap-10 sm:grid-cols-[auto_1fr]">
         <Float
           className="group/pixel relative isolate w-fit rounded-xs bg-card p-1 shadow-border-lg"
-          speed={0.38}
+          speed={0.4}
           amplitude={[2, 8, 4]}
-          rotationRange={[0, 0, 3]}
+          rotationRange={[1, 1, 3]}
         >
           <div className="relative size-50 bg-background">
             <PixelPortrait className="outline-2 outline-card transition-all duration-300" />
@@ -170,8 +159,9 @@ export default function Home() {
           </div> */}
         </div>
       </section>
-      <h2 className="mt-8 -mb-4 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
-        ☆ Projects
+      <h2 className="mt-8 -mb-4 flex items-baseline gap-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
+        Projects
+        <span className="h-[0.5px] flex-1 bg-border" /> ₀₁⁰¹
       </h2>
       <ProjectGrid />
       <Separator className="min-h-px max-w-14" />
@@ -181,7 +171,7 @@ export default function Home() {
       <ProjectGrid items={postItems} />
       <Separator className="max-w-20" />
       <h2 className="font-pixel text-[11px] uppercase" id="about">
-        ~ Art
+        ~ ░ Art
       </h2>
       <ArtCards />
       <Separator className="max-w-20" />
@@ -218,8 +208,16 @@ export default function Home() {
               </CardTitle>
               <CardAction>
                 <div className="size-lh grid grid-cols-1 grid-rows-1">
-                  <FigmaIcon className="ease col-1 row-1 size-3.5 shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0" />
-                  <ArrowUpRight className="ease col-1 row-1 size-4 shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 text-muted-foreground opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100" />
+                  <FigmaIcon
+                    className="ease col-1 row-1 size-3.5 shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
+                    aria-label="Figma Community"
+                  />
+                  <span
+                    className="ease col-1 row-1 size-4 shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel text-[16.5px] leading-none text-muted-foreground opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
+                    aria-hidden
+                  >
+                    ↗
+                  </span>
                 </div>
               </CardAction>
             </CardHeader>
@@ -460,6 +458,10 @@ export default function Home() {
             </DescriptionList>
           </DescriptionListValue>
         </DescriptionList>
+      </section>
+      <section>
+        <h2 className="font-pixel text-[11px] uppercase">Log</h2>
+        <Letterboxd maxFilms={5} />
       </section>
       <Separator className="max-w-14" />
       <section className="flex flex-col gap-6">

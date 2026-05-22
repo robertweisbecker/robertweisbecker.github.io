@@ -12,7 +12,7 @@ import {
   TreeIconReact,
   TreeIconTailwind,
   TreeIconTypescript,
-} from "@/components/icons";
+} from "@/components/icons-tree";
 import { IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronUp } from "@tabler/icons-react";
 import * as React from "react";
 

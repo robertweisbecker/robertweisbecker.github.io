@@ -3,7 +3,7 @@
 import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
 import { Dialog as CommandDialogPrimitive } from "@base-ui/react/dialog";
 import { IconSearch } from "@tabler/icons-react";
-import type * as React from "react";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 import {
   Autocomplete,
@@ -17,6 +17,10 @@ import {
   AutocompleteSeparator,
 } from "@/components/ui/autocomplete";
 import { Kbd } from "./kbd";
+import { MorphIcon } from "../morph-icon";
+import { Button } from "./button";
+import { ChevronLeft } from "@gravity-ui/icons";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const CommandDialog: typeof CommandDialogPrimitive.Root = CommandDialogPrimitive.Root;
 
@@ -94,16 +98,80 @@ export function Command(props: CommandFlatProps<unknown>): React.ReactElement {
   return <Autocomplete autoHighlight={autoHighlight} inline keepHighlight={keepHighlight} open {...rest} />;
 }
 
+export function CommandInputGroup({ className, children, ...props }: React.ComponentProps<"div">): React.ReactElement {
+  return (
+    <div className={cn("flex items-baseline gap-0 border-b border-border/50 px-2.5 pt-1.5", className)} {...props}>
+      <AnimatePresence mode="popLayout" initial={false}>
+        <AutocompletePrimitive.Clear
+          render={
+            <motion.button
+              className="grid-stack h-full min-w-0 rounded-md hover:bg-accent"
+              initial={{
+                transform: "translateX(4px)",
+                filter: "blur(4px)",
+                opacity: 0,
+                width: 0,
+                marginInlineStart: 0,
+                marginInlineEnd: 0,
+              }}
+              animate={{
+                transform: "translateX(0px)",
+                filter: "blur(0px)",
+                opacity: 1,
+                width: 24,
+                marginInlineStart: -4,
+                marginInlineEnd: -8,
+              }}
+              exit={{ transform: "translateX(4px)", filter: "blur(4px)", opacity: 0, width: 0, marginInlineStart: 0, marginInlineEnd: 0 }}
+            />
+          }
+        >
+          <ChevronLeft className="pointer-events-none mt-0.5" />
+        </AutocompletePrimitive.Clear>
+      </AnimatePresence>
+      {children}
+    </div>
+  );
+}
+
 export function CommandInput({
   className,
   placeholder = undefined,
   ...props
 }: React.ComponentProps<typeof AutocompleteInput>): React.ReactElement {
   return (
-    <div className="border-b border-border/50 px-2.5 pt-1.5">
+    <div className="flex items-baseline gap-0 border-b border-border/50 px-2.5 pt-1.5">
+      <AnimatePresence mode="popLayout" initial={false}>
+        <AutocompletePrimitive.Clear
+          render={
+            <motion.button
+              className="grid-stack h-full min-w-0 rounded-md hover:bg-accent"
+              initial={{
+                transform: "translateX(4px)",
+                filter: "blur(4px)",
+                opacity: 0,
+                width: 0,
+                marginInlineStart: 0,
+                marginInlineEnd: 0,
+              }}
+              animate={{
+                transform: "translateX(0px)",
+                filter: "blur(0px)",
+                opacity: 1,
+                width: 24,
+                marginInlineStart: -4,
+                marginInlineEnd: -8,
+              }}
+              exit={{ transform: "translateX(4px)", filter: "blur(4px)", opacity: 0, width: 0, marginInlineStart: 0, marginInlineEnd: 0 }}
+            />
+          }
+        >
+          <ChevronLeft className="pointer-events-none mt-0.5" />
+        </AutocompletePrimitive.Clear>
+      </AnimatePresence>
       <AutocompleteInput
         autoFocus
-        className={cn("border-none! bg-transparent! shadow-none! outline-none! focus-visible:ring-0", className)}
+        className={cn("min-w-0 border-none! bg-transparent! shadow-none! outline-none! focus-visible:ring-0", className)}
         placeholder={placeholder}
         size="lg"
         {...props}

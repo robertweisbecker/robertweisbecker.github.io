@@ -93,15 +93,15 @@ export default function ArtPage() {
           </h2>
         </div>
         <section className="line-y columns-2 gap-4 md:columns-3">
-          <Artwork year={2025} src={br2025} title="Brent and Nellie" medium="digital" />
-          <Artwork year={2020} src={gr2020} title="Chita" medium="digital" />
-          <Artwork year={2025} src={at2025} title="Ashtyn" medium="digital" />
-          <Artwork year={2017} src={x2017} title="Christian" medium="digital" />
-          <Artwork year={2024} src={m2024} title="Madelin" medium="digital" />
-          <Artwork year={2020} src={rrp2020} title="Mr. P & Callie" medium="digital" />
-          <Artwork year={2025} src={ruth2025} title="Ruth" medium="digital" />
-          <Artwork year={2016} src={ad2016} title="Adrian" medium="oil" />
-          <Artwork year={2021} src={gb2021} title="Jerry & Rhys" medium="digital" />
+          <Artwork year={2025} src={br2025} title="Brent and Nellie" medium="digital" loading="eager" />
+          <Artwork year={2020} src={gr2020} title="Chita" medium="digital" loading="eager" />
+          <Artwork year={2025} src={at2025} title="Ashtyn" medium="digital" loading="eager" />
+          <Artwork year={2017} src={x2017} title="Christian" medium="digital" loading="eager" />
+          <Artwork year={2024} src={m2024} title="Madelin" medium="digital" loading="eager" />
+          <Artwork year={2020} src={rrp2020} title="Mr. P & Callie" medium="digital" loading="eager" />
+          <Artwork year={2025} src={ruth2025} title="Ruth" medium="digital" loading="eager" />
+          <Artwork year={2016} src={ad2016} title="Adrian" medium="oil" loading="eager" />
+          <Artwork year={2021} src={gb2021} title="Jerry & Rhys" medium="digital" loading="eager" />
         </section>
 
         <div className="relative">

@@ -49,7 +49,7 @@ function Slider({
         <SliderPrimitive.Track
           data-slot="slider-track"
           className={cn(
-            "relative isolate grow rounded-xl bg-input/25 inset-shadow-xs outline-[0.5px] -outline-offset-[0.5px] outline-input select-none data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
+            "relative isolate grow rounded-sm bg-input/25 inset-shadow-xs outline-[0.5px] -outline-offset-[0.5px] outline-input select-none data-horizontal:h-1.5 data-horizontal:w-full data-vertical:h-full data-vertical:w-1"
           )}
         >
           <SliderPrimitive.Indicator
@@ -63,7 +63,7 @@ function Slider({
             key={index}
             className={cn(
               "group/slider-thumb flex size-thumb shrink-0 items-center justify-center select-none group-hover/slider:cursor-grab data-dragging:cursor-grabbing",
-              "rounded-full has-focus-visible:outline-2 has-focus-visible:outline-ring",
+              "rounded-lg has-focus-visible:outline-2 has-focus-visible:outline-ring",
               "disabled:pointer-events-none disabled:opacity-50"
             )}
           >

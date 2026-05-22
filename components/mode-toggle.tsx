@@ -26,7 +26,7 @@ export function ModeToggle(props: React.ComponentProps<typeof TooltipTrigger>) {
         render={<Button variant="ghost" size="icon-sm" />}
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       >
-        <SunMoonIcon icon={icon} className="size-[16.5px]" />
+        <SunMoonIcon icon={icon} className="size-[11px]" />
       </TooltipTrigger>
       <TooltipContent>Toggle mode</TooltipContent>
     </Tooltip>
