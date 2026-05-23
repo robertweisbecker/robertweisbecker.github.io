@@ -280,7 +280,7 @@ function NumberPanels() {
     <>
       {numbers.map((value) => (
         <TabsPrimitive.Panel key={value} value={value}>
-          <div className="flex size-full items-center justify-center rounded-md bg-muted p-4 text-4xl font-bold text-muted-foreground/50 tabular-nums">
+          <div className="flex size-full items-center justify-center rounded-md bg-muted/50 p-4 text-4xl font-bold text-muted-foreground/50 tabular-nums group-data-[orientation=horizontal]:mt-2">
             #{value}
           </div>
         </TabsPrimitive.Panel>
@@ -332,16 +332,7 @@ export default function TabIndicatorPostPage() {
         Basically, we want each tab to have its own indicator element. When the tab is active, the indicator lines up with its parent. And
         when a different tab is active, we move the indicator to line up with <em>that</em> tab.
       </p>
-      <p>
-        If we sync them up correctly, the active tab&apos;s indicator will move toward the new tab at the same time the new tab&apos;s
-        indicator does. When the two indicators meet, we crossfade them, and it looks like as if a single indicator is moving between
-        siblings.
-      </p>
-      <p>
-        Thankfully, Tailwind has an abstraction for this kind of thing: <code>group</code> and <code>peer</code>. We can use these classes
-        to make adjacent triggers &quot;hand off&quot; the indicator from one trigger to another by flipping the animation direction based
-        on whether the previous trigger is active or not.
-      </p>
+
       <Demo title="Synchronization" centerContent innerClass="min-h-56">
         <ToggleGroupPrimitive defaultValue={["1"]} className="isolate flex -rotate-15 skew-x-15 justify-center gap-0">
           {numbers.map((value, index) => (
@@ -351,6 +342,12 @@ export default function TabIndicatorPostPage() {
           ))}
         </ToggleGroupPrimitive>
       </Demo>
+      <p>
+        If we sync them up correctly, the active tab&apos;s indicator will move toward the new tab at the same time the new tab&apos;s
+        indicator does. When the two indicators meet, we crossfade them, and it looks like as if a single indicator is moving between
+        siblings.
+      </p>
+
       <p>Here&apos;s that same example unskewed, so you can see how they overlap when adjacent siblings are selected:</p>
       <Demo title="Handoff" centerContent innerClass="pb-16">
         <ToggleGroupPrimitive defaultValue={["1"]} className="isolate flex justify-center gap-0">
@@ -361,6 +358,11 @@ export default function TabIndicatorPostPage() {
           ))}
         </ToggleGroupPrimitive>
       </Demo>
+      <p>
+        Thankfully, Tailwind has an abstraction for this kind of thing: <code>group</code> and <code>peer</code>. We can use these classes
+        to make adjacent triggers &quot;hand off&quot; the indicator from one trigger to another by flipping the animation direction based
+        on whether the previous trigger is active or not.
+      </p>
 
       <Separator />
 
@@ -552,9 +554,7 @@ export default function TabIndicatorPostPage() {
               </TabsPrimitive.Tab>
             ))}
           </TabsPrimitive.List>
-          <div className="mt-1 text-center">
-            <NumberPanels />
-          </div>
+          <NumberPanels />
         </TabsPrimitive.Root>
       </Demo>
 

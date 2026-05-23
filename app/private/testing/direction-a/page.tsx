@@ -103,7 +103,7 @@ export default function DirectionA() {
           <p className="mb-1 font-pixel text-[11px] text-muted-foreground">Everfi · 2022 · Design Systems Lead</p>
           <h1 className="mb-3 text-4xl font-semibold tracking-tight">Forge Editor</h1>
           <p className="max-w-xl text-lg text-muted-foreground">
-            Foundational refresh of Everfi's internal learning-content creation & management app.
+            Foundational refresh of Everfi&apos;s internal learning-content creation & management app.
           </p>
           <div className="mt-5 flex flex-wrap gap-6 border-t border-border pt-5">
             <Stat label="Role" value="Design Systems Lead" />

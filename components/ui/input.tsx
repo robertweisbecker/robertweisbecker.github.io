@@ -25,6 +25,7 @@ function Input({ className, size = "md", ...props }: Omit<InputPrimitive.Props, 
     <InputPrimitive
       data-slot="input"
       data-size={size}
+      autoComplete="off"
       className={cn(
         inputVariants({ size, className }),
         "ui-input [&::-webkit-inner-spin-button]:hidden [&::-webkit-outer-spin-button]:hidden"

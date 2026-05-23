@@ -24,7 +24,6 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
       svg.pauseAnimations();
       animate(y, 0, { duration: 0.15 });
       isAirborne.current = false;
-      setIsPressed(false);
     }
   }, [isPlaying, y]);
 
@@ -133,7 +132,12 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
       <Button
         size="xs"
         variant="ghost"
-        onClick={() => setIsPlaying((p) => !p)}
+        onClick={() => {
+          if (isPlaying) {
+            setIsPressed(false);
+          }
+          setIsPlaying((p) => !p);
+        }}
         aria-pressed={isPlaying}
         data-pressed={isPlaying}
         className="absolute inset-e-1 top-1 z-1 font-pixel text-[11px]"

@@ -30,7 +30,10 @@ export type KeyPressOptions = {
  */
 export function useKeyPress(key: string | readonly string[], handler: (event: KeyboardEvent) => void, options: KeyPressOptions = {}): void {
   const handlerRef = useRef(handler);
-  handlerRef.current = handler;
+
+  useEffect(() => {
+    handlerRef.current = handler;
+  }, [handler]);
 
   const keysHash = (Array.isArray(key) ? key : [key as string]).map((k) => k.toLowerCase()).join("|");
 

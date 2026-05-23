@@ -7,14 +7,10 @@ import { cn } from "@/lib/utils";
 import {
   IconBriefcaseFilled,
   IconComponents,
-  IconFile,
-  IconFilter2,
-  IconFilter2Search,
   IconFlask,
   IconHome,
   IconLayoutGridFilled,
-  IconNews,
-  IconPalette,
+  IconNut,
   IconSearch,
   IconUser,
 } from "@tabler/icons-react";
@@ -34,12 +30,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandPanel,
   CommandShortcut,
 } from "./ui/command";
 import { Kbd, KbdGroup } from "./ui/kbd";
 import { Dialog } from "@base-ui/react/dialog";
-import { Badge } from "./ui/badge";
 import { Favicon, FolderIcon, CursorIcon } from "./icons";
 import { PixelNewsIcon, PixelFinderIcon, PixelScribbleIcon } from "./icons-pixel";
 import { TreeIconFile } from "./icons-tree";
@@ -53,7 +47,6 @@ import { Button } from "./ui/button";
 import { LinkButton } from "./ui/link-button";
 import { Toggle } from "./ui/toggle";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { Autocomplete } from "@base-ui/react";
 
 type SearchItem = {
   value: string;
@@ -125,6 +118,7 @@ const staticPages: SearchItem[] = [
   { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
   { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(PixelNewsIcon), group: "Pages" },
   { value: "art", label: "Art", path: "/art", icon: itemIcon(PixelScribbleIcon), group: "Pages" },
+  { value: "playground", label: "Playground", path: "/playground", icon: itemIcon(IconNut), group: "Pages" },
 ];
 
 const privatePages: SearchItem[] = [
@@ -301,7 +295,7 @@ export function SiteSearch({
             "ease squircle flex h-button-sm items-center justify-start gap-2 rounded-md ps-2 pe-3 text-sm transition-colors duration-100",
             variant === "button" && "w-fit bg-muted hover:bg-accent hover:text-accent-foreground",
             variant === "input" &&
-              "w-full bg-background text-destructive inset-shadow-border outline -outline-offset-1 outline-border/50 hover:outline-input",
+              "w-full bg-background inset-shadow-border outline -outline-offset-1 outline-border/50 hover:outline-input",
             className
           )}
           onClick={() => setOpen(true)}

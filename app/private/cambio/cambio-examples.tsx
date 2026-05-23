@@ -2,15 +2,15 @@
 
 import { Cambio } from "cambio";
 import Image from "next/image";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { useId } from "react";
+import { motion } from "framer-motion";
 
 import styles from "./cambio-examples.module.css";
 import { IconX } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
+const MotionImage = motion.create(Image);
+
 function DemoImage({ layoutProps, className, expanded = false }: { layoutProps?: boolean; className?: string; expanded?: boolean }) {
-  const MotionImage = motion.create(Image);
   return (
     // <LayoutGroup>
     //   <motion.div className="size-full rounded-lg bg-card p-1">

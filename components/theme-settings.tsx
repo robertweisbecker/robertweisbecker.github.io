@@ -4,7 +4,7 @@ import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-gr
 import { NumberSlider } from "@/components/number-slider";
 import { ALL_HUE_OPTIONS, COLOR_MAP, HUE_OPTIONS, NEUTRAL_OPTIONS, useTheme, type HueName, type NeutralName } from "@/components/theme";
 import { Button } from "@/components/ui/button";
-import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
 import {
   Popover,
   PopoverContent,
@@ -25,12 +25,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { IconRotate2, IconWheel } from "@tabler/icons-react";
+import { IconWheel } from "@tabler/icons-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { Badge } from "./ui/badge";
 import { Separator } from "./ui/separator";
 import { LinkButton } from "./ui/link-button";
-import { PixelRedoIcon } from "./icons-pixel";
 
 const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({
   value: opt.value,

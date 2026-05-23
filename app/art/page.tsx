@@ -23,7 +23,6 @@ import rrp2020 from "@/public/art/2020_rrp.jpeg";
 import gb2021 from "@/public/art/2021_gb.jpeg";
 import cm2022 from "@/public/art/2022_937.jpeg";
 import lola2023 from "@/public/art/2023_lola.jpeg";
-import self2023 from "@/public/art/2023_self.jpeg";
 import gr2024 from "@/public/art/2024_gr.jpeg";
 import m2024 from "@/public/art/2024_m.jpeg";
 import otis2024 from "@/public/art/2024_otis.jpeg";
@@ -36,7 +35,6 @@ import sprayCig2010 from "@/public/art/2010_spray-cig.jpeg";
 
 import { Artwork } from "./artwork";
 import { LinkOut } from "@/components/link-out";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export const metadata: Metadata = {
   title: "Artwork",
@@ -45,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function ArtPage() {
   return (
-    <div className="container mx-auto max-w-6xl space-y-12 px-4">
+    <div className="mx-auto max-w-6xl space-y-12 px-4">
       {/* <ToggleGroup defaultValue={["people"]} className="md:*:size-20 md:*:h-auto md:*:flex-col" spacing={1}>
         <ToggleGroupItem value="digital">
           <img
@@ -105,7 +103,9 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Places</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+            Places
+          </h2>
         </div>
         <section className="line-y columns-2 gap-4">
           <Artwork year={2025} src={chi2025} title="Harold Washington Library, Chicago" medium="digital" />
@@ -113,7 +113,9 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Pets</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+            Pets
+          </h2>
         </div>
         <section className="line-y columns-2 gap-4">
           <Artwork year={2024} src={otis2024} title="Otis" medium="digital" />
@@ -123,7 +125,9 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Portraits</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+            Portraits
+          </h2>
         </div>
         <section className="line-y columns-2 gap-4">
           <Artwork year={2018} src={self2018} title="Self" />
@@ -133,7 +137,9 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Poses</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+            Poses
+          </h2>
         </div>
         <section className="line-y columns-3 gap-4">
           <Artwork year={2012} src={manSeated2012} medium="charcoal" />
@@ -146,7 +152,9 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase">Props</h2>
+          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+            Misc.
+          </h2>
         </div>
         <section className="line-y columns-2 gap-4">
           <Artwork year={2012} src={sculptureEnhanced2012} title="UMMA" medium="charcoal" />

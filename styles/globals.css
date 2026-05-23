@@ -25,7 +25,7 @@
   /* --default-font-variation-settings: "wght" 425; */
   --font-sans: system-ui, ui-sans-serif, sans-serif;
   --font-heading: var(--font-display), var(--font-sans);
-  --font-heading--font-variation-settings: "SERF" 30, "wght" 600;
+  --font-heading--font-variation-settings: "SERF" 30, "wght" 680, "slnt" -5;
   --font-heading--font-feature-settings: "ss01", "ss02", "calt", "dlig", "frac";
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
@@ -328,7 +328,7 @@
   }
 
   h1 {
-    @apply text-h1 font-heading leading-none -tracking-[0.005em] text-balance;
+    @apply text-h1 font-heading leading-none tracking-[-0.005em] text-balance;
   }
   em {
     /*  Settings for Georgia if reverting: @apply relative -top-[1%] font-serif text-[98%]  */
@@ -373,7 +373,7 @@
 
 @utility text-h1 {
   :where(&) {
-    @apply font-heading text-3xl/[.9em] -tracking-[0.0125em] text-balance;
+    @apply font-heading text-3xl/[.9em] tracking-[-0.0125em] text-balance;
     font-variation-settings:
       "SERF" 25,
       "slnt" -5,
@@ -611,17 +611,17 @@
 }
 
 @utility line-t {
-  @apply relative before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:bg-border;
+  @apply relative before:absolute before:top-0 before:left-[-100vw] before:h-px before:w-[200vw] before:bg-border;
 }
 
 @utility line-b {
-  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:bg-border;
+  @apply relative after:absolute after:bottom-0 after:left-[-100vw] after:h-px after:w-[200vw] after:bg-border;
 }
 
 @utility line-y {
   @apply relative;
-  @apply before:absolute before:top-0 before:-left-[100vw] before:h-px before:w-[200vw] before:bg-border;
-  @apply after:absolute after:bottom-0 after:-left-[100vw] after:h-px after:w-[200vw] after:bg-border;
+  @apply before:absolute before:top-0 before:left-[-100vw] before:h-px before:w-[200vw] before:bg-border;
+  @apply after:absolute after:bottom-0 after:left-[-100vw] after:h-px after:w-[200vw] after:bg-border;
 }
 
 @utility line-t/half {

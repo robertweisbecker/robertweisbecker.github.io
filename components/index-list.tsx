@@ -6,7 +6,7 @@ import Image from "next/image";
 import * as React from "react";
 import { TreeIconFile } from "./icons-tree";
 
-export type ProjectGridItem = {
+export type IndexListItem = {
   id: string | number;
   title: string;
   description?: string;
@@ -22,13 +22,13 @@ export type ProjectGridItem = {
   published?: boolean;
 };
 
-export type ProjectGridProps = {
-  items?: ProjectGridItem[];
+export type IndexListProps = {
+  items?: IndexListItem[];
   className?: string;
   itemClassName?: string;
 };
 
-function renderMedia(icon: ProjectGridItem["icon"]) {
+function renderMedia(icon: IndexListItem["icon"]) {
   if (typeof icon === "string") {
     return (
       <ItemMedia variant="image" className="">
@@ -37,7 +37,7 @@ function renderMedia(icon: ProjectGridItem["icon"]) {
     );
   }
   if (icon) {
-    return <ItemMedia variant="default">{icon}</ItemMedia>;
+    return <ItemMedia variant="image">{icon}</ItemMedia>;
   }
   return (
     <ItemMedia variant="image">
@@ -46,7 +46,7 @@ function renderMedia(icon: ProjectGridItem["icon"]) {
   );
 }
 
-const defaultItems: ProjectGridItem[] = projects.map((p) => ({
+const defaultItems: IndexListItem[] = projects.map((p) => ({
   id: p.id,
   title: p.title,
   description: p.description,
@@ -56,7 +56,7 @@ const defaultItems: ProjectGridItem[] = projects.map((p) => ({
   published: p.published,
 }));
 
-export function ProjectGrid({ items = defaultItems, className, itemClassName }: ProjectGridProps) {
+export function IndexList({ items = defaultItems, className, itemClassName }: IndexListProps) {
   const filteredItems = items.filter((item) => item.published ?? true);
   return (
     <ItemGroup className={className}>

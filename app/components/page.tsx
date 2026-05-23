@@ -1,12 +1,6 @@
 "use client";
 import { useState } from "react";
 import { ChromeTabs } from "@/components/chrome-tabs";
-import { DeviceFrame } from "@/components/device-frame";
-import { Favicon } from "@/components/icons";
-import { FigmaIcon, GithubIcon } from "@/components/icons";
-import { ImageToggle } from "@/components/image-toggle";
-import forgeBefore from "@/public/assets/forge/forge-before.png";
-import forgeAfter from "@/public/assets/forge/forge-after.png";
 import { LinkOut } from "@/components/link-out";
 import {
   AlertDialog,
@@ -21,8 +15,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { DataList } from "@/components/ui/data-list";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import {
@@ -61,7 +53,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Toolbar } from "@/components/ui/toolbar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible } from "@base-ui/react/collapsible";
-import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic, IconTrash } from "@tabler/icons-react";
+import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 import { Section } from "./section";
 
@@ -72,7 +64,7 @@ const ComponentDemos = dynamic(() => import("./component-demos").then((module) =
 export default function ComponentsPage() {
   const [isLoading, setLoading] = useState(false);
   return (
-    <div className="container mx-auto grid min-h-screen grid-rows-[auto_1fr_auto]">
+    <div className="mx-auto grid min-h-screen grid-rows-[auto_1fr_auto]">
       <header className="border-x border-t border-dashed bg-muted p-4">
         <Heading level={1}>Components</Heading>
         <p className="text-muted-foreground">Kitchen sink</p>
@@ -83,56 +75,21 @@ export default function ComponentsPage() {
         </aside>
 
         <main className="order-1 max-w-full border-x border-t border-dashed p-4 md:order-2">
-          <Section title="Playground">
-            <Badge variant="beta">Beta</Badge>
-            <Button
-              loading={isLoading}
-              onClick={() => {
-                setLoading(true);
-                window.setTimeout(() => setLoading(false), 2000);
-              }}
-            >
-              Loading
-            </Button>
-            <div className="wrapper">
-              <button className="group relative flex h-10 items-center gap-2 rounded-full bg-muted px-4 font-medium text-foreground transition-all duration-100 ease-out-quad active:scale-98">
-                <div
-                  className="absolute inset-0 flex h-10 items-center gap-2 rounded-full bg-destructive px-4 text-white transition-[clip-path] duration-300 ease-out [clip-path:inset(0_100%_0_0)] group-active:duration-2000 group-active:ease-out-quad group-active:[clip-path:inset(0_0_0_0)]"
-                  data-slot="inner"
-                >
-                  <IconTrash className="-ms-1 size-4" />
-                  Hold to Delete
-                </div>
-                <IconTrash className="-ms-1 size-4" />
-                Hold to Delete
-              </button>
-            </div>
-            <ChromeTabs>
-              <ChromeTabs.List>
-                <ChromeTabs.Tab value="tab1">
-                  <GithubIcon />
-                  GitHub
-                </ChromeTabs.Tab>
-                <ChromeTabs.Tab value="tab2">
-                  <FigmaIcon />
-                  Figma
-                </ChromeTabs.Tab>
-                <ChromeTabs.Tab value="tab3">Tab 3</ChromeTabs.Tab>
-              </ChromeTabs.List>
-              <ChromeTabs.Panel value="tab1">
-                <p>Tab 1 content</p>
-              </ChromeTabs.Panel>
-              <ChromeTabs.Panel value="tab2">
-                <p>Tab 2 content</p>
-              </ChromeTabs.Panel>
-              <ChromeTabs.Panel value="tab3">
-                <p>Tab 3 content</p>
-              </ChromeTabs.Panel>
-            </ChromeTabs>
+          <Badge variant="beta">Beta</Badge>
+          <Button
+            loading={isLoading}
+            onClick={() => {
+              setLoading(true);
+              window.setTimeout(() => setLoading(false), 2000);
+            }}
+          >
+            Loading
+          </Button>
+          {/* <Section title="testing">
             <ImageToggle mode="comparison" before={forgeBefore} after={forgeAfter} tab1="Before" tab2="After" />
-            {/* <ImageToggle mode="slider" before={forgeBefore} after={forgeAfter} /> */}
-          </Section>
-          <Section title="Button" className="gap-4">
+            <ImageToggle mode="slider" before={forgeBefore} after={forgeAfter} />
+          </Section> */}
+          {/* <Section title="Button" className="gap-4">
             <div className="flex flex-wrap gap-2">
               <div className="squircle size-20 rounded-xl bg-destructive"></div>
               <button className="focus-visible:outline-focus flex items-center gap-x-2 rounded-md bg-popover px-3.5 py-[calc(5/16*1rem)] text-neutral-500 shadow-[0_1px_rgba(0,0,0,0.04),0_1px_5px_-4px_rgba(0,0,0,0.4),0_2px_5px_rgba(0,0,0,0.06)] ring-1 ring-neutral-900/10 outline-none dark:shadow-[0_-1px_rgba(255,255,255,0.06),0_4px_8px_rgba(0,0,0,0.05),0_1px_6px_-4px_#000] dark:ring-white/10">
@@ -155,8 +112,8 @@ export default function ComponentsPage() {
               <Button size="lg">Large</Button>
               <Button size="icon">🔔</Button>
             </div>
-          </Section>
-          <Section title="Badge">
+          </Section> */}
+          {/* <Section title="Badge">
             <div className="flex flex-wrap gap-2">
               <Badge>Default</Badge>
               <Badge variant="secondary">Secondary</Badge>
@@ -165,8 +122,8 @@ export default function ComponentsPage() {
               <Badge variant="ghost">Ghost</Badge>
               <Badge variant="link">Link</Badge>
             </div>
-          </Section>
-          <Section title="Card">
+          </Section> */}
+          {/* <Section title="Card">
             <div className="grid max-w-2xl gap-4 sm:grid-cols-2">
               <Card>
                 <CardHeader>
@@ -192,8 +149,8 @@ export default function ComponentsPage() {
                 </CardContent>
               </Card>
             </div>
-          </Section>
-          <Section title="Device Frame">
+          </Section> */}
+          {/* <Section title="Device Frame">
             <p className="text-xs text-muted-foreground">Phone</p>
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter>
               <p className="flex items-center justify-center p-6 text-center text-sm">
@@ -218,8 +175,8 @@ export default function ComponentsPage() {
                 Browser frame preview
               </div>
             </DeviceFrame.Browser>
-          </Section>
-          <Section title="Button Group" id="button-group">
+          </Section> */}
+          {/* <Section title="Button Group" id="button-group">
             <div className="flex flex-wrap gap-4">
               <ButtonGroup>
                 <Button variant="outline">Left</Button>
@@ -227,7 +184,7 @@ export default function ComponentsPage() {
                 <Button variant="outline">Right</Button>
               </ButtonGroup>
             </div>
-          </Section>
+          </Section> */}
           <Section title="Form & Input" id="form-input">
             <div className="max-w-md space-y-4">
               <Field data-invalid={true}>
@@ -587,7 +544,7 @@ export default function ComponentsPage() {
               <DescriptionListValue>Washington, DC</DescriptionListValue>
             </DescriptionList>
           </Section>
-          <ComponentDemos />
+          {/* <ComponentDemos /> */}
         </main>
         <aside className="order-3 hidden border-e border-t bg-muted p-4 lg:block">Right</aside>
       </div>

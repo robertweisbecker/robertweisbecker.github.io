@@ -2,7 +2,6 @@
 
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { IconBrandLinkedin, IconCircleArrowUp } from "@tabler/icons-react";
 import { LinkButton } from "./ui/link-button";
 
 export function Footer() {

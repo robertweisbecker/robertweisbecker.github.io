@@ -28,7 +28,6 @@ import { Alert, AlertAction, AlertContent, AlertDescription, AlertTitle } from "
 import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Carousel, CarouselViewport, CarouselItem, CarouselToolbar } from "@/components/ui/carousel";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Code } from "@/components/ui/code";
 import { ColorCode } from "@/components/ui/color-code";
@@ -195,9 +194,9 @@ export function ComponentDemos() {
         </div>
       </Section>
 
-      <Section title="Carousel">
+      {/* <Section title="Carousel">
         <div className="grid gap-8">
-          {/* Default */}
+          
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">Default — scroll</p>
             <Carousel>
@@ -217,7 +216,7 @@ export function ComponentDemos() {
             </Carousel>
           </div>
 
-          {/* Autoplay */}
+          
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">Autoplay — pill progress + play/pause</p>
             <Carousel autoplay={{ delay: 3000, defaultInteraction: false }}>
@@ -237,7 +236,7 @@ export function ComponentDemos() {
             </Carousel>
           </div>
 
-          {/* Fade */}
+          
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">Fade — crossfade transitions</p>
             <Carousel fade>
@@ -257,7 +256,7 @@ export function ComponentDemos() {
             </Carousel>
           </div>
 
-          {/* Autoplay + Fade */}
+          
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">Autoplay + Fade</p>
             <Carousel autoplay={{ delay: 3000, defaultInteraction: false }} fade>
@@ -277,7 +276,7 @@ export function ComponentDemos() {
             </Carousel>
           </div>
         </div>
-      </Section>
+      </Section> */}
 
       <Section title="Checkbox">
         <div className="space-y-3">

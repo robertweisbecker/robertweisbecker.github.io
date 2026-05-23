@@ -6,7 +6,7 @@ import * as React from "react";
 import { CheckIcon } from "@/components/icons";
 import { PixelChevronsIcon } from "@/components/icons-pixel";
 import { cn } from "@/lib/utils";
-import { IconChevronDown, IconChevronUp, IconSelector } from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
 const Select = SelectPrimitive.Root;
 

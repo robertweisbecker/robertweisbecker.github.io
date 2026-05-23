@@ -9,8 +9,8 @@ const alertVariants = cva(
     variants: {
       variant: {
         default: "bg-card text-card-foreground [&>svg]:text-muted-foreground ",
-        secondary: "bg-(--hue-50) dark:bg-(--hue-900) text-secondary-foreground [&>svg]:text-primary outline-primary/20",
-        neutral: "bg-neutral-75 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72",
+        secondary: "bg-(--hue-25) dark:bg-(--hue-900) text-secondary-foreground [&>svg]:text-primary outline-secondary-foreground/20",
+        neutral: "bg-neutral-75 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72 outline-border",
         info: "bg-info text-info-foreground outline-info-primary/20 [&>svg]:text-info-primary",
         success: "bg-success text-success-foreground outline-success-primary/20 [&>svg]:text-success-primary",
         warning: "bg-warning text-warning-foreground outline-warning-primary/20 [&>svg]:text-warning-primary",
@@ -33,7 +33,7 @@ function Alert({ className, variant, inline, ...props }: React.ComponentProps<"d
   return (
     <div
       data-slot="alert"
-      role={variant === "destructive" ? "alert" : "status"}
+      role={variant === "destructive" ? "alert" : "note"}
       className={cn(alertVariants({ variant, inline }), className)}
       {...props}
     />

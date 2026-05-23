@@ -7,7 +7,6 @@ import { projects } from "@/lib/data/projects";
 import { getProjectToc } from "@/lib/projects";
 import type { ProjectFrontmatter } from "@/lib/types";
 import { resolveNeighbors } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
 
 export default async function MDXLayout({ children, params }: { children: React.ReactNode; params: Promise<{ slug: string }> }) {
   const { slug } = await params;

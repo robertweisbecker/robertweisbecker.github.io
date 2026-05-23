@@ -35,14 +35,6 @@ export type Post = {
 
 export const posts: Post[] = [
   {
-    id: "component-playground",
-    title: "Component Playground",
-    description: "Some fun components I made for this site",
-    category: "Demo",
-    path: "/posts/component-playground",
-    icon: "IconNut",
-  },
-  {
     id: "theming",
     title: "Theming Demo",
     description: "How theming works on this site",

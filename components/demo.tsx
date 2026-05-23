@@ -60,7 +60,7 @@ function DemoBody({
   centerContent: boolean;
   innerClass?: string;
 }) {
-  const demoInnerClasses = cn("p-5", centerContent && "grid place-items-center", innerClass);
+  const demoInnerClasses = cn("p-5 flex-1", centerContent && "grid place-items-center", innerClass);
 
   if (overflowBehavior === "resize") {
     return (
@@ -114,7 +114,7 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure data-demo className={cn("not-prose rounded-xl bg-sidebar", className)} {...props}>
+    <figure data-demo className={cn("not-prose flex flex-col rounded-xl bg-sidebar", className)} {...props}>
       {hasHeader ? (
         <header
           className={cn(

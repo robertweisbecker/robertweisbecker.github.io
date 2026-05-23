@@ -140,7 +140,7 @@ export default function NativePopoversAnchoringPage() {
       </Demo>
       <p>
         One thing I noticed: you seem to need <Code>transition-all</Code> on the popover content to get the exit transition working;{" "}
-        <Code>transition-[properties]</Code> doesn't work, at least with Tailwind.
+        <Code>transition-[properties]</Code> doesn&apos;t work, at least with Tailwind.
       </p>
       <p>
         Here{"'"}s a toast-y popover. In some countries, that{"'"}s a meal. Regardless, you need to close this one manually rather than by

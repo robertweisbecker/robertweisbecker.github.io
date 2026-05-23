@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { IconBrandApple } from "@tabler/icons-react";
 import * as React from "react";
 
 import { BatteryDisplay, SignalDisplay, Time, useBatteryStatus } from "./shared";

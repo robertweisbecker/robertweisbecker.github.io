@@ -5,13 +5,12 @@ import { ThemeSettings } from "@/components/theme-settings";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconBlobFilled, IconChevronDown, IconComponents, IconNews, IconPalette, IconBrush } from "@tabler/icons-react";
+import { IconBlobFilled, IconComponents, IconNut } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Favicon } from "./icons";
 import { PixelChevronDownIcon, PixelNewsIcon, PixelScribbleIcon } from "./icons-pixel";
-import { SiteSearch } from "./site-search";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -26,8 +25,6 @@ import {
 import { LinkButton } from "./ui/link-button";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { PreviewCardGroup, PreviewCardPrimitive, PreviewCardTrigger } from "./ui/preview-card";
-import { LayoutGroup, motion } from "motion/react";
-import { ProjectMeta } from "./project-meta";
 import { Badge } from "./ui/badge";
 import { DataList, DataListItem, DataListLabel, DataListValue } from "./ui/data-list";
 import * as React from "react";
@@ -101,6 +98,9 @@ export function Header() {
                 </DropdownMenuItem>
                 <DropdownMenuItem render={<Link href="/art" />} nativeButton={false}>
                   Art
+                </DropdownMenuItem>
+                <DropdownMenuItem render={<Link href="/playground" />} nativeButton={false}>
+                  Playground
                 </DropdownMenuItem>
                 {process.env.NODE_ENV === "development" && (
                   <>
@@ -207,6 +207,14 @@ export function Header() {
           aria-current={pathname === "/art" ? "true" : "false"}
           className="max-md:hidden"
         />
+        <HeaderButton
+          label="Playground"
+          icon={<IconNut data-icon={"inline-start"} />}
+          hideTextOnMobile={false}
+          href="/playground"
+          aria-current={pathname === "/playground" ? "true" : "false"}
+          className="max-md:hidden"
+        />
         {/* <SiteSearch className="ml-auto" /> */}
         <div className="ms-auto" />
         {process.env.NODE_ENV === "development" && (
@@ -256,8 +264,7 @@ function HeaderButton({
     <LinkButton
       {...props}
       variant="ghost"
-      size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "xs"}
-      rounded
+      size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "sm"}
       className={cn(
         "font-pixel text-[11px] uppercase backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground",
         "[&_svg]:size-2.75",

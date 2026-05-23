@@ -1,15 +1,17 @@
 "use client";
 
-import { IconEyeCheck, IconEyeFilled } from "@tabler/icons-react";
+import { IconEyeCheck } from "@tabler/icons-react";
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Item, ItemContent, ItemTitle, ItemDescription, ItemHeader, ItemFooter } from "../ui/item";
-import { LinkButton } from "../ui/link-button";
 import { Badge } from "../ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { Vignette } from "../vignette";
+import { LinkOut } from "../link-out";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/tooltip";
+import { ScrollArea } from "../ui/scroll-area";
 
 type Film = {
   title: string;
@@ -31,14 +33,30 @@ type FilmList = {
   }[];
 };
 
+const MIN_LOADING_VISIBLE_MS = 400;
+const CONTENT_REVEAL_DELAY_MS = 160;
+const MAX_POSTER_SETTLE_WAIT_MS = 800;
+
 export function Letterboxd({ maxFilms = 4 }) {
   const [films, setFilms] = useState<Film[]>([]);
   const [lists, setLists] = useState<FilmList[]>([]);
   const [loading, setLoading] = useState(true);
+  const [contentVisible, setContentVisible] = useState(false);
+  const [loadedPosters, setLoadedPosters] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const loadStartedAt = useRef(0);
 
   useEffect(() => {
+    let ignore = false;
+
     async function loadFilms() {
+      loadStartedAt.current = performance.now();
+      setLoading(true);
+      setContentVisible(false);
+      setLoadedPosters(0);
+      setError(null);
+
       try {
         const response = await fetch("/api/letterboxd");
         const data = await response.json();
@@ -47,64 +65,92 @@ export function Letterboxd({ maxFilms = 4 }) {
           throw new Error(data.error || "Unable to load Letterboxd feed.");
         }
 
-        setFilms(data.films.slice(0, maxFilms));
-        setLists(data.lists);
+        if (!ignore) {
+          setFilms(data.films.slice(0, maxFilms));
+          setLists(data.lists);
+        }
       } catch (error) {
-        setError(error instanceof Error ? error.message : "Unable to load Letterboxd feed.");
+        if (!ignore) {
+          setError(error instanceof Error ? error.message : "Unable to load Letterboxd feed.");
+        }
       } finally {
-        setLoading(false);
+        if (!ignore) {
+          setLoading(false);
+        }
       }
     }
 
     loadFilms();
-  }, [maxFilms]);
+
+    return () => {
+      ignore = true;
+    };
+  }, [maxFilms, retryCount]);
+
+  useEffect(() => {
+    if (loading || error || contentVisible || films.length === 0) {
+      return;
+    }
+
+    const elapsed = performance.now() - loadStartedAt.current;
+    const minimumLoadingDelay = Math.max(0, MIN_LOADING_VISIBLE_MS - elapsed);
+    const posterSettleDelay = loadedPosters >= films.length ? CONTENT_REVEAL_DELAY_MS : MAX_POSTER_SETTLE_WAIT_MS;
+    const delay = Math.max(minimumLoadingDelay, posterSettleDelay);
+    const timer = window.setTimeout(() => setContentVisible(true), delay);
+
+    return () => window.clearTimeout(timer);
+  }, [contentVisible, error, films.length, loadedPosters, loading]);
+
+  function handlePosterSettled() {
+    setLoadedPosters((count) => Math.min(count + 1, films.length));
+  }
+
+  function retryFetch() {
+    setRetryCount((count) => count + 1);
+  }
 
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between gap-2">
-        <LinkButton href="https://letterboxd.com/weisbecker/" isExternal variant="link" size="sm">
-          <LetterboxdLogo data-icon="inline-start" /> @weisbecker
-        </LinkButton>
+        <LinkOut
+          href="https://letterboxd.com/weisbecker/"
+          text="Letterboxd"
+          icon={<LetterboxdLogo />}
+          className="text-sm *:first:opacity-100"
+        ></LinkOut>
       </div>
 
-      {loading ? (
-        <LetterboxdSkeleton maxFilms={maxFilms} />
-      ) : error ? (
-        <div className="text-red-500">{error}</div>
-      ) : (
-        <Tabs defaultValue="watched" className="gap-3">
-          <TabsList variant="pill" className="relative w-full animate-stagger-enter justify-start [--delay:45ms] [--stagger:1]">
-            <TabsTrigger value="watched" className="w-fit grow-0">
-              Recents
-            </TabsTrigger>
-            <TabsTrigger value="lists" className="w-fit grow-0">
-              Lists
-            </TabsTrigger>
-            <Badge variant="outline" className="absolute right-0">
-              <IconEyeFilled title="Films logged" className="text-info-primary" /> 1,244
-            </Badge>
-          </TabsList>
-          <TabsContent value="watched">
-            <div className="grid grid-cols-5 gap-2">
-              {films.map((film, index) => (
-                <FilmCard key={film.url ?? index} film={film} index={index} />
-              ))}
-            </div>
-          </TabsContent>
-          <TabsContent value="lists">
-            <div className="grid grid-cols-3 gap-2">
-              {lists.map((list) => (
-                <ListCard key={list.url ?? list.title} list={list} />
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
-      )}
+      <div className="relative">
+        {!contentVisible && !error ? <LetterboxdSkeleton maxFilms={maxFilms} /> : null}
+        {!loading && error ? (
+          <div className="grid gap-2 rounded-xl bg-muted/40 p-3 text-sm text-muted-foreground">
+            <p>{error}</p>
+            <Button variant="elevated" size="sm" className="w-fit" onClick={retryFetch}>
+              Retry
+            </Button>
+          </div>
+        ) : null}
+        {!loading && !error ? (
+          <div
+            aria-hidden={!contentVisible}
+            inert={!contentVisible}
+            className={contentVisible ? "animate-stagger-enter [--delay:45ms]" : "pointer-events-none absolute inset-0 opacity-0"}
+          >
+            <ScrollArea scrollFade orientation="horizontal">
+              <div className="grid w-fit grid-cols-5 gap-2">
+                {films.map((film, index) => (
+                  <FilmCard key={film.url ?? index} film={film} index={index} onPosterSettled={handlePosterSettled} />
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
 
-function FilmCard({ film, index }: { film: Film; index: number }) {
+function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number; onPosterSettled: () => void }) {
   return (
     <Item
       size="xs"
@@ -119,43 +165,57 @@ function FilmCard({ film, index }: { film: Film; index: number }) {
         } as CSSProperties
       }
     >
-      <div className="mask-b absolute -inset-px -z-1 rounded-md mask-b-from-80%">
+      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center rounded-md mask-b-from-80%">
+        <style>
+          {`
+          @keyframes poster-anim {
+            0% { transform: rotate(0); opacity: .3; }
+            50% { opacity: 0.7; }
+            100% { transform: rotate(45deg); opacity: .5; }
+          }
+        `}
+        </style>
         <div
-          className="absolute bottom-6 aspect-square w-50 bg-cover opacity-60 mix-blend-multiply blur-xl"
+          className="aspect-square h-full bg-cover mix-blend-difference blur-xl dark:opacity-20"
           style={{
             backgroundImage: `url(${film.posterUrl})`,
-            animation: "shine-sweep 20s linear infinite alternate-reverse",
-            animationDelay: "calc(var(--index) * 100ms)",
+            animation: "poster-anim 20s linear infinite forwards",
           }}
         />
       </div>
       <ItemHeader className="">
-        <Vignette.Root
-          transitionLength={24}
-          inset={8}
-          className="-mx-1 -mt-1 shadow-border-md outline -outline-offset-1 outline-white/15"
-          radius="var(--radius-md)"
-        >
-          <Vignette.Image src={film.posterUrl} alt={film.title} width={150} height={255} sizes="150px" className="object-cover" />
+        <Vignette.Root transitionLength={16} inset={8} className="shadow-border-md" radius="var(--radius-md)">
+          <Vignette.Image
+            src={film.posterUrl}
+            alt={film.title}
+            width={150}
+            height={255}
+            sizes="150px"
+            loading="eager"
+            className="object-cover"
+            onLoad={onPosterSettled}
+            onError={onPosterSettled}
+          />
         </Vignette.Root>
       </ItemHeader>
-      <ItemContent className="mt-2">
-        <ItemTitle>{film.title}</ItemTitle>
-        {film.rating ? (
-          <ItemDescription className="text-sm text-muted-foreground">
-            {"★".repeat(Math.floor(film.rating)) + (film.rating % 1 ? "½" : "")}
-          </ItemDescription>
-        ) : null}
+      <ItemContent className="mt-1">
+        <ItemTitle className="text-xs!">
+          {film.title}{" "}
+          {film.rewatch && (
+            <TooltipProvider delay={0}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <IconEyeCheck className="align-start inline size-[1em]" title="Rewatch" />
+                </TooltipTrigger>
+                <TooltipContent>Rewatch</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </ItemTitle>
       </ItemContent>
       <ItemFooter>
         <ItemDescription className="font-pixel text-[11px]! text-muted-foreground/60">
-          {film.watchedDate}{" "}
-          {film.rewatch && (
-            <>
-              {" "}
-              ∙ <IconEyeCheck className="inline-block size-3" />
-            </>
-          )}
+          {film.rating ? <span>{"★".repeat(Math.floor(film.rating)) + (film.rating % 1 ? "½" : "")}</span> : null} ∙ {film.watchedDate}{" "}
         </ItemDescription>
       </ItemFooter>
     </Item>
@@ -205,7 +265,7 @@ function LetterboxdSkeleton({ maxFilms }: { maxFilms: number }) {
 
 function LetterboxdLogo() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" className="size-4 opacity-100!">
       <defs>
         <rect id="path-1" x="0" y="0" width="129.847328" height="141.389313" />
         <rect id="path-3" x="0" y="0" width="129.847328" height="141.389313" />

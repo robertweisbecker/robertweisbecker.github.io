@@ -3,11 +3,8 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { animate, AnimatePresence, motion, useMotionValue, useMotionValueEvent, type Transition } from "motion/react";
-import { ArrowRotateLeft, PauseFill, PlayFill } from "@gravity-ui/icons";
-import { useKeyPress } from "@/hooks/use-key-press";
-import { useEffect, useRef, useState } from "react";
-import { Kbd } from "./ui/kbd";
+import { animate, useMotionValue, useMotionValueEvent, type Transition } from "motion/react";
+import { ArrowRotateLeft } from "@gravity-ui/icons";
 import { textRevealCharSegmenter, textRevealWordSegmenter } from "@/lib/text-reveal-segmenters";
 
 const iconTransition: Transition = { type: "spring", stiffness: 600, damping: 30 };

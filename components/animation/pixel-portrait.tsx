@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { PixelReveal } from "@/components/animation/shared";
 
 const PIXEL_BG_CLASS = "fill-primary-foreground dark:fill-secondary-foreground";
 const PIXEL_FG_CLASS = "fill-primary dark:fill-secondary";

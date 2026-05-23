@@ -98,12 +98,12 @@ export default function SmoothGradientsPage() {
   return (
     <div className="prose mx-auto w-full max-w-3xl">
       <p>
-        Linear gradients can be finicky and difficult to get right. More often than not, you'll end up with banding or muddy middles where
-        two colors mix. So, here's a little Tailwind utility to smooth things out.
+        Linear gradients can be finicky and difficult to get right. More often than not, you&apos;ll end up with banding or muddy middles where
+        two colors mix. So, here&apos;s a little Tailwind utility to smooth things out.
       </p>
       <p>
         {" "}
-        Based on Andreas Larsen's <LinkOut href="https://larsenwork.com/easing-gradients/" text="Easing Gradients tool" />, the snippet
+        Based on Andreas Larsen&apos;s <LinkOut href="https://larsenwork.com/easing-gradients/" text="Easing Gradients tool" />, the snippet
         below adds a <Code>.via-smooth</Code> class you can use alongside linear gradients for smooth ease-in-out transitions, as an
         alternative to manually fiddling with color stops and positions.
       </p>
@@ -146,7 +146,7 @@ export default function SmoothGradientsPage() {
 
       <p>
         Even if you manipulate the color stops on a basic linear gradient, you can still end up with banding, like in the example below. To
-        fix this, you'd likely need to add an intermediate color stop with{" "}
+        fix this, you&apos;d likely need to add an intermediate color stop with{" "}
         <Code>
           via-[<var className="italic opacity-72">color</var>]
         </Code>{" "}
@@ -178,7 +178,7 @@ export default function SmoothGradientsPage() {
       </Demo>
       <Heading level={2}>Usage</Heading>
       <p>
-        Just drop the snippet into wherever your Tailwind theme is defined, like <Code>globals.css</Code>. The class overrides Tailwind's
+        Just drop the snippet into wherever your Tailwind theme is defined, like <Code>globals.css</Code>. The class overrides Tailwind&apos;s
         default linear <Code>--tw-gradient-stops</Code> variable with fifteen intermediate stops that follow an approximate ease-in-out
         curve. If you want a different curve, you can swap the percentages with new ones from{" "}
         <LinkOut href="https://larsenwork.com/easing-gradients/" text="Easing Gradients" />.

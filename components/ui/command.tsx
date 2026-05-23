@@ -2,7 +2,6 @@
 
 import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
 import { Dialog as CommandDialogPrimitive } from "@base-ui/react/dialog";
-import { IconSearch } from "@tabler/icons-react";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -17,10 +16,9 @@ import {
   AutocompleteSeparator,
 } from "@/components/ui/autocomplete";
 import { Kbd } from "./kbd";
-import { MorphIcon } from "../morph-icon";
-import { Button } from "./button";
 import { ChevronLeft } from "@gravity-ui/icons";
 import { AnimatePresence, motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-media-query";
 
 export const CommandDialog: typeof CommandDialogPrimitive.Root = CommandDialogPrimitive.Root;
 
@@ -139,6 +137,7 @@ export function CommandInput({
   placeholder = undefined,
   ...props
 }: React.ComponentProps<typeof AutocompleteInput>): React.ReactElement {
+  const isMobile = useIsMobile;
   return (
     <div className="flex items-baseline gap-0 border-b border-border/50 px-2.5 pt-1.5">
       <AnimatePresence mode="popLayout" initial={false}>
@@ -170,7 +169,7 @@ export function CommandInput({
         </AutocompletePrimitive.Clear>
       </AnimatePresence>
       <AutocompleteInput
-        autoFocus
+        autoFocus={!isMobile}
         className={cn("min-w-0 border-none! bg-transparent! shadow-none! outline-none! focus-visible:ring-0", className)}
         placeholder={placeholder}
         size="lg"

@@ -251,7 +251,7 @@ export default function DirectionC() {
           <p className="mb-1 font-pixel text-[11px] text-muted-foreground">Everfi · 2022</p>
           <h1 className="text-3xl font-semibold tracking-tight">Forge Editor</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Foundational refresh of Everfi's internal course builder. Click any tile to read more.
+            Foundational refresh of Everfi&apos;s internal course builder. Click any tile to read more.
           </p>
         </header>
 

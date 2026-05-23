@@ -2,9 +2,7 @@
 
 import type { TocItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { IconArrowNarrowUpDashed } from "@tabler/icons-react";
 import * as React from "react";
-import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 
 function useActiveItem(ids: string[]) {

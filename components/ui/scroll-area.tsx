@@ -19,6 +19,9 @@ function ScrollArea({
   innerClass?: string;
   orientation?: "vertical" | "horizontal" | "both";
 }) {
+  const hasVerticalScrollbar = orientation !== "horizontal";
+  const hasHorizontalScrollbar = orientation !== "vertical";
+
   return (
     <ScrollAreaPrimitive.Root
       className={cn(
@@ -42,9 +45,9 @@ function ScrollArea({
       >
         {children}
       </ScrollAreaPrimitive.Viewport>
-      <ScrollBar orientation="vertical" visible={showScrollbar} />
-      <ScrollBar orientation="horizontal" visible={showScrollbar} />
-      <ScrollAreaPrimitive.Corner data-slot="scroll-area-corner" />
+      {hasVerticalScrollbar ? <ScrollBar orientation="vertical" visible={showScrollbar} /> : null}
+      {hasHorizontalScrollbar ? <ScrollBar orientation="horizontal" visible={showScrollbar} /> : null}
+      {hasVerticalScrollbar && hasHorizontalScrollbar ? <ScrollAreaPrimitive.Corner data-slot="scroll-area-corner" /> : null}
     </ScrollAreaPrimitive.Root>
   );
 }

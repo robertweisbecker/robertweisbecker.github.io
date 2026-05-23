@@ -57,7 +57,7 @@ export default function RootLayout({
           {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','UA-100486484-1',{send_page_view:false});`}
         </Script>
       </head>
-      <body className="safe-area-inset-bottom root relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
+      <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"
@@ -67,7 +67,7 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
+          <main id="main" className="root isolate container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
             {children}
           </main>
           <Footer />
