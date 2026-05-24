@@ -59,9 +59,9 @@ export function Artwork({
       </figure>
 
       <Cambio.Portal>
-        <Cambio.Backdrop className="fixed inset-0 h-dvh w-dvw bg-black/40" />
+        <Cambio.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
         <Cambio.Popup
-          className="relative flex max-h-dialog w-[min(90vw,calc((100dvh-2rem)*var(--art-ratio)))] max-w-dialog flex-col gap-2 md:w-[min(60vw,calc((100dvh-2rem)*var(--art-ratio)))]"
+          className="relative z-100 flex max-h-dialog w-[min(90vw,calc((100dvh-2rem)*var(--art-ratio)))] max-w-dialog flex-col gap-2 md:w-[min(60vw,calc((100dvh-2rem)*var(--art-ratio)))]"
           style={popupStyle}
         >
           <Image

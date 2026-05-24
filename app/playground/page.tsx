@@ -26,9 +26,11 @@ import { MorphIcon } from "@/components/morph-icon";
 import { Toggle } from "@/components/ui/toggle";
 import { ColorCode } from "@/components/ui/color-code";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 
 export default function PlaygroundPage() {
   const [morphIcon, setMorphIcon] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(false);
   return (
     <div className="mx-auto flex flex-col items-center gap-6">
       <div className="sr-only">
@@ -37,26 +39,29 @@ export default function PlaygroundPage() {
 
       <div className="flex w-full flex-col gap-8">
         <div className="grid gap-4 lg:grid-cols-4">
-          <Demo title="Squishy thumbs" className="lg:col-span-2 lg:row-span-2" innerClass="flex flex-col gap-4">
-            <SwitchDemo />
-            <Separator />
-            <SliderDemo />
+          <Demo title="<ChromeTabs>" className="lg:col-span-2 lg:row-span-2" centerContent>
+            <ChromeTabsDemo />
           </Demo>
           <Demo title="Motion chart" centerContent innerClass="">
             <ChartDemo />
           </Demo>
-          <Demo title="Color swatch group" centerContent className="lg:col-span-2">
-            <ColorSwatchGroupDemo />
-          </Demo>
           <Demo title="Color code" centerContent controls={"Click to copy"} description="Click to copy">
             <ColorCode value="#0b0b0b" />
           </Demo>
+          <Demo title="Color swatch group" centerContent className="lg:col-span-2">
+            <ColorSwatchGroupDemo />
+          </Demo>
+
           <Demo title="CSS-anchored slider" centerContent>
             <AnchoredSliderDemo />
           </Demo>
 
-          <ScrollArea className="col-span-full" orientation="horizontal">
-            <div className="grid auto-cols-max grid-flow-col gap-4">
+          <Demo title="Slider" centerContent>
+            <SliderDemo />
+          </Demo>
+
+          <div className="col-span-full">
+            <div className="grid grid-flow-col grid-cols-subgrid gap-4">
               <Demo title="Delete button" centerContent>
                 <DeleteButtonDemo />
               </Demo>
@@ -64,20 +69,36 @@ export default function PlaygroundPage() {
               <Demo title="Animated button" centerContent>
                 <AnimatedButtonDemo />
               </Demo>
+              <Demo title="Loader" centerContent>
+                <Button
+                  rounded
+                  loading={isLoading}
+                  onClick={() => {
+                    setLoading(true);
+                    window.setTimeout(() => setLoading(false), 2000);
+                  }}
+                >
+                  Confirm
+                </Button>
+              </Demo>
             </div>
-          </ScrollArea>
+          </div>
+          <Demo title="Switch" centerContent innerClass="flex flex-col gap-4">
+            <SwitchDemo />
+          </Demo>
           <Demo title="Chrome Tabs" className="lg:col-span-full">
             <ChromeTabsDemo />
           </Demo>
 
-          <Demo title="Copy button">
-            <CopyButton value="Hello, world!" size="icon-sm" rounded variant="outline" />
+          <Demo title="Copy button" centerContent>
+            <CopyButton value="Hello, world!" size="icon" variant="outline" />
           </Demo>
 
           <Demo title="Mode toggle" centerContent>
             <ModeToggle />
           </Demo>
-          <Demo title="Morph filter icon">
+
+          <Demo title="Morph icon toggle" centerContent>
             <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)}>
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
             </Toggle>
@@ -85,40 +106,36 @@ export default function PlaygroundPage() {
           <Demo title="Emoji feedback" caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
             <EmojiFeedbackDemo />
           </Demo>
-          <Demo
-            title="Mark"
-            caption={
-              <>
-                A semi-realistic highlighter effect with <Code>corner-shape</Code>.
-              </>
-            }
-            innerClass="space-y-4 text-sm/6 text-muted-foreground"
-          >
+          <Demo title="Mark" innerClass="space-y-2 text-sm/6 text-muted-foreground">
             <p>
-              A gray highlight? <mark>Boring!</mark>
+              The default mark styling is{" "}
+              <mark className="bg-blend-none m-0 rounded-none bg-[mark] bg-none p-0 text-[markText] shadow-none text-shadow-none">
+                dated
+              </mark>
+              . Let's make the shape a bit more <mark>realistic</mark> with <Code variant="inline">corner-shape</Code>.
             </p>
 
             <p>
-              No worries, we can slap a <Code variant="plain">data-hue</Code> attribute on it. Let&apos;s do some classic highligter colors,
-              like <mark data-hue="yellow">yellow</mark> or <mark data-hue="pink">pink</mark> or <mark data-hue="lime">lime</mark> or{" "}
+              Then slap a <Code variant="plain">data-hue</Code> attribute on it for some classic highligter colors, like{" "}
+              <mark data-hue="yellow">yellow</mark> or <mark data-hue="pink">pink</mark> or <mark data-hue="lime">lime</mark> or{" "}
               <mark data-hue="magenta">magenta</mark> or <mark data-hue="cyan">cyan</mark>.
             </p>
           </Demo>
-          <Demo title="Mark II">
+          <Demo title="Mark II" innerClass="space-y-4 text-sm/6 text-muted-foreground">
             <p>
               The highlight shape also plays nice with long strings.{" "}
               <mark data-hue="indigo">
                 It&apos;s got{" "}
                 <Code variant="plain" className="inline wrap-anywhere">
-                  box-decoration-clone
+                  box-decoration-break: clone
                 </Code>{" "}
                 applied to make the shape span line breaks.
               </mark>{" "}
-              Notice how it also applied to the <Code variant="inline-component">code</Code> element too? I think that&apos;s a nice touch.
-              Same with changing its background color, which you probably didn&apos;t notice.
+              Notice how the nested <Code variant="inline-component">code</Code>&nbsp;inherited a little treatment too? I think that&apos;s
+              a nice touch.
             </p>
           </Demo>
-          <Demo title="Mark III">
+          <Demo title="Mark III" innerClass="space-y-4 text-sm/6 text-muted-foreground">
             <strong>Custom overrides</strong>
             <p>
               Don&apos;t like the default values? Override with classes, like this{" "}
@@ -187,7 +204,6 @@ function ChartDemo() {
 
   // svg uses spring
   const clipPathSpring = useSpring(0, {
-    stiffness: 100,
     damping: isHovering ? 18 : 40,
   });
 
@@ -196,7 +212,7 @@ function ChartDemo() {
   // text uses val
   const clipPathValue = useMotionValue(0);
   const clipPathDisplay = useTransform(clipPathValue, (v: number) => `${100 - Math.round(v)}%`);
-  const displayPosition = useMotionTemplate`clamp(5%, calc(100% - ${clipPathValue}%), calc(95% - 4ch))`;
+  const displayPosition = useMotionTemplate`clamp(5%, calc(100% - ${clipPathSpring}%), calc(95% - 4ch))`;
 
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -377,44 +393,62 @@ function AnchoredSliderDemo() {
 
 function ChromeTabsDemo() {
   return (
-    <ChromeTabs defaultValue="preview" className="border border-border/50 dark:bg-black">
+    <ChromeTabs defaultValue="preview" className="max-w-md border border-border/50 dark:bg-black">
       <ChromeTabs.List>
-        <ChromeTabs.Tab value="preview">
-          <Avatar className="-mx-1 -ms-1.5 size-4.5 rounded-full">
-            <AvatarImage src="https://github.com/robertweisbecker.png" alt="@shadcn" />
-            <AvatarFallback>RW</AvatarFallback>
+        <ChromeTabs.Tab value="preview" className="w-fit">
+          <Avatar className="-ms-1.5 size-4.5 rounded-full">
+            <AvatarImage src="https://github.com/robertweisbecker.png" alt="bob's avatar" />
+            <AvatarFallback>BW</AvatarFallback>
           </Avatar>
           bob.fyi
         </ChromeTabs.Tab>
-        <ChromeTabs.Tab value="code">
-          <Avatar className="-mx-1 -ms-1.5 size-4.5 rounded-full">
+        <ChromeTabs.Tab value="code" className="w-fit">
+          <Avatar className="-ms-1.5 size-4.5 rounded-full">
             <GithubIcon className="size-4" />
           </Avatar>
           Github
         </ChromeTabs.Tab>
-        <ChromeTabs.Tab value="output">
-          <Avatar className="-mx-1 -ms-1.5 size-4.5 rounded-full">
+        <ChromeTabs.Tab value="output" className="w-fit" flush={false}>
+          <Avatar className="-ms-1.5 size-4.5 rounded-full">
             <VercelIcon className="size-3" />
           </Avatar>
           Vercel
         </ChromeTabs.Tab>
       </ChromeTabs.List>
-      <ChromeTabs.Panel value="preview" className="p-4">
-        <div className="grid-stack animate-fade-in border border-dashed border-success-primary bg-success p-10 font-pixel text-[11px] text-success-foreground uppercase">
-          Content
-        </div>
+      <ChromeTabs.Panel value="preview" className="overflow-hidden p-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ opacity: { delay: 0.2 } }}
+          className="grid-stack border border-dashed border-success-primary bg-success p-10 font-pixel text-[11px] text-success-foreground uppercase"
+          // layoutId="chrome-panel"
+        >
+          You are here &darr;
+        </motion.div>
       </ChromeTabs.Panel>
-      <ChromeTabs.Panel value="code" className="p-4">
-        <div className="grid-stack animate-fade-in border border-dashed border-destructive bg-error p-10 font-pixel text-[11px] text-error-foreground uppercase">
+      <ChromeTabs.Panel value="code" className="overflow-hidden p-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ opacity: { delay: 0.2 } }}
+          className="grid-stack border border-dashed border-destructive bg-error p-10 font-pixel text-[11px] text-error-foreground uppercase"
+          // layoutId="chrome-panel"
+        >
           Down for maintenance
-        </div>
+        </motion.div>
       </ChromeTabs.Panel>
-      <ChromeTabs.Panel value="output" className="p-4">
-        <div className="animate-fade-in border border-dashed border-info-primary bg-info p-10 text-center font-pixel text-[11px] text-info-foreground uppercase">
-          <p className="my-auto">
+      <ChromeTabs.Panel value="output" className="overflow-hidden p-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ opacity: { delay: 0.2 } }}
+          className="grid-stack border border-dashed border-info-primary bg-info p-10 text-center font-pixel text-[11px] text-info-foreground uppercase"
+          layoutId="chrome-panel"
+        >
+          <p>
             Designers should <s>code</s> tweet.
           </p>
-        </div>
+        </motion.div>
       </ChromeTabs.Panel>
     </ChromeTabs>
   );

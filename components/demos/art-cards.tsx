@@ -52,7 +52,7 @@ function ArtCard({ src, index, count, left, top, rotate, zIndex, isHovered }: Ar
       }}
       transition={SPRING}
     >
-      <Image src={src} placeholder="blur" fill alt="" className="inset-1 size-full rounded-[inherit] object-cover" />
+      <Image src={src} placeholder="blur" sizes="100px" fill alt="" className="inset-1 size-full rounded-[inherit] object-cover" />
     </motion.div>
   );
 }

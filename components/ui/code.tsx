@@ -12,9 +12,9 @@ const codeVariants = cva(
         default:
           "inline-flex isolate before:rounded before:outline before:outline-popover/20 dark:before:-outline-offset-[0.5px] before:bg-linear-to-b before:from-card before:to-popover dark:before:bg-linear-to-t before:backdrop-blur-xs px-[0.67ex] before:top-0 before:bottom-[0.125ex] -top-px text-muted-foreground before:shadow-[inset_-0_.0625em_hsl(0_0%_100%_/_5%),_0_.0625em_hsl(0_0%_0%_/_5%),inset_0_-0.125em_0.5em_-.0625em_hsl(0_0%_0%_/_5%),var(--shadow-border-xs)] gap-[0.25em] text-[.875em] leading-[inherit] before:inset-x-0 before:absolute before:-z-1 mx-px min-h-5",
         inline:
-          "inline wrap-anywhere break-all before:content-['`'] after:content-['`'] text-[.925em] inline-flex font-mono font-semibold text-foreground",
+          "inline wrap-anywhere break-all before:content-['`'] after:content-['`'] text-[.925em] inline-flex font-mono font-semibold text-foreground translate-y-[-0.0625ex]",
         "inline-component":
-          "inline wrap-anywhere break-all before:content-['<'] after:content-['>'] text-[.925em] inline-flex font-mono font-semibold text-foreground",
+          "inline wrap-anywhere break-all before:content-['<'] after:content-['>'] text-[.925em] inline-flex font-mono font-semibold text-foreground translate-y-[-0.0625ex]",
       },
     },
     defaultVariants: {

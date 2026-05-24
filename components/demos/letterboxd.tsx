@@ -110,8 +110,9 @@ export function Letterboxd({ maxFilms = 4 }) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 bg-card shadow-border-xs sm:-mx-3 sm:rounded-xl sm:p-3">
       <div className="flex justify-between gap-2">
+        <p className="font-pixel text-[11px]! text-muted-foreground/50">Recently watched</p>
         <LinkOut
           href="https://letterboxd.com/weisbecker/"
           text="Letterboxd"
@@ -136,13 +137,11 @@ export function Letterboxd({ maxFilms = 4 }) {
             inert={!contentVisible}
             className={contentVisible ? "animate-stagger-enter [--delay:45ms]" : "pointer-events-none absolute inset-0 opacity-0"}
           >
-            <ScrollArea scrollFade orientation="horizontal" scrollbarGutter showScrollbar>
-              <div className="flex w-full gap-2">
-                {films.map((film, index) => (
-                  <FilmCard key={film.url ?? index} film={film} index={index} onPosterSettled={handlePosterSettled} />
-                ))}
-              </div>
-            </ScrollArea>
+            <div className="flex w-full gap-2">
+              {films.map((film, index) => (
+                <FilmCard key={film.url ?? index} film={film} index={index} onPosterSettled={handlePosterSettled} />
+              ))}
+            </div>
           </div>
         ) : null}
       </div>
@@ -153,7 +152,7 @@ export function Letterboxd({ maxFilms = 4 }) {
 function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number; onPosterSettled: () => void }) {
   return (
     <Item
-      size="sm"
+      size="xs"
       variant="muted"
       className="relative m-0 animate-stagger-enter rounded-md"
       style={
@@ -176,15 +175,15 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
         `}
         </style>
         <div
-          className="aspect-square h-full bg-cover mix-blend-difference blur-xl dark:opacity-20"
+          className="aspect-square h-full bg-cover opacity-40 mix-blend-difference blur-xl dark:opacity-20"
           style={{
             backgroundImage: `url(${film.posterUrl})`,
-            animation: "poster-anim 20s linear infinite forwards",
+            animation: "poster-anim 20s linear infinite forwards alternate",
           }}
         />
       </div>
       <ItemHeader className="">
-        <Vignette.Root transitionLength={16} inset={8} className="shadow-border-md" radius="var(--radius-md)">
+        <Vignette.Root transitionLength={16} inset={8} className="-m-1 shadow-border-md" radius="var(--radius-md)">
           <Vignette.Image
             src={film.posterUrl}
             alt={film.title}
@@ -213,10 +212,15 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
           )}
         </ItemTitle>
       </ItemContent>
-      <ItemFooter>
-        <ItemDescription className="font-pixel text-[11px]! text-muted-foreground/60">
-          {film.rating ? <span>{"★".repeat(Math.floor(film.rating)) + (film.rating % 1 ? "½" : "")}</span> : null} ∙ {film.watchedDate}{" "}
+      <ItemFooter className="justify-between">
+        <ItemDescription className="font-pixel text-[11px]! text-muted-foreground">
+          {film.rating ? (
+            <span>{"★".repeat(Math.floor(film.rating)) + (film.rating % 1 ? "½" : "")}</span>
+          ) : (
+            <span className="text-muted-foreground/60">TBD</span>
+          )}
         </ItemDescription>
+        {film.watchedDate ? <ItemDescription className="text-muted-foreground/60">{film.watchedDate}</ItemDescription> : null}
       </ItemFooter>
     </Item>
   );

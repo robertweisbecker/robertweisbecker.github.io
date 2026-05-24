@@ -9,14 +9,6 @@ import { ArrowSvg } from "../icons";
 import { buttonVariants } from "./button";
 import { IconX } from "@tabler/icons-react";
 
-interface PopoverContentProps
-  extends
-    PopoverPrimitive.Popup.Props,
-    VariantProps<typeof popoverVariants>,
-    Pick<PopoverPrimitive.Positioner.Props, "align" | "alignOffset" | "side" | "sideOffset" | "sticky"> {
-  arrow?: boolean;
-}
-
 const popoverVariants = cva(
   "group/popover data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-99 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1 data-[side=inline-start]:slide-in-from-end-1 data-[side=inline-end]:slide-in-from-start-1 origin-(--transform-origin) z-50 flex duration-100 flex-col p-(--popover-padding)",
   {
@@ -75,7 +67,7 @@ function PopoverContent({
           {...props}
         >
           {children}
-          {arrow && <PopoverArrow />}
+          {arrow && <PopoverArrow variant={variant === "annotation" ? "annotation" : "default"} />}
         </PopoverPrimitive.Popup>
       </PopoverPrimitive.Positioner>
     </PopoverPrimitive.Portal>
@@ -131,27 +123,30 @@ function PopoverDescription({ className, ...props }: PopoverPrimitive.Descriptio
   );
 }
 
-const popoverArrowVariants = cva(
-  "flex data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0 data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
-  {
-    variants: {
-      variant: {
-        default:
-          "flex data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0 data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
-      },
-    },
-  }
-);
-function PopoverArrow({ className, ...props }: PopoverPrimitive.Arrow.Props) {
-  return (
-    <PopoverPrimitive.Arrow
-      data-slot="popover-arrow"
-      className={cn(
+const popoverArrowVariants = cva("", {
+  variants: {
+    variant: {
+      default:
         "flex data-[side=bottom]:-top-2 data-[side=bottom]:rotate-0 data-[side=left]:right-[-13px] data-[side=left]:rotate-90 data-[side=right]:left-[-13px] data-[side=right]:-rotate-90 data-[side=top]:-bottom-2 data-[side=top]:rotate-180",
-        className
-      )}
-      {...props}
-    >
+      annotation: [
+        "data-[side=bottom]:w-px data-[side=top]:w-px",
+        "data-[side=bottom]:h-5 data-[side=top]:h-5",
+        "data-[side=left]:h-px data-[side=right]:h-px",
+        "data-[side=left]:w-5 data-[side=right]:w-5",
+        "bg-foreground",
+        "relative",
+        "before:absolute before:size-2 before:rounded-full before:bg-foreground",
+        "data-[side=bottom]:before:top-[-10px] data-[side=top]:before:bottom-[-10px] data-[side=left]:before:right-[-10px] data-[side=right]:before:left-[-10px]",
+      ],
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+function PopoverArrow({ className, variant, ...props }: PopoverPrimitive.Arrow.Props & VariantProps<typeof popoverArrowVariants>) {
+  return (
+    <PopoverPrimitive.Arrow data-slot="popover-arrow" className={cn(popoverArrowVariants({ variant }), className)} {...props}>
       <ArrowSvg />
     </PopoverPrimitive.Arrow>
   );

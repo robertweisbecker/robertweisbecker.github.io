@@ -310,14 +310,12 @@
     font-synthesis: none;
     text-spacing-trim: space-first;
     text-rendering: geometricPrecision;
-    /* .font-sans {
-      font-feature-settings: "ss01", "ss03", "cv01", "cv11", "calt", "liga", "ccmp", "locl", "kern";
-    } */
   }
   .bg-card {
     @apply backdrop-blur-xs;
   }
   .rounded-full {
+    /* eslint-disable-next-line css/no-unknown-properties */
     corner-shape: initial;
   }
 }
@@ -355,7 +353,7 @@
     --mark-origin: -10% 0%;
     --mark-radius: 60% 93% 1ch 55% / 37% 2ch 5ex 160%;
     --mark-dark: var(--hue-700);
-    --mark-light: var(--hue-100);
+    --mark-light: var(--hue-200);
     @apply bg-blend-multiply [--mark-bg:var(--mark-light)] [--mark-fg:var(--mark-dark)];
     @variant dark {
       @apply bg-blend-screen [--mark-bg:var(--mark-dark)] [--mark-fg:var(--mark-light)];

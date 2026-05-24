@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "dev:fresh": "rm -rf .next && next dev",
+    "dev:webpack": "next dev --webpack",
+    "dev:fresh:webpack": "rm -rf .next && next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",

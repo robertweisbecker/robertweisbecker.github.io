@@ -25,7 +25,7 @@ const demoContainerVariants = cva("rounded-[calc(var(--radius-xl)-1px)] max-w-[c
   variants: {
     variant: {
       card: "bg-card shadow-border-xs",
-      outline: "outline outline-border/50 bg-muted -outline-offset-1",
+      outline: "bg-muted",
     },
   },
   defaultVariants: {
@@ -46,6 +46,7 @@ type DemoProps = React.ComponentProps<"figure"> &
     headerClassName?: string;
     captionClassName?: string;
     code?: DemoCodeConfig;
+    plain?: boolean;
   };
 
 function DemoBody({
@@ -109,6 +110,7 @@ export function Demo({
   code,
   className,
   children,
+  plain,
   ...props
 }: DemoProps) {
   const canExpand = maxHeight !== undefined;
@@ -116,7 +118,7 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure data-demo className={cn("not-prose flex flex-col rounded-xl bg-sidebar", className)} {...props}>
+    <figure data-demo className={cn("not-prose flex flex-col rounded-xl", !plain ? "bg-sidebar" : "", className)} {...props}>
       {hasHeader ? (
         <header
           className={cn(

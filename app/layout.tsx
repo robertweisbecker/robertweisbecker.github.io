@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-// import { Agentation } from "agentation";
+import { Agentation } from "agentation";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -24,10 +24,10 @@ const Display = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bob.fyi"),
   title: "bob dot fyi",
-  description: "Bob Weisbecker is a systems & product designer at Everfi",
+  description: "Bob is a product & systems designer at Everfi.",
   openGraph: {
-    title: "Robert (Bob) Weisbecker",
-    description: "Bob Weisbecker is a systems & product designer at Everfi",
+    title: "bob.fyi",
+    description: "Bob is a product & systems designer at Everfi.",
     url: "https://bob.fyi",
     siteName: "bob.fyi",
     locale: "en_US",
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Robert (Bob) Weisbecker",
-    description: "Bob Weisbecker is a systems & product designer at Everfi",
+    title: "bob.fyi",
+    description: "Bob is a product & systems designer at Everfi.",
   },
   icons: {
     icon: "/assets/favicon.ico",
@@ -72,8 +72,7 @@ export default function RootLayout({
           </main>
           <Footer />
 
-          {/* {process.env.NODE_ENV === "development" && <DevMeasurer />} */}
-          {/* {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />} */}
+          {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

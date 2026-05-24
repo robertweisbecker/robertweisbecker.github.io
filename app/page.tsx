@@ -59,19 +59,19 @@ export default function Home() {
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
       <section>
-        <div className="grid animate-stagger-enter grid-cols-[auto_1fr] items-start gap-x-8 gap-y-4 [--stagger:1]">
+        <div className="grid animate-stagger-enter grid-cols-[1fr_200px] items-start gap-x-8 gap-y-4 [--stagger:1] sm:grid-cols-[auto_1fr]">
           <h1 className="-ms-1 mb-4 text-h1 max-sm:self-end sm:col-span-2">
             Robert
             <br /> Weisbecker
           </h1>
-          <div className="relative w-fit rounded-md bg-muted p-1">
+          <div className="relative w-fit rounded-md bg-muted">
             <Float
               className="group/pixel relative isolate w-fit rounded-md bg-card p-1 shadow-border-lg"
               speed={0.5}
               amplitude={[4, 8, 4]}
               rotationRange={[1, 1, 3]}
             >
-              <div className="relative size-50 overflow-hidden rounded-sm bg-background">
+              <div className="relative overflow-hidden rounded-xs bg-background sm:size-50">
                 <PixelPortrait className="outline-2 outline-card transition-all duration-300" />
                 {isDinoVisible && (
                   <PixelReveal className="absolute inset-0 size-50">
@@ -365,7 +365,8 @@ export default function Home() {
           </div>
         </LayoutGrid>
 
-        <h2 className="font-pixel text-[11px] uppercase">Log</h2>
+        <h2 className="mt-3 font-pixel text-[11px] uppercase">Bonus</h2>
+        <p className="text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching.</p>
         <Letterboxd maxFilms={5} />
       </section>
       <section>

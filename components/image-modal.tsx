@@ -139,10 +139,10 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
           "px-0 sm:px-4 sm:pt-6 sm:pb-10 lg:py-10"
         )}
       >
-        <Cambio.Backdrop className="fixed inset-0 h-dvh w-dvw bg-black/40" />
+        <Cambio.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
         <Cambio.Popup
           className={cn(
-            "relative mx-auto my-0 max-h-dialog overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
+            "relative z-100 mx-auto my-0 max-h-dialog overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
             "sm:my-16 sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
           )}
           style={popupStyle}

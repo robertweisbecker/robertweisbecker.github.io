@@ -5,7 +5,7 @@ import { ThemeSettings } from "@/components/theme-settings";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconBlobFilled, IconComponents, IconNut } from "@tabler/icons-react";
+import { IconBlobFilled, IconComponents, IconMonkeybar } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -69,7 +69,7 @@ export function Header() {
         >
           About
         </LinkButton> */}
-
+        <div className="ms-auto" />
         <PreviewCardGroup side="right" sideOffset={8} handle={previewHandle} actionsRef={previewActions} align="start" anchor={anchorRef}>
           <DropdownMenu
             modal={false}
@@ -209,14 +209,14 @@ export function Header() {
         />
         <HeaderButton
           label="Playground"
-          icon={<IconNut data-icon={"inline-start"} />}
+          icon={<IconMonkeybar data-icon={"inline-start"} imageRendering="pixelated" className="size-3 [image-rendering:pixelated]" />}
           hideTextOnMobile={false}
           href="/playground"
           aria-current={pathname === "/playground" ? "true" : "false"}
           className="max-md:hidden"
         />
         {/* <SiteSearch className="ml-auto" /> */}
-        <div className="ms-auto" />
+
         {process.env.NODE_ENV === "development" && (
           <>
             <HeaderButton
