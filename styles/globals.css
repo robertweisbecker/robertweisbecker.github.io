@@ -10,6 +10,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@custom-variant hover (&:hover);
+
 /* Used by sticky table-of-contents elements that rely on scroll-state containers. */
 @custom-variant @stuck-top {
   @supports (container-type: scroll-state) {
@@ -87,7 +89,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-xs: min(calc(var(--radius) * var(--ellipse-factor) * 0.3), 0.5rem);
+  --radius-xs: min(calc(var(--radius) * calc(var(--ellipse-factor) * 0.75) * 0.3), 0.5rem);
   --radius-sm: min(calc(var(--radius) * var(--ellipse-factor) * 0.5), 0.75rem);
   --radius-md: min(calc(var(--radius) * var(--ellipse-factor) * 0.7), 1.25rem);
   --radius-lg: min(calc(var(--radius) * var(--ellipse-factor) * 0.9), 1.5rem);
@@ -314,6 +316,9 @@
   }
   .bg-card {
     @apply backdrop-blur-xs;
+  }
+  .rounded-full {
+    corner-shape: initial;
   }
 }
 
@@ -646,6 +651,6 @@
   word-spacing: 1ch;
   &:after {
     color: var(--border);
-    content: "······································································";
+    content: "········································································································································";
   }
 }

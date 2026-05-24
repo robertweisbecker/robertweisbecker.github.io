@@ -79,10 +79,10 @@ export default function ArtPage() {
         </ToggleGroupItem>
       </ToggleGroup> */}
       <div className="grid w-full grid-cols-[auto_1fr] gap-4 sm:gap-12">
-        <h1 className="line-b mb-4 self-baseline text-h1">Artwork</h1>
-        <p className="mb-4 self-baseline text-sm text-balance text-muted-foreground">
-          Recent: iPad Pro with <LinkOut href="https://www.procreate.com" text="Procreate" className="underline-offset-1" />. Earlier:
-          pencil, charcoal, oil. 2009—now.
+        <h1 className="line-b mb-4 self-baseline text-h1 max-sm:col-start-2 max-sm:row-start-1">Artwork</h1>
+        <p className="mb-4 self-baseline text-sm text-balance text-muted-foreground max-sm:col-start-2 max-sm:row-start-2">
+          Recent: iPad Pro with <LinkOut href="https://www.procreate.com" text="Procreate" className="underline-offset-1" />
+          &#x2060;.&nbsp;Earlier: pencil, charcoal, oil. 2009—now.
         </p>
 
         <div className="relative">

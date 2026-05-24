@@ -37,6 +37,7 @@ type DemoProps = React.ComponentProps<"figure"> &
   VariantProps<typeof demoContainerVariants> & {
     title?: React.ReactNode;
     controls?: React.ReactNode;
+    description?: React.ReactNode;
     caption?: React.ReactNode;
     maxHeight?: number | string;
     overflowBehavior?: DemoOverflowBehavior;
@@ -96,6 +97,7 @@ function DemoBody({
 export function Demo({
   title,
   controls,
+  description,
   caption,
   maxHeight,
   overflowBehavior = "wrap",
@@ -118,11 +120,14 @@ export function Demo({
       {hasHeader ? (
         <header
           className={cn(
-            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-2 text-xs",
+            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-1.5 text-xs",
             headerClassName
           )}
         >
-          <div className="min-w-0 grow font-pixel text-[11px] uppercase">{title}</div>
+          <div className="flex grow items-baseline gap-1">
+            <span className="min-w-0 font-pixel text-[11px] text-foreground">{title}</span>
+            {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
+          </div>
           <div className="flex items-center gap-1">{controls}</div>
         </header>
       ) : null}

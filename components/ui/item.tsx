@@ -37,16 +37,16 @@ const itemVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-transparent",
+        default: "border-transparent overflow-hidden [a]:hover:overflow-visible",
         outline: "border-border",
-        muted: "bg-accent border-transparent",
+        muted: "bg-muted border-transparent",
         elevated: "shadow-border-sm border-transparent bg-card [a]:hover:after:bg-sidebar",
       },
       size: {
         lg: "gap-4 p-5 rounded-2xl data-[variant=default]:-mx-5",
         default: "gap-4 px-4 py-3 data-[variant=default]:-mx-4",
-        sm: "gap-3 px-3 py-2.5 has-data-[variant=default]:-mx-3 ",
-        xs: "gap-x-2.5 gap-y-1 p-1.5 in-data-[slot=dropdown-menu-content]:p-0  data-[variant=default]:-mx-2.5",
+        sm: "gap-3 px-3 py-2.5 has-data-[variant=default]:-mx-3 rounded-lg",
+        xs: "gap-x-2.5 gap-y-1 py-1.5 px-0 in-data-[slot=dropdown-menu-content]:p-0  rounded-md",
       },
     },
     defaultVariants: {
@@ -83,7 +83,7 @@ function Item({
 const itemMediaVariants = cva("gap-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none squircle", {
   variants: {
     variant: {
-      default: "bg-transparent min-h-lh min-w-lh self-start",
+      default: "bg-transparent min-h-lh min-w-lh self-center",
       icon: " [&_svg:not([class*='size-'])]:size-4 grid-stack min-h-6 grid-stack min-w-6 bg-current/5 text-primary rounded-xs self-start",
       image:
         "size-10 bg-card overflow-hidden shadow-border-xs rounded-md group-data-[size=sm]/item:size-9 group-data-[size=sm]/item:rounded-md group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-cover [&_svg]:size-6 in-group-data-[variant=muted]/item:bg-muted in-group-data-[variant=muted]/item:shadow-none group-has-data-[slot=item-description]/item:self-start group-has-data-[slot=item-description]/item:translate-y-0.5",
@@ -113,8 +113,8 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="item-title"
       className={cn(
-        "line-clamp-1 w-fit items-center text-base leading-tight font-medium group-data-[size=sm]/item:text-sm/none",
-        "group-data-[size=xs]/item:text-sm/none",
+        "line-clamp-1 w-fit items-center text-base leading-tight font-medium group-data-[size=sm]/item:text-sm",
+        "group-data-[size=xs]/item:text-xs",
         className
       )}
       {...props}

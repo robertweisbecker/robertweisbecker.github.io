@@ -67,8 +67,8 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="root isolate container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
-            {children}
+          <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
+            <div className="root isolate">{children}</div>
           </main>
           <Footer />
 

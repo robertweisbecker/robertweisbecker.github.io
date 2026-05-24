@@ -12,18 +12,20 @@ function ColorCode({ value, className, ...props }: Omit<React.ComponentProps<"bu
     <button
       type="button"
       className={cn(
-        "focus-visible:outline-focus inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-sm bg-foreground/8 px-1 py-0.5 align-baseline font-pixel text-[11px] leading-none uppercase transition-colors hover:bg-foreground/12 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-foreground/16 dark:hover:bg-foreground/24",
+        "focus-visible:outline-focus inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-sm bg-foreground/8 px-1 py-1 align-baseline font-pixel text-[11px] leading-none text-foreground transition-colors hover:bg-foreground/12 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-foreground/16 dark:hover:bg-foreground/24",
         className
       )}
       aria-label={`Copy color ${value}`}
       onClick={() => copyToClipboard(value)}
       {...props}
     >
-      <span
+      <motion.span
         data-slot="swatch"
-        className="-ms-px inline-block size-[0.9em] shrink-0 rounded-xs ring-1 ring-black/10 ring-inset"
+        className="inline-block size-[0.9em] shrink-0 rounded-xs ring inset-ring ring-muted inset-ring-border"
         aria-hidden="true"
         style={{ backgroundColor: value }}
+        animate={{ scale: isCopied ? 1.25 : 1, rotate: isCopied ? 90 : 0 }}
+        transition={{ duration: 0.15 }}
       />
 
       <span data-slot="value" className="relative inline-flex">
@@ -35,21 +37,21 @@ function ColorCode({ value, className, ...props }: Omit<React.ComponentProps<"bu
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 2, opacity: 0 }}
               transition={{ duration: 0.15 }}
+              className="absolute inset-x-0 text-center"
             >
               Copied!
             </motion.span>
-          ) : (
-            <motion.span
-              key="value"
-              initial={{ y: -8, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -2, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              {value}
-            </motion.span>
-          )}
+          ) : null}
         </AnimatePresence>
+        <motion.span
+          key="value"
+          // initial={{ y: -8, opacity: 0 }}
+          animate={{ y: isCopied ? -8 : 0, opacity: isCopied ? 0 : 1 }}
+          // exit={{ y: -2, opacity: 0 }}
+          transition={{ duration: 0.15 }}
+        >
+          {value}
+        </motion.span>
       </span>
     </button>
   );

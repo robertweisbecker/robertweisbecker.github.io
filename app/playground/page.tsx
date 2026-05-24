@@ -1,5 +1,4 @@
 "use client";
-
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { Demo } from "@/components/demo";
 import { DeviceFrame } from "@/components/device-frame";
@@ -19,43 +18,54 @@ import { IconTrash, IconTrashFilled } from "@tabler/icons-react";
 import { GithubIcon, VercelIcon } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "framer-motion";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { cn } from "@/lib/utils";
 import { Slider as BaseSlider } from "@base-ui/react";
 import { MorphIcon } from "@/components/morph-icon";
 import { Toggle } from "@/components/ui/toggle";
 import { ColorCode } from "@/components/ui/color-code";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function PlaygroundPage() {
   const [morphIcon, setMorphIcon] = React.useState(false);
   return (
-    <div className="mx-auto flex max-w-4xl flex-col items-center gap-6">
-      <div className="flex w-full max-w-xl flex-col gap-8">
+    <div className="mx-auto flex flex-col items-center gap-6">
+      <div className="sr-only">
         <h1 className="text-h1">Playground</h1>
-        <p>Interactive demos of some components I thought were fun. Your mileage may vary.</p>
       </div>
 
       <div className="flex w-full flex-col gap-8">
-        <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-4">
+        <div className="grid gap-4 lg:grid-cols-4">
           <Demo title="Squishy thumbs" className="lg:col-span-2 lg:row-span-2" innerClass="flex flex-col gap-4">
             <SwitchDemo />
             <Separator />
             <SliderDemo />
           </Demo>
-          <Demo title="Color swatches" centerContent className="lg:col-span-2">
+          <Demo title="Motion chart" centerContent innerClass="">
+            <ChartDemo />
+          </Demo>
+          <Demo title="Color swatch group" centerContent className="lg:col-span-2">
             <ColorSwatchGroupDemo />
           </Demo>
-          <Demo title="Color code" centerContent className="">
+          <Demo title="Color code" centerContent controls={"Click to copy"} description="Click to copy">
             <ColorCode value="#0b0b0b" />
           </Demo>
-          <Demo title="Animated button">
-            <AnimatedButtonDemo />
+          <Demo title="CSS-anchored slider" centerContent>
+            <AnchoredSliderDemo />
           </Demo>
 
-          <Demo title="Delete button">
-            <DeleteButtonDemo />
-          </Demo>
+          <ScrollArea className="col-span-full" orientation="horizontal">
+            <div className="grid auto-cols-max grid-flow-col gap-4">
+              <Demo title="Delete button" centerContent>
+                <DeleteButtonDemo />
+              </Demo>
+
+              <Demo title="Animated button" centerContent>
+                <AnimatedButtonDemo />
+              </Demo>
+            </div>
+          </ScrollArea>
           <Demo title="Chrome Tabs" className="lg:col-span-full">
             <ChromeTabsDemo />
           </Demo>
@@ -118,7 +128,7 @@ export default function PlaygroundPage() {
           <Demo title="Site Search" centerContent className="lg:col-span-full">
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
-          <Demo title="Device frame — phone" overflowBehavior="resize" centerContent>
+          <Demo title="Device frame — phone" overflowBehavior="resize" centerContent className="lg:col-span-2">
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
               <div className="flex items-center justify-center p-6 text-center text-sm">
                 <p>
@@ -128,7 +138,7 @@ export default function PlaygroundPage() {
               </div>
             </DeviceFrame.Phone>
           </Demo>
-          <Demo title="Device frame — browser" variant="outline">
+          <Demo title="Device frame — browser" variant="outline" className="lg:col-span-2" centerContent overflowBehavior="resize">
             <DeviceFrame.Browser address="bob.fyi">
               <div className="flex items-center justify-center py-12 text-sm text-muted-foreground">
                 <Favicon className="mr-2 size-4" />
@@ -162,14 +172,82 @@ function ColorSwatchGroupDemo() {
   const [color, setColor] = React.useState("var(--color-blue-500)");
 
   return (
-    <div className="space-y-3">
+    <div className="flex flex-col justify-start gap-3">
       <ColorSwatchGroup colors={DEMO_SWATCHES} value={color} onValueChange={setColor} />
-      <p className="text-sm text-muted-foreground">
-        Selected:{" "}
-        <Code variant="plain" style={{ color }}>
-          {color}
-        </Code>
+      <p className="text-xs text-muted-foreground">
+        Selected: <ColorCode value={color} />
       </p>
+    </div>
+  );
+}
+
+function ChartDemo() {
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const [isHovering, setIsHovering] = React.useState(false);
+
+  // svg uses spring
+  const clipPathSpring = useSpring(0, {
+    stiffness: 100,
+    damping: isHovering ? 18 : 40,
+  });
+
+  const clipPath = useMotionTemplate`inset(0px ${clipPathSpring}% 0px 0px)`;
+
+  // text uses val
+  const clipPathValue = useMotionValue(0);
+  const clipPathDisplay = useTransform(clipPathValue, (v: number) => `${100 - Math.round(v)}%`);
+  const displayPosition = useMotionTemplate`clamp(5%, calc(100% - ${clipPathValue}%), calc(95% - 4ch))`;
+
+  function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const distanceFromRight = Math.max(rect.right - e.clientX, 0);
+    const percentageFromRight = Math.min((distanceFromRight / rect.width) * 100, 100);
+    clipPathValue.set(percentageFromRight);
+    clipPathSpring.set(percentageFromRight);
+  }
+
+  return (
+    <div
+      className="relative flex aspect-video w-full min-w-0 flex-col items-end rounded border"
+      onPointerMove={onPointerMove}
+      onPointerEnter={() => {
+        setIsHovering(true);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+      }}
+      onPointerLeave={() => {
+        setIsHovering(false);
+        timeoutRef.current = setTimeout(() => {
+          clipPathSpring.set(0);
+          clipPathValue.set(0);
+        }, 1000);
+      }}
+    >
+      <motion.div
+        className="absolute top-5 right-full text-center font-pixel text-xs text-muted-foreground transition-[left] duration-100 ease-linear"
+        style={{ left: displayPosition }}
+      >
+        {clipPathDisplay}
+      </motion.div>
+
+      <motion.svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 644 188" style={{ clipPath }} className="mt-auto w-full">
+        <path
+          stroke="var(--primary)"
+          strokeWidth="2"
+          d="M1 118.5s82.308-15.501 113.735-29 74.769-1.713 121.217-12c37.596-8.328 58.517-15.006 93.781-30.5 80.146-35.215 123.213-16 154.141-24.5S635.97.849 644 1.5"
+        ></path>
+        <motion.path
+          fill="url(#paint0_linear_540_31)"
+          d="M113.912 89.012C82.437 102.511 1 118.01 1 118.01V188h643V1.023c-8.043-.65-129.399 12.499-160.375 20.998-30.976 8.498-74.11-10.714-154.38 24.496-35.319 15.493-56.272 22.17-93.927 30.497-46.52 10.286-89.93-1.5-121.406 11.998"
+        ></motion.path>
+        <defs>
+          <linearGradient id="paint0_linear_540_31" x1="322.5" x2="322.5" y1="1" y2="188" gradientUnits="userSpaceOnUse">
+            <stop stopColor="var(--primary)" stopOpacity="0.4"></stop>
+            <stop offset="1" stopColor="var(--secondary)" stopOpacity="0"></stop>
+          </linearGradient>
+        </defs>
+      </motion.svg>
     </div>
   );
 }
@@ -272,23 +350,28 @@ function SliderDemo() {
     <div className="flex w-full max-w-xs flex-col gap-6">
       <Slider defaultValue={[40]} />
       <Slider defaultValue={[20, 70]} />
-      <BaseSlider.Root defaultValue={25} thumbAlignment="edge-client-only">
-        <BaseSlider.Label>With CSS-anchored value</BaseSlider.Label>
-        <BaseSlider.Control className="flex w-56 touch-none items-center py-3 select-none">
-          <BaseSlider.Track className="squircle h-button-xs w-full overflow-hidden rounded-sm bg-border select-none">
-            <BaseSlider.Indicator className="squircle rounded-s-sm rounded-e bg-black-500 select-none" />
-            <BaseSlider.Thumb
-              aria-label="Volume"
-              className="squircle relative flex h-full rounded-e-xs bg-black-500 p-1 has-focus-visible:outline-2 has-focus-visible:outline-ring"
-              style={{ anchorName: "--thumb" }}
-            >
-              <div className="h-full w-0.5 rounded-xs bg-white shadow-border-xs" />
-            </BaseSlider.Thumb>
-          </BaseSlider.Track>
-        </BaseSlider.Control>
-        <BaseSlider.Value className="absolute bottom-[calc(anchor(top)+4px)] left-[anchor(center)] -translate-x-1/2 rounded-sm bg-popover px-1 py-px text-2xs text-popover-foreground tabular-nums shadow-border-sm [position-anchor:--thumb]" />
-      </BaseSlider.Root>
     </div>
+  );
+}
+
+function AnchoredSliderDemo() {
+  return (
+    <BaseSlider.Root defaultValue={25} thumbAlignment="edge-client-only" className="flex w-56 items-center gap-3 py-4">
+      <BaseSlider.Label className="text-sm font-[450]">Label</BaseSlider.Label>
+      <BaseSlider.Control className="flex w-56 touch-none items-center select-none">
+        <BaseSlider.Track className="squircle h-button-xs w-full overflow-hidden rounded-sm bg-border select-none">
+          <BaseSlider.Indicator className="squircle rounded-s-sm rounded-e bg-black-500 select-none" />
+          <BaseSlider.Thumb
+            aria-label="Volume"
+            className="squircle relative flex h-full rounded-e-xs bg-black-500 p-1 has-focus-visible:outline-2 has-focus-visible:outline-ring"
+            style={{ anchorName: "--thumb" }}
+          >
+            <div className="h-full w-0.5 rounded-xs bg-white shadow-border-xs" />
+          </BaseSlider.Thumb>
+        </BaseSlider.Track>
+      </BaseSlider.Control>
+      <BaseSlider.Value className="absolute bottom-[calc(anchor(top)+4px)] left-[anchor(center)] -translate-x-1/2 rounded-sm bg-popover px-1 py-px text-2xs text-popover-foreground tabular-nums shadow-border-sm [position-anchor:--thumb]" />
+    </BaseSlider.Root>
   );
 }
 

@@ -179,23 +179,21 @@ export function ColorSwatchGroup({
                   </Form>
 
                   {customColors.length > 0 ? (
-                    <ScrollArea className="max-h-36" showScrollbar scrollFade>
-                      <ItemGroup>
+                    <ScrollArea className="max-h-36" showScrollbar scrollFade orientation="vertical">
+                      <ItemGroup className="gap-1">
                         {customColors.map((swatch) => (
-                          <Item key={swatch.value} variant="muted" size="xs" className="rounded-md">
+                          <Item key={swatch.value} size="xs" className="font-mono text-xs">
                             <ItemMedia>
-                              <span
-                                className="size-3 rounded-full inset-ring inset-ring-input"
+                              <div
+                                className="ms-1 size-4 rounded inset-ring inset-ring-input"
                                 style={{ backgroundColor: swatch.color }}
                                 aria-hidden
                               />
                             </ItemMedia>
                             <ItemContent>
-                              <ItemTitle>{swatch.label} </ItemTitle>
+                              <ItemTitle>{swatch.value}</ItemTitle>
+                              {/* <ItemDescription className="font-mono text-xs text-muted-foreground">{swatch.label}</ItemDescription> */}
                             </ItemContent>
-                            <ItemDescription className="flex-1 truncate text-end font-mono text-xs text-muted-foreground">
-                              {swatch.value}
-                            </ItemDescription>
                             <ItemActions>
                               <Button
                                 variant="ghost"

@@ -205,7 +205,7 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
     <div data-slot="device-frame" className={cn("w-full", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
         <div className="squircle overflow-hidden rounded-2xl bg-card shadow-border-md">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 px-2 py-2 md:px-3 md:py-2.5">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-2 py-2 md:px-3 md:py-2.5">
             <div className="flex shrink-0 items-center gap-1.5 self-start pe-1 md:self-center md:ps-1">
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border/50" />
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ffbd2e] inset-ring inset-ring-border/50" />
@@ -216,7 +216,8 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
               <div className="flex flex-1 basis-xs items-center justify-between gap-2">
                 <div
                   className={cn(
-                    "flex h-full shrink-0 items-center gap-2 pe-2 opacity-50 max-md:hidden"
+                    "flex h-full shrink-0 items-center gap-2 pe-2 opacity-50 max-md:hidden",
+                    "@max-xs:hidden"
                     // glassClass
                   )}
                 >
@@ -231,7 +232,7 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
                   </span>
                   <CopyButton value={String(address)} size="icon-xs" className="squircle shrink-0 rounded-md" />
                 </div>
-                <div className="flex w-16 justify-end max-md:hidden md:me-1">
+                <div className="flex w-16 justify-end max-md:hidden md:me-1 @max-md:hidden">
                   <IconDots className={cn("size-4 text-muted-foreground", "shrink-0")} aria-hidden />
                 </div>
               </div>

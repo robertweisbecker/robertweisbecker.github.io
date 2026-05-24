@@ -136,8 +136,8 @@ export function Letterboxd({ maxFilms = 4 }) {
             inert={!contentVisible}
             className={contentVisible ? "animate-stagger-enter [--delay:45ms]" : "pointer-events-none absolute inset-0 opacity-0"}
           >
-            <ScrollArea scrollFade orientation="horizontal">
-              <div className="grid w-fit grid-cols-5 gap-2">
+            <ScrollArea scrollFade orientation="horizontal" scrollbarGutter showScrollbar>
+              <div className="flex w-full gap-2">
                 {films.map((film, index) => (
                   <FilmCard key={film.url ?? index} film={film} index={index} onPosterSettled={handlePosterSettled} />
                 ))}
@@ -153,7 +153,7 @@ export function Letterboxd({ maxFilms = 4 }) {
 function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number; onPosterSettled: () => void }) {
   return (
     <Item
-      size="xs"
+      size="sm"
       variant="muted"
       className="relative m-0 animate-stagger-enter rounded-md"
       style={

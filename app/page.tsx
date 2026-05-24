@@ -44,7 +44,7 @@ const postItems: IndexListItem[] = posts.map((post) => {
         className={cn(
           "font-pixel text-[11px] uppercase",
           post.category === "Snippet" && "text-info-foreground",
-          post.category === "Demo" && "text-warning-foreground",
+          post.category === "Demo" && "text-success-foreground",
           post.category === "Motion" && "text-ruby-500 dark:text-ruby-300"
         )}
       >
@@ -59,35 +59,37 @@ export default function Home() {
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
       <section>
-        <h1 className="-ms-1 mb-4 text-h1">
-          Robert
-          <br /> Weisbecker
-        </h1>
-        <div className="grid animate-stagger-enter items-start gap-10 [--stagger:1] sm:grid-cols-[auto_1fr]">
-          <Float
-            className="group/pixel relative isolate w-fit rounded-xs bg-card p-1 shadow-border-lg"
-            speed={0.4}
-            amplitude={[2, 8, 4]}
-            rotationRange={[1, 1, 3]}
-          >
-            <div className="relative size-50 bg-background">
-              <PixelPortrait className="outline-2 outline-card transition-all duration-300" />
-              {isDinoVisible && (
-                <PixelReveal className="absolute inset-0 size-50">
-                  <PixelDino />
-                </PixelReveal>
-              )}
-            </div>
-            <Button
-              onClick={() => setIsDinoVisible((v) => !v)}
-              variant="ghost"
-              size="icon-xs"
-              className="pointer-fine:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none pointer-fine:-translate-y-1 pointer-fine:opacity-0"
+        <div className="grid animate-stagger-enter grid-cols-[auto_1fr] items-start gap-x-8 gap-y-4 [--stagger:1]">
+          <h1 className="-ms-1 mb-4 text-h1 max-sm:self-end sm:col-span-2">
+            Robert
+            <br /> Weisbecker
+          </h1>
+          <div className="relative w-fit rounded-md bg-muted p-1">
+            <Float
+              className="group/pixel relative isolate w-fit rounded-md bg-card p-1 shadow-border-lg"
+              speed={0.5}
+              amplitude={[4, 8, 4]}
+              rotationRange={[1, 1, 3]}
             >
-              {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
-            </Button>
-          </Float>
-          <div className="w-full max-w-xs space-y-3.5 text-sm">
+              <div className="relative size-50 overflow-hidden rounded-sm bg-background">
+                <PixelPortrait className="outline-2 outline-card transition-all duration-300" />
+                {isDinoVisible && (
+                  <PixelReveal className="absolute inset-0 size-50">
+                    <PixelDino />
+                  </PixelReveal>
+                )}
+              </div>
+              <Button
+                onClick={() => setIsDinoVisible((v) => !v)}
+                variant="ghost"
+                size="icon-xs"
+                className="pointer-fine:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none pointer-fine:-translate-y-1 pointer-fine:opacity-0"
+              >
+                {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
+              </Button>
+            </Float>
+          </div>
+          <div className="w-full max-w-xs space-y-3.5 text-sm max-sm:col-span-2">
             <p className="">
               You can call me{" "}
               <Popover>
@@ -100,7 +102,7 @@ export default function Home() {
               </Popover>
               .
             </p>
-            <p className="">
+            <p>
               I&apos;m a principal designer at <LinkOut href="https://everfi.com" text="Everfi" className="text-foreground" /> working on
               products, tools, and systems to help drive social good through education.
             </p>
@@ -153,9 +155,8 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="mb-2 flex items-center gap-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
+        <h2 className="mb-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
           ▼ Projects
-          <span className="h-[0.5px] flex-1 bg-border" />
         </h2>
         <IndexList />
       </section>
