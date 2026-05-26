@@ -59,12 +59,12 @@ export default function Home() {
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
       <section>
-        <div className="grid w-full min-w-0 animate-stagger-enter grid-cols-[1fr_200px] items-start gap-x-8 gap-y-4 [--stagger:1] sm:grid-cols-[auto_1fr]">
+        <div className="grid w-full min-w-0 animate-stagger-enter grid-cols-1 items-start gap-x-8 gap-y-4 [--stagger:1] sm:grid-cols-[auto_1fr]">
           <h1 className="-ms-1 mb-4 text-h1 max-sm:self-end sm:col-span-2">
             Robert
             <br /> Weisbecker
           </h1>
-          <div className="absolute right-0 w-fit rounded-md bg-muted max-sm:-top-8 sm:relative">
+          <div className="rounded-md bg-muted max-sm:order-last max-sm:justify-self-end">
             <Float
               className="group/pixel relative isolate w-fit rounded-md bg-card p-1 shadow-border-lg"
               speed={0.5}

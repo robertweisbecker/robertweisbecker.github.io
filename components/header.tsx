@@ -79,7 +79,10 @@ export function Header() {
               }
             }}
           >
-            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="group/trigger font-pixel text-[11px] uppercase">
+            <DropdownMenuTrigger
+              render={<Button variant="ghost" size="sm" />}
+              className="group/trigger font-pixel text-[11px] uppercase max-sm:mx-auto"
+            >
               <span className="hidden md:block">Projects</span>
               <span className="md:hidden">Menu</span>
               <PixelChevronDownIcon
