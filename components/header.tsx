@@ -39,7 +39,7 @@ export function Header() {
   const filteredProjects = projects.filter((project) => project.published);
 
   return (
-    <nav className={cn("sticky top-0 z-1")}>
+    <nav className={cn("sticky top-0 isolate z-50")}>
       <div className="max-w-8xl mx-auto flex h-12 items-center gap-1 px-2 py-2 sm:px-4">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           {isHome ? (
@@ -52,14 +52,13 @@ export function Header() {
             </>
           )}
 
-          <span className="text-[11px]/[10px]">
+          <span className="text-[11px]/[10px] max-sm:hidden">
             {" "}
             bob
             <br />
-            <span className="text-primary/50">dot</span>fyi
+            <span className="text-primary/50">dot</span>Ƒyi
           </span>
         </LinkButton>
-
         {/* <LinkButton
           href="/about"
           variant="ghost"

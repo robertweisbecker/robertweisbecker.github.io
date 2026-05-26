@@ -127,7 +127,7 @@ export function Demo({
           )}
         >
           <div className="flex grow items-baseline gap-1">
-            <span className="min-w-0 font-pixel text-[11px] text-foreground">{title}</span>
+            <span className="min-w-0 text-xs text-foreground">{title}</span>
             {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
           </div>
           <div className="flex items-center gap-1">{controls}</div>

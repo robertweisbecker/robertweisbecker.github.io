@@ -39,37 +39,44 @@ export default function PlaygroundPage() {
 
       <div className="flex w-full flex-col gap-8">
         <div className="grid gap-4 lg:grid-cols-4">
-          <Demo title="<ChromeTabs>" className="lg:col-span-2 lg:row-span-2" centerContent>
+          <Demo caption="<ChromeTabs>" className="lg:col-span-2 lg:row-span-2" centerContent>
             <ChromeTabsDemo />
           </Demo>
-          <Demo title="Motion chart" centerContent innerClass="">
+          <Demo caption="Motion chart" centerContent innerClass="">
             <ChartDemo />
           </Demo>
-          <Demo title="Color code" centerContent controls={"Click to copy"} description="Click to copy">
+          <Demo caption="Color code" centerContent>
             <ColorCode value="#0b0b0b" />
           </Demo>
-          <Demo title="Color swatch group" centerContent className="lg:col-span-2">
+
+          <Demo caption="Color swatch group" centerContent className="lg:col-span-2">
             <ColorSwatchGroupDemo />
           </Demo>
 
-          <Demo title="CSS-anchored slider" centerContent>
+          <Demo caption="CSS-anchored slider" centerContent>
             <AnchoredSliderDemo />
           </Demo>
 
-          <Demo title="Slider" centerContent>
+          <Demo centerContent>
             <SliderDemo />
+          </Demo>
+
+          <Demo centerContent>
+            <div className="grid-stack aspect-square w-32">
+              <SwitchDemo />
+            </div>
           </Demo>
 
           <div className="col-span-full">
             <div className="grid grid-flow-col grid-cols-subgrid gap-4">
-              <Demo title="Delete button" centerContent>
+              <Demo caption="Delete button" centerContent>
                 <DeleteButtonDemo />
               </Demo>
 
-              <Demo title="Animated button" centerContent>
+              <Demo caption="Animated button" centerContent>
                 <AnimatedButtonDemo />
               </Demo>
-              <Demo title="Loader" centerContent>
+              <Demo caption="Loading button" centerContent>
                 <Button
                   rounded
                   loading={isLoading}
@@ -83,27 +90,21 @@ export default function PlaygroundPage() {
               </Demo>
             </div>
           </div>
-          <Demo title="Switch" centerContent innerClass="flex flex-col gap-4">
-            <SwitchDemo />
-          </Demo>
-          <Demo title="Chrome Tabs" className="lg:col-span-full">
-            <ChromeTabsDemo />
-          </Demo>
 
-          <Demo title="Copy button" centerContent>
+          <Demo caption="Copy button" centerContent>
             <CopyButton value="Hello, world!" size="icon" variant="outline" />
           </Demo>
 
-          <Demo title="Mode toggle" centerContent>
+          <Demo caption="Mode toggle" centerContent>
             <ModeToggle />
           </Demo>
 
-          <Demo title="Morph icon toggle" centerContent>
+          <Demo caption="Morph icon toggle" centerContent>
             <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)}>
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
             </Toggle>
           </Demo>
-          <Demo title="Emoji feedback" caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
+          <Demo caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
             <EmojiFeedbackDemo />
           </Demo>
           <Demo title="Mark" innerClass="space-y-2 text-sm/6 text-muted-foreground">
@@ -142,6 +143,14 @@ export default function PlaygroundPage() {
               <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
             </p>
           </Demo>
+          <Demo title="Keys" centerContent innerClass="flex flex-col gap-2">
+            <Kbd variant="elevated">⌘/</Kbd>
+            <Kbd>⌘I</Kbd>
+            <KbdGroup className="">
+              <Kbd variant="big">⌘</Kbd>
+              <Kbd variant="big">K</Kbd>
+            </KbdGroup>
+          </Demo>
           <Demo title="Site Search" centerContent className="lg:col-span-full">
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
@@ -162,14 +171,6 @@ export default function PlaygroundPage() {
                 Browser frame preview
               </div>
             </DeviceFrame.Browser>
-          </Demo>
-          <Demo title="Keys" centerContent innerClass="flex flex-col gap-2">
-            <Kbd variant="elevated">⌘/</Kbd>
-            <Kbd>⌘I</Kbd>
-            <KbdGroup className="">
-              <Kbd variant="big">⌘</Kbd>
-              <Kbd variant="big">K</Kbd>
-            </KbdGroup>
           </Demo>
         </div>
       </div>
@@ -199,22 +200,26 @@ function ColorSwatchGroupDemo() {
 }
 
 function ChartDemo() {
+  const SPRING = {
+    damping: 18,
+  };
+
+  const SLOW_SPRING = {
+    damping: 40,
+  };
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
   const [isHovering, setIsHovering] = React.useState(false);
 
   // svg uses spring
-  const clipPathSpring = useSpring(0, {
-    damping: isHovering ? 18 : 40,
-  });
-
+  const clipPathSpring = useSpring(0, isHovering ? SPRING : SLOW_SPRING);
   const clipPath = useMotionTemplate`inset(0px ${clipPathSpring}% 0px 0px)`;
 
-  // text uses val
+  // text uses raw val so it doesn't overshoot 100
   const clipPathValue = useMotionValue(0);
   const clipPathDisplay = useTransform(clipPathValue, (v: number) => `${100 - Math.round(v)}%`);
   const displayPosition = useMotionTemplate`clamp(5%, calc(100% - ${clipPathSpring}%), calc(95% - 4ch))`;
 
-  function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+  function onPointerMove(e: React.PointerEvent<HTMLDivElement> | React.PointerEvent<SVGSVGElement>) {
     const rect = e.currentTarget.getBoundingClientRect();
     const distanceFromRight = Math.max(rect.right - e.clientX, 0);
     const percentageFromRight = Math.min((distanceFromRight / rect.width) * 100, 100);
@@ -224,7 +229,7 @@ function ChartDemo() {
 
   return (
     <div
-      className="relative flex aspect-video w-full min-w-0 flex-col items-end rounded border"
+      className="relative flex aspect-video w-full min-w-0 flex-col items-end rounded outline -outline-offset-1 outline-border"
       onPointerMove={onPointerMove}
       onPointerEnter={() => {
         setIsHovering(true);
@@ -237,19 +242,27 @@ function ChartDemo() {
         timeoutRef.current = setTimeout(() => {
           clipPathSpring.set(0);
           clipPathValue.set(0);
-        }, 1000);
+        }, 100);
       }}
     >
       <motion.div
         className="absolute top-5 right-full text-center font-pixel text-xs text-muted-foreground transition-[left] duration-100 ease-linear"
         style={{ left: displayPosition }}
+        onPointerMove={onPointerMove}
       >
         {clipPathDisplay}
       </motion.div>
 
-      <motion.svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 644 188" style={{ clipPath }} className="mt-auto w-full">
+      <motion.svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 644 188"
+        style={{ clipPath }}
+        className="mt-auto w-full"
+        onPointerMove={onPointerMove}
+      >
         <path
-          stroke="var(--primary)"
+          stroke="var(--success-primary)"
           strokeWidth="2"
           d="M1 118.5s82.308-15.501 113.735-29 74.769-1.713 121.217-12c37.596-8.328 58.517-15.006 93.781-30.5 80.146-35.215 123.213-16 154.141-24.5S635.97.849 644 1.5"
         ></path>
@@ -259,8 +272,8 @@ function ChartDemo() {
         ></motion.path>
         <defs>
           <linearGradient id="paint0_linear_540_31" x1="322.5" x2="322.5" y1="1" y2="188" gradientUnits="userSpaceOnUse">
-            <stop stopColor="var(--primary)" stopOpacity="0.4"></stop>
-            <stop offset="1" stopColor="var(--secondary)" stopOpacity="0"></stop>
+            <stop stopColor="var(--success-primary)" stopOpacity="0.4"></stop>
+            <stop offset="1" stopColor="var(--success)" stopOpacity="0"></stop>
           </linearGradient>
         </defs>
       </motion.svg>
@@ -302,11 +315,11 @@ function AnimatedButtonDemo() {
   return (
     <div
       className={cn(
-        "flex flex-wrap gap-2 [--button-x:--spacing(3)] [--button-y:--spacing(2)]",
+        "grid grid-cols-3 gap-2 [--button-x:--spacing(3)] [--button-y:--spacing(2)]",
         "[&_button]:inline-flex [&_button]:h-button [&_button]:items-center [&_button]:justify-center [&_button]:overflow-hidden [&_button]:rounded-lg [&_button]:bg-muted [&_button]:px-(--button-x) [&_button]:py-(--button-y) [&_button]:text-[13px] [&_button]:font-[550] [&_button]:tracking-[-.02em] [&_button]:hover:bg-accent [&_button]:hover:text-accent-foreground"
       )}
     >
-      <p className="basis-full text-sm text-muted-foreground">Hover</p>
+      <span />
       <button className="group relative duration-300 select-none">
         <span className="translate-y-0 blur-none transition-all group-hover:pointer-events-none group-hover:-translate-y-(--button-y) group-hover:opacity-0">
           Hover up
@@ -315,36 +328,15 @@ function AnimatedButtonDemo() {
           Hovered! &uarr;
         </span>
       </button>
+      <span />
       <button className="group relative duration-300 select-none">
         <span className="transition-all group-hover:pointer-events-none group-hover:-translate-x-(--button-x) group-hover:opacity-0 group-hover:blur-[1px]">
-          Hover right
+          Hover left
         </span>
         <span className="group-hover:blur-0 pointer-events-none absolute translate-x-(--button-x) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-hover:blur-none">
-          Hovered! &rarr;
+          Hovered! &larr;
         </span>
       </button>
-      <button className="group relative duration-300 select-none">
-        <span className="transition-all group-hover:pointer-events-none group-hover:translate-x-(--button-x) group-hover:opacity-0 group-hover:blur-[1px]">
-          Hover left &rarr;
-        </span>
-        <span className="group-hover:blur-0 pointer-events-none absolute -translate-x-(--button-x) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-hover:blur-none">
-          &larr; Hovered!
-        </span>
-      </button>
-      <button className="group relative duration-300 select-none">
-        <span className="invisible grid-stack">
-          <span>Hover down</span>
-          <span>Hovered! &darr;</span>
-        </span>
-        <span className="absolute transition-all group-hover:pointer-events-none group-hover:translate-y-(--button-y) group-hover:opacity-0 group-hover:blur-[1px]">
-          Hover down &darr;
-        </span>
-        <span className="group-hover:blur-0 pointer-events-none absolute -translate-y-(--button-y) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none">
-          Hovered! &uarr;
-        </span>
-      </button>
-      <Separator className="basis-full" />
-      <p className="basis-full font-medium">Consistent width</p>
       <button className="group relative duration-300 select-none">
         <span className="invisible grid-stack" aria-hidden="true">
           <span>Short text</span>
@@ -355,6 +347,22 @@ function AnimatedButtonDemo() {
         </span>
         <span className="group-hover:blur-0 pointer-events-none absolute -translate-y-(--button-y) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none">
           Some longer text
+        </span>
+      </button>
+      <button className="group relative duration-300 select-none">
+        <span className="transition-all group-hover:pointer-events-none group-hover:translate-x-(--button-x) group-hover:opacity-0 group-hover:blur-[1px]">
+          Hover right
+        </span>
+        <span className="group-hover:blur-0 pointer-events-none absolute -translate-x-(--button-x) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-x-0 group-hover:opacity-100 group-hover:blur-none">
+          &rarr; Hovered!
+        </span>
+      </button>
+      <button className="group relative col-start-2 duration-300 select-none">
+        <span className="absolute transition-all group-hover:pointer-events-none group-hover:translate-y-(--button-y) group-hover:opacity-0 group-hover:blur-[1px]">
+          Hover down
+        </span>
+        <span className="group-hover:blur-0 pointer-events-none absolute -translate-y-(--button-y) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none">
+          Hovered! &darr;
         </span>
       </button>
     </div>
@@ -375,14 +383,17 @@ function AnchoredSliderDemo() {
     <BaseSlider.Root defaultValue={25} thumbAlignment="edge-client-only" className="flex w-56 items-center gap-3 py-4">
       <BaseSlider.Label className="text-sm font-[450]">Label</BaseSlider.Label>
       <BaseSlider.Control className="flex w-56 touch-none items-center select-none">
-        <BaseSlider.Track className="squircle h-button-xs w-full overflow-hidden rounded-sm bg-border select-none">
-          <BaseSlider.Indicator className="squircle rounded-s-sm rounded-e bg-black-500 select-none" />
+        <BaseSlider.Track className="squircle h-button-xs w-full cursor-ew-resize overflow-hidden rounded-sm bg-border transition-transform duration-200 ease-out select-none data-dragging:scale-102 data-dragging:cursor-ew-resize">
+          <BaseSlider.Indicator className="squircle rounded-s-sm bg-primary select-none" />
           <BaseSlider.Thumb
             aria-label="Volume"
-            className="squircle relative flex h-full rounded-e-xs bg-black-500 p-1 has-focus-visible:outline-2 has-focus-visible:outline-ring"
+            className={cn(
+              "squircle relative flex h-full rounded-e-sm bg-primary p-1",
+              "has-focus-visible:*:outline-2 has-focus-visible:*:outline-ring"
+            )}
             style={{ anchorName: "--thumb" }}
           >
-            <div className="h-full w-0.5 rounded-xs bg-white shadow-border-xs" />
+            <div className="pointer-events-none h-full w-0.5 origin-right rounded-xs bg-white shadow-border-xs transition-transform duration-100 ease-out-quad in-data-dragging:scale-110" />
           </BaseSlider.Thumb>
         </BaseSlider.Track>
       </BaseSlider.Control>
@@ -396,54 +407,47 @@ function ChromeTabsDemo() {
     <ChromeTabs defaultValue="preview" className="max-w-md border border-border/50 dark:bg-black">
       <ChromeTabs.List>
         <ChromeTabs.Tab value="preview" className="w-fit">
-          <Avatar className="-ms-1.5 size-4.5 rounded-full">
+          <Avatar className="-ms-1.5 size-4.5">
             <AvatarImage src="https://github.com/robertweisbecker.png" alt="bob's avatar" />
             <AvatarFallback>BW</AvatarFallback>
           </Avatar>
           bob.fyi
         </ChromeTabs.Tab>
         <ChromeTabs.Tab value="code" className="w-fit">
-          <Avatar className="-ms-1.5 size-4.5 rounded-full">
-            <GithubIcon className="size-4" />
-          </Avatar>
+          <GithubIcon className="-ms-1 size-4" />
           Github
         </ChromeTabs.Tab>
         <ChromeTabs.Tab value="output" className="w-fit" flush={false}>
-          <Avatar className="-ms-1.5 size-4.5 rounded-full">
-            <VercelIcon className="size-3" />
-          </Avatar>
+          <VercelIcon className="-ms-1 size-4" />
           Vercel
         </ChromeTabs.Tab>
       </ChromeTabs.List>
       <ChromeTabs.Panel value="preview" className="overflow-hidden p-4">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ opacity: { delay: 0.2 } }}
-          className="grid-stack border border-dashed border-success-primary bg-success p-10 font-pixel text-[11px] text-success-foreground uppercase"
-          // layoutId="chrome-panel"
+          initial={{ y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ y: 4 }}
+          className="grid-stack border border-dashed border-primary bg-secondary p-10 font-pixel text-[11px] text-secondary-foreground uppercase"
         >
           You are here &darr;
         </motion.div>
       </ChromeTabs.Panel>
       <ChromeTabs.Panel value="code" className="overflow-hidden p-4">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ opacity: { delay: 0.2 } }}
+          initial={{ y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ y: 4 }}
           className="grid-stack border border-dashed border-destructive bg-error p-10 font-pixel text-[11px] text-error-foreground uppercase"
-          // layoutId="chrome-panel"
         >
           Down for maintenance
         </motion.div>
       </ChromeTabs.Panel>
       <ChromeTabs.Panel value="output" className="overflow-hidden p-4">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ opacity: { delay: 0.2 } }}
+          initial={{ y: 4 }}
+          animate={{ y: 0 }}
+          exit={{ y: 4 }}
           className="grid-stack border border-dashed border-info-primary bg-info p-10 text-center font-pixel text-[11px] text-info-foreground uppercase"
-          layoutId="chrome-panel"
         >
           <p>
             Designers should <s>code</s> tweet.

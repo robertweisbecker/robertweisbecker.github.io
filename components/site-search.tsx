@@ -10,7 +10,7 @@ import {
   IconFlask,
   IconHome,
   IconLayoutGridFilled,
-  IconNut,
+  IconMonkeybar,
   IconSearch,
   IconUser,
 } from "@tabler/icons-react";
@@ -47,6 +47,7 @@ import { Button } from "./ui/button";
 import { LinkButton } from "./ui/link-button";
 import { Toggle } from "./ui/toggle";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { Badge } from "./ui/badge";
 
 type SearchItem = {
   value: string;
@@ -118,7 +119,7 @@ const staticPages: SearchItem[] = [
   { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
   { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(PixelNewsIcon), group: "Pages" },
   { value: "art", label: "Art", path: "/art", icon: itemIcon(PixelScribbleIcon), group: "Pages" },
-  { value: "playground", label: "Playground", path: "/playground", icon: itemIcon(IconNut), group: "Pages" },
+  { value: "playground", label: "Playground", path: "/playground", icon: itemIcon(IconMonkeybar), group: "Pages" },
 ];
 
 const privatePages: SearchItem[] = [
@@ -328,7 +329,7 @@ export function SiteSearch({
         <CommandDialogPopup aria-label="Search pages">
           <Command items={groupedItems} filter={fuzzyFilter}>
             <CommandInput placeholder="Search pages…" className="border-transparent" />
-            <Toolbar.Root className="min-h-button-sm px-2 pt-2 md:absolute md:top-1 md:right-1">
+            <Toolbar.Root className="absolute top-1 right-1 min-h-button-sm px-2 pt-2">
               <LayoutGroup>
                 <Toolbar.Button
                   render={
@@ -342,29 +343,19 @@ export function SiteSearch({
                   }
                 >
                   <MorphIcon from="filter" to="chevronRight" active={showFilters} />
-                  {/* <AnimatePresence mode="popLayout" initial={false}>
-                    {activeTab !== "All" && !showFilters ? (
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    {activeTab !== "All" && !showFilters && (
                       <>
                         <motion.span
-                          key="filter-label"
-                          className="flex items-center gap-1 whitespace-nowrap"
-                          initial={{ opacity: 0, filter: "blur(8px)" }}
-                          animate={{ opacity: 1, filter: "blur(0px)" }}
-                          exit={{ opacity: 0, filter: "blur(8px)" }}
-                          // transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                        >
-                          <Badge variant="outline" size="sm">
-                            {activeTab}
-                          </Badge>
-                          <IconFilter2Search aria-hidden data-icon="inline-start" className="shrink-0" />
-                        </motion.span>
+                          key="filter-indicator"
+                          className="absolute top-0 right-0 size-1.5 rounded-full bg-info-primary whitespace-nowrap"
+                          initial={{ opacity: 0, filter: "blur(2px)", scale: 0.5 }}
+                          animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+                          exit={{ opacity: 0, filter: "blur(2px)", scale: 0.5 }}
+                        ></motion.span>
                       </>
-                    ) : (
-                      <motion.span key="filter-icon-default" animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                        <IconFilter2 className="shrink-0 opacity-72" aria-hidden />
-                      </motion.span>
                     )}
-                  </AnimatePresence> */}
+                  </AnimatePresence>
                 </Toolbar.Button>
                 <AnimatePresence mode="wait" initial={false}>
                   {showFilters && (
@@ -372,9 +363,9 @@ export function SiteSearch({
                       <motion.div
                         key="filter-group"
                         className="flex overflow-hidden"
-                        initial={{ opacity: 0, filter: "blur(8px)", width: 0, paddingInlineStart: 0 }}
-                        animate={{ opacity: 1, filter: "blur(0px)", width: "auto", paddingInlineStart: 4 }}
-                        exit={{ opacity: 0, filter: "blur(4px)", width: 0, paddingInlineStart: 0 }}
+                        initial={{ opacity: 0, filter: "blur(8px)", width: 0, paddingInline: 0 }}
+                        animate={{ opacity: 1, filter: "blur(0px)", width: "auto", paddingInline: 4 }}
+                        exit={{ opacity: 0, filter: "blur(4px)", width: 0, paddingInline: 0 }}
                         transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}
                       >
                         <Toolbar.Group render={<ToggleGroup spacing={1} size="xs" defaultValue={["All"]} />} id="site-search-filters">

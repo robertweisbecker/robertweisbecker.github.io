@@ -16,7 +16,7 @@ const badgeVariants = cva(
         error: "bg-error [a]:hover:bg-error/20 focus-visible:ring-error text-error-foreground ",
         success: "bg-success [a]:hover:bg-success/20 focus-visible:ring-success text-success-foreground ",
         info: "bg-info [a]:hover:bg-info/20 focus-visible:ring-info text-info-foreground",
-        beta: "bg-info border border-dashed border-info-primary font-mono text-info text-info-foreground ",
+        beta: "bg-info text-2xs border border-dashed border-info-primary font-pixel text-info text-info-foreground ",
         inherit:
           "bg-current/8 [&_svg]:text-current/72 text-current text-[inherit] [a]:hover:underline [a]:hover:bg-current/12 [a]:hover:[&_svg]:text-current/84",
         warning: "bg-warning [a]:hover:bg-warning/20 focus-visible:ring-warning text-warning-foreground ",

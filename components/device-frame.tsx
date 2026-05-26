@@ -68,7 +68,7 @@ function BatteryDisplay({
   const batteryLevel = supported ? Math.round((level ?? 0) * 100) : 67;
   const batteryColor = batteryLevel > 50 ? "var(--success-primary)" : "var(--warning-primary)";
   return (
-    <div className="z-1 -me-[.125em] flex items-center font-[system-ui] text-[2.4cqw] font-bold tracking-tighter text-white">
+    <div className="z-1 me-[-.125em] flex items-center font-[system-ui] text-[2.4cqw] font-bold tracking-tighter text-white">
       {loading ? (
         <Skeleton className="absolute inset-0 rounded-sm" />
       ) : (
@@ -116,7 +116,7 @@ function Phone({ className, children, island = true, toolbar = true, address = "
                   <div className="grid-stack aspect-square">
                     <div
                       className="z-1 flex items-center self-center text-[2.5cqw] font-bold tracking-[-5%]"
-                      style={{ color: charging ? "var(--color-foreground)" : "var(--color-background)" }}
+                      style={{ color: charging ? "var(--color-background)" : "var(--color-background)" }}
                     >
                       {loading ? (
                         <span className="relative inline-block min-h-[1em] w-[2ch]">
@@ -130,7 +130,7 @@ function Phone({ className, children, island = true, toolbar = true, address = "
                     </div>
                     <IconBatteryFilled className="size-[7cqw] origin-center scale-x-120 text-input bg-blend-difference" strokeWidth={2} />
                     <IconBatteryFilled
-                      className="size-[7cqw] origin-center scale-x-120"
+                      className={cn("size-[7cqw] origin-center scale-x-120")}
                       style={{
                         maskImage: `linear-gradient(to left, transparent 0%, transparent ${100 - batteryLevel}%, currentColor ${100 - batteryLevel}%, currentColor 100%)`,
                         fill: charging ? "var(--color-green-400)" : batteryColor,
@@ -204,8 +204,8 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
   return (
     <div data-slot="device-frame" className={cn("w-full", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
-        <div className="squircle overflow-hidden rounded-2xl bg-card shadow-border-md">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-2 py-2 md:px-3 md:py-2.5">
+        <div className="squircle overflow-hidden rounded-2xl bg-background shadow-border-md">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-2 py-2.5 @md:px-3">
             <div className="flex shrink-0 items-center gap-1.5 self-start pe-1 md:self-center md:ps-1">
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border/50" />
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ffbd2e] inset-ring inset-ring-border/50" />
@@ -216,7 +216,7 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
               <div className="flex flex-1 basis-xs items-center justify-between gap-2">
                 <div
                   className={cn(
-                    "flex h-full shrink-0 items-center gap-2 pe-2 opacity-50 max-md:hidden",
+                    "flex h-full shrink-0 items-center gap-2 px-1 opacity-50 max-md:hidden",
                     "@max-xs:hidden"
                     // glassClass
                   )}

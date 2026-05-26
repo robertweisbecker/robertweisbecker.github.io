@@ -9,7 +9,7 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { Vignette } from "../vignette";
-import { LinkOut } from "../link-out";
+import { LinkButton } from "../ui/link-button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/tooltip";
 import { ScrollArea } from "../ui/scroll-area";
 
@@ -113,12 +113,10 @@ export function Letterboxd({ maxFilms = 4 }) {
     <div className="flex flex-col gap-2 bg-card shadow-border-xs sm:-mx-3 sm:rounded-xl sm:p-3">
       <div className="flex justify-between gap-2">
         <p className="font-pixel text-[11px]! text-muted-foreground/50">Recently watched</p>
-        <LinkOut
-          href="https://letterboxd.com/weisbecker/"
-          text="Letterboxd"
-          icon={<LetterboxdLogo />}
-          className="text-sm *:first:opacity-100"
-        ></LinkOut>
+        <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="xs">
+          <LetterboxdLogo data-icon="inline-start" />
+          View on Letterboxd
+        </LinkButton>
       </div>
 
       <div className="relative">
@@ -269,7 +267,7 @@ function LetterboxdSkeleton({ maxFilms }: { maxFilms: number }) {
 
 function LetterboxdLogo() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" className="size-4 opacity-100!">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" className="opacity-100!">
       <defs>
         <rect id="path-1" x="0" y="0" width="129.847328" height="141.389313" />
         <rect id="path-3" x="0" y="0" width="129.847328" height="141.389313" />

@@ -61,15 +61,13 @@ export function CodeBlock({
     return language === "css" ? highlight(code, cssPreset) : highlight(code);
   }, [code, language]);
 
-  const contentPadding = !filename && "pe-8";
-
   const codeContent = (
     <ScrollArea orientation="both" scrollbarGutter scrollFade>
-      <pre className={cn("min-h-0 px-1 text-xs/6", lineNumbers && "show-line-numbers", selectAll && "select-all", !filename && "pe-8")}>
+      <pre className={cn("block min-h-0 w-fit text-xs/6", lineNumbers && "show-line-numbers", selectAll && "select-all")}>
         {highlightedHtml ? (
-          <code className="font-mono" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
+          <code className="block w-fit pe-6 font-mono" dangerouslySetInnerHTML={{ __html: highlightedHtml }} />
         ) : (
-          <code className="font-mono">{code}</code>
+          <code className="block w-fit pe-6 font-mono">{code}</code>
         )}
       </pre>
     </ScrollArea>
@@ -110,7 +108,13 @@ export function CodeBlock({
           </CardAction>
         </CardHeader>
       ) : (
-        <CopyButton value={code} size="icon-xs" variant="ghost" disabled={isUpdating} className="absolute top-3 right-2 z-1" />
+        <CopyButton
+          value={code}
+          size="icon-xs"
+          variant="ghost"
+          disabled={isUpdating}
+          className="absolute top-3 right-2 z-1 backdrop-blur-xl"
+        />
       )}
       {collapsible ? (
         <Collapsible>

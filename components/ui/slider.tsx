@@ -63,7 +63,7 @@ function Slider({
             key={index}
             className={cn(
               "group/slider-thumb flex size-thumb shrink-0 items-center justify-center select-none group-hover/slider:cursor-grab data-dragging:cursor-grabbing",
-              "rounded-lg has-focus-visible:outline-2 has-focus-visible:outline-ring",
+              "rounded-xl has-focus-visible:outline-2 has-focus-visible:outline-ring",
               "disabled:pointer-events-none disabled:opacity-50"
             )}
           >

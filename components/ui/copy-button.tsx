@@ -66,50 +66,61 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
         aria-label={isCopied ? "Copied" : "Copy to clipboard"}
         {...props}
       >
-        <AnimatePresence mode="popLayout" initial={false}>
-          <motion.div
-            key={isCopied ? "check" : "copy"}
-            className="grid-stack"
-            initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)", rotate: -45 }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
-            exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)", rotate: 45 }}
-            transition={{
-              type: "spring",
-              duration: 0.3,
-              bounce: 0,
-            }}
-          >
-            {isCopied ? (
-              <motion.svg key="copied-icon" className="size-[1.25em]" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="12" className="fill-border" />
-                <path
-                  className={isCopied ? "animate-svg-draw" : ""}
-                  d="M6.5 13.5L11 17.8C12 14 14 10 16.5 7.5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeDasharray="100 100"
-                  strokeDashoffset="100"
-                  pathLength="100"
-                />
-              </motion.svg>
-            ) : (
-              <motion.div
-                key="copy-icon"
-                initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                transition={{
-                  type: "spring",
-                  duration: 0.3,
-                  bounce: 0,
-                }}
-              >
-                <IconClipboard className="size-[1.25em] *:fill-current/10" strokeWidth={1.5} />
-              </motion.div>
-            )}
-          </motion.div>
+        <AnimatePresence mode="wait" initial={false}>
+          {/* <motion.div
+          // key={isCopied ? "check" : "copy"}
+          // className="grid-stack"
+          // initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: -45 }}
+          // animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
+          // exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: 45 }}
+          // transition={{
+          //   type: "spring",
+          //   duration: 0.3,
+          //   bounce: 0,
+          // }}
+          > */}
+          {isCopied ? (
+            <motion.svg
+              key="copied-icon"
+              className="size-[1.25em]"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: -45 }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: 45 }}
+              transition={{
+                duration: 0.1,
+              }}
+            >
+              <circle cx="12" cy="12" r="12" className="fill-border" />
+              <path
+                className={isCopied ? "animate-svg-draw" : ""}
+                d="M6.5 13.5L11 17.8C12 14 14 10 16.5 7.5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeDasharray="100 100"
+                strokeDashoffset="100"
+                pathLength="100"
+              />
+            </motion.svg>
+          ) : (
+            <motion.div
+              key="copy-icon"
+              initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: 45 }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: -45 }}
+              transition={{
+                duration: 0.1,
+              }}
+            >
+              <IconClipboard className="size-[1.25em] *:fill-current/10" strokeWidth={1.5} />
+            </motion.div>
+          )}
+          {/* </motion.div> */}
         </AnimatePresence>
         {!isIconSize && <span>Copy</span>}
       </Button>

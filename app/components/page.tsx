@@ -75,7 +75,7 @@ export default function ComponentsPage() {
         </aside>
 
         <main className="order-1 max-w-full border-x border-t border-dashed p-4 md:order-2">
-          <Badge variant="beta">Beta</Badge>
+          <Badge variant="beta">ßeta</Badge>
           <Button
             loading={isLoading}
             onClick={() => {

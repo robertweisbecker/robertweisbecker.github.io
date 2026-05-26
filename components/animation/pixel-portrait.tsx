@@ -7,8 +7,8 @@ const PIXEL_FG_CLASS = "fill-primary dark:fill-secondary";
 
 export function PixelPortrait({ className }: { className?: string }) {
   return (
-    <div className={cn("relative size-50 overflow-clip", className)}>
-      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="pointer-events-none size-50 transform-gpu">
+    <div className={cn("relative size-[150px] overflow-clip sm:size-50", className)}>
+      <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="pointer-events-none size-full transform-gpu">
         <defs>
           <filter id="static">
             <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2">

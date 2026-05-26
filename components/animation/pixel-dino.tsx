@@ -45,7 +45,7 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
   useKeyPress(" ", jump, { enabled: isPlaying });
 
   return (
-    <div className={cn("relative grid-stack size-50 bg-card", className)} {...props}>
+    <div className={cn("relative grid-stack size-[150px] bg-card sm:size-50", className)} {...props}>
       <svg
         ref={svgRef}
         viewBox="0 0 50 50"

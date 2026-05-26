@@ -79,18 +79,21 @@ export default function ArtPage() {
         </ToggleGroupItem>
       </ToggleGroup> */}
       <div className="grid w-full grid-cols-[auto_1fr] gap-4 sm:gap-12">
-        <h1 className="line-b mb-4 self-baseline text-h1 max-sm:col-start-2 max-sm:row-start-1">Artwork</h1>
-        <p className="mb-4 self-baseline text-sm text-balance text-muted-foreground max-sm:col-start-2 max-sm:row-start-2">
-          Recent: iPad Pro with <LinkOut href="https://www.procreate.com" text="Procreate" className="underline-offset-1" />
-          &#x2060;.&nbsp;Earlier: pencil, charcoal, oil. 2009—now.
-        </p>
+        <h1 className="self-baseline text-h1 max-sm:col-span-2">Artwork</h1>
+        <div className="self-baseline text-sm text-balance text-muted-foreground max-sm:col-span-2 max-sm:row-start-2">
+          <span className="opacity-72"> 2009—present.</span>
+          <p>
+            Recent: iPad Pro with <LinkOut href="https://www.procreate.com" text="Procreate" className="inline" />. Earlier: pencil,
+            charcoal, oil.
+          </p>
+        </div>
 
         <div className="relative">
           <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             People
           </h2>
         </div>
-        <section className="line-y columns-2 gap-4 md:columns-3">
+        <section className="columns-2 gap-4 md:columns-3">
           <Artwork year={2025} src={br2025} title="Brent and Nellie" medium="digital" loading="eager" />
           <Artwork year={2020} src={gr2020} title="Chita" medium="digital" loading="eager" />
           <Artwork year={2025} src={at2025} title="Ashtyn" medium="digital" loading="eager" />
@@ -107,7 +110,7 @@ export default function ArtPage() {
             Places
           </h2>
         </div>
-        <section className="line-y columns-2 gap-4">
+        <section className="columns-2 gap-4">
           <Artwork year={2025} src={chi2025} title="Harold Washington Library, Chicago" medium="digital" />
           <Artwork year={2022} src={cm2022} title="937 Beach" medium="digital" />
         </section>
@@ -117,7 +120,7 @@ export default function ArtPage() {
             Pets
           </h2>
         </div>
-        <section className="line-y columns-2 gap-4">
+        <section className="columns-2 gap-4">
           <Artwork year={2024} src={otis2024} title="Otis" medium="digital" />
           <Artwork year={2023} src={lola2023} title="Lola" medium="digital" />
           <Artwork year={2020} src={cal2020} title="Callie" medium="digital" />
@@ -129,7 +132,7 @@ export default function ArtPage() {
             Portraits
           </h2>
         </div>
-        <section className="line-y columns-2 gap-4">
+        <section className="columns-2 gap-4">
           <Artwork year={2018} src={self2018} title="Self" />
           <Artwork year={2016} src={selfEnhanced2016} title="Self" medium="charcoal" />
           <Artwork year={2011} src={self2011} title="Self with fronds" />
@@ -141,7 +144,7 @@ export default function ArtPage() {
             Poses
           </h2>
         </div>
-        <section className="line-y columns-3 gap-4">
+        <section className="columns-2 gap-4 sm:columns-3">
           <Artwork year={2012} src={manSeated2012} medium="charcoal" />
           <Artwork year={2012} src={womanPencil2012} medium="graphite" />
           <Artwork year={2012} src={manEnhanced2012} medium="charcoal" />
@@ -156,7 +159,7 @@ export default function ArtPage() {
             Misc.
           </h2>
         </div>
-        <section className="line-y columns-2 gap-4">
+        <section className="columns-2 gap-4">
           <Artwork year={2012} src={sculptureEnhanced2012} title="UMMA" medium="charcoal" />
           <Artwork year={2011} src={oilWarhol2011} title="Still life" medium="oil" />
           <Artwork year={2011} src={bike2011} title="Bicycle" medium="graphite" />

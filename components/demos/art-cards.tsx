@@ -64,7 +64,7 @@ export function ArtCards() {
 
   return (
     <motion.div
-      className="relative isolate h-64 w-full overflow-hidden rounded-xl bg-muted"
+      className="relative isolate flex h-64 w-full overflow-hidden rounded-xl bg-muted sm:-mx-4"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >

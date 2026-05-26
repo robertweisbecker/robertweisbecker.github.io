@@ -59,22 +59,22 @@ export default function Home() {
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
       <section>
-        <div className="grid animate-stagger-enter grid-cols-[1fr_200px] items-start gap-x-8 gap-y-4 [--stagger:1] sm:grid-cols-[auto_1fr]">
+        <div className="grid w-full min-w-0 animate-stagger-enter grid-cols-[1fr_200px] items-start gap-x-8 gap-y-4 [--stagger:1] sm:grid-cols-[auto_1fr]">
           <h1 className="-ms-1 mb-4 text-h1 max-sm:self-end sm:col-span-2">
             Robert
             <br /> Weisbecker
           </h1>
-          <div className="relative w-fit rounded-md bg-muted">
+          <div className="absolute right-0 w-fit rounded-md bg-muted max-sm:-top-8 sm:relative">
             <Float
               className="group/pixel relative isolate w-fit rounded-md bg-card p-1 shadow-border-lg"
               speed={0.5}
               amplitude={[4, 8, 4]}
               rotationRange={[1, 1, 3]}
             >
-              <div className="relative overflow-hidden rounded-xs bg-background sm:size-50">
-                <PixelPortrait className="outline-2 outline-card transition-all duration-300" />
+              <div className="relative size-[150px] overflow-hidden rounded-xs bg-background sm:size-50">
+                <PixelPortrait className="outline-2 outline-card" />
                 {isDinoVisible && (
-                  <PixelReveal className="absolute inset-0 size-50">
+                  <PixelReveal className="absolute inset-0 size-full">
                     <PixelDino />
                   </PixelReveal>
                 )}
@@ -85,12 +85,12 @@ export default function Home() {
                 size="icon-xs"
                 className="pointer-fine:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none pointer-fine:-translate-y-1 pointer-fine:opacity-0"
               >
-                {isDinoVisible ? "⟨" : <PixelShuffleIcon />}
+                {isDinoVisible ? "⟨" : <PixelShuffleIcon className="size-[11px]" />}
               </Button>
             </Float>
           </div>
-          <div className="w-full max-w-xs space-y-3.5 text-sm max-sm:col-span-2">
-            <p className="">
+          <div className="w-full space-y-3.5 text-sm max-sm:col-span-2">
+            <p className="text-pretty">
               You can call me{" "}
               <Popover>
                 <PopoverTrigger openOnHover className="link text-foreground decoration-dotted">
@@ -102,11 +102,11 @@ export default function Home() {
               </Popover>
               .
             </p>
-            <p>
+            <p className="text-balance">
               I&apos;m a principal designer at <LinkOut href="https://everfi.com" text="Everfi" className="text-foreground" /> working on
               products, tools, and systems to help drive social good through education.
             </p>
-            <p>
+            <p className="text-pretty">
               These things have&nbsp;
               <PreviewCard>
                 <PreviewCardTrigger
@@ -136,7 +136,7 @@ export default function Home() {
                       cite="https://everfi.com/press-releases/everfis-suite-of-k-12-educational-content-receives-prestigious-digital-promise-research-based-product-design-certification/#:~:text=Everfi%E2%80%99s%20Impact%2Das%2Da%2DServiceTM%C2%A0solution%20and%20digital%20educational%20content%20have%20reached%20more%20than%2045%20million%20learners%20globally."
                     >
                       “Founded in 2008, Everfi’s Impact-as-a-Service™ solution and digital educational content have reached more than{" "}
-                      <mark>45 million</mark> learners worldwide.”
+                      <mark>45 million</mark> learners globally.”
                     </blockquote>
                     <span className="flex items-center gap-1 text-2xs">
                       <IconLink className="size-3" /> everfi.com
@@ -144,7 +144,7 @@ export default function Home() {
                   </div>
                 </PreviewCardPopup>
               </PreviewCard>
-              &nbsp;reached more than 45 million learners globally.
+              &nbsp;reached more than 45 million learners worldwide.
             </p>
             <p className="">
               This is my little slice of the internet.
@@ -156,29 +156,35 @@ export default function Home() {
 
       <section>
         <h2 className="mb-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
-          ▼ Projects
+          I. Projects
         </h2>
         <IndexList />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-pixel text-[11px] uppercase" id="resources">
-          ✧ Posts
+          II. Posts
         </h2>
         <IndexList items={postItems} />
       </section>
 
       <section>
         <h2 className="mb-3 font-pixel text-[11px] uppercase" id="about">
-          ~ Art
+          III. Art
         </h2>
         <ArtCards />
       </section>
 
       <section>
-        <h2 className="mb-3 font-pixel text-[11px] uppercase" id="resources">
-          ♥ Resources
-        </h2>
+        <div className="mb-3 flex w-full items-center justify-between gap-2">
+          <h2 className="font-pixel text-[11px] uppercase" id="resources">
+            IV. Resources
+          </h2>
+          <LinkButton href="https://www.figma.com/@yobob" variant="ghost" size="sm">
+            View on Figma Community ↗
+          </LinkButton>
+        </div>
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Card variant="muted" size="sm">
             <CardHeader>
@@ -235,8 +241,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-4" id="about">
-        <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase">♦ About</h2>
+      <section className="flex flex-col gap-3" id="about">
+        <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase">V. About</h2>
         <LayoutGrid variant="twoUp">
           <p className="max-w-prose text-sm text-muted-foreground">
             I&apos;m from Baltimore, MD, and now live in southern CA. Since 2021, I&apos;ve led the implementation of a shared design system
@@ -271,7 +277,7 @@ export default function Home() {
               <BeyondMeatIcon className="-mt-px inline-block size-3.5 fill-muted-foreground/50" />
                Beyond Meat
             </span>
-            , among others.
+            , and others.
           </p>
           <div>
             <p className="mb-2 text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
@@ -318,10 +324,10 @@ export default function Home() {
           </div>
           <div>
             <p className="mb-2 text-sm text-muted-foreground">You can find or reach me here:</p>
-            <ul className="flex flex-col gap-2 ps-6 text-sm">
+            <ul className="flex flex-col gap-1 text-sm">
               <li>
                 <span className="flex items-center gap-1">
-                  <IconMailFilled className="size-4" /> Email
+                  Email
                   <span className="after-dots"></span>
                   <LinkButton href="mailto:yo@bob.fyi" variant="link" size="sm">
                     yo@bob.fyi
@@ -330,34 +336,20 @@ export default function Home() {
                 </span>
               </li>
 
-              <li>
-                <span className="flex items-center gap-1">
-                  <LinkedinIcon className="inline" />
-                  LinkedIn
-                  <span className="after-dots" />
-                  <LinkButton href="https://www.linkedin.com/in/robertweisbecker/" variant="link" size="sm">
-                    @robertweisbecker
-                  </LinkButton>
-                </span>
+              <li className="flex items-center gap-1">
+                <span className="text-muted-foreground">LinkedIn</span>
+                <span className="after-dots" />
+                <LinkButton href="https://www.linkedin.com/in/robertweisbecker/" variant="link" size="sm">
+                  @robertweisbecker
+                </LinkButton>
               </li>
 
               <li>
                 <span className="flex items-center gap-1">
-                  <GithubIcon /> GitHub
+                  GitHub
                   <span className="after-dots" />
                   <LinkButton href="https://github.com/robertweisbecker" variant="link" size="sm">
                     @robertweisbecker
-                  </LinkButton>
-                </span>
-              </li>
-
-              <li>
-                <span className="flex items-center gap-1">
-                  <FigmaIcon className="size-4" />
-                  Figma
-                  <span className="after-dots" />
-                  <LinkButton href="https://figma.com/@yobob" variant="link" size="sm">
-                    @yobob
                   </LinkButton>
                 </span>
               </li>
@@ -371,13 +363,13 @@ export default function Home() {
       </section>
       <section>
         <div className="flex w-full justify-between gap-2">
-          <h2 className="font-pixel text-[11px] uppercase">CV</h2>
+          <h2 className="font-pixel text-[11px] uppercase">VI. CV</h2>
           <LinkButton href="/BOB.md" variant="ghost" size="xs" className="-me-(--button-x) -mt-(--button-y)">
             <MarkdownIcon data-icon="inline-start" />
             View BOB.md
           </LinkButton>
         </div>
-        <h3 className="mb-3 font-pixel text-[11px] text-muted-foreground/50 uppercase">Experience</h3>
+        <h3 className="mb-3 font-pixel text-[11px] text-muted-foreground/50 uppercase">↳ Experience</h3>
         <DescriptionList className="mb-6">
           <DescriptionListLabel>
             <span className="flex items-center gap-2 self-start">
@@ -448,7 +440,7 @@ export default function Home() {
             </DescriptionList>
           </DescriptionListValue>
         </DescriptionList>
-        <h3 className="mb-3 font-pixel text-[11px] text-muted-foreground/50 uppercase">Education</h3>
+        <h3 className="mb-3 font-pixel text-[11px] text-muted-foreground/50 uppercase">↳ Education</h3>
         <DescriptionList>
           <DescriptionListLabel>Maryland Institute College of Art</DescriptionListLabel>
           <DescriptionListValue>
@@ -469,7 +461,7 @@ export default function Home() {
 
       {/* <Separator className="max-w-14" /> */}
       <section className="flex flex-col gap-6">
-        <h2 className="font-pixel text-[11px] uppercase">Colophon</h2>
+        <h2 className="font-pixel text-[11px] uppercase">VII. Colophon</h2>
         <DescriptionList className="not-prose">
           <DescriptionListLabel>Type</DescriptionListLabel>
           <DescriptionListValue>

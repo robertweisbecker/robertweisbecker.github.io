@@ -144,7 +144,7 @@ export function CommandInput({
         <AutocompletePrimitive.Clear
           render={
             <motion.button
-              className="grid-stack h-full min-w-0 rounded-md hover:bg-accent"
+              className="grid-stack h-6 w-6 min-w-0 self-center rounded-sm hover:bg-accent"
               initial={{
                 transform: "translateX(4px)",
                 filter: "blur(4px)",

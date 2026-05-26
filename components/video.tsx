@@ -53,7 +53,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
             "--media-object-position": "center",
             // "--media-control-hover-background": "var(--color-accent)",
             // "--media-control-padding": "0",
-            "--media-font-family": "var(--font-mono)",
+            "--media-font-family": "var(--font-pixel)",
             "--media-font-size": "10px",
             "--media-range-bar-color": "color-mix(in srgb, var(--foreground) 64%, transparent)",
             "--media-range-track-background": "color-mix(in srgb, var(--foreground) 10%, transparent)",
@@ -115,7 +115,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
           data-slot="controlbar"
           render={<MediaControlBar />}
           className={cn(
-            "relative isolate m-2 transform-gpu overflow-visible rounded-full bg-background/50 shadow-border-xl backdrop-blur-sm transition-opacity duration-150 ease-out group-has-[[mediaisfullscreen]]:mx-auto group-has-[[mediaisfullscreen]]:max-w-sm"
+            "relative isolate m-2 transform-gpu overflow-visible rounded-full bg-background/50 p-1 shadow-border-xl backdrop-blur-sm transition-opacity duration-150 ease-out group-has-[[mediaisfullscreen]]:mx-auto group-has-[[mediaisfullscreen]]:max-w-sm"
             // "has-[[mediapaused]]:invisible"
             // "translate-y-1/2 opacity-0 transition-[translate,opacity] duration-150 ease-out group-hover/media:translate-y-0 group-hover/media:opacity-100"
           )}

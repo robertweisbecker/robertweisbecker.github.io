@@ -28,7 +28,7 @@
   --font-sans: system-ui, ui-sans-serif, sans-serif;
   --font-heading: var(--font-display), var(--font-sans);
   --font-heading--font-variation-settings: "SERF" 30, "wght" 680, "slnt" -5;
-  --font-heading--font-feature-settings: "ss01", "ss02", "calt", "dlig", "frac";
+  --font-heading--font-feature-settings: "ss01", "ss02", "calt", "dlig";
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
 
@@ -168,7 +168,7 @@
   --secondary: var(--hue-100);
   --secondary-foreground: var(--hue-700);
   --muted: --alpha(var(--neutral-400) / 8%);
-  --muted-foreground: var(--neutral-600);
+  --muted-foreground: var(--neutral-500);
   --accent: --alpha(var(--neutral-400) / 16%);
   --accent-foreground: var(--neutral-950);
   --destructive: var(--error-500);
@@ -264,7 +264,7 @@
   --sidebar-border: --alpha(var(--color-white) / 5%);
   --sidebar-ring: var(--ring);
   --border-shadow:
-    inset 0 0 0 1px --alpha(var(--border) / 10%), inset 0 1px --alpha(var(--border) / 25%),
+    inset 0 0 0 1px --alpha(var(--border) / 5%), inset 0 1px --alpha(var(--border) / 8%),
     inset 0 0.5px 1px --alpha(var(--border) / 40%), 0 0 0 0.5px hsl(0 0 0% / 50%);
   --popover-shadow:
     0 0 1px 1px hsl(0 0 0% / 90%), inset 0 1px 0 0 var(--border), inset 0 0 0 1px --alpha(var(--border) / 50%),
