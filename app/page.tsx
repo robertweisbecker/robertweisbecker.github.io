@@ -357,14 +357,20 @@ export default function Home() {
           </div>
         </LayoutGrid>
 
-        <h2 className="mt-3 font-pixel text-[11px] uppercase">Bonus</h2>
-        <p className="text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching.</p>
-        <Letterboxd maxFilms={5} />
+        <p className="mb-3 text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching.</p>
+        <div className="flex w-full justify-between gap-2">
+          <h3 className="font-pixel text-[11px] text-muted-foreground/50 uppercase">Logged</h3>
+          <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="sm">
+            <LetterboxdLogo data-icon="inline-start" />
+            View on Letterboxd
+          </LinkButton>
+        </div>
+        <Letterboxd maxFilms={4} />
       </section>
       <section>
         <div className="flex w-full justify-between gap-2">
           <h2 className="font-pixel text-[11px] uppercase">VI. CV</h2>
-          <LinkButton href="/BOB.md" variant="ghost" size="xs" className="-me-(--button-x) -mt-(--button-y)">
+          <LinkButton href="/BOB.md" variant="ghost" size="sm" className="-me-(--button-x) -mt-(--button-y)">
             <MarkdownIcon data-icon="inline-start" />
             View BOB.md
           </LinkButton>
@@ -671,5 +677,48 @@ function ProjectLink({ href, text, ...props }: React.ComponentProps<typeof Link>
       <TreeIconRichText data-icon="inline-start" className="opacity-80" />
       {text}
     </Badge>
+  );
+}
+
+function LetterboxdLogo() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" className="opacity-100!">
+      <defs>
+        <rect id="path-1" x="0" y="0" width="129.847328" height="141.389313" />
+        <rect id="path-3" x="0" y="0" width="129.847328" height="141.389313" />
+      </defs>
+      <g id="letterboxd-decal-dots-pos-rgb" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+        <circle id="Circle" fill="#202830" cx="250" cy="250" r="250" />
+        <g id="dots-neg" transform="translate(61.000000, 180.000000)">
+          <g id="Dots">
+            <ellipse id="Green" fill="#00E054" cx="189" cy="69.9732824" rx="70.0786517" ry="69.9732824" />
+            <g id="Blue" transform="translate(248.152672, 0.000000)">
+              <mask id="mask-2" fill="white">
+                <use xlinkHref="#path-1" />
+              </mask>
+              <g id="Mask" />
+              <ellipse fill="#40BCF4" mask="url(#mask-2)" cx="59.7686766" cy="69.9732824" rx="70.0786517" ry="69.9732824" />
+            </g>
+            <g id="Orange">
+              <mask id="mask-4" fill="white">
+                <use xlinkHref="#path-3" />
+              </mask>
+              <g id="Mask" />
+              <ellipse fill="#FF8000" mask="url(#mask-4)" cx="70.0786517" cy="69.9732824" rx="70.0786517" ry="69.9732824" />
+            </g>
+            <path
+              d="M129.539326,107.022244 C122.810493,96.2781677 118.921348,83.5792213 118.921348,69.9732824 C118.921348,56.3673435 122.810493,43.6683972 129.539326,32.9243209 C136.268159,43.6683972 140.157303,56.3673435 140.157303,69.9732824 C140.157303,83.5792213 136.268159,96.2781677 129.539326,107.022244 Z"
+              id="Overlap"
+              fill="#FFFFFF"
+            />
+            <path
+              d="M248.460674,32.9243209 C255.189507,43.6683972 259.078652,56.3673435 259.078652,69.9732824 C259.078652,83.5792213 255.189507,96.2781677 248.460674,107.022244 C241.731841,96.2781677 237.842697,83.5792213 237.842697,69.9732824 C237.842697,56.3673435 241.731841,43.6683972 248.460674,32.9243209 Z"
+              id="Overlap"
+              fill="#FFFFFF"
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
   );
 }

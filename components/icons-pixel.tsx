@@ -1,5 +1,13 @@
 import * as React from "react";
 
+export function PixelPointerIcon(props: React.ComponentProps<"svg">) {
+  return (
+    <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor" {...props}>
+      <path d="M4 9H5L5 10H3V7H4V9ZM9 9V10H7L7 9H9ZM6 8H7V9H5V7H6V8ZM10 9H9V7L10 7V9ZM3 7H2L2 4H3L3 7ZM9 7H8V6H7V5H9V7ZM10 5H9V4H7V3H10V5ZM4 2L2 2V4H1L1 1L4 1V2ZM7 3L4 3V2L7 2V3Z" />
+    </svg>
+  );
+}
+
 export function PixelScribbleIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>

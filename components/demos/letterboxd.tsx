@@ -110,14 +110,14 @@ export function Letterboxd({ maxFilms = 4 }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-card shadow-border-xs sm:-mx-3 sm:rounded-xl sm:p-3">
-      <div className="flex justify-between gap-2">
+    <div className="flex flex-col gap-2 rounded-xl bg-muted sm:-mx-3 sm:p-3">
+      {/* <div className="flex justify-between gap-2">
         <p className="font-pixel text-[11px]! text-muted-foreground/50">Recently watched</p>
         <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="xs">
           <LetterboxdLogo data-icon="inline-start" />
           View on Letterboxd
         </LinkButton>
-      </div>
+      </div> */}
 
       <div className="relative">
         {!contentVisible && !error ? <LetterboxdSkeleton maxFilms={maxFilms} /> : null}
@@ -162,13 +162,13 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
         } as CSSProperties
       }
     >
-      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center rounded-md mask-b-from-80%">
+      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center rounded-md mask-b-from-40%">
         <style>
           {`
           @keyframes poster-anim {
             0% { transform: rotate(0); opacity: .3; }
             50% { opacity: 0.7; }
-            100% { transform: rotate(45deg); opacity: .5; }
+            100% { transform: rotate(180deg); opacity: .5; }
           }
         `}
         </style>
@@ -176,12 +176,12 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
           className="aspect-square h-full bg-cover opacity-40 mix-blend-difference blur-xl dark:opacity-20"
           style={{
             backgroundImage: `url(${film.posterUrl})`,
-            animation: "poster-anim 20s linear infinite forwards alternate",
+            animation: "poster-anim 10s linear infinite forwards alternate",
           }}
         />
       </div>
       <ItemHeader className="">
-        <Vignette.Root transitionLength={16} inset={8} className="-m-1 shadow-border-md" radius="var(--radius-md)">
+        <Vignette.Root transitionLength={16} inset={8} className="shadow-border-md" radius="var(--radius-md)">
           <Vignette.Image
             src={film.posterUrl}
             alt={film.title}
@@ -257,7 +257,6 @@ function LetterboxdSkeleton({ maxFilms }: { maxFilms: number }) {
               <Skeleton className="h-3 w-4/5" />
               <Skeleton className="h-3 w-1/2" />
             </div>
-            <Skeleton className="h-3 w-8" />
           </div>
         ))}
       </div>

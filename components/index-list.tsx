@@ -69,11 +69,13 @@ export function IndexList({ items = defaultItems, className, itemClassName }: In
           >
             {renderMedia(item.icon)}
             <ItemContent>
-              <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>{item.title}</ItemTitle>
+              <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>{item.title} </ItemTitle>
               {item.description && <ItemDescription className="hidden sm:block">{item.description}</ItemDescription>}
             </ItemContent>
-            {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
-            {item.tags && <ItemActions>{item.tags}</ItemActions>}
+            <ItemActions>
+              {item.tags && <span>∙ {item.tags}</span>}
+              {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
+            </ItemActions>
           </Item>
           {index !== filteredItems.length - 1 && <ItemSeparator />}
         </React.Fragment>

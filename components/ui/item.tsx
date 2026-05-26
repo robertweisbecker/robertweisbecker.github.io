@@ -46,7 +46,7 @@ const itemVariants = cva(
         lg: "gap-4 p-5 rounded-2xl data-[variant=default]:-mx-5",
         default: "gap-4 px-4 py-3 data-[variant=default]:-mx-4",
         sm: "gap-3 px-3 py-2.5 has-data-[variant=default]:-mx-3 rounded-lg",
-        xs: "gap-x-2.5 gap-y-1 py-1.5 px-1.5 in-data-[slot=dropdown-menu-content]:p-0 has-data-[variant=default]:-mx-1.5  rounded-md",
+        xs: "gap-x-2.5 gap-y-1 py-1.5 px-1.5 in-data-[slot=command-item]:p-0 in-data-[slot=command-item]:m-0 in-data-[slot=command-item]:gap-0 in-data-[slot=dropdown-menu-content]:p-0 has-data-[variant=default]:-mx-1.5 rounded-md",
       },
     },
     defaultVariants: {

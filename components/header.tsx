@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Favicon } from "./icons";
-import { PixelChevronDownIcon, PixelNewsIcon, PixelScribbleIcon } from "./icons-pixel";
+import { PixelChevronDownIcon, PixelNewsIcon, PixelPointerIcon, PixelScribbleIcon } from "./icons-pixel";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -209,9 +209,10 @@ export function Header() {
           aria-current={pathname === "/art" ? "true" : "false"}
           className="max-md:hidden"
         />
+
         <HeaderButton
           label="Playground"
-          icon={<IconMonkeybar data-icon={"inline-start"} imageRendering="pixelated" className="size-3 [image-rendering:pixelated]" />}
+          icon={<PixelPointerIcon className="size-3.5" data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/playground"
           aria-current={pathname === "/playground" ? "true" : "false"}
