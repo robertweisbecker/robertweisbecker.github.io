@@ -77,25 +77,19 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
   }
 
   return (
-    <Tabs className="not-prose mx-auto w-full min-w-0">
-      <TabsList className="" variant="pill">
+    <Tabs className="not-prose w-full min-w-0">
+      <TabsList className="-ms-2" variant="pill">
         <TabsTrigger value="before">{tab1}</TabsTrigger>
         <TabsTrigger value="after">{tab2}</TabsTrigger>
       </TabsList>
+      {/* <div className="-mx-4 w-[calc(100%+(--spacing(8)))]"> */}
       <TabsContent value="after" keepMounted>
-        <Image
-          src={after}
-          caption={imageProps?.caption}
-          className="max-full my-0 [&>div]:mx-0 [article_&]:-mx-8 [article_&]:w-[calc(100%+4rem)] [article_&]:max-w-none [article_&]:sm:mx-0 [article_&]:sm:w-full [article_&>div]:sm:-mx-1"
-        />
+        <Image src={after} caption={imageProps?.caption} />
       </TabsContent>
       <TabsContent value="before" keepMounted>
-        <Image
-          src={before}
-          caption={imageProps?.caption}
-          className="my-0 [&>div]:mx-0 [article_&]:-mx-8 [article_&]:w-[calc(100%+4rem)] [article_&]:max-w-none [article_&]:sm:mx-0 [article_&]:sm:w-full [article_&>div]:sm:-mx-1"
-        />
+        <Image src={before} caption={imageProps?.caption} />
       </TabsContent>
+      {/* </div> */}
     </Tabs>
   );
 }

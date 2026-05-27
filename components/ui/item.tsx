@@ -33,11 +33,11 @@ function ItemSeparator({ className, ...props }: React.ComponentProps<typeof Sepa
 }
 
 const itemVariants = cva(
-  "[a]:hover:after:bg-accent [a]:after:transition-all [a]:hover:after:scale-100 [a]:after:scale-95 [a]:after:absolute [a]:after:inset-0 [a]:after:duration-200 [a]:after:ease [a]:after:rounded-[inherit] [a]:after:-z-1 isolate relative rounded-xl border border-border/50 text-sm flex-1 group/item focus-visible:border-ring focus-visible:ring-ring/50 flex items-center flex-wrap outline-none transition-colors duration-100 focus-visible:ring-[3px] [a]:transition-colors [data-slot=card-content]>:where(&):py-0 squircle [a]:hover:[&_+[data-slot=item-separator]]:opacity-0 ",
+  "[a]:hover:after:bg-accent [a]:after:transition-all [a]:hover:after:scale-100 [a]:after:scale-95 [a]:after:absolute [a]:after:inset-0 [a]:after:duration-200 [a]:after:ease [a]:after:rounded-[inherit] [a]:after:-z-1 isolate relative rounded-xl border border-border/50 text-sm flex-1 group/item focus-visible:border-ring focus-visible:ring-ring/50 flex items-center flex-wrap outline-none transition-colors duration-100 focus-visible:ring-[3px] [a]:transition-colors [[data-slot=card-content]>:where(&)]:py-0 squircle [a]:hover:[&_+[data-slot=item-separator]]:opacity-0 ",
   {
     variants: {
       variant: {
-        default: "border-transparent overflow-hidden [a]:hover:overflow-visible",
+        default: "border-transparent overflow-hidden [a]:hover:overflow-visible px-0",
         outline: "border-border",
         muted: "bg-muted border-transparent",
         elevated: "shadow-border-sm border-transparent bg-card [a]:hover:after:bg-sidebar",

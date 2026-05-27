@@ -42,6 +42,8 @@ function stepsFor(name: ColorName): readonly number[] {
   return HUE_STEPS;
 }
 
+const PALETTE_NAME_COL = "w-20 shrink-0";
+
 /* -------------------------------------------------------------------------- */
 /*  Color Swatch                                                              */
 /* -------------------------------------------------------------------------- */
@@ -86,11 +88,23 @@ type ColorRampProps = {
   attached?: boolean;
 };
 
+function StepColumnHeader({ steps, className }: { steps: readonly number[]; className?: string }) {
+  return (
+    <div className={cn("grid min-w-0 flex-1", className)} style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}>
+      {steps.map((step) => (
+        <div key={step} className="text-center font-pixel text-[11px] text-muted-foreground">
+          {step}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ColorRamp({ name, label, showLabels = true, className, attached = true }: ColorRampProps) {
   const steps = stepsFor(name);
 
   return (
-    <div className={cn("flex flex-col gap-1", className)}>
+    <div className={cn("relative flex flex-col gap-1", className)}>
       {label && <div className="text-xs font-medium capitalize">{label}</div>}
       <div
         className={cn("grid w-full min-w-0 items-start", !attached && "gap-1")}
@@ -122,7 +136,7 @@ function ColorRamp({ name, label, showLabels = true, className, attached = true 
 type ColorPaletteProps = {
   /** Which group to render. Defaults to "all". */
   group?: "hues" | "neutrals" | "alphas" | "all";
-  /** Show step labels beneath each swatch. */
+  /** When true, show step labels beneath each swatch. When false, show one header row above the grid. */
   showLabels?: boolean;
   /** Show the hue name to the left of each row. */
   showNames?: boolean;
@@ -141,18 +155,28 @@ function ColorPalette({ group = "all", showLabels = true, showNames = true, clas
       {sections.map((section) => (
         <div key={section.title ?? section.names[0]} className="flex flex-col gap-3">
           {section.title && <p className="text-base font-medium">{section.title}</p>}
-          <div className={cn("flex flex-col items-start gap-1")}>
+          <div className={cn("relative grid grid-cols-1 gap-5 sm:grid-cols-[auto_1fr] sm:gap-4")}>
+            {!showLabels && (
+              <>
+                <div className="" />
+                <StepColumnHeader steps={stepsFor(section.names[0])} className="" />
+              </>
+            )}
+
             {section.names.map((name) => {
               const steps = stepsFor(name);
               return (
-                <PaletteRow
-                  key={name}
-                  name={name}
-                  steps={steps}
-                  showName={showNames}
-                  showLabels={showLabels}
-                  attached={steps.length === 1}
-                />
+                <div className="col-span-full grid grid-cols-subgrid gap-1 sm:gap-3" key={name}>
+                  <div className={cn("self-center text-2xs font-medium capitalize max-sm:order-2 sm:text-sm")}>{name}</div>
+                  <PaletteRow
+                    className="col-start-2"
+                    name={name}
+                    steps={steps}
+                    showName={false}
+                    showLabels={showLabels}
+                    attached={steps.length === 1}
+                  />
+                </div>
               );
             })}
           </div>
@@ -172,14 +196,15 @@ type PaletteRowProps = {
   showName?: boolean;
   showLabels?: boolean;
   attached?: boolean;
+  className?: string;
 };
 
-function PaletteRow({ name, steps, showName, showLabels, attached = false }: PaletteRowProps) {
+function PaletteRow({ name, steps, showName, showLabels, attached = false, className }: PaletteRowProps) {
   return (
-    <div className="flex w-full items-start gap-2 max-md:flex-col">
-      {showName && <div className="self-start text-xs font-medium capitalize sm:w-20 sm:pt-0.5">{name}</div>}
+    <div className={cn("flex w-full items-start gap-2", className)}>
+      {showName ? <div className={cn(PALETTE_NAME_COL, "pt-0.5 text-xs font-medium capitalize")}>{name}</div> : null}
       <div
-        className={cn("grid w-full min-w-0 items-start", !attached && "gap-1")}
+        className={cn("grid min-w-0 flex-1 items-start", !attached && "gap-1")}
         style={{ gridTemplateColumns: `repeat(${steps.length}, minmax(0, 1fr))` }}
       >
         {steps.map((step) => (

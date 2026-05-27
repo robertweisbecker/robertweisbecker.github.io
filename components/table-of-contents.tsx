@@ -74,7 +74,7 @@ export function TableOfContents({ toc, title, className }: { toc: TocItem[]; tit
               }
               className={cn(
                 "peer relative first:[&>a]:-mt-1.5",
-                // "before:absolute before:inset-y-1.5 before:-inset-s-px before:w-0.5 before:rounded-e has-data-[active=true]:before:bg-primary",
+                // "before:absolute before:-inset-s-px before:top-0 before:bottom-[50%] before:w-0.5 before:rounded-e has-data-[active=true]:before:bg-primary"
                 "group-has-data-active:[&>a]:not-data-active:border-border peer-has-data-active:[&>a]:border-transparent"
               )}
             >
@@ -83,7 +83,7 @@ export function TableOfContents({ toc, title, className }: { toc: TocItem[]; tit
                 data-active={item.id === activeId}
                 data-depth={item.depth}
                 className={cn(
-                  "block w-full border-l border-transparent py-[round(calc(var(--inset)/3),2px)]",
+                  "block w-full border-s border-transparent py-[round(calc(var(--inset)/3),2px)]",
                   // "data-active:border-input",
                   "text-muted-foreground hover:text-accent-foreground",
                   "pl-(--depth-inset)",
@@ -91,8 +91,8 @@ export function TableOfContents({ toc, title, className }: { toc: TocItem[]; tit
                   item.depth > 2 && ["text-[round(calc(1em-.05em*(var(--depth))),1px)]"],
                   item.depth > 1 && [
                     // "data-active:border-transparent!",
-                    "before:rounded-es-0 before:absolute before:top-0 before:left-0 before:h-1/2 before:w-[calc(var(--depth-inset)/1.5)] before:border-b before:border-l before:border-transparent",
-                    "data-active:before:border-input",
+                    "before:rounded-es-0 before:absolute before:top-0 before:left-0 before:h-[calc(50%+1px)] before:w-[calc(var(--depth-inset)/1.5)] before:border-s before:border-b before:border-transparent",
+                    "data-active:before:border-s-border data-active:before:border-b-input",
                     // "data-active:border-border",
                     // "after:absolute after:top-[calc(var(--inset)/1)] after:bottom-0 after:left-0 after:w-px after:rounded-t data-active:after:bg-border",
                     // "after:mask-l-from-[calc(100%-1px)] after:mask-l-to-[1px]",

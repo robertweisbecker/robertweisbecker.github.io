@@ -10,6 +10,12 @@
       "options": {
         "printWidth": 120
       }
+    },
+    {
+      "files": "*.mdx",
+      "options": {
+        "printWidth": 300
+      }
     }
   ],
   "plugins": ["prettier-plugin-tailwindcss"],

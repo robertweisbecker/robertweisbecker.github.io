@@ -4,6 +4,7 @@ export const frontmatter = {
   role: "Design Lead",
   date: "2025—2026",
 };
+import { Alert, AlertContent } from "@/components/ui/alert";
 import { MarkNote } from "@/components/mark-note";
 import { ColorDiagrams } from "@/components/demos/color-diagrams";
 import oklchGradient from "@/public/assets/oklch/oklch-gradient.png";
@@ -18,23 +19,34 @@ import { Badge } from "@/components/ui/badge";
 
 ## Context
 
-As the <Badge variant="link"  className="text-inherit align-baseline">[Unified Design Language](/unified-design-language)<TreeIconRichText data-icon="inline-end"/></Badge> evolved, we needed an extended color system with underlying logic to make palettes plug and play for any of the dozen themes.
+As the <Badge variant="link"  className="text-inherit align-baseline">[Unified Design Language](/unified-design-language)<TreeIconRichText data-icon="inline-end"/></Badge> evolved, we needed an extended color system with underlying logic to make palettes plug and play for the dozen-plus themes we had to support.
 
 This led me to the okLCH color space and the idea of re-balancing our colors into perceptually uniform palettes. What started as a side-of-desk project ended with 28 new color ramps, 365 colors, and a visual evolution of the brand.
 
-Here's a high-level overview of the color system and how it works. A more in-depth post about the process is coming soon.
-
 ## Overview
 
-The primary goal was to expand our color offerings and ensure accessible contrast across themes. To that end, the resulting ramps each have steps `25` to `975` and fall within a given hue range (`0` being white and `1000` black). Steps are ordered by luminance, and each step corresponds to a target contrast range.
+The primary goal was to expand the system's color palettes so that we could drop theme support for bespoke colors, and derive all theming from the new system instead.
 
-Since steps are aligned to luminance, we can ensure consistent contrast no matter the combination.
+To do so, we needed to **a.** have coverage across the color spectrum for backwards-compatibility, and **b.** ensure predictable contrast.
+
+To the first goal, the resulting ramps each represent a specific hue range:
+
+<Image
+  src={oklchWheelHue}
+  alt="Diagram of color wheel with hue ranges for each ramp: red 350-7°, orange 16-33°, yellow 31-53°, gold 50-80°, lime 94-119°, green 136-151°, jade 154-180°, teal 171-193°, cyan 185-205°, blue 200-220°, indigo 224-246°, purple 247-264°, magenta 284-322°, pink 312-342°."
+/>
+
+As for contrast, the recalibrated steps are aligned to luminance. Step 0 is pure white <ColorCode value="oklch(1 0 0)" />, and 1000 is near-black <ColorCode value="oklch(0.15 0 0)" />. Colors in each of the ramps occupy steps 25 to 975 .
+
+Caveat: There's a little fluctuation in luminance per hue to account for WCAG's
+[quirks](https://typefully.com/DanHollick/wcag-3-and-apca-sle13GMW2Brp). The actual lightness of an individual color corresponds to a
+target contrast ratio, rather than luminance alone.
 
 <ImageToggle before={oklchLuminance} after={oklchLuminanceBw} tab1="Color" tab2="Grayscale" />
 
-Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, and Alphas.
+Colors are divided into three categories: spectrum hues (ROYGBIV & friends), neutral hues, and transparent colors, or alphas.
 
-### Spectrum Colors
+### Hues
 
 16 chromatic ramps for primary and status slots in a theme, these represent saturated hues covering the majority of the color spectrum.
 
@@ -57,26 +69,15 @@ Colors are divided into three categories: Hues (ROYGBIV & friends), Neutrals, an
   <ColorSwatch color="pink-400" label="Pink" />
 </div>
 
-For these color ramps, the `500` step has minimum 5:1 contrast vs. white, a target derived from our brand teal <ColorCode value="#0d7977" />. Each multiple of 100 has minimum AA contrast with steps five spots away in either direction, and 3:1 contrast vs. those four spots away.
+For these color ramps, the `500` step has minimum 5:1 contrast vs. white, a target derived from the brand teal <ColorCode value="#0d7977" />. Each multiple of 100 has minimum AA contrast with steps five spots away in either direction, and 3:1 contrast vs. those four spots away.
 
 <ColorRamp name="teal" className="**:rounded-none" />
 
-The diagram below shows the hue range for each ramp mapped to the color wheel. Keen eyes may notice that a good number either overlap or abut their neighbors.
-
-<Image
-  src={oklchWheelHue}
-  alt="Diagram of color wheel with hue ranges for each ramp: red 350-7°, orange 16-33°, yellow 31-53°, gold 50-80°, lime 94-119°, green 136-151°, jade 154-180°, teal 171-193°, cyan 185-205°, blue 200-220°, indigo 224-246°, purple 247-264°, magenta 284-322°, pink 312-342°."
-/>
-
-These "sibling" colors aren't meant to be used together; they're chosen as alternate options for common canonical status colors (red, green, blue, yellow, etc). This way you can find suitable pairings if your primary color uses a hue that's typically used for statuses.
-
-And that leads us to the next group…which also offers variants. Nice segue!
-
-### Neutral Colors
+### Neutrals
 
 Neutrals are for icons, text, borders, and other relatively monochromatic elements. Here we have two informal subsets: basic grays and… _spicy_ grays.
 
-<div className="grid w-full grid-cols-4 gap-2 sm:grid-cols-8">
+<div className="group relative grid w-full grid-cols-4 gap-2 max-sm:my-10 sm:grid-cols-8">
   <ColorSwatch color="black-500" label="Black" />
   <ColorSwatch color="gray-500" label="Gray" />
   <ColorSwatch color="ash-500" label="Ash" />
@@ -85,21 +86,31 @@ Neutrals are for icons, text, borders, and other relatively monochromatic elemen
   <ColorSwatch color="sand-500" label="Sand" />
   <ColorSwatch color="sage-500" label="Sage" />
   <ColorSwatch color="steel-500" label="Steel" />
+  <div className="col-span-4 col-start-1 flex h-4 items-center justify-center border border-t-transparent font-pixel text-2xs! max-sm:order-first max-sm:border-t-border max-sm:border-b-transparent">
+    <span className="grid-stack bg-background px-1 font-pixel text-2xs! text-muted-foreground max-sm:-mt-4 sm:-mb-4">1</span>
+  </div>
+  <div className="col-span-4 flex h-4 items-center justify-center border border-t-transparent">
+    <span className="-mb-4 grid-stack overflow-hidden bg-background text-center font-pixel text-2xs! *:transition-[opacity,translate]">
+      <span className="px-1 text-muted-foreground group-hover:-translate-y-full group-hover:opacity-0">2</span>
+      <span className="translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100">🔥</span>
+    </span>
+  </div>
 </div>
 
-`Black` is a pure gray scale from white to black. The next three have a subtle color temperature: `gray` is cool, `zinc` is warmer, and `ash` is a blend of the two. These have a natural teal-to-purple bias to harmonize with the default brand colors.
+<mark data-hue="black">Black</mark> is a pure gray scale from white to black. The next three have a subtle color temperature:
+<mark data-hue="gray">gray</mark> is cool, <mark data-hue="zinc">zinc</mark> is warmer, and <mark data-hue="ash">ash</mark> is a blend of the two. There's a natural teal-to-purple bias to harmonize with the default brand colors.
 
-The latter four are more opinionated in terms of chroma: tinted with red (`plum`), yellow (`sand`), green (`sage`), and blue (`steel`). You're making a bit of a statement choosing these, but they're available to designers who want to _lean_ into their primary hue or illustration palette, something we regularly see in more immersive K-12 products.
+The latter four are more opinionated in terms of chroma: tinted with red <mark data-hue="plum">(plum)</mark>, yellow <mark data-hue="sand">(sand)</mark>, green <mark data-hue="sage">(sage)</mark>, and blue <mark data-hue="steel">(steel)</mark>. You're making a bit of a statement choosing these, but they're available to designers who want to _lean_ into their primary hue or illustration palette, something we see regularly in more immersive K-12 products.
 
 A key feature of the neutral ramps is their more dramatic luminance curve relative to the ROYGBIV ramps. This gives the middle steps a greater range of accessible pairing options. For example, the `500` step has 3:1 contrast with `200`, instead of `100`, so workhorse foreground colors remain legible on more surfaces.
 
 <ColorDiagrams type="luminance" caption="Average luminance by step" />
 
-Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can maaaaaybe spot this in the chart above. This also helps balance the scale, nudging the darks lowers for a more nuanced dark mode.
+Ramps also include an extra `75` step that matches the `50` step in the saturated palettes, so that neutral component backgrounds can match their spectrum counterparts. You can _maaaaaybe_ spot this in the chart above. This also helps balance the scale, nudging the tail lower for a more nuanced dark mode.
 
-### Alpha Colors
+### Alphas
 
-Black and white aphas take the luminance curve of the `black` ramp and apply it to their respective alpha values.
+Black and white alphas take the luminance curve of the `black` ramp and apply it to their respective alpha values.
 
 <figure className="space-y-2">
   <ColorRamp name="black" className="**:rounded-none" showLabels={false} />
@@ -129,20 +140,21 @@ The system also currently supports an alpha ramp for the default `gray`, which v
 
 ## Palettes
 
-### Hues
+**Hues**
 
-A single step has min. 3:1 contrast vs steps four spots away, and 4.5:1 five steps away in any palette.
-For example, step 400 has a 3:1 contrast ratio vs. white through 100 and 4.5:1 vs. 900 to black.
+In the following palettes, a single step has min. 3:1 contrast with colors four spots away in any palette, and 4.5:1 at five steps.
 
-<ColorPalette group="hues" showNames />
+<ColorPalette group="hues" showNames showLabels={false} />
 
-### Neutrals
+**Neutrals**
 
-<ColorPalette group="neutrals" showNames />
+Within neutral palettes, colors follow the same contrast pattern as hues. But between neutral and hue palettes, the contrast is more pronounced: 3.0 vs. ± 3 steps; 4.5 vs. ± 4 steps.
 
-### Alpha
+<ColorPalette group="neutrals" showNames showLabels={false} />
 
-<ColorPalette group="alphas" showNames />
+**Alphas**
+
+<ColorPalette group="alphas" showNames showLabels={false} />
 
 ## Usage
 
@@ -206,21 +218,8 @@ The final piece of the puzzle is a dataviz palette designed with contrast and vi
 
 Here's a little tool I made to test and ship our dataviz palettes:
 
-<Demo
-  className="mx-auto self-center"
-  title={"Chart Colors [iframe]"}
-  controls={<LinkOut text="Open in new tab" className="text-sm" href="https://sax-rename-35190045.figma.site/" />}
-  innerClass="p-0"
->
-  <iframe
-    className="aspect-video [zoom:50%]"
-    id="inlineFrameExample"
-    title="Inline Frame Example"
-    width="100%"
-    loading="lazy"
-    height="800"
-    src="https://sax-rename-35190045.figma.site/"
-  />
+<Demo className="mx-auto self-center" title={"Chart Colors [iframe]"} controls={<LinkOut text="Open in new tab" className="text-sm" href="https://sax-rename-35190045.figma.site/" />} innerClass="p-0">
+  <iframe className="aspect-video [zoom:50%]" id="inlineFrameExample" title="Inline Frame Example" width="100%" loading="lazy" height="800" src="https://sax-rename-35190045.figma.site/" />
 </Demo>
 
 ## Demo
