@@ -135,7 +135,7 @@ export function Letterboxd({ maxFilms = 4 }) {
             inert={!contentVisible}
             className={contentVisible ? "animate-stagger-enter [--delay:45ms]" : "pointer-events-none absolute inset-0 opacity-0"}
           >
-            <div className="flex w-full gap-2">
+            <div className="grid w-full min-w-0 grid-cols-2 gap-2 sm:grid-cols-4">
               {films.map((film, index) => (
                 <FilmCard key={film.url ?? index} film={film} index={index} onPosterSettled={handlePosterSettled} />
               ))}
@@ -180,8 +180,8 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
           }}
         />
       </div>
-      <ItemHeader className="">
-        <Vignette.Root transitionLength={16} inset={8} className="shadow-border-md" radius="var(--radius-md)">
+      <ItemHeader className="w-full">
+        <Vignette.Root transitionLength={16} inset={8} className="h-auto w-full shadow-border-md" radius="var(--radius-md)">
           <Vignette.Image
             src={film.posterUrl}
             alt={film.title}
@@ -249,7 +249,7 @@ function LetterboxdSkeleton({ maxFilms }: { maxFilms: number }) {
   return (
     <div className="grid gap-3">
       <Skeleton className="h-7 w-32 rounded-full" />
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {Array.from({ length: maxFilms }).map((_, index) => (
           <div key={index} className="grid gap-2 rounded-xl bg-muted/40 p-1.5">
             <Skeleton className="aspect-10/17 w-full rounded-md" />

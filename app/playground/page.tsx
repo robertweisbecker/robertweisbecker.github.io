@@ -38,68 +38,64 @@ export default function PlaygroundPage() {
       </div>
 
       <div className="flex w-full flex-col gap-8">
-        <div className="grid gap-4 lg:grid-cols-4">
-          <Demo caption="<ChromeTabs>" className="lg:col-span-2 lg:row-span-2" centerContent>
+        <div className="grid gap-4 lg:grid-cols-8">
+          <Demo caption="<ChromeTabs>" className="lg:col-span-4 lg:row-span-2" centerContent>
             <ChromeTabsDemo />
           </Demo>
-          <Demo caption="Motion chart" centerContent innerClass="">
+          <Demo caption="Motion chart ∙ Hover to animate" centerContent className="lg:col-span-2">
             <ChartDemo />
           </Demo>
-          <Demo caption="Color code" centerContent>
+          <Demo caption="ColorCode ∙ Click to copy" centerContent className="lg:col-span-2">
             <ColorCode value="#0b0b0b" />
           </Demo>
 
-          <Demo caption="Color swatch group" centerContent className="lg:col-span-2">
+          <Demo caption="ColorSwatchGroup" centerContent className="lg:col-span-2">
             <ColorSwatchGroupDemo />
           </Demo>
 
-          <Demo caption="CSS-anchored slider" centerContent>
+          <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-2">
             <AnchoredSliderDemo />
           </Demo>
 
-          <Demo centerContent>
+          <Demo centerContent className="lg:col-span-2">
             <SliderDemo />
           </Demo>
 
-          <Demo centerContent>
+          <Demo centerContent className="lg:col-span-2">
             <div className="grid-stack aspect-square w-32">
               <SwitchDemo />
             </div>
           </Demo>
 
-          <div className="col-span-full">
-            <div className="grid grid-flow-col grid-cols-subgrid gap-4">
-              <Demo caption="Delete button" centerContent>
-                <DeleteButtonDemo />
-              </Demo>
-
-              <Demo caption="Animated button" centerContent>
-                <AnimatedButtonDemo />
-              </Demo>
-              <Demo caption="Loading button" centerContent>
-                <Button
-                  rounded
-                  loading={isLoading}
-                  onClick={() => {
-                    setLoading(true);
-                    window.setTimeout(() => setLoading(false), 2000);
-                  }}
-                >
-                  Confirm
-                </Button>
-              </Demo>
-            </div>
-          </div>
-
-          <Demo caption="Copy button" centerContent>
-            <CopyButton value="Hello, world!" size="icon" variant="outline" />
+          <Demo caption="Delete button" centerContent className="lg:col-span-2">
+            <DeleteButtonDemo />
           </Demo>
 
-          <Demo caption="Mode toggle" centerContent>
+          <Demo caption="Animated button" centerContent className="lg:col-span-2">
+            <AnimatedButtonDemo />
+          </Demo>
+          <Demo caption="Loading button" centerContent className="lg:col-span-2">
+            <Button
+              rounded
+              loading={isLoading}
+              onClick={() => {
+                setLoading(true);
+                window.setTimeout(() => setLoading(false), 2000);
+              }}
+            >
+              Confirm
+            </Button>
+          </Demo>
+
+          <Demo caption="Icon swap + deduplicated inline toast" centerContent>
+            <CopyButton value="Hello, world!" size="icon" variant="ghost" />
+          </Demo>
+
+          <Demo caption="Mode toggle + pixel icon rearrange" centerContent>
             <ModeToggle />
           </Demo>
 
-          <Demo caption="Morph icon toggle" centerContent>
+          <Demo caption="Toggle + SVG line morph" centerContent>
             <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)}>
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
             </Toggle>
@@ -154,7 +150,7 @@ export default function PlaygroundPage() {
           <Demo title="Site Search" centerContent className="lg:col-span-full">
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
-          <Demo title="Device frame — phone" overflowBehavior="resize" centerContent className="lg:col-span-2">
+          <Demo title="DeviceFrame / Phone" overflowBehavior="resize" centerContent className="lg:col-span-4">
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
               <div className="flex items-center justify-center p-6 text-center text-sm">
                 <p>
@@ -164,7 +160,7 @@ export default function PlaygroundPage() {
               </div>
             </DeviceFrame.Phone>
           </Demo>
-          <Demo title="Device frame — browser" variant="outline" className="lg:col-span-2" centerContent overflowBehavior="resize">
+          <Demo title="DeviceFrame / Browser" variant="outline" className="lg:col-span-4" centerContent overflowBehavior="resize">
             <DeviceFrame.Browser address="bob.fyi">
               <div className="flex items-center justify-center py-12 text-sm text-muted-foreground">
                 <Favicon className="mr-2 size-4" />
@@ -192,7 +188,7 @@ function ColorSwatchGroupDemo() {
   return (
     <div className="flex flex-col justify-start gap-3">
       <ColorSwatchGroup colors={DEMO_SWATCHES} value={color} onValueChange={setColor} />
-      <p className="text-xs text-muted-foreground">
+      <p className="w-[240px] text-xs text-muted-foreground">
         Selected: <ColorCode value={color} />
       </p>
     </div>
@@ -294,10 +290,10 @@ function SwitchDemo() {
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
                 key={checked ? "onText" : "offText"}
-                className="inline-block"
-                initial={{ opacity: 0, filter: "blur(2px)", x: checked ? "-50%" : "50%" }}
+                className="inline-block min-w-20"
+                initial={{ opacity: 0, filter: "blur(2px)", x: checked ? "-25%" : "25%" }}
                 animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
-                exit={{ opacity: 0, filter: "blur(4px)", x: checked ? "-50%" : "50%" }}
+                exit={{ opacity: 0, filter: "blur(4px)", x: checked ? "-25%" : "25%" }}
                 transition={{ duration: 0.2 }}
                 style={{ color: checked ? "var(--foreground)" : "var(--muted-foreground)" }}
               >
@@ -315,12 +311,12 @@ function AnimatedButtonDemo() {
   return (
     <div
       className={cn(
-        "grid grid-cols-3 gap-2 [--button-x:--spacing(3)] [--button-y:--spacing(2)]",
+        "grid grid-cols-[auto_1fr_auto] gap-2 [--button-x:--spacing(3)] [--button-y:--spacing(2)]",
         "[&_button]:inline-flex [&_button]:h-button [&_button]:items-center [&_button]:justify-center [&_button]:overflow-hidden [&_button]:rounded-lg [&_button]:bg-muted [&_button]:px-(--button-x) [&_button]:py-(--button-y) [&_button]:text-[13px] [&_button]:font-[550] [&_button]:tracking-[-.02em] [&_button]:hover:bg-accent [&_button]:hover:text-accent-foreground"
       )}
     >
       <span />
-      <button className="group relative duration-300 select-none">
+      <button className="group relative justify-self-center duration-300 select-none">
         <span className="translate-y-0 blur-none transition-all group-hover:pointer-events-none group-hover:-translate-y-(--button-y) group-hover:opacity-0">
           Hover up
         </span>
@@ -357,8 +353,9 @@ function AnimatedButtonDemo() {
           &rarr; Hovered!
         </span>
       </button>
-      <button className="group relative col-start-2 duration-300 select-none">
-        <span className="absolute transition-all group-hover:pointer-events-none group-hover:translate-y-(--button-y) group-hover:opacity-0 group-hover:blur-[1px]">
+      <span />
+      <button className="group relative justify-self-center duration-300 select-none">
+        <span className="transition-all group-hover:pointer-events-none group-hover:translate-y-(--button-y) group-hover:opacity-0 group-hover:blur-[1px]">
           Hover down
         </span>
         <span className="group-hover:blur-0 pointer-events-none absolute -translate-y-(--button-y) opacity-0 blur-[1px] transition-all group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none">
@@ -460,15 +457,15 @@ function ChromeTabsDemo() {
 
 function DeleteButtonDemo() {
   return (
-    <button className="group relative flex h-button items-center gap-2 rounded-full bg-muted px-4 text-sm font-medium text-foreground outline -outline-offset-1 outline-border/50 transition-all duration-100 ease-out-quad active:scale-98">
+    <button className="group relative flex h-button items-center gap-2 rounded-full bg-muted px-4 text-sm font-medium text-foreground outline -outline-offset-1 outline-border/50 transition-all duration-200 ease-out-quad select-none hover:bg-error hover:text-error-foreground active:scale-96">
       <div
         className="absolute inset-0 flex h-button items-center gap-2 rounded-[inherit] bg-destructive px-4 text-white transition-[clip-path,background,color] duration-300 ease-out [clip-path:inset(0_100%_0_0)] group-active:duration-2000 group-active:ease-out-quad group-active:[clip-path:inset(0_0_0_0)]"
         data-slot="inner"
       >
-        <IconTrashFilled className="-ms-1 size-4" />
+        <IconTrashFilled className="-ms-1 size-4 shrink-0" />
         Hold to delete
       </div>
-      <IconTrash className="-ms-1 size-4" />
+      <IconTrash className="-ms-1 size-4 shrink-0" />
       Hold to delete
     </button>
   );

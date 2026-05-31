@@ -40,7 +40,7 @@ export function Header() {
 
   return (
     <nav className={cn("sticky top-0 isolate z-50")}>
-      <div className="max-w-8xl mx-auto flex h-12 items-center gap-1 px-2 py-2 sm:px-4">
+      <div className="mx-auto flex h-12 max-w-6xl items-center gap-1 py-2 max-sm:px-2">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           {isHome ? (
             <>
@@ -132,6 +132,7 @@ export function Header() {
                                 fill
                                 sizes="(max-width: 768px) 100vw, 320px"
                                 className="object-cover object-top"
+                                preload
                               />
                             </div>
                           )}

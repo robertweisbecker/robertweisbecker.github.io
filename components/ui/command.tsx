@@ -191,7 +191,7 @@ export function CommandPanel({ className, ...props }: React.ComponentProps<"div"
   return (
     <div
       className={cn(
-        "squircle relative flex min-h-0 flex-1 flex-col rounded-lg bg-card shadow-border-xs **:data-[slot=scroll-area-scrollbar]:mt-2",
+        "squircle relative flex min-h-0 flex-1 flex-col rounded-lg bg-background/90 shadow-border-xs backdrop-blur-sm **:data-[slot=scroll-area-scrollbar]:mt-2",
         className
       )}
       {...props}

@@ -411,11 +411,8 @@ export function SiteSearch({
                           onClick={() => navigate(item.path)}
                           className={cn(isCurrent && "text-foreground")}
                         >
-                          <Item size="sm" className="p-0">
-                            <ItemMedia
-                              variant={"icon"}
-                              className="squircle relative -my-0.5 -ms-0.5 size-5 rounded-sm bg-card shadow-border-xs"
-                            >
+                          <Item size="sm" className="m-0 overflow-visible rounded-none p-0">
+                            <ItemMedia variant={"icon"} className="squircle relative size-5 rounded-sm bg-card shadow-border-xs">
                               {item.icon ? item.icon : <TreeIconFile className="size-4 opacity-64" />}
                               {isCurrent && (
                                 <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />
@@ -458,17 +455,14 @@ export function SiteSearch({
               <LinkButton variant="elevated" rounded size="icon" href="/">
                 <Favicon className="size-4 opacity-50" />
               </LinkButton>
-              <span className="flex h-button items-center gap-1 rounded-full bg-card p-1.5 shadow-border-xs">
+              <span className="flex h-button items-center gap-1 rounded-full bg-card p-1 shadow-border-xs">
                 <span className="flex items-center gap-1 ps-3 pe-2">
                   Go <Kbd>↵</Kbd>
                 </span>
-                <Separator orientation="vertical" />
-                {/* <Dialog.Close className="after:squircle relative isolate flex items-center gap-1 after:absolute after:-inset-x-2 after:-z-1 after:h-button-sm after:rounded-sm after:transition-colors after:duration-100 after:ease-out hover:after:bg-accent">
-                  Close <Kbd className="-me-0.5">esc</Kbd>
-                </Dialog.Close> */}
+
                 <Dialog.Close
                   render={
-                    <Button variant="ghost" rounded size="xs" className="text-[13px]">
+                    <Button variant="ghost" rounded size="sm" className="text-[13px]">
                       Close <Kbd className="-me-0.5">esc</Kbd>
                     </Button>
                   }

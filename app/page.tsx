@@ -327,7 +327,7 @@ export default function Home() {
             <ul className="flex flex-col gap-1 text-sm">
               <li>
                 <span className="flex items-center gap-1">
-                  Email
+                  <span className="text-muted-foreground">Email</span>
                   <span className="after-dots"></span>
                   <LinkButton href="mailto:yo@bob.fyi" variant="link" size="sm">
                     yo@bob.fyi
@@ -346,7 +346,7 @@ export default function Home() {
 
               <li>
                 <span className="flex items-center gap-1">
-                  GitHub
+                  <span className="text-muted-foreground">GitHub</span>
                   <span className="after-dots" />
                   <LinkButton href="https://github.com/robertweisbecker" variant="link" size="sm">
                     @robertweisbecker
@@ -356,11 +356,12 @@ export default function Home() {
             </ul>
           </div>
         </LayoutGrid>
-
-        <p className="mb-3 text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching.</p>
-        <div className="flex w-full justify-between gap-2">
+      </section>
+      <section>
+        <p className="mb-3 text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching:</p>
+        <div className="mb-2 flex w-full items-center justify-between gap-2">
           <h3 className="font-pixel text-[11px] text-muted-foreground/50 uppercase">Logged</h3>
-          <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="sm">
+          <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="sm" className="-me-(--button-x)">
             <LetterboxdLogo data-icon="inline-start" />
             View on Letterboxd
           </LinkButton>

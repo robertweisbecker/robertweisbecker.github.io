@@ -431,7 +431,7 @@
     }
 
     @variant hover {
-      @apply bg-accent decoration-current;
+      @apply bg-accent decoration-current/100;
     }
     @variant focus-visible {
       @apply rounded outline-2 outline-offset-2 outline-ring;
