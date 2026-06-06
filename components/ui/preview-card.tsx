@@ -115,6 +115,7 @@ export function PreviewCardGroup({
                   "transition-[width,height,opacity,scale]",
                   "duration-(--group-duration)",
                   "ease-(--group-easing)",
+                  "scale-100 opacity-100",
                   "data-starting-style:scale-90 data-starting-style:opacity-0",
                   "data-ending-style:scale-90 data-ending-style:opacity-0",
                   popupClassName
@@ -130,7 +131,7 @@ export function PreviewCardGroup({
                 <PreviewCardPrimitive.Viewport
                   data-slot="preview-card-group-viewport"
                   className={cn(
-                    "relative h-full w-full overflow-clip",
+                    "relative h-full w-full min-w-64 overflow-clip",
                     // Base styles for both incoming (current) and outgoing (previous) content
                     "**:data-current:w-[var(--popup-width,auto)] **:data-current:translate-x-0 **:data-current:opacity-100 **:data-current:transition-[translate,opacity] **:data-current:duration-[var(--group-duration),175ms] **:data-current:ease-(--group-easing)",
                     "**:data-previous:w-[var(--popup-width,auto)] **:data-previous:translate-x-0 **:data-previous:opacity-100 **:data-previous:transition-[translate,opacity] **:data-previous:duration-[var(--group-duration),175ms] **:data-previous:ease-(--group-easing)",
