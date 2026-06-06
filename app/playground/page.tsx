@@ -101,23 +101,23 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelVolumeMutedIcon, name: "Volume Muted" },
   { Icon: PixelIcons.PixelComputerRetroIcon, name: "Computer Retro" },
   { Icon: PixelIcons.PixelSwirlIcon, name: "Swirl" },
-  { Icon: PixelIcons.PixelFigma2610386Icon, name: "Figma 2610386" },
+  { Icon: PixelIcons.PixelPlayFilledIcon, name: "PlayFilled" },
   { Icon: PixelIcons.PixelInfoIcon, name: "Info" },
-  { Icon: PixelIcons.PixelFigma2610324Icon, name: "Figma 2610324" },
+  { Icon: PixelIcons.PixelGradientIcon, name: "Gradient" },
   { Icon: PixelIcons.PixelLightbulbIcon, name: "Lightbulb" },
   { Icon: PixelIcons.PixelPauseIcon, name: "Pause" },
   { Icon: PixelIcons.PixelMarkdownIcon, name: "Markdown" },
   { Icon: PixelIcons.PixelMessage2Icon, name: "Message 2" },
   { Icon: PixelIcons.PixelBigArrowDownIcon, name: "Big Arrow Down" },
   { Icon: PixelIcons.PixelTvIcon, name: "TV" },
-  { Icon: PixelIcons.PixelFigma2610367Icon, name: "Figma 2610367" },
+  { Icon: PixelIcons.PixelPaletteIcon, name: "Palette" },
   { Icon: PixelIcons.PixelUserIcon, name: "User" },
   { Icon: PixelIcons.PixelBillIcon, name: "Bill" },
   { Icon: PixelIcons.PixelPause2Icon, name: "Pause 2" },
   { Icon: PixelIcons.PixelMarkdown2Icon, name: "Markdown 2" },
   { Icon: PixelIcons.PixelHelp2Icon, name: "Help 2" },
   { Icon: PixelIcons.PixelCheckboxIcon, name: "Checkbox" },
-  { Icon: PixelIcons.PixelFigma2610261Icon, name: "Figma 2610261" },
+  { Icon: PixelIcons.PixelPlayOutlineIcon, name: "PlayOutline" },
   { Icon: PixelIcons.PixelStarburstIcon, name: "Starburst" },
   { Icon: PixelIcons.PixelPenToolIcon, name: "Pen Tool" },
   { Icon: PixelIcons.PixelPauseOutlineIcon, name: "Pause Outline" },
@@ -133,7 +133,7 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelStarburst2Icon, name: "Starburst 2" },
   { Icon: PixelIcons.PixelTargetIcon, name: "Target" },
   { Icon: PixelIcons.PixelHouseWindowIcon, name: "House Window" },
-  { Icon: PixelIcons.PixelFigma2610397Icon, name: "Figma 2610397" },
+  { Icon: PixelIcons.PixelAtSignIcon, name: "AtSign" },
   { Icon: PixelIcons.PixelWarningIcon, name: "Warning" },
   { Icon: PixelIcons.PixelCommentIcon, name: "Comment" },
   { Icon: PixelIcons.PixelTilesIcon, name: "Tiles" },
@@ -143,7 +143,7 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelPlayIcon, name: "Play" },
   { Icon: PixelIcons.PixelMonitorIcon, name: "Monitor" },
   { Icon: PixelIcons.PixelAutoIcon, name: "Auto" },
-  { Icon: PixelIcons.PixelFigma2610395Icon, name: "Figma 2610395" },
+  { Icon: PixelIcons.PixelBookIcon, name: "Book" },
   { Icon: PixelIcons.PixelHomeIcon, name: "Home" },
   { Icon: PixelIcons.PixelHouseIcon, name: "House" },
   { Icon: PixelIcons.PixelPersonIcon, name: "Person" },
@@ -151,17 +151,16 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelWalletIcon, name: "Wallet" },
   { Icon: PixelIcons.PixelCursor2Icon, name: "Cursor 2" },
   { Icon: PixelIcons.PixelStar3Icon, name: "Star 3" },
-  { Icon: PixelIcons.PixelFigma2610296Icon, name: "Figma 2610296" },
-  { Icon: PixelIcons.PixelFigma2610373Icon, name: "Figma 2610373" },
+  { Icon: PixelIcons.PixelFolderIcon, name: "Folder" },
+  { Icon: PixelIcons.PixelBookOpenIcon, name: "BookOpen" },
   { Icon: PixelIcons.PixelNoteIcon, name: "Note" },
-  { Icon: PixelIcons.PixelFigma2610325Icon, name: "Figma 2610325" },
+  { Icon: PixelIcons.PixelYinYangIcon, name: "YinYang" },
   { Icon: PixelIcons.PixelDownloadWideIcon, name: "Download Wide" },
   { Icon: PixelIcons.PixelScribble2Icon, name: "Scribble 2" },
   { Icon: PixelIcons.PixelErrorIcon, name: "Error" },
-  { Icon: PixelIcons.PixelFigma2610374Icon, name: "Figma 2610374" },
-  { Icon: PixelIcons.PixelFigma2610293Icon, name: "Figma 2610293" },
+  { Icon: PixelIcons.PixelFolderOpenIcon, name: "Folder Open" },
   { Icon: PixelIcons.PixelClipboardCheckIcon, name: "Clipboard Check" },
-  { Icon: PixelIcons.PixelFigma2610291Icon, name: "Figma 2610291" },
+  { Icon: PixelIcons.PixelGraduationCapIcon, name: "GraduationCap" },
 ];
 
 export default function PlaygroundPage() {
@@ -266,7 +265,7 @@ export default function PlaygroundPage() {
           <Demo caption="Animated button" centerContent className="lg:col-span-4">
             <AnimatedButtonDemo />
           </Demo>
-          <Demo caption="PixelIcons at 11px" centerContent className="lg:col-span-4 lg:row-span-2">
+          <Demo caption="PixelIcons" centerContent className="lg:col-span-4 lg:row-span-3">
             <PixelIconsGridDemo />
           </Demo>
           <Demo caption="Icon swap + deduplicated inline toast" centerContent className="lg:col-span-2">
@@ -809,11 +808,11 @@ function SkeletonDemo() {
 
 function PixelIconsGridDemo() {
   return (
-    <div className="grid w-full max-w-md grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-3">
+    <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-2">
       {PIXEL_ICONS.map(({ Icon, name }) => (
-        <div key={name} className="flex min-w-0 flex-col items-center gap-2 rounded-lg border bg-card p-3 text-center">
-          <Icon className="size-[11px] shrink-0" aria-hidden="true" />
-          <span className="text-[11px] leading-tight text-muted-foreground">{name}</span>
+        <div key={name} className="flex min-w-0 flex-col items-center gap-1 rounded-md border bg-card px-1 py-2 text-center">
+          <Icon className="size-[22px] shrink-0" aria-hidden="true" />
+          <div className="w-full truncate font-pixel text-2xs/none text-muted-foreground">{name}</div>
         </div>
       ))}
     </div>

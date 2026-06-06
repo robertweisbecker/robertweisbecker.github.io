@@ -270,7 +270,7 @@ export const PixelSwirlIcon = createPixelIcon(
   11,
   "3,2 4,2 5,2 6,2 7,2 2,3 8,3 1,4 4,4 5,4 6,4 1,5 3,5 7,5 1,6 3,6 5,6 8,6 1,7 4,7 5,7 8,7 2,8 7,8 3,9 4,9 5,9 6,9"
 );
-export const PixelFigma2610386Icon = createPixelIcon(
+export const PixelPlayFilledIcon = createPixelIcon(
   11,
   11,
   "2,3 3,3 2,4 3,4 4,4 5,4 6,4 2,5 3,5 4,5 5,5 6,5 7,5 8,5 2,6 3,6 4,6 5,6 6,6 7,6 8,6 2,7 3,7 4,7 5,7 6,7 2,8 3,8"
@@ -280,7 +280,7 @@ export const PixelInfoIcon = createPixelIcon(
   11,
   "3,1 4,1 5,1 6,1 7,1 2,2 8,2 1,3 5,3 9,3 1,4 9,4 1,5 5,5 9,5 1,6 5,6 9,6 1,7 5,7 9,7 2,8 8,8 3,9 4,9 5,9 6,9 7,9"
 );
-export const PixelFigma2610324Icon = createPixelIcon(
+export const PixelGradientIcon = createPixelIcon(
   11,
   11,
   "3,2 4,2 5,2 6,2 7,2 2,3 6,3 8,3 2,4 5,4 7,4 8,4 2,5 6,5 8,5 2,6 5,6 7,6 8,6 2,7 4,7 6,7 8,7 3,8 4,8 5,8 6,8 7,8"
@@ -315,7 +315,7 @@ export const PixelTvIcon = createPixelIcon(
   11,
   "1,2 2,2 3,2 4,2 5,2 6,2 7,2 8,2 9,2 1,3 9,3 1,4 9,4 1,5 9,5 1,6 9,6 1,7 2,7 3,7 4,7 5,7 6,7 7,7 8,7 9,7 3,8 7,8"
 );
-export const PixelFigma2610367Icon = createPixelIcon(
+export const PixelPaletteIcon = createPixelIcon(
   11,
   11,
   "3,1 4,1 5,1 6,1 7,1 2,2 8,2 1,3 6,3 9,3 1,4 4,4 9,4 1,5 9,5 1,6 3,6 6,6 7,6 8,6 1,7 6,7 2,8 5,8 6,8 3,9 4,9 5,9"
@@ -350,7 +350,7 @@ export const PixelCheckboxIcon = createPixelIcon(
   11,
   "2,2 3,2 4,2 5,2 6,2 7,2 1,3 8,3 1,4 8,4 1,5 6,5 8,5 1,6 3,6 5,6 8,6 1,7 4,7 8,7 1,8 8,8 2,9 3,9 4,9 5,9 6,9 7,9"
 );
-export const PixelFigma2610261Icon = createPixelIcon(
+export const PixelPlayOutlineIcon = createPixelIcon(
   12,
   12,
   "2,1 3,1 4,1 1,2 5,2 6,2 1,3 7,3 8,3 1,4 9,4 10,4 1,5 11,5 1,6 11,6 1,7 9,7 10,7 1,8 7,8 8,8 1,9 5,9 6,9 2,10 3,10 4,10"
@@ -430,7 +430,7 @@ export const PixelHouseWindowIcon = createPixelIcon(
   11,
   "5,2 4,3 5,3 6,3 3,4 4,4 5,4 6,4 7,4 2,5 3,5 4,5 6,5 7,5 8,5 3,6 4,6 5,6 6,6 7,6 3,7 4,7 6,7 7,7 3,8 4,8 6,8 7,8"
 );
-export const PixelFigma2610397Icon = createPixelIcon(
+export const PixelAtSignIcon = createPixelIcon(
   11,
   11,
   "3,2 4,2 5,2 6,2 7,2 2,3 8,3 2,4 5,4 6,4 8,4 2,5 4,5 6,5 8,5 2,6 4,6 6,6 8,6 2,7 4,7 5,7 7,7 8,7 2,8 3,9 4,9 5,9"
@@ -480,7 +480,7 @@ export const PixelAutoIcon = createPixelIcon(
   11,
   "4,2 5,2 6,2 3,3 7,3 2,4 4,4 5,4 6,4 8,4 2,5 4,5 5,5 6,5 8,5 2,6 8,6 2,7 4,7 5,7 6,7 8,7 2,8 4,8 6,8 8,8 3,9 7,9"
 );
-export const PixelFigma2610395Icon = createPixelIcon(
+export const PixelBookIcon = createPixelIcon(
   11,
   11,
   "3,2 4,2 5,2 6,2 7,2 8,2 2,3 4,3 8,3 2,4 4,4 8,4 2,5 4,5 8,5 2,6 4,6 8,6 2,7 8,7 2,8 8,8 3,9 4,9 5,9 6,9 7,9 8,9"
@@ -520,12 +520,12 @@ export const PixelStar3Icon = createPixelIcon(
   11,
   "5,1 4,2 6,2 1,3 2,3 3,3 4,3 6,3 7,3 8,3 9,3 1,4 9,4 2,5 8,5 3,6 7,6 2,7 5,7 8,7 2,8 4,8 6,8 8,8 2,9 3,9 7,9 8,9"
 );
-export const PixelFigma2610296Icon = createPixelIcon(
+export const PixelFolderIcon = createPixelIcon(
   11,
   11,
   "2,2 3,2 4,2 1,3 5,3 1,4 2,4 3,4 4,4 5,4 6,4 7,4 8,4 1,5 9,5 1,6 9,6 1,7 9,7 1,8 9,8 2,9 3,9 4,9 5,9 6,9 7,9 8,9"
 );
-export const PixelFigma2610373Icon = createPixelIcon(
+export const PixelBookOpenIcon = createPixelIcon(
   11,
   11,
   "1,2 2,2 3,2 4,2 6,2 7,2 8,2 9,2 1,3 5,3 9,3 1,4 5,4 9,4 1,5 5,5 9,5 1,6 9,6 1,7 9,7 2,8 3,8 4,8 6,8 7,8 8,8 5,9"
@@ -535,7 +535,7 @@ export const PixelNoteIcon = createPixelIcon(
   11,
   "2,2 3,2 4,2 5,2 6,2 7,2 8,2 9,2 2,3 9,3 2,4 9,4 2,5 9,5 2,6 7,6 8,6 9,6 2,7 7,7 8,7 2,8 7,8 2,9 3,9 4,9 5,9 6,9"
 );
-export const PixelFigma2610325Icon = createPixelIcon(
+export const PixelYinYangIcon = createPixelIcon(
   11,
   11,
   "4,2 5,2 6,2 3,3 6,3 7,3 2,4 4,4 6,4 7,4 8,4 2,5 6,5 7,5 8,5 2,6 4,6 5,6 6,6 7,6 8,6 3,7 4,7 6,7 7,7 4,8 5,8 6,8"
@@ -551,18 +551,18 @@ export const PixelErrorIcon = createPixelIcon(
   11,
   "3,1 4,1 5,1 6,1 7,1 2,2 8,2 1,3 5,3 9,3 1,4 5,4 9,4 1,5 5,5 9,5 1,6 9,6 1,7 5,7 9,7 2,8 8,8 3,9 4,9 5,9 6,9 7,9"
 );
-export const PixelFigma2610374Icon = createPixelIcon(
+export const PixelFolderOpenIcon = createPixelIcon(
   11,
   11,
   "2,2 3,2 4,2 1,3 5,3 6,3 1,4 7,4 1,5 5,5 6,5 7,5 8,5 1,6 4,6 9,6 1,7 4,7 9,7 1,8 3,8 8,8 2,9 3,9 4,9 5,9 6,9 7,9"
 );
-export const PixelFigma2610293Icon = createPixelIcon(11, 11, "");
+
 export const PixelClipboardCheckIcon = createPixelIcon(
   11,
   11,
   "4,1 5,1 3,2 6,2 2,3 4,3 5,3 7,3 1,4 8,4 1,5 6,5 8,5 1,6 3,6 5,6 8,6 1,7 4,7 8,7 1,8 8,8 2,9 3,9 4,9 5,9 6,9 7,9"
 );
-export const PixelFigma2610291Icon = createPixelIcon(
+export const PixelGraduationCapIcon = createPixelIcon(
   11,
   11,
   "5,1 3,2 4,2 6,2 7,2 1,3 2,3 8,3 9,3 0,4 10,4 1,5 9,5 2,6 3,6 7,6 8,6 2,7 4,7 5,7 6,7 8,7 3,8 7,8 9,8 4,9 5,9 6,9"
