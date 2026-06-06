@@ -100,6 +100,30 @@ export function useTheme() {
   return themeContext;
 }
 
+function getBodyBackgroundColor() {
+  const backgroundColor = window.getComputedStyle(document.body).backgroundColor;
+  return backgroundColor && backgroundColor !== "rgba(0, 0, 0, 0)" && backgroundColor !== "transparent" ? backgroundColor : null;
+}
+
+function syncThemeColorMeta() {
+  const color = getBodyBackgroundColor();
+  if (!color) return;
+
+  const metas = Array.from(document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]'));
+  for (const meta of metas) {
+    meta.content = color;
+  }
+
+  let dynamicMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"][data-dynamic-theme-color]');
+  if (!dynamicMeta) {
+    dynamicMeta = document.createElement("meta");
+    dynamicMeta.name = "theme-color";
+    dynamicMeta.dataset.dynamicThemeColor = "";
+    document.head.append(dynamicMeta);
+  }
+  dynamicMeta.content = color;
+}
+
 type ThemeProps = Omit<React.ComponentProps<"div">, "children"> & {
   children: React.ReactNode;
   defaultHue?: HueName;
@@ -195,16 +219,33 @@ export function Theme({
 
   React.useEffect(() => {
     if (!isRoot) return;
-    const el = document.body;
-    el.setAttribute("data-theme", "");
-    el.setAttribute("data-hue", settings.hue);
-    el.setAttribute("data-neutral", settings.neutral);
-    el.style.setProperty("--radius", radiusValue);
+    const els = [document.documentElement, document.body];
+    for (const el of els) {
+      el.setAttribute("data-theme", "");
+      el.setAttribute("data-hue", settings.hue);
+      el.setAttribute("data-neutral", settings.neutral);
+      el.style.setProperty("--radius", radiusValue);
+    }
     return () => {
-      el.removeAttribute("data-theme");
-      el.removeAttribute("data-hue");
-      el.removeAttribute("data-neutral");
-      el.style.removeProperty("--radius");
+      for (const el of els) {
+        el.removeAttribute("data-theme");
+        el.removeAttribute("data-hue");
+        el.removeAttribute("data-neutral");
+        el.style.removeProperty("--radius");
+      }
+    };
+  }, [isRoot, settings.hue, settings.neutral, radiusValue]);
+
+  React.useEffect(() => {
+    if (!isRoot) return;
+    const frame = window.requestAnimationFrame(syncThemeColorMeta);
+    const observer = new MutationObserver(syncThemeColorMeta);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-hue", "data-neutral", "data-theme", "style"] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class", "data-hue", "data-neutral", "data-theme", "style"] });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
     };
   }, [isRoot, settings.hue, settings.neutral, radiusValue]);
 

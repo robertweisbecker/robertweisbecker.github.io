@@ -5,7 +5,7 @@ import { ThemeSettings } from "@/components/theme-settings";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconBlobFilled, IconComponents, IconMonkeybar } from "@tabler/icons-react";
+import { IconBlobFilled, IconComponents } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -39,7 +39,7 @@ export function Header() {
   const filteredProjects = projects.filter((project) => project.published);
 
   return (
-    <nav className={cn("sticky top-0 isolate z-50")}>
+    <nav className={cn("sticky top-0 isolate z-50 bg-background")}>
       <div className="mx-auto flex h-12 max-w-6xl items-center gap-1 py-2 max-sm:px-2">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           {isHome ? (

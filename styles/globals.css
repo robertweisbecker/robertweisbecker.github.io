@@ -299,6 +299,13 @@
     @apply border-border outline-ring selection:bg-primary selection:text-primary-foreground;
     interpolate-size: allow-keywords;
   }
+  html {
+    background-color: var(--background);
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
   .root {
     @apply relative isolate;
     scroll-behavior: smooth;

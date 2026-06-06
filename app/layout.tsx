@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import Script from "next/script";
 import type { Metadata } from "next";
+import type { Viewport } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -42,6 +43,15 @@ export const metadata: Metadata = {
     icon: "/assets/favicon.ico",
     apple: "/assets/apple-touch-icon.png",
   },
+};
+
+export const viewport: Viewport = {
+  colorScheme: "light dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
+    { media: "(prefers-color-scheme: dark)", color: "#2f2615" },
+  ],
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
