@@ -136,11 +136,23 @@ export function PixelMoonIcon(props: React.ComponentProps<"svg">) {
 
 export function PixelLoaderIcon(props: React.ComponentProps<"svg">) {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <path
-        d="M15 3V4.5H13.5V6H12V7.5H10.5V12H12V13.5H13.5V15H18V13.5H19.5V12H21V15H19.5V18H18V19.5H15V21H9V19.5H6V18H4.5V15H3V9H4.5V6H6V4.5H9V3H15Z"
-        fill="currentColor"
-      />
+    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" {...props}>
+      <rect x="5" y="1" width="1" height="1" fill="currentColor" />
+      <rect x="5" y="2" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.885" x="8" y="2" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.125" x="2" y="2" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.885" x="7" y="3" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.125" x="3" y="3" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.25" x="1" y="5" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.25" x="2" y="5" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.75" x="8" y="5" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.75" x="9" y="5" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.375" x="3" y="7" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.625" x="7" y="7" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.375" x="2" y="8" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.5" x="5" y="8" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.625" x="8" y="8" width="1" height="1" fill="currentColor" />
+      <rect opacity="0.5" x="5" y="9" width="1" height="1" fill="currentColor" />
     </svg>
   );
 }
