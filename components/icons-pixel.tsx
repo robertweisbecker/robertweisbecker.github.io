@@ -40,7 +40,7 @@ export function PixelScribbleIcon(props: React.ComponentProps<"svg">) {
 
 export function PixelFinderIcon(props: React.ComponentProps<"svg">) {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" {...props}>
       <path d="M9 11H11V12H9V13H13V14H3V13H8V12H5V11H8V10H9V11ZM3 13H2V4H3V13ZM14 13H13V4H14V13ZM5 11H4V10H5V11ZM12 11H11V10H12V11ZM8 10H7V7H8V10ZM6 8H5V6H6V8ZM11 8H10V6H11V8ZM9 7H8V5H9V7ZM13 4H10V5H9V4H3V3H13V4Z" />
     </svg>
   );

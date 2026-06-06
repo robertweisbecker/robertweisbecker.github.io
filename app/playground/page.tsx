@@ -1,23 +1,54 @@
 "use client";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
+import { TextReveal } from "@/components/animation/shared";
+import { PixelDino } from "@/components/animation/pixel-dino";
+import { CodeBlock } from "@/components/code-block";
 import { Demo } from "@/components/demo";
 import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
+import {
+  PixelChevronDownIcon,
+  PixelChevronsIcon,
+  PixelClipboardIcon,
+  PixelDropdownIcon,
+  PixelFinderIcon,
+  PixelLoaderIcon,
+  PixelMoonIcon,
+  PixelNewsIcon,
+  PixelPointerIcon,
+  PixelRedoIcon,
+  PixelScribbleIcon,
+  PixelShuffleIcon,
+  PixelSunIcon,
+} from "@/components/icons-pixel";
+import { ImageToggle } from "@/components/image-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
 import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
 import { Code } from "@/components/ui/code";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Slider } from "@/components/ui/slider";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
 import * as React from "react";
 import { Field, FieldLabel, FieldDescription, FieldContent, FieldTitle } from "@/components/ui/field";
 import { SiteSearch } from "@/components/site-search";
 import { LinkOut } from "@/components/link-out";
-import { IconTrash, IconTrashFilled } from "@tabler/icons-react";
+import {
+  IconArrowDown,
+  IconArrowDownLeft,
+  IconArrowDownRight,
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUp,
+  IconArrowUpLeft,
+  IconArrowUpRight,
+  IconPoint,
+  IconTrash,
+  IconTrashFilled,
+} from "@tabler/icons-react";
 import { GithubIcon, VercelIcon } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
 import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "framer-motion";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { cn } from "@/lib/utils";
@@ -25,8 +56,39 @@ import { Slider as BaseSlider } from "@base-ui/react";
 import { MorphIcon } from "@/components/morph-icon";
 import { Toggle } from "@/components/ui/toggle";
 import { ColorCode } from "@/components/ui/color-code";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselItem, CarouselToolbar, CarouselViewport } from "@/components/ui/carousel";
+import { PreviewCardGroup, PreviewCardTrigger } from "@/components/ui/preview-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
+import { ToggleGrid, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Video } from "@/components/video";
+import luminance from "@/public/assets/oklch/luminance.png";
+import luminanceBw from "@/public/assets/oklch/luminance-bw.png";
+
+const CAROUSEL_SLIDES = [
+  { src: "/assets/oklch/status-error.png", alt: "OKLCH status error palette" },
+  { src: "/assets/oklch/status-warning.png", alt: "OKLCH status warning palette" },
+  { src: "/assets/oklch/status-info.png", alt: "OKLCH status info palette" },
+  { src: "/assets/oklch/status-success.png", alt: "OKLCH status success palette" },
+  { src: "/assets/oklch/status-highlight.png", alt: "OKLCH status highlight palette" },
+];
+
+const PIXEL_ICONS = [
+  { Icon: PixelPointerIcon, name: "Pointer" },
+  { Icon: PixelScribbleIcon, name: "Scribble" },
+  { Icon: PixelFinderIcon, name: "Finder" },
+  { Icon: PixelNewsIcon, name: "News" },
+  { Icon: PixelChevronsIcon, name: "Chevrons" },
+  { Icon: PixelChevronDownIcon, name: "Chevron Down" },
+  { Icon: PixelClipboardIcon, name: "Clipboard" },
+  { Icon: PixelSunIcon, name: "Sun" },
+  { Icon: PixelRedoIcon, name: "Redo" },
+  { Icon: PixelDropdownIcon, name: "Dropdown" },
+  { Icon: PixelMoonIcon, name: "Moon" },
+  { Icon: PixelLoaderIcon, name: "Loader" },
+  { Icon: PixelShuffleIcon, name: "Shuffle" },
+];
 
 export default function PlaygroundPage() {
   const [morphIcon, setMorphIcon] = React.useState(false);
@@ -57,6 +119,50 @@ export default function PlaygroundPage() {
             <AnchoredSliderDemo />
           </Demo>
 
+          <Demo title="Site Search" centerContent className="lg:col-span-4">
+            <SiteSearch className="w-full max-w-xs" variant="input" />
+          </Demo>
+
+          <Demo caption="Grouped Popups" centerContent className="lg:col-span-4" innerClass="min-h-60">
+            <GroupedPopupsDemo />
+          </Demo>
+          <Demo caption="TextReveal with reset" centerContent className="lg:col-span-4" innerClass="min-h-60">
+            <TextRevealDemo />
+          </Demo>
+          <Demo caption="CarouselToolbar" centerContent className="lg:col-span-4">
+            <CarouselDemo />
+          </Demo>
+          <Demo caption="Skeleton" centerContent className="lg:col-span-2">
+            <SkeletonDemo />
+          </Demo>
+          <Demo caption="PixelDino" centerContent className="lg:col-span-2">
+            <PixelDino />
+          </Demo>
+          <Demo caption="ImageToggle tabs" centerContent className="lg:col-span-2 lg:col-start-1">
+            <ImageToggleDemo />
+          </Demo>
+          <Demo caption="ImageToggle slider" centerContent className="lg:col-span-3">
+            <ImageToggleDemo mode="slider" />
+          </Demo>
+          <Demo caption="ImageToggle comparison" centerContent className="lg:col-span-3">
+            <ImageToggleDemo mode="comparison" />
+          </Demo>
+          <Demo caption="Video" centerContent className="lg:col-span-full">
+            <Video src="/assets/shine/unused/shine-military-dataviz.mov" className="my-0 w-full max-w-4xl" />
+          </Demo>
+          <Demo caption="Tabs variants" centerContent className="lg:col-span-3">
+            <TabsVariantsDemo />
+          </Demo>
+          <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-3">
+            <ToggleVariantsDemo />
+          </Demo>
+          <Demo caption="CodeBlock" centerContent className="lg:col-span-2">
+            <CodeBlock
+              code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
+              language="tsx"
+              filename="button-demo.tsx"
+            />
+          </Demo>
           <Demo centerContent className="lg:col-span-2">
             <SliderDemo />
           </Demo>
@@ -71,9 +177,6 @@ export default function PlaygroundPage() {
             <DeleteButtonDemo />
           </Demo>
 
-          <Demo caption="Animated button" centerContent className="lg:col-span-2">
-            <AnimatedButtonDemo />
-          </Demo>
           <Demo caption="Loading button" centerContent className="lg:col-span-2">
             <Button
               rounded
@@ -86,19 +189,32 @@ export default function PlaygroundPage() {
               Confirm
             </Button>
           </Demo>
-
-          <Demo caption="Icon swap + deduplicated inline toast" centerContent>
+          <Demo caption="Animated button" centerContent className="lg:col-span-4">
+            <AnimatedButtonDemo />
+          </Demo>
+          <Demo caption="PixelIcons at 11px" centerContent className="lg:col-span-4 lg:row-span-2">
+            <PixelIconsGridDemo />
+          </Demo>
+          <Demo caption="Icon swap + deduplicated inline toast" centerContent className="lg:col-span-2">
             <CopyButton value="Hello, world!" size="icon" variant="ghost" />
           </Demo>
 
-          <Demo caption="Mode toggle + pixel icon rearrange" centerContent>
+          <Demo caption="Mode toggle + pixel icon rearrange" centerContent className="lg:col-span-2">
             <ModeToggle />
           </Demo>
 
-          <Demo caption="Toggle + SVG line morph" centerContent>
+          <Demo caption="Toggle + SVG line morph" centerContent className="lg:col-span-2">
             <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)}>
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
             </Toggle>
+          </Demo>
+          <Demo title="Keys" centerContent className="lg:col-span-2" innerClass="flex flex-col gap-2">
+            <Kbd variant="elevated">⌘/</Kbd>
+            <Kbd>⌘I</Kbd>
+            <KbdGroup className="">
+              <Kbd variant="big">⌘</Kbd>
+              <Kbd variant="big">K</Kbd>
+            </KbdGroup>
           </Demo>
           <Demo caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
             <EmojiFeedbackDemo />
@@ -109,7 +225,7 @@ export default function PlaygroundPage() {
               <mark className="bg-blend-none m-0 rounded-none bg-[mark] bg-none p-0 text-[markText] shadow-none text-shadow-none">
                 dated
               </mark>
-              . Let's make the shape a bit more <mark>realistic</mark> with <Code variant="inline">corner-shape</Code>.
+              . Let&apos;s make the shape a bit more <mark>realistic</mark> with <Code variant="inline">corner-shape</Code>.
             </p>
 
             <p>
@@ -138,17 +254,6 @@ export default function PlaygroundPage() {
               Don&apos;t like the default values? Override with classes, like this{" "}
               <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
             </p>
-          </Demo>
-          <Demo title="Keys" centerContent innerClass="flex flex-col gap-2">
-            <Kbd variant="elevated">⌘/</Kbd>
-            <Kbd>⌘I</Kbd>
-            <KbdGroup className="">
-              <Kbd variant="big">⌘</Kbd>
-              <Kbd variant="big">K</Kbd>
-            </KbdGroup>
-          </Demo>
-          <Demo title="Site Search" centerContent className="lg:col-span-full">
-            <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
           <Demo title="DeviceFrame / Phone" overflowBehavior="resize" centerContent className="lg:col-span-4">
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
@@ -371,6 +476,272 @@ function SliderDemo() {
     <div className="flex w-full max-w-xs flex-col gap-6">
       <Slider defaultValue={[40]} />
       <Slider defaultValue={[20, 70]} />
+    </div>
+  );
+}
+
+function GroupedPopupsDemo() {
+  const links = [
+    {
+      title: "bob.fyi",
+      url: "https://bob.fyi",
+      description: "Portfolio, writing, experiments, and component playgrounds.",
+      avatar: (
+        <Avatar>
+          <AvatarImage src="https://github.com/robertweisbecker.png" alt="Bob Weisbecker" />
+        </Avatar>
+      ),
+    },
+    {
+      title: "Vercel",
+      url: "https://vercel.com",
+      description: "Frontend cloud platform for shipping web applications.",
+      avatar: <VercelIcon className="size-4" aria-hidden="true" />,
+    },
+    {
+      title: "GitHub",
+      url: "https://github.com/robertweisbecker",
+      description: "Code hosting, projects, and public repositories.",
+      avatar: <GithubIcon className="size-4" aria-hidden="true" />,
+    },
+  ];
+
+  return (
+    <div className="grid w-full max-w-lg gap-6 md:grid-cols-2">
+      <div className="space-y-3">
+        <p className="text-xs font-medium text-muted-foreground">TooltipGroup icon buttons</p>
+        <TooltipGroup side="top" sideOffset={8} delay={100} closeDelay={0}>
+          <div className="flex flex-col gap-2">
+            <div className="flex flex-wrap gap-2">
+              <TooltipTrigger tooltip="Pointer" render={<Button size="icon" variant="outline" aria-label="Pointer" />}>
+                <PixelPointerIcon />
+              </TooltipTrigger>
+              <TooltipTrigger tooltip="Scribble" render={<Button size="icon" variant="outline" aria-label="Scribble" />}>
+                <PixelScribbleIcon />
+              </TooltipTrigger>
+              <TooltipTrigger tooltip="Clipboard" render={<Button size="icon" variant="outline" aria-label="Clipboard" />}>
+                <PixelClipboardIcon />
+              </TooltipTrigger>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <TooltipTrigger tooltip="Sun" render={<Button size="icon-sm" variant="outline" aria-label="Sun" />}>
+                <PixelSunIcon />
+              </TooltipTrigger>
+              <TooltipTrigger tooltip="Moon" render={<Button size="icon-sm" variant="outline" aria-label="Moon" />}>
+                <PixelMoonIcon />
+              </TooltipTrigger>
+              <TooltipTrigger tooltip="Shuffle" render={<Button size="icon-sm" variant="outline" aria-label="Shuffle" />}>
+                <PixelShuffleIcon />
+              </TooltipTrigger>
+            </div>
+          </div>
+        </TooltipGroup>
+      </div>
+
+      <div className="mx-auto space-y-3">
+        <p className="text-xs font-medium text-muted-foreground">PreviewCardGroup links</p>
+        <PreviewCardGroup side="top" arrow>
+          <div className="flex flex-wrap gap-2">
+            {links.map((link) => (
+              <PreviewCardTrigger
+                key={link.url}
+                preview={<GroupedLinkPreview {...link} />}
+                render={<a href={link.url} target="_blank" rel="noreferrer" className="link" />}
+              >
+                {link.title}
+              </PreviewCardTrigger>
+            ))}
+          </div>
+        </PreviewCardGroup>
+      </div>
+    </div>
+  );
+}
+
+function GroupedLinkPreview({
+  title,
+  url,
+  description,
+  avatar,
+}: {
+  title: string;
+  url: string;
+  description: string;
+  avatar: React.ReactNode;
+}) {
+  return (
+    <div className="w-xs">
+      <div className="flex items-center gap-3">
+        {avatar}
+
+        <div className="min-w-0">
+          <p className="font-medium text-card-foreground">{title}</p>
+        </div>
+      </div>
+      <p className="my-3 text-sm">{description}</p>
+      <LinkOut href={url} text={url} className="text-xs text-muted-foreground" />
+    </div>
+  );
+}
+
+function TextRevealDemo() {
+  const [resetKey, setResetKey] = React.useState(0);
+
+  return (
+    <div className="flex max-w-sm flex-col items-center gap-4 text-center">
+      <TextReveal key={resetKey} className="text-2xl font-semibold tracking-tight text-balance" duration={600} stagger={22}>
+        Interfaces should feel alive, but never impatient.
+      </TextReveal>
+      <Button size="sm" variant="outline" onClick={() => setResetKey((key) => key + 1)} className="w-fit">
+        Reset
+      </Button>
+    </div>
+  );
+}
+
+function CarouselDemo() {
+  return (
+    <Carousel autoplay={{ delay: 3000, defaultInteraction: false }} fade className="w-full max-w-xl">
+      <CarouselViewport>
+        {CAROUSEL_SLIDES.map((slide) => (
+          <CarouselItem key={slide.src}>
+            <div
+              className="aspect-video rounded-xl bg-cover bg-center bg-no-repeat ring-1 ring-border/50 ring-inset"
+              style={{ backgroundImage: `url('${slide.src}')` }}
+              role="img"
+              aria-label={slide.alt}
+            />
+          </CarouselItem>
+        ))}
+      </CarouselViewport>
+      <CarouselToolbar />
+    </Carousel>
+  );
+}
+
+function ImageToggleDemo({ mode }: { mode?: "slider" | "comparison" }) {
+  return (
+    <div className="w-full">
+      <ImageToggle mode={mode} before={luminance} after={luminanceBw} tab1="Color" tab2="Grayscale" />
+    </div>
+  );
+}
+
+function TabsVariantsDemo() {
+  return (
+    <div className="grid w-full max-w-sm gap-5">
+      <Tabs defaultValue="default">
+        <TabsList>
+          <TabsTrigger value="default">Default</TabsTrigger>
+          <TabsTrigger value="details">Details</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+        </TabsList>
+        <TabsContent value="default" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Default tabs use a card-like active indicator.
+        </TabsContent>
+        <TabsContent value="details" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Details content.
+        </TabsContent>
+        <TabsContent value="settings" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Settings content.
+        </TabsContent>
+      </Tabs>
+      <Tabs defaultValue="line">
+        <TabsList variant="line">
+          <TabsTrigger value="line">Line</TabsTrigger>
+          <TabsTrigger value="reports">Reports</TabsTrigger>
+          <TabsTrigger value="exports">Exports</TabsTrigger>
+        </TabsList>
+        <TabsContent value="line" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Line tabs keep the navigation lightweight.
+        </TabsContent>
+        <TabsContent value="reports" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Reports content.
+        </TabsContent>
+        <TabsContent value="exports" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Exports content.
+        </TabsContent>
+      </Tabs>
+      <Tabs defaultValue="pill">
+        <TabsList variant="pill">
+          <TabsTrigger value="pill">Pill</TabsTrigger>
+          <TabsTrigger value="drafts">Drafts</TabsTrigger>
+          <TabsTrigger value="archive">Archive</TabsTrigger>
+        </TabsList>
+        <TabsContent value="pill" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Pill tabs work well as segmented controls.
+        </TabsContent>
+        <TabsContent value="drafts" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Drafts content.
+        </TabsContent>
+        <TabsContent value="archive" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+          Archive content.
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
+
+function ToggleVariantsDemo() {
+  return (
+    <div className="flex items-center justify-center">
+      <ToggleGrid variant="elevated" columns={3} defaultValue={["center"]} className="w-40">
+        <ToggleGroupItem value="up-left" aria-label="Up left">
+          <IconArrowUpLeft />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="up" aria-label="Up">
+          <IconArrowUp />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="up-right" aria-label="Up right">
+          <IconArrowUpRight />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="left" aria-label="Left">
+          <IconArrowLeft />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="center" aria-label="Center">
+          <IconPoint />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="right" aria-label="Right">
+          <IconArrowRight />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="down-left" aria-label="Down left">
+          <IconArrowDownLeft />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="down" aria-label="Down">
+          <IconArrowDown />
+        </ToggleGroupItem>
+        <ToggleGroupItem value="down-right" aria-label="Down right">
+          <IconArrowDownRight />
+        </ToggleGroupItem>
+      </ToggleGrid>
+    </div>
+  );
+}
+
+function SkeletonDemo() {
+  return (
+    <div className="w-full max-w-xs space-y-4">
+      <div className="flex items-center gap-4">
+        <Skeleton className="size-12 rounded-full" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-3 w-44" />
+        </div>
+      </div>
+      <Skeleton className="h-28 w-full rounded-xl" />
+    </div>
+  );
+}
+
+function PixelIconsGridDemo() {
+  return (
+    <div className="grid w-full max-w-md grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-3">
+      {PIXEL_ICONS.map(({ Icon, name }) => (
+        <div key={name} className="flex min-w-0 flex-col items-center gap-2 rounded-lg border bg-card p-3 text-center">
+          <Icon className="size-[11px] shrink-0" aria-hidden="true" />
+          <span className="text-[11px] leading-tight text-muted-foreground">{name}</span>
+        </div>
+      ))}
     </div>
   );
 }
