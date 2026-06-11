@@ -70,10 +70,10 @@ export function IndexList({ items = defaultItems, className, itemClassName }: In
             {renderMedia(item.icon)}
             <ItemContent>
               <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>{item.title} </ItemTitle>
-              {item.description && <ItemDescription className="hidden sm:block">{item.description}</ItemDescription>}
+              {item.description && <ItemDescription className="max-sm:hidden">{item.description}</ItemDescription>}
             </ItemContent>
             <ItemActions>
-              {item.tags && <span>∙ {item.tags}</span>}
+              {item.tags && <span className="max-sm:hidden">{item.tags}</span>}
               {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
             </ItemActions>
           </Item>

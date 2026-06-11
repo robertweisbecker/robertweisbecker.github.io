@@ -613,7 +613,7 @@ function GroupedPopupsDemo() {
 
       <div className="mx-auto space-y-3">
         <p className="text-xs font-medium text-muted-foreground">PreviewCardGroup links</p>
-        <PreviewCardGroup side="top" arrow>
+        <PreviewCardGroup>
           <div className="flex flex-wrap gap-2">
             {links.map((link) => (
               <PreviewCardTrigger
@@ -643,7 +643,7 @@ function GroupedLinkPreview({
   avatar: React.ReactNode;
 }) {
   return (
-    <div className="w-xs">
+    <div className="w-xs p-3">
       <div className="flex items-center gap-3">
         {avatar}
 
@@ -868,7 +868,7 @@ function ChromeTabsDemo() {
           initial={{ y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-primary bg-secondary p-10 font-pixel text-[11px] text-secondary-foreground uppercase"
+          className="grid-stack border border-dashed border-primary bg-secondary p-10 font-pixel text-2xs/none text-secondary-foreground uppercase"
         >
           You are here &darr;
         </motion.div>
@@ -878,7 +878,7 @@ function ChromeTabsDemo() {
           initial={{ y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-destructive bg-error p-10 font-pixel text-[11px] text-error-foreground uppercase"
+          className="grid-stack border border-dashed border-destructive bg-error p-10 font-pixel text-2xs/none text-error-foreground uppercase"
         >
           Down for maintenance
         </motion.div>
@@ -890,9 +890,7 @@ function ChromeTabsDemo() {
           exit={{ y: 4 }}
           className="grid-stack border border-dashed border-info-primary bg-info p-10 text-center font-pixel text-[11px] text-info-foreground uppercase"
         >
-          <p>
-            Designers should <s>code</s> tweet.
-          </p>
+          <PixelIcons.PixelFolderOpenIcon />
         </motion.div>
       </ChromeTabs.Panel>
     </ChromeTabs>

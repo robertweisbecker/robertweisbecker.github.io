@@ -156,7 +156,7 @@ export default function Home() {
 
       <section>
         <h2 className="mb-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
-          I. Projects
+          I. Work
         </h2>
         <IndexList />
       </section>
@@ -186,7 +186,7 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <Card variant="muted" size="sm">
+          {/* <Card variant="muted" size="sm">
             <CardHeader>
               <CardTitle>Base UI Starter Kit</CardTitle>
               <CardAction>
@@ -199,7 +199,7 @@ export default function Home() {
             >
               <BaseUiIcon className="size-12" />
             </div>
-          </Card>
+          </Card> */}
           {resources.map((resource) => (
             <Card
               key={resource.id}

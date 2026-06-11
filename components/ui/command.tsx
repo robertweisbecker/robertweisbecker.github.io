@@ -19,6 +19,7 @@ import { Kbd } from "./kbd";
 import { ChevronLeft } from "@gravity-ui/icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-media-query";
+import { IconSearch } from "@tabler/icons-react";
 
 export const CommandDialog: typeof CommandDialogPrimitive.Root = CommandDialogPrimitive.Root;
 
@@ -139,35 +140,43 @@ export function CommandInput({
 }: React.ComponentProps<typeof AutocompleteInput>): React.ReactElement {
   const isMobile = useIsMobile;
   return (
-    <div className="flex items-baseline gap-0 border-b border-border/50 px-2.5 pt-1.5">
-      <AnimatePresence mode="popLayout" initial={false}>
-        <AutocompletePrimitive.Clear
-          render={
-            <motion.button
-              className="grid-stack h-6 w-6 min-w-0 self-center rounded-sm hover:bg-accent"
-              initial={{
-                transform: "translateX(4px)",
-                filter: "blur(4px)",
-                opacity: 0,
-                width: 0,
-                marginInlineStart: 0,
-                marginInlineEnd: 0,
-              }}
-              animate={{
-                transform: "translateX(0px)",
-                filter: "blur(0px)",
-                opacity: 1,
-                width: 24,
-                marginInlineStart: -4,
-                marginInlineEnd: -8,
-              }}
-              exit={{ transform: "translateX(4px)", filter: "blur(4px)", opacity: 0, width: 0, marginInlineStart: 0, marginInlineEnd: 0 }}
-            />
-          }
-        >
-          <ChevronLeft className="pointer-events-none mt-0.5" />
-        </AutocompletePrimitive.Clear>
-      </AnimatePresence>
+    <div className="flex items-center gap-0 border-b border-border/50 px-2.5 pt-1.5">
+      <div className="grid-stack size-6 min-w-0 self-center">
+        <IconSearch
+          data-slot="autocomplete-icon"
+          className="stroke-1.5 size-4.5 self-center text-muted-foreground/64 has-[+[data-slot=autocomplete-clear]]:absolute has-[+[data-slot=autocomplete-clear]]:hidden"
+        />
+
+        <AnimatePresence mode="popLayout" initial={false}>
+          <AutocompletePrimitive.Clear
+            data-slot="autocomplete-clear"
+            render={
+              <motion.button
+                className="grid-stack h-6 w-6 min-w-0 self-center rounded-sm text-muted-foreground hover:bg-accent"
+                initial={{
+                  transform: "translateX(4px)",
+                  filter: "blur(4px)",
+                  opacity: 0,
+                  width: 0,
+                  marginInlineStart: 0,
+                  marginInlineEnd: 0,
+                }}
+                animate={{
+                  transform: "translateX(0px)",
+                  filter: "blur(0px)",
+                  opacity: 1,
+                  width: 24,
+                  marginInlineStart: -4,
+                  marginInlineEnd: -8,
+                }}
+                exit={{ transform: "translateX(4px)", filter: "blur(4px)", opacity: 0, width: 0, marginInlineStart: 0, marginInlineEnd: 0 }}
+              />
+            }
+          >
+            <ChevronLeft className="pointer-events-none" />
+          </AutocompletePrimitive.Clear>
+        </AnimatePresence>
+      </div>
       <AutocompleteInput
         autoFocus={!isMobile}
         className={cn("min-w-0 border-none! bg-transparent! shadow-none! outline-none! focus-visible:ring-0", className)}

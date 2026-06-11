@@ -110,7 +110,7 @@ export function Letterboxd({ maxFilms = 4 }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl bg-muted sm:-mx-3 sm:p-3">
+    <div className="flex flex-col gap-2 rounded-xl bg-muted sm:-mx-3 sm:p-2">
       {/* <div className="flex justify-between gap-2">
         <p className="font-pixel text-[11px]! text-muted-foreground/50">Recently watched</p>
         <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="xs">
@@ -152,7 +152,7 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
     <Item
       size="xs"
       variant="muted"
-      className="relative m-0 animate-stagger-enter rounded-md"
+      className="relative m-0 animate-stagger-enter rounded-md p-1"
       style={
         {
           "--index": index,

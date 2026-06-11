@@ -170,7 +170,7 @@ export function ColorSwatchGroup({
                           >
                             Add{" "}
                             <Kbd data-icon="inline-end" className="translate-x-0.5">
-                              ↲
+                              ⏎
                             </Kbd>
                           </InputGroupButton>
                         </InputGroupAddon>

@@ -23,6 +23,7 @@ import {
 } from "media-chrome/react";
 import { Button } from "./ui/button";
 import { Toolbar } from "./ui/toolbar";
+// import { PixelPauseOutlineIcon, PixelPlayOutlineIcon } from "./icons-pixel";
 
 interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src?: string;
@@ -110,6 +111,8 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
         >
           <IconPlayerPlayFilled slot="play" className="size-8" />
           <IconPlayerPauseFilled slot="pause" className="size-8" />
+          {/* <PixelPlayOutlineIcon slot="play" className="size-[33px]" />
+          <PixelPauseOutlineIcon slot="pause" className="size-[33px]" /> */}
         </Button>
         <Toolbar.Root
           data-slot="controlbar"

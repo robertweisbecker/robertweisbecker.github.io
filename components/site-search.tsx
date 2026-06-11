@@ -457,12 +457,12 @@ export function SiteSearch({
               </LinkButton>
               <span className="flex h-button items-center gap-1 rounded-full bg-card p-1 shadow-border-xs">
                 <span className="flex items-center gap-1 ps-3 pe-2">
-                  Go <Kbd>↵</Kbd>
+                  Go <Kbd>⏎</Kbd>
                 </span>
 
                 <Dialog.Close
                   render={
-                    <Button variant="ghost" rounded size="sm" className="text-[13px]">
+                    <Button variant="ghost" rounded size="sm" className="-me-0.5 text-[13px]">
                       Close <Kbd className="-me-0.5">esc</Kbd>
                     </Button>
                   }

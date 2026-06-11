@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Favicon } from "./icons";
-import { PixelChevronDownIcon, PixelNewsIcon, PixelPointerIcon, PixelScribbleIcon } from "./icons-pixel";
+import { PixelChevronDownIcon, PixelNewspaperIcon, PixelPointerIcon, PixelScribbleIcon } from "./icons-pixel";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -42,21 +42,13 @@ export function Header() {
     <nav className={cn("sticky top-0 isolate z-50 bg-background")}>
       <div className="mx-auto flex h-12 max-w-6xl items-center gap-1 py-2 max-sm:px-2">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
-          {isHome ? (
-            <>
-              <Favicon className="size-4 text-secondary-foreground" />
-            </>
-          ) : (
-            <>
-              <PixelChevronDownIcon className="rotate-90" />
-            </>
-          )}
+          <Favicon className="size-4 text-secondary-foreground" />
 
           <span className="text-[11px]/[10px] max-sm:hidden">
             {" "}
             bob
             <br />
-            <span className="text-primary/50">dot</span>Ƒyi
+            <span className="text-primary/50">dot</span>fyi
           </span>
         </LinkButton>
         {/* <LinkButton
@@ -83,7 +75,7 @@ export function Header() {
               render={<Button variant="ghost" size="sm" />}
               className="group/trigger font-pixel text-[11px] uppercase max-sm:mx-auto"
             >
-              <span className="hidden md:block">Projects</span>
+              <span className="hidden md:block">Work</span>
               <span className="md:hidden">Menu</span>
               <PixelChevronDownIcon
                 className={cn("rotate-0 opacity-50 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
@@ -196,7 +188,7 @@ export function Header() {
         </PreviewCardGroup>
         <HeaderButton
           label="Posts"
-          icon={<PixelNewsIcon className="size-3.5" data-icon={"inline-start"} />}
+          icon={<PixelNewspaperIcon className="size-3.5" data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}

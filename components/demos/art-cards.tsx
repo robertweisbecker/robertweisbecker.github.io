@@ -64,7 +64,7 @@ export function ArtCards() {
 
   return (
     <motion.div
-      className="relative isolate flex h-64 w-full overflow-hidden rounded-xl bg-muted sm:-mx-4"
+      className="relative isolate flex h-64 w-full overflow-hidden rounded-xl bg-muted"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
@@ -76,7 +76,8 @@ export function ArtCards() {
       <ArtCard src={art6} index={5} left={86} top={58} rotate={-9} zIndex={4} {...cardProps} />
 
       <LinkButton className="absolute bottom-6 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2" href="/art" isExternal={false}>
-        View all <PixelChevronDownIcon className="-rotate-90" data-icon="inline-end" />
+        View all
+        <PixelChevronDownIcon className="size-[11px] -rotate-90" data-icon="inline-end" />
       </LinkButton>
     </motion.div>
   );
