@@ -329,13 +329,18 @@ media-control-bar {
   opacity: 0.65;
 }
 
+/* Match the h2 `mt-16` buffer when a leading hero image is followed by prose */
+.prose > [data-media]:first-child + p {
+  margin-top: --spacing(16);
+}
+
 /* --- First/last child margin collapse --- */
 .prose > *:first-child,
-.prose p:first-of-type {
+.prose > p:first-child {
   margin-top: 0;
 }
 .prose > :last-child,
-.prose p:last-of-type {
+.prose > p:last-child {
   margin-bottom: 0;
 }
 

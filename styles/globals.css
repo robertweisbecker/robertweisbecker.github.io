@@ -302,6 +302,7 @@
   html {
     background-color: var(--background);
     color-scheme: light;
+    overflow-x: clip;
   }
   html.dark {
     color-scheme: dark;

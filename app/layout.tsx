@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Agentation } from "agentation";
+import { ScrollReset } from "@/components/scroll-reset";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -68,6 +69,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
+        <ScrollReset />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"

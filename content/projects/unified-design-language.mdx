@@ -38,16 +38,26 @@ import udlStorybookTokens from "@/public/assets/udl/storybook-tokens.png";
 import udlFigma from "@/public/assets/udl/figma.png";
 import udlStorybook from "@/public/assets/udl/storybook.png";
 
-<div className="not-prose relative w-full overflow-hidden rounded-xl" style={{ aspectRatio: "16 / 9" }}>
-  <div
-    className="absolute inset-0 bg-cover bg-top bg-no-repeat dark:hidden"
-    style={{ backgroundImage: "url(/assets/udl/foundry-light.png)" }}
-  />
-  <div
-    className="absolute inset-0 hidden bg-cover bg-top bg-no-repeat dark:block"
-    style={{ backgroundImage: "url(/assets/udl/foundry-dark.png)" }}
-  />
-</div>
+<figure
+  data-media
+  className="not-prose relative my-0 flex w-full flex-col items-center gap-1.5 self-center max-sm:-mx-4 max-sm:w-[calc(100%+(--spacing(8)))] max-sm:max-w-[unset]"
+>
+  <div className="sm:squircle w-full bg-card py-1 shadow-border-sm sm:rounded-xl sm:px-1 dark:bg-muted">
+    <div
+      className="sm:squircle relative w-full overflow-hidden sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+      style={{ aspectRatio: "16 / 9" }}
+    >
+      <div
+        className="absolute inset-0 bg-cover bg-top bg-no-repeat dark:hidden"
+        style={{ backgroundImage: "url(/assets/udl/foundry-light.png)" }}
+      />
+      <div
+        className="absolute inset-0 hidden bg-cover bg-top bg-no-repeat dark:block"
+        style={{ backgroundImage: "url(/assets/udl/foundry-dark.png)" }}
+      />
+    </div>
+  </div>
+</figure>
 
 ## Background
 

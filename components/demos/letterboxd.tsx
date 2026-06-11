@@ -162,7 +162,7 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
         } as CSSProperties
       }
     >
-      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center rounded-md mask-b-from-40%">
+      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center overflow-clip rounded-md mask-b-from-40%">
         <style>
           {`
           @keyframes poster-anim {

@@ -104,7 +104,14 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
 
   return (
     <Cambio.Root dismissible>
-      <figure data-media className={cn("group/figure flex w-full flex-col items-center justify-center gap-1.5", className)}>
+      <figure
+        data-media
+        className={cn(
+          "group/figure flex w-full flex-col items-center justify-center gap-1.5",
+          "max-sm:-mx-4 max-sm:w-[calc(100%+(--spacing(8)))] max-sm:max-w-[unset]",
+          className
+        )}
+      >
         <Cambio.Trigger
           aria-label="View fullscreen image"
           className={cn(
@@ -142,8 +149,11 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
         <Cambio.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
         <Cambio.Popup
           className={cn(
-            "relative z-100 mx-auto my-0 max-h-dialog max-w-dialog overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
-            "sm:my-16 sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
+            "relative z-100 mx-auto my-0 overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
+            // Width is capped by the viewport height via the image ratio so tall
+            // images always fit fully on screen instead of being clipped.
+            "w-[min(100vw,calc((100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-3rem)*var(--image-ratio)))]",
+            "sm:my-16 sm:w-[min(var(--container-7xl),calc(100vw-2rem),calc((100dvh-10rem)*var(--image-ratio)))]"
           )}
           style={popupStyle}
         >
@@ -154,7 +164,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             fill
-            className="pointer-events-none object-cover object-top select-none"
+            className="pointer-events-none object-contain object-center select-none"
             preload
           />
           <Cambio.Close

@@ -173,22 +173,31 @@ export default function PlaygroundPage() {
       </div>
 
       <div className="flex w-full flex-col gap-8">
-        <div className="grid gap-4 lg:grid-cols-8">
-          <Demo caption="<ChromeTabs>" className="lg:col-span-4 lg:row-span-2" centerContent>
+        <div className="grid gap-4 lg:grid-cols-12">
+          {/* Row: anchor tile + hero chart */}
+          <Demo caption="<ChromeTabs>" className="lg:col-span-5" centerContent>
             <ChromeTabsDemo />
           </Demo>
-          <Demo caption="Motion chart ∙ Hover to animate" centerContent className="lg:col-span-2">
+          <Demo caption="Motion chart ∙ Hover to animate" centerContent className="lg:col-span-7">
             <ChartDemo />
           </Demo>
-          <Demo caption="ColorCode ∙ Click to copy" centerContent className="lg:col-span-2">
+
+          {/* Row: small swatches and loaders */}
+          <Demo caption="ColorCode ∙ Click to copy" centerContent className="lg:col-span-3">
             <ColorCode value="#0b0b0b" />
           </Demo>
-
-          <Demo caption="ColorSwatchGroup" centerContent className="lg:col-span-2">
+          <Demo caption="ColorSwatchGroup" centerContent className="lg:col-span-3">
             <ColorSwatchGroupDemo />
           </Demo>
+          <Demo caption="Skeleton" centerContent className="lg:col-span-3">
+            <SkeletonDemo />
+          </Demo>
+          <Demo caption="PixelDino" centerContent className="lg:col-span-3">
+            <PixelDino />
+          </Demo>
 
-          <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-2">
+          {/* Row: interaction trio */}
+          <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-4">
             <AnchoredSliderDemo />
           </Demo>
 
@@ -196,61 +205,79 @@ export default function PlaygroundPage() {
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
 
-          <Demo caption="Grouped Popups" centerContent className="lg:col-span-4" innerClass="min-h-60">
-            <GroupedPopupsDemo />
-          </Demo>
           <Demo caption="TextReveal with reset" centerContent className="lg:col-span-4" innerClass="min-h-60">
             <TextRevealDemo />
           </Demo>
-          <Demo caption="CarouselToolbar" centerContent className="lg:col-span-4">
+
+          {/* Row: wide popups + carousel */}
+          <Demo caption="Grouped Popups" centerContent className="lg:col-span-6" innerClass="min-h-60">
+            <GroupedPopupsDemo />
+          </Demo>
+          <Demo caption="CarouselToolbar" centerContent className="lg:col-span-6">
             <CarouselDemo />
           </Demo>
-          <Demo caption="Skeleton" centerContent className="lg:col-span-2">
-            <SkeletonDemo />
-          </Demo>
-          <Demo caption="PixelDino" centerContent className="lg:col-span-2">
-            <PixelDino />
-          </Demo>
-          <Demo caption="ImageToggle tabs" centerContent className="lg:col-span-2 lg:col-start-1">
+
+          {/* Row: ImageToggle trio */}
+          <Demo caption="ImageToggle tabs" centerContent className="lg:col-span-4">
             <ImageToggleDemo />
           </Demo>
-          <Demo caption="ImageToggle slider" centerContent className="lg:col-span-3">
+          <Demo caption="ImageToggle slider" centerContent className="lg:col-span-4">
             <ImageToggleDemo mode="slider" />
           </Demo>
-          <Demo caption="ImageToggle comparison" centerContent className="lg:col-span-3">
+          <Demo caption="ImageToggle comparison" centerContent className="lg:col-span-4">
             <ImageToggleDemo mode="comparison" />
           </Demo>
+
+          {/* Full-bleed video */}
           <Demo caption="Video" centerContent className="lg:col-span-full">
             <Video src="/assets/shine/unused/shine-military-dataviz.mov" className="my-0 w-full max-w-4xl" />
           </Demo>
-          <Demo caption="Tabs variants" centerContent className="lg:col-span-3">
+
+          {/* Row: tabs / toggles / switch */}
+          <Demo caption="Tabs variants" centerContent className="lg:col-span-4">
             <TabsVariantsDemo />
           </Demo>
-          <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-3">
+          <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-4">
             <ToggleVariantsDemo />
           </Demo>
-          <Demo caption="CodeBlock" centerContent className="lg:col-span-2">
+          <Demo centerContent className="lg:col-span-4">
+            <div className="grid-stack aspect-square w-32">
+              <SwitchDemo />
+            </div>
+          </Demo>
+
+          {/* Row: code + inputs */}
+          <Demo caption="CodeBlock" centerContent className="lg:col-span-4">
             <CodeBlock
               code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
               language="tsx"
               filename="button-demo.tsx"
             />
           </Demo>
-          <Demo centerContent className="lg:col-span-2">
+          <Demo centerContent className="lg:col-span-4">
             <SliderDemo />
           </Demo>
-
-          <Demo centerContent className="lg:col-span-2">
-            <div className="grid-stack aspect-square w-32">
-              <SwitchDemo />
-            </div>
+          <Demo title="Keys" centerContent className="lg:col-span-4" innerClass="flex flex-col gap-2">
+            <Kbd variant="elevated">⌘/</Kbd>
+            <Kbd>⌘I</Kbd>
+            <KbdGroup className="">
+              <Kbd variant="big">⌘</Kbd>
+              <Kbd variant="big">K</Kbd>
+            </KbdGroup>
           </Demo>
 
-          <Demo caption="Delete button" centerContent className="lg:col-span-2">
+          {/* Rows: pixel icons anchor a column of small button demos */}
+          <Demo caption="PixelIcons" centerContent className="lg:col-span-6 lg:row-span-3">
+            <PixelIconsGridDemo />
+          </Demo>
+          <Demo caption="Animated button" centerContent className="lg:col-span-6">
+            <AnimatedButtonDemo />
+          </Demo>
+          <Demo caption="Delete button" centerContent className="lg:col-span-3">
             <DeleteButtonDemo />
           </Demo>
 
-          <Demo caption="Loading button" centerContent className="lg:col-span-2">
+          <Demo caption="Loading button" centerContent className="lg:col-span-3">
             <Button
               rounded
               loading={isLoading}
@@ -261,12 +288,6 @@ export default function PlaygroundPage() {
             >
               Confirm
             </Button>
-          </Demo>
-          <Demo caption="Animated button" centerContent className="lg:col-span-4">
-            <AnimatedButtonDemo />
-          </Demo>
-          <Demo caption="PixelIcons" centerContent className="lg:col-span-4 lg:row-span-3">
-            <PixelIconsGridDemo />
           </Demo>
           <Demo caption="Icon swap + deduplicated inline toast" centerContent className="lg:col-span-2">
             <CopyButton value="Hello, world!" size="icon" variant="ghost" />
@@ -281,18 +302,10 @@ export default function PlaygroundPage() {
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
             </Toggle>
           </Demo>
-          <Demo title="Keys" centerContent className="lg:col-span-2" innerClass="flex flex-col gap-2">
-            <Kbd variant="elevated">⌘/</Kbd>
-            <Kbd>⌘I</Kbd>
-            <KbdGroup className="">
-              <Kbd variant="big">⌘</Kbd>
-              <Kbd variant="big">K</Kbd>
-            </KbdGroup>
-          </Demo>
           <Demo caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
             <EmojiFeedbackDemo />
           </Demo>
-          <Demo title="Mark" innerClass="space-y-2 text-sm/6 text-muted-foreground">
+          <Demo title="Mark" className="lg:col-span-4" innerClass="space-y-2 text-sm/6 text-muted-foreground">
             <p>
               The default mark styling is{" "}
               <mark className="bg-blend-none m-0 rounded-none bg-[mark] bg-none p-0 text-[markText] shadow-none text-shadow-none">
@@ -307,7 +320,7 @@ export default function PlaygroundPage() {
               <mark data-hue="magenta">magenta</mark> or <mark data-hue="cyan">cyan</mark>.
             </p>
           </Demo>
-          <Demo title="Mark II" innerClass="space-y-4 text-sm/6 text-muted-foreground">
+          <Demo title="Mark II" className="lg:col-span-4" innerClass="space-y-4 text-sm/6 text-muted-foreground">
             <p>
               The highlight shape also plays nice with long strings.{" "}
               <mark data-hue="indigo">
@@ -321,14 +334,14 @@ export default function PlaygroundPage() {
               a nice touch.
             </p>
           </Demo>
-          <Demo title="Mark III" innerClass="space-y-4 text-sm/6 text-muted-foreground">
+          <Demo title="Mark III" className="lg:col-span-4" innerClass="space-y-4 text-sm/6 text-muted-foreground">
             <strong>Custom overrides</strong>
             <p>
               Don&apos;t like the default values? Override with classes, like this{" "}
               <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
             </p>
           </Demo>
-          <Demo title="DeviceFrame / Phone" overflowBehavior="resize" centerContent className="lg:col-span-4">
+          <Demo title="DeviceFrame / Phone" overflowBehavior="resize" centerContent className="lg:col-span-5">
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
               <div className="flex items-center justify-center p-6 text-center text-sm">
                 <p>
@@ -338,7 +351,7 @@ export default function PlaygroundPage() {
               </div>
             </DeviceFrame.Phone>
           </Demo>
-          <Demo title="DeviceFrame / Browser" variant="outline" className="lg:col-span-4" centerContent overflowBehavior="resize">
+          <Demo title="DeviceFrame / Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
             <DeviceFrame.Browser address="bob.fyi">
               <div className="flex items-center justify-center py-12 text-sm text-muted-foreground">
                 <Favicon className="mr-2 size-4" />
