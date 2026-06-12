@@ -122,8 +122,8 @@ export default function ThemingPostPage() {
           <Alert>
             <AlertTitle>Note</AlertTitle>
             <AlertDescription>
-              I guess Tailwind now converts oklch to okLab when compiling (as of v4.2 or so?), so inspected values may not match what&apos;s in
-              the code. Shouldn&apos;t really matter though, since the two convert cleanly, but just FYI.
+              I guess Tailwind now converts oklch to okLab when compiling (as of v4.2 or so?), so inspected values may not match what&apos;s
+              in the code. Shouldn&apos;t really matter though, since the two convert cleanly, but just FYI.
             </AlertDescription>
           </Alert>
         </section>
@@ -262,8 +262,8 @@ components/
               variables are overridden on a descendant.
             </p>
             <p>
-              (Despite my reservations, I&apos;m using shadcn tokens on this site to see what the hype&apos;s about / how my colors work with them;
-              this isn&apos;t what&apos;s used in the actual project.)
+              (Despite my reservations, I&apos;m using shadcn tokens on this site to see what the hype&apos;s about / how my colors work
+              with them; this isn&apos;t what&apos;s used in the actual project.)
             </p>
 
             <CodeBlock
@@ -291,8 +291,8 @@ components/
             values cascade down and re-scale instances.
           </p>
           <p>
-            I also capped the values with some eyeballing to avoid absurdly large radii; I&apos;d prefer to use a more precise approach, but this
-            is a quick and dirty solution.
+            I also capped the values with some eyeballing to avoid absurdly large radii; I&apos;d prefer to use a more precise approach, but
+            this is a quick and dirty solution.
           </p>
 
           <CodeBlock
@@ -314,8 +314,8 @@ components/
           />
 
           <p>
-            PS — If you&apos;re wondering what the <Code variant="plain">--ellipse-factor</Code> is for, it has nothing to do with theming. I
-            made a utility class for squircle corners, and that&apos;ll offset the radius variable to get the desired effect.
+            PS — If you&apos;re wondering what the <Code variant="plain">--ellipse-factor</Code> is for, it has nothing to do with theming.
+            I made a utility class for squircle corners, and that&apos;ll offset the radius variable to get the desired effect.
           </p>
 
           <CodeBlock

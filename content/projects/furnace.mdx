@@ -129,11 +129,7 @@ One of the biggest pain points in our SDK was the lack of a flexible grid. While
 To replace them, we created two CSS Grid layouts: a classic Bootstrap-style 12-column grid for full flexibility, and another inspired by <LinkOut href="https://m2.material.io/design/layout/responsive-layout-grid.html#columns-gutters-and-margins" text="Material 2" /> that dynamically renders different columns per breakpoint (4 on mobile, 8 on tablet, and 12 on desktop).
 
 <LayoutGrid variant="twoUp">
-  <ImageModal
-    src={furnaceGrid}
-    portrait={true}
-    caption="Grid examples at the tablet breakpoint. Note that the Dynamic Grid maxes out at 8 columns, while the Static Grid displays 12."
-  />
+  <ImageModal src={furnaceGrid} portrait={true} caption="Grid examples at the tablet breakpoint. Note that the Dynamic Grid maxes out at 8 columns, while the Static Grid displays 12." />
   <ImageModal src={furnaceGridTable} portrait={true} caption="Documentation comparing responsive class behaviors within the two grids." />
 </LayoutGrid>
 
@@ -210,16 +206,7 @@ This ended up only applying to headings, though. We found that since course page
 
 Resize the pen below to see how responsive type and spacing work together:
 
-<iframe
-  className="not-prose w-full max-w-full rounded-xl p-2"
-  style={{ resize: "horizontal", height: 400 }}
-  scrolling="no"
-  title="Primitives Type & Spacing"
-  src="https://codepen.io/weisbecker/embed/preview/eaOyKq?default-tab=result"
-  frameBorder="0"
-  loading="lazy"
-  allowFullScreen
-/>
+<iframe className="not-prose w-full max-w-full rounded-xl p-2" style={{ resize: "horizontal", height: 400 }} scrolling="no" title="Primitives Type & Spacing" src="https://codepen.io/weisbecker/embed/preview/eaOyKq?default-tab=result" frameBorder="0" loading="lazy" allowFullScreen />
 
 ### Shadows
 

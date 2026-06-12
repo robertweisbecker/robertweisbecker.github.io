@@ -38,7 +38,6 @@ import { Favicon, FolderIcon, CursorIcon } from "./icons";
 import { PixelNewsIcon, PixelFinderIcon, PixelScribbleIcon } from "./icons-pixel";
 import { TreeIconFile } from "./icons-tree";
 import { MorphIcon } from "./morph-icon";
-import { Separator } from "./ui/separator";
 import { Item, ItemTitle, ItemContent, ItemMedia, ItemDescription, ItemActions } from "./ui/item";
 import { Toolbar } from "./ui/toolbar";
 import { ToggleGroup, ToggleGroupItem } from "./ui/toggle-group";
@@ -47,7 +46,6 @@ import { Button } from "./ui/button";
 import { LinkButton } from "./ui/link-button";
 import { Toggle } from "./ui/toggle";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
-import { Badge } from "./ui/badge";
 
 type SearchItem = {
   value: string;
@@ -418,9 +416,10 @@ export function SiteSearch({
                                 <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />
                               )}
                             </ItemMedia>
-                            <ItemContent>
-                              <ItemTitle className="grid grid-cols-2 font-normal">
-                                {item.label} <ItemDescription className="ps-1 opacity-50">{item.date}</ItemDescription>
+                            <ItemContent className="min-w-0">
+                              <ItemTitle className="flex max-w-full min-w-0 font-normal">
+                                <span className="min-w-0 truncate">{item.label}</span>
+                                {item.date && <ItemDescription className="shrink-0 ps-1 opacity-50">{item.date}</ItemDescription>}
                               </ItemTitle>
                             </ItemContent>
                             <ItemDescription>

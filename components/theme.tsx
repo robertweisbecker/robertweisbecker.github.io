@@ -240,7 +240,10 @@ export function Theme({
     if (!isRoot) return;
     const frame = window.requestAnimationFrame(syncThemeColorMeta);
     const observer = new MutationObserver(syncThemeColorMeta);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-hue", "data-neutral", "data-theme", "style"] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-hue", "data-neutral", "data-theme", "style"],
+    });
     observer.observe(document.body, { attributes: true, attributeFilter: ["class", "data-hue", "data-neutral", "data-theme", "style"] });
 
     return () => {

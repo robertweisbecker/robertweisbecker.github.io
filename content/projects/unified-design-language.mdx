@@ -3,12 +3,7 @@ export const frontmatter = {
   subtitle: "Consolidating Everfi's platform & product design systems into a shared design language",
   role: "Design Systems Lead",
   date: "2021 – present",
-  team: [
-    { name: "Marianne Epstein", role: "UX", url: "https://www.marianneepstein.com/" },
-    { name: "Alyssa Kjar", role: "UX", url: "https://www.linkedin.com/in/alyssakjar/" },
-    { name: "Jey Nandakumar", role: "Engineering" },
-    { role: "+ more" },
-  ],
+  team: [{ name: "Marianne Epstein", role: "UX", url: "https://www.marianneepstein.com/" }, { name: "Alyssa Kjar", role: "UX", url: "https://www.linkedin.com/in/alyssakjar/" }, { name: "Jey Nandakumar", role: "Engineering" }, { role: "+ more" }],
 };
 
 import udlStylesFoundry from "@/public/assets/udl/styles-foundry.png";
@@ -38,23 +33,11 @@ import udlStorybookTokens from "@/public/assets/udl/storybook-tokens.png";
 import udlFigma from "@/public/assets/udl/figma.png";
 import udlStorybook from "@/public/assets/udl/storybook.png";
 
-<figure
-  data-media
-  className="not-prose relative my-0 flex w-full flex-col items-center gap-1.5 self-center max-sm:-mx-4 max-sm:w-[calc(100%+(--spacing(8)))] max-sm:max-w-[unset]"
->
+<figure data-media className="not-prose relative my-0 flex w-full flex-col items-center gap-1.5 self-center max-sm:-mx-4 max-sm:w-[calc(100%+(--spacing(8)))] max-sm:max-w-[unset]">
   <div className="sm:squircle w-full bg-card py-1 shadow-border-sm sm:rounded-xl sm:px-1 dark:bg-muted">
-    <div
-      className="sm:squircle relative w-full overflow-hidden sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
-      style={{ aspectRatio: "16 / 9" }}
-    >
-      <div
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat dark:hidden"
-        style={{ backgroundImage: "url(/assets/udl/foundry-light.png)" }}
-      />
-      <div
-        className="absolute inset-0 hidden bg-cover bg-top bg-no-repeat dark:block"
-        style={{ backgroundImage: "url(/assets/udl/foundry-dark.png)" }}
-      />
+    <div className="sm:squircle relative w-full overflow-hidden sm:rounded-[calc(var(--radius-xl)---spacing(1))]" style={{ aspectRatio: "16 / 9" }}>
+      <div className="absolute inset-0 bg-cover bg-top bg-no-repeat dark:hidden" style={{ backgroundImage: "url(/assets/udl/foundry-light.png)" }} />
+      <div className="absolute inset-0 hidden bg-cover bg-top bg-no-repeat dark:block" style={{ backgroundImage: "url(/assets/udl/foundry-dark.png)" }} />
     </div>
   </div>
 </figure>
@@ -71,15 +54,9 @@ We kicked it off with our own definition:
 
 The question "What does an Everfi button look like?" has a different answer depending on which of its products you're using.
 
-<ImageModal
-  src={udlStylesFoundry}
-  caption="Foundry, the assigned learning platform, is powered by its own React design system, Alloy, which takes cues from Material Design"
-/>
+<ImageModal src={udlStylesFoundry} caption="Foundry, the assigned learning platform, is powered by its own React design system, Alloy, which takes cues from Material Design" />
 
-<ImageModal
-  src={udlStylesHomeroom}
-  caption="Homeroom, the K12 platform, uses fully-custom styles that override its underlying legacy Bootstrap components. Its teacher-facing UI was redesigned in 2019, but other parts of the app remain untouched."
-/>
+<ImageModal src={udlStylesHomeroom} caption="Homeroom, the K12 platform, uses fully-custom styles that override its underlying legacy Bootstrap components. Its teacher-facing UI was redesigned in 2019, but other parts of the app remain untouched." />
 
 <ImageModal
   src={udlThemePreviews}
