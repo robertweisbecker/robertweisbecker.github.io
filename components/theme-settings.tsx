@@ -123,14 +123,13 @@ export function HueSwatch({ hue }: { hue: HueName }) {
 export function ThemeSettings({ className }: { className?: string }) {
   return (
     <Popover>
-      <PopoverTrigger
-        render={<Button variant="ghost" size="icon-sm" aria-label="Theme settings" />}
-        className={cn("text-muted-foreground", className)}
-      >
+      <PopoverTrigger render={<Button variant="ghost" size="sm" aria-label="Theme settings" />} className={cn(className)}>
         <IconWheel
+          data-icon="inline-start"
           strokeWidth={1.5}
           className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720"
         />
+        Theme
       </PopoverTrigger>
       <PopoverContent align="end" className="w-xs overflow-hidden">
         <PopoverHeader className="">

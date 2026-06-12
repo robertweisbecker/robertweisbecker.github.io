@@ -307,7 +307,7 @@ export function SiteSearch({
             <IconSearch data-icon="inline-start" className="stroke-1.5 size-3.5 text-muted-foreground" />
           )}
 
-          {label && <span className={cn("text-xs text-muted-foreground", variant === "input" && "opacity-50")}>{label}</span>}
+          {label && <span className={cn("text-sm text-muted-foreground", variant === "input" && "text-md opacity-72")}>{label}</span>}
           {showKbd ? (
             variant === "input" ? (
               <KbdGroup className="-me-1.5 ml-auto hidden md:block">

@@ -71,7 +71,7 @@ export default function Home() {
               amplitude={[4, 8, 4]}
               rotationRange={[1, 1, 3]}
             >
-              <div className="relative size-[150px] overflow-hidden rounded-xs bg-background sm:size-50">
+              <div className="relative size-[150px] overflow-hidden rounded-[calc(var(--radius-md)-4px)] bg-background sm:size-50">
                 <PixelPortrait className="outline-2 outline-card" />
                 {isDinoVisible && (
                   <PixelReveal className="absolute inset-0 size-full">
@@ -186,26 +186,12 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {/* <Card variant="muted" size="sm">
-            <CardHeader>
-              <CardTitle>Base UI Starter Kit</CardTitle>
-              <CardAction>
-                <Badge variant="secondary">Coming soon</Badge>
-              </CardAction>
-            </CardHeader>
-            <div
-              className="m-px grid-stack aspect-video w-[calc(100%-2px)] rounded-[inherit] bg-accent object-contain text-muted-foreground/50"
-              data-slot="media"
-            >
-              <BaseUiIcon className="size-12" />
-            </div>
-          </Card> */}
           {resources.map((resource) => (
             <Card
               key={resource.id}
               size="sm"
               variant="muted"
-              className="group/resource relative transition-shadow focus-within:ring-2 focus-within:ring-ring hover:outline hover:-outline-offset-1 hover:outline-primary"
+              className="group/resource relative gap-0.5 transition-shadow focus-within:ring-2 focus-within:ring-ring hover:outline hover:-outline-offset-1 hover:outline-primary"
             >
               <CardHeader>
                 <CardTitle>

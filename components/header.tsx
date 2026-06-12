@@ -60,7 +60,7 @@ export function Header() {
         >
           About
         </LinkButton> */}
-        <div className="ms-auto" />
+        <div className="me-auto" />
         <PreviewCardGroup side="right" sideOffset={8} handle={previewHandle} actionsRef={previewActions} align="start" anchor={anchorRef}>
           <DropdownMenu
             modal={false}
@@ -71,10 +71,7 @@ export function Header() {
               }
             }}
           >
-            <DropdownMenuTrigger
-              render={<Button variant="ghost" size="sm" />}
-              className="group/trigger font-pixel text-[11px] uppercase max-sm:mx-auto"
-            >
+            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="group/trigger font-pixel text-[11px] uppercase">
               <span className="hidden md:block">Work</span>
               <span className="md:hidden">Menu</span>
               <PixelChevronDownIcon
@@ -204,7 +201,7 @@ export function Header() {
         />
 
         <HeaderButton
-          label="Playground"
+          label="Play"
           icon={<PixelPointerIcon className="size-3.5" data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/playground"
@@ -231,8 +228,8 @@ export function Header() {
             />
           </>
         )}
-        <ThemeSettings />
-        <ModeToggle />
+        <ThemeSettings className="font-pixel text-[11px] uppercase" />
+        <ModeToggle size="sm" className="font-pixel text-[11px] uppercase" variant="ghost" label={true} />
       </div>
       <div
         className={cn(

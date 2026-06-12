@@ -4,6 +4,7 @@ import { BackButton } from "@/components/back-button";
 import { CodeBlock } from "@/components/code-block";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { Demo } from "@/components/demo";
+import { FocusPolaroidFan } from "@/components/demos/focus-polaroid-fan";
 import {
   BaseUiIcon,
   CssIcon,
@@ -566,6 +567,12 @@ export function ComponentDemos() {
             <p className="text-sm text-muted-foreground">{`${LOREM} ${LOREM_ALT}`}</p>
           </Demo>
         </div>
+      </Section>
+
+      <Section title="Focus Polaroid Fan">
+        <Demo title="Forge gallery" description="Click to center a card" caption="Focus to center" innerClass="min-h-[600px]">
+          <FocusPolaroidFan />
+        </Demo>
       </Section>
 
       <Section title="Info Tip">

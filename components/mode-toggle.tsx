@@ -8,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { motion, useReducedMotion } from "motion/react";
 
 interface ModeToggleProps extends Omit<React.ComponentProps<typeof Button>, "children"> {
-  label?: React.ReactNode;
+  label?: boolean;
 }
 
 export function ModeToggle({ label, className, size = "icon-sm", variant = "ghost", onClick, ...props }: ModeToggleProps) {
@@ -33,11 +33,11 @@ export function ModeToggle({ label, className, size = "icon-sm", variant = "ghos
     <Tooltip>
       <TooltipTrigger
         aria-label="Toggle mode"
-        className={cn(className)}
-        render={<Button type="button" variant={variant} size={size} onClick={handleClick} {...props} />}
+        className={cn("capitalize", className)}
+        render={<Button variant={variant} size={size} onClick={handleClick} {...props} />}
       >
         <SunMoonIcon icon={icon} className="size-[16.5px]" />
-        {label}
+        {label && <span className="min-w-[5ch]">{resolvedTheme}</span>}
       </TooltipTrigger>
       <TooltipContent>Toggle mode</TooltipContent>
     </Tooltip>

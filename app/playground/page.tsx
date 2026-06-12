@@ -8,16 +8,9 @@ import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
 import * as PixelIcons from "@/components/icons-pixel";
 import {
-  PixelChevronDownIcon,
-  PixelChevronsIcon,
   PixelClipboardIcon,
-  PixelDropdownIcon,
-  PixelFinderIcon,
-  PixelLoaderIcon,
   PixelMoonIcon,
-  PixelNewsIcon,
   PixelPointerIcon,
-  PixelRedoIcon,
   PixelScribbleIcon,
   PixelShuffleIcon,
   PixelSunIcon,
@@ -26,6 +19,7 @@ import { ImageToggle } from "@/components/image-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
 import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
+import { FocusPolaroidFan } from "@/components/demos/focus-polaroid-fan";
 import { Code } from "@/components/ui/code";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Slider } from "@/components/ui/slider";
@@ -66,6 +60,7 @@ import { ToggleGrid, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Video } from "@/components/video";
 import luminance from "@/public/assets/oklch/luminance.png";
 import luminanceBw from "@/public/assets/oklch/luminance-bw.png";
+import { LinkButton } from "@/components/ui/link-button";
 
 const CAROUSEL_SLIDES = [
   { src: "/assets/oklch/status-error.png", alt: "OKLCH status error palette" },
@@ -76,16 +71,20 @@ const CAROUSEL_SLIDES = [
 ];
 
 const PIXEL_ICONS = [
-  { Icon: PixelIcons.PixelAtSignIcon, name: "AtSign" },
+  { Icon: PixelIcons.PixelAtSignIcon, name: "At Sign" },
   { Icon: PixelIcons.PixelAutoIcon, name: "Auto" },
   { Icon: PixelIcons.PixelBigArrowDownIcon, name: "Big Arrow Down" },
   { Icon: PixelIcons.PixelBillIcon, name: "Bill" },
   { Icon: PixelIcons.PixelBookIcon, name: "Book" },
-  { Icon: PixelIcons.PixelBookOpenIcon, name: "BookOpen" },
+  { Icon: PixelIcons.PixelBookOpenIcon, name: "Book Open" },
+  { Icon: PixelIcons.PixelCalendarIcon, name: "Calendar" },
+  { Icon: PixelIcons.PixelCalendarDayIcon, name: "Calendar Day" },
+  { Icon: PixelIcons.PixelCaptionsIcon, name: "Captions" },
   { Icon: PixelIcons.PixelCheckboxIcon, name: "Checkbox" },
-  { Icon: PixelChevronDownIcon, name: "Chevron Down" },
-  { Icon: PixelChevronsIcon, name: "Chevrons" },
-  { Icon: PixelClipboardIcon, name: "Clipboard" },
+  { Icon: PixelIcons.PixelChefHatIcon, name: "Chef Hat" },
+  { Icon: PixelIcons.PixelChevronDownIcon, name: "Chevron Down" },
+  { Icon: PixelIcons.PixelChevronsIcon, name: "Chevrons" },
+  { Icon: PixelIcons.PixelClipboardIcon, name: "Clipboard" },
   { Icon: PixelIcons.PixelClipboardCheckIcon, name: "Clipboard Check" },
   { Icon: PixelIcons.PixelCommentIcon, name: "Comment" },
   { Icon: PixelIcons.PixelComputerOutlineIcon, name: "Computer Outline" },
@@ -94,15 +93,20 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelCursor2Icon, name: "Cursor 2" },
   { Icon: PixelIcons.PixelDownloadIcon, name: "Download" },
   { Icon: PixelIcons.PixelDownloadWideIcon, name: "Download Wide" },
-  { Icon: PixelDropdownIcon, name: "Dropdown" },
-  { Icon: PixelIcons.PixelErrorIcon, name: "Error" },
+  { Icon: PixelIcons.PixelDropdownIcon, name: "Dropdown" },
+  { Icon: PixelIcons.PixelEnvelopeIcon, name: "Envelope" },
   { Icon: PixelIcons.PixelExternalIcon, name: "External" },
   { Icon: PixelIcons.PixelEyeIcon, name: "Eye" },
-  { Icon: PixelFinderIcon, name: "Finder" },
+  { Icon: PixelIcons.PixelEyeClosedIcon, name: "Eye Closed" },
+  { Icon: PixelIcons.PixelFileIcon, name: "File" },
+  { Icon: PixelIcons.PixelFileFoldedIcon, name: "File Folded" },
+  { Icon: PixelIcons.PixelFinderIcon, name: "Finder" },
   { Icon: PixelIcons.PixelFolderIcon, name: "Folder" },
   { Icon: PixelIcons.PixelFolderOpenIcon, name: "Folder Open" },
+  { Icon: PixelIcons.PixelGithubIcon, name: "GitHub" },
+  { Icon: PixelIcons.PixelGithubOutlineIcon, name: "GitHub Outline" },
   { Icon: PixelIcons.PixelGradientIcon, name: "Gradient" },
-  { Icon: PixelIcons.PixelGraduationCapIcon, name: "GraduationCap" },
+  { Icon: PixelIcons.PixelGraduationCapIcon, name: "Graduation Cap" },
   { Icon: PixelIcons.PixelHelpIcon, name: "Help" },
   { Icon: PixelIcons.PixelHelp2Icon, name: "Help 2" },
   { Icon: PixelIcons.PixelHelp3Icon, name: "Help 3" },
@@ -112,55 +116,71 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelHouseWindowIcon, name: "House Window" },
   { Icon: PixelIcons.PixelIphoneXIcon, name: "iPhone X" },
   { Icon: PixelIcons.PixelInfoIcon, name: "Info" },
+  { Icon: PixelIcons.PixelInfoCircleLowercaseIcon, name: "Info Circle Lowercase" },
   { Icon: PixelIcons.PixelLightbulbIcon, name: "Lightbulb" },
+  { Icon: PixelIcons.PixelLinkedinIcon, name: "LinkedIn" },
+  { Icon: PixelIcons.PixelLinkedinOutlineIcon, name: "LinkedIn Outline" },
   { Icon: PixelIcons.PixelListIcon, name: "List" },
-  { Icon: PixelLoaderIcon, name: "Loader" },
+  { Icon: PixelIcons.PixelLoaderIcon, name: "Loader" },
   { Icon: PixelIcons.PixelMarkdownIcon, name: "Markdown" },
   { Icon: PixelIcons.PixelMarkdown2Icon, name: "Markdown 2" },
   { Icon: PixelIcons.PixelMessage2Icon, name: "Message 2" },
   { Icon: PixelIcons.PixelMonitorIcon, name: "Monitor" },
-  { Icon: PixelMoonIcon, name: "Moon" },
+  { Icon: PixelIcons.PixelMoonIcon, name: "Moon" },
   { Icon: PixelIcons.PixelMoon2Icon, name: "Moon 2" },
-  { Icon: PixelNewsIcon, name: "News" },
+  { Icon: PixelIcons.PixelNewsIcon, name: "News" },
   { Icon: PixelIcons.PixelNewspaperIcon, name: "Newspaper" },
   { Icon: PixelIcons.PixelNoteIcon, name: "Note" },
+  { Icon: PixelIcons.PixelNotepadIcon, name: "Notepad" },
+  { Icon: PixelIcons.PixelOscarIcon, name: "Oscar" },
+  { Icon: PixelIcons.PixelOscar2Icon, name: "Oscar2" },
   { Icon: PixelIcons.PixelPaletteIcon, name: "Palette" },
+  { Icon: PixelIcons.PixelPaperclipIcon, name: "Paperclip" },
   { Icon: PixelIcons.PixelPauseIcon, name: "Pause" },
-  { Icon: PixelIcons.PixelPause2Icon, name: "Pause 2" },
-  { Icon: PixelIcons.PixelPauseOutlineIcon, name: "Pause Outline" },
+  { Icon: PixelIcons.PixelPause2Icon, name: "Pause2" },
+  { Icon: PixelIcons.PixelPauseOutlineIcon, name: "PauseOutline" },
+  { Icon: PixelIcons.PixelPauseOutlineRoundedIcon, name: "PauseOutlineRounded" },
   { Icon: PixelIcons.PixelPenToolIcon, name: "Pen Tool" },
   { Icon: PixelIcons.PixelPersonIcon, name: "Person" },
   { Icon: PixelIcons.PixelPlayIcon, name: "Play" },
   { Icon: PixelIcons.PixelPlayFilledIcon, name: "PlayFilled" },
   { Icon: PixelIcons.PixelPlayOutlineIcon, name: "PlayOutline" },
-  { Icon: PixelPointerIcon, name: "Pointer" },
+  { Icon: PixelIcons.PixelMessageIcon, name: "Message" },
+  { Icon: PixelIcons.PixelPointerIcon, name: "Pointer" },
   { Icon: PixelIcons.PixelPointer2Icon, name: "Pointer 2" },
+  { Icon: PixelIcons.PixelPresentationIcon, name: "Presentation" },
+  { Icon: PixelIcons.PixelQuestionCircleIcon, name: "Question Circle" },
   { Icon: PixelIcons.PixelRadioIcon, name: "Radio" },
   { Icon: PixelIcons.PixelReceiptIcon, name: "Receipt" },
-  { Icon: PixelRedoIcon, name: "Redo" },
-  { Icon: PixelScribbleIcon, name: "Scribble" },
-  { Icon: PixelIcons.PixelScribble2Icon, name: "Scribble 2" },
-  { Icon: PixelShuffleIcon, name: "Shuffle" },
+  { Icon: PixelIcons.PixelRedoIcon, name: "Redo" },
+  { Icon: PixelIcons.PixelScribbleIcon, name: "Scribble" },
+  { Icon: PixelIcons.PixelScribble2Icon, name: "Scribble2" },
+  { Icon: PixelIcons.PixelShovelIcon, name: "Shovel" },
+  { Icon: PixelIcons.PixelShuffleIcon, name: "Shuffle" },
   { Icon: PixelIcons.PixelSparklesIcon, name: "Sparkles" },
   { Icon: PixelIcons.PixelStarIcon, name: "Star" },
-  { Icon: PixelIcons.PixelStar2Icon, name: "Star 2" },
-  { Icon: PixelIcons.PixelStar3Icon, name: "Star 3" },
+  { Icon: PixelIcons.PixelStar2Icon, name: "Star2" },
+  { Icon: PixelIcons.PixelStar3Icon, name: "Star3" },
   { Icon: PixelIcons.PixelStarburstIcon, name: "Starburst" },
-  { Icon: PixelIcons.PixelStarburst2Icon, name: "Starburst 2" },
-  { Icon: PixelSunIcon, name: "Sun" },
-  { Icon: PixelIcons.PixelSun2Icon, name: "Sun 2" },
+  { Icon: PixelIcons.PixelStarburst2Icon, name: "Starburst2" },
+  { Icon: PixelIcons.PixelSunIcon, name: "Sun" },
+  { Icon: PixelIcons.PixelSun2Icon, name: "Sun2" },
   { Icon: PixelIcons.PixelSunSmallIcon, name: "SunSmall" },
   { Icon: PixelIcons.PixelSwirlIcon, name: "Swirl" },
   { Icon: PixelIcons.PixelTargetIcon, name: "Target" },
   { Icon: PixelIcons.PixelTilesIcon, name: "Tiles" },
   { Icon: PixelIcons.PixelTvIcon, name: "TV" },
   { Icon: PixelIcons.PixelUserIcon, name: "User" },
+  { Icon: PixelIcons.PixelVercelIcon, name: "Vercel" },
+  { Icon: PixelIcons.PixelVercelOutlineIcon, name: "Vercel Outline" },
+  { Icon: PixelIcons.PixelVideoCameraIcon, name: "Video Camera" },
   { Icon: PixelIcons.PixelVolumeIcon, name: "Volume" },
-  { Icon: PixelIcons.PixelVolume2Icon, name: "Volume 2" },
   { Icon: PixelIcons.PixelVolumeMutedIcon, name: "Volume Muted" },
   { Icon: PixelIcons.PixelWalletIcon, name: "Wallet" },
   { Icon: PixelIcons.PixelWarningIcon, name: "Warning" },
-  { Icon: PixelIcons.PixelYinYangIcon, name: "YinYang" },
+  { Icon: PixelIcons.PixelWarningCircleIcon, name: "Warning Circle" },
+  { Icon: PixelIcons.PixelWindowIcon, name: "Window" },
+  { Icon: PixelIcons.PixelYinYangIcon, name: "Yin Yang" },
 ];
 
 export default function PlaygroundPage() {
@@ -174,11 +194,35 @@ export default function PlaygroundPage() {
 
       <div className="flex w-full flex-col gap-8">
         <div className="grid gap-4 lg:grid-cols-12">
+          <Demo
+            caption="Focus polaroid fan"
+            title="Forge gallery"
+            description="Click to center a card"
+            className="lg:col-span-full"
+            innerClass="min-h-[400px]"
+          >
+            <FocusPolaroidFan />
+          </Demo>
+
           {/* Row: anchor tile + hero chart */}
-          <Demo caption="<ChromeTabs>" className="lg:col-span-5" centerContent>
+          <Demo
+            caption={"CSS shape + masking for cutouts"}
+            title="Chrome Tabs"
+            className="lg:col-span-5 lg:row-span-2"
+            centerContent
+            controls={
+              <LinkButton variant="link" size="sm" href="/posts/clip-path-curve">
+                Clip-path playground
+                <IconArrowUpRight data-icon="inline-end" />
+              </LinkButton>
+            }
+          >
             <ChromeTabsDemo />
           </Demo>
-          <Demo caption="Motion chart ∙ Hover to animate" centerContent className="lg:col-span-7">
+          <Demo caption="Command Palette" centerContent className="lg:col-span-4">
+            <SiteSearch className="w-full max-w-xs" variant="input" />
+          </Demo>
+          <Demo caption="Motion chart ∙ Hover to animate" centerContent className="lg:col-span-3">
             <ChartDemo />
           </Demo>
 
@@ -192,21 +236,18 @@ export default function PlaygroundPage() {
           <Demo caption="Skeleton" centerContent className="lg:col-span-3">
             <SkeletonDemo />
           </Demo>
-          <Demo caption="PixelDino" centerContent className="lg:col-span-3">
-            <PixelDino />
-          </Demo>
 
           {/* Row: interaction trio */}
           <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-4">
             <AnchoredSliderDemo />
           </Demo>
 
-          <Demo title="Site Search" centerContent className="lg:col-span-4">
-            <SiteSearch className="w-full max-w-xs" variant="input" />
-          </Demo>
-
           <Demo caption="TextReveal with reset" centerContent className="lg:col-span-4" innerClass="min-h-60">
             <TextRevealDemo />
+          </Demo>
+
+          <Demo caption="PixelDino" centerContent className="lg:col-span-3">
+            <PixelDino />
           </Demo>
 
           {/* Row: wide popups + carousel */}
@@ -234,7 +275,7 @@ export default function PlaygroundPage() {
           </Demo>
 
           {/* Row: tabs / toggles / switch */}
-          <Demo caption="Tabs variants" centerContent className="lg:col-span-4">
+          <Demo caption="Tabs variants" className="lg:col-span-full">
             <TabsVariantsDemo />
           </Demo>
           <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-4">
@@ -623,7 +664,6 @@ function GroupedPopupsDemo() {
           </div>
         </TooltipGroup>
       </div>
-
       <div className="mx-auto space-y-3">
         <p className="text-xs font-medium text-muted-foreground">PreviewCardGroup links</p>
         <PreviewCardGroup>
@@ -692,7 +732,7 @@ function CarouselDemo() {
         {CAROUSEL_SLIDES.map((slide) => (
           <CarouselItem key={slide.src}>
             <div
-              className="aspect-video rounded-xl bg-cover bg-center bg-no-repeat ring-1 ring-border/50 ring-inset"
+              className="aspect-video overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat ring-1 ring-border/50 ring-inset"
               style={{ backgroundImage: `url('${slide.src}')` }}
               role="img"
               aria-label={slide.alt}
@@ -714,53 +754,54 @@ function ImageToggleDemo({ mode }: { mode?: "slider" | "comparison" }) {
 }
 
 function TabsVariantsDemo() {
+  const panelClass = "min-h-40 px-3 text-sm text-muted-foreground grid place-items-center bg-background rounded-lg";
   return (
-    <div className="grid w-full max-w-sm gap-5">
-      <Tabs defaultValue="default">
+    <div className="grid gap-4 sm:grid-cols-3">
+      <Tabs defaultValue="default" className="w-full">
         <TabsList>
-          <TabsTrigger value="default">Default</TabsTrigger>
-          <TabsTrigger value="details">Details</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="default">Account</TabsTrigger>
+          <TabsTrigger value="details">Profile</TabsTrigger>
+          <TabsTrigger value="settings">Payment</TabsTrigger>
         </TabsList>
-        <TabsContent value="default" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
-          Default tabs use a card-like active indicator.
+        <TabsContent value="default" className={panelClass}>
+          Default tabs use an elevated indicator.
         </TabsContent>
-        <TabsContent value="details" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
-          Details content.
+        <TabsContent value="details" className={panelClass}>
+          Animation handled by CSS transitions.
         </TabsContent>
-        <TabsContent value="settings" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
-          Settings content.
+        <TabsContent value="settings" className={panelClass}>
+          Built on Base UI.
         </TabsContent>
       </Tabs>
-      <Tabs defaultValue="line">
+      <Tabs defaultValue="line" className="w-full">
         <TabsList variant="line">
-          <TabsTrigger value="line">Line</TabsTrigger>
+          <TabsTrigger value="line">Dashboard</TabsTrigger>
           <TabsTrigger value="reports">Reports</TabsTrigger>
           <TabsTrigger value="exports">Exports</TabsTrigger>
         </TabsList>
-        <TabsContent value="line" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+        <TabsContent className={panelClass} value="line">
           Line tabs keep the navigation lightweight.
         </TabsContent>
-        <TabsContent value="reports" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+        <TabsContent className={panelClass} value="reports">
           Reports content.
         </TabsContent>
-        <TabsContent value="exports" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+        <TabsContent className={panelClass} value="exports">
           Exports content.
         </TabsContent>
       </Tabs>
-      <Tabs defaultValue="pill">
+      <Tabs defaultValue="pill" className="w-full">
         <TabsList variant="pill">
-          <TabsTrigger value="pill">Pill</TabsTrigger>
+          <TabsTrigger value="pill">Posts</TabsTrigger>
           <TabsTrigger value="drafts">Drafts</TabsTrigger>
           <TabsTrigger value="archive">Archive</TabsTrigger>
         </TabsList>
-        <TabsContent value="pill" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+        <TabsContent value="pill" className={panelClass}>
           Pill tabs work well as segmented controls.
         </TabsContent>
-        <TabsContent value="drafts" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+        <TabsContent value="drafts" className={panelClass}>
           Drafts content.
         </TabsContent>
-        <TabsContent value="archive" className="mt-3 rounded-lg border p-3 text-sm text-muted-foreground">
+        <TabsContent value="archive" className={panelClass}>
           Archive content.
         </TabsContent>
       </Tabs>

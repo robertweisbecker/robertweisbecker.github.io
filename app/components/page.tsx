@@ -595,6 +595,7 @@ const CUSTOM_LINKS: { href: string; label: string }[] = [
   { href: "#code-block", label: "Code Block" },
   { href: "#color-swatch-group", label: "Color Swatch Group" },
   { href: "#device-frame", label: "Device Frame" },
+  { href: "#focus-polaroid-fan", label: "Focus Polaroid Fan" },
   { href: "#icons", label: "Icons" },
   { href: "#image", label: "Image" },
   { href: "#image-modal", label: "Image Modal" },

@@ -35,6 +35,15 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    id: "pixel-icons",
+    title: "Pixel Icons",
+    description: "A small gallery of 11px pixel icons synced from Figma",
+    category: "Demo",
+    date: "06/11/2026",
+    path: "/posts/pixel-icons",
+    icon: "IconPalette",
+  },
+  {
     id: "theming",
     title: "Theming Demo",
     description: "How theming works on this site",
