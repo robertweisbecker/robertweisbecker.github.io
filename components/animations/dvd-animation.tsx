@@ -197,6 +197,23 @@ export function DvdAnimationRoot({
   const [cornerHits, setCornerHits] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(defaultPlaying);
 
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function syncReducedMotionPreference() {
+      if (mediaQuery.matches) {
+        setIsPlaying(false);
+      }
+    }
+
+    syncReducedMotionPreference();
+    mediaQuery.addEventListener("change", syncReducedMotionPreference);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncReducedMotionPreference);
+    };
+  }, []);
+
   const { xDuration, yDuration, cornerInterval } = React.useMemo(() => getAnimationTiming(duration), [duration]);
 
   const resolvedLogoSize = React.useMemo(
@@ -240,6 +257,10 @@ export function DvdAnimationRoot({
       logo.setAttribute("x", "0");
       logo.setAttribute("y", "0");
       logo.setAttribute("fill", getColor(colors, 0));
+    }
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsPlaying(false);
     }
   }, [animationKey, colors]);
 
@@ -320,7 +341,7 @@ export type DvdAnimationStageProps = React.SVGProps<SVGSVGElement> & {
 };
 
 export function DvdAnimationStage({ backgroundColor = "#222", className, ...props }: DvdAnimationStageProps) {
-  const { colors, height, logoHeight, logoRef, logoWidth, width } = useDvdAnimationContext("DvdAnimationStage");
+  const { height, logoHeight, logoRef, logoWidth, width } = useDvdAnimationContext("DvdAnimationStage");
 
   return (
     <svg
@@ -334,12 +355,9 @@ export function DvdAnimationStage({ backgroundColor = "#222", className, ...prop
 
       <svg
         ref={logoRef}
-        x="0"
-        y="0"
         width={logoWidth}
         height={logoHeight}
         viewBox={`0 0 ${LOGO_VIEW_BOX_WIDTH} ${LOGO_VIEW_BOX_HEIGHT}`}
-        fill={getColor(colors, 0)}
       >
         <path fill="inherit" d={LOGO_PATH} />
       </svg>
@@ -378,6 +396,18 @@ export function DvdAnimationScore({
   const [miniBalloons, setMiniBalloons] = React.useState<MiniBalloon[]>([]);
   const [isPulsing, setIsPulsing] = React.useState(false);
   const [scorePopKey, setScorePopKey] = React.useState(0);
+  const balloonTimeoutsRef = React.useRef<number[]>([]);
+
+  React.useEffect(() => {
+    const timeouts = balloonTimeoutsRef.current;
+
+    return () => {
+      timeouts.forEach((timeoutId) => {
+        window.clearTimeout(timeoutId);
+      });
+      balloonTimeoutsRef.current = [];
+    };
+  }, []);
 
   const createMiniBalloonBurst = React.useCallback(() => {
     const scoreBox = scoreRef.current?.getBoundingClientRect();
@@ -402,10 +432,13 @@ export function DvdAnimationScore({
 
     setMiniBalloons((currentBalloons) => [...currentBalloons, ...newBalloons]);
 
-    window.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       const newBalloonIds = new Set(newBalloons.map((balloon) => balloon.id));
       setMiniBalloons((currentBalloons) => currentBalloons.filter((balloon) => !newBalloonIds.has(balloon.id)));
+      balloonTimeoutsRef.current = balloonTimeoutsRef.current.filter((id) => id !== timeoutId);
     }, 1600);
+
+    balloonTimeoutsRef.current.push(timeoutId);
   }, [burstColors]);
 
   React.useEffect(() => {
