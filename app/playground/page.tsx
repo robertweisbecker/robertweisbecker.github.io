@@ -61,7 +61,7 @@ import { Video } from "@/components/video";
 import luminance from "@/public/assets/oklch/luminance.png";
 import luminanceBw from "@/public/assets/oklch/luminance-bw.png";
 import { LinkButton } from "@/components/ui/link-button";
-import { DvdBouncingLogoDemo } from "@/components/animations/dvd-bouncing-logo";
+import { DvdAnimationDemo } from "@/components/animations/dvd-animation";
 
 const CAROUSEL_SLIDES = [
   { src: "/assets/oklch/status-error.png", alt: "OKLCH status error palette" },
@@ -196,13 +196,13 @@ export default function PlaygroundPage() {
       <div className="flex w-full flex-col gap-8">
         <div className="grid gap-4 lg:grid-cols-12">
           <Demo
-            caption="DVD bouncing logo"
+            caption="DVD animation"
             title="Corner counter"
             description="Composable DVD-style animation"
             className="lg:col-span-4"
             innerClass="bg-black p-3"
           >
-            <DvdBouncingLogoDemo />
+            <DvdAnimationDemo />
           </Demo>
           <Demo
             caption="Focus polaroid fan"

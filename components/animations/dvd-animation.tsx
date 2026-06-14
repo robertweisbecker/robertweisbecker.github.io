@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Kbd } from "@/components/ui/kbd";
 
 const DEFAULT_WIDTH = 1000;
 const DEFAULT_HEIGHT = 1000;
@@ -136,7 +136,7 @@ function getCurrentLogoColor(elapsed: number, xDuration: number, yDuration: numb
   return latestEvent.time === Number.NEGATIVE_INFINITY ? getColor(colors, 0) : latestEvent.color;
 }
 
-type DvdContextValue = {
+type DvdAnimationContextValue = {
   colors: string[];
   cornerHits: number;
   height: number;
@@ -148,19 +148,19 @@ type DvdContextValue = {
   width: number;
 };
 
-const DvdContext = React.createContext<DvdContextValue | null>(null);
+const DvdAnimationContext = React.createContext<DvdAnimationContextValue | null>(null);
 
-function useDvdContext(componentName: string) {
-  const context = React.useContext(DvdContext);
+function useDvdAnimationContext(componentName: string) {
+  const context = React.useContext(DvdAnimationContext);
 
   if (!context) {
-    throw new Error(`${componentName} must be used inside <DvdRoot />.`);
+    throw new Error(`${componentName} must be used inside <DvdAnimationRoot />.`);
   }
 
   return context;
 }
 
-export type DvdRootProps = React.ComponentProps<"div"> & {
+export type DvdAnimationRootProps = React.ComponentProps<"div"> & {
   duration?: number;
   colors?: string[];
   width?: number;
@@ -173,7 +173,7 @@ export type DvdRootProps = React.ComponentProps<"div"> & {
   onCornerHit?: (cornerHits: number) => void;
 };
 
-export function DvdRoot({
+export function DvdAnimationRoot({
   duration = DEFAULT_DURATION,
   colors = DEFAULT_LOGO_COLORS,
   width = DEFAULT_WIDTH,
@@ -187,7 +187,7 @@ export function DvdRoot({
   className,
   children,
   ...props
-}: DvdRootProps) {
+}: DvdAnimationRootProps) {
   const logoRef = React.useRef<SVGSVGElement | null>(null);
   const animationFrameRef = React.useRef<number | null>(null);
   const elapsedRef = React.useRef(0);
@@ -289,7 +289,7 @@ export function DvdRoot({
     };
   }, [colors, cornerInterval, handleCornerHit, isPlaying, xDuration, xMax, yDuration, yMax]);
 
-  const contextValue = React.useMemo<DvdContextValue>(
+  const contextValue = React.useMemo<DvdAnimationContextValue>(
     () => ({
       colors,
       cornerHits,
@@ -305,21 +305,21 @@ export function DvdRoot({
   );
 
   return (
-    <DvdContext.Provider value={contextValue}>
+    <DvdAnimationContext.Provider value={contextValue}>
       <div className={cn("relative aspect-square w-full overflow-hidden rounded-2xl", className)} {...props}>
-        <DvdStyles />
+        <DvdAnimationStyles />
         {children}
       </div>
-    </DvdContext.Provider>
+    </DvdAnimationContext.Provider>
   );
 }
 
-export type DvdAnimationProps = React.SVGProps<SVGSVGElement> & {
+export type DvdAnimationStageProps = React.SVGProps<SVGSVGElement> & {
   backgroundColor?: string;
 };
 
-export function DvdAnimation({ backgroundColor = "#222", className, ...props }: DvdAnimationProps) {
-  const { colors, height, logoHeight, logoRef, logoWidth, width } = useDvdContext("DvdAnimation");
+export function DvdAnimationStage({ backgroundColor = "#222", className, ...props }: DvdAnimationStageProps) {
+  const { colors, height, logoHeight, logoRef, logoWidth, width } = useDvdAnimationContext("DvdAnimationStage");
 
   return (
     <svg
@@ -346,15 +346,15 @@ export function DvdAnimation({ backgroundColor = "#222", className, ...props }: 
   );
 }
 
-export type DvdControlsProps = React.ComponentProps<"div">;
+export type DvdAnimationControlsProps = React.ComponentProps<"div">;
 
-export function DvdControls({ className, ...props }: DvdControlsProps) {
+export function DvdAnimationControls({ className, ...props }: DvdAnimationControlsProps) {
   return (
     <div className={cn("absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2", className)} {...props} />
   );
 }
 
-export type DvdScoreProps = React.ComponentProps<typeof Badge> & {
+export type DvdAnimationScoreProps = React.ComponentProps<"div"> & {
   label?: string;
   showLabel?: boolean;
   showPop?: boolean;
@@ -362,7 +362,7 @@ export type DvdScoreProps = React.ComponentProps<typeof Badge> & {
   burstColors?: string[];
 };
 
-export function DvdScore({
+export function DvdAnimationScore({
   label = "Corners",
   showLabel = true,
   showPop = true,
@@ -370,8 +370,8 @@ export function DvdScore({
   burstColors = DEFAULT_MINI_BALLOON_COLORS,
   className,
   ...props
-}: DvdScoreProps) {
-  const { cornerHits } = useDvdContext("DvdScore");
+}: DvdAnimationScoreProps) {
+  const { cornerHits } = useDvdAnimationContext("DvdAnimationScore");
   const scoreRef = React.useRef<HTMLDivElement | null>(null);
   const previousCornerHitsRef = React.useRef(cornerHits);
   const [miniBalloons, setMiniBalloons] = React.useState<MiniBalloon[]>([]);
@@ -430,25 +430,21 @@ export function DvdScore({
 
   return (
     <>
-      <div ref={scoreRef} className="relative">
-        <Badge
-          variant="outline"
-          className={cn(
-            "relative min-w-20 flex-col gap-1 rounded-full border-white/15 bg-black/55 px-3 py-2 text-center text-white backdrop-blur-md",
-            isPulsing && "dvd-counter-pulse",
-            className,
-          )}
-          {...props}
+      <div ref={scoreRef} className={cn("relative flex flex-col items-center gap-1 text-center", className)} {...props}>
+        {showLabel ? (
+          <span className="font-pixel text-[11px] uppercase tracking-widest text-white/55">{label}</span>
+        ) : null}
+        <Kbd
+          variant="elevated"
+          pressed={isPulsing}
+          className="font-pixel text-[11px] tracking-widest uppercase transition-none duration-0 tabular-nums"
         >
-          {showLabel ? (
-            <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.2em] text-white/55">{label}</span>
-          ) : null}
-          <span className="font-mono text-lg font-black leading-none tabular-nums tracking-tight">{cornerHits}</span>
-        </Badge>
+          {cornerHits}
+        </Kbd>
         {showPop && isPulsing ? (
           <span
             key={scorePopKey}
-            className="dvd-score-pop pointer-events-none absolute left-1/2 top-[-8px] font-mono text-base font-black text-white"
+            className="dvd-score-pop pointer-events-none absolute left-1/2 top-[-8px] font-pixel text-[11px] text-white"
           >
             +1!
           </span>
@@ -481,32 +477,26 @@ export function DvdScore({
   );
 }
 
-export type DvdPlayButtonProps = React.ComponentProps<typeof Button> & {
-  pauseLabel?: string;
-  playLabel?: string;
-};
+export type DvdAnimationPlayButtonProps = React.ComponentProps<typeof Button>;
 
-export function DvdPlayButton({
-  pauseLabel = "❚❚",
-  playLabel = "▶",
+export function DvdAnimationPlayButton({
   className,
   onClick,
   children,
-  variant = "overlay",
-  size = "icon",
-  rounded = true,
+  size = "xs",
+  variant = "ghost",
   ...props
-}: DvdPlayButtonProps) {
-  const { isPlaying, setIsPlaying } = useDvdContext("DvdPlayButton");
+}: DvdAnimationPlayButtonProps) {
+  const { isPlaying, setIsPlaying } = useDvdAnimationContext("DvdAnimationPlayButton");
 
   return (
     <Button
-      aria-label={isPlaying ? "Pause animation" : "Play animation"}
-      aria-pressed={!isPlaying}
-      variant={variant}
       size={size}
-      rounded={rounded}
-      className={cn("text-xs font-bold", className)}
+      variant={variant}
+      aria-label={isPlaying ? "Pause animation" : "Play animation"}
+      aria-pressed={isPlaying}
+      data-pressed={isPlaying}
+      className={cn("font-pixel text-[11px] text-white hover:bg-white/10 hover:text-white", className)}
       onClick={(event) => {
         onClick?.(event);
 
@@ -516,20 +506,27 @@ export function DvdPlayButton({
       }}
       {...props}
     >
-      {children ?? (isPlaying ? pauseLabel : playLabel)}
+      {children ??
+        (isPlaying ? (
+          <>
+            <span aria-hidden="true" className="relative top-[.5px] -mx-1 rotate-90 text-[16.5px]">
+              =
+            </span>
+            Pause
+          </>
+        ) : (
+          <>
+            <span aria-hidden="true">►</span>
+            <span aria-hidden="true">Play</span>
+          </>
+        ))}
     </Button>
   );
 }
 
-function DvdStyles() {
+function DvdAnimationStyles() {
   return (
     <style>{`
-      @keyframes dvd-counter-pulse {
-        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, .24); }
-        42% { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(255, 255, 255, .10); }
-        100% { transform: scale(1); box-shadow: 0 0 0 16px rgba(255, 255, 255, 0); }
-      }
-
       @keyframes dvd-score-pop {
         0% { opacity: 0; transform: translateX(-50%) translateY(8px) scale(0.65); }
         20% { opacity: 1; transform: translateX(-50%) translateY(-2px) scale(1.08); }
@@ -546,10 +543,6 @@ function DvdStyles() {
           opacity: 0;
           transform: translate(-50%, -50%) translate3d(var(--travel-x), calc(var(--travel-y) * -1), 0) scale(1) rotate(var(--rotate));
         }
-      }
-
-      .dvd-counter-pulse {
-        animation: dvd-counter-pulse 650ms cubic-bezier(.16, 1, .3, 1);
       }
 
       .dvd-score-pop {
@@ -580,14 +573,14 @@ function DvdStyles() {
   );
 }
 
-export function DvdBouncingLogoDemo({ className }: { className?: string }) {
+export function DvdAnimationDemo({ className }: { className?: string }) {
   return (
-    <DvdRoot duration={30} width={640} height={640} className={cn("w-full", className)}>
-      <DvdAnimation backgroundColor="#000" />
-      <DvdControls>
-        <DvdScore />
-        <DvdPlayButton />
-      </DvdControls>
-    </DvdRoot>
+    <DvdAnimationRoot duration={60} width={640} height={640} className={cn("w-full", className)}>
+      <DvdAnimationStage backgroundColor="#000" />
+      <DvdAnimationControls>
+        <DvdAnimationScore />
+        <DvdAnimationPlayButton />
+      </DvdAnimationControls>
+    </DvdAnimationRoot>
   );
 }
