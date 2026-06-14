@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { balloons } from "balloons-js";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 const DEFAULT_WIDTH = 1000;
 const DEFAULT_HEIGHT = 1000;
@@ -353,7 +354,7 @@ export function DvdControls({ className, ...props }: DvdControlsProps) {
   );
 }
 
-export type DvdScoreProps = React.ComponentProps<"div"> & {
+export type DvdScoreProps = React.ComponentProps<typeof Badge> & {
   label?: string;
   showLabel?: boolean;
   showPop?: boolean;
@@ -429,26 +430,28 @@ export function DvdScore({
 
   return (
     <>
-      <div
-        ref={scoreRef}
-        className={cn(
-          "relative min-w-20 rounded-full border border-white/15 bg-black/55 px-3 py-2 text-center text-white backdrop-blur-md",
-          isPulsing && "dvd-counter-pulse",
-          className,
-        )}
-        {...props}
-      >
-        {showLabel ? (
-          <div className="mb-1 text-[9px] font-semibold uppercase leading-none tracking-[0.2em] text-white/55">{label}</div>
-        ) : null}
-        <div className="font-mono text-lg font-black leading-none tabular-nums tracking-tight">{cornerHits}</div>
+      <div ref={scoreRef} className="relative">
+        <Badge
+          variant="outline"
+          className={cn(
+            "relative min-w-20 flex-col gap-1 rounded-full border-white/15 bg-black/55 px-3 py-2 text-center text-white backdrop-blur-md",
+            isPulsing && "dvd-counter-pulse",
+            className,
+          )}
+          {...props}
+        >
+          {showLabel ? (
+            <span className="text-[9px] font-semibold uppercase leading-none tracking-[0.2em] text-white/55">{label}</span>
+          ) : null}
+          <span className="font-mono text-lg font-black leading-none tabular-nums tracking-tight">{cornerHits}</span>
+        </Badge>
         {showPop && isPulsing ? (
-          <div
+          <span
             key={scorePopKey}
             className="dvd-score-pop pointer-events-none absolute left-1/2 top-[-8px] font-mono text-base font-black text-white"
           >
             +1!
-          </div>
+          </span>
         ) : null}
       </div>
 
@@ -478,7 +481,7 @@ export function DvdScore({
   );
 }
 
-export type DvdPlayButtonProps = React.ComponentProps<"button"> & {
+export type DvdPlayButtonProps = React.ComponentProps<typeof Button> & {
   pauseLabel?: string;
   playLabel?: string;
 };
@@ -489,19 +492,21 @@ export function DvdPlayButton({
   className,
   onClick,
   children,
+  variant = "overlay",
+  size = "icon",
+  rounded = true,
   ...props
 }: DvdPlayButtonProps) {
   const { isPlaying, setIsPlaying } = useDvdContext("DvdPlayButton");
 
   return (
-    <button
-      type="button"
+    <Button
       aria-label={isPlaying ? "Pause animation" : "Play animation"}
       aria-pressed={!isPlaying}
-      className={cn(
-        "grid size-10 place-items-center rounded-full border border-white/15 bg-black/55 text-xs font-bold text-white backdrop-blur-md transition hover:bg-white/10",
-        className,
-      )}
+      variant={variant}
+      size={size}
+      rounded={rounded}
+      className={cn("text-xs font-bold", className)}
       onClick={(event) => {
         onClick?.(event);
 
@@ -512,7 +517,7 @@ export function DvdPlayButton({
       {...props}
     >
       {children ?? (isPlaying ? pauseLabel : playLabel)}
-    </button>
+    </Button>
   );
 }
 
@@ -572,30 +577,6 @@ function DvdStyles() {
         transform: translateX(-50%);
       }
     `}</style>
-  );
-}
-
-export type BalloonsButtonProps = React.ComponentProps<"button">;
-
-export function BalloonsButton({ className, onClick, children, ...props }: BalloonsButtonProps) {
-  return (
-    <button
-      type="button"
-      className={cn(
-        "inline-flex items-center justify-center rounded-2xl bg-zinc-100 px-4 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-zinc-200 focus:ring-offset-2 focus:ring-offset-zinc-950",
-        className,
-      )}
-      onClick={(event) => {
-        onClick?.(event);
-
-        if (!event.defaultPrevented) {
-          balloons();
-        }
-      }}
-      {...props}
-    >
-      {children ?? "Trigger balloons"}
-    </button>
   );
 }
 
