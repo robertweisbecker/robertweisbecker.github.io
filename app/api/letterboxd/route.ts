@@ -18,11 +18,11 @@ function getPosterUrl(description = "") {
 
 function decodeText(text = "") {
   return text
-    .replaceAll("&amp;", "&")
     .replaceAll("&quot;", '"')
     .replaceAll("&#39;", "'")
     .replaceAll("&ndash;", "–")
-    .replaceAll("&mdash;", "—");
+    .replaceAll("&mdash;", "—")
+    .replaceAll("&amp;", "&");
 }
 
 function getListFilms(description = "") {
