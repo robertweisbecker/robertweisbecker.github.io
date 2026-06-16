@@ -19,6 +19,11 @@
 - `@vercel/analytics` and `@vercel/speed-insights` are no-ops locally and only activate on Vercel deployments.
 - The homepage doubles as the About page at `/`; there is no separate `/about` route in the nav.
 - `/oklch-colors` is heavier than many project routes because its MDX renders hundreds of color swatches/palette nodes plus a large inline SVG.
+- Pixel icon morphing is implemented in `components/pixel-icon-morph.tsx` and is intentionally limited to `MorphablePixelIconName` icons from `components/icons-pixel.tsx`: 11x11 `createPixelIcon(...)` data icons with exactly 28 points. Non-28 data icons remain normal pixel icons but are excluded from `morphablePixelIconNames`.
+- `PixelIconMorph` renders exactly 28 `motion.rect` elements. Parent components own interaction state and pass `active`; the component should not infer pressed/active state from parent DOM.
+- Pixel morph pairing strategies are `nearest`, `reading`, `radial`, `scatter`, and `compress`; animation types are `linear`, `ease`, and `spring`. Keep scatter/compress as strategies, not animation types, and avoid spring multi-keyframes for midpoint strategies.
+- Pixel morph demos are post-specific: `components/demos/pixel-icon-morph-visualizer.tsx` renders directly in `app/posts/pixel-icons/page.tsx` without a `Demo` wrapper, while `components/demos/pixel-icon-morph-toggles.tsx` is wrapped in `Demo` on that post. Do not add these pixel morph demos to `app/components/component-demos.tsx` or the components sidebar unless explicitly requested.
+- In the pixel morph visualizer, the left card contains the interactive icon, sequence dots, picker, and `CardAction` play/clear buttons; the right card contains controls. Use `ToggleGroup` for compact animation/speed controls and `Select` for strategy labels so they are not truncated. Speed values are intentionally inverse duration labels: `1x` is 200ms, `0.5x` is 400ms, and `0.25x` is 800ms.
 
 ## Known Bugs & Workarounds
 

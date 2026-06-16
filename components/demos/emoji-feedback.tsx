@@ -73,7 +73,7 @@ export function EmojiFeedbackDemo() {
   const [rowRef, { width: rowWidth }] = useMeasure();
   const shouldReduceMotion = useReducedMotion();
   const isOpen = rating !== null;
-  const collapsedWidth = rowWidth === null ? "auto" : rowWidth + 8;
+  const collapsedWidth = rowWidth === null ? "auto" : `min(${rowWidth + 8}px, calc(100vw - 2rem))`;
   const containerAnimation = {
     height: isOpen ? innerHeight : null,
     width: isOpen ? "var(--feedback-expanded-width)" : collapsedWidth,
@@ -96,7 +96,7 @@ export function EmojiFeedbackDemo() {
         layout={!shouldReduceMotion}
         data-state={isOpen ? "open" : "closed"}
         className={cn(
-          "m-auto overflow-hidden bg-popover p-0 shadow-border-sm [--feedback-expanded-width:min(22rem,calc(100vw-2rem))] sm:[--feedback-expanded-width:var(--container-md)]",
+          "m-auto max-w-[calc(100vw-2rem)] overflow-hidden bg-popover p-0 shadow-border-sm [--feedback-expanded-width:min(22rem,calc(100vw-2rem))] sm:[--feedback-expanded-width:var(--container-md)]",
           isOpen ? "rounded-md" : "rounded-full"
         )}
         animate={containerAnimation}
@@ -104,8 +104,11 @@ export function EmojiFeedbackDemo() {
         <LayoutGroup>
           <div ref={innerRef}>
             <motion.div layout={shouldReduceMotion ? false : "position"} className="relative mx-auto flex items-center justify-center p-1">
-              <div ref={rowRef} className="flex w-fit min-w-max items-center justify-center gap-3">
-                <span className="ps-3 text-sm font-medium whitespace-nowrap text-foreground">Was this helpful?</span>
+              <div ref={rowRef} className="flex w-fit min-w-max items-center justify-center gap-1.5 sm:gap-3">
+                <span className="ps-2 text-sm font-medium whitespace-nowrap text-foreground sm:ps-3">
+                  <span className="sm:hidden">Helpful?</span>
+                  <span className="hidden sm:inline">Was this helpful?</span>
+                </span>
                 <TooltipGroup side="top" sideOffset={6} delay={100} closeDelay={0} actionsRef={tooltipActionsRef}>
                   <ToggleGroup
                     aria-label="Rate this content"
@@ -179,7 +182,7 @@ export function EmojiFeedbackDemo() {
                   variant="ghost"
                   size="icon-xs"
                   aria-label="Close feedback form"
-                  className="absolute inset-e-2 top-2"
+                  className="absolute inset-e-2 top-2 max-sm:hidden"
                   onClick={() => setRating(null)}
                 >
                   <IconX className="size-4" />

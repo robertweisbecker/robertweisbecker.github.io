@@ -7,6 +7,7 @@ import {
   IconLivePhoto,
   IconTooltip,
   IconNut,
+  IconIcons,
 } from "@tabler/icons-react";
 
 /** Serializable icon id → Tabler component. Use this map in UI; keep `Post.icon` as a string key. */
@@ -19,6 +20,7 @@ export const postIcons = {
   IconLivePhoto,
   IconTooltip,
   IconNut,
+  IconIcons,
 } as const;
 
 export type PostIconName = keyof typeof postIcons;
@@ -36,12 +38,12 @@ export type Post = {
 export const posts: Post[] = [
   {
     id: "pixel-icons",
-    title: "Pixel Icons",
-    description: "A small gallery of 11px pixel icons synced from Figma",
+    title: "28-Pixel Icons",
+    description: "Creating animated 11x11 icons with Figma + Codex.",
     category: "Demo",
     date: "06/11/2026",
     path: "/posts/pixel-icons",
-    icon: "IconPalette",
+    icon: "IconIcons",
   },
   {
     id: "theming",

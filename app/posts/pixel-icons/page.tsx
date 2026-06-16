@@ -1,11 +1,13 @@
 import { Demo } from "@/components/demo";
+import { PixelIconMorphToggles } from "@/components/demos/pixel-icon-morph-toggles";
+import { PixelIconMorphVisualizer } from "@/components/demos/pixel-icon-morph-visualizer";
 import * as PixelIcons from "@/components/icons-pixel";
 import type { Metadata } from "next";
 import type * as React from "react";
 
 export const metadata: Metadata = {
-  title: "Pixel Icons",
-  description: "A small gallery of 11px pixel icons synced from Figma.",
+  title: "28-pixel Icons",
+  description: "Creating animated 11x11 pixel icons with Figma + Codex",
 };
 
 type PixelIconComponent = React.ComponentType<React.ComponentProps<"svg">>;
@@ -145,7 +147,6 @@ const ICON_GROUPS: PixelIconGroup[] = [
       { Icon: PixelIcons.PixelQuestionCircleIcon, name: "Question Circle" },
       { Icon: PixelIcons.PixelRadioIcon, name: "Radio" },
       { Icon: PixelIcons.PixelScribbleIcon, name: "Scribble" },
-      { Icon: PixelIcons.PixelScribble2Icon, name: "Scribble 2" },
       { Icon: PixelIcons.PixelShovelIcon, name: "Shovel" },
       { Icon: PixelIcons.PixelSparklesIcon, name: "Sparkles" },
       { Icon: PixelIcons.PixelStarIcon, name: "Star" },
@@ -169,14 +170,54 @@ const ICON_GROUPS: PixelIconGroup[] = [
 export default function PixelIconsPage() {
   return (
     <div className="w-full space-y-10">
-      {ICON_GROUPS.map((group) => (
-        <section key={group.title} className="space-y-3">
-          <h2 className="font-pixel text-[11px] uppercase">{group.title}</h2>
-          <Demo caption={group.caption} innerClass="p-3">
-            <IconGrid icons={group.icons} />
-          </Demo>
-        </section>
-      ))}
+      <section className="space-y-3">
+        <div className="prose prose-sm max-w-none text-muted-foreground">
+          <ul>
+            <li>
+              <strong>Build a sequence. </strong>
+              Select any of the morphable 28-rect icons to add them to the sequence. The numbered badges show the order, and the dots below
+              the preview let you jump to a specific step.
+            </li>
+            <li>
+              <strong>Choose an animation. </strong>
+              <strong>Linear</strong> moves each pixel at a constant rate, <strong>Ease</strong> gives the transition a softer UI feel, and{" "}
+              <strong>Spring</strong> adds a snappier state-change response.
+            </li>
+            <li>
+              <strong>Set the strategy. </strong>
+              <strong>Nearest</strong> pairs pixels by shortest travel distance, <strong>Reading</strong> follows top-to-bottom ordering,{" "}
+              <strong>Radial</strong> sorts around the icon center, <strong>Scatter</strong> spreads pixels outward before resolving, and{" "}
+              <strong>Compress</strong> pulls them inward first.
+            </li>
+            <li>
+              <strong>Adjust the speed. </strong>
+              The control uses playback-style labels: <strong>1x</strong> is the default 200ms transition, <strong>0.5x</strong> slows it to
+              400ms, and <strong>0.25x</strong> stretches it to 800ms.
+            </li>
+          </ul>
+        </div>
+
+        <h2 className="font-pixel text-[11px] uppercase">Morphs</h2>
+        <PixelIconMorphVisualizer />
+      </section>
+
+      <section className="prose space-y-3">
+        <h2 className="">Stateful Morphs</h2>
+        <Demo caption="Single-button toggles powered by PixelIconMorph." innerClass="p-3">
+          <PixelIconMorphToggles />
+        </Demo>
+      </section>
+      <section className="prose">
+        <h2>All icons</h2>
+        {ICON_GROUPS.map((group) => (
+          <section key={group.title} className="space-y-3">
+            <h3 className="font-pixel text-[11px] uppercase">{group.title}</h3>
+            <Demo caption={group.caption} innerClass="p-3">
+              <IconGrid icons={group.icons} />
+            </Demo>
+          </section>
+        ))}
+      </section>
     </div>
   );
 }

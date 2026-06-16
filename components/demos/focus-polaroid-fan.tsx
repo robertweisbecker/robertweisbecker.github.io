@@ -94,7 +94,7 @@ export function FocusPolaroidFan({ className }: { className?: string }) {
               const clusterRotate = cfg.rotate * 0.35;
 
               const x = isFocused ? 0 : isOther ? clusterX : cfg.x;
-              const y = isFocused ? 0 : isOther ? clusterY : isHovered ? cfg.y - 24 : cfg.y;
+              const y = isFocused ? 0 : isOther ? clusterY : isHovered ? cfg.y - 12 : cfg.y;
               const rotate = isFocused ? 0 : isOther ? clusterRotate : cfg.rotate;
               const scale = isFocused ? FOCUS_SCALE : isOther ? 0.8 : isHovered ? 1.05 : 1;
 

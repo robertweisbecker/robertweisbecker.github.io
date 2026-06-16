@@ -12,6 +12,11 @@ import oklchLuminance from "@/public/assets/oklch/luminance.png";
 import oklchLuminanceBw from "@/public/assets/oklch/luminance-bw.png";
 import oklchWheelHue from "@/public/assets/oklch/wheel-hue.png";
 import oklchDataviz from "@/public/assets/oklch/dataviz.png";
+import oklchStatusInfo from "@/public/assets/oklch/status-info.png";
+import oklchStatusSuccess from "@/public/assets/oklch/status-success.png";
+import oklchStatusWarning from "@/public/assets/oklch/status-warning.png";
+import oklchStatusError from "@/public/assets/oklch/status-error.png";
+import oklchStatusHighlight from "@/public/assets/oklch/status-highlight.png";
 import { TreeIconRichText } from "@/components/icons-tree";
 import { Badge } from "@/components/ui/badge";
 
@@ -205,6 +210,17 @@ With 16 hues and 8 neutrals, we can map colors to semantic slots without having 
 Need your primary color to be red? _Cool, your error colors can be pink or magenta. Or ruby or orange._ Going for something more muted? _Try navy for info and gold for warnings._
 
 Most components also support raw `colorScheme` props to use a specific color from the system, even if it's not one of your designated slots.
+
+<ProjectImageCarousel
+  slides={[
+    { src: oklchStatusError, alt: "Error status palette generated from the OKLCH color system." },
+    { src: oklchStatusWarning, alt: "Warning status palette generated from the OKLCH color system." },
+    { src: oklchStatusInfo, alt: "Info status palette generated from the OKLCH color system." },
+    { src: oklchStatusSuccess, alt: "Success status palette generated from the OKLCH color system." },
+    { src: oklchStatusHighlight, alt: "Highlight status palette generated from the OKLCH color system." },
+  ]}
+  fade
+/>
 
 ![Badges](/assets/oklch/badges.png)
 

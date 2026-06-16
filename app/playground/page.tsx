@@ -155,7 +155,6 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelReceiptIcon, name: "Receipt" },
   { Icon: PixelIcons.PixelRedoIcon, name: "Redo" },
   { Icon: PixelIcons.PixelScribbleIcon, name: "Scribble" },
-  { Icon: PixelIcons.PixelScribble2Icon, name: "Scribble2" },
   { Icon: PixelIcons.PixelShovelIcon, name: "Shovel" },
   { Icon: PixelIcons.PixelShuffleIcon, name: "Shuffle" },
   { Icon: PixelIcons.PixelSparklesIcon, name: "Sparkles" },
@@ -260,28 +259,33 @@ export default function PlaygroundPage() {
             <PixelDino />
           </Demo>
 
-          {/* Row: wide popups + carousel */}
-          <Demo caption="Grouped Popups" centerContent className="lg:col-span-6" innerClass="min-h-60">
+          {/* Row: wide popups */}
+          <Demo caption="Grouped Popups" centerContent className="lg:col-span-full" innerClass="min-h-60">
             <GroupedPopupsDemo />
           </Demo>
-          <Demo caption="CarouselToolbar" centerContent className="lg:col-span-6">
+
+          {/* Row: ImageToggle variants + carousel */}
+          <Demo caption="CarouselToolbar" centerContent className="lg:col-span-3">
             <CarouselDemo />
           </Demo>
-
-          {/* Row: ImageToggle trio */}
-          <Demo caption="ImageToggle tabs" centerContent className="lg:col-span-4">
+          <Demo caption="ImageToggle tabs" centerContent className="lg:col-span-3">
             <ImageToggleDemo />
           </Demo>
-          <Demo caption="ImageToggle slider" centerContent className="lg:col-span-4">
+          <Demo caption="ImageToggle slider" centerContent className="lg:col-span-3">
             <ImageToggleDemo mode="slider" />
           </Demo>
-          <Demo caption="ImageToggle comparison" centerContent className="lg:col-span-4">
+          <Demo caption="ImageToggle comparison" centerContent className="lg:col-span-3">
             <ImageToggleDemo mode="comparison" />
           </Demo>
 
           {/* Full-bleed video */}
           <Demo caption="Video" centerContent className="lg:col-span-full">
-            <Video src="/assets/shine/unused/shine-military-dataviz.mov" className="my-0 w-full max-w-4xl" />
+            <Video
+              src="/assets/shine/unused/shine-military-dataviz.mov"
+              autoPlay={false}
+              preload="metadata"
+              className="my-0 w-full max-w-4xl"
+            />
           </Demo>
 
           {/* Row: tabs / toggles / switch */}
@@ -356,41 +360,47 @@ export default function PlaygroundPage() {
           <Demo caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
             <EmojiFeedbackDemo />
           </Demo>
-          <Demo title="Mark" className="lg:col-span-4" innerClass="space-y-2 text-sm/6 text-muted-foreground">
-            <p>
-              The default mark styling is{" "}
-              <mark className="bg-blend-none m-0 rounded-none bg-[mark] bg-none p-0 text-[markText] shadow-none text-shadow-none">
-                dated
-              </mark>
-              . Let&apos;s make the shape a bit more <mark>realistic</mark> with <Code variant="inline">corner-shape</Code>.
-            </p>
+          <Demo
+            title="Mark"
+            className="lg:col-span-full"
+            innerClass="grid divide-y text-sm/6 text-muted-foreground sm:grid-cols-3 sm:divide-x sm:divide-y-0"
+          >
+            <div className="space-y-2 p-4 sm:ps-0">
+              <p>
+                The default mark styling is{" "}
+                <mark className="bg-blend-none m-0 rounded-none bg-[mark] bg-none p-0 text-[markText] shadow-none text-shadow-none">
+                  dated
+                </mark>
+                . Let&apos;s make the shape a bit more <mark>realistic</mark> with <Code variant="inline">corner-shape</Code>.
+              </p>
 
-            <p>
-              Then slap a <Code variant="plain">data-hue</Code> attribute on it for some classic highligter colors, like{" "}
-              <mark data-hue="yellow">yellow</mark> or <mark data-hue="pink">pink</mark> or <mark data-hue="lime">lime</mark> or{" "}
-              <mark data-hue="magenta">magenta</mark> or <mark data-hue="cyan">cyan</mark>.
-            </p>
-          </Demo>
-          <Demo title="Mark II" className="lg:col-span-4" innerClass="space-y-4 text-sm/6 text-muted-foreground">
-            <p>
-              The highlight shape also plays nice with long strings.{" "}
-              <mark data-hue="indigo">
-                It&apos;s got{" "}
-                <Code variant="plain" className="inline wrap-anywhere">
-                  box-decoration-break: clone
-                </Code>{" "}
-                applied to make the shape span line breaks.
-              </mark>{" "}
-              Notice how the nested <Code variant="inline-component">code</Code>&nbsp;inherited a little treatment too? I think that&apos;s
-              a nice touch.
-            </p>
-          </Demo>
-          <Demo title="Mark III" className="lg:col-span-4" innerClass="space-y-4 text-sm/6 text-muted-foreground">
-            <strong>Custom overrides</strong>
-            <p>
-              Don&apos;t like the default values? Override with classes, like this{" "}
-              <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
-            </p>
+              <p>
+                Then slap a <Code variant="plain">data-hue</Code> attribute on it for some classic highligter colors, like{" "}
+                <mark data-hue="yellow">yellow</mark> or <mark data-hue="pink">pink</mark> or <mark data-hue="lime">lime</mark> or{" "}
+                <mark data-hue="magenta">magenta</mark> or <mark data-hue="cyan">cyan</mark>.
+              </p>
+            </div>
+            <div className="space-y-4 p-4">
+              <p>
+                The highlight shape also plays nice with long strings.{" "}
+                <mark data-hue="indigo">
+                  It&apos;s got{" "}
+                  <Code variant="plain" className="inline wrap-anywhere">
+                    box-decoration-break: clone
+                  </Code>{" "}
+                  applied to make the shape span line breaks.
+                </mark>{" "}
+                Notice how the nested <Code variant="inline-component">code</Code>&nbsp;inherited a little treatment too? I think
+                that&apos;s a nice touch.
+              </p>
+            </div>
+            <div className="space-y-4 p-4 sm:pe-0">
+              <strong>Custom overrides</strong>
+              <p>
+                Don&apos;t like the default values? Override with classes, like this{" "}
+                <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
+              </p>
+            </div>
           </Demo>
           <Demo title="DeviceFrame / Phone" overflowBehavior="resize" centerContent className="lg:col-span-5">
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
@@ -404,10 +414,7 @@ export default function PlaygroundPage() {
           </Demo>
           <Demo title="DeviceFrame / Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
             <DeviceFrame.Browser address="bob.fyi">
-              <div className="flex items-center justify-center py-12 text-sm text-muted-foreground">
-                <Favicon className="mr-2 size-4" />
-                Browser frame preview
-              </div>
+              <BrowserFramePreview />
             </DeviceFrame.Browser>
           </Demo>
         </div>
@@ -759,6 +766,54 @@ function ImageToggleDemo({ mode }: { mode?: "slider" | "comparison" }) {
   return (
     <div className="w-full">
       <ImageToggle mode={mode} before={luminance} after={luminanceBw} tab1="Color" tab2="Grayscale" />
+    </div>
+  );
+}
+
+function BrowserFramePreview() {
+  return (
+    <div className="min-h-44 bg-background p-4 text-sm">
+      <div className="mx-auto flex max-w-2xl flex-col gap-4">
+        <div className="flex items-center justify-between gap-3 border-b border-border/60 pb-3">
+          <div className="flex items-center gap-2 font-medium">
+            <Favicon className="size-4" />
+            Studio
+          </div>
+          <div className="hidden items-center gap-2 sm:flex">
+            <Skeleton className="h-2.5 w-12" />
+            <Skeleton className="h-2.5 w-16" />
+            <Skeleton className="h-2.5 w-10" />
+          </div>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-[1fr_0.72fr]">
+          <div className="space-y-3 rounded-lg border border-border/60 bg-card p-3">
+            <Skeleton className="h-3 w-3/5" />
+            <Skeleton className="h-2.5 w-full" />
+            <Skeleton className="h-2.5 w-5/6" />
+            <div className="grid grid-cols-3 gap-2 pt-2">
+              <Skeleton className="h-12" />
+              <Skeleton className="h-12" />
+              <Skeleton className="h-12" />
+            </div>
+          </div>
+
+          <div className="grid gap-3">
+            <div className="rounded-lg border border-border/60 bg-card p-3">
+              <Skeleton className="mb-3 h-2.5 w-20" />
+              <div className="space-y-2">
+                <Skeleton className="h-2 w-full" />
+                <Skeleton className="h-2 w-4/5" />
+                <Skeleton className="h-2 w-2/3" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Skeleton className="h-16" />
+              <Skeleton className="h-16" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
