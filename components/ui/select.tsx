@@ -110,9 +110,7 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
       <SelectPrimitive.ItemIndicator className="pointer-events-none absolute inset-s-2 grid place-items-center">
         <CheckIcon className="pointer-events-none size-3" />
       </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 items-center gap-1.5 whitespace-nowrap">
-        {children}
-      </SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 items-center gap-1.5">{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
 }

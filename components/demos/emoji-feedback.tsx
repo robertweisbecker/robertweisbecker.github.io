@@ -73,7 +73,7 @@ export function EmojiFeedbackDemo() {
   const [rowRef, { width: rowWidth }] = useMeasure();
   const shouldReduceMotion = useReducedMotion();
   const isOpen = rating !== null;
-  const collapsedWidth = rowWidth === null ? "auto" : `min(${rowWidth + 8}px, calc(100vw - 2rem))`;
+  const collapsedWidth = rowWidth === null ? "auto" : rowWidth + 8;
   const containerAnimation = {
     height: isOpen ? innerHeight : null,
     width: isOpen ? "var(--feedback-expanded-width)" : collapsedWidth,
@@ -96,7 +96,7 @@ export function EmojiFeedbackDemo() {
         layout={!shouldReduceMotion}
         data-state={isOpen ? "open" : "closed"}
         className={cn(
-          "m-auto max-w-[calc(100vw-2rem)] overflow-hidden bg-popover p-0 shadow-border-sm [--feedback-expanded-width:min(22rem,calc(100vw-2rem))] sm:[--feedback-expanded-width:var(--container-md)]",
+          "m-auto max-w-[calc(100vw-2rem)] overflow-hidden bg-popover p-0 shadow-border-sm [--feedback-expanded-width:var(--container-3xs)] sm:[--feedback-expanded-width:var(--container-md)]",
           isOpen ? "rounded-md" : "rounded-full"
         )}
         animate={containerAnimation}

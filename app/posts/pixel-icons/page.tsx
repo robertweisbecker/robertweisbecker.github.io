@@ -2,6 +2,8 @@ import { Demo } from "@/components/demo";
 import { PixelIconMorphToggles } from "@/components/demos/pixel-icon-morph-toggles";
 import { PixelIconMorphVisualizer } from "@/components/demos/pixel-icon-morph-visualizer";
 import * as PixelIcons from "@/components/icons-pixel";
+import { LinkOut } from "@/components/link-out";
+import { Collapsible, CollapsibleContent, CollapsibleIcon, CollapsibleTrigger } from "@/components/ui/collapsible";
 import type { Metadata } from "next";
 import type * as React from "react";
 
@@ -172,29 +174,53 @@ export default function PixelIconsPage() {
     <div className="w-full space-y-10">
       <section className="space-y-3">
         <div className="prose prose-sm max-w-none text-muted-foreground">
-          <ul>
-            <li>
-              <strong>Build a sequence. </strong>
-              Select any of the morphable 28-rect icons to add them to the sequence. The numbered badges show the order, and the dots below
-              the preview let you jump to a specific step.
-            </li>
-            <li>
-              <strong>Choose an animation. </strong>
-              <strong>Linear</strong> moves each pixel at a constant rate, <strong>Ease</strong> gives the transition a softer UI feel, and{" "}
-              <strong>Spring</strong> adds a snappier state-change response.
-            </li>
-            <li>
-              <strong>Set the strategy. </strong>
-              <strong>Nearest</strong> pairs pixels by shortest travel distance, <strong>Reading</strong> follows top-to-bottom ordering,{" "}
-              <strong>Radial</strong> sorts around the icon center, <strong>Scatter</strong> spreads pixels outward before resolving, and{" "}
-              <strong>Compress</strong> pulls them inward first.
-            </li>
-            <li>
-              <strong>Adjust the speed. </strong>
-              The control uses playback-style labels: <strong>1x</strong> is the default 200ms transition, <strong>0.5x</strong> slows it to
-              400ms, and <strong>0.25x</strong> stretches it to 800ms.
-            </li>
-          </ul>
+          <h2>Visualizer</h2>
+          <Collapsible>
+            <CollapsibleTrigger className="relative flex items-center gap-1.5 py-2 transition-colors hover:text-foreground md:-ms-5.5">
+              <CollapsibleIcon side="inline-start" />
+              Instructions
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <ul>
+                <li>
+                  <strong>Choose icons to animate. </strong>
+                  Click any icon to add or remove it from the animation. Badges show the order, and dots below the preview jump to a
+                  specific step.
+                </li>
+                <li>
+                  <strong>Specify timing function. </strong> Choose from linear, ease, or spring (uses{" "}
+                  <LinkOut href="https://motion.dev/docs/react-use-spring">Motion</LinkOut>).
+                </li>
+                <li>
+                  <strong>Set reordering strategy. </strong>
+                  <ul>
+                    <li>
+                      <strong>Nearest</strong> animates pixels by shortest travel distance. This can make some areas of the icon resolve
+                      faster than others but the new icon becomes recognizable sooner.
+                    </li>
+                    <li>
+                      <strong>Reading</strong> reorders pixels from left-to-right, top-to-bottom. In many cases, this makes the icon appear
+                      to flip.
+                    </li>
+                    <li>
+                      <strong>Radial</strong> sorts based on distance from the icon center. This is the most graceful option.
+                    </li>
+                    <li>
+                      <strong>Scatter</strong> spreads pixels outward before resolving. This is best for a glitch effect.
+                    </li>
+                    <li>
+                      <strong>Compress</strong> pulls pixels to the center first. This mimics a scale-down animation.
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Adjust the speed. </strong>
+                  The control uses playback-style labels: <strong>1x</strong> is the default 200ms transition, <strong>0.5x</strong> slows
+                  it to 400ms, and <strong>0.25x</strong> stretches it to 800ms.
+                </li>
+              </ul>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
 
         <h2 className="font-pixel text-[11px] uppercase">Morphs</h2>

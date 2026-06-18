@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { PixelPauseOutlineIcon, PixelPlayOutlineIcon } from "@/components/icons-pixel";
+import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons-pixel";
 import { Kbd } from "@/components/ui/kbd";
 
 const DEFAULT_WIDTH = 1000;
@@ -226,7 +226,7 @@ export function DvdAnimationRoot({
         logoScale,
         logoAspectRatio,
       }),
-    [height, logoAspectRatio, logoHeight, logoScale, logoWidth, width],
+    [height, logoAspectRatio, logoHeight, logoScale, logoWidth, width]
   );
 
   const xMax = Math.max(0, width - resolvedLogoSize.logoWidth);
@@ -235,7 +235,7 @@ export function DvdAnimationRoot({
   const animationKey = React.useMemo(
     () =>
       `duration-${duration}-width-${width}-height-${height}-logo-${resolvedLogoSize.logoWidth}x${resolvedLogoSize.logoHeight}-colors-${colors.join("|")}`,
-    [colors, duration, height, resolvedLogoSize.logoHeight, resolvedLogoSize.logoWidth, width],
+    [colors, duration, height, resolvedLogoSize.logoHeight, resolvedLogoSize.logoWidth, width]
   );
 
   const handleCornerHit = React.useCallback(() => {
@@ -323,7 +323,7 @@ export function DvdAnimationRoot({
       setIsPlaying,
       width,
     }),
-    [colors, cornerHits, height, isPlaying, resolvedLogoSize.logoHeight, resolvedLogoSize.logoWidth, width],
+    [colors, cornerHits, height, isPlaying, resolvedLogoSize.logoHeight, resolvedLogoSize.logoWidth, width]
   );
 
   return (
@@ -353,12 +353,7 @@ export function DvdAnimationStage({ backgroundColor = "#222", className, ...prop
     >
       <rect width="100%" height="100%" fill={backgroundColor} rx="10" />
 
-      <svg
-        ref={logoRef}
-        width={logoWidth}
-        height={logoHeight}
-        viewBox={`0 0 ${LOGO_VIEW_BOX_WIDTH} ${LOGO_VIEW_BOX_HEIGHT}`}
-      >
+      <svg ref={logoRef} width={logoWidth} height={logoHeight} viewBox={`0 0 ${LOGO_VIEW_BOX_WIDTH} ${LOGO_VIEW_BOX_HEIGHT}`}>
         <path fill="inherit" d={LOGO_PATH} />
       </svg>
     </svg>
@@ -368,9 +363,7 @@ export function DvdAnimationStage({ backgroundColor = "#222", className, ...prop
 export type DvdAnimationControlsProps = React.ComponentProps<"div">;
 
 export function DvdAnimationControls({ className, ...props }: DvdAnimationControlsProps) {
-  return (
-    <div className={cn("absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2", className)} {...props} />
-  );
+  return <div className={cn("absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2", className)} {...props} />;
 }
 
 export type DvdAnimationScoreProps = React.ComponentProps<"div"> & {
@@ -464,21 +457,15 @@ export function DvdAnimationScore({
 
   return (
     <>
-      <div ref={scoreRef} className={cn("relative flex flex-col items-center gap-1 text-center", className)} {...props}>
-        {showLabel ? (
-          <span className="font-pixel text-[11px] uppercase tracking-widest text-white/55">{label}</span>
-        ) : null}
-        <Kbd
-          variant="elevated"
-          pressed={isPulsing}
-          className="font-pixel text-[11px] tracking-widest uppercase transition-none duration-0 tabular-nums"
-        >
+      <div ref={scoreRef} className={cn("relative flex items-center gap-1 text-center", className)} {...props}>
+        {showLabel ? <span className="font-pixel text-[11px] text-white uppercase">{label}</span> : null}
+        <Kbd variant="elevated" pressed={isPulsing} className="font-pixel text-[11px] uppercase">
           {cornerHits}
         </Kbd>
         {showPop && isPulsing ? (
           <span
             key={scorePopKey}
-            className="dvd-score-pop pointer-events-none absolute left-1/2 top-[-8px] font-pixel text-[11px] text-white"
+            className="dvd-score-pop pointer-events-none absolute top-[-8px] left-1/2 font-pixel text-[11px] text-white"
           >
             +1!
           </span>
@@ -530,7 +517,7 @@ export function DvdAnimationPlayButton({
       aria-label={isPlaying ? "Pause animation" : "Play animation"}
       aria-pressed={isPlaying}
       data-pressed={isPlaying}
-      className={cn("font-pixel text-[11px] text-white hover:bg-white/10 hover:text-white", className)}
+      className={cn("font-pixel text-[11px] text-white uppercase hover:bg-white/10 hover:text-white", className)}
       onClick={(event) => {
         onClick?.(event);
 
@@ -543,13 +530,15 @@ export function DvdAnimationPlayButton({
       {children ??
         (isPlaying ? (
           <>
-            <PixelPauseOutlineIcon aria-hidden="true" />
+            <PixelPauseIcon aria-hidden="true" />
             <span aria-hidden="true">Pause</span>
           </>
         ) : (
           <>
-            <PixelPlayOutlineIcon aria-hidden="true" />
-            <span aria-hidden="true">Play</span>
+            <PixelPlayIcon aria-hidden="true" />
+            <span aria-hidden="true" className="min-w-[5ch]">
+              Play
+            </span>
           </>
         ))}
     </Button>

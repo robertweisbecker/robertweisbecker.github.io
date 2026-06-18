@@ -427,7 +427,7 @@ export function SiteSearch({
                             </ItemDescription>
                             <ItemActions>
                               <CommandShortcut className="ease opacity-0 transition-opacity duration-50 group-data-highlighted/command-item:opacity-100">
-                                ↵
+                                ⏎
                               </CommandShortcut>
                             </ItemActions>
                           </Item>

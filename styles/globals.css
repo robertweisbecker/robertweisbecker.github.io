@@ -167,7 +167,8 @@
   --primary-foreground: var(--hue-25);
   --secondary: var(--hue-100);
   --secondary-foreground: var(--hue-700);
-  --muted: --alpha(var(--neutral-400) / 8%);
+  /* --muted: --alpha(var(--neutral-400) / 6%); */
+  --muted: var(--neutral-75);
   --muted-foreground: var(--neutral-500);
   --accent: --alpha(var(--neutral-400) / 16%);
   --accent-foreground: var(--neutral-950);

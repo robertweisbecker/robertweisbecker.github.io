@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import * as PixelIcons from "@/components/icons-pixel";
 import { PixelIconMorph, type PixelIconMorphAnimation, type PixelIconMorphStrategy } from "@/components/pixel-icon-morph";
 import { Button } from "@/components/ui/button";
@@ -7,16 +8,19 @@ import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/componen
 import { Field, FieldLabel } from "@/components/ui/field";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ToggleGrid, ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
 import { IconPlayerPlayFilled } from "@tabler/icons-react";
 import * as React from "react";
+import { TooltipGroup, TooltipTrigger } from "../ui/tooltip";
+import { Badge } from "../ui/badge";
 
 type SpeedScale = "0.25" | "0.5" | "1";
 
 type Option<T extends string> = {
   value: T;
   label: string;
+  description?: string;
 };
 
 const BASE_DURATION = 0.2;
@@ -25,18 +29,18 @@ const STAGGER = 0.002;
 const DEFAULT_SEQUENCE: PixelIcons.MorphablePixelIconName[] = [
   "PixelCopyIcon",
   "PixelClipboardCheckIcon",
-  "PixelDownloadIcon",
+
   "PixelFolderIcon",
   "PixelFolderOpenIcon",
   "PixelExternalIcon",
 ];
 
 const STRATEGY_OPTIONS: Option<PixelIconMorphStrategy>[] = [
-  { value: "nearest", label: "Nearest" },
-  { value: "reading", label: "Reading" },
-  { value: "radial", label: "Radial" },
-  { value: "scatter", label: "Scatter" },
-  { value: "compress", label: "Compress" },
+  { value: "nearest", label: "Nearest", description: "Move pixels shortest distance" },
+  { value: "reading", label: "Reading", description: "Re-paint from top left" },
+  { value: "radial", label: "Radial", description: "Reshuffle pixels from center" },
+  { value: "scatter", label: "Scatter", description: "Spread pixels, then compress to new position" },
+  { value: "compress", label: "Compress", description: "Move pixels to center first, then animate out" },
 ];
 
 const ANIMATION_OPTIONS: Option<PixelIconMorphAnimation>[] = [
@@ -52,8 +56,8 @@ const SPEED_OPTIONS: Option<SpeedScale>[] = [
 ];
 
 const SPEED_DURATIONS: Record<SpeedScale, number> = {
-  "0.25": 0.8,
-  "0.5": 0.4,
+  "0.25": BASE_DURATION * 4,
+  "0.5": BASE_DURATION * 2,
   "1": BASE_DURATION,
 };
 
@@ -67,76 +71,74 @@ function formatIconName(name: string) {
     .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2");
 }
 
+const iconNameCollator = new Intl.Collator("en", { sensitivity: "base" });
+const sortedMorphablePixelIconNames = [...PixelIcons.morphablePixelIconNames].sort((a, b) =>
+  iconNameCollator.compare(formatIconName(a), formatIconName(b))
+);
+
 function getNextIndex(currentIndex: number, length: number) {
   return (currentIndex + 1) % length;
 }
 
-function SegmentedControl<T extends string>({
+function AnimationControl<T extends string>({
   label,
+  type = "toggle",
   value,
   options,
   onValueChange,
 }: {
   label: string;
+  type?: "toggle" | "select";
   value: T;
   options: Option<T>[];
   onValueChange: (value: T) => void;
 }) {
-  return (
-    <Field className="gap-1.5">
-      <FieldLabel className="text-xs">{label}</FieldLabel>
-      <ToggleGroup
-        value={[value]}
-        onValueChange={(next) => {
-          const nextValue = Array.isArray(next) ? next[0] : next;
-          if (nextValue) {
-            onValueChange(nextValue as T);
-          }
-        }}
-        spacing={0.5}
-        size="sm"
-        variant="elevated"
-        aria-label={label}
-        className="w-full flex-wrap"
-      >
-        {options.map((option) => (
-          <ToggleGroupItem key={option.value} value={option.value} aria-label={option.label} className="min-h-8 flex-1 px-2">
-            <span className="truncate text-xs">{option.label}</span>
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
-    </Field>
-  );
-}
-
-function StrategyControl({
-  value,
-  onValueChange,
-}: {
-  value: PixelIconMorphStrategy;
-  onValueChange: (value: PixelIconMorphStrategy) => void;
-}) {
-  const selectedOption = STRATEGY_OPTIONS.find((option) => option.value === value);
-
-  return (
-    <Field className="gap-1.5">
-      <FieldLabel className="text-xs">Strategy</FieldLabel>
-      <Select value={value} onValueChange={(nextValue) => onValueChange(nextValue as PixelIconMorphStrategy)}>
-        <SelectTrigger className="w-full">
-          <SelectValue>{selectedOption?.label ?? value}</SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {STRATEGY_OPTIONS.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
-    </Field>
-  );
+  if (type === "select") {
+    return (
+      <Field orientation="horizontal">
+        <FieldLabel>{label}</FieldLabel>
+        <Select value={value} onValueChange={(nextValue) => onValueChange(nextValue as T)}>
+          <SelectTrigger className="w-full">
+            <SelectValue>{options.find((option) => option.value === value)?.label ?? value}</SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {options.map((option) => (
+                <SelectItem key={option.value} value={option.value} className="leading-none **:gap-0">
+                  {option.label}
+                  {option.description ? <p className="w-full min-w-0 text-xs/none text-muted-foreground">{option.description}</p> : null}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </Field>
+    );
+  } else
+    return (
+      <Field>
+        <FieldLabel>{label}</FieldLabel>
+        <ToggleGroup
+          value={[value]}
+          onValueChange={(next) => {
+            const nextValue = Array.isArray(next) ? next[0] : next;
+            if (nextValue) {
+              onValueChange(nextValue as T);
+            }
+          }}
+          spacing={1}
+          size="sm"
+          className="flex-wrap"
+          aria-label={label}
+        >
+          {options.map((option) => (
+            <ToggleGroupItem key={option.value} value={option.value} aria-label={option.label} className="">
+              <span className="truncate text-xs">{option.label}</span>
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+      </Field>
+    );
 }
 
 export function PixelIconMorphVisualizer({ className }: { className?: string }) {
@@ -160,11 +162,15 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
   const settingsKey = `${animation}-${strategy}-${speedScale}`;
   const previousSettingsRef = React.useRef(settingsKey);
   const transitionLabel =
-    from && to && canPlay
-      ? `${formatIconName(from)} -> ${formatIconName(to)}`
-      : from
-        ? "Add another icon to animate"
-        : "Select icons to build a sequence";
+    from && to && canPlay ? (
+      <>
+        <span className="opacity-100">{formatIconName(from)}</span> &rarr; <span className="opacity-50">{formatIconName(to)}</span>
+      </>
+    ) : from ? (
+      "Add another icon to animate"
+    ) : (
+      "Select icons to build a sequence"
+    );
 
   const clearTimer = React.useCallback(() => {
     if (timerRef.current) {
@@ -173,37 +179,70 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
     }
   }, []);
 
-  const playTransition = React.useCallback(() => {
-    if (isAnimating || !canPlay) {
-      return;
-    }
-
-    clearTimer();
-    setIsAnimating(true);
-    setActive(false);
-
-    window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(() => setActive(true));
-    });
-
-    const startedAt = window.performance.now();
-
-    const finishTransition = () => {
-      const remaining = totalDuration - (window.performance.now() - startedAt);
-
-      if (remaining > 16) {
-        timerRef.current = window.setTimeout(finishTransition, remaining);
+  const playTransitions = React.useCallback(
+    (steps: number) => {
+      if (isAnimating || !canPlay || steps < 1) {
         return;
       }
 
-      setCurrentIndex((index) => getNextIndex(index, sequence.length));
-      setActive(false);
-      setIsAnimating(false);
-      timerRef.current = null;
-    };
+      const sequenceLength = sequence.length;
+      const startIndex = Math.min(currentIndex, sequenceLength - 1);
 
-    timerRef.current = window.setTimeout(finishTransition, totalDuration);
-  }, [canPlay, clearTimer, isAnimating, sequence.length, totalDuration]);
+      clearTimer();
+      setIsAnimating(true);
+
+      const runStep = (stepIndex: number, fromIndex: number) => {
+        setCurrentIndex(fromIndex);
+        setActive(false);
+
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => setActive(true));
+        });
+
+        const startedAt = window.performance.now();
+
+        const finishTransition = () => {
+          const remaining = totalDuration - (window.performance.now() - startedAt);
+
+          if (remaining > 16) {
+            timerRef.current = window.setTimeout(finishTransition, remaining);
+            return;
+          }
+
+          const nextFromIndex = getNextIndex(fromIndex, sequenceLength);
+
+          if (stepIndex + 1 >= steps) {
+            setCurrentIndex(nextFromIndex);
+            setActive(false);
+            setIsAnimating(false);
+            timerRef.current = null;
+            return;
+          }
+
+          setCurrentIndex(nextFromIndex);
+          setActive(false);
+          window.requestAnimationFrame(() => runStep(stepIndex + 1, nextFromIndex));
+        };
+
+        timerRef.current = window.setTimeout(finishTransition, totalDuration);
+      };
+
+      runStep(0, startIndex);
+    },
+    [canPlay, clearTimer, currentIndex, isAnimating, sequence.length, totalDuration]
+  );
+
+  const advanceSequence = React.useCallback(() => {
+    playTransitions(1);
+  }, [playTransitions]);
+
+  const playSequence = React.useCallback(() => {
+    if (!canPlay) {
+      return;
+    }
+
+    playTransitions(Math.max(1, sequence.length - 1));
+  }, [canPlay, playTransitions, sequence.length]);
 
   React.useEffect(() => clearTimer, [clearTimer]);
 
@@ -213,29 +252,28 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
     }
 
     previousSettingsRef.current = settingsKey;
-    playTransition();
-  }, [playTransition, settingsKey]);
+    advanceSequence();
+  }, [advanceSequence, settingsKey]);
 
-  function toggleIcon(icon: PixelIcons.MorphablePixelIconName) {
+  function updateSequence(nextValue: PixelIcons.MorphablePixelIconName[]) {
     clearTimer();
     setActive(false);
     setIsAnimating(false);
 
     setSequence((items) => {
-      const existingIndex = items.indexOf(icon);
+      const selected = new Set(nextValue);
+      const next = [...items.filter((item) => selected.has(item)), ...nextValue.filter((item) => !items.includes(item))];
 
-      if (existingIndex === -1) {
-        return [...items, icon];
-      }
-
-      const next = items.filter((item) => item !== icon);
       setCurrentIndex((index) => {
         if (next.length === 0) {
           return 0;
         }
 
-        if (existingIndex < index) {
-          return index - 1;
+        const currentIcon = items[index];
+        const nextCurrentIndex = currentIcon ? next.indexOf(currentIcon) : -1;
+
+        if (nextCurrentIndex !== -1) {
+          return nextCurrentIndex;
         }
 
         return Math.min(index, next.length - 1);
@@ -263,19 +301,8 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
     <div className={cn("grid items-start gap-2 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)]", className)}>
       <Card>
         <CardHeader>
-          <CardTitle>Morph Sequence</CardTitle>
+          <CardTitle>Preview</CardTitle>
           <CardAction>
-            <Button
-              type="button"
-              size="icon-xs"
-              variant="ghost"
-              onClick={playTransition}
-              aria-disabled={isAnimating || !canPlay}
-              aria-label="Play transition"
-              data-testid="pixel-morph-play"
-            >
-              <IconPlayerPlayFilled />
-            </Button>
             <Button
               type="button"
               size="xs"
@@ -284,104 +311,129 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
               disabled={sequence.length === 0}
               data-testid="pixel-morph-clear"
             >
-              Clear
+              Clear selections
+            </Button>
+            <Button
+              type="button"
+              size="xs"
+              variant="ghost"
+              onClick={playSequence}
+              focusableWhenDisabled={true}
+              disabled={isAnimating || !canPlay}
+              aria-disabled={isAnimating || !canPlay}
+              aria-label="Play transition"
+              data-testid="pixel-morph-play"
+            >
+              <IconPlayerPlayFilled data-icon="inline-start" />
+              Play all
             </Button>
           </CardAction>
         </CardHeader>
         <CardContent className="gap-4">
-          <div className="flex flex-col items-center gap-3">
-            <div className="grid size-button-lg place-items-center">
-              <Button
-                type="button"
-                size="icon-lg"
-                variant="ghost"
-                rounded
-                onClick={playTransition}
-                aria-disabled={isAnimating || !canPlay}
-                aria-label={canPlay && from && to ? `Play ${formatIconName(from)} to ${formatIconName(to)}` : transitionLabel}
-                data-testid="pixel-morph-preview"
-              >
-                {canPlay && from && to ? (
-                  <PixelIconMorph
-                    key={`${from}-${to}-${strategy}-${animation}`}
-                    from={from}
-                    to={to}
-                    active={active}
-                    strategy={strategy}
-                    animation={animation}
-                    duration={duration}
-                    stagger={STAGGER}
-                    className="size-[22px]"
-                  />
-                ) : CurrentIcon ? (
-                  <CurrentIcon className="size-[22px]" aria-hidden />
-                ) : (
-                  <span className="size-[22px] rounded-md border border-dashed border-muted-foreground/40" aria-hidden />
-                )}
-              </Button>
-            </div>
-
-            {sequence.length > 0 ? (
-              <div className="flex items-center gap-1.5" aria-label="Selected icon sequence">
-                {sequence.map((icon, index) => (
-                  <button
-                    key={icon}
-                    type="button"
-                    onClick={() => jumpToIcon(index)}
-                    aria-label={`Jump to ${formatIconName(icon)}`}
-                    aria-current={index === currentIndex ? "step" : undefined}
-                    className={cn(
-                      "size-2 rounded-full bg-border transition-[scale,background-color]",
-                      index === currentIndex && "scale-125 bg-input"
-                    )}
-                  />
-                ))}
-              </div>
-            ) : null}
-
-            <div className="min-h-5 text-center text-xs font-medium text-foreground">{transitionLabel}</div>
+          <div className="grid h-[110px] place-items-center" data-section="preview">
+            <Button
+              type="button"
+              size="icon-lg"
+              variant="outline"
+              onClick={advanceSequence}
+              aria-label={canPlay && from && to ? `Play ${formatIconName(from)} to ${formatIconName(to)}` : undefined}
+              data-testid="pixel-morph-preview"
+              className="size-[88px]! scale-100!"
+            >
+              {canPlay && from && to ? (
+                <PixelIconMorph
+                  key={`${from}-${to}-${strategy}-${animation}`}
+                  from={from}
+                  to={to}
+                  active={active}
+                  strategy={strategy}
+                  animation={animation}
+                  duration={duration}
+                  stagger={STAGGER}
+                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
+                />
+              ) : CurrentIcon ? (
+                <CurrentIcon className="size-[44px]!" aria-hidden />
+              ) : (
+                <span
+                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
+                  aria-hidden
+                />
+              )}
+            </Button>
           </div>
+          <div className="mx-auto flex h-button-xs items-center gap-px" aria-label="Selected icon sequence">
+            {sequence.length > 0 ? (
+              <>
+                <TooltipGroup>
+                  <LayoutGroup>
+                    <AnimatePresence>
+                      {sequence.map((icon, index) => (
+                        <TooltipTrigger
+                          key={icon}
+                          tooltip={<span className="px-1 font-pixel text-2xs whitespace-nowrap">{formatIconName(icon)}</span>}
+                          render={
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              rounded
+                              size="xs"
+                              onClick={() => jumpToIcon(index)}
+                              aria-label={`Jump to ${formatIconName(icon)}`}
+                              aria-current={index === currentIndex ? "step" : undefined}
+                              className="px-1 font-pixel text-2xs"
+                              render={<motion.button animate={{ opacity: 1 }} />}
+                            />
+                          }
+                        >
+                          <motion.span
+                            className={cn(
+                              "size-2 rounded-full bg-current/50 transition-[scale,background-color]",
+                              index === currentIndex && "scale-110 bg-current"
+                            )}
+                          />
+                        </TooltipTrigger>
+                      ))}
+                    </AnimatePresence>
+                  </LayoutGroup>
+                </TooltipGroup>
+              </>
+            ) : null}
+          </div>
+          <div className="min-h-5 text-center font-pixel text-2xs text-foreground">{transitionLabel}</div>
 
-          <ScrollArea className="h-72 w-full" scrollbarGutter showScrollbar scrollFade>
-            <div className="grid grid-cols-6 gap-0.5 sm:grid-cols-8 lg:grid-cols-10" aria-label="Morphable pixel icons">
-              {PixelIcons.morphablePixelIconNames.map((icon) => {
+          <ScrollArea className="h-72 w-full" scrollbarGutter showScrollbar scrollFade innerClass="py-1">
+            <ToggleGrid
+              columns={10}
+              spacing={0.5}
+              multiple
+              value={sequence}
+              onValueChange={(next) => updateSequence(next as PixelIcons.MorphablePixelIconName[])}
+              aria-label="Morphable pixel icons"
+            >
+              {sortedMorphablePixelIconNames.map((icon) => {
                 const Icon = iconComponents[icon];
                 const sequenceIndex = sequence.indexOf(icon);
                 const isSelected = sequenceIndex !== -1;
                 const isCurrent = sequenceIndex === currentIndex;
 
                 return (
-                  <Button
+                  <ToggleGroupItem
                     key={icon}
-                    type="button"
-                    size="icon-lg"
-                    variant={isCurrent ? "default" : isSelected ? "outline" : "ghost"}
-                    onClick={() => toggleIcon(icon)}
+                    value={icon}
+                    variant={isCurrent ? "outline" : "default"}
                     aria-label={`${isSelected ? "Remove" : "Add"} ${formatIconName(icon)}`}
-                    aria-pressed={isSelected}
-                    className={cn(
-                      isSelected &&
-                        !isCurrent &&
-                        "border-blue-500/70 text-blue-600 shadow-[0_0_0_1px_--alpha(var(--color-blue-500)_/_35%)]",
-                      isCurrent && "bg-blue-500 text-white hover:bg-blue-500/90"
-                    )}
                   >
-                    <Icon className="size-4" aria-hidden />
+                    <Icon className="size-[16.5px]" aria-hidden />
                     {isSelected ? (
-                      <span
-                        aria-hidden
-                        className={cn(
-                          "absolute end-1 top-1 grid size-3.5 place-items-center rounded-full text-[8px]/none font-medium",
-                          isCurrent ? "bg-white/20 text-white" : "bg-blue-500 text-white"
-                        )}
-                      >
+                      <Badge variant="outline" size="sm" aria-hidden className={cn("absolute end-0.5 top-0.5")}>
                         {sequenceIndex + 1}
-                      </span>
+                      </Badge>
                     ) : null}
-                  </Button>
+                  </ToggleGroupItem>
                 );
               })}
-            </div>
+            </ToggleGrid>
           </ScrollArea>
         </CardContent>
       </Card>
@@ -391,9 +443,9 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
           <CardTitle>Customize</CardTitle>
         </CardHeader>
         <CardContent className="gap-3">
-          <SegmentedControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
-          <StrategyControl value={strategy} onValueChange={setStrategy} />
-          <SegmentedControl label="Speed" value={speedScale} options={SPEED_OPTIONS} onValueChange={setSpeedScale} />
+          <AnimationControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
+          <AnimationControl type="toggle" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />
+          <AnimationControl type="toggle" label="Speed" value={speedScale} options={SPEED_OPTIONS} onValueChange={setSpeedScale} />
         </CardContent>
       </Card>
     </div>
