@@ -1,9 +1,18 @@
 import { Demo } from "@/components/demo";
+import {
+  DepartureMonoSymbolDemo,
+  DepartureMonoTextDemo,
+  MorphablePixelIconScrollDemo,
+  PixelAnimationOptionsDemo,
+  PixelIconDataInspectorDemo,
+  PixelSunMoonMorphDemo,
+  TablerRotationIdeaDemo,
+} from "@/components/demos/pixel-icons-post-demos";
 import { PixelIconMorphToggles } from "@/components/demos/pixel-icon-morph-toggles";
 import { PixelIconMorphVisualizer } from "@/components/demos/pixel-icon-morph-visualizer";
 import * as PixelIcons from "@/components/icons-pixel";
 import { LinkOut } from "@/components/link-out";
-import { Collapsible, CollapsibleContent, CollapsibleIcon, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Code } from "@/components/ui/code";
 import type { Metadata } from "next";
 import type * as React from "react";
 
@@ -33,14 +42,14 @@ const ICON_GROUPS: PixelIconGroup[] = [
       { Icon: PixelIcons.PixelCaptionsIcon, name: "Captions" },
       { Icon: PixelIcons.PixelPauseIcon, name: "Pause" },
       { Icon: PixelIcons.PixelPause2Icon, name: "Pause 2" },
-      { Icon: PixelIcons.PixelPauseOutlineIcon, name: "Pause Outline" },
       { Icon: PixelIcons.PixelPauseOutlineRoundedIcon, name: "Pause Rounded" },
       { Icon: PixelIcons.PixelPlayIcon, name: "Play" },
       { Icon: PixelIcons.PixelPlayFilledIcon, name: "Play Filled" },
+      { Icon: PixelIcons.PixelPauseOutlineIcon, name: "Pause Outline" },
       { Icon: PixelIcons.PixelPlayOutlineIcon, name: "Play Outline" },
-      { Icon: PixelIcons.PixelVideoCameraIcon, name: "Video Camera" },
       { Icon: PixelIcons.PixelVolumeIcon, name: "Volume" },
       { Icon: PixelIcons.PixelVolumeMutedIcon, name: "Volume Muted" },
+      { Icon: PixelIcons.PixelVideoCameraIcon, name: "Video Camera" },
     ],
   },
   {
@@ -48,18 +57,17 @@ const ICON_GROUPS: PixelIconGroup[] = [
     caption: "Tiny product and social marks",
     icons: [
       { Icon: PixelIcons.PixelGithubIcon, name: "GitHub" },
-      { Icon: PixelIcons.PixelGithubOutlineIcon, name: "GitHub Outline" },
-      { Icon: PixelIcons.PixelLinkedinIcon, name: "LinkedIn" },
-      { Icon: PixelIcons.PixelLinkedinOutlineIcon, name: "LinkedIn Outline" },
       { Icon: PixelIcons.PixelVercelIcon, name: "Vercel" },
+      { Icon: PixelIcons.PixelLinkedinIcon, name: "LinkedIn" },
+      { Icon: PixelIcons.PixelGithubOutlineIcon, name: "GitHub Outline" },
       { Icon: PixelIcons.PixelVercelOutlineIcon, name: "Vercel Outline" },
+      { Icon: PixelIcons.PixelLinkedinOutlineIcon, name: "LinkedIn Outline" },
     ],
   },
   {
     title: "Documents",
     caption: "Files, notes, and written bits",
     icons: [
-      { Icon: PixelIcons.PixelBillIcon, name: "Bill" },
       { Icon: PixelIcons.PixelBookIcon, name: "Book" },
       { Icon: PixelIcons.PixelBookOpenIcon, name: "Book Open" },
       { Icon: PixelIcons.PixelClipboardIcon, name: "Clipboard" },
@@ -73,7 +81,6 @@ const ICON_GROUPS: PixelIconGroup[] = [
       { Icon: PixelIcons.PixelNoteIcon, name: "Note" },
       { Icon: PixelIcons.PixelNotepadIcon, name: "Notepad" },
       { Icon: PixelIcons.PixelPaperclipIcon, name: "Paperclip" },
-      { Icon: PixelIcons.PixelReceiptIcon, name: "Receipt" },
     ],
   },
   {
@@ -104,24 +111,34 @@ const ICON_GROUPS: PixelIconGroup[] = [
     ],
   },
   {
-    title: "Places",
+    title: "Objects",
     caption: "Devices, rooms, and everyday objects",
     icons: [
       { Icon: PixelIcons.PixelChefHatIcon, name: "Chef Hat" },
-      { Icon: PixelIcons.PixelComputerOutlineIcon, name: "Computer Outline" },
-      { Icon: PixelIcons.PixelComputerRetroIcon, name: "Computer Retro" },
-      { Icon: PixelIcons.PixelFinderIcon, name: "Finder" },
+      { Icon: PixelIcons.PixelGraduationCapIcon, name: "Graduation Cap" },
       { Icon: PixelIcons.PixelFolderIcon, name: "Folder" },
       { Icon: PixelIcons.PixelFolderOpenIcon, name: "Folder Open" },
       { Icon: PixelIcons.PixelHomeIcon, name: "Home" },
       { Icon: PixelIcons.PixelHouseIcon, name: "House" },
       { Icon: PixelIcons.PixelHouseChimneyIcon, name: "House Chimney" },
       { Icon: PixelIcons.PixelHouseWindowIcon, name: "House Window" },
+      { Icon: PixelIcons.PixelComputerOutlineIcon, name: "Computer Outline" },
+      { Icon: PixelIcons.PixelComputerRetroIcon, name: "Computer Retro" },
+      { Icon: PixelIcons.PixelFinderIcon, name: "Finder" },
       { Icon: PixelIcons.PixelIphoneXIcon, name: "iPhone X" },
       { Icon: PixelIcons.PixelMonitorIcon, name: "Monitor" },
-      { Icon: PixelIcons.PixelPresentationIcon, name: "Presentation" },
       { Icon: PixelIcons.PixelTvIcon, name: "TV" },
+      { Icon: PixelIcons.PixelPresentationIcon, name: "Presentation" },
       { Icon: PixelIcons.PixelWalletIcon, name: "Wallet" },
+      { Icon: PixelIcons.PixelBillIcon, name: "Bill" },
+      { Icon: PixelIcons.PixelReceiptIcon, name: "Receipt" },
+      { Icon: PixelIcons.PixelShovelIcon, name: "Shovel" },
+      { Icon: PixelIcons.PixelLightbulbIcon, name: "Lightbulb" },
+      { Icon: PixelIcons.PixelMoonIcon, name: "Moon" },
+      { Icon: PixelIcons.PixelMoon2Icon, name: "Moon 2" },
+      { Icon: PixelIcons.PixelOscarIcon, name: "Oscar" },
+      { Icon: PixelIcons.PixelOscar2Icon, name: "Oscar 2" },
+      { Icon: PixelIcons.PixelPaletteIcon, name: "Palette" },
     ],
   },
   {
@@ -133,23 +150,16 @@ const ICON_GROUPS: PixelIconGroup[] = [
       { Icon: PixelIcons.PixelEyeIcon, name: "Eye" },
       { Icon: PixelIcons.PixelEyeClosedIcon, name: "Eye Closed" },
       { Icon: PixelIcons.PixelGradientIcon, name: "Gradient" },
-      { Icon: PixelIcons.PixelGraduationCapIcon, name: "Graduation Cap" },
       { Icon: PixelIcons.PixelHelpIcon, name: "Help" },
       { Icon: PixelIcons.PixelHelp2Icon, name: "Help 2" },
       { Icon: PixelIcons.PixelHelp3Icon, name: "Help 3" },
       { Icon: PixelIcons.PixelInfoIcon, name: "Info" },
       { Icon: PixelIcons.PixelInfoCircleLowercaseIcon, name: "Info Circle Lowercase" },
-      { Icon: PixelIcons.PixelLightbulbIcon, name: "Lightbulb" },
-      { Icon: PixelIcons.PixelMoonIcon, name: "Moon" },
-      { Icon: PixelIcons.PixelMoon2Icon, name: "Moon 2" },
-      { Icon: PixelIcons.PixelOscarIcon, name: "Oscar" },
-      { Icon: PixelIcons.PixelOscar2Icon, name: "Oscar 2" },
-      { Icon: PixelIcons.PixelPaletteIcon, name: "Palette" },
       { Icon: PixelIcons.PixelPenToolIcon, name: "Pen Tool" },
       { Icon: PixelIcons.PixelQuestionCircleIcon, name: "Question Circle" },
       { Icon: PixelIcons.PixelRadioIcon, name: "Radio" },
       { Icon: PixelIcons.PixelScribbleIcon, name: "Scribble" },
-      { Icon: PixelIcons.PixelShovelIcon, name: "Shovel" },
+
       { Icon: PixelIcons.PixelSparklesIcon, name: "Sparkles" },
       { Icon: PixelIcons.PixelStarIcon, name: "Star" },
       { Icon: PixelIcons.PixelStar2Icon, name: "Star 2" },
@@ -172,60 +182,135 @@ const ICON_GROUPS: PixelIconGroup[] = [
 export default function PixelIconsPage() {
   return (
     <div className="w-full space-y-10">
-      <section className="space-y-3">
-        <div className="prose prose-sm max-w-none text-muted-foreground">
-          <h2>Visualizer</h2>
-          <Collapsible>
-            <CollapsibleTrigger className="relative flex items-center gap-1.5 py-2 transition-colors hover:text-foreground md:-ms-5.5">
-              <CollapsibleIcon side="inline-start" />
-              Instructions
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <ul>
-                <li>
-                  <strong>Choose icons to animate. </strong>
-                  Click any icon to add or remove it from the animation. Badges show the order, and dots below the preview jump to a
-                  specific step.
-                </li>
-                <li>
-                  <strong>Specify timing function. </strong> Choose from linear, ease, or spring (uses{" "}
-                  <LinkOut href="https://motion.dev/docs/react-use-spring">Motion</LinkOut>).
-                </li>
-                <li>
-                  <strong>Set reordering strategy. </strong>
-                  <ul>
-                    <li>
-                      <strong>Nearest</strong> animates pixels by shortest travel distance. This can make some areas of the icon resolve
-                      faster than others but the new icon becomes recognizable sooner.
-                    </li>
-                    <li>
-                      <strong>Reading</strong> reorders pixels from left-to-right, top-to-bottom. In many cases, this makes the icon appear
-                      to flip.
-                    </li>
-                    <li>
-                      <strong>Radial</strong> sorts based on distance from the icon center. This is the most graceful option.
-                    </li>
-                    <li>
-                      <strong>Scatter</strong> spreads pixels outward before resolving. This is best for a glitch effect.
-                    </li>
-                    <li>
-                      <strong>Compress</strong> pulls pixels to the center first. This mimics a scale-down animation.
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <strong>Adjust the speed. </strong>
-                  The control uses playback-style labels: <strong>1x</strong> is the default 200ms transition, <strong>0.5x</strong> slows
-                  it to 400ms, and <strong>0.25x</strong> stretches it to 800ms.
-                </li>
-              </ul>
-            </CollapsibleContent>
-          </Collapsible>
+      <div className="prose">
+        <p>
+          The nice pixel typeface you may notice around here is <LinkOut href="https://departuremono.com/" text="Departure Mono" />,
+          designed by <LinkOut href="https://helenazhang.com/" text="Helena Zhang" />. I first saw it used on{" "}
+          <LinkOut href="https://www.makingsoftware.com" text="Making Software" /> by{" "}
+          <LinkOut href="https://alcohollick.com/" text="Dan Hollick" />. The font has lots of non-text characters built-in, especially some
+          great ones for box drawings and ASCII art.
+        </p>
+
+        <p>Just look at this progress bar!</p>
+        <div className="mx-auto max-w-3xs">
+          <span className="inline border border-current font-pixel text-2xs">████████▒▒▒▒▒░░░░░░░░░░░</span>
         </div>
 
-        <h2 className="font-pixel text-[11px] uppercase">Morphs</h2>
-        <PixelIconMorphVisualizer />
+        <Demo caption="A few Departure Mono symbols">
+          <DepartureMonoSymbolDemo />
+        </Demo>
+
+        <p>
+          Departure is drawn on an 11x11 pixel grid, so characters are pixel-perfect at multiples of 11px. If you want to fudge it a little
+          bigger to 16.5px, one side of a stroke will land on a pixel edge, so it remains decently crisp when using characters as
+          replacements for 12-, 16-, 20-, or 24px SVGs.
+        </p>
+
+        <Demo caption="A few Departure Mono text sizes">
+          <DepartureMonoTextDemo />
+        </Demo>
+      </div>
+
+      <div className="prose prose-sm max-w-none">
+        <p>
+          I'm using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other places.
+          You saw all those chevrons above, we could use that for dropdowns perhaps.
+        </p>
+        <p>
+          The 28-pixel constraint started with the light/dark mode toggle. My first idea was simple and commonplace enough: a sun icon
+          rotates into a moon icon and call it a day. With a regular SVG, this works just fine.
+        </p>
+      </div>
+
+      <Demo caption="The original idea works naturally with outline icons." centerContent innerClass="p-4">
+        <TablerRotationIdeaDemo />
+      </Demo>
+
+      <section className="prose">
+        <p>
+          But pixels don't rotate. Elements painted with pixels can <em>appear</em> to rotate, but really it's just other pixels along its
+          path lighting up; there's no continuity, so having a little rectangle spin into place breaks the metaphor. The two states needed
+          to use the same number of pixels, and they ought to reshuffle rather than rotate.
+        </p>
+        <p>
+          <small className="leading-snug text-muted-foreground">
+            Nor do they slide diagonally, but we're suspending disbelief on that count. I could have each pixel animate using{" "}
+            <LinkOut
+              href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timing-function#stepsinteger_step-position"
+              text="steps"
+            />{" "}
+            or <LinkOut href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/calcMode#discrete" text="SMIL" />, but
+            then the animation would be way too slow.
+          </small>
+        </p>
+        <h2>Why 28 pixels?</h2>
+        <p>
+          That's just how many pixels it took for the sun to look right. That's literally it. The moon only needed 24, so it earned a little
+          star.
+        </p>
       </section>
+
+      <Demo
+        caption="The sun and moon share a 28-rect budget, so the pixels rearrange instead of rotating."
+        centerContent
+        innerClass="min-h-3xs"
+      >
+        <PixelSunMoonMorphDemo />
+      </Demo>
+
+      <div className="prose prose-sm max-w-none">
+        <p>
+          Then I saw <LinkOut href="https://benji.org/morphing-icons-with-claude" text="Benji's post" /> about morphing icons with Claude.
+          He uses three-line SVGs, which got me wondering how many more icons I could squeeze out of that same 28-pixel budget. Turns out:
+          quite a few.
+        </p>
+        <p>
+          There are a lot of duplicates and variants in here. They are mostly different attempts at getting the silhouette to feel right.
+          One day I&apos;ll clean them up, but I kind of like showing the messy middle. It makes the process more honest.
+        </p>
+      </div>
+
+      <Demo caption="The current 28-rect morphable set." innerClass="p-3">
+        <MorphablePixelIconScrollDemo />
+      </Demo>
+
+      <div className="prose prose-sm max-w-none">
+        <p>
+          I made the icons in Figma, then had Codex use the Figma MCP to grab the rectangle coordinates and turn them into a tiny{" "}
+          <Code variant="inline">createPixelIcon</Code> helper. Each icon is just a compact coordinate string that gets rendered as{" "}
+          <Code variant="inline">&lt;rect&gt;</Code> elements inside an SVG wrapper.
+        </p>
+      </div>
+
+      <Demo caption="Click an icon to inspect the coordinate string behind it." innerClass="p-3">
+        <PixelIconDataInspectorDemo />
+      </Demo>
+
+      <div className="prose prose-sm max-w-none">
+        <p>
+          From there, the visualizer became the useful part. It lets me try different ways of pairing pixels between two icons, then test
+          whether the transition feels like a clean rearrangement or like someone shook the icon in a box.
+        </p>
+        <p>The animation controls are deliberately small:</p>
+        <ul>
+          <li>
+            <strong>Linear</strong> moves each rectangle at a constant rate.
+          </li>
+          <li>
+            <strong>Ease</strong> uses a softer timing curve for a more familiar UI feel.
+          </li>
+          <li>
+            <strong>Spring</strong> is snappier and better for quick state changes, though it is less useful for slow inspection.
+          </li>
+        </ul>
+      </div>
+
+      <Demo caption="Slow-motion samples of the animation options." innerClass="p-3">
+        <PixelAnimationOptionsDemo />
+      </Demo>
+
+      <h2 className="font-pixel text-[11px] uppercase">Morphs</h2>
+      <PixelIconMorphVisualizer />
 
       <section className="prose space-y-3">
         <h2 className="">Stateful Morphs</h2>
