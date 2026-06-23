@@ -29,7 +29,7 @@ export function ProjectImageCarousel({
   const hasCaptions = slides.some((s) => Boolean(s.caption));
 
   return (
-    <div className={cn("not-prose relative mx-auto w-full lg:max-w-3xl", className)}>
+    <div className={cn("not-prose relative mx-auto w-full", className)}>
       <Carousel
         orientation={orientation}
         opts={

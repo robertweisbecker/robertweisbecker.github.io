@@ -11,7 +11,7 @@ export type ImageProps =
   | (Common & { src: StaticImageData; width?: number; height?: number })
   | (Common & { src: string; width: number; height: number });
 
-const imgClassName = "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]";
+const imgClassName = "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)---spacing(1))]";
 
 export function Image(props: ImageProps) {
   const { src, alt = "", caption, className, priority, sizes: sizesProp, quality, placeholder, loading } = props;
@@ -37,7 +37,7 @@ export function Image(props: ImageProps) {
         className
       )}
     >
-      <div className="sm:squircle w-full bg-card py-1 shadow-border-sm sm:rounded-xl sm:px-1 dark:bg-muted">
+      <div className="sm:squircle w-full bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1 dark:bg-muted">
         <NextImage
           src={src}
           alt={alt}

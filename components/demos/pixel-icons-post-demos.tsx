@@ -4,8 +4,8 @@ import { CodeBlock } from "@/components/code-block";
 import * as PixelIcons from "@/components/icons-pixel";
 import { PixelIconMorph, type PixelIconMorphAnimation } from "@/components/pixel-icon-morph";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
 import { IconMoon, IconPlayerPlayFilled, IconSun } from "@tabler/icons-react";
@@ -25,6 +25,10 @@ const inspectedIcons: PixelIcons.MorphablePixelIconName[] = [
   "PixelFolderIcon",
   "PixelSunSmallIcon",
   "PixelMoon2Icon",
+  "PixelBoldIcon",
+  "PixelBold2Icon",
+  "PixelItalicIcon",
+  "PixelUnderlineIcon",
 ];
 
 const animationOptions: {
@@ -208,7 +212,7 @@ export function PixelIconDataInspectorDemo() {
   const [selectedIcon, setSelectedIcon] = React.useState<PixelIcons.MorphablePixelIconName>("PixelCopyIcon");
   const data = PixelIcons.pixelIconData[selectedIcon];
   const Icon = iconComponents[selectedIcon];
-  const code = `createPixelIcon("${selectedIcon}", ${data.width}, ${data.height}, "${data.data}")`;
+  const code = `createPixelIcon(\n  "${selectedIcon}",\n  ${data.width},\n  ${data.height},\n  "${data.data}"\n)`;
 
   return (
     <div className="grid gap-3">
@@ -237,10 +241,11 @@ export function PixelIconDataInspectorDemo() {
         })}
       </ToggleGroup>
       <Card variant="muted" size="sm">
+        <CardHeader>
+          <Icon className="size-[44px]" aria-hidden />
+        </CardHeader>
+
         <CardContent className="grid gap-3 md:grid-cols-[auto_1fr]">
-          <div className="grid place-items-center rounded-lg bg-background p-4 text-foreground shadow-border-xs">
-            <Icon className="size-[44px]" aria-hidden />
-          </div>
           <CodeBlock code={code} language="tsx" filename={`${selectedIcon}.tsx`} className="min-w-0" />
         </CardContent>
       </Card>

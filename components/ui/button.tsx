@@ -68,7 +68,7 @@ const buttonVariants = cva(
       size: {
         md: "[--button-x:--spacing(3.5)] [--button-y:--spacing(2)] h-button",
         xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-sm)] text-[0.6875rem]/4 gap-1",
-        sm: "h-button-sm [--button-x:--spacing(2)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)] text-[0.8125rem]  ",
+        sm: "h-button-sm [--button-x:--spacing(3)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)] text-[0.8125rem] gap-(--button-y)",
         lg: "h-button-lg [--button-x:--spacing(4)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-base",
         icon: "size-button [&_svg:not([class*='size-'])]:size-4",
         "icon-xs": "size-button-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-xs)]",

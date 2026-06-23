@@ -10,7 +10,7 @@ const alertVariants = cva(
       variant: {
         default: "bg-card text-card-foreground [&>svg]:text-muted-foreground ",
         secondary: "bg-(--hue-25) dark:bg-(--hue-900) text-secondary-foreground [&>svg]:text-primary outline-secondary-foreground/20",
-        neutral: "bg-neutral-75 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72 outline-border",
+        neutral: "bg-neutral-75/50 text-foreground dark:bg-neutral-900 [&>svg]:text-muted-foreground/72 outline-border",
         info: "bg-info text-info-foreground outline-info-primary/20 [&>svg]:text-info-primary",
         success: "bg-success text-success-foreground outline-success-primary/20 [&>svg]:text-success-primary",
         warning: "bg-warning text-warning-foreground outline-warning-primary/20 [&>svg]:text-warning-primary",

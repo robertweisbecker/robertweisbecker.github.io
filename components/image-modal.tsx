@@ -116,7 +116,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
           aria-label="View fullscreen image"
           className={cn(
             "group/trigger block w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
-            "sm:squircle relative bg-card py-1 shadow-border-sm sm:rounded-xl sm:px-1 dark:bg-muted"
+            "sm:squircle relative bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1 dark:bg-muted"
           )}
         >
           <NextImage
@@ -124,7 +124,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             sizes="(max-width: 768px) 100vw, 720px"
-            className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)-(--spacing(1)))]"
+            className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)-(--spacing(1)))]"
           />
           <span
             aria-hidden
@@ -149,7 +149,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
         <Cambio.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
         <Cambio.Popup
           className={cn(
-            "relative z-100 mx-auto my-0 overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-2xl sm:shadow-border-xl",
+            "relative z-100 mx-auto my-0 overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-3xl sm:shadow-border-xl",
             // Width is capped by the viewport height via the image ratio so tall
             // images always fit fully on screen instead of being clipped.
             "w-[min(100vw,calc((100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-3rem)*var(--image-ratio)))]",

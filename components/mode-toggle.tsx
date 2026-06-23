@@ -37,7 +37,7 @@ export function ModeToggle({ label, className, size = "icon-sm", variant = "ghos
         render={<Button variant={variant} size={size} onClick={handleClick} {...props} />}
       >
         <SunMoonIcon icon={icon} className="size-[16.5px]" />
-        {label && <span className="min-w-[5ch]">{resolvedTheme}</span>}
+        {label && <span className="min-w-[5ch]">{resolvedTheme === "dark" ? "Dark" : "Light"}</span>}
       </TooltipTrigger>
       <TooltipContent>Toggle mode</TooltipContent>
     </Tooltip>

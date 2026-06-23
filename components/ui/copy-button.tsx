@@ -94,9 +94,9 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
                 duration: 0.1,
               }}
             >
-              <circle cx="12" cy="12" r="12" className="fill-border" />
+              <rect x="1" y="1" width="22" rx="11" height="22" className="fill-border" stroke="currentColor" strokeWidth={1.5} />
               <path
-                className={isCopied ? "animate-svg-draw" : ""}
+                className={cn(isCopied ? "animate-svg-draw" : "")}
                 d="M6.5 13.5L11 17.8C12 14 14 10 16.5 7.5"
                 stroke="currentColor"
                 strokeWidth="2"

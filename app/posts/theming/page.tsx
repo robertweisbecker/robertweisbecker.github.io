@@ -110,8 +110,12 @@ export default function ThemingPostPage() {
             <Link href="/projects/oklch" className="link">
               writeup
             </Link>{" "}
-            of the okLCH color system I made. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to
-            this site, so we end up with a pretty close approximation.
+            of the okLCH color system I created for the{" "}
+            <Link href="/projects/unified-design-language" className="link">
+              Unified Design Language
+            </Link>{" "}
+            project. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so we end up with
+            a pretty close approximation.
           </p>
           <p>
             You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the page, but you can always
@@ -122,8 +126,8 @@ export default function ThemingPostPage() {
           <Alert>
             <AlertTitle>Note</AlertTitle>
             <AlertDescription>
-              I guess Tailwind now converts oklch to okLab when compiling (as of v4.2 or so?), so inspected values may not match what&apos;s
-              in the code. Shouldn&apos;t really matter though, since the two convert cleanly, but just FYI.
+              It seems LightningCSS (used by Tailwind) now converts oklch to okLab when compiled as of ~v4.2, so inspected values may not
+              match what&apos;s in the code. Shouldn&apos;t really matter though, since the two convert cleanly, but just FYI.
             </AlertDescription>
           </Alert>
         </section>
@@ -218,9 +222,11 @@ export default function ThemingPostPage() {
               variables and utility classes (<Code variant="plain">bg-ruby-500</Code>, <Code variant="plain">text-sand-200</Code>, etc.).
             </p>
             <p>
-              Two alias scales — <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code> — act as indirection
-              layers. By default they point to the <Code variant="plain">sand</Code> palette, but setting{" "}
-              <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps the entire scale.
+              Two alias scales, <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code>, help power theming beyond
+              what the semantic tokens provide. This also lets us re-theme components without having to touch the semantic token definitions
+              if we don't need to. By default, they both point to the <Code variant="plain">sand</Code> palette, but setting{" "}
+              <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps the entire scale for
+              another color ramp.
             </p>
             <Heading level={4}>File structure</Heading>
             <CodeBlock
@@ -262,8 +268,9 @@ components/
               variables are overridden on a descendant.
             </p>
             <p>
-              (Despite my reservations, I&apos;m using shadcn tokens on this site to see what the hype&apos;s about / how my colors work
-              with them; this isn&apos;t what&apos;s used in the actual project.)
+              (I think they're too limited for practical use, but I&apos;m using shadcn tokens on this site. It's mostly a thought
+              experiment to see how far I can push them / test how my colors work with them; this isn&apos;t what&apos;s used in the actual
+              project.)
             </p>
 
             <CodeBlock
@@ -291,7 +298,7 @@ components/
             values cascade down and re-scale instances.
           </p>
           <p>
-            I also capped the values with some eyeballing to avoid absurdly large radii; I&apos;d prefer to use a more precise approach, but
+            I also capped the values with some eyeballing to avoid overly large radii; I&apos;d prefer to use a more precise approach, but
             this is a quick and dirty solution.
           </p>
 

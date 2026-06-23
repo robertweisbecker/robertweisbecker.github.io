@@ -17,6 +17,9 @@ import oklchStatusSuccess from "@/public/assets/oklch/status-success.png";
 import oklchStatusWarning from "@/public/assets/oklch/status-warning.png";
 import oklchStatusError from "@/public/assets/oklch/status-error.png";
 import oklchStatusHighlight from "@/public/assets/oklch/status-highlight.png";
+import oklchThemeBuilder from "@/public/assets/oklch/theme-builder.png";
+import oklchCallouts from "@/public/assets/oklch/callouts.png";
+import oklchBadges from "@/public/assets/oklch/badges.png";
 import { TreeIconRichText } from "@/components/icons-tree";
 import { Badge } from "@/components/ui/badge";
 
@@ -180,6 +183,10 @@ const theme = {
 };
 ```
 
+<ImageModal src={oklchBadges} caption="Badges in the default theme" />
+
+<ImageModal src={oklchCallouts} caption="Callouts in the default theme" />
+
 You _can_ override individual tokens for specific needs but must make sure contrast is maintained, since the system assigns foreground and background tokens based on expected step values by default (the step being a proxy for luminance).
 
 It sounds manual, but it can just be a matter of shifting a few tokens up or down the scale.
@@ -209,8 +216,6 @@ With 16 hues and 8 neutrals, we can map colors to semantic slots without having 
 
 Need your primary color to be red? _Cool, your error colors can be pink or magenta. Or ruby or orange._ Going for something more muted? _Try navy for info and gold for warnings._
 
-Most components also support raw `colorScheme` props to use a specific color from the system, even if it's not one of your designated slots.
-
 <ProjectImageCarousel
   slides={[
     { src: oklchStatusError, alt: "Error status palette generated from the OKLCH color system." },
@@ -222,9 +227,9 @@ Most components also support raw `colorScheme` props to use a specific color fro
   fade
 />
 
-![Badges](/assets/oklch/badges.png)
+To visualize how different color overrides might look with the new system, I made a theme builder tool for Storybook (with a little help from Opus):
 
-![Callouts](/assets/oklch/callouts.png)
+<ImageModal src={oklchThemeBuilder} alt="Theme builder" />
 
 ### Dataviz
 

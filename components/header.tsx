@@ -39,7 +39,7 @@ export function Header() {
   const filteredProjects = projects.filter((project) => project.published);
 
   return (
-    <nav className={cn("sticky top-0 isolate z-50 bg-background")}>
+    <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-background")}>
       <div className="mx-auto flex h-12 max-w-6xl items-center gap-1 py-2 max-sm:px-2">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           <Favicon className="size-4 text-secondary-foreground" />

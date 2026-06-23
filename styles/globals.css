@@ -167,7 +167,7 @@
   --primary-foreground: var(--hue-25);
   --secondary: var(--hue-100);
   --secondary-foreground: var(--hue-700);
-  --muted: --alpha(var(--neutral-400) / 8%);
+  --muted: --alpha(var(--neutral-400) / 12%);
   /* --muted: var(--neutral-75); */
   --muted-foreground: var(--neutral-500);
   --accent: --alpha(var(--neutral-400) / 16%);
@@ -431,7 +431,7 @@
 
 @utility link {
   :where(&) {
-    @apply relative isolate inline rounded-[.25em] wrap-break-word break-all text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 outline-none;
+    @apply relative isolate inline rounded-[.25em] wrap-break-word break-all text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring;
     svg {
       @apply inline max-h-[1em] max-w-[1em];
     }
@@ -441,9 +441,6 @@
 
     @variant hover {
       @apply bg-accent decoration-current/90;
-    }
-    @variant focus-visible {
-      @apply rounded outline-2 outline-offset-2 outline-ring;
     }
   }
 }

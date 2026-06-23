@@ -68,6 +68,8 @@ const ICON_GROUPS: PixelIconGroup[] = [
     title: "Documents",
     caption: "Files, notes, and written bits",
     icons: [
+      { Icon: PixelIcons.PixelBoldIcon, name: "Bold" },
+      { Icon: PixelIcons.PixelBold2Icon, name: "Bold 2" },
       { Icon: PixelIcons.PixelBookIcon, name: "Book" },
       { Icon: PixelIcons.PixelBookOpenIcon, name: "Book Open" },
       { Icon: PixelIcons.PixelClipboardIcon, name: "Clipboard" },
@@ -75,12 +77,14 @@ const ICON_GROUPS: PixelIconGroup[] = [
       { Icon: PixelIcons.PixelEnvelopeIcon, name: "Envelope" },
       { Icon: PixelIcons.PixelFileIcon, name: "File" },
       { Icon: PixelIcons.PixelFileFoldedIcon, name: "File Folded" },
+      { Icon: PixelIcons.PixelItalicIcon, name: "Italic" },
       { Icon: PixelIcons.PixelMarkdownIcon, name: "Markdown" },
       { Icon: PixelIcons.PixelMarkdown2Icon, name: "Markdown 2" },
       { Icon: PixelIcons.PixelNewspaperIcon, name: "Newspaper" },
       { Icon: PixelIcons.PixelNoteIcon, name: "Note" },
       { Icon: PixelIcons.PixelNotepadIcon, name: "Notepad" },
       { Icon: PixelIcons.PixelPaperclipIcon, name: "Paperclip" },
+      { Icon: PixelIcons.PixelUnderlineIcon, name: "Underline" },
     ],
   },
   {
@@ -184,6 +188,7 @@ export default function PixelIconsPage() {
     <div className="w-full space-y-10">
       <div className="prose">
         <p>A collection of icons formed by animating 28 pixels around an 11x11 grid</p>
+
         <h2>The need for icons</h2>
         <p>
           The nice pixel typeface you may notice around here is <LinkOut href="https://departuremono.com/" text="Departure Mono" />,
@@ -234,7 +239,7 @@ export default function PixelIconsPage() {
       </div>
 
       <section className="prose prose-sm max-w-none">
-        <h2>Custom Icons v1</h2>
+        <h2>Custom Icons</h2>
         <p>I landed on 2 categories of icons: </p>
         <ol>
           <li>
@@ -247,7 +252,7 @@ export default function PixelIconsPage() {
           </li>
         </ol>
 
-        <Demo centerContent className="not-prose" title="Version 1">
+        <Demo centerContent className="not-prose" title="UI icons">
           <div className="flex flex-wrap gap-4">
             <span className="flex flex-col items-center gap-2">
               <PixelIcons.PixelChevronDownIcon className="size-[22px] shrink-0" /> <Code variant="plain">ChevronDown</Code>
@@ -266,6 +271,9 @@ export default function PixelIconsPage() {
             </span>
           </div>
         </Demo>
+        <Demo title="A sample of the morphing icons" innerClass="p-3">
+          <PixelIconMorphToggles />
+        </Demo>
         <h2>Why 28 pixels?</h2>
         <p>
           The 28-pixel constraint started with the light/dark mode toggle. My first idea was simple and commonplace enough: a sun icon
@@ -279,7 +287,7 @@ export default function PixelIconsPage() {
 
       <section className="prose">
         <p>
-          But how could I do this with pixel icons? Pixels don't rotate. Elements painted with pixels can <em>appear</em> to rotate, but
+          But how might one accomplish this with pixels? They don't rotate. Elements painted with pixels can <em>appear</em> to rotate, but
           really it's just other pixels along its path lighting up. Pixels are discrete and don't maintain the kind of illusory continuity
           you'd get from a rotated path, so having a little rectangle spin into place breaks the metaphor.{" "}
         </p>
@@ -298,16 +306,17 @@ export default function PixelIconsPage() {
             then the animation would be way too slow and jerky.
           </small>
         </p>
-
         <p>
           So, why 28 pixels? That's just how many pixels it took for the sun to look right, and it's the first one I made. That's all. This
           could work with any number of pixels, and you don't even need a constant number; you could have unused pixels dissolve if you
-          wanted. The moon only needed 24, so it earned a little star. Good job, buddy.
+          wanted. Speaking of which: the moon only needed 24, so it earned a little star. Good job, buddy.
         </p>
-        <p>
+        <p className="text-pretty">
           In reality, each "pixel" is a <Code variant="inline-component">rect</Code> element with a width and height of 1px. Motion animates
-          each's <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new position. It's
-          self-evident that the path-based approach is smoother, but that's not the point.
+          each's <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new position.
+        </p>{" "}
+        <p>
+          It's self-evident that the path-based approach is smoother, but that's not the point.
           <mark>We don't want these to look polished, the icons are inherently raw and imperfect.</mark> We can add a hint of gracefulness
           to their rearranging, but that's more a byproduct of easing.
         </p>
@@ -353,33 +362,10 @@ export default function PixelIconsPage() {
           From there, the visualizer became the useful part. It lets me try different ways of pairing pixels between two icons, then test
           whether the transition feels like a clean rearrangement or like someone shook the icon in a box.
         </p>
-        <p>The animation controls are deliberately small:</p>
-        <ul>
-          <li>
-            <strong>Linear</strong> moves each rectangle at a constant rate.
-          </li>
-          <li>
-            <strong>Ease</strong> uses a softer timing curve for a more familiar UI feel.
-          </li>
-          <li>
-            <strong>Spring</strong> is snappier and better for quick state changes, though it is less useful for slow inspection.
-          </li>
-        </ul>
       </div>
 
-      <Demo caption="Slow-motion samples of the animation options." innerClass="p-3">
-        <PixelAnimationOptionsDemo />
-      </Demo>
-
-      <h2 className="font-pixel text-[11px] uppercase">Morphs</h2>
       <PixelIconMorphVisualizer />
 
-      <section className="prose space-y-3">
-        <h2 className="">Stateful Morphs</h2>
-        <Demo caption="Single-button toggles powered by PixelIconMorph." innerClass="p-3">
-          <PixelIconMorphToggles />
-        </Demo>
-      </section>
       <section className="prose">
         <h2>All icons</h2>
         {ICON_GROUPS.map((group) => (

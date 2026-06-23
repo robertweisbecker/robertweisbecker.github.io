@@ -118,7 +118,7 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure data-demo className={cn("not-prose flex flex-col rounded-xl", !plain ? "bg-sidebar" : "", className)} {...props}>
+    <figure data-demo className={cn("not-prose flex flex-col rounded-xl", !plain ? "bg-muted" : "", className)} {...props}>
       {hasHeader ? (
         <header
           className={cn(
