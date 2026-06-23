@@ -183,6 +183,8 @@ export default function PixelIconsPage() {
   return (
     <div className="w-full space-y-10">
       <div className="prose">
+        <p>A collection of icons formed by animating 28 pixels around an 11x11 grid</p>
+        <h2>The need for icons</h2>
         <p>
           The nice pixel typeface you may notice around here is <LinkOut href="https://departuremono.com/" text="Departure Mono" />,
           designed by <LinkOut href="https://helenazhang.com/" text="Helena Zhang" />. I first saw it used on{" "}
@@ -191,19 +193,39 @@ export default function PixelIconsPage() {
           great ones for box drawings and ASCII art.
         </p>
 
-        <p>Just look at this progress bar!</p>
-        <div className="mx-auto max-w-3xs">
-          <span className="inline border border-current font-pixel text-2xs">████████▒▒▒▒▒░░░░░░░░░░░</span>
-        </div>
-
-        <Demo caption="A few Departure Mono symbols">
-          <DepartureMonoSymbolDemo />
+        <Demo caption="Just look at this progress bar!">
+          <div className="mx-auto max-w-3xs text-center">
+            <span className="inline border border-current font-pixel text-2xs">████████▒▒▒▒▒░░░░░░░░░░░</span>
+          </div>
         </Demo>
 
         <p>
-          Departure is drawn on an 11x11 pixel grid, so characters are pixel-perfect at multiples of 11px. If you want to fudge it a little
-          bigger to 16.5px, one side of a stroke will land on a pixel edge, so it remains decently crisp when using characters as
-          replacements for 12-, 16-, 20-, or 24px SVGs.
+          I'm using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other places.
+          At first glance, it seemed like we had all the bases covered, and I could replace my Tabler icons with Departure Mono symbols.
+        </p>
+        <Demo caption="A few Departure Mono symbols">
+          <DepartureMonoSymbolDemo />
+        </Demo>
+        <p>
+          One issue: all the chevrons are horizontal. At first, I just rotated a single <span className="font-pixel text-2xs">{">"}</span>{" "}
+          character for collapsibles, dropdowns, and pagination, but then I wanted an up-down chevron for my Select component. And a pause
+          icon. Do I stack two chevrons and rotate them separate directions? Should I use a sideways equal sign for my pause icon?
+        </p>
+        <p>
+          Yes to both. Then I hated looking at the code, so I hopped into Figma and made some SVGs to fill in the gaps. That begged another
+          question: what if I want something a little more expressive or specific?
+        </p>
+
+        <h2>Pixel perfect?</h2>
+        <p>
+          Departure is drawn at an albeit irregular size of 11 pixels, but it scales relatively well. Since characters are pixel-perfect at
+          font-size multiples of 11px, you can use a half-step at 16.5px to make each "pixel" land on a pixel edge on at least one side.
+          This equates to an icon with a 1.5px stroke (like Lucide) and remains decently crisp. Given these constraints, you end up with 11,
+          16.5, and 22px size options, which can be used as replacements for common SVG sizes like 12, 16, 20, or 24px.
+        </p>
+        <p>
+          For monospacing, the em box of a given character is 8×14, with ascenders or descenders exceeding the 11px bounding box. This is
+          fine, and never really came up.
         </p>
 
         <Demo caption="A few Departure Mono text sizes">
@@ -211,70 +233,110 @@ export default function PixelIconsPage() {
         </Demo>
       </div>
 
-      <div className="prose prose-sm max-w-none">
-        <p>
-          I'm using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other places.
-          You saw all those chevrons above, we could use that for dropdowns perhaps.
-        </p>
+      <section className="prose prose-sm max-w-none">
+        <h2>Custom Icons v1</h2>
+        <p>I landed on 2 categories of icons: </p>
+        <ol>
+          <li>
+            Symbolic icons for UI affordances, filling in any gaps in Departure Mono. These can use any number of pixels, typically 16 or
+            fewer, and can have open terminals or shapes.
+          </li>
+          <li>
+            Pictorial icons that always use <mark data-hue="blue">28 pixels</mark>. These all have closed shapes for consistency and can
+            animate from one to another.
+          </li>
+        </ol>
+
+        <Demo centerContent className="not-prose" title="Version 1">
+          <div className="flex flex-wrap gap-4">
+            <span className="flex flex-col items-center gap-2">
+              <PixelIcons.PixelChevronDownIcon className="size-[22px] shrink-0" /> <Code variant="plain">ChevronDown</Code>
+            </span>
+            <span className="flex flex-col items-center gap-2">
+              <PixelIcons.PixelChevronsIcon className="size-[22px] shrink-0" /> <Code variant="plain">Chevrons</Code>
+            </span>
+            <span className="flex flex-col items-center gap-2">
+              <PixelIcons.PixelLoaderIcon className="size-[22px] shrink-0" /> <Code variant="plain">Loader</Code>
+            </span>
+            <span className="flex flex-col items-center gap-2">
+              <PixelIcons.PixelShuffleIcon className="size-[22px] shrink-0" /> <Code variant="plain">Shuffle</Code>
+            </span>
+            <span className="flex flex-col items-center gap-2">
+              <PixelIcons.PixelRedoIcon className="size-[22px] shrink-0" /> <Code variant="plain">Redo</Code>
+            </span>
+          </div>
+        </Demo>
+        <h2>Why 28 pixels?</h2>
         <p>
           The 28-pixel constraint started with the light/dark mode toggle. My first idea was simple and commonplace enough: a sun icon
           rotates into a moon icon and call it a day. With a regular SVG, this works just fine.
         </p>
-      </div>
-
-      <Demo caption="The original idea works naturally with outline icons." centerContent innerClass="p-4">
-        <TablerRotationIdeaDemo />
-      </Demo>
+        <p>We can rig this up with Tabler and Motion:</p>
+        <Demo caption="The original idea works naturally with path-based SVGs." centerContent innerClass="p-4">
+          <TablerRotationIdeaDemo />
+        </Demo>
+      </section>
 
       <section className="prose">
         <p>
-          But pixels don't rotate. Elements painted with pixels can <em>appear</em> to rotate, but really it's just other pixels along its
-          path lighting up; there's no continuity, so having a little rectangle spin into place breaks the metaphor. The two states needed
-          to use the same number of pixels, and they ought to reshuffle rather than rotate.
+          But how could I do this with pixel icons? Pixels don't rotate. Elements painted with pixels can <em>appear</em> to rotate, but
+          really it's just other pixels along its path lighting up. Pixels are discrete and don't maintain the kind of illusory continuity
+          you'd get from a rotated path, so having a little rectangle spin into place breaks the metaphor.{" "}
         </p>
         <p>
-          <small className="leading-snug text-muted-foreground">
-            Nor do they slide diagonally, but we're suspending disbelief on that count. I could have each pixel animate using{" "}
+          The two states needed to use <mark>the same number of pixels</mark>, and the pixels ought to <mark>reshuffle</mark> rather than
+          rotate.
+        </p>
+        <p>
+          <small className="leading-none text-muted-foreground">
+            Nor do pixels slide diagonally, but we're suspending disbelief on that count. I could have each pixel animate using{" "}
             <LinkOut
               href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timing-function#stepsinteger_step-position"
               text="steps"
             />{" "}
             or <LinkOut href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/calcMode#discrete" text="SMIL" />, but
-            then the animation would be way too slow.
+            then the animation would be way too slow and jerky.
           </small>
         </p>
-        <h2>Why 28 pixels?</h2>
+
         <p>
-          That's just how many pixels it took for the sun to look right. That's literally it. The moon only needed 24, so it earned a little
-          star.
+          So, why 28 pixels? That's just how many pixels it took for the sun to look right, and it's the first one I made. That's all. This
+          could work with any number of pixels, and you don't even need a constant number; you could have unused pixels dissolve if you
+          wanted. The moon only needed 24, so it earned a little star. Good job, buddy.
+        </p>
+        <p>
+          In reality, each "pixel" is a <Code variant="inline-component">rect</Code> element with a width and height of 1px. Motion animates
+          each's <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new position. It's
+          self-evident that the path-based approach is smoother, but that's not the point.
+          <mark>We don't want these to look polished, the icons are inherently raw and imperfect.</mark> We can add a hint of gracefulness
+          to their rearranging, but that's more a byproduct of easing.
         </p>
       </section>
 
-      <Demo
-        caption="The sun and moon share a 28-rect budget, so the pixels rearrange instead of rotating."
-        centerContent
-        innerClass="min-h-3xs"
-      >
+      <Demo caption="Rotating paths vs. rearranging pixels" centerContent innerClass="min-h-3xs">
         <PixelSunMoonMorphDemo />
       </Demo>
 
       <div className="prose prose-sm max-w-none">
+        <h2>Going overboard</h2>
         <p>
-          Then I saw <LinkOut href="https://benji.org/morphing-icons-with-claude" text="Benji's post" /> about morphing icons with Claude.
-          He uses three-line SVGs, which got me wondering how many more icons I could squeeze out of that same 28-pixel budget. Turns out:
-          quite a few.
+          Then I saw <LinkOut href="https://benji.org/morphing-icons-with-claude" text="this post" /> from Benji Taylor about morphing icons
+          with Claude, in which he's animating three-line SVGs. That got me wondering how many more icons I could squeeze out of 28 pixels.
+          Turns out quite a few.
         </p>
+
+        <Demo caption="The current 28-rect morphable set." innerClass="p-3">
+          <MorphablePixelIconScrollDemo />
+        </Demo>
+
         <p>
-          There are a lot of duplicates and variants in here. They are mostly different attempts at getting the silhouette to feel right.
-          One day I&apos;ll clean them up, but I kind of like showing the messy middle. It makes the process more honest.
+          There are a lot of duplicates and variants in here. It's mostly different attempts at getting the shapes right, and looping back
+          to see which ones animate well. One day I&apos;ll clean them up, but we're experimenting here, folks.
         </p>
       </div>
 
-      <Demo caption="The current 28-rect morphable set." innerClass="p-3">
-        <MorphablePixelIconScrollDemo />
-      </Demo>
-
       <div className="prose prose-sm max-w-none">
+        <h2>Codex to the rescue</h2>
         <p>
           I made the icons in Figma, then had Codex use the Figma MCP to grab the rectangle coordinates and turn them into a tiny{" "}
           <Code variant="inline">createPixelIcon</Code> helper. Each icon is just a compact coordinate string that gets rendered as{" "}
@@ -337,9 +399,9 @@ function IconGrid({ icons }: { icons: PixelIconItem[] }) {
   return (
     <ul className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
       {icons.map(({ Icon, name }) => (
-        <li key={name} className="flex min-w-0 items-center gap-2 rounded-md bg-background px-2.5 py-2 text-xs shadow-border-xs">
-          <span className="grid size-7 shrink-0 place-items-center rounded bg-muted text-foreground">
-            <Icon className="size-[18px]" aria-hidden />
+        <li key={name} className="flex min-w-0 items-center gap-1 text-2xs">
+          <span className="grid size-6 shrink-0 place-items-center rounded border text-foreground">
+            <Icon className="size-[11px]" aria-hidden />
           </span>
           <span className="min-w-0 truncate text-muted-foreground">{name}</span>
         </li>

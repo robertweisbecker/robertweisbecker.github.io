@@ -79,7 +79,7 @@ export function FocusPolaroidFan({ className }: { className?: string }) {
   const [hoveredId, setHoveredId] = React.useState<string | null>(null);
 
   return (
-    <div className={cn("flex w-full flex-col items-center border p-4", className)}>
+    <div className={cn("flex w-full flex-col items-center", className)}>
       <div className="relative h-[400px] w-full overflow-hidden bg-muted" onClick={() => setFocusedId(null)} role="presentation">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative h-full w-full">

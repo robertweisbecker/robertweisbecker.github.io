@@ -186,6 +186,7 @@ const PIXEL_ICONS = [
 export default function PlaygroundPage() {
   const [morphIcon, setMorphIcon] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
+  const [resetKey, setResetKey] = React.useState(0);
   return (
     <div className="mx-auto flex flex-col items-center gap-6">
       <div className="sr-only">
@@ -194,22 +195,10 @@ export default function PlaygroundPage() {
 
       <div className="flex w-full flex-col gap-8">
         <div className="grid gap-4 lg:grid-cols-12">
-          <Demo
-            caption="DVD animation"
-            title="Corner counter"
-            description="Composable DVD-style animation"
-            className="lg:col-span-4"
-            innerClass="bg-black p-3"
-          >
-            <DvdAnimationDemo />
+          <Demo title="DVD Loader" description="+ corner counter" className="lg:col-span-4">
+            <DvdAnimationDemo className="dark bg-background" />
           </Demo>
-          <Demo
-            caption="Focus polaroid fan"
-            title="Forge gallery"
-            description="Click to center a card"
-            className="lg:col-span-8"
-            innerClass="min-h-[400px]"
-          >
+          <Demo title="Motion cards" className="lg:col-span-8" innerClass="min-h-[400px]">
             <FocusPolaroidFan />
           </Demo>
 
@@ -220,7 +209,7 @@ export default function PlaygroundPage() {
             className="lg:col-span-5 lg:row-span-2"
             centerContent
             controls={
-              <LinkButton variant="link" size="sm" href="/posts/clip-path-curve">
+              <LinkButton variant="ghost" size="xs" href="/posts/clip-path-curve">
                 Clip-path playground
                 <IconArrowUpRight data-icon="inline-end" />
               </LinkButton>
@@ -228,10 +217,10 @@ export default function PlaygroundPage() {
           >
             <ChromeTabsDemo />
           </Demo>
-          <Demo caption="Command Palette" centerContent className="lg:col-span-4">
+          <Demo title="Site search" description="∙ a Raycast-style command palette" centerContent className="lg:col-span-4">
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
-          <Demo caption="Motion chart ∙ Hover to animate" centerContent className="lg:col-span-3">
+          <Demo title="Motion chart" description="∙ Hover to animate" centerContent className="lg:col-span-3">
             <ChartDemo />
           </Demo>
 
@@ -239,7 +228,7 @@ export default function PlaygroundPage() {
           <Demo caption="ColorCode ∙ Click to copy" centerContent className="lg:col-span-3">
             <ColorCode value="#0b0b0b" />
           </Demo>
-          <Demo caption="ColorSwatchGroup" centerContent className="lg:col-span-3">
+          <Demo caption="ColorSwatchGroup" centerContent className="lg:col-span-4">
             <ColorSwatchGroupDemo />
           </Demo>
           <Demo caption="Skeleton" centerContent className="lg:col-span-3">
@@ -247,20 +236,37 @@ export default function PlaygroundPage() {
           </Demo>
 
           {/* Row: interaction trio */}
-          <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-4">
+          <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-5">
             <AnchoredSliderDemo />
           </Demo>
 
-          <Demo caption="TextReveal with reset" centerContent className="lg:col-span-4" innerClass="min-h-60">
-            <TextRevealDemo />
+          <Demo
+            title="TextReveal"
+            centerContent
+            className="lg:col-span-4"
+            innerClass="min-h-60"
+            controls={
+              <Button size="xs" variant="ghost" onClick={() => setResetKey((key) => key + 1)} className="w-fit">
+                Replay
+              </Button>
+            }
+          >
+            <TextReveal
+              key={resetKey}
+              className="overflow-visible text-center text-2xl font-semibold tracking-tight text-balance"
+              duration={600}
+              stagger={22}
+            >
+              Interfaces should feel alive, but never impatient.
+            </TextReveal>
           </Demo>
 
-          <Demo caption="PixelDino" centerContent className="lg:col-span-3">
+          <Demo title="Dino Animation" caption="SVG animation, so no cacti" centerContent className="lg:col-span-5">
             <PixelDino />
           </Demo>
 
           {/* Row: wide popups */}
-          <Demo caption="Grouped Popups" centerContent className="lg:col-span-full" innerClass="min-h-60">
+          <Demo title="Grouped Popups" centerContent className="lg:col-span-7" innerClass="min-h-60">
             <GroupedPopupsDemo />
           </Demo>
 
@@ -268,18 +274,27 @@ export default function PlaygroundPage() {
           <Demo caption="CarouselToolbar" centerContent className="lg:col-span-3">
             <CarouselDemo />
           </Demo>
-          <Demo caption="ImageToggle tabs" centerContent className="lg:col-span-3">
+          <Demo title="ImageToggle" caption="Tabs variant" centerContent className="lg:col-span-3">
             <ImageToggleDemo />
           </Demo>
-          <Demo caption="ImageToggle slider" centerContent className="lg:col-span-3">
+          <Demo title="ImageToggle" caption="Slider variant" centerContent className="lg:col-span-3">
             <ImageToggleDemo mode="slider" />
           </Demo>
-          <Demo caption="ImageToggle comparison" centerContent className="lg:col-span-3">
+          <Demo title="ImageToggle" caption="Comparison variant" centerContent className="lg:col-span-3">
             <ImageToggleDemo mode="comparison" />
           </Demo>
 
           {/* Full-bleed video */}
-          <Demo caption="Video" centerContent className="lg:col-span-full">
+          <Demo
+            title="Video Player"
+            caption={
+              <>
+                Built with <LinkOut href="https://www.media-chrome.org/" text="media-chrome" /> + Base UI Toolbar
+              </>
+            }
+            centerContent
+            className="lg:col-span-full"
+          >
             <Video
               src="/assets/shine/unused/shine-military-dataviz.mov"
               autoPlay={false}
@@ -289,7 +304,7 @@ export default function PlaygroundPage() {
           </Demo>
 
           {/* Row: tabs / toggles / switch */}
-          <Demo caption="Tabs variants" className="lg:col-span-full">
+          <Demo title="Tabs" caption="Elevated, line, and pill variants" className="lg:col-span-full">
             <TabsVariantsDemo />
           </Demo>
           <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-4">
@@ -302,7 +317,7 @@ export default function PlaygroundPage() {
           </Demo>
 
           {/* Row: code + inputs */}
-          <Demo caption="CodeBlock" centerContent className="lg:col-span-4">
+          <Demo caption="CodeBlock" centerContent className="lg:col-span-4 lg:row-span-2">
             <CodeBlock
               code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
               language="tsx"
@@ -321,12 +336,11 @@ export default function PlaygroundPage() {
             </KbdGroup>
           </Demo>
 
-          {/* Rows: pixel icons anchor a column of small button demos */}
-          <Demo caption="PixelIcons" centerContent className="lg:col-span-6 lg:row-span-3">
-            <PixelIconsGridDemo />
+          <Demo caption="Hover effects" centerContent className="lg:col-span-6">
+            <AnimatedButtonDemo />
           </Demo>
           <Demo caption="Animated button" centerContent className="lg:col-span-6">
-            <AnimatedButtonDemo />
+            <CobotButtonDemo />
           </Demo>
           <Demo caption="Delete button" centerContent className="lg:col-span-3">
             <DeleteButtonDemo />
@@ -344,24 +358,31 @@ export default function PlaygroundPage() {
               Confirm
             </Button>
           </Demo>
-          <Demo caption="Icon swap + deduplicated inline toast" centerContent className="lg:col-span-2">
-            <CopyButton value="Hello, world!" size="icon" variant="ghost" />
-          </Demo>
 
-          <Demo caption="Mode toggle + pixel icon rearrange" centerContent className="lg:col-span-2">
-            <ModeToggle />
+          <Demo title="Animated icon buttons" centerContent className="lg:col-span-6">
+            <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
+              <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
+                <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
+              </Toggle>
+              <p className="row-2">Line morph</p>
+              <ModeToggle size="icon" variant="outline" />
+              <p className="row-2">Mode toggle: pixel morph</p>
+              <CopyButton value="Hello, world!" size="icon" variant="outline" />
+              <p className="row-2">Icon swap, stroke anim, inline toast</p>
+            </div>
           </Demo>
-
-          <Demo caption="Toggle + SVG line morph" centerContent className="lg:col-span-2">
-            <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)}>
-              <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
-            </Toggle>
-          </Demo>
-          <Demo caption="Remix of Vercel's Emoji Feedback component" className="lg:col-span-full">
+          <Demo
+            title="Emoji Feedback"
+            description="∙ a remix of Vercel's Feedback component"
+            controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
+            className="lg:col-span-full"
+            innerClass="min-h-72 "
+          >
             <EmojiFeedbackDemo />
           </Demo>
           <Demo
-            title="Mark"
+            title="Custom mark styles"
+            description="with CSS corner-shape"
             className="lg:col-span-full"
             innerClass="grid divide-y text-sm/6 text-muted-foreground sm:grid-cols-3 sm:divide-x sm:divide-y-0"
           >
@@ -402,17 +423,17 @@ export default function PlaygroundPage() {
               </p>
             </div>
           </Demo>
-          <Demo title="DeviceFrame / Phone" overflowBehavior="resize" centerContent className="lg:col-span-5">
+          <Demo title="DeviceFrame · Phone" overflowBehavior="resize" centerContent className="lg:col-span-5">
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
               <div className="flex items-center justify-center p-6 text-center text-sm">
                 <p>
-                  A remix of Geist&apos;s <LinkOut href="https://vercel.com/geist/phone" text="Phone" /> component. Responds to color mode
-                  and uses your device&apos;s clock and battery level (non-iOS).
+                  A remix of Geist&apos;s <LinkOut href="https://vercel.com/geist/phone" text="Phone" />
+                  &nbsp;component. Responds to color mode and uses your device&apos;s clock and battery level (non-iOS).
                 </p>
               </div>
             </DeviceFrame.Phone>
           </Demo>
-          <Demo title="DeviceFrame / Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
+          <Demo title="DeviceFrame · Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
             <DeviceFrame.Browser address="bob.fyi">
               <BrowserFramePreview />
             </DeviceFrame.Browser>
@@ -437,7 +458,7 @@ function ColorSwatchGroupDemo() {
   return (
     <div className="flex flex-col justify-start gap-3">
       <ColorSwatchGroup colors={DEMO_SWATCHES} value={color} onValueChange={setColor} />
-      <p className="w-[240px] text-xs text-muted-foreground">
+      <p className="w-[320px] max-w-full text-xs text-muted-foreground">
         Selected: <ColorCode value={color} />
       </p>
     </div>
@@ -627,7 +648,7 @@ function SliderDemo() {
 function GroupedPopupsDemo() {
   const links = [
     {
-      title: "bob.fyi",
+      title: "Website",
       url: "https://bob.fyi",
       description: "Portfolio, writing, experiments, and component playgrounds.",
       avatar: (
@@ -653,36 +674,23 @@ function GroupedPopupsDemo() {
   return (
     <div className="grid w-full max-w-lg gap-6 md:grid-cols-2">
       <div className="space-y-3">
-        <p className="text-xs font-medium text-muted-foreground">TooltipGroup icon buttons</p>
+        <p className="text-xs font-medium text-muted-foreground">TooltipGroup</p>
         <TooltipGroup side="top" sideOffset={8} delay={100} closeDelay={0}>
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-wrap gap-2">
-              <TooltipTrigger tooltip="Pointer" render={<Button size="icon" variant="outline" aria-label="Pointer" />}>
-                <PixelPointerIcon />
-              </TooltipTrigger>
-              <TooltipTrigger tooltip="Scribble" render={<Button size="icon" variant="outline" aria-label="Scribble" />}>
-                <PixelScribbleIcon />
-              </TooltipTrigger>
-              <TooltipTrigger tooltip="Clipboard" render={<Button size="icon" variant="outline" aria-label="Clipboard" />}>
-                <PixelClipboardIcon />
-              </TooltipTrigger>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <TooltipTrigger tooltip="Sun" render={<Button size="icon-sm" variant="outline" aria-label="Sun" />}>
-                <PixelSunIcon />
-              </TooltipTrigger>
-              <TooltipTrigger tooltip="Moon" render={<Button size="icon-sm" variant="outline" aria-label="Moon" />}>
-                <PixelMoonIcon />
-              </TooltipTrigger>
-              <TooltipTrigger tooltip="Shuffle" render={<Button size="icon-sm" variant="outline" aria-label="Shuffle" />}>
-                <PixelShuffleIcon />
-              </TooltipTrigger>
-            </div>
+          <div className="flex flex-wrap gap-2">
+            <TooltipTrigger tooltip="Pointer" render={<Button size="icon" variant="outline" aria-label="Pointer" />}>
+              <PixelPointerIcon />
+            </TooltipTrigger>
+            <TooltipTrigger tooltip="Scribble" render={<Button size="icon" variant="outline" aria-label="Scribble" />}>
+              <PixelScribbleIcon />
+            </TooltipTrigger>
+            <TooltipTrigger tooltip="Clipboard" render={<Button size="icon" variant="outline" aria-label="Clipboard" />}>
+              <PixelClipboardIcon />
+            </TooltipTrigger>
           </div>
         </TooltipGroup>
       </div>
       <div className="mx-auto space-y-3">
-        <p className="text-xs font-medium text-muted-foreground">PreviewCardGroup links</p>
+        <p className="text-xs font-medium text-muted-foreground">PreviewCardGroup</p>
         <PreviewCardGroup>
           <div className="flex flex-wrap gap-2">
             {links.map((link) => (
@@ -723,21 +731,6 @@ function GroupedLinkPreview({
       </div>
       <p className="my-3 text-sm">{description}</p>
       <LinkOut href={url} text={url} className="text-xs text-muted-foreground" />
-    </div>
-  );
-}
-
-function TextRevealDemo() {
-  const [resetKey, setResetKey] = React.useState(0);
-
-  return (
-    <div className="flex max-w-sm flex-col items-center gap-4 text-center">
-      <TextReveal key={resetKey} className="text-2xl font-semibold tracking-tight text-balance" duration={600} stagger={22}>
-        Interfaces should feel alive, but never impatient.
-      </TextReveal>
-      <Button size="sm" variant="outline" onClick={() => setResetKey((key) => key + 1)} className="w-fit">
-        Reset
-      </Button>
     </div>
   );
 }
@@ -861,7 +854,7 @@ function TabsVariantsDemo() {
           <TabsTrigger value="archive">Archive</TabsTrigger>
         </TabsList>
         <TabsContent value="pill" className={panelClass}>
-          Pill tabs work well as segmented controls.
+          Pill tabs work well for nested or inline contexts.
         </TabsContent>
         <TabsContent value="drafts" className={panelClass}>
           Drafts content.
@@ -987,9 +980,9 @@ function ChromeTabsDemo() {
           initial={{ y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-primary bg-secondary p-10 font-pixel text-2xs/none text-secondary-foreground uppercase"
+          className="grid-stack border border-dashed border-info-primary bg-info p-10 font-pixel text-2xs/none text-info-foreground uppercase"
         >
-          You are here &darr;
+          <PixelIcons.PixelFolderOpenIcon className="size-[22px] shrink-0" />
         </motion.div>
       </ChromeTabs.Panel>
       <ChromeTabs.Panel value="code" className="overflow-hidden p-4">
@@ -997,9 +990,9 @@ function ChromeTabsDemo() {
           initial={{ y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-destructive bg-error p-10 font-pixel text-2xs/none text-error-foreground uppercase"
+          className="grid-stack border border-dashed border-violet-400 bg-violet-25 p-10 font-pixel text-2xs/none text-violet-500 uppercase dark:border-violet-600 dark:bg-violet-950 dark:text-violet-400"
         >
-          Down for maintenance
+          <PixelIcons.PixelGithubOutlineIcon className="size-[22px] shrink-0" />
         </motion.div>
       </ChromeTabs.Panel>
       <ChromeTabs.Panel value="output" className="overflow-hidden p-4">
@@ -1007,12 +1000,33 @@ function ChromeTabsDemo() {
           initial={{ y: 4 }}
           animate={{ y: 0 }}
           exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-info-primary bg-info p-10 text-center font-pixel text-[11px] text-info-foreground uppercase"
+          className="grid-stack border border-dashed border-warning-primary bg-warning p-10 text-center font-pixel text-[11px] text-warning-foreground uppercase"
         >
-          <PixelIcons.PixelFolderOpenIcon />
+          <PixelIcons.PixelVercelOutlineIcon className="size-[22px] shrink-0" />
         </motion.div>
       </ChromeTabs.Panel>
     </ChromeTabs>
+  );
+}
+
+function CobotButtonDemo() {
+  return (
+    <button
+      className={cn(
+        "relative isolate m-10 inline-flex h-10 items-center rounded-full px-4 font-medium text-white transition-all duration-100 ease-out-quad",
+        "[--highlight-color:var(--color-pink-300)]",
+        "border-[0.5px] border-neutral-600",
+        "ring-[0.5px] ring-black/20",
+        "inset-shadow-sm inset-shadow-neutral-300/50",
+        "bg-linear-to-b from-white from-5% via-neutral-900 via-67% to-(--highlight-color) bg-center",
+        "shadow-md text-shadow-[0px_1px_0px_hsl(0_0_100%/30%),0px_.25px_hsl(0_0_0_/_100%),0_0_1px_hsl(0_0_0_/_80%),0_.5px_.5px_hsl(0_0_100%_/_50%)]",
+        "before:absolute before:inset-0.5 before:-z-1 before:rounded-full before:bg-(--highlight-color) before:bg-radial-[at_25%_-25%] before:from-neutral-300/80 before:via-neutral-400 before:to-neutral-600 before:bg-size-[200%_100%] before:shadow-lg before:shadow-(color:--highlight-color)/30 before:transition-all before:duration-100 before:ease-out-quad",
+        "focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-(--highlight-color)",
+        "active:translate-y-px active:scale-97 active:before:inset-px active:before:blur-[.25px]"
+      )}
+    >
+      Agent
+    </button>
   );
 }
 

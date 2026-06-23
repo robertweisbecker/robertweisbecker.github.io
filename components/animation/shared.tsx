@@ -37,7 +37,7 @@ export function TextReveal({
   return (
     <div
       className={cn(
-        "group/textReveal relative overflow-hidden transition-[opacity,transform]",
+        "group/textReveal relative overflow-visible transition-[opacity,transform]",
         once ? "animate-text-reveal-initial" : "animate-text-reveal"
       )}
       id={id}
@@ -75,7 +75,7 @@ export function TextReveal({
           size="icon-xs"
           variant="ghost"
         >
-          ↲
+          ⏎
         </Button>
       )}
     </div>

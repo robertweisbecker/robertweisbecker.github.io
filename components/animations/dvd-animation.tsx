@@ -328,7 +328,7 @@ export function DvdAnimationRoot({
 
   return (
     <DvdAnimationContext.Provider value={contextValue}>
-      <div className={cn("relative aspect-square w-full overflow-hidden rounded-2xl", className)} {...props}>
+      <div className={cn("relative size-full overflow-hidden", className)} {...props}>
         <DvdAnimationStyles />
         {children}
       </div>
@@ -336,11 +336,7 @@ export function DvdAnimationRoot({
   );
 }
 
-export type DvdAnimationStageProps = React.SVGProps<SVGSVGElement> & {
-  backgroundColor?: string;
-};
-
-export function DvdAnimationStage({ backgroundColor = "#222", className, ...props }: DvdAnimationStageProps) {
+export function DvdAnimationStage({ className, ...props }: React.ComponentProps<"svg">) {
   const { height, logoHeight, logoRef, logoWidth, width } = useDvdAnimationContext("DvdAnimationStage");
 
   return (
@@ -351,8 +347,6 @@ export function DvdAnimationStage({ backgroundColor = "#222", className, ...prop
       aria-label="Bouncing logo animation"
       {...props}
     >
-      <rect width="100%" height="100%" fill={backgroundColor} rx="10" />
-
       <svg ref={logoRef} width={logoWidth} height={logoHeight} viewBox={`0 0 ${LOGO_VIEW_BOX_WIDTH} ${LOGO_VIEW_BOX_HEIGHT}`}>
         <path fill="inherit" d={LOGO_PATH} />
       </svg>
@@ -457,22 +451,19 @@ export function DvdAnimationScore({
 
   return (
     <>
-      <div ref={scoreRef} className={cn("relative flex items-center gap-1 text-center", className)} {...props}>
-        {showLabel ? <span className="font-pixel text-[11px] text-white uppercase">{label}</span> : null}
-        <Kbd variant="elevated" pressed={isPulsing} className="font-pixel text-[11px] uppercase">
+      <div ref={scoreRef} className={cn("relative flex items-center gap-1 text-center text-foreground", className)} {...props}>
+        {showLabel ? <span className="font-pixel text-[11px] uppercase">{label}</span> : null}
+        <Kbd variant="elevated" pressed={isPulsing} className="font-pixel text-[11px]">
           {cornerHits}
         </Kbd>
         {showPop && isPulsing ? (
-          <span
-            key={scorePopKey}
-            className="dvd-score-pop pointer-events-none absolute top-[-8px] left-1/2 font-pixel text-[11px] text-white"
-          >
+          <span key={scorePopKey} className="dvd-score-pop pointer-events-none absolute top-[-8px] left-1/2 font-pixel text-[11px]">
             +1!
           </span>
         ) : null}
       </div>
 
-      <div className="pointer-events-none fixed inset-0 z-[9999]">
+      <div className="pointer-events-none fixed inset-0 z-100">
         {miniBalloons.map((balloon) => (
           <span
             key={balloon.id}
@@ -517,7 +508,7 @@ export function DvdAnimationPlayButton({
       aria-label={isPlaying ? "Pause animation" : "Play animation"}
       aria-pressed={isPlaying}
       data-pressed={isPlaying}
-      className={cn("font-pixel text-[11px] text-white uppercase hover:bg-white/10 hover:text-white", className)}
+      className={cn("font-pixel text-[11px] uppercase", className)}
       onClick={(event) => {
         onClick?.(event);
 
@@ -530,12 +521,12 @@ export function DvdAnimationPlayButton({
       {children ??
         (isPlaying ? (
           <>
-            <PixelPauseIcon aria-hidden="true" />
-            <span aria-hidden="true">Pause</span>
+            <PixelPauseIcon aria-hidden="true" data-icon="inline-start" />
+            Pause
           </>
         ) : (
           <>
-            <PixelPlayIcon aria-hidden="true" />
+            <PixelPlayIcon aria-hidden="true" data-icon="inline-start" />
             <span aria-hidden="true" className="min-w-[5ch]">
               Play
             </span>
@@ -596,11 +587,11 @@ function DvdAnimationStyles() {
 
 export function DvdAnimationDemo({ className }: { className?: string }) {
   return (
-    <DvdAnimationRoot duration={60} width={640} height={640} className={cn("w-full", className)}>
-      <DvdAnimationStage backgroundColor="#000" />
-      <DvdAnimationControls>
+    <DvdAnimationRoot duration={60} width={640} height={640} logoScale={0.3} className={cn("dark w-full", className)}>
+      <DvdAnimationStage />
+      <DvdAnimationControls className="dark!">
         <DvdAnimationScore />
-        <DvdAnimationPlayButton />
+        <DvdAnimationPlayButton className="text-foreground" />
       </DvdAnimationControls>
     </DvdAnimationRoot>
   );

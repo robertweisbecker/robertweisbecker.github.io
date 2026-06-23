@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { PixelPauseOutlineIcon, PixelPlayOutlineIcon } from "@/components/icons-pixel";
+import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons-pixel";
 import { cn } from "@/lib/utils";
 import { animate, motion, useMotionValue } from "motion/react";
 import { useKeyPress } from "@/hooks/use-key-press";
@@ -126,7 +126,7 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
             Space
           </Kbd>
         ) : (
-          <p className={cn("font-pixel text-[11px] text-muted-foreground")}>You know what to do...</p>
+          <p className={cn("font-pixel text-[11px] text-muted-foreground")}>You know how to play…</p>
         )}
       </div>
 
@@ -146,12 +146,12 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
       >
         {isPlaying ? (
           <>
-            <PixelPauseOutlineIcon aria-hidden="true" />
+            <PixelPauseIcon aria-hidden="true" className="size-[11px]" data-icon="inline-start" />
             <span aria-hidden="true">Pause</span>
           </>
         ) : (
           <>
-            <PixelPlayOutlineIcon aria-hidden="true" />
+            <PixelPlayIcon aria-hidden="true" className="size-[11px]" data-icon="inline-start" />
             <span aria-hidden="true">Play</span>
           </>
         )}

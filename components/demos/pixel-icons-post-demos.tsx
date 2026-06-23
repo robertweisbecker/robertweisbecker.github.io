@@ -147,9 +147,9 @@ export function TablerRotationIdeaDemo() {
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={dark ? "moon" : "sun"}
-            initial={{ rotate: dark ? -90 : 90, scale: 0.82, opacity: 0 }}
+            initial={{ rotate: dark ? 45 : -90, scale: 0.82, opacity: 0 }}
             animate={{ rotate: 0, scale: 1, opacity: 1 }}
-            exit={{ rotate: dark ? -90 : -90, scale: 0.82, opacity: 0 }}
+            exit={{ rotate: dark ? 90 : -90, scale: dark ? 0.5 : 0.95, opacity: 0 }}
             transition={{ type: "spring", stiffness: 420, damping: 32 }}
             className="grid place-items-center"
           >
@@ -190,23 +190,17 @@ export function PixelSunMoonMorphDemo() {
 
 export function MorphablePixelIconScrollDemo() {
   return (
-    <ScrollArea className="h-48 w-full" showScrollbar scrollbarGutter scrollFade>
-      <div className="grid grid-cols-8 gap-1 sm:grid-cols-12 md:grid-cols-16">
-        {sortedMorphableIconNames.map((name) => {
-          const Icon = iconComponents[name];
+    <div className="grid grid-cols-8 gap-1 sm:grid-cols-12 md:grid-cols-16">
+      {sortedMorphableIconNames.map((name) => {
+        const Icon = iconComponents[name];
 
-          return (
-            <span
-              key={name}
-              title={formatIconName(name)}
-              className="grid aspect-square place-items-center rounded-md bg-background text-foreground shadow-border-xs"
-            >
-              <Icon className="size-[16.5px]" aria-hidden />
-            </span>
-          );
-        })}
-      </div>
-    </ScrollArea>
+        return (
+          <span key={name} title={formatIconName(name)} className="grid aspect-square place-items-center rounded-md border text-foreground">
+            <Icon className="size-[16.5px]" aria-hidden />
+          </span>
+        );
+      })}
+    </div>
   );
 }
 
