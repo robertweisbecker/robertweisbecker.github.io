@@ -38,7 +38,7 @@ const buttonVariants = cva(
           "[--button-color:white] [--button-bg:var(--destructive)] bg-linear-to-b from-current/15 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--destructive)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground active:shadow-xs active:inset-shadow-button-pressed focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
         success:
           "[--button-color:white] bg-success-primary hover:bg-[oklch(from_var(--success-primary)_calc(l*.95)_calc(c*1.05)_h)] focus-visible:outline-success-primary focus-visible:outline-offset-2 text-white shadow-[color-mix(in_oklch,var(--success-primary),black)]/20 inset-shadow-button shadow-sm active:inset-shadow-button-pressed active:shadow-xs",
-        link: "[--button-color:var(--foreground)] disabled:bg-transparent cursor-pointer px-0.5 aria-expanded:text-accent-foreground aria-expanded:decoration-current has-data-[icon=inline-start]:ps-0 has-data-[icon=inline-end]:pe-0 has-data-icon:[&_svg]:opacity-50 has-data-icon:hover:[&_svg]:opacity-100  text-secondary-foreground after:absolute after:inset-y-2 font-normal hover:after:bg-accent decoration-current/40 underline after:rounded relative after:-inset-x-0.5",
+        link: "[--button-color:var(--foreground)] disabled:bg-transparent cursor-pointer px-0.5 aria-expanded:text-accent-foreground aria-expanded:decoration-current has-data-[icon=inline-start]:ps-0 has-data-[icon=inline-end]:pe-0 has-data-icon:[&_svg]:opacity-50 has-data-icon:hover:[&_svg]:opacity-100  text-secondary-foreground after:absolute after:inset-y-[.25em] font-normal hover:after:bg-accent hover:decoration-current decoration-current/40 underline decoration-[round(.075em,.5px)] underline-offset-[.25em] after:rounded relative after:-inset-x-0.5",
         "elevated-old":
           "[--button-color:var(--foreground)] text-foreground active:shadow-border-xs bg-card backdrop-blur-xs hover:bg-[color-mix(in_oklch,_var(--accent)_50%,var(--card))] active:bg-muted data-pressed:bg-muted shadow-border-sm data-pressed:inset-shadow-sm data-pressed:inset-ring data-pressed:inset-ring-border data-pressed:shadow-none aria-expanded:text-foreground inset-shadow-none transition-shadows",
         elevated: [
@@ -62,7 +62,7 @@ const buttonVariants = cva(
         ],
         overlay: [
           "[--button-color:white] bg-neutral-700/60 hover:bg-neutral-700/70 backdrop-blur-xl text-white outline outline-white/10 ring-1 ring-black/60 -outline-offset-1 ",
-          "not-disabled:hover:bg-neutral-800/80 active:bg-neutral-700/40 aria-disabled:bg-neutral-700/10! aria-disabled:text-white/50 rounded-full",
+          "not-disabled:hover:bg-neutral-800/80 active:bg-neutral-700/40 aria-disabled:bg-neutral-700/10! aria-disabled:text-white/50 rounded-full backdrop-invert-50",
         ],
       },
       size: {

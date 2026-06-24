@@ -20,15 +20,11 @@ const sortedMorphableIconNames = [...PixelIcons.morphablePixelIconNames].sort((a
 );
 
 const inspectedIcons: PixelIcons.MorphablePixelIconName[] = [
-  "PixelCopyIcon",
+  "PixelPenToolIcon",
   "PixelClipboardCheckIcon",
   "PixelFolderIcon",
   "PixelSunSmallIcon",
   "PixelMoon2Icon",
-  "PixelBoldIcon",
-  "PixelBold2Icon",
-  "PixelItalicIcon",
-  "PixelUnderlineIcon",
 ];
 
 const animationOptions: {
@@ -215,9 +211,13 @@ export function PixelIconDataInspectorDemo() {
   const code = `createPixelIcon(\n  "${selectedIcon}",\n  ${data.width},\n  ${data.height},\n  "${data.data}"\n)`;
 
   return (
-    <div className="grid gap-3">
+    <div className="flex flex-col items-center gap-2">
+      <div className="grid aspect-square size-20 w-full place-items-center">
+        <Icon className="size-[44px]" aria-hidden />
+      </div>
       <ToggleGroup
         spacing={0.5}
+        shape="square"
         value={[selectedIcon]}
         onValueChange={(next) => {
           const nextValue = Array.isArray(next) ? next[0] : next;
@@ -225,30 +225,28 @@ export function PixelIconDataInspectorDemo() {
             setSelectedIcon(nextValue as PixelIcons.MorphablePixelIconName);
           }
         }}
-        size="sm"
-        className="flex-wrap"
+        size="xs"
+        className="w-full"
         aria-label="Choose pixel icon data"
       >
         {inspectedIcons.map((name) => {
           const OptionIcon = iconComponents[name];
 
           return (
-            <ToggleGroupItem key={name} value={name} aria-label={formatIconName(name)}>
-              <OptionIcon className="size-4" aria-hidden />
-              <span className="hidden sm:inline">{name}</span>
+            <ToggleGroupItem
+              key={name}
+              value={name}
+              aria-label={formatIconName(name)}
+              className="h-fit flex-1 flex-col items-center py-2 break-words"
+            >
+              <OptionIcon data-icon="inline-start" className="size-[16.5px]" aria-hidden />
+              <span className="truncate whitespace-normal">{formatIconName(name)}</span>
             </ToggleGroupItem>
           );
         })}
       </ToggleGroup>
-      <Card variant="muted" size="sm">
-        <CardHeader>
-          <Icon className="size-[44px]" aria-hidden />
-        </CardHeader>
 
-        <CardContent className="grid gap-3 md:grid-cols-[auto_1fr]">
-          <CodeBlock code={code} language="tsx" filename={`${selectedIcon}.tsx`} className="min-w-0" />
-        </CardContent>
-      </Card>
+      <CodeBlock code={code} language="tsx" filename={`${selectedIcon}.tsx`} className="min-w-0" />
     </div>
   );
 }

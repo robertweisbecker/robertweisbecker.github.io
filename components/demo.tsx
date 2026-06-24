@@ -118,16 +118,20 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure data-demo className={cn("not-prose flex flex-col rounded-xl", !plain ? "bg-muted" : "", className)} {...props}>
+    <figure
+      data-demo
+      className={cn("not-prose flex flex-col rounded-xl", !plain ? "bg-linear-to-b from-muted/50 to-muted/25" : "", className)}
+      {...props}
+    >
       {hasHeader ? (
         <header
           className={cn(
-            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-1.5 text-xs",
+            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-1.5 text-sm",
             headerClassName
           )}
         >
           <div className="flex grow items-baseline gap-1">
-            <span className="min-w-0 text-xs text-foreground">{title}</span>
+            <span className="min-w-0 font-[450] text-foreground">{title}</span>
             {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
           </div>
           <div className="flex items-center gap-1">{controls}</div>

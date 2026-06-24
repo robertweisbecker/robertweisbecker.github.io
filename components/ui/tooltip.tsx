@@ -60,7 +60,13 @@ function TooltipGroup({
     <TooltipProvider data-slot="tooltip-group-provider" delay={delay} closeDelay={closeDelay} timeout={timeout}>
       <TooltipGroupContext.Provider value={{ handle }}>
         {children}
-        <TooltipPrimitive.Root data-slot="tooltip-group" handle={handle} trackCursorAxis={trackCursorAxis} actionsRef={actionsRef}>
+        <TooltipPrimitive.Root
+          data-slot="tooltip-group"
+          handle={handle}
+          trackCursorAxis={trackCursorAxis}
+          actionsRef={actionsRef}
+          disableHoverablePopup={true}
+        >
           {({ payload }) => (
             <TooltipPrimitive.Portal>
               <TooltipPrimitive.Positioner

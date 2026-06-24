@@ -110,7 +110,7 @@ export function Letterboxd({ maxFilms = 4 }) {
   }
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl bg-muted sm:-mx-3 sm:p-2">
+    <div className="flex flex-col gap-2">
       {/* <div className="flex justify-between gap-2">
         <p className="font-pixel text-[11px]! text-muted-foreground/50">Recently watched</p>
         <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="xs">
@@ -152,7 +152,7 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
     <Item
       size="xs"
       variant="muted"
-      className="relative m-0 animate-stagger-enter rounded-md p-1"
+      className="relative isolate m-0 animate-stagger-enter rounded-lg"
       style={
         {
           "--index": index,
@@ -162,25 +162,25 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
         } as CSSProperties
       }
     >
-      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center overflow-clip rounded-md mask-b-from-40%">
+      <div className="mask-b absolute -inset-px -z-1 grid-stack justify-center overflow-clip rounded-lg mask-b-from-40%">
         <style>
           {`
           @keyframes poster-anim {
             0% { transform: rotate(0); opacity: .3; }
             50% { opacity: 0.7; }
-            100% { transform: rotate(180deg); opacity: .5; }
+            100% { transform: rotate(240deg); opacity: .5; }
           }
         `}
         </style>
         <div
-          className="aspect-square h-full bg-cover opacity-40 mix-blend-difference blur-xl dark:opacity-20"
+          className="aspect-square h-full bg-cover opacity-60 mix-blend-difference blur-2xl dark:opacity-30"
           style={{
             backgroundImage: `url(${film.posterUrl})`,
-            animation: "poster-anim 10s linear infinite forwards alternate",
+            animation: "poster-anim 7s linear infinite forwards alternate",
           }}
         />
       </div>
-      <ItemHeader className="w-full">
+      <ItemHeader className="">
         <Vignette.Root transitionLength={16} inset={8} className="h-auto w-full shadow-border-md" radius="var(--radius-md)">
           <Vignette.Image
             src={film.posterUrl}
@@ -195,8 +195,8 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
           />
         </Vignette.Root>
       </ItemHeader>
-      <ItemContent className="mt-1">
-        <ItemTitle className="text-xs!">
+      <ItemContent className="">
+        <ItemTitle className="line-clamp-1">
           {film.title}{" "}
           {film.rewatch && (
             <TooltipProvider delay={0}>
@@ -209,17 +209,17 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
             </TooltipProvider>
           )}
         </ItemTitle>
+        <ItemFooter className="items-baseline justify-between">
+          <ItemDescription className="font-pixel text-[11px]! text-muted-foreground">
+            {film.rating ? (
+              <span>{"★".repeat(Math.floor(film.rating)) + (film.rating % 1 ? "½" : "")}</span>
+            ) : (
+              <span className="text-muted-foreground/60">TBD</span>
+            )}
+          </ItemDescription>
+          {film.watchedDate ? <ItemDescription className="text-2xs text-muted-foreground/60">{film.watchedDate}</ItemDescription> : null}
+        </ItemFooter>
       </ItemContent>
-      <ItemFooter className="justify-between">
-        <ItemDescription className="font-pixel text-[11px]! text-muted-foreground">
-          {film.rating ? (
-            <span>{"★".repeat(Math.floor(film.rating)) + (film.rating % 1 ? "½" : "")}</span>
-          ) : (
-            <span className="text-muted-foreground/60">TBD</span>
-          )}
-        </ItemDescription>
-        {film.watchedDate ? <ItemDescription className="text-muted-foreground/60">{film.watchedDate}</ItemDescription> : null}
-      </ItemFooter>
     </Item>
   );
 }

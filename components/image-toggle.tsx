@@ -60,10 +60,16 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
         <div className="relative overflow-hidden rounded-md">
           <img
             src={beforeUrl}
+            className="mix-blend-plus-lighter"
             // style={{ opacity: 1 - sliderValue / 100 }}
             alt="Before image"
           />
-          <img src={afterUrl} className="absolute inset-0 z-1" style={{ opacity: sliderValue / 100 }} alt="After image" />
+          <img
+            src={afterUrl}
+            className="absolute inset-0 z-1 mix-blend-plus-lighter"
+            style={{ opacity: sliderValue / 100 }}
+            alt="After image"
+          />
         </div>
         <figcaption className="mx-auto grid w-full max-w-sm flex-1 grid-cols-[auto_1fr_auto] items-center gap-4 p-3 text-xs text-muted-foreground">
           <p>{tab1}</p>

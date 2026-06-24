@@ -118,13 +118,18 @@ export function PixelChevronDownIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
-export function PixelClipboardIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
-      <path d="M18 22H6v-2h12v2ZM6 20H4V6h2v14Zm14 0h-2V6h2v14ZM16 2v2h2v2h-2v2H8V6H6V4h2V2h8Zm-6 2v2h4V4h-4Z" />
-    </svg>
-  );
-}
+export const PixelClipboardIcon = createPixelIcon(
+  "PixelClipboardIcon",
+  11,
+  11,
+  "4,1 5,1 2,2 3,2 6,2 7,2 1,3 3,3 4,3 5,3 6,3 8,3 1,4 8,4 1,5 8,5 1,6 8,6 1,7 8,7 1,8 8,8 2,9 3,9 4,9 5,9 6,9 7,9"
+);
+export const PixelMugIcon = createPixelIcon(
+  "PixelMugIcon",
+  11,
+  11,
+  "2,3 3,3 4,3 5,3 6,3 1,4 3,4 4,4 5,4 7,4 8,4 1,5 4,5 7,5 9,5 1,6 7,6 9,6 1,7 7,7 8,7 1,8 7,8 2,9 3,9 4,9 5,9 6,9"
+);
 
 export function PixelSunIcon(props: React.ComponentProps<"svg">) {
   return (
@@ -211,7 +216,7 @@ export const PixelVolumeMutedIcon = createPixelIcon(
   "PixelVolumeMutedIcon",
   11,
   11,
-  "9,1 5,2 9,2 4,3 5,3 8,3 2,4 3,4 5,4 8,4 10,4 1,5 5,5 7,5 10,5 2,6 3,6 7,6 10,6 4,7 6,7 9,7 9,7 6,8 9,8 5,9 8,9 5,10"
+  "8,1 4,2 8,2 3,3 4,3 7,3 1,4 2,4 4,4 7,4 10,4 0,5 4,5 6,5 10,5 1,6 2,6 6,6 10,6 3,7 5,7 9,7 9,7 5,8 9,8 4,9 8,9 4,10"
 );
 export const PixelComputerRetroIcon = createPixelIcon(
   "PixelComputerRetroIcon",
@@ -572,7 +577,7 @@ export const PixelClipboardCheckIcon = createPixelIcon(
   "PixelClipboardCheckIcon",
   11,
   11,
-  "4,1 5,1 3,2 6,2 2,3 4,3 5,3 7,3 1,4 8,4 1,5 6,5 8,5 1,6 3,6 5,6 8,6 1,7 4,7 8,7 1,8 8,8 2,9 3,9 4,9 5,9 6,9 7,9"
+  "1,5 1,3 1,4 1,6 8,8 3,9 1,8 7,9 1,7 4,1 2,9 3,2 4,9 5,9 6,9 5,1 8,3 8,7 6,5 5,6 6,2 8,4 8,5 8,6 3,6 4,7 7,2 2,2"
 );
 export const PixelGraduationCapIcon = createPixelIcon(
   "PixelGraduationCapIcon",
@@ -586,8 +591,8 @@ export const PixelCalendarIcon = createPixelIcon(
   11,
   "3,2 4,2 5,2 6,2 7,2 2,3 8,3 2,4 3,4 4,4 5,4 6,4 7,4 8,4 2,5 8,5 2,6 4,6 5,6 6,6 8,6 2,7 8,7 3,8 4,8 5,8 6,8 7,8"
 );
-export const PixelCalendarDayIcon = createPixelIcon(
-  "PixelCalendarDayIcon",
+export const PixelInfoCircleIcon = createPixelIcon(
+  "PixelInfoCircleIcon",
   11,
   11,
   "4,1 5,1 6,1 3,2 7,2 2,3 5,3 8,3 1,4 9,4 1,5 4,5 5,5 9,5 1,6 5,6 9,6 1,7 5,7 6,7 9,7 2,8 8,8 3,9 7,9 4,10 5,10 6,10"
@@ -614,7 +619,7 @@ export const PixelEyeClosedIcon = createPixelIcon(
   "PixelEyeClosedIcon",
   11,
   11,
-  "0,4 10,4 0,5 10,5 1,6 9,6 1,7 2,7 8,7 9,7 0,8 2,8 3,8 4,8 5,8 6,8 7,8 8,8 10,8 1,9 3,9 5,9 7,9 9,9 2,10 4,10 6,10 8,10"
+  "1,4 9,4 0,5 10,5 1,6 9,6 1,7 2,7 8,7 9,7 0,8 2,8 3,8 4,8 5,8 6,8 7,8 8,8 10,8 1,9 3,9 5,9 7,9 9,9 2,10 4,10 6,10 8,10"
 );
 export const PixelFileIcon = createPixelIcon(
   "PixelFileIcon",
@@ -638,7 +643,7 @@ export const PixelGithubOutlineIcon = createPixelIcon(
   "PixelGithubOutlineIcon",
   11,
   11,
-  "3,1 4,1 7,1 8,1 3,2 5,2 6,2 8,2 2,3 9,3 2,4 9,4 2,5 9,5 1,6 3,6 8,6 2,7 4,7 7,7 2,8 3,8 8,8 3,9 4,9 5,9 6,9 7,9"
+  "3,1 4,1 7,1 8,1 3,2 5,2 6,2 8,2 2,3 9,3 2,4 9,4 2,5 9,5 1,6 3,6 8,6 2,7 4,7 7,7 3,8 8,8 3,9 4,9 5,9 6,9 7,9 8,9"
 );
 export const PixelInfoCircleLowercaseIcon = createPixelIcon(
   "PixelInfoCircleLowercaseIcon",
@@ -650,7 +655,7 @@ export const PixelLinkedinIcon = createPixelIcon(
   "PixelLinkedinIcon",
   11,
   11,
-  "1,3 2,3 1,4 2,4 4,5 6,5 7,5 8,5 1,6 2,6 4,6 5,6 6,6 7,6 8,6 9,6 1,7 2,7 4,7 5,7 8,7 9,7 1,8 2,8 4,8 5,8 8,8 9,8"
+  "1,3 2,3 1,4 2,4 1,6 2,6 4,6 6,6 7,6 1,7 2,7 4,7 5,7 6,7 7,7 8,7 1,8 2,8 4,8 5,8 7,8 8,8 1,9 2,9 4,9 5,9 7,9 8,9"
 );
 export const PixelLinkedinOutlineIcon = createPixelIcon(
   "PixelLinkedinOutlineIcon",
@@ -674,7 +679,7 @@ export const PixelOscar2Icon = createPixelIcon(
   "PixelOscar2Icon",
   11,
   11,
-  "5,0 4,1 6,1 5,2 4,3 5,3 6,3 3,4 7,4 3,5 4,5 6,5 7,5 5,6 4,7 6,7 4,8 6,8 3,9 4,9 5,9 6,9 7,9 2,10 4,10 5,10 6,10 8,10"
+  "5,0 4,1 6,1 5,2 4,3 5,3 6,3 3,4 7,4 3,5 4,5 6,5 7,5 5,6 4,7 6,7 4,8 6,8 3,9 5,9 7,9 2,10 3,10 4,10 5,10 6,10 7,10 8,10"
 );
 export const PixelPaperclipIcon = createPixelIcon(
   "PixelPaperclipIcon",
@@ -698,7 +703,7 @@ export const PixelPresentationIcon = createPixelIcon(
   "PixelPresentationIcon",
   11,
   11,
-  "2,1 3,1 4,1 5,1 6,1 7,1 8,1 1,2 9,2 1,3 9,3 1,4 9,4 1,5 9,5 2,6 3,6 4,6 5,6 6,6 7,6 8,6 5,7 4,8 5,8 6,8 3,9 7,9"
+  "1,1 2,1 3,1 4,1 5,1 6,1 7,1 8,1 9,1 1,2 9,2 1,3 9,3 1,4 9,4 1,5 9,5 2,6 3,6 4,6 6,6 7,6 8,6 5,7 4,8 6,8 3,9 7,9"
 );
 export const PixelQuestionCircleIcon = createPixelIcon(
   "PixelQuestionCircleIcon",
@@ -728,7 +733,7 @@ export const PixelVideoCameraIcon = createPixelIcon(
   "PixelVideoCameraIcon",
   11,
   11,
-  "2,3 3,3 4,3 5,3 6,3 9,3 0,4 1,4 6,4 8,4 9,4 0,5 7,5 9,5 0,6 7,6 9,6 0,7 1,7 6,7 8,7 9,7 2,8 3,8 4,8 5,8 6,8 9,8"
+  "1,3 2,3 3,3 4,3 5,3 6,3 9,3 1,4 6,4 8,4 9,4 1,5 7,5 9,5 1,6 7,6 9,6 1,7 6,7 8,7 9,7 1,8 2,8 3,8 4,8 5,8 6,8 9,8"
 );
 export const PixelWindowIcon = createPixelIcon(
   "PixelWindowIcon",
@@ -763,6 +768,8 @@ export const PixelUnderlineIcon = createPixelIcon(
 
 export const pixelIconNames = [
   "PixelScribbleIcon",
+  "PixelClipboardIcon",
+  "PixelMugIcon",
   "PixelRedoIcon",
   "PixelDropdownIcon",
   "PixelLoaderIcon",
@@ -838,7 +845,7 @@ export const pixelIconNames = [
   "PixelClipboardCheckIcon",
   "PixelGraduationCapIcon",
   "PixelCalendarIcon",
-  "PixelCalendarDayIcon",
+  "PixelInfoCircleIcon",
   "PixelCaptionsIcon",
   "PixelChefHatIcon",
   "PixelEnvelopeIcon",
@@ -871,6 +878,8 @@ export const pixelIconNames = [
 
 export const morphablePixelIconNames = [
   "PixelComputerOutlineIcon",
+  "PixelClipboardIcon",
+  "PixelMugIcon",
   "PixelSparklesIcon",
   "PixelDownloadIcon",
   "PixelHelpIcon",
@@ -941,7 +950,7 @@ export const morphablePixelIconNames = [
   "PixelClipboardCheckIcon",
   "PixelGraduationCapIcon",
   "PixelCalendarIcon",
-  "PixelCalendarDayIcon",
+  "PixelInfoCircleIcon",
   "PixelCaptionsIcon",
   "PixelChefHatIcon",
   "PixelEnvelopeIcon",

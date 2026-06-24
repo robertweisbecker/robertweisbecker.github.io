@@ -124,6 +124,7 @@ export function EmojiFeedbackDemo() {
                       <TooltipTrigger
                         key={value}
                         tooltip={label}
+                        closeOnClick={true}
                         render={
                           <ToggleGroupItem
                             data-hue={hue}

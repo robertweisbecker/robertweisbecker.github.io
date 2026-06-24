@@ -2,9 +2,10 @@
 
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import * as PixelIcons from "@/components/icons-pixel";
+import { NumberSlider } from "@/components/number-slider";
 import { PixelIconMorph, type PixelIconMorphAnimation, type PixelIconMorphStrategy } from "@/components/pixel-icon-morph";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -24,18 +25,12 @@ type Option<T extends string> = {
 };
 
 const BASE_DURATION = 0.2;
-const STAGGER = 0.002;
+const DEFAULT_STAGGER_MS = 2;
 
-const DEFAULT_SEQUENCE: PixelIcons.MorphablePixelIconName[] = [
-  "PixelCopyIcon",
-  "PixelClipboardCheckIcon",
-
-  "PixelFolderIcon",
-  "PixelFolderOpenIcon",
-  "PixelExternalIcon",
-];
+const DEFAULT_SEQUENCE: PixelIcons.MorphablePixelIconName[] = ["PixelEyeIcon", "PixelEyeClosedIcon"];
 
 const STRATEGY_OPTIONS: Option<PixelIconMorphStrategy>[] = [
+  { value: "match", label: "Match", description: "Keep shared pixels pinned, then move the rest nearest" },
   { value: "nearest", label: "Nearest", description: "Move pixels shortest distance" },
   { value: "reading", label: "Reading", description: "Re-paint from top left" },
   { value: "radial", label: "Radial", description: "Reshuffle pixels from center" },
@@ -83,30 +78,36 @@ function getNextIndex(currentIndex: number, length: number) {
 function AnimationControl<T extends string>({
   label,
   type = "toggle",
+  orientation,
   value,
   options,
   onValueChange,
 }: {
   label: string;
   type?: "toggle" | "select";
+  orientation?: "vertical" | "horizontal" | "responsive";
   value: T;
   options: Option<T>[];
   onValueChange: (value: T) => void;
 }) {
+  // const fieldOrientation = orientation ?? (type === "select" ? "horizontal" : "vertical");
+
   if (type === "select") {
     return (
-      <Field orientation="horizontal">
+      <Field orientation={orientation}>
         <FieldLabel>{label}</FieldLabel>
         <Select value={value} onValueChange={(nextValue) => onValueChange(nextValue as T)}>
           <SelectTrigger className="w-full">
             <SelectValue>{options.find((option) => option.value === value)?.label ?? value}</SelectValue>
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="min-w-64">
             <SelectGroup>
               {options.map((option) => (
-                <SelectItem key={option.value} value={option.value} className="leading-none **:gap-0">
-                  {option.label}
-                  {option.description ? <p className="w-full min-w-0 text-xs/none text-muted-foreground">{option.description}</p> : null}
+                <SelectItem key={option.value} value={option.value} className="py-2.5">
+                  <span className="flex min-w-0 flex-col gap-1">
+                    <span className="truncate">{option.label}</span>
+                    {option.description ? <span className="text-xs/4 text-muted-foreground">{option.description}</span> : null}
+                  </span>
                 </SelectItem>
               ))}
             </SelectGroup>
@@ -116,7 +117,7 @@ function AnimationControl<T extends string>({
     );
   } else
     return (
-      <Field>
+      <Field orientation={orientation}>
         <FieldLabel>{label}</FieldLabel>
         <ToggleGroup
           value={[value]}
@@ -126,13 +127,14 @@ function AnimationControl<T extends string>({
               onValueChange(nextValue as T);
             }
           }}
-          spacing={1}
+          spacing={0.25}
           size="sm"
-          className="flex-wrap"
+          variant="elevated"
+          className={cn("flex-wrap", orientation === "horizontal" && "justify-end")}
           aria-label={label}
         >
           {options.map((option) => (
-            <ToggleGroupItem key={option.value} value={option.value} aria-label={option.label} className="">
+            <ToggleGroupItem key={option.value} value={option.value} aria-label={option.label} className="grow">
               <span className="truncate text-xs">{option.label}</span>
             </ToggleGroupItem>
           ))}
@@ -146,21 +148,21 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [active, setActive] = React.useState(false);
   const [isAnimating, setIsAnimating] = React.useState(false);
-  const [strategy, setStrategy] = React.useState<PixelIconMorphStrategy>("nearest");
+  const [strategy, setStrategy] = React.useState<PixelIconMorphStrategy>("match");
   const [animation, setAnimation] = React.useState<PixelIconMorphAnimation>("ease");
   const [speedScale, setSpeedScale] = React.useState<SpeedScale>("1");
+  const [staggerMs, setStaggerMs] = React.useState(DEFAULT_STAGGER_MS);
   const timerRef = React.useRef<number | null>(null);
 
   const duration = SPEED_DURATIONS[speedScale] ?? BASE_DURATION;
+  const stagger = staggerMs / 1000;
   const from = sequence[currentIndex];
   const nextIndex = sequence.length > 0 ? getNextIndex(currentIndex, sequence.length) : 0;
   const to = sequence[nextIndex];
   const canPlay = sequence.length >= 2 && Boolean(from && to);
   const CurrentIcon = from ? iconComponents[from] : null;
-  const rawTotalDuration = (duration + STAGGER * 27) * 1000 + 80;
+  const rawTotalDuration = (duration + stagger * 27) * 1000 + 80;
   const totalDuration = Number.isFinite(rawTotalDuration) ? Math.max(160, rawTotalDuration) : 320;
-  const settingsKey = `${animation}-${strategy}-${speedScale}`;
-  const previousSettingsRef = React.useRef(settingsKey);
   const transitionLabel =
     from && to && canPlay ? (
       <>
@@ -180,13 +182,13 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
   }, []);
 
   const playTransitions = React.useCallback(
-    (steps: number) => {
+    (steps: number, startIndex = currentIndex) => {
       if (isAnimating || !canPlay || steps < 1) {
         return;
       }
 
       const sequenceLength = sequence.length;
-      const startIndex = Math.min(currentIndex, sequenceLength - 1);
+      const resolvedStartIndex = Math.min(startIndex, sequenceLength - 1);
 
       clearTimer();
       setIsAnimating(true);
@@ -227,7 +229,7 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
         timerRef.current = window.setTimeout(finishTransition, totalDuration);
       };
 
-      runStep(0, startIndex);
+      runStep(0, resolvedStartIndex);
     },
     [canPlay, clearTimer, currentIndex, isAnimating, sequence.length, totalDuration]
   );
@@ -241,19 +243,10 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
       return;
     }
 
-    playTransitions(Math.max(1, sequence.length - 1));
+    playTransitions(Math.max(1, sequence.length - 1), 0);
   }, [canPlay, playTransitions, sequence.length]);
 
   React.useEffect(() => clearTimer, [clearTimer]);
-
-  React.useEffect(() => {
-    if (previousSettingsRef.current === settingsKey) {
-      return;
-    }
-
-    previousSettingsRef.current = settingsKey;
-    advanceSequence();
-  }, [advanceSequence, settingsKey]);
 
   function updateSequence(nextValue: PixelIcons.MorphablePixelIconName[]) {
     clearTimer();
@@ -313,23 +306,9 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
             >
               Clear selections
             </Button>
-            <Button
-              type="button"
-              size="xs"
-              variant="ghost"
-              onClick={playSequence}
-              focusableWhenDisabled={true}
-              disabled={isAnimating || !canPlay}
-              aria-disabled={isAnimating || !canPlay}
-              aria-label="Play transition"
-              data-testid="pixel-morph-play"
-            >
-              <IconPlayerPlayFilled data-icon="inline-start" />
-              Play all
-            </Button>
           </CardAction>
         </CardHeader>
-        <CardContent className="gap-4">
+        <CardContent>
           <div className="grid h-[110px] place-items-center" data-section="preview">
             <Button
               type="button"
@@ -349,8 +328,8 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
                   strategy={strategy}
                   animation={animation}
                   duration={duration}
-                  stagger={STAGGER}
-                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
+                  stagger={stagger}
+                  className="size-[44px]!"
                 />
               ) : CurrentIcon ? (
                 <CurrentIcon className="size-[44px]!" aria-hidden />
@@ -365,33 +344,29 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
           <div className="mx-auto flex h-button-xs items-center gap-px" aria-label="Selected icon sequence">
             {sequence.length > 0 ? (
               <>
-                <TooltipGroup>
+                <TooltipGroup side="bottom">
                   <LayoutGroup>
                     <AnimatePresence>
                       {sequence.map((icon, index) => (
                         <TooltipTrigger
                           key={icon}
-                          tooltip={<span className="px-1 font-pixel text-2xs whitespace-nowrap">{formatIconName(icon)}</span>}
+                          tooltip={<span className="whitespace-nowrap">{formatIconName(icon)}</span>}
                           render={
                             <Button
                               type="button"
-                              variant="ghost"
+                              variant={"ghost"}
+                              size="icon-xs"
                               rounded
-                              size="xs"
                               onClick={() => jumpToIcon(index)}
                               aria-label={`Jump to ${formatIconName(icon)}`}
                               aria-current={index === currentIndex ? "step" : undefined}
-                              className="px-1 font-pixel text-2xs"
-                              render={<motion.button animate={{ opacity: 1 }} />}
+                              data-pressed={index === currentIndex}
                             />
                           }
                         >
-                          <motion.span
-                            className={cn(
-                              "size-2 rounded-full bg-current/50 transition-[scale,background-color]",
-                              index === currentIndex && "scale-110 bg-current"
-                            )}
-                          />
+                          <motion.span animate={{ scale: index === currentIndex ? 1.1 : 1, opacity: index === currentIndex ? 1 : 0.5 }}>
+                            <PixelIconMorph from={icon} to={icon} />
+                          </motion.span>
                         </TooltipTrigger>
                       ))}
                     </AnimatePresence>
@@ -402,32 +377,37 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
           </div>
           <div className="min-h-5 text-center font-pixel text-2xs text-foreground">{transitionLabel}</div>
 
-          <ScrollArea className="h-72 w-full" scrollbarGutter showScrollbar scrollFade innerClass="py-1">
+          <ScrollArea className="w-full max-sm:h-64" scrollbarGutter showScrollbar scrollFade innerClass="border-t border-s">
             <ToggleGrid
-              columns={10}
-              spacing={0.5}
+              columns={12}
+              spacing={0}
               multiple
+              shape="square"
               value={sequence}
               onValueChange={(next) => updateSequence(next as PixelIcons.MorphablePixelIconName[])}
               aria-label="Morphable pixel icons"
+              className="divide-x divide-y *:last:border-e *:last:border-b"
             >
               {sortedMorphablePixelIconNames.map((icon) => {
                 const Icon = iconComponents[icon];
                 const sequenceIndex = sequence.indexOf(icon);
                 const isSelected = sequenceIndex !== -1;
-                const isCurrent = sequenceIndex === currentIndex;
 
                 return (
                   <ToggleGroupItem
                     key={icon}
                     value={icon}
-                    variant={isCurrent ? "outline" : "default"}
+                    // variant={isCurrent ? "outline" : "default"}
                     aria-label={`${isSelected ? "Remove" : "Add"} ${formatIconName(icon)}`}
+                    className="group aspect-square h-auto! rounded-none"
                   >
                     <Icon className="size-[16.5px]" aria-hidden />
+                    <span className="ease pointer-events-none absolute inset-0 grid-stack overflow-hidden bg-secondary text-center text-[9px]/none text-ellipsis opacity-0 group-hover:opacity-100 group-data-pressed:opacity-0">
+                      {formatIconName(icon)}
+                    </span>
                     {isSelected ? (
-                      <Badge variant="outline" size="sm" aria-hidden className={cn("absolute end-0.5 top-0.5")}>
-                        {sequenceIndex + 1}
+                      <Badge variant="outline" size="sm" aria-hidden className={cn("absolute inset-e-px top-px h-fit")}>
+                        <span className="font-pixel text-2xs">{sequenceIndex + 1}</span>
                       </Badge>
                     ) : null}
                   </ToggleGroupItem>
@@ -444,9 +424,42 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
         </CardHeader>
         <CardContent className="gap-3">
           <AnimationControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
-          <AnimationControl type="toggle" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />
-          <AnimationControl type="toggle" label="Speed" value={speedScale} options={SPEED_OPTIONS} onValueChange={setSpeedScale} />
+          <AnimationControl type="select" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />
+          <AnimationControl
+            type="toggle"
+            // orientation="horizontal"
+            label="Speed"
+            value={speedScale}
+            options={SPEED_OPTIONS}
+            onValueChange={setSpeedScale}
+          />
+          <NumberSlider
+            label="Stagger"
+            min={0}
+            max={10}
+            step={1}
+            value={staggerMs}
+            onValueChange={setStaggerMs}
+            unit="ms"
+            format={{ maximumFractionDigits: 0 }}
+          />
         </CardContent>
+        <CardFooter className="justify-end">
+          <Button
+            type="button"
+            size="xs"
+            variant="ghost"
+            onClick={playSequence}
+            focusableWhenDisabled={true}
+            disabled={isAnimating || !canPlay}
+            aria-disabled={isAnimating || !canPlay}
+            aria-label="Play full sequence from beginning"
+            data-testid="pixel-morph-play"
+          >
+            <IconPlayerPlayFilled data-icon="inline-start" />
+            Play all
+          </Button>
+        </CardFooter>
       </Card>
     </div>
   );

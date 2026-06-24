@@ -408,7 +408,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
     <Toolbar.Group
       role="tablist"
       className={cn(
-        "flex h-button-sm shrink-0 items-center justify-center rounded-full border bg-neutral-700/60 px-2.5 py-1.5 backdrop-blur-xl",
+        "flex h-button-sm shrink-0 items-center justify-center rounded-full border bg-neutral-700/60 px-2.5 py-1.5 backdrop-blur-xl backdrop-invert-50",
         // orientation === "vertical" && "h-auto rotate-90",
         className
       )}

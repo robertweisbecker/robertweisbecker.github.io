@@ -109,6 +109,7 @@ export function ColorSwatchGroup({
             <TooltipTrigger
               key={swatch.value}
               tooltip={swatch.label}
+              closeOnClick={false}
               render={
                 <ToggleGroupItem
                   value={swatch.value}

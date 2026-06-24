@@ -239,8 +239,8 @@ export function Header() {
           "via-smooth overflow-hidden bg-linear-to-b from-background from-25% to-background/0"
         )}
       >
-        <div className="absolute inset-0 mask-b-from-black mask-b-from-10% mask-b-to-black/0 backdrop-blur-xs" />
-        <div className="absolute inset-0 mask-b-from-black mask-b-from-25% mask-b-to-black/0 backdrop-blur-md" />
+        <div className="absolute inset-0 mask-b-from-black mask-b-from-10% mask-b-to-black/0 backdrop-blur-xs backdrop-contrast-200" />
+        <div className="absolute inset-0 mask-b-from-black mask-b-from-25% mask-b-to-black/0 backdrop-blur-md backdrop-saturate-200" />
       </div>
     </nav>
   );
@@ -259,7 +259,7 @@ function HeaderButton({
       variant="ghost"
       size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "sm"}
       className={cn(
-        "font-pixel text-[11px] uppercase backdrop-blur-md aria-current:bg-accent aria-current:text-accent-foreground",
+        "font-pixel text-[11px] uppercase aria-current:bg-accent aria-current:text-accent-foreground",
         "[&_svg]:size-2.75",
         props.className
       )}

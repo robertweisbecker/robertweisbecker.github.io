@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 import * as React from "react";
 
-export type PixelIconMorphStrategy = "nearest" | "reading" | "radial" | "scatter" | "compress";
+export type PixelIconMorphStrategy = "match" | "nearest" | "reading" | "radial" | "scatter" | "compress";
 export type PixelIconMorphAnimation = "linear" | "ease" | "spring";
 
 export type PixelIconMorphProps = Omit<React.ComponentProps<typeof motion.svg>, "children"> & {
@@ -32,6 +32,10 @@ const EXPECTED_POINT_COUNT = 28;
 
 function pointDistance(a: PixelIconPoint, b: PixelIconPoint) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+}
+
+function pointsShareCoordinates(a: PixelIconPoint, b: PixelIconPoint) {
+  return a.x === b.x && a.y === b.y;
 }
 
 function getCentroid(points: PixelIconPoint[]) {
@@ -70,10 +74,56 @@ function byRadialOrder(points: IndexedPoint[]) {
   });
 }
 
+function getNearestPairs(source: IndexedPoint[], target: IndexedPoint[]) {
+  const availableTargets = [...target];
+
+  return source.map((sourcePoint) => {
+    let targetIndex = 0;
+    let bestDistance = Number.POSITIVE_INFINITY;
+
+    for (let index = 0; index < availableTargets.length; index += 1) {
+      const targetPoint = availableTargets[index];
+      const distance = pointDistance(sourcePoint, targetPoint);
+
+      if (distance < bestDistance || (distance === bestDistance && targetPoint.index < availableTargets[targetIndex].index)) {
+        targetIndex = index;
+        bestDistance = distance;
+      }
+    }
+
+    const [targetPoint] = availableTargets.splice(targetIndex, 1);
+    return { from: sourcePoint, to: targetPoint };
+  });
+}
+
+function getMatchPairs(source: IndexedPoint[], target: IndexedPoint[]) {
+  const availableTargets = [...target];
+  const pairs: Array<MorphPair | undefined> = Array.from({ length: source.length });
+  const remainingSource: IndexedPoint[] = [];
+
+  source.forEach((sourcePoint) => {
+    const exactTargetIndex = availableTargets.findIndex((targetPoint) => pointsShareCoordinates(sourcePoint, targetPoint));
+
+    if (exactTargetIndex === -1) {
+      remainingSource.push(sourcePoint);
+      return;
+    }
+
+    const [targetPoint] = availableTargets.splice(exactTargetIndex, 1);
+    pairs[sourcePoint.index] = { from: sourcePoint, to: targetPoint };
+  });
+
+  getNearestPairs(remainingSource, availableTargets).forEach((pair) => {
+    pairs[pair.from.index] = pair;
+  });
+
+  return pairs.filter((pair): pair is MorphPair => Boolean(pair));
+}
+
 export function getPixelIconMorphPairs(
   from: MorphablePixelIconName,
   to: MorphablePixelIconName,
-  strategy: PixelIconMorphStrategy = "nearest"
+  strategy: PixelIconMorphStrategy = "match"
 ): MorphPair[] {
   const fromPoints = withIndex(pixelIconData[from].points);
   const toPoints = withIndex(pixelIconData[to].points);
@@ -96,25 +146,11 @@ export function getPixelIconMorphPairs(
     return source.map((point, index) => ({ from: point, to: target[index] }));
   }
 
-  const availableTargets = [...toPoints];
+  if (strategy === "match") {
+    return getMatchPairs(fromPoints, toPoints);
+  }
 
-  return fromPoints.map((source) => {
-    let targetIndex = 0;
-    let bestDistance = Number.POSITIVE_INFINITY;
-
-    for (let index = 0; index < availableTargets.length; index += 1) {
-      const target = availableTargets[index];
-      const distance = pointDistance(source, target);
-
-      if (distance < bestDistance || (distance === bestDistance && target.index < availableTargets[targetIndex].index)) {
-        targetIndex = index;
-        bestDistance = distance;
-      }
-    }
-
-    const [target] = availableTargets.splice(targetIndex, 1);
-    return { from: source, to: target };
-  });
+  return getNearestPairs(fromPoints, toPoints);
 }
 
 function getScatterPoint(point: PixelIconPoint) {
@@ -218,7 +254,7 @@ export function PixelIconMorph({
   from,
   to,
   active = false,
-  strategy = "nearest",
+  strategy = "match",
   animation = "linear",
   duration = 0.2,
   stagger = 0.002,

@@ -7,14 +7,7 @@ import { Demo } from "@/components/demo";
 import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
 import * as PixelIcons from "@/components/icons-pixel";
-import {
-  PixelClipboardIcon,
-  PixelMoonIcon,
-  PixelPointerIcon,
-  PixelScribbleIcon,
-  PixelShuffleIcon,
-  PixelSunIcon,
-} from "@/components/icons-pixel";
+import { PixelClipboardIcon, PixelPointerIcon, PixelScribbleIcon } from "@/components/icons-pixel";
 import { ImageToggle } from "@/components/image-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
@@ -79,7 +72,6 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelBookIcon, name: "Book" },
   { Icon: PixelIcons.PixelBookOpenIcon, name: "Book Open" },
   { Icon: PixelIcons.PixelCalendarIcon, name: "Calendar" },
-  { Icon: PixelIcons.PixelCalendarDayIcon, name: "Calendar Day" },
   { Icon: PixelIcons.PixelCaptionsIcon, name: "Captions" },
   { Icon: PixelIcons.PixelCheckboxIcon, name: "Checkbox" },
   { Icon: PixelIcons.PixelChefHatIcon, name: "Chef Hat" },
@@ -117,6 +109,7 @@ const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelHouseWindowIcon, name: "House Window" },
   { Icon: PixelIcons.PixelIphoneXIcon, name: "iPhone X" },
   { Icon: PixelIcons.PixelInfoIcon, name: "Info" },
+  { Icon: PixelIcons.PixelInfoCircleIcon, name: "Info Circle" },
   { Icon: PixelIcons.PixelInfoCircleLowercaseIcon, name: "Info Circle Lowercase" },
   { Icon: PixelIcons.PixelLightbulbIcon, name: "Lightbulb" },
   { Icon: PixelIcons.PixelLinkedinIcon, name: "LinkedIn" },
@@ -339,8 +332,11 @@ export default function PlaygroundPage() {
           <Demo caption="Hover effects" centerContent className="lg:col-span-6">
             <AnimatedButtonDemo />
           </Demo>
-          <Demo caption="Animated button" centerContent className="lg:col-span-6">
+          <Demo caption="Metallic button" centerContent className="lg:col-span-6">
             <CobotButtonDemo />
+          </Demo>
+          <Demo caption="iOS 27 icon" centerContent className="lg:col-span-3" innerClass="bg-card dark">
+            <MacAppIconDemo />
           </Demo>
           <Demo caption="Delete button" centerContent className="lg:col-span-3">
             <DeleteButtonDemo />
@@ -678,13 +674,13 @@ function GroupedPopupsDemo() {
         <TooltipGroup side="top" sideOffset={8} delay={100} closeDelay={0}>
           <div className="flex flex-wrap gap-2">
             <TooltipTrigger tooltip="Pointer" render={<Button size="icon" variant="outline" aria-label="Pointer" />}>
-              <PixelPointerIcon />
+              <PixelIcons.PixelPointerIcon />
             </TooltipTrigger>
             <TooltipTrigger tooltip="Scribble" render={<Button size="icon" variant="outline" aria-label="Scribble" />}>
-              <PixelScribbleIcon />
+              <PixelIcons.PixelScribbleIcon />
             </TooltipTrigger>
             <TooltipTrigger tooltip="Clipboard" render={<Button size="icon" variant="outline" aria-label="Clipboard" />}>
-              <PixelClipboardIcon />
+              <PixelIcons.PixelClipboardIcon />
             </TooltipTrigger>
           </div>
         </TooltipGroup>
@@ -1013,20 +1009,39 @@ function CobotButtonDemo() {
   return (
     <button
       className={cn(
-        "relative isolate m-10 inline-flex h-10 items-center rounded-full px-4 font-medium text-white transition-all duration-100 ease-out-quad",
-        "[--highlight-color:var(--color-pink-300)]",
-        "border-[0.5px] border-neutral-600",
+        "relative isolate m-10 inline-flex h-button-lg items-center rounded-full px-8 pb-0.5 font-medium text-white transition-[scale] duration-100 ease-out",
+        "[--highlight-color:var(--hue-300)]",
+        "border-[0.5px] border-muted-foreground",
         "ring-[0.5px] ring-black/20",
         "inset-shadow-sm inset-shadow-neutral-300/50",
         "bg-linear-to-b from-white from-5% via-neutral-900 via-67% to-(--highlight-color) bg-center",
         "shadow-md text-shadow-[0px_1px_0px_hsl(0_0_100%/30%),0px_.25px_hsl(0_0_0_/_100%),0_0_1px_hsl(0_0_0_/_80%),0_.5px_.5px_hsl(0_0_100%_/_50%)]",
-        "before:absolute before:inset-0.5 before:-z-1 before:rounded-full before:bg-(--highlight-color) before:bg-radial-[at_25%_-25%] before:from-neutral-300/80 before:via-neutral-400 before:to-neutral-600 before:bg-size-[200%_100%] before:shadow-lg before:shadow-(color:--highlight-color)/30 before:transition-all before:duration-100 before:ease-out-quad",
+        "before:absolute before:inset-0.5 before:-z-1 before:rounded-full before:bg-(--highlight-color) before:bg-radial-[at_25%_-25%] before:from-neutral-300/80 before:via-neutral-400 before:to-neutral-600 before:bg-size-[200%_100%] before:shadow-lg before:shadow-(color:--highlight-color)/30 before:transition-all before:duration-100 before:ease-out",
         "focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-(--highlight-color)",
-        "active:translate-y-px active:scale-97 active:before:inset-px active:before:blur-[.25px]"
+        "active:translate-y-px active:scale-97 active:before:inset-[1.5px] active:before:blur-[.5px]"
       )}
     >
       Agent
     </button>
+  );
+}
+
+function MacAppIconDemo() {
+  return (
+    <div className="squircle relative isolate flex size-24 items-center justify-center rounded-2xl bg-linear-to-b from-[#1F1E1E] to-[#0E0E0E] shadow-[inset_0px_-0.125px_0.6875px_-0.6875px_var(--color-white-alpha-400),_inset_0px_4px_0.33px_-3.75px_var(--color-white-alpha-400),_inset_0px_22px_5.5px_-17.5px_var(--color-white-alpha-200),_inset_-0.33px_-1.375px_0.6875px_-0.33px_var(--color-white-alpha-200),_inset_0.33px_1.3617px_0.6875px_-0.33px_var(--color-white-alpha-200),_inset_0px_0px_0.6875px_0.6875px_var(--border)] ring-[0.5px] ring-black/50 drop-shadow-lg drop-shadow-black/20">
+      <div className="aspect-square size-14 bg-conic/decreasing from-(--color-red-300) via-(--color-lime-200) to-(--color-red-300) mask-[url(#mask-0)]" />
+      <svg width={0} height={0} xmlns="http://www.w3.org/2000/svg" id="icon-0" className="absolute">
+        <defs>
+          <mask id="mask-0" maskContentUnits="objectBoundingBox">
+            <path
+              transform="scale(0.0666667)"
+              fill="white"
+              d="M9.84277 1.5C11.1153 1.5 11.7514 2.12445 11.7514 3.37352L11.7524 4.49789C13.7463 5.06059 15 6.67718 15 8.89037C15 11.6709 13.0314 13.5 10.1047 13.5H7.57481C5.3404 13.5 3.67027 12.4392 3.00082 10.7053L1.90865 10.7045C0.628807 10.7045 0 10.0874 0 8.83829V3.37352C0 2.12445 0.628807 1.5 1.90865 1.5H9.84277ZM7.57481 5.35134C5.29948 5.35134 3.75751 6.78616 3.75751 8.89037C3.75751 11.0019 5.29948 12.4294 7.57481 12.4294H10.1047C12.3727 12.4294 13.9222 11.0019 13.9222 8.89037C13.9222 6.78616 12.3727 5.35134 10.1047 5.35134H7.57481ZM10.2412 5.58564L10.3143 5.58918C11.2724 5.75272 11.7514 6.31779 11.7514 7.44792V8.82337C11.7514 10.1245 11.1153 10.7045 9.82039 10.7045H5.93565C5.49401 10.7045 5.33689 10.9498 5.4491 11.3067C5.51655 11.5149 5.35927 11.5669 5.19463 11.4331C5.00746 11.2621 4.65565 10.8904 4.65565 10.3773C4.65565 10.0056 4.95519 9.63389 5.56882 9.63389H9.8279C10.3667 9.63389 10.6661 9.34382 10.6661 8.77875V7.25469C10.6661 6.6004 10.5988 6.10217 10.1797 5.85687C10.0332 5.77755 10.0643 5.59838 10.2412 5.58564ZM1.92367 2.57806C1.38469 2.57806 1.07795 2.86052 1.07795 3.42559V8.77875C1.07795 9.34382 1.38469 9.63389 1.92367 9.63389L2.72886 9.63389C2.69635 9.39458 2.67971 9.14651 2.67971 8.89037C2.67971 6.11709 4.64078 4.28058 7.57481 4.28058H10.1047C10.2964 4.28058 10.484 4.28846 10.6672 4.30396L10.6661 3.42559C10.6661 2.86052 10.3592 2.57806 9.8279 2.57806H1.92367Z"
+            />
+          </mask>
+        </defs>
+      </svg>
+    </div>
   );
 }
 

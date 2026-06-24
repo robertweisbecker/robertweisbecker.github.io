@@ -229,65 +229,56 @@ export default function Home() {
 
       <section className="flex flex-col gap-3" id="about">
         <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase">V. About</h2>
-        <LayoutGrid variant="twoUp">
-          <p className="max-w-prose text-sm text-muted-foreground">
+        <LayoutGrid variant="twoUp" className="text-sm/6">
+          <p className="max-w-prose text-muted-foreground">
             I&apos;m from Baltimore, MD, and now live in southern CA. Since 2021, I&apos;ve led the implementation of a shared design system
             for e-learning admin, educator, and learner-facing products. Recently, I&apos;ve been designing a new platform for educators,
             diving deep into color spaces, exploring animation in React, and working with agents.
           </p>
-          <p className="max-w-prose text-sm text-muted-foreground">
-            Before that, I worked on financial &amp; K12 products for Everfi, including{" "}
+          <p className="max-w-prose text-muted-foreground">
+            Before that, I worked on financial, K12 to higher education, &amp; workplace compliance products for Everfi, including{" "}
             <LinkOut href="https://everfi.com/financial-education/consumers/" text="Achieve" />,{" "}
             <ProjectLink href="/everfi-engage" text="Engage" />
-            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. Plus more
-            for partners like{" "}
-            <span className="whitespace-nowrap">
-              <GoogleIcon className="-mt-px inline-block size-3 grayscale" /> Google
+            , and <LinkOut href="https://everfi.com/courses/k-12/teaching-data-science-in-high-school/" text="Data Science" />. Plus many
+            more for partners like{" "}
+            <span className="whitespace-nowrap text-foreground">
+              <GoogleIcon className="mx-px -mt-0.5 inline-block size-3.5 opacity-50 grayscale" /> Google
             </span>
             ,{" "}
-            <span className="whitespace-nowrap">
-              <MetaIcon className="-mt-px inline-block size-4 grayscale" />
+            <span className="whitespace-nowrap text-foreground">
+              <MetaIcon className="-mt-[3px] inline-block size-4 opacity-50 grayscale" />
                Meta
             </span>
             ,{" "}
-            <span className="whitespace-nowrap">
-              <LinkedinIcon className="-mt-px inline-block size-3.5 fill-muted-foreground/50" />
+            <span className="whitespace-nowrap text-foreground">
+              <LinkedinIcon className="-mt-0.5 inline-block size-3.5 fill-muted-foreground/50" />
                LinkedIn
             </span>
             ,{" "}
-            <span className="whitespace-nowrap">
+            <span className="whitespace-nowrap text-foreground">
               <KrogerIcon className="-mt-1 inline-block size-4 fill-muted-foreground/50" /> Kroger
             </span>
-            ,{" "}
-            <span className="whitespace-nowrap">
-              <BeyondMeatIcon className="-mt-px inline-block size-3.5 fill-muted-foreground/50" />
+            , and{" "}
+            <span className="whitespace-nowrap text-foreground">
+              <BeyondMeatIcon className="me-0.5 -mt-0.5 inline-block size-3.5 fill-muted-foreground/50" />
                Beyond Meat
             </span>
-            , and others.
+            .
           </p>
           <div>
-            <p className="mb-2 text-sm text-muted-foreground">Some other things I&apos;ve done:</p>
+            <p className="mb-2 text-muted-foreground">Some other things I&apos;ve done:</p>
 
-            <ul className="max-w-prose list-disc space-y-2 ps-6 text-sm text-muted-foreground marker:text-muted-foreground/50">
+            <ul className="max-w-prose list-disc space-y-2 ps-4 text-muted-foreground marker:text-muted-foreground/50">
               <li>
-                Delivered a (finally relevant!){" "}
-                <Badge variant="link" render={<Link href="/conversational-immigration-forms" />} className="text-sm">
-                  <TreeIconRichText data-icon="inline-start" className="opacity-50" />
-                  thesis
-                </Badge>{" "}
-                exploring chatbots and conversational interface design patterns.{" "}
+                Delivered a (prescient?) <ProjectLink href="/conversational-immigration-forms" text="thesis" /> exploring chatbots and
+                conversational interface design patterns.{" "}
               </li>
               <li>
-                Built a{" "}
-                <Badge variant="link" render={<Link href="/npr-maps" />}>
-                  <TreeIconRichText data-icon="inline-start" className="opacity-50" />
-                  mapping application
-                </Badge>{" "}
-                at NPR when I wasn&apos;t busy <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the
-                background of Tiny Desk recordings.
+                Built a <ProjectLink href="/npr-maps" text="mapping application" /> at NPR when I wasn&apos;t busy{" "}
+                <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background of Tiny Desk recordings.
               </li>
               <li>
-                Designed web &amp; iOS screens, performed user testing, and made graphics for{" "}
+                Designed web &amp; iOS screens, performed user testing, and made some wacky graphics for{" "}
                 <PreviewCard>
                   <PreviewCardTrigger
                     render={<LinkOut href="https://blog.spothero.com/spothero-acquires-parking-panda" text="Parking Panda" />}
@@ -304,7 +295,7 @@ export default function Home() {
                     </Badge>
                   </PreviewCardPopup>
                 </PreviewCard>{" "}
-                (acq. by SpotHero)
+                (acq. by SpotHero).
               </li>
             </ul>
           </div>
@@ -336,6 +327,24 @@ export default function Home() {
                   <span className="after-dots" />
                   <LinkButton href="https://github.com/robertweisbecker" variant="link" size="sm">
                     @robertweisbecker
+                  </LinkButton>
+                </span>
+              </li>
+              <li>
+                <span className="flex items-center gap-1">
+                  <span className="text-muted-foreground">Figma</span>
+                  <span className="after-dots" />
+                  <LinkButton href="https://figma.com/@yobob" variant="link" size="sm">
+                    @yobob
+                  </LinkButton>
+                </span>
+              </li>
+              <li>
+                <span className="flex items-center gap-1">
+                  <span className="text-muted-foreground">Letterboxd</span>
+                  <span className="after-dots" />
+                  <LinkButton href="https://letterboxd.com/weisbecker/" variant="link" size="sm">
+                    @weisbecker
                   </LinkButton>
                 </span>
               </li>
@@ -661,7 +670,7 @@ function BeyondMeatIcon(props: React.ComponentProps<"svg">) {
 function ProjectLink({ href, text, ...props }: React.ComponentProps<typeof Link> & { text: string }) {
   return (
     <Badge variant="link" render={<Link href={href} {...props} />} style={{ fontSize: "inherit", lineHeight: "inherit" }}>
-      <TreeIconRichText data-icon="inline-start" className="opacity-80" />
+      <TreeIconRichText data-icon="inline-start" className="opacity-50" />
       {text}
     </Badge>
   );

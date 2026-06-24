@@ -80,19 +80,22 @@ function Item({
   });
 }
 
-const itemMediaVariants = cva("gap-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none squircle", {
-  variants: {
-    variant: {
-      default: "bg-transparent min-h-lh min-w-lh self-center",
-      icon: " [&_svg:not([class*='size-'])]:size-4 grid-stack min-h-6 grid-stack min-w-6 bg-current/5 text-primary rounded-xs self-start",
-      image:
-        "size-10 bg-card overflow-hidden shadow-border-xs rounded-md group-data-[size=sm]/item:size-9 group-data-[size=sm]/item:rounded-md group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-cover [&_svg]:size-6 in-group-data-[variant=muted]/item:bg-muted in-group-data-[variant=muted]/item:shadow-none group-has-data-[slot=item-description]/item:self-start group-has-data-[slot=item-description]/item:translate-y-0.5",
+const itemMediaVariants = cva(
+  "gap-2 flex shrink-0 items-center justify-center text-(--hue-400) in-group-data-[orientation=vertical]/item:block [&_svg]:pointer-events-none squircle",
+  {
+    variants: {
+      variant: {
+        default: "bg-transparent min-h-lh min-w-lh self-center",
+        icon: " [&_svg:not([class*='size-'])]:size-4 grid-stack min-h-6 grid-stack min-w-6 bg-current/5  rounded-xs self-start",
+        image:
+          "size-10 bg-card overflow-hidden shadow-border-xs rounded-md group-data-[size=sm]/item:size-9 group-data-[size=sm]/item:rounded-md group-data-[size=xs]/item:size-7 [&_img]:size-full [&_img]:object-cover [&_svg]:size-6 in-group-data-[variant=muted]/item:bg-muted in-group-data-[variant=muted]/item:shadow-none group-has-data-[slot=item-description]/item:self-start group-has-data-[slot=item-description]/item:translate-y-0.5",
+      },
     },
-  },
-  defaultVariants: {
-    variant: "default",
-  },
-});
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
 
 function ItemMedia({ className, variant = "default", ...props }: React.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
   return <div data-slot="item-media" data-variant={variant} className={cn(itemMediaVariants({ variant, className }))} {...props} />;
@@ -113,7 +116,7 @@ function ItemTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="item-title"
       className={cn(
-        "line-clamp-1 w-fit items-center text-base leading-tight font-medium group-data-[size=sm]/item:text-sm",
+        "w-fit items-center text-base leading-tight font-medium whitespace-normal group-data-[size=sm]/item:text-sm",
         "group-data-[size=xs]/item:text-xs",
         className
       )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { PixelIconMorph, type PixelIconMorphAnimation, type PixelIconMorphStrategy } from "@/components/pixel-icon-morph";
+import { PixelIconMorph, type PixelIconMorphAnimation } from "@/components/pixel-icon-morph";
 import { Toggle } from "@/components/ui/toggle";
 import { cn } from "@/lib/utils";
 import type { MorphablePixelIconName } from "@/components/icons-pixel";
@@ -31,16 +31,20 @@ const TOGGLES: PixelIconMorphToggleItem[] = [
   {
     from: "PixelFolderIcon",
     to: "PixelFolderOpenIcon",
-    label: "Toggle folder",
+    label: "Open/close folder",
   },
   {
     from: "PixelComputerOutlineIcon",
     to: "PixelIphoneXIcon",
-    label: "Toggle device",
+    label: "Toggle device type",
+  },
+  {
+    from: "PixelEyeIcon",
+    to: "PixelEyeClosedIcon",
+    label: "Toggle visibility",
   },
 ];
 
-const STRATEGY: PixelIconMorphStrategy = "nearest";
 const ANIMATION: PixelIconMorphAnimation = "ease";
 
 export function PixelIconMorphToggles({ className }: { className?: string }) {
@@ -58,15 +62,7 @@ function PixelIconMorphToggle({ item }: { item: PixelIconMorphToggleItem }) {
 
   return (
     <Toggle pressed={pressed} onPressedChange={setPressed} aria-label={item.label}>
-      <PixelIconMorph
-        from={item.from}
-        to={item.to}
-        active={pressed}
-        strategy={STRATEGY}
-        animation={ANIMATION}
-        duration={0.2}
-        stagger={0.002}
-      />
+      <PixelIconMorph from={item.from} to={item.to} active={pressed} animation={ANIMATION} duration={0.2} stagger={0.02} />
     </Toggle>
   );
 }

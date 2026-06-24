@@ -8,8 +8,8 @@ const cardVariants = cva(
   {
     variants: {
       variant: {
-        default: "shadow-border-sm bg-card",
-        muted: "bg-muted/50 border-transparent",
+        default: "shadow-border-sm bg-linear-to-b from-card/50 to-card",
+        muted: "bg-muted/50 backdrop-saturate-120 border-transparent",
         outline: "outline-border -outline-offset-1 outline-1 dark:-outline-offset-1",
       },
       size: {
