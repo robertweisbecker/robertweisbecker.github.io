@@ -39,7 +39,7 @@ export function Header() {
   const filteredProjects = projects.filter((project) => project.published);
 
   return (
-    <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-background")}>
+    <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")}>
       <div className="mx-auto flex h-12 max-w-6xl items-center gap-1 py-2 max-sm:px-2">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           <Favicon className="size-4 text-secondary-foreground" />
@@ -48,7 +48,8 @@ export function Header() {
             {" "}
             bob
             <br />
-            <span className="text-primary/50">dot</span>fyi
+            <span className="text-(--hue-500)">dot</span>
+            <span className="">fyi</span>
           </span>
         </LinkButton>
         {/* <LinkButton
@@ -239,7 +240,7 @@ export function Header() {
           "via-smooth overflow-hidden bg-linear-to-b from-background from-25% to-background/0"
         )}
       >
-        <div className="absolute inset-0 mask-b-from-black mask-b-from-10% mask-b-to-black/0 backdrop-blur-xs backdrop-contrast-200" />
+        <div className="absolute inset-0 mask-b-from-black mask-b-from-10% mask-b-to-black/0 backdrop-blur-xs backdrop-saturate-200" />
         <div className="absolute inset-0 mask-b-from-black mask-b-from-25% mask-b-to-black/0 backdrop-blur-md backdrop-saturate-200" />
       </div>
     </nav>

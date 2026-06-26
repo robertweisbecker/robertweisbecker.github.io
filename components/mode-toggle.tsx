@@ -37,13 +37,14 @@ export function ModeToggle({ label, className, size = "icon-sm", variant = "ghos
         render={<Button variant={variant} size={size} onClick={handleClick} {...props} />}
       >
         <PixelIconMorph
+          data-icon={label ? "inline-start" : ""}
           from="PixelSunSmallIcon"
           to="PixelMoon2Icon"
           active={icon === "moon"}
           strategy="radial"
-          animation="linear"
-          duration={0.25}
-          stagger={0.01}
+          animation="ease"
+          duration={0.5}
+          stagger={0.025}
           className="size-[11px]"
         />
         {label && (

@@ -16,6 +16,7 @@ export type PixelIconMorphProps = Omit<React.ComponentProps<typeof motion.svg>, 
   animation?: PixelIconMorphAnimation;
   duration?: number;
   stagger?: number;
+  dots?: boolean;
 };
 
 type IndexedPoint = PixelIconPoint & {
@@ -238,7 +239,7 @@ function getTransition(
       type: "spring",
       stiffness: 520,
       damping: 36,
-      mass: 0.65,
+      mass: 0.25,
       delay,
     };
   }
@@ -258,6 +259,7 @@ export function PixelIconMorph({
   animation = "linear",
   duration = 0.2,
   stagger = 0.002,
+  dots = false,
   className,
   style,
   "aria-hidden": ariaHidden = true,
@@ -277,16 +279,15 @@ export function PixelIconMorph({
       height={ICON_SIZE}
       viewBox={`0 0 ${ICON_SIZE} ${ICON_SIZE}`}
       fill="currentColor"
-      className={cn("block overflow-visible", className)}
-      style={{ imageRendering: "pixelated", ...style }}
+      className={cn("block shrink-0 overflow-visible", className)}
+      style={{ imageRendering: undefined, ...style }}
       aria-hidden={ariaHidden}
       {...props}
     >
       {pairs.map((pair, index) => (
         <motion.rect
           key={`${pair.from.index}-${pair.to.index}`}
-          width={1}
-          height={1}
+          {...(dots ? { rx: 1, x: 0.05, y: 0.05, width: 0.9, height: 0.9 } : { width: 1, height: 1 })}
           fill="currentColor"
           initial={false}
           animate={getAnimateTarget(pair, active, strategy, animation, shouldReduceMotion)}

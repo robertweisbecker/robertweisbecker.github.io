@@ -68,6 +68,7 @@ const toggleGroupItemVariants = [
   "group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-s",
   "group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
   "group-data-[spacing=0]/toggle-group:rounded-none",
+  "group-data-[size=xs]/toggle-group:group-data-[variant=elevated]/toggle-group:rounded-md",
   // "group-data-[spacing=0]/toggle-group:px-2",
 ];
 

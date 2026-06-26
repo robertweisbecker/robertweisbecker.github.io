@@ -2,7 +2,17 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { BaseUiIcon, FigmaIcon, GithubIcon, LinkedinIcon, NextJsIcon, CursorIcon, MarkdownIcon, VercelIcon } from "@/components/icons";
+import {
+  BaseUiIcon,
+  FigmaIcon,
+  GithubIcon,
+  LinkedinIcon,
+  NextJsIcon,
+  CursorIcon,
+  MarkdownIcon,
+  VercelIcon,
+  CodexIcon,
+} from "@/components/icons";
 import { PixelShuffleIcon } from "@/components/icons-pixel";
 import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
@@ -509,9 +519,9 @@ export default function Home() {
           <DescriptionListLabel>Clankers</DescriptionListLabel>
           <DescriptionListValue>
             <span className="flex items-center gap-1.5">
-              <CursorIcon className="size-4" /> Cursor &
+              <CursorIcon className="size-4" /> Cursor,
               <TreeIconClaude className="size-4" />
-              Claude
+              Claude, and <CodexIcon className="size-4" /> Codex
             </span>
           </DescriptionListValue>
         </DescriptionList>

@@ -59,7 +59,7 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
   /* Remove bottom margin on h1 if directly followed by a <p> */
   &:has(+ p) {
     margin-bottom: 0.5em;
-    /* & ~ p:first-of-type {
+    /* & + p:first-of-type {
       @apply text-lg/6 text-balance opacity-60;
     } */
   }

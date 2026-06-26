@@ -16,44 +16,46 @@ const TOGGLES: PixelIconMorphToggleItem[] = [
   {
     from: "PixelVolumeIcon",
     to: "PixelVolumeMutedIcon",
-    label: "Toggle volume",
+    label: "Mute",
   },
   {
     from: "PixelPlayIcon",
     to: "PixelPauseIcon",
-    label: "Toggle playback",
+    label: "Play",
   },
   {
-    from: "PixelCopyIcon",
+    from: "PixelClipboardIcon",
     to: "PixelClipboardCheckIcon",
-    label: "Toggle copied state",
+    label: "Copy",
   },
   {
     from: "PixelFolderIcon",
     to: "PixelFolderOpenIcon",
-    label: "Open/close folder",
+    label: "Open",
   },
   {
     from: "PixelComputerOutlineIcon",
     to: "PixelIphoneXIcon",
-    label: "Toggle device type",
+    label: "Device",
   },
   {
     from: "PixelEyeIcon",
     to: "PixelEyeClosedIcon",
-    label: "Toggle visibility",
+    label: "Hide",
   },
 ];
 
-const ANIMATION: PixelIconMorphAnimation = "ease";
+const ANIMATION: PixelIconMorphAnimation = "spring";
 
 export function PixelIconMorphToggles({ className }: { className?: string }) {
   return (
-    <div className={cn("flex flex-wrap justify-center gap-2", className)}>
-      {TOGGLES.map((item) => (
-        <PixelIconMorphToggle key={`${item.from}-${item.to}`} item={item} />
-      ))}
-    </div>
+    <>
+      <div className={cn("grid grid-cols-3 gap-2", className)}>
+        {TOGGLES.map((item) => (
+          <PixelIconMorphToggle key={`${item.from}-${item.to}`} item={item} />
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -61,8 +63,17 @@ function PixelIconMorphToggle({ item }: { item: PixelIconMorphToggleItem }) {
   const [pressed, setPressed] = React.useState(false);
 
   return (
-    <Toggle pressed={pressed} onPressedChange={setPressed} aria-label={item.label}>
-      <PixelIconMorph from={item.from} to={item.to} active={pressed} animation={ANIMATION} duration={0.2} stagger={0.02} />
+    <Toggle pressed={pressed} onPressedChange={setPressed} aria-label={item.label} size="lg" className="" shape="column">
+      <PixelIconMorph
+        className="size-[33px]"
+        from={item.from}
+        to={item.to}
+        active={pressed}
+        animation={ANIMATION}
+        duration={0.05}
+        stagger={0.005}
+      />
+      {item.label}
     </Toggle>
   );
 }

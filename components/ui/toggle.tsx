@@ -18,8 +18,8 @@ const toggleVariants = cva(
       },
       shape: {
         default: "inline-flex items-center justify-center whitespace-nowrap",
-        column: "flex flex-col gap-1 p-2 items-center justify-center leading-tight w-full h-auto text-center",
-        square: "flex flex-col gap-0 items-center [&_svg]:size-5 justify-center aspect-square h-full",
+        column: "flex flex-col gap-1! p-2 items-center justify-center leading-tight h-fit text-center",
+        square: "flex flex-col gap-0! items-center [&_svg]:size-5 justify-center aspect-square h-full",
       },
       size: {
         default: "min-h-button min-w-button px-2.5 rounded-md gap-1.5",

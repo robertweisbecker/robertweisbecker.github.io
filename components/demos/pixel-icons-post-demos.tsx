@@ -72,8 +72,6 @@ export function DepartureMonoSymbolDemo() {
     "‹",
     "<",
     "×",
-    "⌥",
-    "⌘",
     "❱",
     "❯",
     "❭",
@@ -195,9 +193,9 @@ export function MorphablePixelIconScrollDemo() {
         const Icon = iconComponents[name];
 
         return (
-          <span key={name} title={formatIconName(name)} className="grid aspect-square place-items-center rounded-md border text-foreground">
+          <div key={name} title={formatIconName(name)} className="grid aspect-square place-items-center rounded-md border text-foreground">
             <Icon className="size-[16.5px]" aria-hidden />
-          </span>
+          </div>
         );
       })}
     </div>
@@ -205,19 +203,20 @@ export function MorphablePixelIconScrollDemo() {
 }
 
 export function PixelIconDataInspectorDemo() {
-  const [selectedIcon, setSelectedIcon] = React.useState<PixelIcons.MorphablePixelIconName>("PixelCopyIcon");
+  const [selectedIcon, setSelectedIcon] = React.useState<PixelIcons.MorphablePixelIconName>("PixelPenToolIcon");
   const data = PixelIcons.pixelIconData[selectedIcon];
   const Icon = iconComponents[selectedIcon];
   const code = `createPixelIcon(\n  "${selectedIcon}",\n  ${data.width},\n  ${data.height},\n  "${data.data}"\n)`;
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="grid aspect-square size-20 w-full place-items-center">
+      {/* <div className="grid aspect-square size-20 w-full place-items-center">
         <Icon className="size-[44px]" aria-hidden />
-      </div>
+      </div> */}
       <ToggleGroup
-        spacing={0.5}
+        spacing={0.25}
         shape="square"
+        variant="elevated"
         value={[selectedIcon]}
         onValueChange={(next) => {
           const nextValue = Array.isArray(next) ? next[0] : next;

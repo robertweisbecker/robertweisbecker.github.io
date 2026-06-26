@@ -30,12 +30,12 @@ const DEFAULT_STAGGER_MS = 2;
 const DEFAULT_SEQUENCE: PixelIcons.MorphablePixelIconName[] = ["PixelEyeIcon", "PixelEyeClosedIcon"];
 
 const STRATEGY_OPTIONS: Option<PixelIconMorphStrategy>[] = [
-  { value: "match", label: "Match", description: "Keep shared pixels pinned, then move the rest nearest" },
-  { value: "nearest", label: "Nearest", description: "Move pixels shortest distance" },
-  { value: "reading", label: "Reading", description: "Re-paint from top left" },
-  { value: "radial", label: "Radial", description: "Reshuffle pixels from center" },
-  { value: "scatter", label: "Scatter", description: "Spread pixels, then compress to new position" },
-  { value: "compress", label: "Compress", description: "Move pixels to center first, then animate out" },
+  { value: "match", label: "Match", description: "Keep shared pixels pinned, then move the rest to their nearest match" },
+  { value: "nearest", label: "Nearest", description: "Move pixels to their nearest neighbor, disregarding shared pixels" },
+  { value: "reading", label: "Reading", description: "Re-paint left-to-right, top-to-bottom" },
+  { value: "radial", label: "Radial", description: "Reshuffle pixels clockwise from center" },
+  { value: "scatter", label: "Scatter", description: "Spread outward first, then move in (kind of like a sneeze)" },
+  { value: "compress", label: "Compress", description: "Jump to center first, then animate outward" },
 ];
 
 const ANIMATION_OPTIONS: Option<PixelIconMorphAnimation>[] = [
