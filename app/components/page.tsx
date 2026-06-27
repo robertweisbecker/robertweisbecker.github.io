@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DataList } from "@/components/ui/data-list";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import {
   Dialog,
@@ -56,6 +55,11 @@ import { Collapsible } from "@base-ui/react/collapsible";
 import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 import { Section } from "./section";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { DeviceFrame } from "@/components/device-frame";
+import { Favicon } from "@/components/icons";
+import { ButtonGroup } from "@/components/ui/button-group";
+import { DataList } from "@/components/ui/data-list";
 
 const ComponentDemos = dynamic(() => import("./component-demos").then((module) => ({ default: module.ComponentDemos })), {
   loading: () => <p className="text-sm text-muted-foreground">Loading additional component demos…</p>,
@@ -85,11 +89,8 @@ export default function ComponentsPage() {
           >
             Loading
           </Button>
-          {/* <Section title="testing">
-            <ImageToggle mode="comparison" before={forgeBefore} after={forgeAfter} tab1="Before" tab2="After" />
-            <ImageToggle mode="slider" before={forgeBefore} after={forgeAfter} />
-          </Section> */}
-          {/* <Section title="Button" className="gap-4">
+
+          <Section title="Button" className="gap-4">
             <div className="flex flex-wrap gap-2">
               <div className="squircle size-20 rounded-xl bg-destructive"></div>
               <button className="focus-visible:outline-focus flex items-center gap-x-2 rounded-md bg-popover px-3.5 py-[calc(5/16*1rem)] text-neutral-500 shadow-[0_1px_rgba(0,0,0,0.04),0_1px_5px_-4px_rgba(0,0,0,0.4),0_2px_5px_rgba(0,0,0,0.06)] ring-1 ring-neutral-900/10 outline-none dark:shadow-[0_-1px_rgba(255,255,255,0.06),0_4px_8px_rgba(0,0,0,0.05),0_1px_6px_-4px_#000] dark:ring-white/10">
@@ -112,8 +113,8 @@ export default function ComponentsPage() {
               <Button size="lg">Large</Button>
               <Button size="icon">🔔</Button>
             </div>
-          </Section> */}
-          {/* <Section title="Badge">
+          </Section>
+          <Section title="Badge">
             <div className="flex flex-wrap gap-2">
               <Badge>Default</Badge>
               <Badge variant="secondary">Secondary</Badge>
@@ -122,8 +123,8 @@ export default function ComponentsPage() {
               <Badge variant="ghost">Ghost</Badge>
               <Badge variant="link">Link</Badge>
             </div>
-          </Section> */}
-          {/* <Section title="Card">
+          </Section>
+          <Section title="Card">
             <div className="grid max-w-2xl gap-4 sm:grid-cols-2">
               <Card>
                 <CardHeader>
@@ -149,8 +150,8 @@ export default function ComponentsPage() {
                 </CardContent>
               </Card>
             </div>
-          </Section> */}
-          {/* <Section title="Device Frame">
+          </Section>
+          <Section title="Device Frame">
             <p className="text-xs text-muted-foreground">Phone</p>
             <DeviceFrame.Phone island toolbar address="bob.fyi" gutter>
               <p className="flex items-center justify-center p-6 text-center text-sm">
@@ -175,8 +176,8 @@ export default function ComponentsPage() {
                 Browser frame preview
               </div>
             </DeviceFrame.Browser>
-          </Section> */}
-          {/* <Section title="Button Group" id="button-group">
+          </Section>
+          <Section title="Button Group" id="button-group">
             <div className="flex flex-wrap gap-4">
               <ButtonGroup>
                 <Button variant="outline">Left</Button>
@@ -184,7 +185,7 @@ export default function ComponentsPage() {
                 <Button variant="outline">Right</Button>
               </ButtonGroup>
             </div>
-          </Section> */}
+          </Section>
           <Section title="Form & Input" id="form-input">
             <div className="max-w-md space-y-4">
               <Field data-invalid={true}>
