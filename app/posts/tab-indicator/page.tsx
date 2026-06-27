@@ -22,6 +22,7 @@ import { Alert, AlertContent, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Code } from "@/components/ui/code";
 import { DataList } from "@/components/ui/data-list";
+import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
@@ -366,7 +367,7 @@ export default function TabIndicatorPostPage() {
 
       <Separator />
 
-      <h2>Step-by-step</h2>
+      <Heading level={2}>Step-by-step</Heading>
       <p>
         Before we do anything, let&apos;s consider the possible positions for the indicator. We&apos;re trying to animate the indicator in
         from the left when a previous tab is active, and in from the right when a later tab is active. So, we have three possible positions:
@@ -544,7 +545,9 @@ export default function TabIndicatorPostPage() {
         </ToggleGroupPrimitive>
       </Demo>
       <hr />
-      <h2 className="mt-8">Final result</h2>
+      <Heading level={2} className="mt-8">
+        Final result
+      </Heading>
       <Demo title="Pill tabs" code={demoCode(finalTabsCode)} centerContent innerClass="grid gap-4">
         <TabsPrimitive.Root defaultValue="1" className="w-full rounded-xl border p-1">
           <TabsPrimitive.List className="flex overflow-hidden">
@@ -599,7 +602,7 @@ export default function TabIndicatorPostPage() {
         </TabsPrimitive.Root>
       </Demo>
 
-      <h2>Gotchas</h2>
+      <Heading level={2}>Gotchas</Heading>
       <p>A few things to watch out for when using this approach:</p>
       <ul>
         <li>
@@ -618,7 +621,7 @@ export default function TabIndicatorPostPage() {
       </ul>
 
       <section className="grid gap-3">
-        <h2>Agent Instructions</h2>
+        <Heading level={2}>Agent Instructions</Heading>
 
         <p>If you&apos;re handing this off to an agent, you can give it the behavioral recipe instead of the full markup:</p>
 

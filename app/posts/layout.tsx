@@ -1,6 +1,7 @@
 "use client";
 
 import { BackButton } from "@/components/back-button";
+import { PostTableOfContents } from "@/components/post-table-of-contents";
 import { posts } from "@/lib/data/posts";
 import { formatPostDateForDisplay } from "@/lib/parse-post-date";
 import { usePathname } from "next/navigation";
@@ -22,7 +23,7 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
   const post = posts.find((p) => p.path === pathname);
 
   return (
-    <div className="container mx-auto flex max-w-4xl flex-col items-center gap-6">
+    <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
       {/* <div
         className="absolute inset-0 -z-1"
         style={{
@@ -31,13 +32,23 @@ export default function PostsLayout({ children }: { children: React.ReactNode })
           backgroundSize: "100% 1.5rem",
         }}
       /> */}
-      {/* post title */}
-      <div className="flex w-full max-w-xl flex-col gap-8">
-        <PostTopBar date={post?.date} />
-        <h1 className="text-h1">{post?.title}</h1>
+      <aside id="toc" className="not-prose @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-32">
+        <PostTableOfContents contentId="post-content" title={post?.title} />
+      </aside>
+
+      <div className="col-start-2 flex min-w-0 flex-col items-center gap-6">
+        {/* post title */}
+        <div className="flex w-full max-w-xl flex-col gap-8">
+          <PostTopBar date={post?.date} />
+          <h1 className="text-h1">{post?.title}</h1>
+        </div>
+        <article id="post-content" className="w-full min-w-0">
+          {children}
+        </article>
+        <PostPagination />
       </div>
-      {children}
-      <PostPagination />
+
+      <div className="max-lg:hidden" aria-hidden />
     </div>
   );
 }

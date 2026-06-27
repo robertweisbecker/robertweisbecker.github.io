@@ -224,7 +224,7 @@ export default function ThemingPostPage() {
             <p>
               Two alias scales, <Code variant="plain">--hue-*</Code> and <Code variant="plain">--neutral-*</Code>, help power theming beyond
               what the semantic tokens provide. This also lets us re-theme components without having to touch the semantic token definitions
-              if we don't need to. By default, they both point to the <Code variant="plain">sand</Code> palette, but setting{" "}
+              if we don&apos;t need to. By default, they both point to the <Code variant="plain">sand</Code> palette, but setting{" "}
               <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps the entire scale for
               another color ramp.
             </p>
@@ -268,7 +268,7 @@ components/
               variables are overridden on a descendant.
             </p>
             <p>
-              (I think they're too limited for practical use, but I&apos;m using shadcn tokens on this site. It's mostly a thought
+              (I think they&apos;re too limited for practical use, but I&apos;m using shadcn tokens on this site. It&apos;s mostly a thought
               experiment to see how far I can push them / test how my colors work with them; this isn&apos;t what&apos;s used in the actual
               project.)
             </p>

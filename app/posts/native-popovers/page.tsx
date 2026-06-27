@@ -4,6 +4,7 @@ import { Demo } from "@/components/demo";
 import { Button } from "@/components/ui/button";
 import { Code } from "@/components/ui/code";
 import { Badge } from "@/components/ui/badge";
+import { Heading } from "@/components/ui/heading";
 import { IconAlertCircle, IconArrowUpRight } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 import { Separator } from "@base-ui/react";
@@ -117,6 +118,9 @@ export default function NativePopoversAnchoringPage() {
       <p>
         Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and <Code>starting-style</Code>.
       </p>
+      <Heading level={2} className="mt-4">
+        Anchored popovers
+      </Heading>
       <Demo title="Anchored" code={{ ...demoCode, value: anchoredPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-anchor" variant="outline" className="[anchor-name:--trigger2]">
@@ -146,6 +150,7 @@ export default function NativePopoversAnchoringPage() {
         Here{"'"}s a toast-y popover. In some countries, that{"'"}s a meal. Regardless, you need to close this one manually rather than by
         clicking outside.
       </p>
+      <Heading level={2}>Toast popovers</Heading>
       <Demo title="Toast-like" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button
@@ -199,6 +204,7 @@ export default function NativePopoversAnchoringPage() {
         The next one has a backdrop just to see how it works. But don{"'"}t be fooled, it{"'"}s not modal, nor does it lock scroll position
         or focus. In reality, you might use a <Code>{"<dialog>"}</Code> here if you{"'"}re going native.
       </p>
+      <Heading level={2}>Backdrop popovers</Heading>
       <Demo title="With backdrop" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-backdrop" variant="outline" className="relative">
@@ -233,6 +239,7 @@ export default function NativePopoversAnchoringPage() {
         </div>
       </Demo>
       <p>You can have some fun with the backdrops too. This one also requires an explicit close.</p>
+      <Heading level={2}>Manual popovers</Heading>
       <Demo title="Danger (manual)" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button

@@ -12,6 +12,7 @@ import { PixelIconMorphVisualizer } from "@/components/demos/pixel-icon-morph-vi
 import * as PixelIcons from "@/components/icons-pixel";
 import { LinkOut } from "@/components/link-out";
 import { Code } from "@/components/ui/code";
+import { Heading } from "@/components/ui/heading";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -44,8 +45,8 @@ export default function PixelIconsPage() {
           </Demo>
 
           <p>
-            I'm using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other places.
-            At first glance, it seemed like we Departure would let me replace my Tabler icons with symbols.
+            I&apos;m using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other
+            places. At first glance, it seemed like we Departure would let me replace my Tabler icons with symbols.
           </p>
           <Demo caption="A few Departure Mono symbols">
             <div className="text-center font-pixel text-[22px]">
@@ -56,15 +57,15 @@ export default function PixelIconsPage() {
             </div>
           </Demo>
           <p>
-            One issue: all the chevrons are horizontal. I don't want to rotate a single character every time a need a downward-facing one.
-            Time to make some custom icons.
+            One issue: all the chevrons are horizontal. I don&apos;t want to rotate a single character every time a need a downward-facing
+            one. Time to make some custom icons.
           </p>
 
-          <h2>Pixel perfect pixel art</h2>
+          <Heading level={2}>Pixel perfect pixel art</Heading>
           <p>
             Departure is drawn at an albeit irregular size of 11 pixels, but it scales relatively well. Since characters are pixel-perfect
-            at font-size multiples of 11px, you can use a half-step at 16.5px to make each "pixel" land on a pixel edge on at least one
-            side. This equates to an icon with a 1.5px stroke (like Lucide) and remains decently crisp.{" "}
+            at font-size multiples of 11px, you can use a half-step at 16.5px to make each &quot;pixel&quot; land on a pixel edge on at
+            least one side. This equates to an icon with a 1.5px stroke (like Lucide) and remains decently crisp.{" "}
           </p>
           <Demo caption="A few Departure Mono text sizes">
             <DepartureMonoTextDemo />
@@ -77,7 +78,7 @@ export default function PixelIconsPage() {
         </div>
 
         <section className="prose prose-sm max-w-none">
-          <h2>Custom Icons</h2>
+          <Heading level={2}>Custom Icons</Heading>
           <p>I landed on 2 categories of icons: </p>
           <ol>
             <li>
@@ -115,10 +116,10 @@ export default function PixelIconsPage() {
           <Demo title="Animated" description="Click each icon to morph" centerContent innerClass="min-h-[300px]">
             <PixelIconMorphToggles />
           </Demo>
-          <h2>Why 28 pixels?</h2>
+          <Heading level={2}>Why 28 pixels?</Heading>
           <p>
-            The 28-pixel constraint started with the light/dark mode toggle. I wanted to do something I'd seen before: a sun icon rotates
-            into a moon icon and call it a day. With a regular SVG, this works just fine.
+            The 28-pixel constraint started with the light/dark mode toggle. I wanted to do something I&apos;d seen before: a sun icon
+            rotates into a moon icon and call it a day. With a regular SVG, this works just fine.
           </p>
           <p>We can rig this up with Tabler and Motion:</p>
           <Demo caption="The original idea works naturally with path-based SVGs." centerContent className="min-h-[400px]">
@@ -128,9 +129,10 @@ export default function PixelIconsPage() {
 
         <section className="prose">
           <p>
-            But how might one accomplish this with pixels? They don't rotate. Elements painted with pixels can <em>appear</em> to rotate,
-            but really it's just other pixels along its path lighting up. Pixels are discrete and don't maintain the kind of illusory
-            continuity you'd get from a rotated path, so having a little rectangle spin into place breaks the metaphor.{" "}
+            But how might one accomplish this with pixels? They don&apos;t rotate. Elements painted with pixels can <em>appear</em> to
+            rotate, but really it&apos;s just other pixels along its path lighting up. Pixels are discrete and don&apos;t maintain the kind
+            of illusory continuity you&apos;d get from a rotated path, so having a little rectangle spin into place breaks the
+            metaphor.{" "}
           </p>
           <p>
             The two states needed to use <mark>the same number of pixels</mark>, and the pixels ought to <mark>reshuffle</mark> rather than
@@ -138,7 +140,7 @@ export default function PixelIconsPage() {
           </p>
           <p>
             <small className="leading-none text-muted-foreground">
-              Nor do pixels slide diagonally, but we're suspending disbelief on that count. I could have each pixel animate using{" "}
+              Nor do pixels slide diagonally, but we&apos;re suspending disbelief on that count. I could have each pixel animate using{" "}
               <LinkOut
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-timing-function#stepsinteger_step-position"
                 text="steps"
@@ -148,33 +150,36 @@ export default function PixelIconsPage() {
             </small>
           </p>
           <p>
-            So, why 28 pixels? That's just how many pixels it took for the sun{" "}
-            <PixelIcons.PixelSunSmallIcon className="inline size-[16.5px] align-text-top text-yellow-400" /> to look right, and it's the
-            first one I made. That's all. This could work with any number of pixels, and you don't even need a constant number; unused
-            pixels could combine or dissolve. Speaking of which: the moon{" "}
+            So, why 28 pixels? That&apos;s just how many pixels it took for the sun{" "}
+            <PixelIcons.PixelSunSmallIcon className="inline size-[16.5px] align-text-top text-yellow-400" /> to look right, and it&apos;s
+            the first one I made. That&apos;s all. This could work with any number of pixels, and you don&apos;t even need a constant
+            number; unused pixels could combine or dissolve. Speaking of which: the moon{" "}
             <PixelIcons.PixelMoon2Icon className="inline size-[16.5px] align-text-top text-purple-400" /> only needed 24, so it earned a
             little star. Good job, buddy.
           </p>
           <p className="text-pretty">
-            In reality, each "pixel" is a <Code variant="inline-component">rect</Code> element with a width and height of 1px. Motion
-            animates each's <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new position.
+            In reality, each &quot;pixel&quot; is a <Code variant="inline-component">rect</Code> element with a width and height of 1px.
+            Motion animates each&apos;s <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new
+            position.
           </p>{" "}
           <Demo caption="Rotating paths vs. rearranging pixels" centerContent className="min-h-[400px]">
             <PixelSunMoonMorphDemo />
           </Demo>
           <p>
-            It's self-evident that the path-based approach is smoother, but that's not the point:
-            <mark>they shouldn't look polished, the icons are intentionally lo-res. They're inherently rough and imperfect.</mark> We can
-            add a hint of gracefulness to their rearranging, but that's more a byproduct of easing.
+            It&apos;s self-evident that the path-based approach is smoother, but that&apos;s not the point:
+            <mark>
+              they shouldn&apos;t look polished, the icons are intentionally lo-res. They&apos;re inherently rough and imperfect.
+            </mark>{" "}
+            We can add a hint of gracefulness to their rearranging, but that&apos;s more a byproduct of easing.
           </p>
         </section>
 
         <div className="prose prose-sm max-w-none">
-          <h2>Going overboard</h2>
+          <Heading level={2}>Going overboard</Heading>
           <p>
             Then I saw <LinkOut href="https://benji.org/morphing-icons-with-claude" text="this post" /> from Benji Taylor about morphing
-            icons with Claude, in which he's animating between 21 different SVGs made from 3 lines each. That got me wondering how many more
-            icons I could squeeze out of 28 pixels.
+            icons with Claude, in which he&apos;s animating between 21 different SVGs made from 3 lines each. That got me wondering how many
+            more icons I could squeeze out of 28 pixels.
           </p>
           <p>A lot, it turns out.</p>
 
@@ -183,13 +188,13 @@ export default function PixelIconsPage() {
           </Demo>
 
           <p>
-            (Some of these are duplicates or variants of others, mostly different attempts at getting the shapes right. They're still
+            (Some of these are duplicates or variants of others, mostly different attempts at getting the shapes right. They&apos;re still
             kicking around to test which animate well.)
           </p>
         </div>
 
         <div className="prose prose-sm max-w-none">
-          <h2>Codex to the rescue</h2>
+          <Heading level={2}>Codex to the rescue</Heading>
           <p>
             Instead of copy-pasting from Figma and manually converting to JSX, I started off having Codex use the Figma MCP to grab frames
             and populate the SVGs as individual components.
@@ -206,11 +211,11 @@ export default function PixelIconsPage() {
         </div>
 
         <div className="prose prose-sm max-w-none">
-          <h2>Morph Visualizer</h2>
+          <Heading level={2}>Morph Visualizer</Heading>
           <p>
-            With the second batch of icons created, the next step was to see how they animate. Inspired by Benji's post, Codex and I created
-            a visualizer to experiment further. You can select a sequence of icons to see how pixels match up between states, and test
-            different animations, speeds, etc. Give it a spin below.
+            With the second batch of icons created, the next step was to see how they animate. Inspired by Benji&apos;s post, Codex and I
+            created a visualizer to experiment further. You can select a sequence of icons to see how pixels match up between states, and
+            test different animations, speeds, etc. Give it a spin below.
           </p>
         </div>
 

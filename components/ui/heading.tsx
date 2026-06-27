@@ -35,10 +35,18 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement>, Variant
   render?: React.ReactElement<React.HTMLAttributes<HTMLElement>>;
 }
 
+function getNodeText(node: React.ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(getNodeText).join("");
+  if (React.isValidElement<{ children?: React.ReactNode }>(node)) return getNodeText(node.props.children);
+  return "";
+}
+
 function getHeadingId(id: React.HTMLAttributes<HTMLHeadingElement>["id"], children: React.ReactNode) {
   if (id) return id;
-  if (typeof children !== "string") return undefined;
-  const generatedId = slugify(children);
+  const text = getNodeText(children);
+  const generatedId = slugify(text);
   return generatedId || undefined;
 }
 
@@ -60,6 +68,7 @@ function Heading({ level = 2, render, className, children, ...props }: HeadingPr
     return React.cloneElement(render, {
       ...props,
       id: headingId,
+      "data-toc-heading": level > 1 ? "" : undefined,
       ...(render.props as Record<string, unknown>),
       className: cn(classes, (render.props as { className?: string }).className),
       children: (render.props as { children?: React.ReactNode }).children ?? headingContent,
@@ -69,7 +78,7 @@ function Heading({ level = 2, render, className, children, ...props }: HeadingPr
   const Tag = `h${level}` as const;
 
   return (
-    <Tag className={classes} id={headingId} {...props}>
+    <Tag className={classes} id={headingId} data-toc-heading={level > 1 ? "" : undefined} {...props}>
       {headingContent}
     </Tag>
   );

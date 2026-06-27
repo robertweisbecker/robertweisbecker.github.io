@@ -25,6 +25,7 @@ import { Mark, MarkNote } from "@/components/mark-note";
 import { ModeToggle } from "@/components/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
 import { Stats } from "@/components/stats";
+import { TableOfContents } from "@/components/table-of-contents";
 import { Theme } from "@/components/theme";
 import { ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme-settings";
 import { Alert, AlertAction, AlertContent, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -80,6 +81,14 @@ const LOREM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 const LOREM_ALT =
   "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+const TOC_DEMO_ITEMS = [
+  { id: "toc-demo-overview", text: "Overview", depth: 2 },
+  { id: "toc-demo-installation", text: "Installation", depth: 2 },
+  { id: "toc-demo-client-component", text: "Client component", depth: 3 },
+  { id: "toc-demo-server-component", text: "Server component", depth: 3 },
+  { id: "toc-demo-options", text: "Options", depth: 2 },
+];
 
 function ComboboxDemo() {
   return (
@@ -481,6 +490,41 @@ export function ComponentDemos() {
         </div>
         <div>
           <Heading level={5}>Heading 5</Heading>
+        </div>
+      </Section>
+
+      <Section title="Table of Contents">
+        <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,12rem)_1fr]">
+          <div>
+            <p className="mb-2 font-pixel text-[11px] text-muted-foreground uppercase">All depths</p>
+            <TableOfContents toc={TOC_DEMO_ITEMS} />
+          </div>
+          <div>
+            <p className="mb-2 font-pixel text-[11px] text-muted-foreground uppercase">H2 only</p>
+            <TableOfContents toc={TOC_DEMO_ITEMS} maxDepth={2} />
+          </div>
+          <article className="prose max-w-none">
+            <Heading id="toc-demo-overview" level={2}>
+              Overview
+            </Heading>
+            <p>{LOREM}</p>
+            <Heading id="toc-demo-installation" level={2}>
+              Installation
+            </Heading>
+            <p>{LOREM_ALT}</p>
+            <Heading id="toc-demo-client-component" level={3}>
+              Client component
+            </Heading>
+            <p>{LOREM}</p>
+            <Heading id="toc-demo-server-component" level={3}>
+              Server component
+            </Heading>
+            <p>{LOREM_ALT}</p>
+            <Heading id="toc-demo-options" level={2}>
+              Options
+            </Heading>
+            <p>{LOREM}</p>
+          </article>
         </div>
       </Section>
 

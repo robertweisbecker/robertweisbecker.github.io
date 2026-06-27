@@ -605,6 +605,7 @@ const CUSTOM_LINKS: { href: string; label: string }[] = [
   { href: "#mode-toggle", label: "Mode Toggle" },
   { href: "#number-slider", label: "Number Slider" },
   { href: "#stats", label: "Stats" },
+  { href: "#table-of-contents", label: "Table of Contents" },
   { href: "#theme-settings", label: "Theme Settings" },
   { href: "#video", label: "Video" },
 ];

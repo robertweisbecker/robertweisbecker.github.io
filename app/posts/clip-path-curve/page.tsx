@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import { IconLine, IconVectorBezier2, IconVectorSpline, IconX } from "@tabler/icons-react";
 
@@ -200,7 +201,7 @@ export default function ClipPathCurvePage() {
       </ClipPathEditor>
       <Separator variant="dotted" />
       <section className="prose">
-        <h2 className="">Resources</h2>
+        <Heading level={2}>Resources</Heading>
         <ul>
           <li>
             <LinkOut href="https://bennettfeely.com/clippy/" text="Clippy" />, a CSS Clip-Path Generator by Bennett Feely
