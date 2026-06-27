@@ -544,7 +544,7 @@ export default function ComponentsPage() {
               <DescriptionListValue>Washington, DC</DescriptionListValue>
             </DescriptionList>
           </Section>
-          {/* <ComponentDemos /> */}
+          <ComponentDemos />
         </main>
         <aside className="order-3 hidden border-e border-t bg-muted p-4 lg:block">Right</aside>
       </div>
@@ -605,6 +605,7 @@ const CUSTOM_LINKS: { href: string; label: string }[] = [
   { href: "#mode-toggle", label: "Mode Toggle" },
   { href: "#number-slider", label: "Number Slider" },
   { href: "#stats", label: "Stats" },
+  { href: "#theme-settings", label: "Theme Settings" },
   { href: "#video", label: "Video" },
 ];
 

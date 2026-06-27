@@ -11,6 +11,7 @@
 - This is a static Next.js 16 App Router site with MDX content, no database, no API routes, and no required environment variables.
 - Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, and `npm run format:check`.
 - `npm run build` produces the static site output, while `npm run dev:fresh` clears `.next` before starting dev.
+- `npm run build` intentionally uses `next build --webpack` while production Turbopack builds are unreliable in this repo.
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
 - `ToggleGrid` preserves intended toggle styling by extending `ToggleGroup` context with `grid?: boolean`.
 - Tailwind v4.3 custom variants such as `@stuck-top` are valid here; see **Known Bugs & Workarounds** for the Turbopack stale-CSS bug that makes errors persist past the fix.
@@ -38,3 +39,10 @@
   2. Run `npm run dev:fresh` (`rm -rf .next && next dev`) for a full reset.
   3. Run `next dev --webpack` for reliable CSS HMR when doing complex CSS work.
   4. Do **not** use the prettier-plugin-tailwindcss canonical form `@stuck-top:**:data-[slot=title]:visible` — it produces invalid CSS with this custom variant. Always use the bracketed form `@stuck-top:[&_[data-slot=title]]:visible` and add `{/* prettier-ignore */}` to prevent rewriting.
+
+### Production build bundler fallback
+
+- Use `next build --webpack` for production builds while Turbopack production builds remain slower or unreliable in this repo.
+- Current evidence: `next build` uses Turbopack and failed to complete even a scoped `app/about/page.tsx` build after ~100s, while `next build --webpack` completed the full production build reliably.
+- Re-test Turbopack after relevant changes, such as a Next/Turbopack upgrade, MDX config changes, removing dev-only packages from the root/client graph, clearing `.next` with the dev server stopped, or trimming private/demo routes from production.
+- Exit criteria for returning `npm run build` to plain `next build`: both scoped-route and full `npx next build` complete reliably within roughly the same range as webpack and do not hang.

@@ -8,8 +8,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Agentation } from "agentation";
 import { ScrollReset } from "@/components/scroll-reset";
+import { AgentationToolbar } from "@/components/agentation-toolbar";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -84,7 +84,7 @@ export default function RootLayout({
           </main>
           <Footer />
 
-          {process.env.NODE_ENV === "development" && <Agentation endpoint="http://localhost:4747" />}
+          <AgentationToolbar />
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

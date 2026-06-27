@@ -25,6 +25,8 @@ import { Mark, MarkNote } from "@/components/mark-note";
 import { ModeToggle } from "@/components/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
 import { Stats } from "@/components/stats";
+import { Theme } from "@/components/theme";
+import { ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme-settings";
 import { Alert, AlertAction, AlertContent, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -122,6 +124,31 @@ function NumberSliderDemo() {
     <div className="max-w-sm">
       <NumberSlider label="Opacity" min={0} max={100} step={1} value={value} onValueChange={setValue} format="percent" />
     </div>
+  );
+}
+
+function ThemeSettingsFieldsDemo() {
+  return (
+    <Theme className="w-full max-w-2xl rounded-md border bg-background p-4">
+      <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_14rem]">
+        <div className="flex min-w-0 flex-col gap-5">
+          <ThemePrimaryColorField display="swatches" />
+          <ThemeNeutralColorField display="select" />
+          <ThemeRadiusField />
+        </div>
+        <div className="flex min-h-36 flex-col justify-between rounded-md border bg-card p-4 shadow-border-xs">
+          <div className="space-y-2">
+            <div className="h-3 w-24 rounded-full bg-primary" />
+            <div className="h-3 w-32 rounded-full bg-muted" />
+            <div className="h-3 w-16 rounded-full bg-accent" />
+          </div>
+          <Button size="sm" className="w-fit">
+            Action
+          </Button>
+        </div>
+      </div>
+      <ThemeResetAllButton variant="outline" size="sm" className="mt-5" />
+    </Theme>
   );
 }
 
@@ -648,6 +675,10 @@ export function ComponentDemos() {
 
           <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
         </div>
+      </Section>
+
+      <Section title="Theme Settings" id="theme-settings">
+        <ThemeSettingsFieldsDemo />
       </Section>
 
       <Section title="Mark Note" id="mark-note">

@@ -157,132 +157,226 @@ export function ThemeSettings({ className }: { className?: string }) {
   );
 }
 
-type ColorDisplayMode = "select" | "swatches";
+export type ThemeColorDisplayMode = "select" | "swatches";
+
+type ThemeFieldHeaderProps = {
+  label: React.ReactNode;
+  value: string;
+  dirty: boolean;
+  onReset: () => void;
+  resetLabel: string;
+  showReset?: boolean;
+  showValue?: boolean;
+};
+
+function ThemeFieldHeader({ label, value, dirty, onReset, resetLabel, showReset = true, showValue = true }: ThemeFieldHeaderProps) {
+  return (
+    <div className="flex items-center gap-1 pe-1">
+      {label !== null && <FieldLabel className="me-auto">{label}</FieldLabel>}
+      {showReset && <ThemeFieldReset dirty={dirty} onReset={onReset} aria-label={resetLabel} />}
+      {showValue && <span className="text-xs text-muted-foreground capitalize">{value}</span>}
+    </div>
+  );
+}
+
+export type ThemePrimaryColorFieldProps = Omit<React.ComponentProps<typeof Field>, "children"> & {
+  display?: ThemeColorDisplayMode;
+  label?: React.ReactNode;
+  showReset?: boolean;
+  showValue?: boolean;
+};
+
+export function ThemePrimaryColorField({
+  className,
+  display = "select",
+  label = "Primary color",
+  showReset,
+  showValue,
+  ...props
+}: ThemePrimaryColorFieldProps) {
+  const { hue, defaultHue, set } = useTheme();
+  const hueDirty = hue !== defaultHue;
+
+  return (
+    <Field className={className} {...props}>
+      <ThemeFieldHeader
+        label={label}
+        value={hue}
+        dirty={hueDirty}
+        onReset={() => set({ hue: defaultHue })}
+        resetLabel="Reset primary color to default"
+        showReset={showReset}
+        showValue={showValue}
+      />
+      {display === "select" ? (
+        <Select value={hue} onValueChange={(v) => set({ hue: v as HueName })}>
+          <SelectTrigger className="w-full">
+            <SelectValue>
+              <HueSwatch hue={hue} />
+              {COLOR_MAP.get(hue)?.label ?? hue}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Grays</SelectLabel>
+              {NEUTRAL_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  <HueSwatch hue={opt.value} />
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+            <SelectSeparator />
+            <SelectGroup>
+              <SelectLabel>Hues</SelectLabel>
+              {HUE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  <HueSwatch hue={opt.value} />
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ) : (
+        <ColorSwatchGroup colors={ALL_SWATCHES} value={hue} onValueChange={(v) => set({ hue: v as HueName })} allowCustomColors={false} />
+      )}
+    </Field>
+  );
+}
+
+export type ThemeNeutralColorFieldProps = Omit<React.ComponentProps<typeof Field>, "children"> & {
+  display?: ThemeColorDisplayMode;
+  label?: React.ReactNode;
+  showReset?: boolean;
+  showValue?: boolean;
+};
+
+export function ThemeNeutralColorField({
+  className,
+  display = "swatches",
+  label = "Neutral color",
+  showReset,
+  showValue,
+  ...props
+}: ThemeNeutralColorFieldProps) {
+  const { neutral, defaultNeutral, set } = useTheme();
+  const neutralDirty = neutral !== defaultNeutral;
+
+  return (
+    <Field className={className} {...props}>
+      <ThemeFieldHeader
+        label={label}
+        value={neutral}
+        dirty={neutralDirty}
+        onReset={() => set({ neutral: defaultNeutral })}
+        resetLabel="Reset neutral color to default"
+        showReset={showReset}
+        showValue={showValue}
+      />
+
+      {display === "swatches" ? (
+        <ColorSwatchGroup
+          colors={NEUTRAL_SWATCHES}
+          value={neutral}
+          onValueChange={(v) => set({ neutral: v as NeutralName })}
+          allowCustomColors={false}
+        />
+      ) : (
+        <Select value={neutral} onValueChange={(v) => set({ neutral: v as NeutralName })}>
+          <SelectTrigger className="w-full">
+            <SelectValue>
+              <HueSwatch hue={neutral} />
+              {COLOR_MAP.get(neutral)?.label ?? neutral}
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Neutrals</SelectLabel>
+              {NEUTRAL_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  <HueSwatch hue={opt.value} />
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      )}
+    </Field>
+  );
+}
+
+export type ThemeRadiusFieldProps = Omit<
+  React.ComponentProps<typeof NumberSlider>,
+  "label" | "labelAction" | "min" | "max" | "step" | "value" | "onValueChange" | "unit"
+> & {
+  label?: string;
+  max?: number;
+  min?: number;
+  showReset?: boolean;
+  step?: number;
+  unit?: string;
+};
+
+export function ThemeRadiusField({
+  label = "Radius",
+  max = 32,
+  min = 0,
+  showReset = true,
+  step = 1,
+  unit = "px",
+  ...props
+}: ThemeRadiusFieldProps) {
+  const { radius, defaultRadius, set } = useTheme();
+  const radiusDirty = radius !== defaultRadius;
+
+  return (
+    <NumberSlider
+      label={label}
+      labelAction={
+        showReset ? (
+          <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" />
+        ) : null
+      }
+      min={min}
+      max={max}
+      step={step}
+      value={radius}
+      onValueChange={(v) => set({ radius: v })}
+      unit={unit}
+      {...props}
+    />
+  );
+}
+
+export type ThemeSettingsPanelProps = React.ComponentProps<typeof FieldGroup> & {
+  hueDisplay?: ThemeColorDisplayMode;
+  neutralDisplay?: ThemeColorDisplayMode;
+};
 
 export function ThemeSettingsPanel({
   className,
   hueDisplay = "select",
   neutralDisplay = "swatches",
-}: {
-  className?: string;
-  hueDisplay?: ColorDisplayMode;
-  neutralDisplay?: ColorDisplayMode;
-}) {
-  const { hue, neutral, radius, defaultHue, defaultNeutral, defaultRadius, set } = useTheme();
-
-  const hueDirty = hue !== defaultHue;
-  const neutralDirty = neutral !== defaultNeutral;
-  const radiusDirty = radius !== defaultRadius;
-
+  children,
+  ...props
+}: ThemeSettingsPanelProps) {
   return (
-    <FieldGroup className={className}>
-      <FieldSet>
-        <FieldLegend>Colors</FieldLegend>
-        <FieldGroup>
-          <Field>
-            <div className="flex items-center gap-1 pe-1">
-              <FieldLabel className="me-auto">Primary hue</FieldLabel>
-
-              <ThemeFieldReset dirty={hueDirty} onReset={() => set({ hue: defaultHue })} aria-label="Reset hue to default" />
-              <span className="text-xs text-muted-foreground capitalize">{hue}</span>
-            </div>
-            {hueDisplay === "select" ? (
-              <Select value={hue} onValueChange={(v) => set({ hue: v as HueName })}>
-                <SelectTrigger className="w-full">
-                  <SelectValue>
-                    <HueSwatch hue={hue} />
-                    {COLOR_MAP.get(hue)?.label ?? hue}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Grays</SelectLabel>
-                    {NEUTRAL_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        <HueSwatch hue={opt.value} />
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                  <SelectSeparator />
-                  <SelectGroup>
-                    <SelectLabel>Hues</SelectLabel>
-                    {HUE_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        <HueSwatch hue={opt.value} />
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            ) : (
-              <ColorSwatchGroup
-                colors={ALL_SWATCHES}
-                value={hue}
-                onValueChange={(v) => set({ hue: v as HueName })}
-                allowCustomColors={false}
-              />
-            )}
-          </Field>
-
-          <Field>
-            <div className="flex items-center gap-1 pe-1">
-              <FieldLabel className="me-auto">Neutral hue</FieldLabel>
-              <ThemeFieldReset
-                dirty={neutralDirty}
-                onReset={() => set({ neutral: defaultNeutral })}
-                aria-label="Reset neutral palette to default"
-              />
-              <span className="text-xs text-muted-foreground capitalize">{neutral}</span>
-            </div>
-
-            {neutralDisplay === "swatches" ? (
-              <ColorSwatchGroup
-                colors={NEUTRAL_SWATCHES}
-                value={neutral}
-                onValueChange={(v) => set({ neutral: v as NeutralName })}
-                allowCustomColors={false}
-              />
-            ) : (
-              <Select value={neutral} onValueChange={(v) => set({ neutral: v as NeutralName })}>
-                <SelectTrigger className="w-full">
-                  <SelectValue>
-                    <HueSwatch hue={neutral} />
-                    {COLOR_MAP.get(neutral)?.label ?? neutral}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Neutrals</SelectLabel>
-                    {NEUTRAL_OPTIONS.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        <HueSwatch hue={opt.value} />
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            )}
-          </Field>
-        </FieldGroup>
-      </FieldSet>
-      <FieldSeparator />
-      <NumberSlider
-        label="Radius"
-        labelAction={
-          <>
-            <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" />
-          </>
-        }
-        min={0}
-        max={32}
-        step={1}
-        value={radius}
-        onValueChange={(v) => set({ radius: v })}
-        unit="px"
-      />
+    <FieldGroup className={className} {...props}>
+      {children ?? (
+        <>
+          <FieldSet>
+            <FieldLegend>Colors</FieldLegend>
+            <FieldGroup>
+              <ThemePrimaryColorField display={hueDisplay} />
+              <ThemeNeutralColorField display={neutralDisplay} />
+            </FieldGroup>
+          </FieldSet>
+          <FieldSeparator />
+          <ThemeRadiusField />
+        </>
+      )}
     </FieldGroup>
   );
 }
