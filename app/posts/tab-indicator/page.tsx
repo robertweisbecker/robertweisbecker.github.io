@@ -314,7 +314,7 @@ export default function TabIndicatorPostPage() {
               </TabsPrimitive.Tab>
             ))}
           </TabsPrimitive.List>
-          <div className="w-full text-center">
+          <div className="mt-2 w-full text-center">
             <NumberPanels />
           </div>
         </TabsPrimitive.Root>
@@ -549,7 +549,7 @@ export default function TabIndicatorPostPage() {
         Final result
       </Heading>
       <Demo title="Pill tabs" code={demoCode(finalTabsCode)} centerContent innerClass="grid gap-4">
-        <TabsPrimitive.Root defaultValue="1" className="w-full rounded-xl border p-1">
+        <TabsPrimitive.Root defaultValue="1" className="grid w-full gap-2 rounded-xl border p-1">
           <TabsPrimitive.List className="flex overflow-hidden">
             {numbers.map((value) => (
               <TabsPrimitive.Tab key={value} value={value} className={tabTriggerIndicatorClasses}>

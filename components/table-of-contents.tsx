@@ -7,31 +7,38 @@ import { ScrollArea } from "./ui/scroll-area";
 
 export type TableOfContentsMaxDepth = 2 | 3 | 4 | 5 | 6;
 
-function useH1OutOfView(enabled: boolean) {
-  const [isOutOfView, setIsOutOfView] = React.useState(false);
+const titleScrollThreshold = 200;
+
+function useScrolledPast(enabled: boolean, threshold = titleScrollThreshold) {
+  const [isScrolledPast, setIsScrolledPast] = React.useState(false);
 
   React.useEffect(() => {
     if (!enabled) {
-      setIsOutOfView(false);
+      setIsScrolledPast(false);
       return;
     }
 
-    const h1 = document.querySelector("h1");
-    if (!h1) {
-      setIsOutOfView(true);
-      return;
-    }
+    let frame = 0;
+    const updateScrolledPast = () => {
+      setIsScrolledPast(window.scrollY >= threshold);
+    };
+    const scheduleUpdate = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateScrolledPast);
+    };
 
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsOutOfView(!entry.isIntersecting);
-    });
+    updateScrolledPast();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
-    observer.observe(h1);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [enabled, threshold]);
 
-    return () => observer.disconnect();
-  }, [enabled]);
-
-  return isOutOfView;
+  return isScrolledPast;
 }
 
 function useActiveItem(ids: string[]) {
@@ -47,22 +54,18 @@ function useActiveItem(ids: string[]) {
     let frame = 0;
     const updateActiveItem = () => {
       const viewportHeight = window.innerHeight;
-      const activationLine = viewportHeight * 0.2;
+      const activationLine = viewportHeight / 2;
       let nextActiveId: string | null = null;
-      let firstVisibleId: string | null = null;
 
       for (const heading of headings) {
         const rect = heading.getBoundingClientRect();
-        const isVisible = rect.top <= viewportHeight && rect.bottom >= 0;
-
-        firstVisibleId ??= isVisible ? heading.id : null;
 
         if (rect.top <= activationLine) {
           nextActiveId = heading.id;
         }
       }
 
-      setActiveId(nextActiveId ?? firstVisibleId);
+      setActiveId(nextActiveId);
     };
     const scheduleUpdate = () => {
       window.cancelAnimationFrame(frame);
@@ -94,7 +97,7 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
   const visibleToc = React.useMemo(() => toc.filter((item) => item.depth <= maxDepth), [toc, maxDepth]);
   const ids = React.useMemo(() => visibleToc.map((item) => item.id), [visibleToc]);
   const activeId = useActiveItem(ids);
-  const isTitleVisible = useH1OutOfView(Boolean(title));
+  const isTitleVisible = useScrolledPast(Boolean(title));
 
   if (!visibleToc.length) return null;
 
@@ -102,30 +105,31 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
     <nav
       aria-label="Table of contents"
       className={cn(
-        "my-4 grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-4 text-xs",
+        "grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-2 py-4 text-xs",
         "[--inset:--spacing(3)]",
         className
       )}
     >
+      {title && (
+        <p
+          className="data-visible:blur-0 -translate-y-1.5 transform pt-3 pb-1.5 text-sm font-medium opacity-0 blur-xs transition-[transform,opacity,translate,filter] duration-400 ease-out data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 data-[visible=true]:blur-none"
+          data-visible={isTitleVisible}
+          data-slot="title"
+        >
+          <a href={"#"} data-active={activeId === ""}>
+            {title}
+          </a>
+        </p>
+      )}
       <ScrollArea scrollFade scrollbarGutter>
         <ul
           className={cn(
             "group relative text-[0.8125rem]/5",
+            isTitleVisible && "opacity-72",
             // "before:absolute before:inset-s-0 before:top-1.5 before:bottom-1.5 before:w-px before:bg-border",
             className
           )}
         >
-          {title && (
-            <li
-              className="ease -translate-y-0.5 transform truncate pt-2 pb-1 text-xs opacity-0 transition-[translate,transform,opacity] delay-400 duration-200 data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100"
-              data-visible={isTitleVisible}
-              data-slot="title"
-            >
-              <a href={"#"} data-active={activeId === ""}>
-                {title}
-              </a>
-            </li>
-          )}
           {visibleToc.map((item, index) => (
             <li
               key={item.id}
@@ -138,6 +142,7 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
               }
               className={cn(
                 "peer relative first:[&>a]:-mt-1.5",
+                "group-hover:opacity-64 hover:opacity-100",
                 // "before:absolute before:-inset-s-px before:top-0 before:bottom-[50%] before:w-0.5 before:rounded-e has-data-[active=true]:before:bg-primary"
                 "group-has-data-active:[&>a]:not-data-active:border-border peer-has-data-active:[&>a]:border-transparent",
                 index === 0 && !isTitleVisible && "[&>a]:border-s-transparent! [&>a]:before:border-s-transparent!"
@@ -157,7 +162,7 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
                   item.depth > 1 && [
                     // "data-active:border-transparent!",
                     "before:rounded-es-0 before:absolute before:top-0 before:left-0 before:h-[calc(50%+1px)] before:w-[calc(var(--depth-inset)/1.5)] before:border-s before:border-b before:border-transparent",
-                    "data-active:before:border-s-border data-active:before:border-b-input",
+                    "hover:before:border-b-border data-active:before:border-border",
                     // "data-active:border-border",
                     // "after:absolute after:top-[calc(var(--inset)/1)] after:bottom-0 after:left-0 after:w-px after:rounded-t data-active:after:bg-border",
                     // "after:mask-l-from-[calc(100%-1px)] after:mask-l-to-[1px]",

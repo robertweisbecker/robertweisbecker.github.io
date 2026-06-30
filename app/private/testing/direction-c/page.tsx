@@ -11,7 +11,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogBody } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogPopup, DialogHeader, DialogTitle, DialogDescription, DialogBody } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -287,8 +287,10 @@ export default function DirectionC() {
           if (!isOpen) close();
         }}
       >
-        <DialogContent showCloseButton className="sm:max-w-2xl">
-          {activeSection && <SectionDialogContent section={activeSection} />}
+        <DialogContent>
+          <DialogPopup showCloseButton className="sm:max-w-2xl">
+            {activeSection && <SectionDialogContent section={activeSection} />}
+          </DialogPopup>
         </DialogContent>
       </Dialog>
     </div>

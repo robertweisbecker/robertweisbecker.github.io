@@ -22,7 +22,16 @@
 import * as React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, LayoutGroup } from "motion/react";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogClose,
+  DialogPopup,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  DialogOverlay,
+} from "@/components/ui/dialog";
 import { Carousel, CarouselViewport, CarouselItem, CarouselToolbar } from "@/components/ui/carousel";
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -223,114 +232,145 @@ function Variation1() {
       </p>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent
-          showCloseButton={false}
-          className="flex h-svh max-h-svh w-svw max-w-svw flex-col rounded-none bg-foreground/60 p-0 backdrop-blur-xl sm:max-w-svw"
-        >
-          {/* Top bar */}
-          <div className="flex shrink-0 items-center gap-3 border-b border-background/10 px-4 py-3">
-            <span className="font-pixel text-[10px] text-background/50 tabular-nums">
-              {activeSlide + 1} / {SLIDES.length}
-            </span>
-            <Separator orientation="vertical" className="h-3 bg-background/20" />
-            <span className={cn("text-sm font-medium text-background/90 transition-opacity duration-150", fading && "opacity-0")}>
-              {SLIDES[activeSlide].caption}
-            </span>
-            <DialogClose
-              render={
-                <Button
-                  variant="ghost"
-                  size="icon-sm"
-                  rounded
-                  className="ml-auto text-background/70 hover:bg-background/10 hover:text-background"
-                  aria-label="Close"
-                />
-              }
-            >
-              <IconX />
-            </DialogClose>
-          </div>
-
-          {/* Main: image + caption sidebar */}
-          <div className="group/lb flex min-h-0 flex-1 overflow-hidden">
-            <div className="relative flex min-h-0 flex-1 items-center justify-center">
-              {SLIDES.map((slide, i) => (
-                <div
-                  key={slide.src}
-                  className={cn(
-                    "absolute inset-0 flex items-center justify-center p-6 transition-opacity duration-150",
-                    i === activeSlide && !fading ? "opacity-100" : "pointer-events-none opacity-0"
-                  )}
-                >
-                  <img src={slide.src} alt={slide.alt} className="max-h-full max-w-full rounded-xl object-contain" />
-                </div>
-              ))}
-
-              <Button
-                variant="overlay"
-                size="icon"
-                rounded
-                onClick={prev}
-                aria-label="Previous"
-                className="absolute top-1/2 left-4 -translate-y-1/2 opacity-0 transition-opacity duration-150 group-hover/lb:opacity-100"
+        <DialogOverlay className="bg-foreground/60 backdrop-blur-xl" />
+        <DialogContent className="flex h-svh max-h-svh p-0">
+          <DialogPopup showCloseButton={false} unstyled={true} className="flex h-full flex-col gap-0 bg-foreground/60 backdrop-blur-xl">
+            {/* Top bar */}
+            <DialogHeader className="shrink-0 flex-row items-center gap-3 border-b border-background/10">
+              <span className="font-pixel text-[10px] text-background/50 tabular-nums">
+                {activeSlide + 1} / {SLIDES.length}
+              </span>
+              <Separator orientation="vertical" className="h-3 bg-background/20" />
+              <span className={cn("text-sm font-medium text-background/90 transition-opacity duration-150")}>
+                {SLIDES[activeSlide].caption}
+              </span>
+              <DialogClose
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    rounded
+                    className="ml-auto text-background/70 hover:bg-background/10 hover:text-background"
+                    aria-label="Close"
+                  />
+                }
               >
-                <IconChevronLeft />
-              </Button>
-              <Button
-                variant="overlay"
-                size="icon"
-                rounded
-                onClick={next}
-                aria-label="Next"
-                className="absolute top-1/2 right-4 -translate-y-1/2 opacity-0 transition-opacity duration-150 group-hover/lb:opacity-100"
-              >
-                <IconChevronRight />
-              </Button>
-            </div>
+                <IconX />
+              </DialogClose>
+            </DialogHeader>
 
-            <aside className="flex w-64 shrink-0 flex-col justify-center gap-4 border-l border-white/10 bg-black/40 p-6">
-              <div className={cn("flex flex-col gap-3 transition-opacity duration-150", fading && "opacity-0")}>
-                <Badge variant="outline" className="w-fit border-white/20 bg-white/10 text-white/70">
-                  {SLIDES[activeSlide].label}
-                </Badge>
-                <p className="text-base font-semibold text-white">{SLIDES[activeSlide].caption}</p>
-                <p className="text-sm leading-relaxed text-white/60">{SLIDES[activeSlide].detail}</p>
-              </div>
-              <Separator className="bg-white/10" />
-              <div className="flex flex-col gap-1 overflow-y-auto">
+            {/* Main: image + caption sidebar */}
+            <DialogBody className="group/lb grid h-full min-h-0 flex-1 content-stretch items-stretch gap-0 overflow-hidden p-0 sm:grid-cols-[1fr_auto]">
+              <div className="relative isolate col-span-1 flex min-h-0 w-full flex-1 shrink-0">
                 {SLIDES.map((slide, i) => (
-                  <button
+                  <div
                     key={slide.src}
-                    onClick={() => goTo(i)}
                     className={cn(
-                      "flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-xs transition-colors",
-                      i === activeSlide ? "bg-white/10 text-white" : "text-white/40 hover:bg-white/5 hover:text-white/70"
+                      "absolute inset-0 z-0 flex items-center justify-center p-6 transition-opacity duration-150",
+                      i === activeSlide && !fading ? "opacity-100" : "pointer-events-none opacity-0"
                     )}
                   >
-                    <span className="font-pixel text-[9px] text-white/30 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-                    {slide.caption}
-                  </button>
+                    <img src={slide.src} alt={slide.alt} className="max-h-full max-w-full rounded-xl object-contain" />
+                  </div>
                 ))}
-              </div>
-            </aside>
-          </div>
 
-          <div className="flex shrink-0 items-center gap-2 overflow-x-auto border-t border-white/10 bg-black/60 px-4 py-3">
-            {SLIDES.map((slide, i) => (
-              <button
-                key={slide.src}
-                onClick={() => goTo(i)}
-                aria-label={slide.caption}
-                className={cn(
-                  "relative h-12 shrink-0 overflow-hidden rounded-md border-2 transition-all duration-100",
-                  i === activeSlide ? "border-white" : "border-transparent opacity-40 hover:opacity-70"
-                )}
-                style={{ aspectRatio: "16/9" }}
-              >
-                <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" />
-              </button>
-            ))}
-          </div>
+                <Button
+                  variant="overlay"
+                  size="icon"
+                  rounded
+                  onClick={prev}
+                  aria-label="Previous"
+                  className="absolute top-1/2 left-4 -translate-y-1/2 opacity-0 transition-opacity duration-150 group-hover/lb:opacity-100"
+                >
+                  <IconChevronLeft />
+                </Button>
+                <Button
+                  variant="overlay"
+                  size="icon"
+                  rounded
+                  onClick={next}
+                  aria-label="Next"
+                  className="absolute top-1/2 right-4 -translate-y-1/2 opacity-0 transition-opacity duration-150 group-hover/lb:opacity-100"
+                >
+                  <IconChevronRight />
+                </Button>
+              </div>
+
+              <aside className="dark grid w-64 shrink-0 items-start justify-center gap-4 border-s bg-popover p-6">
+                <motion.div layout className={cn("flex flex-col gap-3")}>
+                  <AnimatePresence mode="popLayout" initial={false}>
+                    <>
+                      <Badge
+                        variant="outline"
+                        className="dark"
+                        render={
+                          <motion.span
+                            // layoutId="badge-label"
+                            // key={`motion-badge-label-${activeSlide}`}
+                            initial={false}
+                            animate={{ opacity: fading ? 0 : 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={SPRING}
+                          />
+                        }
+                      >
+                        {SLIDES[activeSlide].label}
+                      </Badge>
+                      <motion.p
+                        // layout
+                        // key={`motion-caption-${activeSlide}`}
+                        // layoutId="caption"
+                        className="text-base font-semibold text-white"
+                      >
+                        {SLIDES[activeSlide].caption}
+                      </motion.p>
+                      <motion.p
+                        // layout
+                        // key={`motion-detail-${activeSlide}`}
+                        // layoutId="detail"
+                        className="text-sm leading-relaxed text-white/60"
+                      >
+                        {SLIDES[activeSlide].detail}
+                      </motion.p>
+                    </>
+                  </AnimatePresence>
+                </motion.div>
+                <Separator className="bg-white/10" />
+                <div className="flex flex-col gap-1 overflow-y-auto">
+                  {SLIDES.map((slide, i) => (
+                    <button
+                      key={slide.src}
+                      onClick={() => goTo(i)}
+                      className={cn(
+                        "flex items-center gap-2 rounded-lg px-2 py-1.5 text-left text-xs transition-colors",
+                        i === activeSlide ? "bg-white/10 text-white" : "text-white/40 hover:bg-white/5 hover:text-white/70"
+                      )}
+                    >
+                      <span className="font-pixel text-[9px] text-white/30 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                      {slide.caption}
+                    </button>
+                  ))}
+                </div>
+              </aside>
+            </DialogBody>
+
+            <DialogFooter className="flex shrink-0 items-start gap-2 overflow-x-auto border-t border-white/10 bg-black/60 px-4 py-3 sm:justify-center">
+              {SLIDES.map((slide, i) => (
+                <button
+                  key={slide.src}
+                  onClick={() => goTo(i)}
+                  aria-label={slide.caption}
+                  className={cn(
+                    "relative h-12 shrink-0 overflow-hidden rounded-md border-2 transition-all duration-100",
+                    i === activeSlide ? "border-white" : "border-transparent opacity-40 hover:opacity-70"
+                  )}
+                  style={{ aspectRatio: "16/9" }}
+                >
+                  <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" />
+                </button>
+              ))}
+            </DialogFooter>
+          </DialogPopup>
         </DialogContent>
       </Dialog>
     </div>

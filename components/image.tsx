@@ -12,7 +12,7 @@ export type ImageProps =
   | (Common & { src: string; width: number; height: number });
 
 const imgClassName =
-  "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)---spacing(1))] overflow-hidden outline outline-card -outline-offset-1";
+  "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)---spacing(0.5))] overflow-hidden outline outline-border/50 -outline-offset-1 squircle";
 
 export function Image(props: ImageProps) {
   const { src, alt = "", caption, className, priority, sizes: sizesProp, quality, placeholder, loading } = props;
@@ -38,7 +38,7 @@ export function Image(props: ImageProps) {
         className
       )}
     >
-      <div className="sm:squircle w-full bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1">
+      <div className="sm:squircle relative w-full bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1">
         <NextImage
           src={src}
           alt={alt}
@@ -50,8 +50,9 @@ export function Image(props: ImageProps) {
           loading={loading}
           {...intrinsicDims}
         />
+        {/* <div className="squircle pointer-events-none absolute inset-y-1 rounded-xl outline -outline-offset-2 outline-border/50 select-none sm:inset-x-1" /> */}
       </div>
-      {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
+      {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground/50">{caption}</figcaption>}
     </figure>
   );
 }

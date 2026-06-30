@@ -42,7 +42,17 @@ function ArtCard({ src, index, count, left, top, rotate, zIndex, isHovered }: Ar
         boxShadow: isHovered ? "var(--shadow-border-lg)" : "var(--shadow-border-sm)",
         zIndex,
       }}
-      initial={false}
+      initial={{ y: 100, scale: 0.95, opacity: 0 }}
+      whileInView={{
+        y: "-50%",
+        scale: 1,
+        opacity: 1,
+        transition: {
+          delay: index * 0.1,
+          visualDuration: 0.5 - index * 0.1,
+          type: "spring",
+        },
+      }}
       animate={{
         left: `${isHovered ? hoverLeft : left}%`,
         top: `${isHovered ? 50 : top}%`,

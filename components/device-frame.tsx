@@ -15,9 +15,10 @@ import * as React from "react";
 import { CopyButton } from "./ui/copy-button";
 import { Skeleton } from "./ui/skeleton";
 import { useBattery } from "@uidotdev/usehooks";
+import { ScrollArea } from "./ui/scroll-area";
 
 const glassClass =
-  "flex items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover  text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
+  "flex items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
 const glassCircleClass = "rounded-full h-[12cqw] w-[12cqw]";
 
 const timeFormatter = new Intl.DateTimeFormat(undefined, {
@@ -86,14 +87,14 @@ function Phone({ className, children, island = true, toolbar = true, address = "
   const hasBottomGutter = gutter && toolbar;
   const { loading, supported, level, charging } = useBattery();
   const batteryLevel = supported ? Math.round((level ?? 0) * 100) : 67;
-  const batteryColor = batteryLevel > 50 ? "var(--color-foreground)" : "var(--color-yellow-400)";
+  const batteryColor = batteryLevel > 50 ? "var(--foreground)" : "var(--color-yellow-400)";
 
   return (
     <div data-slot="device-frame" className={cn("mx-auto w-full max-w-sm", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
         <div className="relative w-full bg-black p-[2.5%] shadow-lg outline-2 outline-neutral-600/40 [&]:rounded-[15cqw]">
           <div className="relative aspect-9/19.5 overflow-hidden [&]:rounded-[calc(15cqw-2.5cqw)]">
-            <div className="border/50 absolute inset-0 rounded-[inherit] border bg-sidebar" />
+            <div className="border/50 absolute inset-0 rounded-[inherit] border bg-background" />
             <div className={cn("absolute inset-0", hasTopGutter && "pt-[10%]", hasBottomGutter && "pb-[15%]")}>{children}</div>
             <div className="via-smooth pointer-events-none absolute inset-x-0 bottom-0 h-[20%] w-full bg-linear-to-b from-transparent via-black/10 via-30% to-black/25 bg-blend-multiply" />
           </div>
@@ -113,7 +114,10 @@ function Phone({ className, children, island = true, toolbar = true, address = "
                     strokeWidth={2.5}
                   />
                   <IconWifi className="size-[1em]" strokeWidth={2.5} />
-                  <div className="grid-stack aspect-square">
+                  <div
+                    className="grid-stack aspect-square"
+                    style={{ "--battery-color": charging ? "var(--color-green-400)" : batteryColor } as React.CSSProperties}
+                  >
                     <div
                       className="z-1 flex items-center self-center text-[2.5cqw] font-bold tracking-[-5%]"
                       style={{ color: charging ? "var(--color-background)" : "var(--color-background)" }}
@@ -128,12 +132,12 @@ function Phone({ className, children, island = true, toolbar = true, address = "
                         </>
                       )}
                     </div>
-                    <IconBatteryFilled className="size-[7cqw] origin-center scale-x-120 text-input bg-blend-difference" strokeWidth={2} />
+                    <IconBatteryFilled className="size-[7cqw] origin-center scale-x-120 fill-input" strokeWidth={2} />
                     <IconBatteryFilled
-                      className={cn("size-[7cqw] origin-center scale-x-120")}
+                      className={cn("size-[7cqw] origin-center scale-x-120 fill-(--battery-color)")}
                       style={{
                         maskImage: `linear-gradient(to left, transparent 0%, transparent ${100 - batteryLevel}%, currentColor ${100 - batteryLevel}%, currentColor 100%)`,
-                        fill: charging ? "var(--color-green-400)" : batteryColor,
+                        // fill: charging ? "var(--color-green-400)" : batteryColor,
                       }}
                       strokeWidth={2}
                     />

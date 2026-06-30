@@ -124,7 +124,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             sizes="(max-width: 768px) 100vw, 720px"
-            className="sm:squircle h-auto w-full ring ring-border/50 sm:rounded-[calc(var(--radius-2xl)-(--spacing(1)))]"
+            className="sm:squircle h-auto w-full outline -outline-offset-1 outline-border/50 sm:rounded-[calc(var(--radius-2xl)-(--spacing(1)))]"
           />
           <span
             aria-hidden

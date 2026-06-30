@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import Link from "next/link";
+import { Section } from "@/components/section";
 import {
   ExampleBasic,
   ExampleBouncy,
@@ -18,22 +18,16 @@ export const metadata: Metadata = {
   robots: "noindex, nofollow",
 };
 
-type DemoSection = {
-  id: string;
-  title: string;
-  description: string;
-  children: ReactNode;
+const cambioSectionClassName = "scroll-mt-24 items-stretch gap-0 border-b border-border py-12 not-last:mb-0 last:border-b-0";
+const cambioHeadingClassName = "mt-0 mb-2 font-heading text-lg font-medium tracking-normal";
+const cambioDescriptionClassName = "mb-6 max-w-2xl";
+const cambioContentClassName = "max-w-xl rounded-none border-0 bg-transparent p-0";
+const cambioSectionProps = {
+  className: cambioSectionClassName,
+  headingClassName: cambioHeadingClassName,
+  descriptionClassName: cambioDescriptionClassName,
+  contentClassName: cambioContentClassName,
 };
-
-function Section({ id, title, description, children }: DemoSection) {
-  return (
-    <section id={id} className="scroll-mt-24 border-b border-border py-12 last:border-b-0">
-      <h2 className="mb-2 font-heading text-lg font-medium text-foreground">{title}</h2>
-      <p className="mb-6 max-w-2xl text-sm text-muted-foreground">{description}</p>
-      <div className="max-w-xl">{children}</div>
-    </section>
-  );
-}
 
 export default function PrivateCambioPage() {
   return (
@@ -64,11 +58,17 @@ export default function PrivateCambioPage() {
         id="basic"
         title="Basic"
         description="Default shared animation with dismissible drag (matches the upstream basic example component)."
+        {...cambioSectionProps}
       >
         <ExampleBasic />
       </Section>
 
-      <Section id="dismissible" title="Dismissible" description="Popup can be dismissed by dragging, using the default sensitivity.">
+      <Section
+        id="dismissible"
+        title="Dismissible"
+        description="Popup can be dismissed by dragging, using the default sensitivity."
+        {...cambioSectionProps}
+      >
         <ExampleDismissible />
       </Section>
 
@@ -76,27 +76,43 @@ export default function PrivateCambioPage() {
         id="dismissible-advanced"
         title="Dismissible (advanced)"
         description="Custom dismissal threshold and velocity from the dismissible-advanced example."
+        {...cambioSectionProps}
       >
         <ExampleDismissibleAdvanced />
       </Section>
 
-      <Section id="reduced" title="Reduced motion" description="reduceMotion forces minimal motion for testing or accessibility overrides.">
+      <Section
+        id="reduced"
+        title="Reduced motion"
+        description="reduceMotion forces minimal motion for testing or accessibility overrides."
+        {...cambioSectionProps}
+      >
         <ExampleReduced />
       </Section>
 
-      <Section id="snappy" title="Snappy" description="Fast ease-out preset (240ms) for responsive interactions.">
+      <Section id="snappy" title="Snappy" description="Fast ease-out preset (240ms) for responsive interactions." {...cambioSectionProps}>
         <ExampleSnappy />
       </Section>
 
-      <Section id="smooth" title="Smooth" description="Balanced ease-in-out preset (300ms), general-purpose modals.">
+      <Section
+        id="smooth"
+        title="Smooth"
+        description="Balanced ease-in-out preset (300ms), general-purpose modals."
+        {...cambioSectionProps}
+      >
         <ExampleSmooth />
       </Section>
 
-      <Section id="bouncy" title="Bouncy" description="Spring motion with overshoot for playful transitions.">
+      <Section id="bouncy" title="Bouncy" description="Spring motion with overshoot for playful transitions." {...cambioSectionProps}>
         <ExampleBouncy />
       </Section>
 
-      <Section id="variants" title="Variants" description="Per-part presets: snappy trigger, bouncy popup, smooth backdrop.">
+      <Section
+        id="variants"
+        title="Variants"
+        description="Per-part presets: snappy trigger, bouncy popup, smooth backdrop."
+        {...cambioSectionProps}
+      >
         <ExampleVariants />
       </Section>
 
@@ -104,6 +120,7 @@ export default function PrivateCambioPage() {
         id="overrides"
         title="Overrides"
         description="Global smooth motion with per-component overrides (snappy trigger, reduced backdrop, bouncy popup)."
+        {...cambioSectionProps}
       >
         <ExampleOverrides />
       </Section>

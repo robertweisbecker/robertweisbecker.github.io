@@ -13,7 +13,7 @@ import {
   VercelIcon,
   CodexIcon,
 } from "@/components/icons";
-import { PixelShuffleIcon } from "@/components/icons-pixel";
+import { PixelMarkdown2Icon, PixelShuffleIcon, PixelExternalIcon } from "@/components/icons-pixel";
 import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
 import { IndexList, type IndexListItem } from "@/components/index-list";
@@ -99,7 +99,7 @@ export default function Home() {
               </Button>
             </Float>
           </div>
-          <div className="w-full space-y-3.5 text-sm max-sm:col-span-2">
+          <div className="w-full space-y-3.5 text-base max-sm:col-span-2">
             <p className="text-pretty">
               You can call me{" "}
               <Popover>
@@ -112,11 +112,11 @@ export default function Home() {
               </Popover>
               .
             </p>
-            <p className="text-balance">
+            <p className="text-pretty">
               I&apos;m a principal designer at <LinkOut href="https://everfi.com" text="Everfi" className="text-foreground" /> working on
               products, tools, and systems to help drive social good through education.
             </p>
-            <p className="text-pretty">
+            <p className="text-balance">
               These things have&nbsp;
               <PreviewCard>
                 <PreviewCardTrigger
@@ -137,7 +137,7 @@ export default function Home() {
                     </AvatarFallback>
                   </Avatar>
                   <div className="w-full space-y-2">
-                    <p className="line-clamp-2 text-xs font-medium">
+                    <p className="text-xs font-medium">
                       Everfi’s Suite of K-12 Educational Content Receives Prestigious Digital Promise Research-Based Product Design
                       Certification
                     </p>
@@ -145,8 +145,8 @@ export default function Home() {
                       className="mb-3 block text-xs text-muted-foreground [quotes:initial]"
                       cite="https://everfi.com/press-releases/everfis-suite-of-k-12-educational-content-receives-prestigious-digital-promise-research-based-product-design-certification/#:~:text=Everfi%E2%80%99s%20Impact%2Das%2Da%2DServiceTM%C2%A0solution%20and%20digital%20educational%20content%20have%20reached%20more%20than%2045%20million%20learners%20globally."
                     >
-                      “Founded in 2008, Everfi’s Impact-as-a-Service™ solution and digital educational content have reached more than{" "}
-                      <mark>45 million</mark> learners globally.”
+                      “Founded in 2008, Everfi’s Impact-as-a-Service™ solution and digital educational content have reached more than <br />
+                      <mark data-hue="yellow">45 million</mark> learners globally.”
                     </blockquote>
                     <span className="flex items-center gap-1 text-2xs">
                       <IconLink className="size-3" /> everfi.com
@@ -175,7 +175,7 @@ export default function Home() {
         <h2 className="font-pixel text-[11px] uppercase" id="resources">
           II. Posts
         </h2>
-        <IndexList items={postItems} />
+        <IndexList items={postItems} maxVisibleItems={3} />
       </section>
 
       <section>
@@ -219,7 +219,7 @@ export default function Home() {
                       className="ease col-1 row-1 size-4 shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel text-[16.5px] leading-none text-muted-foreground opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
                       aria-hidden
                     >
-                      ↗
+                      <PixelExternalIcon />
                     </span>
                   </div>
                 </CardAction>
@@ -377,7 +377,7 @@ export default function Home() {
         <div className="flex w-full justify-between gap-2">
           <h2 className="font-pixel text-[11px] uppercase">VI. CV</h2>
           <LinkButton href="/BOB.md" variant="ghost" size="sm" className="-me-(--button-x) -mt-(--button-y)">
-            <MarkdownIcon data-icon="inline-start" />
+            <PixelMarkdown2Icon data-icon="inline-start" />
             View BOB.md
           </LinkButton>
         </div>
@@ -406,7 +406,7 @@ export default function Home() {
             </DescriptionList>
           </DescriptionListValue>
 
-          <DescriptionListLabel className="flex items-center gap-2 self-start">
+          <DescriptionListLabel className="flex items-center gap-2 self-start uppercase">
             <Avatar size="sm">
               <AvatarImage src="/assets/logos/everfi-icon.png" alt="Everfi" />
             </Avatar>{" "}
@@ -521,7 +521,11 @@ export default function Home() {
             <span className="flex items-center gap-1.5">
               <CursorIcon className="size-4" /> Cursor,
               <TreeIconClaude className="size-4" />
-              Claude, and <CodexIcon className="size-4" /> Codex
+              Claude, and{" "}
+              <span className="inline-flex size-4 items-center justify-center rounded-sm bg-white p-0.5 shadow-button">
+                <CodexIcon className="squircle size-3 fill-indigo-400" />
+              </span>
+              Codex
             </span>
           </DescriptionListValue>
         </DescriptionList>

@@ -116,7 +116,8 @@ export default function NativePopoversAnchoringPage() {
   return (
     <div className="mx-auto w-full max-w-xl space-y-8">
       <p>
-        Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and <Code>starting-style</Code>.
+        Playing with the native <Code>popover</Code> API, plus <Code>anchor</Code> positioning and <Code>starting-style</Code>. Note: iffy
+        support on iOS Safari.
       </p>
       <Heading level={2} className="mt-4">
         Anchored popovers
@@ -151,7 +152,7 @@ export default function NativePopoversAnchoringPage() {
         clicking outside.
       </p>
       <Heading level={2}>Toast popovers</Heading>
-      <Demo title="Toast-like" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
+      <Demo title="Manual close" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button
             popoverTarget="popover-toast"
@@ -204,8 +205,8 @@ export default function NativePopoversAnchoringPage() {
         The next one has a backdrop just to see how it works. But don{"'"}t be fooled, it{"'"}s not modal, nor does it lock scroll position
         or focus. In reality, you might use a <Code>{"<dialog>"}</Code> here if you{"'"}re going native.
       </p>
-      <Heading level={2}>Backdrop popovers</Heading>
-      <Demo title="With backdrop" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
+      <Heading level={2}>Backdrop</Heading>
+      <Demo title="Non-modal" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-backdrop" variant="outline" className="relative">
             With backdrop
@@ -239,8 +240,8 @@ export default function NativePopoversAnchoringPage() {
         </div>
       </Demo>
       <p>You can have some fun with the backdrops too. This one also requires an explicit close.</p>
-      <Heading level={2}>Manual popovers</Heading>
-      <Demo title="Danger (manual)" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
+
+      <Demo title="Manual + backdrop" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button
             popoverTarget="popover-backdrop-2"
