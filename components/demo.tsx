@@ -1,10 +1,13 @@
 "use client";
 
 import { CodeBlock } from "@/components/code-block";
+import { Separator } from "@/components/ui/separator";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
+import { InfoTip } from "./info-tip";
 
 type DemoCodeLanguage = "css" | "html" | "js" | "ts" | "json" | "tsx" | "jsx" | "md" | "mdx" | "text";
 
@@ -26,6 +29,8 @@ const demoContainerVariants = cva("rounded-[calc(var(--radius-xl)-1px)] max-w-[c
     variant: {
       card: "bg-card shadow-border-xs",
       outline: "bg-muted",
+      plain: "bg-transparent",
+      muted: "bg-muted",
     },
   },
   defaultVariants: {
@@ -62,11 +67,11 @@ function DemoBody({
   centerContent: boolean;
   innerClass?: string;
 }) {
-  const demoInnerClasses = cn("p-5 flex-1", centerContent && "grid place-items-center", innerClass);
+  const demoInnerClasses = cn("p-5 flex-1 overflow-hidden", centerContent && "grid place-items-center", innerClass);
 
   if (overflowBehavior === "resize") {
     return (
-      <ResizablePanelGroup orientation="horizontal" style={{ overflow: "visible" }} className="p-px">
+      <ResizablePanelGroup orientation="horizontal" style={{ overflow: "visible" }} className="max-w-full p-px" data-slot="demo-body">
         <ResizablePanel
           defaultSize="100%"
           minSize="25%"
@@ -85,8 +90,10 @@ function DemoBody({
 
   if (overflowBehavior === "scroll") {
     return (
-      <div className={cn(demoContainerVariants({ variant }), "max-h-56 min-h-14 w-full overflow-auto")}>
-        <div className={cn(demoInnerClasses, "min-w-max")}>{children}</div>
+      <div className={cn(demoContainerVariants({ variant }), "max-h-56 min-h-14 max-w-full min-w-0")}>
+        <ScrollArea orientation="horizontal" className="size-full" scrollFade innerClass={demoInnerClasses}>
+          {children}
+        </ScrollArea>
       </div>
     );
   }
@@ -118,19 +125,29 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure data-demo className={cn("not-prose flex flex-col rounded-xl", !plain ? "bg-muted" : "", className)} {...props}>
+    <figure data-demo className={cn("not-prose flex min-w-0 flex-col rounded-xl", !plain ? "bg-muted" : "", className)} {...props}>
       {hasHeader ? (
         <header
           className={cn(
-            "flex items-center justify-between gap-2 px-[max(var(--radius-xl),--spacing(3))] pt-2 pb-1.5 text-sm",
+            "flex items-center justify-between gap-2 ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-sm",
             headerClassName
           )}
         >
-          <div className="flex grow items-baseline gap-1">
-            <span className="min-w-0 font-[450] text-foreground">{title}</span>
-            {description ? <span className="text-xs text-muted-foreground">{description}</span> : null}
+          <div className="flex flex-1 flex-wrap items-center gap-x-2 gap-y-0">
+            <div className="min-w-0 font-[450] text-foreground">{title}</div>
+            {description ? (
+              <>
+                <p className="truncate text-xs text-muted-foreground max-sm:hidden">∙ {description}</p>
+                <InfoTip className="sm:hidden" description={description} />
+              </>
+            ) : null}
           </div>
-          <div className="flex items-center gap-1">{controls}</div>
+          {controls ? (
+            <>
+              <Separator orientation="vertical" className="h-3" />
+              <div className="flex items-center justify-end gap-1">{controls}</div>
+            </>
+          ) : null}
         </header>
       ) : null}
 
@@ -139,7 +156,7 @@ export function Demo({
       </DemoBody>
 
       {caption ? (
-        <figcaption className={cn("px-(--radius-xl) pt-1 pb-2 text-2xs text-muted-foreground", captionClassName)}>{caption}</figcaption>
+        <figcaption className={cn("px-(--radius-xl) pt-1.5 pb-2 text-xs text-muted-foreground", captionClassName)}>{caption}</figcaption>
       ) : null}
 
       {hasCode ? (
@@ -150,7 +167,7 @@ export function Demo({
           lineNumbers={code.lineNumbers}
           collapsible={code.collapsible}
           initialHeight={code.initialHeight}
-          className="-mx-px mt-px rounded-b-none border-y bg-transparent"
+          className="m-px rounded-b-[inherit] border border-border"
         />
       ) : null}
     </figure>

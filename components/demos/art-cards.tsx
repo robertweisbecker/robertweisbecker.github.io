@@ -85,7 +85,7 @@ export function ArtCards() {
       <ArtCard src={art4} index={4} left={74} top={52} rotate={12} zIndex={3} {...cardProps} />
       <ArtCard src={art6} index={5} left={86} top={58} rotate={-9} zIndex={4} {...cardProps} />
 
-      <LinkButton className="absolute bottom-6 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2" href="/art" isExternal={false}>
+      <LinkButton className="absolute bottom-2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2" href="/art" isExternal={false}>
         View all
         <PixelChevronDownIcon className="size-[11px] -rotate-90" data-icon="inline-end" />
       </LinkButton>

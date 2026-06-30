@@ -1,5 +1,5 @@
-/* PALETTES
- * Registered as @theme so Tailwind generates utility classes
+/* @AGENTS: 
+ * These are registered as @theme so Tailwind generates utility classes
  * and CSS custom properties are available at runtime.
  * Utility classes are tree-shaken; @source inline below safelists
  * the bg-* classes used by the color palette component.

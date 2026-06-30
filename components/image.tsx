@@ -34,7 +34,8 @@ export function Image(props: ImageProps) {
     <figure
       data-media
       className={cn(
-        "relative my-0 flex flex-col items-center gap-1.5 self-center max-sm:-mx-4 max-sm:w-[calc(100%+(--spacing(8)))] max-sm:max-w-[unset] [article>&]:my-10",
+        "relative flex flex-col items-center gap-1.5 self-center lg:max-w-[unset] [article>&]:my-6 lg:[article>&]:w-6xl lg:[article>&]:max-w-none",
+        "max-sm:-mx-4 max-sm:w-[calc(100%+(--spacing(8)))]",
         className
       )}
     >

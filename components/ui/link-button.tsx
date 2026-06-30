@@ -43,4 +43,4 @@ function LinkButton({ className, variant = "default", size = "md", rounded = fal
   );
 }
 
-export { LinkButton };
+export { LinkButton, type LinkButtonProps };

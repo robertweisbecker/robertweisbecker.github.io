@@ -1,4 +1,5 @@
 "use client";
+import { Marker, MarkerContent } from "@/components/ui/marker";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { MotionText, TextReveal } from "@/components/animation/shared";
 import { PixelDino } from "@/components/animation/pixel-dino";
@@ -12,6 +13,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
 import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
 import { CardFan } from "@/components/demos/card-fan";
+import { Card, CardTitle, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { CopyButton } from "@/components/ui/copy-button";
 import { Slider, SliderControl, SliderGroup, SliderLabel, SliderValue } from "@/components/ui/slider";
@@ -217,7 +219,7 @@ export default function PlaygroundPage() {
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10">
       <h1 className="w-full text-h1">Playground</h1>
-
+      <FoldedCardDemo />
       <div className="flex w-full flex-col gap-14">
         <PlaygroundSection id="motion-systems" title="Motion">
           <Demo title="DVD Loader" className="lg:col-span-4">
@@ -229,10 +231,12 @@ export default function PlaygroundPage() {
           <Demo
             title="TextReveal"
             centerContent
+            variant="muted"
+            plain
             className="lg:col-span-4"
             innerClass="min-h-60"
             controls={
-              <Button size="xs" variant="link" onClick={() => setResetKey((key) => key + 1)} className="-me-1">
+              <Button size="xs" variant="ghost" onClick={() => setResetKey((key) => key + 1)}>
                 Replay
                 <PixelIcons.PixelRedoIcon data-icon="inline-end" />
               </Button>
@@ -276,7 +280,7 @@ export default function PlaygroundPage() {
           >
             <ChromeTabsDemo />
           </Demo>
-          <Demo title="Site search" description="∙ a Raycast-style command palette" centerContent className="lg:col-span-4">
+          <Demo title="Site search" caption="A Raycast-style command palette" centerContent className="lg:col-span-5">
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
           <Demo title="Grouped Popups" centerContent className="lg:col-span-7" innerClass="min-h-60">
@@ -285,7 +289,7 @@ export default function PlaygroundPage() {
           <Demo title="Tabs" caption="Elevated, line, and pill variants" className="lg:col-span-full">
             <TabsVariantsDemo />
           </Demo>
-          <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-4">
+          <Demo title="ToggleGrid" centerContent className="lg:col-span-4">
             <ToggleVariantsDemo />
           </Demo>
           <Demo title="Switch" centerContent className="lg:col-span-4">
@@ -382,7 +386,7 @@ export default function PlaygroundPage() {
           </Demo>
           <Demo
             title="Emoji Feedback"
-            description="∙ a remix of Vercel's Feedback component"
+            description="A remix of Vercel's Feedback component"
             controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
             className="lg:col-span-full"
             innerClass="min-h-72 "
@@ -392,10 +396,10 @@ export default function PlaygroundPage() {
         </PlaygroundSection>
 
         <PlaygroundSection id="visual-details" title="Verisimilitude">
-          <Demo title="Motion chart" description="∙ Hover to animate" centerContent className="lg:col-span-4">
+          <Demo title="Motion chart" description="Hover to animate" centerContent className="lg:col-span-4">
             <ChartDemo />
           </Demo>
-          <Demo title="ColorCode" description="∙ Click to copy" centerContent className="lg:col-span-3">
+          <Demo title="ColorCode" description="Click to copy" centerContent className="lg:col-span-3">
             <ColorCode value="#0b0b0b" />
           </Demo>
           <Demo title="ColorSwatchGroup" centerContent className="lg:col-span-5">
@@ -412,6 +416,7 @@ export default function PlaygroundPage() {
           </Demo>
           <Demo caption="Glass button" centerContent className="[var(--bg:var(--primary))] lg:col-span-3">
             <GlassButtonDemo />
+            <Button variant="glass">Glass</Button>
           </Demo>
           <Demo caption="Delete button" centerContent className="lg:col-span-3">
             <DeleteButtonDemo />
@@ -1200,21 +1205,25 @@ function SkeletonDemo() {
 
   React.useEffect(() => {
     setLoaded(false);
-    const timeout = window.setTimeout(() => setLoaded(true), 2200);
+    const timeout = window.setTimeout(() => setLoaded(true), 4000);
     return () => window.clearTimeout(timeout);
   }, [replayKey]);
 
   return (
     <div className="grid w-full max-w-sm gap-3" data-testid="skeleton-demo" data-loaded={loaded}>
-      <div className="flex justify-end">
-        <Button size="xs" variant="ghost" onClick={() => setReplayKey((key) => key + 1)} data-testid="skeleton-replay">
-          Replay
+      <div className="order-last flex justify-center">
+        <Button variant="outline" rounded onClick={() => setReplayKey((key) => key + 1)} data-testid="skeleton-replay">
+          Reload
           <PixelIcons.PixelRedoIcon data-icon="inline-end" />
         </Button>
       </div>
 
       <div
-        className="relative min-h-[13.5rem] overflow-hidden rounded-xl border bg-card p-4"
+        className={cn(
+          "squircle relative min-h-[13.5rem] overflow-hidden rounded-2xl border",
+          "ring-4 transition-[opacity,border-color] duration-500 ease-out",
+          loaded ? "pointer-events-none border-success-primary bg-card ring-success-primary/20" : "border-dashed bg-card/50 ring-border/20"
+        )}
         aria-live="polite"
         data-testid="skeleton-frame"
       >
@@ -1222,12 +1231,13 @@ function SkeletonDemo() {
           aria-hidden={loaded}
           data-testid="skeleton-loading"
           className={cn(
-            "absolute inset-0 grid gap-4 p-4 transition-opacity duration-500 ease-out",
-            loaded ? "pointer-events-none opacity-0" : "opacity-100"
+            "absolute inset-0 grid gap-4 p-4",
+            "[transition:inherit]",
+            loaded ? "pointer-events-none opacity-0" : "border-dashed opacity-100"
           )}
         >
           <div className="flex items-center gap-4">
-            <Skeleton className="size-12 rounded-full" />
+            <Skeleton className="size-10 rounded-lg" />
             <div className="flex-1 space-y-2">
               <Skeleton className="h-4 w-32" />
               <Skeleton className="h-3 w-44 max-w-full" />
@@ -1245,19 +1255,24 @@ function SkeletonDemo() {
           )}
         >
           <div className="flex items-center gap-4">
-            <Avatar className="size-12">
-              <AvatarImage src="/assets/bob-avatar.png" alt="Robert Weisbecker" />
+            <Avatar className="size-10 rounded-md">
+              <AvatarImage src="/assets/unused/bob.png" alt="Robert Weisbecker" />
               <AvatarFallback>RW</AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">Robert Weisbecker</p>
-              <p className="truncate text-xs text-muted-foreground">Design systems and interaction details</p>
+              <p className="truncate text-sm font-medium">Bob Weisbecker</p>
+              <Marker className="text-xs">
+                <MarkerContent>San Diego, CA</MarkerContent>
+              </Marker>
             </div>
           </div>
-          <div className="grid h-28 place-items-center rounded-xl border bg-muted/40 p-4 text-center">
+          <div className="grid h-28 rounded-xl p-0">
             <div>
-              <p className="font-pixel text-[11px] text-muted-foreground uppercase">Loaded</p>
-              <p className="mt-1 text-sm font-medium">Content fades into the reserved skeleton frame.</p>
+              <p className="mt-1 line-clamp-5 text-sm text-muted-foreground">
+                Ipsum officia sit eu velit irure ullamco magna qui occaecat id. Incididunt proident exercitation culpa dolore officia sunt
+                aliquip minim anim aliqua non quis Lorem irure esse. Occaecat dolore irure dolor elit aliqua ea duis aliquip irure officia
+                enim deserunt adipisicing elit.
+              </p>
             </div>
           </div>
         </div>
@@ -1323,19 +1338,14 @@ function ChromeTabsDemo() {
           Vercel
         </ChromeTabs.Tab>
       </ChromeTabs.List>
-      <ChromeTabDvdPanel value="preview" label="bob.fyi" icon={Favicon} className="border-info-primary bg-info text-info-foreground" />
+      <ChromeTabDvdPanel value="preview" label="bob.fyi" icon={Favicon} className="border bg-accent text-muted-foreground" />
       <ChromeTabDvdPanel
         value="code"
         label="Github"
         icon={GithubIcon}
         className="border-violet-400 bg-violet-25 text-violet-500 dark:border-violet-600 dark:bg-violet-950 dark:text-violet-400"
       />
-      <ChromeTabDvdPanel
-        value="output"
-        label="Vercel"
-        icon={VercelIcon}
-        className="border-warning-primary bg-warning text-warning-foreground"
-      />
+      <ChromeTabDvdPanel value="output" label="Vercel" icon={VercelIcon} className="border-white bg-black text-white" />
     </ChromeTabs>
   );
 }
@@ -1357,11 +1367,11 @@ function ChromeTabDvdPanel({
         initial={{ opacity: 0, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 4 }}
-        className={cn("h-36 overflow-hidden border border-dashed", className)}
+        className={cn("mx-auto h-36 w-72 overflow-hidden border border-dashed", className)}
       >
         <DvdAnimationRoot
           duration={42}
-          width={320}
+          width={288}
           height={144}
           logoScale={0.22}
           logoAspectRatio={1}
@@ -1395,6 +1405,31 @@ function CobotButtonDemo() {
     >
       Agent
     </button>
+  );
+}
+
+function FoldedCardDemo() {
+  return (
+    <Card
+      variant="plain"
+      size="sm"
+      className={cn(
+        "ease squircle z-2 max-w-3xs overflow-visible rounded-md border bg-[color-mix(in_srgb,var(--background),var(--card))] bg-clip-padding drop-shadow-[0_1px,-1px_2px] drop-shadow-black/4 transition-all duration-180 hover:drop-shadow-[0_1px,-1px_3px_2px] hover:drop-shadow-black/8",
+        "rounded-se-[26px] hover:rounded-se-[36px]",
+        "hover:before:size-[42px] hover:before:border-input",
+        "after:drop-shadow-black/32 hover:after:translate-x-0 hover:after:translate-y-0 hover:after:rounded-bl-[8px] hover:after:drop-shadow-md",
+
+        "[mask-image-radial-gradient(white,black)] transition-180ms decoration-none relative z-2 m-0 block h-full w-full overflow-hidden border [border-style:none] bg-size-[100%_100%] p-[20px_16px_18px] inset-shadow-[0_0_0_1px_var(--border)] [border-image:initial]",
+        "before:absolute before:top-0 before:right-0 before:z-2 before:z-3 before:size-7.5 before:translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:bg-background before:shadow-[-1px_1px] before:shadow-[color-mix(in_srgb,var(--border)_75%,var(--background))] before:transition-[inherit]",
+
+        "after:linear after:absolute after:top-0 after:right-0 after:z-2 after:size-7 after:translate-x-2 after:-translate-y-2 after:rounded-bl-[6px] after:bg-[color-mix(in_srgb,var(--border)_50%,var(--card))] after:shadow-[-.5px_.5px_0_.5px_var(--border)] after:transition-all after:duration-180"
+      )}
+    >
+      <CardContent>
+        <CardTitle>Card Title</CardTitle>
+        <p>Card content goes here. You can put any content inside.</p>
+      </CardContent>
+    </Card>
   );
 }
 

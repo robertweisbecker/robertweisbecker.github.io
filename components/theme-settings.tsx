@@ -60,11 +60,11 @@ function ThemeFieldReset({
         render={
           <Button
             type="button"
-            variant="link"
+            variant="ghost"
             size="icon-xs"
             rounded
             className={cn(
-              "-my-1 -ms-1 shrink-0 text-muted-foreground opacity-100 transition-opacity",
+              "-my-1 -ms-1 size-3 shrink-0 text-muted-foreground opacity-100 transition-opacity",
               !dirty && "pointer-events-none opacity-0!",
               className
             )}
@@ -100,10 +100,10 @@ export function HueSwatch({ hue }: { hue: HueName }) {
   );
 }
 
-export function ThemeSettings({ className }: { className?: string }) {
+export function ThemeSettings({ className, ...props }: Omit<React.ComponentProps<typeof Button>, "aria-label">) {
   return (
     <Popover>
-      <PopoverTrigger render={<Button variant="ghost" size="sm" aria-label="Theme settings" />} className={cn(className)}>
+      <PopoverTrigger render={<Button variant="ghost" {...props} aria-label="Theme settings" />} className={cn(className)}>
         <span
           data-icon="inline-start"
           className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720"
@@ -300,6 +300,18 @@ export type ThemeRadiusFieldProps = Omit<
   unit?: string;
 };
 
+export type ThemeDensityFieldProps = Omit<
+  React.ComponentProps<typeof NumberSlider>,
+  "label" | "labelAction" | "min" | "max" | "step" | "value" | "onValueChange" | "unit"
+> & {
+  label?: string;
+  max?: number;
+  min?: number;
+  showReset?: boolean;
+  step?: number;
+  unit?: string;
+};
+
 export function ThemeRadiusField({
   label = "Radius",
   max = 32,
@@ -331,6 +343,37 @@ export function ThemeRadiusField({
   );
 }
 
+export function ThemeDensityField({
+  label = "Density",
+  max = 1.2,
+  min = 0.8,
+  showReset = true,
+  step = 0.1,
+  unit = "x",
+  ...props
+}: ThemeDensityFieldProps) {
+  const { density, defaultDensity, set } = useTheme();
+  const densityDirty = density !== defaultDensity;
+
+  return (
+    <NumberSlider
+      label={label}
+      labelAction={
+        showReset ? (
+          <ThemeFieldReset dirty={densityDirty} onReset={() => set({ density: defaultDensity })} aria-label="Reset density to default" />
+        ) : null
+      }
+      min={min}
+      max={max}
+      step={step}
+      value={density}
+      onValueChange={(v) => set({ density: v as number })}
+      unit={unit}
+      {...props}
+    />
+  );
+}
+
 export type ThemeSettingsPanelProps = React.ComponentProps<typeof FieldGroup> & {
   hueDisplay?: ThemeColorDisplayMode;
   neutralDisplay?: ThemeColorDisplayMode;
@@ -356,6 +399,8 @@ export function ThemeSettingsPanel({
           </FieldSet>
           <FieldSeparator />
           <ThemeRadiusField />
+          {/* TODO: Get this working */}
+          {/* <ThemeDensityField /> */}
         </>
       )}
     </FieldGroup>

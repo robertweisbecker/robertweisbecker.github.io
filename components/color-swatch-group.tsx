@@ -121,7 +121,7 @@ export function ColorSwatchGroup({
                   aria-label={swatch.label}
                   className={cn(
                     "relative aspect-square h-8 w-8 rounded-full p-1",
-                    "group cursor-pointer outline-transparent transition-[border,background,outline-width,outline-offset] ease-out-quint hover:border-current data-pressed:outline-3 data-pressed:-outline-offset-1"
+                    "group cursor-pointer outline-transparent transition-[border,background,outline-width,outline-offset] ease-out-quint hover:border-current data-pressed:bg-accent data-pressed:outline-3 data-pressed:-outline-offset-1"
                   )}
                   style={{ touchAction: "manipulation", color: swatch.color }}
                 />
@@ -136,7 +136,7 @@ export function ColorSwatchGroup({
                   scale: selected.includes(swatch.value) ? 0.9 : 1,
                   outlineWidth: 4,
                   outlineOffset: 2,
-                  outlineColor: selected.includes(swatch.value) ? swatch.color : "transparent",
+                  outlineColor: selected.includes(swatch.value) ? swatch.color : undefined,
                 }}
                 transition={{ type: "spring", visualDuration: 50 }}
               />

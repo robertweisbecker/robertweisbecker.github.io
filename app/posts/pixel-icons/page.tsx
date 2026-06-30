@@ -8,7 +8,7 @@ import {
   TablerRotationIdeaDemo,
 } from "@/components/demos/pixel-icons-post-demos";
 import { PixelMorphToggles, PixelIconPasswordToggle } from "@/components/demos/pixel-morph-toggles";
-import { PixelMorphVisualizer } from "@/components/demos/pixel-morph-visualizer";
+import { PixelMorphVisualizer, PixelMorphVisualizerV2 } from "@/components/demos/pixel-morph-visualizer";
 import * as PixelIcons from "@/components/icons-pixel";
 import { LinkOut } from "@/components/link-out";
 import { Code } from "@/components/ui/code";
@@ -226,7 +226,22 @@ export default function PixelIconsPage() {
           </p>
         </div>
 
-        <PixelMorphVisualizer />
+        <div className="not-prose grid gap-10">
+          <section className="space-y-3">
+            <Heading level={3}>V1 — sequence builder</Heading>
+            <p className="text-sm text-muted-foreground">
+              Build a sequence, jump between steps, and play transitions from the preview or footer.
+            </p>
+            <PixelMorphVisualizer />
+          </section>
+          <section className="space-y-3">
+            <Heading level={3}>V2 — click to morph</Heading>
+            <p className="text-sm text-muted-foreground">
+              Start empty, click an icon to preview it, then click another to morph. Click the active icon again to clear.
+            </p>
+            <PixelMorphVisualizerV2 />
+          </section>
+        </div>
       </div>
     </>
   );

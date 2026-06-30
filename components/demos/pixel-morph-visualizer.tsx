@@ -509,3 +509,233 @@ export function PixelMorphVisualizer({ className }: { className?: string }) {
     </div>
   );
 }
+
+export function PixelMorphVisualizerV2({ className }: { className?: string }) {
+  const [activeIcon, setActiveIcon] = React.useState<PixelIcons.MorphablePixelIconName | null>(null);
+  const [morphFrom, setMorphFrom] = React.useState<PixelIcons.MorphablePixelIconName | null>(null);
+  const [morphTo, setMorphTo] = React.useState<PixelIcons.MorphablePixelIconName | null>(null);
+  const [morphActive, setMorphActive] = React.useState(false);
+  const [strategy, setStrategy] = React.useState<PixelMorphStrategy>("match");
+  const [animation, setAnimation] = React.useState<PixelMorphAnimation>("ease");
+  const [speedScale, setSpeedScale] = React.useState<SpeedScale>("1");
+  const [staggerMs, setStaggerMs] = React.useState(DEFAULT_STAGGER_MS);
+  const [previewScale, setPreviewScale] = React.useState(DEFAULT_PREVIEW_SCALE);
+  const [previewColor, setPreviewColor] = React.useState(DEFAULT_PREVIEW_COLOR);
+  const timerRef = React.useRef<number | null>(null);
+  const isAnimatingRef = React.useRef(false);
+
+  const duration = SPEED_DURATIONS[speedScale] ?? BASE_DURATION;
+  const stagger = staggerMs / 1000;
+  const previewColorStyle = React.useMemo<React.CSSProperties>(() => ({ color: previewColor }), [previewColor]);
+  const rawTotalDuration = (duration + stagger * 27) * 1000 + 80;
+  const totalDuration = Number.isFinite(rawTotalDuration) ? Math.max(160, rawTotalDuration) : 320;
+  const previewFrom = morphFrom ?? activeIcon;
+  const previewTo = morphTo ?? activeIcon;
+  const statusLabel =
+    morphFrom && morphTo ? (
+      <>
+        <span className="opacity-100">{formatIconName(morphFrom)}</span> &rarr;{" "}
+        <span className="opacity-50">{formatIconName(morphTo)}</span>
+      </>
+    ) : activeIcon ? (
+      formatIconName(activeIcon)
+    ) : (
+      "Select an icon"
+    );
+
+  const clearTimer = React.useCallback(() => {
+    if (timerRef.current) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
+  const finishMorph = React.useCallback(
+    (to: PixelIcons.MorphablePixelIconName) => {
+      setActiveIcon(to);
+      setMorphFrom(null);
+      setMorphTo(null);
+      setMorphActive(false);
+      isAnimatingRef.current = false;
+      timerRef.current = null;
+    },
+    []
+  );
+
+  const triggerMorph = React.useCallback(
+    (from: PixelIcons.MorphablePixelIconName, to: PixelIcons.MorphablePixelIconName) => {
+      clearTimer();
+      isAnimatingRef.current = true;
+      setMorphFrom(from);
+      setMorphTo(to);
+      setMorphActive(false);
+
+      window.requestAnimationFrame(() => {
+        setMorphActive(true);
+      });
+
+      const startedAt = window.performance.now();
+
+      const finishTransition = () => {
+        const remaining = totalDuration - (window.performance.now() - startedAt);
+
+        if (remaining > 16) {
+          timerRef.current = window.setTimeout(finishTransition, remaining);
+          return;
+        }
+
+        finishMorph(to);
+      };
+
+      timerRef.current = window.setTimeout(finishTransition, totalDuration);
+    },
+    [clearTimer, finishMorph, totalDuration]
+  );
+
+  function handleGridChange(nextValue: PixelIcons.MorphablePixelIconName[]) {
+    if (isAnimatingRef.current) {
+      return;
+    }
+
+    const nextIcon = nextValue[0] ?? null;
+
+    if (!nextIcon) {
+      clearTimer();
+      isAnimatingRef.current = false;
+      setMorphFrom(null);
+      setMorphTo(null);
+      setMorphActive(false);
+      setActiveIcon(null);
+      return;
+    }
+
+    if (!activeIcon) {
+      setActiveIcon(nextIcon);
+      return;
+    }
+
+    if (activeIcon === nextIcon) {
+      return;
+    }
+
+    triggerMorph(activeIcon, nextIcon);
+  }
+
+  React.useEffect(() => clearTimer, [clearTimer]);
+
+  return (
+    <div className={cn("grid items-start gap-2 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)]", className)}>
+      <Card>
+        <CardHeader>
+          <CardTitle>Preview</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid h-[110px] place-items-center" data-section="preview">
+            <div
+              className="grid size-[88px] place-items-center rounded-xl border border-border"
+              data-testid="pixel-morph-preview-v2"
+            >
+              {previewFrom && previewTo ? (
+                <PixelMorph
+                  from={previewFrom}
+                  to={previewTo}
+                  active={morphActive}
+                  strategy={strategy}
+                  animation={animation}
+                  duration={duration}
+                  stagger={stagger}
+                  scale={previewScale}
+                  style={previewColorStyle}
+                />
+              ) : (
+                <span
+                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
+                  aria-hidden
+                />
+              )}
+            </div>
+          </div>
+          <div className="min-h-5 text-center font-pixel text-2xs text-foreground">{statusLabel}</div>
+
+          <ScrollArea className="w-full max-sm:h-64" scrollbarGutter showScrollbar scrollFade innerClass="border-t border-s">
+            <ToggleGrid
+              columns={12}
+              spacing={0}
+              shape="square"
+              value={activeIcon ? [activeIcon] : []}
+              onValueChange={(next) => handleGridChange(next as PixelIcons.MorphablePixelIconName[])}
+              aria-label="Morphable pixel icons"
+              className="divide-x divide-y *:last:border-e *:last:border-b"
+            >
+              {sortedMorphablePixelIconNames.map((icon) => {
+                const Icon = iconComponents[icon];
+                const isSelected = activeIcon === icon;
+
+                return (
+                  <ToggleGroupItem
+                    key={icon}
+                    value={icon}
+                    aria-label={`${isSelected ? "Deselect" : "Select"} ${formatIconName(icon)}`}
+                    className="group aspect-square h-auto! rounded-none"
+                  >
+                    <Icon className="size-[16.5px]" aria-hidden />
+                    <span className="ease pointer-events-none absolute inset-0 grid-stack overflow-hidden bg-secondary text-center text-[9px]/none text-ellipsis opacity-0 group-hover:opacity-100 group-data-pressed:opacity-0">
+                      {formatIconName(icon)}
+                    </span>
+                  </ToggleGroupItem>
+                );
+              })}
+            </ToggleGrid>
+          </ScrollArea>
+        </CardContent>
+      </Card>
+
+      <Card variant="muted">
+        <CardHeader>
+          <CardTitle>Customize</CardTitle>
+        </CardHeader>
+        <CardContent className="gap-3">
+          <AnimationControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
+          <AnimationControl type="select" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />
+          <AnimationControl
+            type="toggle"
+            label="Speed"
+            value={speedScale}
+            options={SPEED_OPTIONS}
+            onValueChange={setSpeedScale}
+          />
+          <NumberSlider
+            label="Stagger"
+            min={0}
+            max={10}
+            step={1}
+            value={staggerMs}
+            onValueChange={setStaggerMs}
+            unit="ms"
+            format={{ maximumFractionDigits: 0 }}
+          />
+          <NumberSlider
+            label="Scale"
+            min={0.5}
+            max={8}
+            step={0.5}
+            value={previewScale}
+            onValueChange={setPreviewScale}
+            unit="x"
+            format={{ maximumFractionDigits: 1 }}
+          />
+          <Field>
+            <FieldLabel>Fill</FieldLabel>
+            <ColorSwatchGroup
+              colors={PREVIEW_COLOR_SWATCHES}
+              value={previewColor}
+              onValueChange={setPreviewColor}
+              tooltipSide="bottom"
+              className="justify-start"
+            />
+          </Field>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

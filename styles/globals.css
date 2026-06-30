@@ -117,13 +117,15 @@
   --inset-shadow-button-pressed: var(--shadow-button-inset-pressed);
   --shadow-popover: var(--popover-shadow);
 
-  --text-2xs: 0.6875rem;
+  --text-2xs: --spacing(2.75);
   --text-2xs--line-height: calc(15 / 11);
 
-  --text-xs: 0.8125rem;
-  --text-md: 0.9375rem;
+  --text-xs: --spacing(3.25);
+  --text-md: --spacing(3.75);
   --text-md--line-height: calc(22 / 15);
   --text-md--letter-spacing: -0.005em;
+
+  --spacing: calc(var(--density, 1) * 0.25rem);
 }
 
 :root {
@@ -146,6 +148,7 @@
 
 :root,
 [data-theme] {
+  --density: 1;
   --radius: 0.625rem; /* 10px */
   --ellipse-factor: 1;
   --radius-xs: min(calc(var(--radius) * 0.3), 0.5rem);

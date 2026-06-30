@@ -11,6 +11,7 @@ const cardVariants = cva(
         default: "shadow-border-sm bg-linear-to-b from-card/50 to-card",
         muted: "bg-muted/50 backdrop-saturate-120 border-transparent",
         outline: "outline-border -outline-offset-1 outline-1 dark:-outline-offset-1",
+        plain: "bg-card",
       },
       size: {
         default: "[--card-padding:--spacing(4)] [--card-radius:var(--radius-xl)]",

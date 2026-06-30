@@ -33,7 +33,7 @@ const ICON_SIZE = 11;
 const EXPECTED_POINT_COUNT = 28;
 const SCALE_VARIABLE = "--pixel-morph-scale";
 const SIZE_VARIABLE = "--pixel-morph-size";
-const SCALE_SIZE = `calc(var(${SCALE_VARIABLE}, 1) * ${ICON_SIZE}px)`;
+const SCALE_SIZE = `calc(var(${SCALE_VARIABLE}) * ${ICON_SIZE}px)`;
 
 type PixelMorphStyle = React.CSSProperties & {
   [SCALE_VARIABLE]?: number;
@@ -269,7 +269,7 @@ export function PixelMorph({
   duration = 0.2,
   stagger = 0.002,
   dots = false,
-  scale = 1,
+  scale,
   className,
   style,
   "aria-hidden": ariaHidden = true,
@@ -288,8 +288,6 @@ export function PixelMorph({
       ? {}
       : {
           [SCALE_VARIABLE]: scale,
-          width: SCALE_SIZE,
-          height: SCALE_SIZE,
           [SIZE_VARIABLE]: `calc(var(${SCALE_VARIABLE}, 1) * ${ICON_SIZE}px)`,
         };
 

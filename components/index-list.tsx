@@ -118,16 +118,14 @@ export function IndexList({ items = defaultItems, className, itemClassName, maxV
         key={`scrim-${open ? "open" : "closed"}`}
         transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
         className={cn(
-          "absolute inset-x-0 z-10 flex justify-center px-4",
+          "absolute inset-x-0 z-10 flex h-18 items-end justify-center px-4",
           open
-            ? "absolute top-full -bottom-8 pt-0 pb-0"
-            : "absolute bottom-0 bg-linear-to-t from-background via-background/95 via-45% to-transparent pt-16 pb-3"
+            ? "top-full -bottom-10 pt-0 pb-0"
+            : "via-smooth bottom-0 bg-linear-to-t from-background via-background/75 to-transparent pb-4"
         )}
       >
         <Button
-          variant="elevated"
-          size="sm"
-          rounded
+          variant="ghost"
           render={<motion.button />}
           onClick={() => setOpen((value) => !value)}
           className="pointer-events-auto"
@@ -135,7 +133,9 @@ export function IndexList({ items = defaultItems, className, itemClassName, maxV
           aria-expanded={open}
         >
           <MotionText.Morph as="span">
-            {open ? `Hide ${filteredItems.length - resolvedMaxVisibleItems}` : `+${filteredItems.length - resolvedMaxVisibleItems} more`}
+            {open
+              ? `Hide ${filteredItems.length - resolvedMaxVisibleItems} items`
+              : `Show ${filteredItems.length - resolvedMaxVisibleItems} more`}
           </MotionText.Morph>
           <PixelMorph from="PixelChevronDownIcon" to="PixelChevronUpIcon" active={open} />
         </Button>

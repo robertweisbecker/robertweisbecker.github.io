@@ -808,21 +808,53 @@ export const PixelArrowsCompressIcon = createPixelIcon(
   "2,2 4,2 6,2 8,2 3,3 4,3 6,3 7,3 2,4 3,4 4,4 6,4 7,4 8,4 2,6 3,6 4,6 6,6 7,6 8,6 3,7 4,7 6,7 7,7 2,8 4,8 6,8 8,8"
 );
 
+export const PixelChevronDownSmallIcon = createPixelIcon(
+  "PixelChevronDownSmallIcon",
+  11,
+  11,
+  "2,4 8,4 3,5 7,5 4,6 6,6 5,7 2,4 8,4 3,5 7,5 4,6 6,6 5,7 2,4 8,4 3,5 7,5 4,6 6,6 5,7 2,4 8,4 3,5 7,5 4,6 6,6 5,7"
+);
+
+export const PixelChevronUpSmallIcon = createPixelIcon(
+  "PixelChevronUpSmallIcon",
+  11,
+  11,
+  "5,3 4,4 6,4 3,5 7,5 2,6 8,6 5,3 4,4 6,4 3,5 7,5 2,6 8,6 5,3 4,4 6,4 3,5 7,5 2,6 8,6 5,3 4,4 6,4 3,5 7,5 2,6 8,6"
+);
+
+export const PixelCrossSmallIcon = createPixelIcon(
+  "PixelCrossSmallIcon",
+  11,
+  11,
+  "3,3 7,3 4,4 6,4 5,5 4,6 6,6 3,7 7,7 3,3 7,3 4,4 6,4 5,5 4,6 6,6 3,7 7,7 3,3 7,3 4,4 6,4 5,5 4,6 6,6 3,7 7,7 3,3"
+);
+
+export const PixelPlusSmallIcon = createPixelIcon(
+  "PixelPlusSmallIcon",
+  11,
+  11,
+  "5,3 5,4 3,5 4,5 5,5 6,5 7,5 5,6 5,7 5,3 5,4 3,5 4,5 5,5 6,5 7,5 5,6 5,7 5,3 5,4 3,5 4,5 5,5 6,5 7,5 5,6 5,7 5,3"
+);
+
 export const PixelChevronDownIcon = createPixelIcon(
   "PixelChevronDownIcon",
   11,
   11,
-  "1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 1,4"
+  "1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5 8,5"
 );
 
 export const PixelChevronUpIcon = createPixelIcon(
   "PixelChevronUpIcon",
   11,
   11,
-  "5,2 4,3 6,3 3,4 7,4 2,5 8,5 1,6 9,6 5,2 4,3 6,3 3,4 7,4 2,5 8,5 1,6 9,6 5,2 4,3 6,3 3,4 7,4 2,5 8,5 1,6 9,6 5,2"
+  "5,3 4,4 6,4 3,5 7,5 2,6 8,6 1,7 9,7 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5 3,5"
 );
 
 export const pixelIconNames = [
+  "PixelChevronDownSmallIcon",
+  "PixelChevronUpSmallIcon",
+  "PixelCrossSmallIcon",
+  "PixelPlusSmallIcon",
   "PixelChevronUpIcon",
   "PixelChevronDownIcon",
   "PixelScribbleIcon",
@@ -940,6 +972,10 @@ export const pixelIconNames = [
 ] as const;
 
 export const morphablePixelIconNames = [
+  "PixelChevronDownSmallIcon",
+  "PixelChevronUpSmallIcon",
+  "PixelCrossSmallIcon",
+  "PixelPlusSmallIcon",
   "PixelChevronUpIcon",
   "PixelChevronDownIcon",
   "PixelComputerOutlineIcon",

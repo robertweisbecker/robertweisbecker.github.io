@@ -5,12 +5,12 @@ import { ThemeSettings } from "@/components/theme-settings";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { IconBlobFilled, IconComponents } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Favicon } from "./icons";
-import { PixelChevronDownIcon, PixelNewspaperIcon, PixelPointerIcon, PixelScribbleIcon } from "./icons-pixel";
+import { PixelEyeIcon, PixelNewspaperIcon, PixelPointerIcon, PixelScribbleIcon, PixelUserIcon } from "./icons-pixel";
+import { PixelMorph } from "./pixel-morph";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -22,12 +22,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { LinkButton } from "./ui/link-button";
+import { LinkButton, type LinkButtonProps } from "./ui/link-button";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { PreviewCardGroup, PreviewCardPrimitive, PreviewCardTrigger } from "./ui/preview-card";
 import { Badge } from "./ui/badge";
 import { DataList, DataListItem, DataListLabel, DataListValue } from "./ui/data-list";
 import * as React from "react";
+import { Separator } from "./ui/separator";
 
 export function Header() {
   const isMobile = useMediaQuery("max-md");
@@ -37,19 +38,21 @@ export function Header() {
   const previewHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const previewActions = React.useRef<PreviewCardPrimitive.Root.Actions | null>(null);
   const filteredProjects = projects.filter((project) => project.published);
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
+  const mobileIconClasses = "squircle -ms-1 grid-stack size-7 shrink-0 rounded-sm bg-card shadow-border-xs";
   return (
     <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")}>
       <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 py-2 max-sm:px-2">
-        <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
-          <Favicon className="size-4 text-secondary-foreground" />
+        <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 gap-2 font-pixel">
+          <Favicon className="size-4 text-secondary-foreground" data-icon="inline-start" />
 
           <span className="text-[11px]/[10px] max-sm:hidden">
             {" "}
             bob
             <br />
             <span className="text-(--hue-500)">dot</span>
-            <span className="">fyi</span>
+            <span className="text-muted-foreground">fyi</span>
           </span>
         </LinkButton>
         {/* <LinkButton
@@ -66,44 +69,68 @@ export function Header() {
           <DropdownMenu
             modal={false}
             onOpenChange={(open) => {
+              setMenuOpen(open);
               if (!open) {
                 previewHandle.close();
                 previewActions.current?.unmount();
               }
             }}
           >
-            <DropdownMenuTrigger render={<Button variant="ghost" size="sm" />} className="group/trigger font-pixel text-[11px] uppercase">
-              <span className="hidden md:block">Work</span>
+            <DropdownMenuTrigger render={<Button variant="ghost" size={isMobile ? "md" : "sm"} rounded />} className="group/trigger">
+              <span className="max-md:hidden">Work</span>
               <span className="md:hidden">Menu</span>
-              <PixelChevronDownIcon
-                className={cn("rotate-0 opacity-50 transition-transform duration-100 group-data-pressed/trigger:rotate-180")}
+              <PixelMorph
+                from="PixelChevronDownSmallIcon"
+                to="PixelCrossSmallIcon"
+                active={menuOpen}
+                animation="spring"
+                strategy="radial"
+                duration={0.5}
+                stagger={0.01}
+                scale={1.5}
                 data-icon="inline-end"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" ref={anchorRef}>
-              <DropdownMenuGroup className="md:hidden">
-                <DropdownMenuItem render={<Link href="/" />} nativeButton={false}>
-                  Home
+            <DropdownMenuContent align={isMobile ? "center" : "end"} ref={anchorRef} className="max-md:max-w-md">
+              <DropdownMenuGroup className="-mt-1 grid grid-cols-4 px-1 text-2xs *:grid *:shrink-0 *:grid-rows-2 *:place-items-center *:gap-0.5 *:text-xs *:before:inset-0 md:hidden">
+                <DropdownMenuItem render={<Link href="/#about" />} nativeButton={false}>
+                  <div className={mobileIconClasses} data-slot="icon">
+                    <PixelUserIcon scale={1.5} />
+                  </div>
+                  About
                 </DropdownMenuItem>
-                <DropdownMenuItem render={<Link href="/posts" />} nativeButton={false}>
+                <DropdownMenuItem
+                  className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
+                  render={<Link href="/posts" />}
+                  nativeButton={false}
+                >
+                  <div className={mobileIconClasses} data-slot="icon">
+                    <PixelNewspaperIcon scale={1.5} className="text-blue-500 dark:text-blue-400" />
+                  </div>
                   Posts
                 </DropdownMenuItem>
-                <DropdownMenuItem render={<Link href="/art" />} nativeButton={false}>
+                <DropdownMenuItem
+                  className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
+                  render={<Link href="/art" />}
+                  nativeButton={false}
+                >
+                  <div className={mobileIconClasses} data-slot="icon">
+                    <PixelScribbleIcon scale={1.5} className="text-violet-500 dark:text-violet-400" />
+                  </div>
                   Art
                 </DropdownMenuItem>
-                <DropdownMenuItem render={<Link href="/playground" />} nativeButton={false}>
-                  Playground
+                <DropdownMenuItem
+                  className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
+                  render={<Link href="/playground" />}
+                  nativeButton={false}
+                >
+                  <div className={mobileIconClasses} data-slot="icon">
+                    <PixelPointerIcon scale={1.5} className="text-green-500 dark:text-green-400" />
+                  </div>
+                  Play
                 </DropdownMenuItem>
-                {process.env.NODE_ENV === "development" && (
-                  <>
-                    <DropdownMenuItem render={<Link href="/private/qa" />} nativeButton={false} className="md:hidden">
-                      <IconComponents />
-                      QA
-                    </DropdownMenuItem>
-                  </>
-                )}
-                <DropdownMenuSeparator />
               </DropdownMenuGroup>
+              <DropdownMenuSeparator className="md:hidden" />
               <DropdownMenuGroup>
                 <DropdownMenuLabel>Projects</DropdownMenuLabel>
 
@@ -166,7 +193,7 @@ export function Header() {
                   >
                     {project.icon && (
                       <Avatar className="-ms-1 size-[1lh] self-start shadow-border-xs [--avatar-radius:var(--radius-sm)]">
-                        <AvatarImage src={project.icon} alt={project.nickname} className="object-scale-down" />
+                        <AvatarImage src={project.icon} alt={project.nickname} className="object-contain" />
                       </Avatar>
                     )}
 
@@ -181,30 +208,42 @@ export function Header() {
                   </PreviewCardTrigger>
                 ))}
               </DropdownMenuGroup>
+
+              {process.env.NODE_ENV === "development" && (
+                <>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem render={<Link href="/private/qa" />} nativeButton={false}>
+                    <div className="size-4">
+                      <PixelEyeIcon scale={1.5} />
+                    </div>
+                    Private
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </PreviewCardGroup>
-        <HeaderButton
+        <HeaderLinkButton
           label="Posts"
-          icon={<PixelNewspaperIcon data-icon={"inline-start"} />}
-          hideTextOnMobile={false}
+          icon={<PixelNewspaperIcon scale={1.5} />}
+          mobileIconOnly={false}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
           className="max-md:hidden"
         />
-        <HeaderButton
+        <HeaderLinkButton
           label="Art"
-          icon={<PixelScribbleIcon data-icon={"inline-start"} />}
-          hideTextOnMobile={false}
+          icon={<PixelScribbleIcon scale={1.5} />}
+          mobileIconOnly={false}
           href="/art"
           aria-current={pathname === "/art" ? "true" : "false"}
           className="max-md:hidden"
         />
 
-        <HeaderButton
+        <HeaderLinkButton
           label="Play"
-          icon={<PixelPointerIcon data-icon={"inline-start"} />}
-          hideTextOnMobile={false}
+          icon={<PixelPointerIcon data-icon={"inline-start"} scale={1.5} />}
+          mobileIconOnly={false}
           href="/playground"
           aria-current={pathname === "/playground" ? "true" : "false"}
           className="max-md:hidden"
@@ -213,18 +252,18 @@ export function Header() {
 
         {process.env.NODE_ENV === "development" && (
           <>
-            <HeaderButton
-              label="QA"
-              icon={<IconComponents data-icon={isMobile ? null : "inline-start"} />}
-              hideTextOnMobile={true}
-              href="/private/qa"
-              aria-current={pathname === "/private/qa" ? "true" : "false"}
+            <HeaderLinkButton
+              label="Dev"
+              icon={<PixelEyeIcon scale={1.5} />}
+              mobileIconOnly={true}
+              href="/private"
+              aria-current={pathname === "/private" ? "true" : "false"}
             />
-            <HeaderButton label="Dev" hideTextOnMobile={true} href="/private" aria-current={pathname === "/private" ? "true" : "false"} />
           </>
         )}
-        <ThemeSettings className="font-pixel text-[11px] uppercase" />
-        <ModeToggle size="sm" className="font-pixel text-[11px] uppercase" variant="ghost" label={true} />
+        <Separator orientation="vertical" className="h-4" />
+        <ThemeSettings className="rounded-full" size={isMobile ? "md" : "sm"} />
+        <ModeToggle size={isMobile ? "md" : "sm"} className="rounded-full" variant="ghost" label={true} />
       </div>
       <div
         className={cn(
@@ -241,22 +280,31 @@ export function Header() {
   );
 }
 
-function HeaderButton({
-  label,
-  icon,
-  hideTextOnMobile = false,
-  ...props
-}: React.ComponentProps<typeof LinkButton> & { label: string; icon?: React.ReactNode; hideTextOnMobile?: boolean }) {
+type HeaderLinkButtonProps = Omit<Extract<LinkButtonProps, { isExternal?: false }>, "size" | "rounded" | "className" | "children"> & {
+  label: string;
+  icon?: React.ReactNode;
+  mobileIconOnly?: boolean;
+  className?: string;
+};
+
+function HeaderLinkButton({ label, icon, mobileIconOnly = false, className, ...props }: HeaderLinkButtonProps) {
   const isMobile = useMediaQuery("max-md");
+  const buttonSize = isMobile && icon && mobileIconOnly ? "icon" : isMobile ? "md" : "sm";
+
   return (
     <LinkButton
-      {...props}
       variant="ghost"
-      size={isMobile && hideTextOnMobile && icon ? "icon" : "sm"}
-      className={cn("font-pixel text-[11px] uppercase aria-current:bg-accent aria-current:text-accent-foreground", props.className)}
+      rounded={true}
+      size={buttonSize}
+      className={cn(
+        // "font-pixel text-[11px] uppercase",
+        // "aria-current:bg-accent aria-current:text-accent-foreground",
+        className
+      )}
+      {...props}
     >
-      {icon}
-      <span className={cn(hideTextOnMobile && "max-md:sr-only")}>{label}</span>
+      <span data-icon={isMobile ? null : "inline-start"}>{icon}</span>
+      <span className={cn(mobileIconOnly && "max-md:sr-only")}>{label}</span>
     </LinkButton>
   );
 }
