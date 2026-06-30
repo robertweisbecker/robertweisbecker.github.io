@@ -1,5 +1,5 @@
 import { posts } from "@/lib/data/posts";
-import { getProjectSlugs } from "@/lib/projects";
+import { projects } from "@/lib/data/projects";
 import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://bob.fyi";
@@ -18,10 +18,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
   }));
 
-  const projectEntries: MetadataRoute.Sitemap = getProjectSlugs().map((slug) => ({
-    url: `${SITE_URL}/${slug}`,
-    lastModified: new Date(),
-  }));
+  const projectEntries: MetadataRoute.Sitemap = projects.flatMap((project) =>
+    project.published
+      ? [
+          {
+            url: `${SITE_URL}${project.path}`,
+            lastModified: new Date(),
+          },
+        ]
+      : []
+  );
 
   return [...staticEntries, ...postEntries, ...projectEntries];
 }

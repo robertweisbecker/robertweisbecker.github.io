@@ -127,4 +127,17 @@ export const projects = [
     categories: ["Product Design"],
     published: false,
   },
+  {
+    id: 11,
+    title: "Pixel Icon Studio",
+    nickname: "Pixel Icons",
+    icon: "/assets/pixel-icon-studio/screenshot-12.jpg",
+    heroImage: "/assets/pixel-icon-studio/screenshot-01.jpg",
+    date: "2026",
+    path: "/pixel-icon-studio",
+    description: "A Glaze-built Mac app for drawing, organizing, and exporting pixel icons",
+    company: "Personal",
+    categories: ["App", "Tooling"],
+    published: false,
+  },
 ];

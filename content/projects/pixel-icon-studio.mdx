@@ -1,0 +1,82 @@
+export const frontmatter = {
+  title: "Pixel Icon Studio",
+  subtitle: "A compact Mac app for drawing, organizing, and exporting tiny icon systems",
+  role: "Designer, builder",
+  date: "2026",
+  meta: [
+    { label: "Tool", value: "Glaze" },
+    { label: "Format", value: "Local Mac app" },
+  ],
+};
+
+import dashboardGrid from "@/public/assets/pixel-icon-studio/screenshot-01.jpg";
+import dashboardList from "@/public/assets/pixel-icon-studio/screenshot-02.jpg";
+import preferences from "@/public/assets/pixel-icon-studio/screenshot-03.jpg";
+import editorInfo from "@/public/assets/pixel-icon-studio/screenshot-04.jpg";
+import editorPreview from "@/public/assets/pixel-icon-studio/screenshot-05.jpg";
+import editorCode from "@/public/assets/pixel-icon-studio/screenshot-06.jpg";
+import selectedPixel from "@/public/assets/pixel-icon-studio/screenshot-07.jpg";
+import folderTags from "@/public/assets/pixel-icon-studio/screenshot-08.jpg";
+import draftIcon from "@/public/assets/pixel-icon-studio/screenshot-09.jpg";
+import framedDraftIcon from "@/public/assets/pixel-icon-studio/screenshot-10.jpg";
+import importedFolder from "@/public/assets/pixel-icon-studio/screenshot-11.jpg";
+import appIcon from "@/public/assets/pixel-icon-studio/screenshot-12.jpg";
+
+<Image src={dashboardGrid} alt="Pixel Icon Studio dashboard with a grid of saved pixel icons" priority loading="eager" />
+
+Pixel Icon Studio is a small utility I made with Glaze, Raycast's agentic app builder, to design the pixel icons used across this site.
+
+The app started as a simple 11-by-11 grid editor and grew into a more complete local tool: a dashboard for saved icons, a canvas for drawing and editing pixels, folders and tags for organization, import/export flows, and code views for moving the finished icons back into a React icon system.
+
+## Library
+
+The opening view is a dense library of saved icons. Cards keep the artwork large enough to scan quickly, while the sidebar handles folder navigation and preferences without sending the user into a separate settings window.
+
+<ProjectImageCarousel
+  variant="inset"
+  slides={[
+    { src: dashboardGrid, alt: "Icon dashboard shown as a grid of cards", caption: "Grid view for browsing saved icons" },
+    { src: dashboardList, alt: "Icon dashboard shown as a table", caption: "List view with size, pixel count, tags, and dates" },
+    { src: importedFolder, alt: "Imported icon folder in the dashboard", caption: "Folders keep imported sets separate from hand-drawn icons" },
+  ]}
+/>
+
+## Editor
+
+The editor is built around a crisp square canvas with a small floating tool bar for move, paint, erase, brush size, color, and clearing the canvas. The surrounding panels carry the heavier information: layers on the left, inspector details on the right.
+
+<LayoutGrid variant="twoUp">
+  <ImageModal src={editorInfo} caption="Canvas metadata, tags, file details, and grid size controls" />
+  <ImageModal src={editorPreview} caption="Actual-size preview at 1x, 2x, and 3x" />
+</LayoutGrid>
+
+The canvas supports drawing and editing behaviors that feel closer to a design tool than a form: drag to paint, command-drag to erase, shift to constrain strokes, lasso selection from the margin, arrow-key nudging, grouping, and per-pixel color overrides.
+
+<LayoutGrid variant="twoUp">
+  <ImageModal src={selectedPixel} caption="A selected pixel keeps its fill while using a high-contrast selection ring" />
+  <ImageModal src={folderTags} caption="Folder and tag actions are available from the library without opening the icon" />
+</LayoutGrid>
+
+## Export
+
+The right inspector keeps export formats close to the icon. SVG, coordinate JSON, binary matrices, and a string format can all be copied from the same place, so the app works as a quick bridge between drawing and implementation.
+
+<ImageModal src={editorCode} caption="Generated SVG and JSON are available in the code inspector" />
+
+## Process
+
+Glaze made the iteration loop feel closer to directing a product prototype than starting a desktop app from scratch. The agent maintained its own project memory as the app evolved, which was useful for keeping UI decisions consistent across later changes: dashboard density, inspector tabs, import behavior, tag management, cursor behavior, and export preferences all stayed documented as the app grew.
+
+<ProjectImageCarousel
+  variant="inset"
+  slides={[
+    { src: draftIcon, alt: "A new pixel icon being drawn on the editor canvas", caption: "Drawing a new icon on the grid" },
+    { src: framedDraftIcon, alt: "A larger framed pixel icon draft", caption: "Testing a heavier framed variant" },
+    { src: preferences, alt: "Preferences pane with color, grid size, and tag settings", caption: "Preferences for defaults and library metadata" },
+    { src: appIcon, alt: "Pixel Icon Studio app icon", caption: "A pixel-styled app icon for the finished tool" },
+  ]}
+/>
+
+## Notes
+
+This is a draft stub. The final write-up should stay short: what I needed, how the UI is structured, what Glaze made easier, and how the app fits into the site's pixel icon workflow.
