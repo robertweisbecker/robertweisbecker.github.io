@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import * as React from "react";
 
 export type PixelIconPoint = {
@@ -36,13 +37,25 @@ type GeneratedPixelIconProps = React.ComponentProps<"svg"> & {
   data: string;
   iconHeight: number;
   iconWidth: number;
+  scale?: number | string;
 };
 
-function GeneratedPixelIcon({ data, iconHeight, iconWidth, ...props }: GeneratedPixelIconProps) {
+function GeneratedPixelIcon({ data, iconHeight, iconWidth, scale = 1, className, ...props }: GeneratedPixelIconProps) {
   const points = parsePixelIconData(data);
 
   return (
-    <svg width={iconWidth} height={iconHeight} viewBox={`0 0 ${iconWidth} ${iconHeight}`} fill="currentColor" {...props}>
+    <svg
+      width={iconWidth}
+      height={iconHeight}
+      viewBox={`0 0 ${iconWidth} ${iconHeight}`}
+      fill="currentColor"
+      data-scale={scale}
+      className={cn("size-(--pixel-icon-size) shrink-0", className)}
+      {...props}
+      style={
+        { "--pixel-icon-scale": scale, "--pixel-icon-size": `calc(var(--pixel-icon-scale, 1) * ${iconWidth}px)` } as React.CSSProperties
+      }
+    >
       {points.map((point, index) => (
         <rect
           key={`${point.x}-${point.y}-${point.width}-${point.height}-${point.opacity}-${index}`}
@@ -66,18 +79,17 @@ function createPixelIcon(name: string, width: number, height: number, data: stri
     points: parsePixelIconData(data),
   };
 
-  return function PixelGeneratedIcon(props: React.ComponentProps<"svg">) {
-    return <GeneratedPixelIcon iconWidth={width} iconHeight={height} data={data} {...props} />;
+  return function PixelGeneratedIcon(props: React.ComponentProps<"svg">, scale?: number | string) {
+    return <GeneratedPixelIcon iconWidth={width} iconHeight={height} data={data} scale={scale} {...props} />;
   };
 }
 
-export function PixelPointerIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor" {...props}>
-      <path d="M4 9H5L5 10H3V7H4V9ZM9 9V10H7L7 9H9ZM6 8H7V9H5V7H6V8ZM10 9H9V7L10 7V9ZM3 7H2L2 4H3L3 7ZM9 7H8V6H7V5H9V7ZM10 5H9V4H7V3H10V5ZM4 2L2 2V4H1L1 1L4 1V2ZM7 3L4 3V2L7 2V3Z" />
-    </svg>
-  );
-}
+export const PixelPointerIcon = createPixelIcon(
+  "PixelPointerIcon",
+  11,
+  11,
+  "2,1 3,1 1,2 4,2 5,2 6,2 1,3 7,3 8,3 9,3 2,4 9,4 2,5 7,5 8,5 2,6 8,6 3,7 5,7 9,7 3,8 5,8 6,8 9,8 3,9 4,9 7,9 8,9"
+);
 
 export const PixelScribbleIcon = createPixelIcon(
   "PixelScribbleIcon",
@@ -110,13 +122,13 @@ export function PixelChevronsIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
-export function PixelChevronDownIcon(props: React.ComponentProps<"svg">) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
-      <path d="M13 16h-2v-2h2v2Zm-2-2H9v-2h2v2Zm4 0h-2v-2h2v2Zm-6-2H7v-2h2v2Zm8 0h-2v-2h2v2ZM7 10H5V8h2v2Zm12 0h-2V8h2v2Z" />
-    </svg>
-  );
-}
+// export function PixelChevronDownIcon(props: React.ComponentProps<"svg">) {
+//   return (
+//     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" {...props}>
+//       <path d="M13 16h-2v-2h2v2Zm-2-2H9v-2h2v2Zm4 0h-2v-2h2v2Zm-6-2H7v-2h2v2Zm8 0h-2v-2h2v2ZM7 10H5V8h2v2Zm12 0h-2V8h2v2Z" />
+//     </svg>
+//   );
+// }
 
 export const PixelClipboardIcon = createPixelIcon(
   "PixelClipboardIcon",
@@ -139,6 +151,12 @@ export function PixelSunIcon(props: React.ComponentProps<"svg">) {
   );
 }
 export const PixelRedoIcon = createPixelIcon("PixelRedoIcon", 11, 11, "8,6 8,5 6,9 5,9 8,7 7,8 4,3 5,3 6,3 7,4 3,3 2,3 4,5 3,2 4,1 3,4");
+export const PixelResetSmallIcon = createPixelIcon(
+  "PixelResetSmallIcon",
+  11,
+  11,
+  "8,5 8,4 6,8 5,8 4,8 3,7 7,7 5,2 6,2 7,3 4,2 3,3 2,4 1,2 1,3 1,4 8,6 3,5 4,5 2,5 1,5"
+);
 export const PixelDropdownIcon = createPixelIcon("PixelDropdownIcon", 11, 11, "8,4 5,7 7,5 6,6 4,6 3,5 2,4");
 export function PixelMoonIcon(props: React.ComponentProps<"svg">) {
   return (
@@ -253,6 +271,12 @@ export const PixelLightbulbIcon = createPixelIcon(
   11,
   11,
   "4,1 5,1 6,1 3,2 7,2 2,3 8,3 2,4 4,4 6,4 8,4 2,5 4,5 5,5 6,5 8,5 2,6 5,6 8,6 3,7 5,7 7,7 4,8 5,8 6,8 4,9 5,9 6,9"
+);
+export const PixelLaptopIcon = createPixelIcon(
+  "PixelLaptopIcon",
+  11,
+  11,
+  "3,2 4,2 5,2 6,2 7,2 2,3 8,3 2,4 4,4 5,4 6,4 8,4 2,5 4,5 5,5 6,5 8,5 2,6 8,6 1,7 9,7 2,8 3,8 4,8 5,8 6,8 7,8 8,8"
 );
 export const PixelPauseIcon = createPixelIcon(
   "PixelPauseIcon",
@@ -633,6 +657,12 @@ export const PixelFileFoldedIcon = createPixelIcon(
   11,
   "2,2 3,2 4,2 5,2 6,2 2,3 5,3 7,3 2,4 5,4 8,4 2,5 5,5 6,5 7,5 8,5 2,6 8,6 2,7 8,7 2,8 8,8 3,9 4,9 5,9 6,9 7,9 8,9"
 );
+export const PixelFigmaIcon = createPixelIcon(
+  "PixelFigmaIcon",
+  11,
+  11,
+  "3,1 4,1 5,1 6,1 7,1 2,2 8,2 2,3 8,3 3,4 5,4 6,4 7,4 2,5 5,5 8,5 2,6 8,6 3,7 5,7 6,7 7,7 2,8 5,8 2,9 5,9 3,10 4,10"
+);
 export const PixelGithubIcon = createPixelIcon(
   "PixelGithubIcon",
   11,
@@ -765,12 +795,41 @@ export const PixelUnderlineIcon = createPixelIcon(
   11,
   "2,2 3,2 4,2 8,2 9,2 3,3 4,3 8,3 3,4 4,4 8,4 3,5 4,5 8,5 3,6 4,6 8,6 4,7 5,7 6,7 7,7 2,9 3,9 4,9 5,9 6,9 7,9 8,9"
 );
+export const PixelArrowsExpandIcon = createPixelIcon(
+  "PixelArrowsExpandIcon",
+  11,
+  11,
+  "2,2 3,2 4,2 6,2 7,2 8,2 2,3 3,3 7,3 8,3 2,4 4,4 6,4 8,4 2,6 4,6 6,6 8,6 2,7 3,7 7,7 8,7 2,8 3,8 4,8 6,8 7,8 8,8"
+);
+export const PixelArrowsCompressIcon = createPixelIcon(
+  "PixelArrowsCompressIcon",
+  11,
+  11,
+  "2,2 4,2 6,2 8,2 3,3 4,3 6,3 7,3 2,4 3,4 4,4 6,4 7,4 8,4 2,6 3,6 4,6 6,6 7,6 8,6 3,7 4,7 6,7 7,7 2,8 4,8 6,8 8,8"
+);
+
+export const PixelChevronDownIcon = createPixelIcon(
+  "PixelChevronDownIcon",
+  11,
+  11,
+  "1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 1,4 9,4 2,5 8,5 3,6 7,6 4,7 6,7 5,8 1,4"
+);
+
+export const PixelChevronUpIcon = createPixelIcon(
+  "PixelChevronUpIcon",
+  11,
+  11,
+  "5,2 4,3 6,3 3,4 7,4 2,5 8,5 1,6 9,6 5,2 4,3 6,3 3,4 7,4 2,5 8,5 1,6 9,6 5,2 4,3 6,3 3,4 7,4 2,5 8,5 1,6 9,6 5,2"
+);
 
 export const pixelIconNames = [
+  "PixelChevronUpIcon",
+  "PixelChevronDownIcon",
   "PixelScribbleIcon",
   "PixelClipboardIcon",
   "PixelMugIcon",
   "PixelRedoIcon",
+  "PixelResetSmallIcon",
   "PixelDropdownIcon",
   "PixelLoaderIcon",
   "PixelShuffleIcon",
@@ -789,6 +848,7 @@ export const pixelIconNames = [
   "PixelInfoIcon",
   "PixelGradientIcon",
   "PixelLightbulbIcon",
+  "PixelLaptopIcon",
   "PixelPauseIcon",
   "PixelMarkdownIcon",
   "PixelMessage2Icon",
@@ -852,6 +912,7 @@ export const pixelIconNames = [
   "PixelEyeClosedIcon",
   "PixelFileIcon",
   "PixelFileFoldedIcon",
+  "PixelFigmaIcon",
   "PixelGithubIcon",
   "PixelGithubOutlineIcon",
   "PixelInfoCircleLowercaseIcon",
@@ -874,9 +935,13 @@ export const pixelIconNames = [
   "PixelBold2Icon",
   "PixelItalicIcon",
   "PixelUnderlineIcon",
+  "PixelArrowsExpandIcon",
+  "PixelArrowsCompressIcon",
 ] as const;
 
 export const morphablePixelIconNames = [
+  "PixelChevronUpIcon",
+  "PixelChevronDownIcon",
   "PixelComputerOutlineIcon",
   "PixelClipboardIcon",
   "PixelMugIcon",
@@ -894,6 +959,7 @@ export const morphablePixelIconNames = [
   "PixelInfoIcon",
   "PixelGradientIcon",
   "PixelLightbulbIcon",
+  "PixelLaptopIcon",
   "PixelPauseIcon",
   "PixelMarkdownIcon",
   "PixelMessage2Icon",
@@ -957,6 +1023,7 @@ export const morphablePixelIconNames = [
   "PixelEyeClosedIcon",
   "PixelFileIcon",
   "PixelFileFoldedIcon",
+  "PixelFigmaIcon",
   "PixelGithubIcon",
   "PixelGithubOutlineIcon",
   "PixelInfoCircleLowercaseIcon",
@@ -979,6 +1046,8 @@ export const morphablePixelIconNames = [
   "PixelBold2Icon",
   "PixelItalicIcon",
   "PixelUnderlineIcon",
+  "PixelArrowsExpandIcon",
+  "PixelArrowsCompressIcon",
 ] as const;
 
 export type PixelIconName = (typeof pixelIconNames)[number];

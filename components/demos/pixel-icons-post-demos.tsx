@@ -2,9 +2,9 @@
 
 import { CodeBlock } from "@/components/code-block";
 import * as PixelIcons from "@/components/icons-pixel";
-import { PixelIconMorph, type PixelIconMorphAnimation } from "@/components/pixel-icon-morph";
+import { PixelMorph, type PixelMorphAnimation } from "@/components/pixel-morph";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
@@ -28,7 +28,7 @@ const inspectedIcons: PixelIcons.MorphablePixelIconName[] = [
 ];
 
 const animationOptions: {
-  animation: PixelIconMorphAnimation;
+  animation: PixelMorphAnimation;
   label: string;
   description: string;
 }[] = [
@@ -169,7 +169,7 @@ export function PixelSunMoonMorphDemo() {
 
       <div className="grid place-items-center gap-2">
         <Button type="button" size="icon-lg" onClick={() => setActive((value) => !value)} aria-label="Toggle pixel sun and moon">
-          <PixelIconMorph
+          <PixelMorph
             from="PixelSunSmallIcon"
             to="PixelMoon2Icon"
             active={active}
@@ -177,7 +177,7 @@ export function PixelSunMoonMorphDemo() {
             strategy="radial"
             duration={0.25}
             stagger={0.01}
-            className="size-[16.5px]"
+            scale={1.5}
           />
         </Button>
         <p className="text-center text-xs text-muted-foreground">Pixels</p>
@@ -205,7 +205,6 @@ export function MorphablePixelIconScrollDemo() {
 export function PixelIconDataInspectorDemo() {
   const [selectedIcon, setSelectedIcon] = React.useState<PixelIcons.MorphablePixelIconName>("PixelPenToolIcon");
   const data = PixelIcons.pixelIconData[selectedIcon];
-  const Icon = iconComponents[selectedIcon];
   const code = `createPixelIcon(\n  "${selectedIcon}",\n  ${data.width},\n  ${data.height},\n  "${data.data}"\n)`;
 
   return (
@@ -236,7 +235,7 @@ export function PixelIconDataInspectorDemo() {
               key={name}
               value={name}
               aria-label={formatIconName(name)}
-              className="h-fit flex-1 flex-col items-center py-2 break-words"
+              className="h-fit flex-1 flex-col items-center py-2 wrap-break-word"
             >
               <OptionIcon data-icon="inline-start" className="size-[16.5px]" aria-hidden />
               <span className="truncate whitespace-normal">{formatIconName(name)}</span>
@@ -260,15 +259,7 @@ export function PixelAnimationOptionsDemo() {
   );
 }
 
-function AnimationOptionCard({
-  animation,
-  label,
-  description,
-}: {
-  animation: PixelIconMorphAnimation;
-  label: string;
-  description: string;
-}) {
+function AnimationOptionCard({ animation, label, description }: { animation: PixelMorphAnimation; label: string; description: string }) {
   const [active, setActive] = React.useState(false);
 
   return (
@@ -284,7 +275,7 @@ function AnimationOptionCard({
           </Button>
         </div>
         <div className="grid h-20 place-items-center rounded-lg bg-background text-foreground shadow-border-xs">
-          <PixelIconMorph
+          <PixelMorph
             from="PixelCopyIcon"
             to="PixelClipboardCheckIcon"
             active={active}
@@ -292,7 +283,7 @@ function AnimationOptionCard({
             strategy="nearest"
             duration={0.8}
             stagger={0.02}
-            className="size-[33px]"
+            scale={3}
           />
         </div>
       </CardContent>

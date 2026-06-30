@@ -1,6 +1,6 @@
 "use client";
 
-import { PixelIconMorph } from "@/components/pixel-icon-morph";
+import { PixelMorph } from "@/components/pixel-morph";
 import { useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -36,7 +36,7 @@ export function ModeToggle({ label, className, size = "icon-sm", variant = "ghos
         className={cn("capitalize", className)}
         render={<Button variant={variant} size={size} onClick={handleClick} {...props} />}
       >
-        <PixelIconMorph
+        <PixelMorph
           data-icon={label ? "inline-start" : ""}
           from="PixelSunSmallIcon"
           to="PixelMoon2Icon"
@@ -45,7 +45,7 @@ export function ModeToggle({ label, className, size = "icon-sm", variant = "ghos
           animation="ease"
           duration={0.5}
           stagger={0.025}
-          className="size-[11px]"
+          scale={1}
         />
         {label && (
           <span suppressHydrationWarning className="min-w-[5ch]">

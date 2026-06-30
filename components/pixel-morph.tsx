@@ -5,18 +5,19 @@ import { cn } from "@/lib/utils";
 import { motion, useReducedMotion, type Transition } from "motion/react";
 import * as React from "react";
 
-export type PixelIconMorphStrategy = "match" | "nearest" | "reading" | "radial" | "scatter" | "compress";
-export type PixelIconMorphAnimation = "linear" | "ease" | "spring";
+export type PixelMorphStrategy = "match" | "nearest" | "reading" | "radial" | "scatter" | "compress";
+export type PixelMorphAnimation = "linear" | "ease" | "spring";
 
-export type PixelIconMorphProps = Omit<React.ComponentProps<typeof motion.svg>, "children"> & {
+export type PixelMorphProps = Omit<React.ComponentProps<typeof motion.svg>, "children"> & {
   from: MorphablePixelIconName;
   to: MorphablePixelIconName;
   active?: boolean;
-  strategy?: PixelIconMorphStrategy;
-  animation?: PixelIconMorphAnimation;
+  strategy?: PixelMorphStrategy;
+  animation?: PixelMorphAnimation;
   duration?: number;
   stagger?: number;
   dots?: boolean;
+  scale?: number;
 };
 
 type IndexedPoint = PixelIconPoint & {
@@ -30,6 +31,14 @@ type MorphPair = {
 
 const ICON_SIZE = 11;
 const EXPECTED_POINT_COUNT = 28;
+const SCALE_VARIABLE = "--pixel-morph-scale";
+const SIZE_VARIABLE = "--pixel-morph-size";
+const SCALE_SIZE = `calc(var(${SCALE_VARIABLE}, 1) * ${ICON_SIZE}px)`;
+
+type PixelMorphStyle = React.CSSProperties & {
+  [SCALE_VARIABLE]?: number;
+  [SIZE_VARIABLE]?: string;
+};
 
 function pointDistance(a: PixelIconPoint, b: PixelIconPoint) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -121,10 +130,10 @@ function getMatchPairs(source: IndexedPoint[], target: IndexedPoint[]) {
   return pairs.filter((pair): pair is MorphPair => Boolean(pair));
 }
 
-export function getPixelIconMorphPairs(
+export function getPixelMorphPairs(
   from: MorphablePixelIconName,
   to: MorphablePixelIconName,
-  strategy: PixelIconMorphStrategy = "match"
+  strategy: PixelMorphStrategy = "match"
 ): MorphPair[] {
   const fromPoints = withIndex(pixelIconData[from].points);
   const toPoints = withIndex(pixelIconData[to].points);
@@ -179,8 +188,8 @@ function getCompressPoint() {
 function getAnimateTarget(
   pair: MorphPair,
   active: boolean,
-  strategy: PixelIconMorphStrategy,
-  animation: PixelIconMorphAnimation,
+  strategy: PixelMorphStrategy,
+  animation: PixelMorphAnimation,
   reduceMotion: boolean
 ) {
   const start = active ? pair.from : pair.to;
@@ -219,13 +228,13 @@ function getAnimateTarget(
   };
 }
 
-function hasMidpointStrategy(strategy: PixelIconMorphStrategy) {
+function hasMidpointStrategy(strategy: PixelMorphStrategy) {
   return strategy === "scatter" || strategy === "compress";
 }
 
 function getTransition(
-  animation: PixelIconMorphAnimation,
-  strategy: PixelIconMorphStrategy,
+  animation: PixelMorphAnimation,
+  strategy: PixelMorphStrategy,
   duration: number,
   delay: number,
   reduceMotion: boolean
@@ -251,7 +260,7 @@ function getTransition(
   };
 }
 
-export function PixelIconMorph({
+export function PixelMorph({
   from,
   to,
   active = false,
@@ -260,27 +269,38 @@ export function PixelIconMorph({
   duration = 0.2,
   stagger = 0.002,
   dots = false,
+  scale = 1,
   className,
   style,
   "aria-hidden": ariaHidden = true,
   ...props
-}: PixelIconMorphProps) {
+}: PixelMorphProps) {
   const reduceMotion = useReducedMotion();
   const shouldReduceMotion = reduceMotion === true;
-  const pairs = React.useMemo(() => getPixelIconMorphPairs(from, to, strategy), [from, to, strategy]);
+  const pairs = React.useMemo(() => getPixelMorphPairs(from, to, strategy), [from, to, strategy]);
 
   if (!morphablePixelIconNames.includes(from) || !morphablePixelIconNames.includes(to) || pairs.length !== EXPECTED_POINT_COUNT) {
     return null;
   }
 
+  const scaledStyle: PixelMorphStyle =
+    scale === undefined
+      ? {}
+      : {
+          [SCALE_VARIABLE]: scale,
+          width: SCALE_SIZE,
+          height: SCALE_SIZE,
+          [SIZE_VARIABLE]: `calc(var(${SCALE_VARIABLE}, 1) * ${ICON_SIZE}px)`,
+        };
+
   return (
     <motion.svg
-      width={ICON_SIZE}
-      height={ICON_SIZE}
+      width={scale ? SCALE_SIZE : ICON_SIZE}
+      height={scale ? SCALE_SIZE : ICON_SIZE}
       viewBox={`0 0 ${ICON_SIZE} ${ICON_SIZE}`}
       fill="currentColor"
-      className={cn("block shrink-0 overflow-visible", className)}
-      style={{ imageRendering: undefined, ...style }}
+      className={cn("block size-(--pixel-morph-size) shrink-0 overflow-visible", className)}
+      style={{ imageRendering: undefined, ...scaledStyle, ...style } as React.CSSProperties}
       aria-hidden={ariaHidden}
       {...props}
     >

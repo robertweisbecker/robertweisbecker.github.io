@@ -2,15 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import {
-  IconArrowsDiagonal,
-  IconArrowsDiagonalMinimize2,
-  IconPlayerPauseFilled,
-  IconPlayerPlayFilled,
-  IconVolume,
-  IconVolume2,
-  IconVolumeOff,
-} from "@tabler/icons-react";
-import {
   MediaControlBar,
   MediaController,
   MediaFullscreenButton,
@@ -21,9 +12,10 @@ import {
   MediaTimeDisplay,
   MediaTimeRange,
 } from "media-chrome/react";
+import * as React from "react";
+import { PixelMorph } from "./pixel-morph";
 import { Button } from "./ui/button";
 import { Toolbar } from "./ui/toolbar";
-// import { PixelPauseOutlineIcon, PixelPlayOutlineIcon } from "./icons-pixel";
 
 interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src?: string;
@@ -31,11 +23,105 @@ interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   unmuted?: boolean;
 }
 
+type VideoMorphIconProps = {
+  className?: string;
+  scale?: number;
+  slot?: string;
+};
+
+function useMediaHostAttribute<TElement extends HTMLElement>(attribute: string) {
+  const [host, setHost] = React.useState<HTMLElement | null>(null);
+  const [value, setValue] = React.useState<string | null>(null);
+
+  const ref = React.useCallback(
+    (node: TElement | null) => {
+      const nextHost = node?.parentElement ?? null;
+
+      setHost(nextHost);
+      setValue(nextHost?.getAttribute(attribute) ?? null);
+    },
+    [attribute]
+  );
+
+  React.useEffect(() => {
+    if (!host) {
+      return;
+    }
+
+    const updateValue = () => setValue(host.getAttribute(attribute));
+    const observer = new MutationObserver(updateValue);
+
+    updateValue();
+    observer.observe(host, { attributes: true, attributeFilter: [attribute] });
+
+    return () => observer.disconnect();
+  }, [attribute, host]);
+
+  return [value, ref] as const;
+}
+
+function VideoPlayMorphIcon({ className, scale, slot }: VideoMorphIconProps) {
+  const [pausedAttribute, ref] = useMediaHostAttribute<HTMLSpanElement>("mediapaused");
+
+  return (
+    <span ref={ref} slot={slot} className="inline-grid place-items-center">
+      <PixelMorph
+        from="PixelPlayIcon"
+        to="PixelPauseIcon"
+        active={pausedAttribute === null}
+        animation="spring"
+        duration={0.05}
+        stagger={0.005}
+        scale={scale}
+        className={className}
+      />
+    </span>
+  );
+}
+
+function VideoVolumeMorphIcon({ className, scale, slot }: VideoMorphIconProps) {
+  const [volumeLevel, ref] = useMediaHostAttribute<HTMLSpanElement>("mediavolumelevel");
+
+  return (
+    <span ref={ref} slot={slot} className="inline-grid place-items-center">
+      <PixelMorph
+        from="PixelVolumeIcon"
+        to="PixelVolumeMutedIcon"
+        active={volumeLevel === "off"}
+        animation="spring"
+        duration={0.05}
+        stagger={0.005}
+        scale={scale}
+        className={className}
+      />
+    </span>
+  );
+}
+
+function VideoFullscreenMorphIcon({ className, scale, slot }: VideoMorphIconProps) {
+  const [fullscreenAttribute, ref] = useMediaHostAttribute<HTMLSpanElement>("mediaisfullscreen");
+
+  return (
+    <span ref={ref} slot={slot} className="inline-grid place-items-center">
+      <PixelMorph
+        from="PixelArrowsExpandIcon"
+        to="PixelArrowsCompressIcon"
+        active={fullscreenAttribute !== null}
+        animation="spring"
+        duration={0.05}
+        stagger={0.005}
+        scale={scale}
+        className={className}
+      />
+    </span>
+  );
+}
+
 export function Video({ src, caption, className, children, unmuted = false, ...props }: VideoProps) {
   const wrapper = (
     <div
       className={cn(
-        "not-prose content-visibility-auto relative mx-auto my-4 overflow-hidden rounded-xl outline -outline-offset-1 outline-border/50",
+        "not-prose content-visibility-auto squircle relative mx-auto my-4 overflow-hidden rounded-2xl outline -outline-offset-1 outline-border/50",
         className
       )}
     >
@@ -55,13 +141,13 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
             // "--media-control-hover-background": "var(--color-accent)",
             // "--media-control-padding": "0",
             "--media-font-family": "var(--font-pixel)",
-            "--media-font-size": "10px",
+            "--media-font-size": "11px",
             "--media-range-bar-color": "color-mix(in srgb, var(--foreground) 64%, transparent)",
             "--media-range-track-background": "color-mix(in srgb, var(--foreground) 10%, transparent)",
             "--media-time-range-buffered-color": "color-mix(in srgb, var(--foreground) 10%, transparent)",
             "--media-range-thumb-background": "var(--color-white)",
             "--media-range-thumb-box-shadow": "var(--shadow-border-xs)",
-            "--media-text-color": "var(--foreground)",
+            "--media-text-color": "var(--muted-foreground)",
             "--media-icon-color": "var(--foreground)",
             "--media-tooltip-arrow-display": "none",
             "--media-tooltip-filter": "var(--drop-shadow-xs)",
@@ -109,10 +195,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
             // "before:absolute before:-inset-200 before:-z-1"
           )}
         >
-          <IconPlayerPlayFilled slot="play" className="size-8" />
-          <IconPlayerPauseFilled slot="pause" className="size-8" />
-          {/* <PixelPlayOutlineIcon slot="play" className="size-[33px]" />
-          <PixelPauseOutlineIcon slot="pause" className="size-[33px]" /> */}
+          <VideoPlayMorphIcon slot="icon" scale={3} />
         </Button>
         <Toolbar.Root
           data-slot="controlbar"
@@ -130,11 +213,10 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
               size="icon-xs"
               className="rounded-full! bg-transparent"
             >
-              <IconPlayerPlayFilled slot="play" className="size-4" />
-              <IconPlayerPauseFilled slot="pause" className="size-4" />
+              <VideoPlayMorphIcon slot="icon" scale={1.5} />
             </Toolbar.Button>
             <MediaTimeRange className="h-4 max-w-full grow rounded-full! bg-transparent"></MediaTimeRange>
-            <MediaTimeDisplay noToggle={true} showDuration />
+            <MediaTimeDisplay noToggle={true} showDuration className="select-none" />
           </Toolbar.Group>
 
           <Toolbar.Separator />
@@ -146,10 +228,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
                 className="rounded-full! bg-transparent [&_svg]:fill-none"
                 render={<MediaMuteButton noTooltip />}
               >
-                <IconVolume slot="high" />
-                <IconVolume2 slot="medium" />
-                <IconVolume2 slot="low" />
-                <IconVolumeOff slot="off" />
+                <VideoVolumeMorphIcon slot="icon" scale={1.5} />
               </Toolbar.Button>
             )}
 
@@ -158,8 +237,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
               nativeButton={false}
               size="icon-xs"
             >
-              <IconArrowsDiagonal slot="enter" />
-              <IconArrowsDiagonalMinimize2 slot="exit" />
+              <VideoFullscreenMorphIcon slot="icon" scale={1.5} />
             </Toolbar.Button>
           </Toolbar.Group>
         </Toolbar.Root>

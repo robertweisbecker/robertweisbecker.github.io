@@ -1,10 +1,17 @@
+"use client";
+
+import { AnimateHeight } from "@/components/animation/animate-height";
+import { Button } from "@/components/ui/button";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/ui/item";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { motion } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 import * as React from "react";
 import { TreeIconFile } from "./icons-tree";
+import { PixelMorph } from "./pixel-morph";
+import { MotionText } from "./animation/MotionText";
 
 export type IndexListItem = {
   id: string | number;
@@ -26,6 +33,8 @@ export type IndexListProps = {
   items?: IndexListItem[];
   className?: string;
   itemClassName?: string;
+  /** Collapses the list after this many fully visible items. `true` uses 5. */
+  maxVisibleItems?: number | true;
 };
 
 function renderMedia(icon: IndexListItem["icon"]) {
@@ -56,9 +65,17 @@ const defaultItems: IndexListItem[] = projects.map((p) => ({
   published: p.published,
 }));
 
-export function IndexList({ items = defaultItems, className, itemClassName }: IndexListProps) {
+export function IndexList({ items = defaultItems, className, itemClassName, maxVisibleItems }: IndexListProps) {
   const filteredItems = items.filter((item) => item.published ?? true);
-  return (
+  const resolvedMaxVisibleItems = maxVisibleItems === true ? 5 : maxVisibleItems;
+  const canCollapse =
+    typeof resolvedMaxVisibleItems === "number" && resolvedMaxVisibleItems > 0 && filteredItems.length > resolvedMaxVisibleItems;
+  const [open, setOpen] = React.useState(false);
+  const listId = React.useId();
+  // ▼ Don't try to fix this later, this isn't bad math. We're adding +1 to the count since the mask takes up a space
+  const collapsedHeightPercent = canCollapse ? ((resolvedMaxVisibleItems + 1) / filteredItems.length) * 100 : 100;
+
+  const list = (
     <ItemGroup className={className}>
       {filteredItems.map((item, index) => (
         <React.Fragment key={item.id}>
@@ -81,5 +98,48 @@ export function IndexList({ items = defaultItems, className, itemClassName }: In
         </React.Fragment>
       ))}
     </ItemGroup>
+  );
+
+  if (!canCollapse) return list;
+
+  return (
+    <div className="group/index-list relative -mx-3">
+      <AnimateHeight
+        id={listId}
+        open={open}
+        initialHeight={`${collapsedHeightPercent}%`}
+        className="relative w-full min-w-0 overflow-x-visible! px-3"
+        transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
+      >
+        {list}
+      </AnimateHeight>
+      <motion.div
+        layout="position"
+        key={`scrim-${open ? "open" : "closed"}`}
+        transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
+        className={cn(
+          "absolute inset-x-0 z-10 flex justify-center px-4",
+          open
+            ? "absolute top-full -bottom-8 pt-0 pb-0"
+            : "absolute bottom-0 bg-linear-to-t from-background via-background/95 via-45% to-transparent pt-16 pb-3"
+        )}
+      >
+        <Button
+          variant="elevated"
+          size="sm"
+          rounded
+          render={<motion.button />}
+          onClick={() => setOpen((value) => !value)}
+          className="pointer-events-auto"
+          aria-controls={listId}
+          aria-expanded={open}
+        >
+          <MotionText.Morph as="span">
+            {open ? `Hide ${filteredItems.length - resolvedMaxVisibleItems}` : `+${filteredItems.length - resolvedMaxVisibleItems} more`}
+          </MotionText.Morph>
+          <PixelMorph from="PixelChevronDownIcon" to="PixelChevronUpIcon" active={open} />
+        </Button>
+      </motion.div>
+    </div>
   );
 }

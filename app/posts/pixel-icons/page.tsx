@@ -7,8 +7,8 @@ import {
   PixelSunMoonMorphDemo,
   TablerRotationIdeaDemo,
 } from "@/components/demos/pixel-icons-post-demos";
-import { PixelIconMorphToggles } from "@/components/demos/pixel-icon-morph-toggles";
-import { PixelIconMorphVisualizer } from "@/components/demos/pixel-icon-morph-visualizer";
+import { PixelMorphToggles, PixelIconPasswordToggle } from "@/components/demos/pixel-morph-toggles";
+import { PixelMorphVisualizer } from "@/components/demos/pixel-morph-visualizer";
 import * as PixelIcons from "@/components/icons-pixel";
 import { LinkOut } from "@/components/link-out";
 import { Code } from "@/components/ui/code";
@@ -26,6 +26,7 @@ export default function PixelIconsPage() {
       <div className="w-full space-y-10">
         <p className="mx-auto max-w-xl">A collection of icons formed by animating 28 pixels around an 11x11 grid</p>
         <div className="prose">
+          <Heading level={2}>Departure Mono</Heading>
           <p>
             The nice pixel typeface you may notice around here is <LinkOut href="https://departuremono.com/" text="Departure Mono" />,
             designed by <LinkOut href="https://helenazhang.com/" text="Helena Zhang" />. I first saw it used on{" "}
@@ -70,7 +71,7 @@ export default function PixelIconsPage() {
           <Demo caption="A few Departure Mono text sizes">
             <DepartureMonoTextDemo />
           </Demo>
-          <p>Given these constraints, we can use 11 / 16.5 / 22px in place of common SVG sizes like 12 / 16 / 20 / 24px.</p>
+          <p>That means we should be able use the trio of 11 / 16.5 / 22px in place of common SVG sizes like 12, 16, 20, and 24px.</p>
           <p>
             For monospacing, the em box of a given character is 8×14, with ascenders or descenders exceeding the 11px bounding box. This
             gives us some wiggle room for a larger 14px set if we need it.
@@ -78,45 +79,51 @@ export default function PixelIconsPage() {
         </div>
 
         <section className="prose prose-sm max-w-none">
-          <Heading level={2}>Custom Icons</Heading>
-          <p>I landed on 2 categories of icons: </p>
+          <Heading level={2}>Direction</Heading>
+          <p>
+            I landed on two sets of icons with different constraints. I&apos;ll explain why in a moment, but for now, let&apos;s take a look
+            at each.
+          </p>
           <ol>
             <li>
-              <strong>Static</strong> symbolic icons for UI needs, filling in any gaps in Departure Mono. These can use any number of
-              pixels, typically 16 or fewer, and can have open terminals or shapes.
+              First are <strong>static</strong> symbolic icons for UI needs, filling in any gaps in Departure Mono. These can use any number
+              of pixels, typically 16 or fewer, and can have open terminals or shapes.
             </li>
             <li>
-              <strong>Animated</strong> pictorial icons that always use <mark>28 pixels</mark>. These all have closed shapes for consistency
-              and can animate from one to another.
+              Next are <strong>animated</strong> pictorial icons that always use <mark>28 pixels</mark>. These all have closed shapes for
+              consistency and can animate from one to another.
             </li>
           </ol>
 
           <Demo centerContent className="not-prose" title="Static icons" innerClass="min-h-[300px]">
             <div className="grid grid-cols-3 items-baseline gap-3 gap-y-5 text-sm font-medium text-muted-foreground **:shrink-0">
               <span className="flex flex-col items-center gap-1">
-                <PixelIcons.PixelChevronDownIcon className="size-[33px] shrink-0" /> <p>ChevronDown</p>
+                <PixelIcons.PixelChevronDownIcon className="size-[33px] shrink-0 text-primary" /> <p>ChevronDown</p>
               </span>
               <span className="flex flex-col items-center gap-1">
-                <PixelIcons.PixelChevronsIcon className="size-[33px] shrink-0" /> <p>Chevrons</p>
+                <PixelIcons.PixelChevronsIcon className="size-[33px] shrink-0 text-primary" /> <p>Chevrons</p>
               </span>
               <span className="flex flex-col items-center gap-1">
-                <PixelIcons.PixelLoaderIcon className="size-[33px] shrink-0" /> <p>Loader</p>
+                <PixelIcons.PixelLoaderIcon className="size-[33px] shrink-0 text-primary" /> <p>Loader</p>
               </span>
               <span className="flex flex-col items-center gap-1">
-                <PixelIcons.PixelShuffleIcon className="size-[33px] shrink-0" /> <p>Shuffle</p>
+                <PixelIcons.PixelShuffleIcon className="size-[33px] shrink-0 text-primary" /> <p>Shuffle</p>
               </span>
               <span className="flex flex-col items-center gap-1">
-                <PixelIcons.PixelRedoIcon className="size-[33px] shrink-0" /> <p>Redo</p>
+                <PixelIcons.PixelRedoIcon className="size-[33px] shrink-0 text-primary" /> <p>Redo</p>
               </span>
               <span className="flex flex-col items-center gap-1">
-                <PixelIcons.PixelFinderIcon className="size-[48px]! shrink-0" /> <p>Finder</p>
+                <PixelIcons.PixelFinderIcon className="size-[48px]! shrink-0 text-primary" /> <p>Finder</p>
               </span>
             </div>
           </Demo>
-          <Demo title="Animated" description="Click each icon to morph" centerContent innerClass="min-h-[300px]">
-            <PixelIconMorphToggles />
+          <Demo title="Animated" description="∙ click each to morph" centerContent innerClass="min-h-[300px]">
+            <PixelMorphToggles />
           </Demo>
-          <Heading level={2}>Why 28 pixels?</Heading>
+          <Demo title="Password toggle" description="∙ type or hide your password" centerContent innerClass="min-h-[300px]">
+            <PixelIconPasswordToggle />
+          </Demo>
+          <Heading level={2}>Twenty-eight pixels</Heading>
           <p>
             The 28-pixel constraint started with the light/dark mode toggle. I wanted to do something I&apos;d seen before: a sun icon
             rotates into a moon icon and call it a day. With a regular SVG, this works just fine.
@@ -219,7 +226,7 @@ export default function PixelIconsPage() {
           </p>
         </div>
 
-        <PixelIconMorphVisualizer />
+        <PixelMorphVisualizer />
       </div>
     </>
   );

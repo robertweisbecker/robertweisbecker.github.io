@@ -1,9 +1,10 @@
 "use client";
 
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-group";
 import * as PixelIcons from "@/components/icons-pixel";
 import { NumberSlider } from "@/components/number-slider";
-import { PixelIconMorph, type PixelIconMorphAnimation, type PixelIconMorphStrategy } from "@/components/pixel-icon-morph";
+import { PixelMorph, type PixelMorphAnimation, type PixelMorphStrategy } from "@/components/pixel-morph";
 import { Button } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldLabel } from "@/components/ui/field";
@@ -26,10 +27,12 @@ type Option<T extends string> = {
 
 const BASE_DURATION = 0.2;
 const DEFAULT_STAGGER_MS = 2;
+const DEFAULT_PREVIEW_SCALE = 4;
+const DEFAULT_PREVIEW_COLOR = "var(--foreground)";
 
 const DEFAULT_SEQUENCE: PixelIcons.MorphablePixelIconName[] = ["PixelEyeIcon", "PixelEyeClosedIcon"];
 
-const STRATEGY_OPTIONS: Option<PixelIconMorphStrategy>[] = [
+const STRATEGY_OPTIONS: Option<PixelMorphStrategy>[] = [
   { value: "match", label: "Match", description: "Keep shared pixels pinned, then move the rest to their nearest match" },
   { value: "nearest", label: "Nearest", description: "Move pixels to their nearest neighbor, disregarding shared pixels" },
   { value: "reading", label: "Reading", description: "Re-paint left-to-right, top-to-bottom" },
@@ -38,7 +41,7 @@ const STRATEGY_OPTIONS: Option<PixelIconMorphStrategy>[] = [
   { value: "compress", label: "Compress", description: "Jump to center first, then animate outward" },
 ];
 
-const ANIMATION_OPTIONS: Option<PixelIconMorphAnimation>[] = [
+const ANIMATION_OPTIONS: Option<PixelMorphAnimation>[] = [
   { value: "linear", label: "Linear" },
   { value: "ease", label: "Ease" },
   { value: "spring", label: "Spring" },
@@ -55,6 +58,15 @@ const SPEED_DURATIONS: Record<SpeedScale, number> = {
   "0.5": BASE_DURATION * 2,
   "1": BASE_DURATION,
 };
+
+const PREVIEW_COLOR_SWATCHES: ColorSwatch[] = [
+  { value: "var(--foreground)", label: "Foreground", color: "var(--foreground)" },
+  { value: "var(--primary)", label: "Primary", color: "var(--primary)" },
+  { value: "var(--color-blue-400)", label: "Blue", color: "var(--color-blue-400)" },
+  { value: "var(--color-green-400)", label: "Green", color: "var(--color-green-400)" },
+  { value: "var(--color-yellow-400)", label: "Yellow", color: "var(--color-yellow-400)" },
+  { value: "var(--color-pink-400)", label: "Pink", color: "var(--color-pink-400)" },
+];
 
 const iconComponents = PixelIcons as Record<PixelIcons.MorphablePixelIconName, React.ComponentType<React.ComponentProps<"svg">>>;
 
@@ -143,15 +155,17 @@ function AnimationControl<T extends string>({
     );
 }
 
-export function PixelIconMorphVisualizer({ className }: { className?: string }) {
+export function PixelMorphVisualizer({ className }: { className?: string }) {
   const [sequence, setSequence] = React.useState<PixelIcons.MorphablePixelIconName[]>(DEFAULT_SEQUENCE);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [active, setActive] = React.useState(false);
   const [isAnimating, setIsAnimating] = React.useState(false);
-  const [strategy, setStrategy] = React.useState<PixelIconMorphStrategy>("match");
-  const [animation, setAnimation] = React.useState<PixelIconMorphAnimation>("ease");
+  const [strategy, setStrategy] = React.useState<PixelMorphStrategy>("match");
+  const [animation, setAnimation] = React.useState<PixelMorphAnimation>("ease");
   const [speedScale, setSpeedScale] = React.useState<SpeedScale>("1");
   const [staggerMs, setStaggerMs] = React.useState(DEFAULT_STAGGER_MS);
+  const [previewScale, setPreviewScale] = React.useState(DEFAULT_PREVIEW_SCALE);
+  const [previewColor, setPreviewColor] = React.useState(DEFAULT_PREVIEW_COLOR);
   const timerRef = React.useRef<number | null>(null);
 
   const duration = SPEED_DURATIONS[speedScale] ?? BASE_DURATION;
@@ -161,6 +175,16 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
   const to = sequence[nextIndex];
   const canPlay = sequence.length >= 2 && Boolean(from && to);
   const CurrentIcon = from ? iconComponents[from] : null;
+  const previewColorStyle = React.useMemo<React.CSSProperties>(() => ({ color: previewColor }), [previewColor]);
+  const fallbackPreviewStyle = React.useMemo<React.CSSProperties>(
+    () => ({
+      color: previewColor,
+      width: `calc(${previewScale} * 11px)`,
+      height: `calc(${previewScale} * 11px)`,
+      "--pixel-morph-scale": previewScale,
+    }),
+    [previewColor, previewScale]
+  );
   const rawTotalDuration = (duration + stagger * 27) * 1000 + 80;
   const totalDuration = Number.isFinite(rawTotalDuration) ? Math.max(160, rawTotalDuration) : 320;
   const transitionLabel =
@@ -298,7 +322,7 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
           <CardAction>
             <Button
               type="button"
-              size="xs"
+              size="sm"
               variant="ghost"
               onClick={clearSequence}
               disabled={sequence.length === 0}
@@ -320,7 +344,7 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
               className="size-[88px]! scale-100!"
             >
               {canPlay && from && to ? (
-                <PixelIconMorph
+                <PixelMorph
                   key={`${from}-${to}-${strategy}-${animation}`}
                   from={from}
                   to={to}
@@ -329,10 +353,11 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
                   animation={animation}
                   duration={duration}
                   stagger={stagger}
-                  className="size-[44px]!"
+                  scale={previewScale}
+                  style={previewColorStyle}
                 />
               ) : CurrentIcon ? (
-                <CurrentIcon className="size-[44px]!" aria-hidden />
+                <CurrentIcon style={fallbackPreviewStyle} aria-hidden />
               ) : (
                 <span
                   className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
@@ -365,7 +390,7 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
                           }
                         >
                           <motion.span animate={{ scale: index === currentIndex ? 1.1 : 1, opacity: index === currentIndex ? 1 : 0.5 }}>
-                            <PixelIconMorph from={icon} to={icon} />
+                            <PixelMorph from={icon} to={icon} />
                           </motion.span>
                         </TooltipTrigger>
                       ))}
@@ -443,6 +468,26 @@ export function PixelIconMorphVisualizer({ className }: { className?: string }) 
             unit="ms"
             format={{ maximumFractionDigits: 0 }}
           />
+          <NumberSlider
+            label="Scale"
+            min={0.5}
+            max={8}
+            step={0.5}
+            value={previewScale}
+            onValueChange={setPreviewScale}
+            unit="x"
+            format={{ maximumFractionDigits: 1 }}
+          />
+          <Field>
+            <FieldLabel>Fill</FieldLabel>
+            <ColorSwatchGroup
+              colors={PREVIEW_COLOR_SWATCHES}
+              value={previewColor}
+              onValueChange={setPreviewColor}
+              tooltipSide="bottom"
+              className="justify-start"
+            />
+          </Field>
         </CardContent>
         <CardFooter className="justify-end">
           <Button
