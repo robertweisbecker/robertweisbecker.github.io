@@ -104,10 +104,7 @@ export function ThemeSettings({ className, ...props }: Omit<React.ComponentProps
   return (
     <Popover>
       <PopoverTrigger render={<Button variant="ghost" {...props} aria-label="Theme settings" />} className={cn(className)}>
-        <span
-          data-icon="inline-start"
-          className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720"
-        >
+        <span className="-ms-1.5 size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720">
           <IconWheel strokeWidth={1.5} />
         </span>
         Theme
@@ -337,37 +334,6 @@ export function ThemeRadiusField({
       step={step}
       value={radius}
       onValueChange={(v) => set({ radius: v })}
-      unit={unit}
-      {...props}
-    />
-  );
-}
-
-export function ThemeDensityField({
-  label = "Density",
-  max = 1.2,
-  min = 0.8,
-  showReset = true,
-  step = 0.1,
-  unit = "x",
-  ...props
-}: ThemeDensityFieldProps) {
-  const { density, defaultDensity, set } = useTheme();
-  const densityDirty = density !== defaultDensity;
-
-  return (
-    <NumberSlider
-      label={label}
-      labelAction={
-        showReset ? (
-          <ThemeFieldReset dirty={densityDirty} onReset={() => set({ density: defaultDensity })} aria-label="Reset density to default" />
-        ) : null
-      }
-      min={min}
-      max={max}
-      step={step}
-      value={density}
-      onValueChange={(v) => set({ density: v as number })}
       unit={unit}
       {...props}
     />
