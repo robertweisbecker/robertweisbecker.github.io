@@ -1,21 +1,20 @@
 "use client";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
-import { TextReveal } from "@/components/animation/shared";
+import { MotionText, TextReveal } from "@/components/animation/shared";
 import { PixelDino } from "@/components/animation/pixel-dino";
 import { CodeBlock } from "@/components/code-block";
 import { Demo } from "@/components/demo";
 import { DeviceFrame } from "@/components/device-frame";
-import { Favicon } from "@/components/icons";
+import { Favicon, GithubIcon, VercelIcon } from "@/components/icons";
 import * as PixelIcons from "@/components/icons-pixel";
-import { PixelClipboardIcon, PixelPointerIcon, PixelScribbleIcon } from "@/components/icons-pixel";
 import { ImageToggle } from "@/components/image-toggle";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
 import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
-import { FocusPolaroidFan } from "@/components/demos/focus-polaroid-fan";
+import { CardFan } from "@/components/demos/card-fan";
 import { Code } from "@/components/ui/code";
 import { CopyButton } from "@/components/ui/copy-button";
-import { Slider } from "@/components/ui/slider";
+import { Slider, SliderControl, SliderGroup, SliderLabel, SliderValue } from "@/components/ui/slider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
 import * as React from "react";
@@ -35,7 +34,6 @@ import {
   IconTrash,
   IconTrashFilled,
 } from "@tabler/icons-react";
-import { GithubIcon, VercelIcon } from "@/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "framer-motion";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
@@ -54,7 +52,8 @@ import { Video } from "@/components/video";
 import luminance from "@/public/assets/oklch/luminance.png";
 import luminanceBw from "@/public/assets/oklch/luminance-bw.png";
 import { LinkButton } from "@/components/ui/link-button";
-import { DvdAnimationDemo } from "@/components/animations/dvd-animation";
+import { DvdAnimationDemo, DvdAnimationRoot, DvdAnimationStage } from "@/components/animation/dvd-animation";
+import { BubbleDemo } from "@/components/demos/chat-demo";
 
 const CAROUSEL_SLIDES = [
   { src: "/assets/oklch/status-error.png", alt: "OKLCH status error palette" },
@@ -63,6 +62,41 @@ const CAROUSEL_SLIDES = [
   { src: "/assets/oklch/status-success.png", alt: "OKLCH status success palette" },
   { src: "/assets/oklch/status-highlight.png", alt: "OKLCH status highlight palette" },
 ];
+
+type MotionTextRevealType = "css" | "motion";
+type MotionTextPer = "char" | "word" | "line";
+type MotionTextPreset = "fade" | "fade-in-blur" | "slide" | "scale" | "blur-sm";
+
+const MOTION_TEXT_DEFAULTS = {
+  type: "motion" as MotionTextRevealType,
+  per: "word" as MotionTextPer,
+  preset: "fade-in-blur" as MotionTextPreset,
+  duration: 560,
+  stagger: 36,
+  waveDepth: 12,
+  loopRunning: true,
+};
+
+const MOTION_TEXT_TYPES: { value: MotionTextRevealType; label: string }[] = [
+  { value: "css", label: "CSS" },
+  { value: "motion", label: "Motion" },
+];
+
+const MOTION_TEXT_PER_OPTIONS: { value: MotionTextPer; label: string }[] = [
+  { value: "char", label: "Char" },
+  { value: "word", label: "Word" },
+  { value: "line", label: "Line" },
+];
+
+const MOTION_TEXT_PRESETS: { value: MotionTextPreset; label: string }[] = [
+  { value: "fade", label: "Fade" },
+  { value: "fade-in-blur", label: "Blur +" },
+  { value: "slide", label: "Slide" },
+  { value: "scale", label: "Scale" },
+  { value: "blur-sm", label: "Blur" },
+];
+
+const CHROME_TAB_DVD_COLORS = ["currentColor"];
 
 const PIXEL_ICONS = [
   { Icon: PixelIcons.PixelAtSignIcon, name: "At Sign" },
@@ -181,21 +215,53 @@ export default function PlaygroundPage() {
   const [isLoading, setLoading] = React.useState(false);
   const [resetKey, setResetKey] = React.useState(0);
   return (
-    <div className="mx-auto flex flex-col items-center gap-6">
-      <div className="sr-only">
-        <h1 className="text-h1">Playground</h1>
-      </div>
+    <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10">
+      <h1 className="w-full text-h1">Playground</h1>
 
-      <div className="flex w-full flex-col gap-8">
-        <div className="grid gap-4 lg:grid-cols-12">
-          <Demo title="DVD Loader" description="+ corner counter" className="lg:col-span-4">
+      <div className="flex w-full flex-col gap-14">
+        <PlaygroundSection id="motion-systems" title="Motion">
+          <Demo title="DVD Loader" className="lg:col-span-4">
             <DvdAnimationDemo className="dark bg-background" />
           </Demo>
           <Demo title="Motion cards" className="lg:col-span-8" innerClass="min-h-[400px]">
-            <FocusPolaroidFan />
+            <CardFan />
+          </Demo>
+          <Demo
+            title="TextReveal"
+            centerContent
+            className="lg:col-span-4"
+            innerClass="min-h-60"
+            controls={
+              <Button size="xs" variant="link" onClick={() => setResetKey((key) => key + 1)} className="-me-1">
+                Replay
+                <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+              </Button>
+            }
+          >
+            <TextReveal
+              key={resetKey}
+              className="overflow-visible text-center text-2xl font-semibold tracking-tight text-balance"
+              duration={600}
+              stagger={22}
+            >
+              Interfaces should feel alive, but never impatient.
+            </TextReveal>
+          </Demo>
+          <Demo
+            title="MotionText"
+            caption="Variants + shared timing controls"
+            className="lg:col-span-8 lg:row-span-3"
+            innerClass="min-h-[520px]"
+          >
+            <MotionTextPlaygroundDemo />
           </Demo>
 
-          {/* Row: anchor tile + hero chart */}
+          <Demo title="Dino Animation" caption="SVG animation, so no cacti" centerContent className="lg:col-span-4">
+            <PixelDino />
+          </Demo>
+        </PlaygroundSection>
+
+        <PlaygroundSection id="interaction-components" title="Controls">
           <Demo
             caption={"CSS shape + masking for cutouts"}
             title="Chrome Tabs"
@@ -213,57 +279,42 @@ export default function PlaygroundPage() {
           <Demo title="Site search" description="∙ a Raycast-style command palette" centerContent className="lg:col-span-4">
             <SiteSearch className="w-full max-w-xs" variant="input" />
           </Demo>
-          <Demo title="Motion chart" description="∙ Hover to animate" centerContent className="lg:col-span-3">
-            <ChartDemo />
-          </Demo>
-
-          {/* Row: small swatches and loaders */}
-          <Demo caption="ColorCode ∙ Click to copy" centerContent className="lg:col-span-3">
-            <ColorCode value="#0b0b0b" />
-          </Demo>
-          <Demo caption="ColorSwatchGroup" centerContent className="lg:col-span-4">
-            <ColorSwatchGroupDemo />
-          </Demo>
-          <Demo caption="Skeleton" centerContent className="lg:col-span-3">
-            <SkeletonDemo />
-          </Demo>
-
-          {/* Row: interaction trio */}
-          <Demo caption="Base UI slider with CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-5">
-            <AnchoredSliderDemo />
-          </Demo>
-
-          <Demo
-            title="TextReveal"
-            centerContent
-            className="lg:col-span-4"
-            innerClass="min-h-60"
-            controls={
-              <Button size="xs" variant="ghost" onClick={() => setResetKey((key) => key + 1)} className="w-fit">
-                Replay
-              </Button>
-            }
-          >
-            <TextReveal
-              key={resetKey}
-              className="overflow-visible text-center text-2xl font-semibold tracking-tight text-balance"
-              duration={600}
-              stagger={22}
-            >
-              Interfaces should feel alive, but never impatient.
-            </TextReveal>
-          </Demo>
-
-          <Demo title="Dino Animation" caption="SVG animation, so no cacti" centerContent className="lg:col-span-5">
-            <PixelDino />
-          </Demo>
-
-          {/* Row: wide popups */}
           <Demo title="Grouped Popups" centerContent className="lg:col-span-7" innerClass="min-h-60">
             <GroupedPopupsDemo />
           </Demo>
+          <Demo title="Tabs" caption="Elevated, line, and pill variants" className="lg:col-span-full">
+            <TabsVariantsDemo />
+          </Demo>
+          <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-4">
+            <ToggleVariantsDemo />
+          </Demo>
+          <Demo title="Switch" centerContent className="lg:col-span-4">
+            <div className="grid-stack aspect-square w-32">
+              <SwitchDemo />
+            </div>
+          </Demo>
+          <Demo title="Keys" centerContent className="lg:col-span-4" innerClass="flex flex-col gap-2">
+            <Kbd variant="elevated">⌘/</Kbd>
+            <Kbd>⌘I</Kbd>
+            <KbdGroup className="">
+              <Kbd variant="big">⌘</Kbd>
+              <Kbd variant="big">K</Kbd>
+            </KbdGroup>
+          </Demo>
+        </PlaygroundSection>
 
-          {/* Row: ImageToggle variants + carousel */}
+        <PlaygroundSection id="media-comparison" title="Frames">
+          <Demo
+            title="DeviceFrame · Phone"
+            overflowBehavior="resize"
+            centerContent
+            className="lg:col-span-5 lg:row-span-2"
+            caption="A remix of Geist's Phone component. Responds to color mode and uses your device's clock and battery level (except on iOS)."
+          >
+            <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
+              <BubbleDemo />
+            </DeviceFrame.Phone>
+          </Demo>
           <Demo caption="CarouselToolbar" centerContent className="lg:col-span-3">
             <CarouselDemo />
           </Demo>
@@ -276,8 +327,6 @@ export default function PlaygroundPage() {
           <Demo title="ImageToggle" caption="Comparison variant" centerContent className="lg:col-span-3">
             <ImageToggleDemo mode="comparison" />
           </Demo>
-
-          {/* Full-bleed video */}
           <Demo
             title="Video Player"
             caption={
@@ -295,21 +344,23 @@ export default function PlaygroundPage() {
               className="my-0 w-full max-w-4xl"
             />
           </Demo>
+          <Demo title="DeviceFrame · Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
+            <DeviceFrame.Browser address="bob.fyi">
+              <BrowserFramePreview />
+            </DeviceFrame.Browser>
+          </Demo>
+        </PlaygroundSection>
 
-          {/* Row: tabs / toggles / switch */}
-          <Demo title="Tabs" caption="Elevated, line, and pill variants" className="lg:col-span-full">
-            <TabsVariantsDemo />
+        <PlaygroundSection id="forms-feedback" title="Feedback">
+          <Demo title="Skeleton" centerContent className="lg:col-span-4">
+            <SkeletonDemo />
           </Demo>
-          <Demo caption="ToggleGrid elevated" centerContent className="lg:col-span-4">
-            <ToggleVariantsDemo />
+          <Demo title="Base UI + CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-4">
+            <AnchoredSliderDemo />
           </Demo>
-          <Demo centerContent className="lg:col-span-4">
-            <div className="grid-stack aspect-square w-32">
-              <SwitchDemo />
-            </div>
+          <Demo title="Slider" centerContent className="lg:col-span-4">
+            <SliderDemo />
           </Demo>
-
-          {/* Row: code + inputs */}
           <Demo caption="CodeBlock" centerContent className="lg:col-span-4 lg:row-span-2">
             <CodeBlock
               code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
@@ -317,18 +368,39 @@ export default function PlaygroundPage() {
               filename="button-demo.tsx"
             />
           </Demo>
-          <Demo centerContent className="lg:col-span-4">
-            <SliderDemo />
+          <Demo caption="Loading button" centerContent className="lg:col-span-4">
+            <Button
+              rounded
+              loading={isLoading}
+              onClick={() => {
+                setLoading(true);
+                window.setTimeout(() => setLoading(false), 2000);
+              }}
+            >
+              Confirm
+            </Button>
           </Demo>
-          <Demo title="Keys" centerContent className="lg:col-span-4" innerClass="flex flex-col gap-2">
-            <Kbd variant="elevated">⌘/</Kbd>
-            <Kbd>⌘I</Kbd>
-            <KbdGroup className="">
-              <Kbd variant="big">⌘</Kbd>
-              <Kbd variant="big">K</Kbd>
-            </KbdGroup>
+          <Demo
+            title="Emoji Feedback"
+            description="∙ a remix of Vercel's Feedback component"
+            controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
+            className="lg:col-span-full"
+            innerClass="min-h-72 "
+          >
+            <EmojiFeedbackDemo />
           </Demo>
+        </PlaygroundSection>
 
+        <PlaygroundSection id="visual-details" title="Verisimilitude">
+          <Demo title="Motion chart" description="∙ Hover to animate" centerContent className="lg:col-span-4">
+            <ChartDemo />
+          </Demo>
+          <Demo title="ColorCode" description="∙ Click to copy" centerContent className="lg:col-span-3">
+            <ColorCode value="#0b0b0b" />
+          </Demo>
+          <Demo title="ColorSwatchGroup" centerContent className="lg:col-span-5">
+            <ColorSwatchGroupDemo />
+          </Demo>
           <Demo caption="Hover effects" centerContent className="lg:col-span-6">
             <AnimatedButtonDemo />
           </Demo>
@@ -344,20 +416,6 @@ export default function PlaygroundPage() {
           <Demo caption="Delete button" centerContent className="lg:col-span-3">
             <DeleteButtonDemo />
           </Demo>
-
-          <Demo caption="Loading button" centerContent className="lg:col-span-3">
-            <Button
-              rounded
-              loading={isLoading}
-              onClick={() => {
-                setLoading(true);
-                window.setTimeout(() => setLoading(false), 2000);
-              }}
-            >
-              Confirm
-            </Button>
-          </Demo>
-
           <Demo title="Animated icon buttons" centerContent className="lg:col-span-6">
             <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
               <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
@@ -369,15 +427,6 @@ export default function PlaygroundPage() {
               <CopyButton value="Hello, world!" size="icon" variant="outline" />
               <p className="row-2">Icon swap, stroke anim, inline toast</p>
             </div>
-          </Demo>
-          <Demo
-            title="Emoji Feedback"
-            description="∙ a remix of Vercel's Feedback component"
-            controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
-            className="lg:col-span-full"
-            innerClass="min-h-72 "
-          >
-            <EmojiFeedbackDemo />
           </Demo>
           <Demo
             title="Custom mark styles"
@@ -422,24 +471,18 @@ export default function PlaygroundPage() {
               </p>
             </div>
           </Demo>
-          <Demo title="DeviceFrame · Phone" overflowBehavior="resize" centerContent className="lg:col-span-5">
-            <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
-              <div className="flex items-center justify-center p-6 text-center text-sm">
-                <p>
-                  A remix of Geist&apos;s <LinkOut href="https://vercel.com/geist/phone" text="Phone" />
-                  &nbsp;component. Responds to color mode and uses your device&apos;s clock and battery level (non-iOS).
-                </p>
-              </div>
-            </DeviceFrame.Phone>
-          </Demo>
-          <Demo title="DeviceFrame · Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
-            <DeviceFrame.Browser address="bob.fyi">
-              <BrowserFramePreview />
-            </DeviceFrame.Browser>
-          </Demo>
-        </div>
+        </PlaygroundSection>
       </div>
     </div>
+  );
+}
+
+function PlaygroundSection({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+  return (
+    <section id={id} className="grid w-full scroll-mt-24 gap-4">
+      <h2 className="border-b border-border pb-2 font-sans text-base font-[550] tracking-tight text-foreground">{title}</h2>
+      <div className="grid gap-4 lg:grid-cols-12">{children}</div>
+    </section>
   );
 }
 
@@ -640,6 +683,255 @@ function SliderDemo() {
     <div className="flex w-full max-w-xs flex-col gap-6">
       <Slider defaultValue={[40]} />
       <Slider defaultValue={[20, 70]} />
+    </div>
+  );
+}
+
+function MotionTextOptionGrid<T extends string>({
+  value,
+  options,
+  columns,
+  onValueChange,
+}: {
+  value: T;
+  options: { value: T; label: string }[];
+  columns: number;
+  onValueChange: (value: T) => void;
+}) {
+  return (
+    <ToggleGrid
+      value={[value]}
+      onValueChange={(nextValue) => {
+        const next = Array.isArray(nextValue) ? nextValue[0] : nextValue;
+        if (next) onValueChange(next as T);
+      }}
+      variant="elevated"
+      size="xs"
+      columns={columns}
+      className="w-full"
+    >
+      {options.map((option) => (
+        <ToggleGroupItem
+          key={option.value}
+          value={option.value}
+          aria-label={option.label}
+          data-testid={`motion-text-option-${option.value}`}
+        >
+          {option.label}
+        </ToggleGroupItem>
+      ))}
+    </ToggleGrid>
+  );
+}
+
+function MotionTextSliderControl({
+  label,
+  value,
+  min,
+  max,
+  step,
+  suffix,
+  onValueChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  suffix: string;
+  onValueChange: (value: number) => void;
+}) {
+  const readSliderValue = React.useCallback(
+    (nextValue: number | readonly number[]) => {
+      const next = Array.isArray(nextValue) ? nextValue[0] : nextValue;
+      return Math.round(next ?? value);
+    },
+    [value]
+  );
+
+  const commitValue = React.useCallback(
+    (nextValue: number | readonly number[]) => {
+      onValueChange(readSliderValue(nextValue));
+    },
+    [onValueChange, readSliderValue]
+  );
+
+  return (
+    <Field className="gap-2">
+      <SliderGroup
+        key={value}
+        className="flex-col items-stretch gap-2"
+        defaultValue={[value]}
+        min={min}
+        max={max}
+        step={step}
+        onValueCommitted={commitValue}
+      >
+        <SliderLabel className="flex w-full items-center justify-between gap-3 text-xs">
+          <FieldTitle>{label}</FieldTitle>
+          <SliderValue className="font-mono">
+            {(formattedValues) => {
+              const formattedValue = formattedValues[0] ?? String(value);
+              return `${formattedValue}${suffix}`;
+            }}
+          </SliderValue>
+        </SliderLabel>
+        <SliderControl />
+      </SliderGroup>
+    </Field>
+  );
+}
+
+function MotionTextSample({ label, action, children }: { label: string; action?: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <div className="grid min-w-0 gap-1.5">
+      <div className="flex min-h-button-xs items-center justify-between gap-3">
+        <p className="text-xs font-medium text-muted-foreground">{label}</p>
+        {action}
+      </div>
+      <div className="min-w-0 text-sm leading-6 text-foreground">{children}</div>
+    </div>
+  );
+}
+
+function MotionTextPlaygroundDemo() {
+  const [type, setType] = React.useState<MotionTextRevealType>(MOTION_TEXT_DEFAULTS.type);
+  const [per, setPer] = React.useState<MotionTextPer>(MOTION_TEXT_DEFAULTS.per);
+  const [preset, setPreset] = React.useState<MotionTextPreset>(MOTION_TEXT_DEFAULTS.preset);
+  const [duration, setDuration] = React.useState(MOTION_TEXT_DEFAULTS.duration);
+  const [stagger, setStagger] = React.useState(MOTION_TEXT_DEFAULTS.stagger);
+  const [waveDepth, setWaveDepth] = React.useState(MOTION_TEXT_DEFAULTS.waveDepth);
+  const [loopRunning, setLoopRunning] = React.useState(MOTION_TEXT_DEFAULTS.loopRunning);
+  const [morphAlternate, setMorphAlternate] = React.useState(false);
+  const [resetKey, setResetKey] = React.useState(0);
+
+  const effectSpeedReveal = 480 / duration;
+  const effectSpeedSegment = 40 / stagger;
+
+  function reset() {
+    setType(MOTION_TEXT_DEFAULTS.type);
+    setPer(MOTION_TEXT_DEFAULTS.per);
+    setPreset(MOTION_TEXT_DEFAULTS.preset);
+    setDuration(MOTION_TEXT_DEFAULTS.duration);
+    setStagger(MOTION_TEXT_DEFAULTS.stagger);
+    setWaveDepth(MOTION_TEXT_DEFAULTS.waveDepth);
+    setLoopRunning(MOTION_TEXT_DEFAULTS.loopRunning);
+    setMorphAlternate(false);
+    setResetKey((key) => key + 1);
+  }
+
+  return (
+    <div className="grid w-full gap-4 xl:grid-cols-[minmax(0,1fr)_18rem]" data-testid="motion-text-playground">
+      <div className="flex min-w-0 flex-col gap-5">
+        <MotionTextSample label="Reveal">
+          <MotionText.Reveal
+            key={`reveal-${resetKey}-${type}-${per}-${duration}-${stagger}`}
+            type={type}
+            per={per}
+            duration={duration}
+            stagger={stagger}
+            className="text-sm leading-6 text-balance"
+          >
+            Motion text makes expressive systems feel reusable.
+          </MotionText.Reveal>
+        </MotionTextSample>
+
+        <MotionTextSample label="Effect">
+          <MotionText.Effect
+            key={`effect-${resetKey}-${preset}-${per}-${duration}-${stagger}`}
+            per={per}
+            preset={preset}
+            speedReveal={effectSpeedReveal}
+            speedSegment={effectSpeedSegment}
+            className="text-sm leading-6 text-balance"
+          >
+            Presets share the timing controls.
+          </MotionText.Effect>
+        </MotionTextSample>
+
+        <MotionTextSample
+          label="Loop"
+          action={
+            <Field orientation="horizontal" className="w-auto items-center gap-2">
+              <FieldLabel className="text-xs">Run</FieldLabel>
+              <Switch checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
+            </Field>
+          }
+        >
+          <p>
+            Feels{" "}
+            <MotionText.Loop trigger={loopRunning} interval={1.2} className="text-primary">
+              {["snappy", "calm", "clear"]}
+            </MotionText.Loop>
+          </p>
+        </MotionTextSample>
+
+        <MotionTextSample label="Scramble">
+          <MotionText.Scramble key={`scramble-${resetKey}-${duration}`} duration={duration / 1000} className="font-mono text-sm leading-6">
+            Interface signal
+          </MotionText.Scramble>
+        </MotionTextSample>
+
+        <MotionTextSample label="Wave">
+          <MotionText.Wave
+            duration={duration / 1000}
+            zDistance={waveDepth}
+            yDistance={Math.round(waveDepth / -4)}
+            rotateYDistance={waveDepth}
+            className="text-sm leading-6 text-balance"
+          >
+            Waves respect shared duration
+          </MotionText.Wave>
+        </MotionTextSample>
+
+        <MotionTextSample
+          label="Morph"
+          action={
+            <Button size="xs" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
+              Swap
+            </Button>
+          }
+        >
+          <MotionText.Morph className="text-sm leading-6">
+            {morphAlternate ? "Motion variants compose cleanly" : "Variant controls compose motion"}
+          </MotionText.Morph>
+        </MotionTextSample>
+
+        <MotionTextSample label="Shimmer">
+          <p className="shimmer shimmer-color-primary/70 shimmer-duration-1400 text-sm leading-6 text-muted-foreground">
+            Generating response&hellip;
+          </p>
+        </MotionTextSample>
+      </div>
+
+      <div className="grid h-fit gap-4 rounded-md bg-muted/50 p-3">
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs font-medium text-muted-foreground">Timing</p>
+          <Button size="xs" variant="ghost" type="button" onClick={reset} data-testid="motion-text-reset">
+            Reset
+            <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+          </Button>
+        </div>
+
+        <Field className="gap-2">
+          <FieldLabel className="text-xs">Reveal type</FieldLabel>
+          <MotionTextOptionGrid value={type} options={MOTION_TEXT_TYPES} columns={2} onValueChange={setType} />
+        </Field>
+
+        <Field className="gap-2">
+          <FieldLabel className="text-xs">Split</FieldLabel>
+          <MotionTextOptionGrid value={per} options={MOTION_TEXT_PER_OPTIONS} columns={3} onValueChange={setPer} />
+        </Field>
+
+        <Field className="gap-2">
+          <FieldLabel className="text-xs">Preset</FieldLabel>
+          <MotionTextOptionGrid value={preset} options={MOTION_TEXT_PRESETS} columns={2} onValueChange={setPreset} />
+        </Field>
+
+        <MotionTextSliderControl label="Duration" value={duration} min={220} max={1200} step={20} suffix="ms" onValueChange={setDuration} />
+        <MotionTextSliderControl label="Stagger" value={stagger} min={8} max={96} step={2} suffix="ms" onValueChange={setStagger} />
+        <MotionTextSliderControl label="Wave depth" value={waveDepth} min={0} max={28} step={1} suffix="px" onValueChange={setWaveDepth} />
+      </div>
     </div>
   );
 }
@@ -903,16 +1195,73 @@ function ToggleVariantsDemo() {
 }
 
 function SkeletonDemo() {
+  const [replayKey, setReplayKey] = React.useState(0);
+  const [loaded, setLoaded] = React.useState(false);
+
+  React.useEffect(() => {
+    setLoaded(false);
+    const timeout = window.setTimeout(() => setLoaded(true), 2200);
+    return () => window.clearTimeout(timeout);
+  }, [replayKey]);
+
   return (
-    <div className="w-full max-w-xs space-y-4">
-      <div className="flex items-center gap-4">
-        <Skeleton className="size-12 rounded-full" />
-        <div className="flex-1 space-y-2">
-          <Skeleton className="h-4 w-32" />
-          <Skeleton className="h-3 w-44" />
+    <div className="grid w-full max-w-sm gap-3" data-testid="skeleton-demo" data-loaded={loaded}>
+      <div className="flex justify-end">
+        <Button size="xs" variant="ghost" onClick={() => setReplayKey((key) => key + 1)} data-testid="skeleton-replay">
+          Replay
+          <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+        </Button>
+      </div>
+
+      <div
+        className="relative min-h-[13.5rem] overflow-hidden rounded-xl border bg-card p-4"
+        aria-live="polite"
+        data-testid="skeleton-frame"
+      >
+        <div
+          aria-hidden={loaded}
+          data-testid="skeleton-loading"
+          className={cn(
+            "absolute inset-0 grid gap-4 p-4 transition-opacity duration-500 ease-out",
+            loaded ? "pointer-events-none opacity-0" : "opacity-100"
+          )}
+        >
+          <div className="flex items-center gap-4">
+            <Skeleton className="size-12 rounded-full" />
+            <div className="flex-1 space-y-2">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-3 w-44 max-w-full" />
+            </div>
+          </div>
+          <Skeleton className="h-28 w-full rounded-xl" />
+        </div>
+
+        <div
+          aria-hidden={!loaded}
+          data-testid="skeleton-content"
+          className={cn(
+            "absolute inset-0 grid gap-4 p-4 transition-opacity duration-500 ease-out",
+            loaded ? "opacity-100" : "pointer-events-none opacity-0"
+          )}
+        >
+          <div className="flex items-center gap-4">
+            <Avatar className="size-12">
+              <AvatarImage src="/assets/bob-avatar.png" alt="Robert Weisbecker" />
+              <AvatarFallback>RW</AvatarFallback>
+            </Avatar>
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium">Robert Weisbecker</p>
+              <p className="truncate text-xs text-muted-foreground">Design systems and interaction details</p>
+            </div>
+          </div>
+          <div className="grid h-28 place-items-center rounded-xl border bg-muted/40 p-4 text-center">
+            <div>
+              <p className="font-pixel text-[11px] text-muted-foreground uppercase">Loaded</p>
+              <p className="mt-1 text-sm font-medium">Content fades into the reserved skeleton frame.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <Skeleton className="h-28 w-full rounded-xl" />
     </div>
   );
 }
@@ -974,37 +1323,57 @@ function ChromeTabsDemo() {
           Vercel
         </ChromeTabs.Tab>
       </ChromeTabs.List>
-      <ChromeTabs.Panel value="preview" className="overflow-hidden p-4">
-        <motion.div
-          initial={{ y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-info-primary bg-info p-10 font-pixel text-2xs/none text-info-foreground uppercase"
-        >
-          <PixelIcons.PixelFolderOpenIcon className="size-[22px] shrink-0" />
-        </motion.div>
-      </ChromeTabs.Panel>
-      <ChromeTabs.Panel value="code" className="overflow-hidden p-4">
-        <motion.div
-          initial={{ y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-violet-400 bg-violet-25 p-10 font-pixel text-2xs/none text-violet-500 uppercase dark:border-violet-600 dark:bg-violet-950 dark:text-violet-400"
-        >
-          <PixelIcons.PixelGithubOutlineIcon className="size-[22px] shrink-0" />
-        </motion.div>
-      </ChromeTabs.Panel>
-      <ChromeTabs.Panel value="output" className="overflow-hidden p-4">
-        <motion.div
-          initial={{ y: 4 }}
-          animate={{ y: 0 }}
-          exit={{ y: 4 }}
-          className="grid-stack border border-dashed border-warning-primary bg-warning p-10 text-center font-pixel text-[11px] text-warning-foreground uppercase"
-        >
-          <PixelIcons.PixelVercelOutlineIcon className="size-[22px] shrink-0" />
-        </motion.div>
-      </ChromeTabs.Panel>
+      <ChromeTabDvdPanel value="preview" label="bob.fyi" icon={Favicon} className="border-info-primary bg-info text-info-foreground" />
+      <ChromeTabDvdPanel
+        value="code"
+        label="Github"
+        icon={GithubIcon}
+        className="border-violet-400 bg-violet-25 text-violet-500 dark:border-violet-600 dark:bg-violet-950 dark:text-violet-400"
+      />
+      <ChromeTabDvdPanel
+        value="output"
+        label="Vercel"
+        icon={VercelIcon}
+        className="border-warning-primary bg-warning text-warning-foreground"
+      />
     </ChromeTabs>
+  );
+}
+
+function ChromeTabDvdPanel({
+  value,
+  label,
+  icon: Icon,
+  className,
+}: {
+  value: string;
+  label: string;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  className: string;
+}) {
+  return (
+    <ChromeTabs.Panel value={value} className="overflow-hidden p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 4 }}
+        className={cn("h-36 overflow-hidden border border-dashed", className)}
+      >
+        <DvdAnimationRoot
+          duration={42}
+          width={320}
+          height={144}
+          logoScale={0.22}
+          logoAspectRatio={1}
+          colors={CHROME_TAB_DVD_COLORS}
+          className="size-full"
+        >
+          <DvdAnimationStage logoViewBox="0 0 16 16" aria-label={`${label} bouncing icon`}>
+            <Icon width="100%" height="100%" />
+          </DvdAnimationStage>
+        </DvdAnimationRoot>
+      </motion.div>
+    </ChromeTabs.Panel>
   );
 }
 
