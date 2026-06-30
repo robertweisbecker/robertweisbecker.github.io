@@ -13,7 +13,7 @@ import {
   VercelIcon,
   CodexIcon,
 } from "@/components/icons";
-import { PixelMarkdown2Icon, PixelShuffleIcon, PixelExternalIcon } from "@/components/icons-pixel";
+import { PixelMarkdown2Icon, PixelShuffleIcon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons-pixel";
 import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
 import { IndexList, type IndexListItem } from "@/components/index-list";
@@ -179,23 +179,23 @@ export default function Home() {
       </section>
 
       <section>
-        <h2 className="mb-3 font-pixel text-[11px] uppercase" id="about">
+        <h2 className="mb-3 font-pixel text-[11px] uppercase" id="art">
           III. Art
         </h2>
         <ArtCards />
       </section>
 
-      <section>
+      <section className="flex flex-col gap-5">
         <div className="mb-3 flex w-full items-center justify-between gap-2">
           <h2 className="font-pixel text-[11px] uppercase" id="resources">
             IV. Resources
           </h2>
-          <LinkButton href="https://www.figma.com/@yobob" variant="ghost" size="sm">
-            View on Figma Community ↗
-          </LinkButton>
+          <span className="ease text-sm text-muted-foreground opacity-72 hover:opacity-100">
+            View on <LinkOut href="https://www.figma.com/@yobob" text="Figma" />
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {resources.map((resource) => (
             <Card
               key={resource.id}
@@ -210,13 +210,14 @@ export default function Home() {
                   </a>
                 </CardTitle>
                 <CardAction>
-                  <div className="size-lh grid grid-cols-1 grid-rows-1">
-                    <FigmaIcon
-                      className="ease col-1 row-1 size-3.5 shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
+                  <div className="size-lh grid-stack text-muted-foreground">
+                    <PixelFigmaIcon
+                      scale={1}
+                      className="ease shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
                       aria-label="Figma Community"
                     />
                     <span
-                      className="ease col-1 row-1 size-4 shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel text-[16.5px] leading-none text-muted-foreground opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
+                      className="ease shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
                       aria-hidden
                     >
                       <PixelExternalIcon />
@@ -238,7 +239,9 @@ export default function Home() {
       </section>
 
       <section className="flex flex-col gap-3" id="about">
-        <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase">V. About</h2>
+        <h2 className="scroll-mt-20 font-pixel text-[11px] uppercase" id="about">
+          V. About
+        </h2>
         <LayoutGrid variant="twoUp" className="text-sm/6">
           <p className="max-w-prose text-muted-foreground">
             I&apos;m from Baltimore, MD, and now live in southern CA. Since 2021, I&apos;ve led the implementation of a shared design system
@@ -314,7 +317,7 @@ export default function Home() {
             <ul className="flex flex-col gap-1 text-sm">
               <li>
                 <span className="flex items-center gap-1">
-                  <span className="text-muted-foreground">Email</span>
+                  <span className="text-muted-foreground/64">Email</span>
                   <span className="after-dots"></span>
                   <LinkButton href="mailto:yo@bob.fyi" variant="link" size="sm">
                     yo@bob.fyi
@@ -324,7 +327,7 @@ export default function Home() {
               </li>
 
               <li className="flex items-center gap-1">
-                <span className="text-muted-foreground">LinkedIn</span>
+                <span className="text-muted-foreground/64">LinkedIn</span>
                 <span className="after-dots" />
                 <LinkButton href="https://www.linkedin.com/in/robertweisbecker/" variant="link" size="sm">
                   @robertweisbecker
@@ -333,7 +336,7 @@ export default function Home() {
 
               <li>
                 <span className="flex items-center gap-1">
-                  <span className="text-muted-foreground">GitHub</span>
+                  <span className="text-muted-foreground/64">GitHub</span>
                   <span className="after-dots" />
                   <LinkButton href="https://github.com/robertweisbecker" variant="link" size="sm">
                     @robertweisbecker
@@ -342,7 +345,7 @@ export default function Home() {
               </li>
               <li>
                 <span className="flex items-center gap-1">
-                  <span className="text-muted-foreground">Figma</span>
+                  <span className="text-muted-foreground/64">Figma</span>
                   <span className="after-dots" />
                   <LinkButton href="https://figma.com/@yobob" variant="link" size="sm">
                     @yobob
@@ -351,7 +354,7 @@ export default function Home() {
               </li>
               <li>
                 <span className="flex items-center gap-1">
-                  <span className="text-muted-foreground">Letterboxd</span>
+                  <span className="text-muted-foreground/64">Letterboxd</span>
                   <span className="after-dots" />
                   <LinkButton href="https://letterboxd.com/weisbecker/" variant="link" size="sm">
                     @weisbecker
@@ -362,27 +365,29 @@ export default function Home() {
           </div>
         </LayoutGrid>
       </section>
+
       <section>
-        <p className="mb-3 text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching:</p>
-        <div className="mb-2 flex w-full items-center justify-between gap-2">
+        {" "}
+        <p className="mb-5 text-sm text-muted-foreground">And, since you made it this far, here&apos;s what I&apos;ve been watching:</p>
+        {/* <div className="mb-2 flex w-full items-center justify-between gap-2">
           <h3 className="font-pixel text-[11px] text-muted-foreground/50 uppercase">Logged</h3>
           <LinkButton href="https://letterboxd.com/weisbecker/" variant="ghost" size="sm" className="-me-(--button-x)">
             <LetterboxdLogo data-icon="inline-start" />
             View on Letterboxd
           </LinkButton>
-        </div>
+        </div> */}
         <Letterboxd maxFilms={4} />
       </section>
       <section>
-        <div className="flex w-full justify-between gap-2">
+        <div className="flex w-full items-center justify-between gap-2">
           <h2 className="font-pixel text-[11px] uppercase">VI. CV</h2>
-          <LinkButton href="/BOB.md" variant="ghost" size="sm" className="-me-(--button-x) -mt-(--button-y)">
-            <PixelMarkdown2Icon data-icon="inline-start" />
+          <LinkButton href="/BOB.md" variant="link" size="sm">
+            <PixelMarkdown2Icon data-icon="inline-start" scale={1.5} />
             View BOB.md
           </LinkButton>
         </div>
-        <h3 className="mb-3 font-pixel text-[11px] text-muted-foreground/50 uppercase">↳ Experience</h3>
-        <DescriptionList className="mb-6">
+        <h3 className="my-10 font-pixel text-[11px] text-muted-foreground/50 uppercase">─── Experience</h3>
+        <DescriptionList>
           <DescriptionListLabel>
             <span className="flex items-center gap-2 self-start">
               <Avatar size="sm">
@@ -452,7 +457,7 @@ export default function Home() {
             </DescriptionList>
           </DescriptionListValue>
         </DescriptionList>
-        <h3 className="mb-3 font-pixel text-[11px] text-muted-foreground/50 uppercase">↳ Education</h3>
+        <h3 className="my-10 font-pixel text-[11px] text-muted-foreground/50 uppercase">─── Education</h3>
         <DescriptionList>
           <DescriptionListLabel>Maryland Institute College of Art</DescriptionListLabel>
           <DescriptionListValue>
