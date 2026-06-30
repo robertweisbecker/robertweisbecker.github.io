@@ -78,8 +78,8 @@ export type ThemeSettings = {
   radius: number;
 };
 
-const DEFAULT_HUE: HueName = "sand";
-const DEFAULT_NEUTRAL: NeutralName = "sand";
+const DEFAULT_HUE: HueName = "black";
+const DEFAULT_NEUTRAL: NeutralName = "black";
 
 const DEFAULTS: ThemeSettings = { hue: DEFAULT_HUE, neutral: DEFAULT_NEUTRAL, radius: 10 };
 

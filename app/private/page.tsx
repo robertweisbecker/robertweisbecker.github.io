@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 const privateLinks = [
+  ["/private/qa", "QA"],
   ["/private/device", "Device"],
   ["/private/image-modal", "Image modal"],
   ["/private/og-preview", "OG preview"],

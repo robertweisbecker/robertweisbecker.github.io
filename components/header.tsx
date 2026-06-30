@@ -40,7 +40,7 @@ export function Header() {
 
   return (
     <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")}>
-      <div className="mx-auto flex h-12 max-w-6xl items-center gap-1 py-2 max-sm:px-2">
+      <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 py-2 max-sm:px-2">
         <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 font-pixel">
           <Favicon className="size-4 text-secondary-foreground" />
 
@@ -96,9 +96,9 @@ export function Header() {
                 </DropdownMenuItem>
                 {process.env.NODE_ENV === "development" && (
                   <>
-                    <DropdownMenuItem render={<Link href="/components" />} nativeButton={false} className="md:hidden">
+                    <DropdownMenuItem render={<Link href="/private/qa" />} nativeButton={false} className="md:hidden">
                       <IconComponents />
-                      Components
+                      QA
                     </DropdownMenuItem>
                   </>
                 )}
@@ -186,7 +186,7 @@ export function Header() {
         </PreviewCardGroup>
         <HeaderButton
           label="Posts"
-          icon={<PixelNewspaperIcon className="size-3.5" data-icon={"inline-start"} />}
+          icon={<PixelNewspaperIcon data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/posts"
           aria-current={pathname.startsWith("/posts") ? "true" : "false"}
@@ -194,7 +194,7 @@ export function Header() {
         />
         <HeaderButton
           label="Art"
-          icon={<PixelScribbleIcon className="size-3.5" data-icon={"inline-start"} />}
+          icon={<PixelScribbleIcon data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/art"
           aria-current={pathname === "/art" ? "true" : "false"}
@@ -203,7 +203,7 @@ export function Header() {
 
         <HeaderButton
           label="Play"
-          icon={<PixelPointerIcon className="size-3.5" data-icon={"inline-start"} />}
+          icon={<PixelPointerIcon data-icon={"inline-start"} />}
           hideTextOnMobile={false}
           href="/playground"
           aria-current={pathname === "/playground" ? "true" : "false"}
@@ -214,19 +214,13 @@ export function Header() {
         {process.env.NODE_ENV === "development" && (
           <>
             <HeaderButton
-              label="Components"
+              label="QA"
               icon={<IconComponents data-icon={isMobile ? null : "inline-start"} />}
               hideTextOnMobile={true}
-              href="/components"
-              aria-current={pathname === "/components" ? "true" : "false"}
+              href="/private/qa"
+              aria-current={pathname === "/private/qa" ? "true" : "false"}
             />
-            <HeaderButton
-              label="Private"
-              icon={<IconBlobFilled data-icon={isMobile ? null : "inline-start"} />}
-              hideTextOnMobile={true}
-              href="/private"
-              aria-current={pathname === "/private" ? "true" : "false"}
-            />
+            <HeaderButton label="Dev" hideTextOnMobile={true} href="/private" aria-current={pathname === "/private" ? "true" : "false"} />
           </>
         )}
         <ThemeSettings className="font-pixel text-[11px] uppercase" />
@@ -252,18 +246,14 @@ function HeaderButton({
   icon,
   hideTextOnMobile = false,
   ...props
-}: React.ComponentProps<typeof LinkButton> & { label: string; icon: React.ReactNode; hideTextOnMobile?: boolean }) {
+}: React.ComponentProps<typeof LinkButton> & { label: string; icon?: React.ReactNode; hideTextOnMobile?: boolean }) {
   const isMobile = useMediaQuery("max-md");
   return (
     <LinkButton
       {...props}
       variant="ghost"
-      size={isMobile && hideTextOnMobile && icon ? "icon-sm" : "sm"}
-      className={cn(
-        "font-pixel text-[11px] uppercase aria-current:bg-accent aria-current:text-accent-foreground",
-        "[&_svg]:size-2.75",
-        props.className
-      )}
+      size={isMobile && hideTextOnMobile && icon ? "icon" : "sm"}
+      className={cn("font-pixel text-[11px] uppercase aria-current:bg-accent aria-current:text-accent-foreground", props.className)}
     >
       {icon}
       <span className={cn(hideTextOnMobile && "max-md:sr-only")}>{label}</span>

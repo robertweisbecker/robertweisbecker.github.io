@@ -122,9 +122,9 @@ const staticPages: SearchItem[] = [
 
 const privatePages: SearchItem[] = [
   {
-    value: "components",
-    label: "Components",
-    path: "/components",
+    value: "qa",
+    label: "QA",
+    path: "/private/qa",
     icon: itemIcon(IconComponents),
     category: "Testing",
     group: "Private",

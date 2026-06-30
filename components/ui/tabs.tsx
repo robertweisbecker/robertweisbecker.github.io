@@ -62,12 +62,12 @@ function TabsTrigger({ className, children, label, ...props }: TabsPrimitive.Tab
     <TabsPrimitive.Tab
       data-slot="tabs-trigger"
       className={cn(
-        "relative inline-flex h-full flex-1 items-center justify-center gap-[calc(var(--tab-padding-x)/1.5)] px-(--tab-padding-x) py-(--tab-padding-y) whitespace-nowrap transition-[color,background,background-color,box-shadow,border-radius] duration-200 ease-in-out group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground hover:not-disabled:not-data-active:not-active:bg-accent",
+        "relative inline-flex h-full flex-1 items-center justify-center gap-[calc(var(--tab-padding-x)/1.5)] px-(--tab-padding-x) py-(--tab-padding-y) whitespace-nowrap transition-[color,background,background-color,box-shadow,border-radius,outline] duration-200 ease-in-out group-data-vertical/tabs:w-full group-data-vertical/tabs:justify-start hover:text-foreground hover:not-disabled:not-data-active:not-active:bg-accent",
         "focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-ring",
         "disabled:opacity-50 aria-disabled:opacity-50 [&_svg]:pointer-events-none",
         "[&_svg]:-mx-[calc(var(--tab-padding-x)/4)] [&_svg]:shrink-0 [&_svg]:opacity-72 [&_svg:not([class*='size-'])]:size-[1em]",
         "data-active:bg-transparent data-active:text-foreground",
-        "group-data-[variant=pill]/tabs-list:rounded-(--tabs-radius) group-data-[variant=pill]/tabs-list:bg-transparent!",
+        "group-data-[variant=pill]/tabs-list:rounded-(--tabs-radius)",
         // "will-change-contents",
         "[--tab-gap:--spacing(2)]",
         className

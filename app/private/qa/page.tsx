@@ -54,31 +54,34 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Collapsible } from "@base-ui/react/collapsible";
 import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
-import { Section } from "./section";
+import { Section } from "@/components/section";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { DataList } from "@/components/ui/data-list";
+import { TableOfContents } from "@/components/table-of-contents";
+import type { TocItem } from "@/lib/types";
 
 const ComponentDemos = dynamic(() => import("./component-demos").then((module) => ({ default: module.ComponentDemos })), {
   loading: () => <p className="text-sm text-muted-foreground">Loading additional component demos…</p>,
 });
 
-export default function ComponentsPage() {
+export default function QaPage() {
   const [isLoading, setLoading] = useState(false);
   return (
-    <div className="mx-auto grid min-h-screen grid-rows-[auto_1fr_auto]">
-      <header className="border-x border-t border-dashed bg-muted p-4">
-        <Heading level={1}>Components</Heading>
-        <p className="text-muted-foreground">Kitchen sink</p>
-      </header>
-      <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[240px_1fr_240px]">
-        <aside className="order-2 border-s border-t border-dashed bg-muted p-4 md:order-1">
-          <Sidebar />
-        </aside>
+    <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-8 lg:grid-cols-[14rem_minmax(0,1fr)]">
+      <aside className="not-prose self-start max-lg:hidden lg:sticky lg:top-20">
+        <TableOfContents toc={QA_TOC} title="QA" />
+      </aside>
 
-        <main className="order-1 max-w-full border-x border-t border-dashed p-4 md:order-2">
+      <main className="min-w-0">
+        <header className="mb-8">
+          <Heading level={1}>QA</Heading>
+          <p className="text-sm text-muted-foreground">Private component QA surface.</p>
+        </header>
+
+        <div className="mb-8 flex flex-wrap items-center gap-2">
           <Badge variant="beta">ßeta</Badge>
           <Button
             loading={isLoading}
@@ -89,7 +92,12 @@ export default function ComponentsPage() {
           >
             Loading
           </Button>
+        </div>
 
+        <section className="grid gap-4">
+          <Heading level={2} id="ui-components">
+            UI components
+          </Heading>
           <Section title="Button" className="gap-4">
             <div className="flex flex-wrap gap-2">
               <div className="squircle size-20 rounded-xl bg-destructive"></div>
@@ -545,94 +553,82 @@ export default function ComponentsPage() {
               <DescriptionListValue>Washington, DC</DescriptionListValue>
             </DescriptionList>
           </Section>
+        </section>
+
+        <section className="mt-12 grid gap-4">
+          <Heading level={2} id="custom-components">
+            Custom components
+          </Heading>
           <ComponentDemos />
-        </main>
-        <aside className="order-3 hidden border-e border-t bg-muted p-4 lg:block">Right</aside>
-      </div>
-      <footer className="border p-4">Footer</footer>
+        </section>
+      </main>
     </div>
   );
 }
 
-const UI_LINKS: { href: string; label: string }[] = [
-  { href: "#alert", label: "Alert" },
-  { href: "#alert-dialog", label: "Alert Dialog" },
-  { href: "#avatar", label: "Avatar" },
-  { href: "#badge", label: "Badge" },
-  { href: "#button", label: "Button" },
-  { href: "#button-group", label: "Button Group" },
-  { href: "#card", label: "Card" },
-  { href: "#carousel", label: "Carousel" },
-  { href: "#checkbox", label: "Checkbox" },
-  { href: "#code", label: "Code" },
-  { href: "#collapsible", label: "Collapsible" },
-  { href: "#combobox", label: "Combobox" },
-  { href: "#copy-button", label: "Copy Button" },
-  { href: "#data-list", label: "Data List" },
-  { href: "#description-list", label: "Description List" },
-  { href: "#dialog", label: "Dialog" },
-  { href: "#dropdown-menu", label: "Dropdown Menu" },
-  { href: "#form-input", label: "Form & Input" },
-  { href: "#heading-levels", label: "Heading" },
-  { href: "#input-group", label: "Input Group" },
-  { href: "#item", label: "Item" },
-  { href: "#kbd", label: "Kbd" },
-  { href: "#number-field", label: "Number Field" },
-  { href: "#popover", label: "Popover" },
-  { href: "#scroll-area", label: "Scroll Area" },
-  { href: "#select", label: "Select" },
-  { href: "#separator", label: "Separator" },
-  { href: "#slider", label: "Slider" },
-  { href: "#switch", label: "Switch" },
-  { href: "#tabs", label: "Tabs" },
-  { href: "#toggle-togglegroup", label: "Toggle" },
-  { href: "#toolbar", label: "Toolbar" },
-  { href: "#tooltip", label: "Tooltip" },
+const UI_TOC_ITEMS = [
+  { id: "button", text: "Button" },
+  { id: "badge", text: "Badge" },
+  { id: "card", text: "Card" },
+  { id: "device-frame", text: "Device Frame" },
+  { id: "button-group", text: "Button Group" },
+  { id: "form-input", text: "Form & Input" },
+  { id: "select", text: "Select" },
+  { id: "toggle-togglegroup", text: "Toggle & ToggleGroup" },
+  { id: "toolbar", text: "Toolbar" },
+  { id: "tabs", text: "Tabs" },
+  { id: "chrome-tabs", text: "Chrome Tabs" },
+  { id: "dialog", text: "Dialog" },
+  { id: "alert-dialog", text: "Alert Dialog" },
+  { id: "dropdown-menu", text: "Dropdown Menu" },
+  { id: "popover", text: "Popover" },
+  { id: "tooltip", text: "Tooltip" },
+  { id: "collapsible", text: "Collapsible" },
+  { id: "separator", text: "Separator" },
+  { id: "scroll-area", text: "Scroll Area" },
+  { id: "data-list", text: "Data List" },
+  { id: "description-list", text: "Description List" },
 ];
 
-const CUSTOM_LINKS: { href: string; label: string }[] = [
-  { href: "#back-button", label: "Back Button" },
-  { href: "#chrome-tabs", label: "Chrome Tabs" },
-  { href: "#code-block", label: "Code Block" },
-  { href: "#color-swatch-group", label: "Color Swatch Group" },
-  { href: "#device-frame", label: "Device Frame" },
-  { href: "#focus-polaroid-fan", label: "Focus Polaroid Fan" },
-  { href: "#icons", label: "Icons" },
-  { href: "#image", label: "Image" },
-  { href: "#image-modal", label: "Image Modal" },
-  { href: "#info-tip", label: "Info Tip" },
-  { href: "#link-out", label: "Link Out" },
-  { href: "#mark-note", label: "Mark Note" },
-  { href: "#mode-toggle", label: "Mode Toggle" },
-  { href: "#number-slider", label: "Number Slider" },
-  { href: "#stats", label: "Stats" },
-  { href: "#table-of-contents", label: "Table of Contents" },
-  { href: "#theme-settings", label: "Theme Settings" },
-  { href: "#video", label: "Video" },
+const CUSTOM_TOC_ITEMS = [
+  { id: "animate-height", text: "Animate Height" },
+  { id: "motion-text", text: "Motion Text" },
+  { id: "alert", text: "Alert" },
+  { id: "avatar", text: "Avatar" },
+  { id: "checkbox", text: "Checkbox" },
+  { id: "code", text: "Code" },
+  { id: "combobox", text: "Combobox" },
+  { id: "copy-button", text: "Copy Button" },
+  { id: "input-group", text: "Input Group" },
+  { id: "item", text: "Item" },
+  { id: "index-list", text: "Index List" },
+  { id: "kbd", text: "Kbd" },
+  { id: "number-field", text: "Number Field" },
+  { id: "slider", text: "Slider" },
+  { id: "switch", text: "Switch" },
+  { id: "heading-levels", text: "Heading Levels" },
+  { id: "table-of-contents", text: "Table of Contents" },
+  { id: "link-out", text: "Link Out" },
+  { id: "back-button", text: "Back Button" },
+  { id: "code-block", text: "Code Block" },
+  { id: "demo", text: "Demo" },
+  { id: "card-fan", text: "Card Fan" },
+  { id: "info-tip", text: "Info Tip" },
+  { id: "mode-toggle", text: "Mode Toggle" },
+  { id: "number-slider", text: "Number Slider" },
+  { id: "stats", text: "Stats" },
+  { id: "color-swatch-group", text: "Color Swatch Group" },
+  { id: "icons", text: "Icons" },
+  { id: "image", text: "Image" },
+  { id: "image-modal", text: "Image Modal" },
+  { id: "theme-settings", text: "Theme Settings" },
+  { id: "mark-note", text: "Mark Note" },
+  { id: "video", text: "Video" },
 ];
 
-function SidebarGroup({ title, links }: { title: string; links: { href: string; label: string }[] }) {
-  return (
-    <div>
-      <p className="mb-1 font-medium text-muted-foreground">{title}</p>
-      <ul className="flex flex-col gap-1">
-        {links.map((link) => (
-          <li key={link.href}>
-            <a className="link" href={link.href}>
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function Sidebar() {
-  return (
-    <nav className="sticky top-4 flex max-h-[calc(100vh-10rem)] flex-col gap-4 overflow-y-auto overscroll-contain pb-4 text-xs">
-      <SidebarGroup title="UI" links={UI_LINKS} />
-      <SidebarGroup title="Custom" links={CUSTOM_LINKS} />
-    </nav>
-  );
-}
+const QA_TOC: TocItem[] = [
+  { id: "ui-components", text: "UI components", depth: 2 },
+  ...UI_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "custom-components", text: "Custom components", depth: 2 },
+  ...CUSTOM_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+];

@@ -5,7 +5,7 @@ import { Separator as SeparatorPrimitive } from "@base-ui/react/separator";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const separatorVariants = cva(
-  "data-horizontal:w-full data-horizontal:min-w-0 data-vertical:min-h-0 data-horizontal:grow data-horizontal:flex data-vertical:self-stretch shrink-0 [--separator-color:var(--border)] data-horizontal:w-stretch ",
+  "data-horizontal:w-full data-horizontal:min-w-0 data-vertical:min-h-0 data-horizontal:grow data-horizontal:flex data-vertical:self-center shrink-0 [--separator-color:var(--border)] data-horizontal:w-stretch ",
   {
     variants: {
       variant: {

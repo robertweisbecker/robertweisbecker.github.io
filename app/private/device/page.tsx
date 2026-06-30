@@ -24,10 +24,10 @@ export default function DevicePreviewPage() {
               <code className="rounded bg-muted px-1 py-0.5 text-xs">Device.Browser</code>,{" "}
               <code className="rounded bg-muted px-1 py-0.5 text-xs">Device.Desktop</code>, and composable{" "}
               <code className="rounded bg-muted px-1 py-0.5 text-xs">Device.Shine</code>. Compare with the legacy{" "}
-              <Link href="/components#device-frame" className="link font-medium">
+              <Link href="/private/qa#device-frame" className="link font-medium">
                 Device Frame
               </Link>{" "}
-              section on the components page.
+              section on the QA page.
             </p>
           </header>
 

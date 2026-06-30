@@ -248,6 +248,22 @@ export function CursorIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+export function ClipboardIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width={16} height={16} viewBox="0 0 16 16" fill="currentColor" {...props}>
+      <path
+        opacity="0.5"
+        d="M12 3.26953C12.5973 3.61546 13 4.26007 13 5V12C13 13.1046 12.1046 14 11 14H5C3.89543 14 3 13.1046 3 12V5C3 4.26007 3.40267 3.61546 4 3.26953V3.45215C4.00002 3.71837 4.05328 4.09053 4.30078 4.43359C4.74057 5.04284 5.81625 6 8 6C10.1838 6 11.2594 5.04284 11.6992 4.43359C11.9467 4.09053 12 3.71837 12 3.45215V3.26953Z"
+        fill="currentColor"
+      />
+      <path
+        d="M11 2.83333V3.55935C11 3.63009 10.9854 3.69985 10.9479 3.75988C10.7591 4.0628 10.0121 5 8 5C5.98786 5 5.24094 4.0628 5.05208 3.75988C5.01465 3.69985 5 3.63009 5 3.55935V2.83333C5 2.55719 5.22386 2.33333 5.5 2.33333H6.05556C6.30102 2.33333 6.5 2.13435 6.5 1.88889C6.5 1.39797 6.89797 1 7.38889 1H8.61111C9.10203 1 9.5 1.39797 9.5 1.88889C9.5 2.13435 9.69898 2.33333 9.94444 2.33333H10.5C10.7761 2.33333 11 2.55719 11 2.83333Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export function CheckIconStraight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg fill="currentcolor" width="10" height="10" viewBox="0 0 10 10" {...props}>

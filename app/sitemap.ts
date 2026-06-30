@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://bob.fyi";
 
-const staticRoutes = ["/", "/about", "/components", "/posts"] as const;
+const staticRoutes = ["/", "/about", "/posts"] as const;
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {

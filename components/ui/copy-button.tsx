@@ -5,7 +5,7 @@ import { Toast } from "@base-ui/react/toast";
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { IconClipboard } from "@tabler/icons-react";
+import { ClipboardIcon } from "@/components/icons";
 import { AnimatePresence, motion } from "motion/react";
 
 interface CopyButtonProps extends Omit<React.ComponentProps<typeof Button>, "children"> {
@@ -91,10 +91,10 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
               exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: 45 }}
               transition={{
-                duration: 0.1,
+                duration: 0.15,
               }}
             >
-              <rect x="1" y="1" width="22" rx="11" height="22" className="fill-border" stroke="currentColor" strokeWidth={1.5} />
+              <rect x="1" y="1" width="22" rx="11" height="22" className="fill-border" />
               <path
                 className={cn(isCopied ? "animate-svg-draw" : "")}
                 d="M6.5 13.5L11 17.8C12 14 14 10 16.5 7.5"
@@ -110,14 +110,14 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
           ) : (
             <motion.div
               key="copy-icon"
-              initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: 45 }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: -45 }}
+              initial={{ opacity: 0, scale: 0.75, filter: "blur(4px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 0.75, filter: "blur(4px)" }}
               transition={{
-                duration: 0.1,
+                duration: 0.15,
               }}
             >
-              <IconClipboard className="size-[1.25em] *:fill-current/10" strokeWidth={1.5} />
+              <ClipboardIcon className="size-[1.25em]" />
             </motion.div>
           )}
           {/* </motion.div> */}

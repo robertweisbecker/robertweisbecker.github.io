@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverHeader, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -10,7 +11,7 @@ import { IconPlus, IconTrash } from "@tabler/icons-react";
 import * as React from "react";
 import { Field, FieldLabel } from "./ui/field";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "./ui/input-group";
-import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "./ui/item";
+import { Item, ItemActions, ItemContent, ItemGroup, ItemMedia, ItemTitle } from "./ui/item";
 import { Kbd } from "./ui/kbd";
 import { ScrollArea } from "./ui/scroll-area";
 
@@ -101,9 +102,13 @@ export function ColorSwatchGroup({
             if (nextValue) onValueChange(nextValue);
           }}
           size="sm"
-          spacing={1}
-          className={cn("flex-wrap rounded-full py-1", className)}
+          spacing={0.5}
+          variant="outline"
+          shape="round"
+          data-columns={columns}
+          className={cn("flex-wrap rounded-full!", className)}
           aria-label="Choose a swatch color"
+          render={<motion.div />}
         >
           {allColors.map((swatch) => (
             <TooltipTrigger
@@ -115,17 +120,36 @@ export function ColorSwatchGroup({
                   value={swatch.value}
                   aria-label={swatch.label}
                   className={cn(
-                    "aspect-square h-8 w-8 rounded-full border p-0.5",
-                    "group data-pressed:border-primary data-pressed:bg-muted data-pressed:ring-1 data-pressed:ring-primary"
+                    "relative aspect-square h-8 w-8 rounded-full p-1",
+                    "group cursor-pointer outline-transparent transition-[border,background,outline-width,outline-offset] ease-out-quint hover:border-current data-pressed:outline-3 data-pressed:-outline-offset-1"
                   )}
                   style={{ touchAction: "manipulation", color: swatch.color }}
                 />
               }
             >
-              <span
-                className="peer block aspect-square size-full shrink-0 origin-center rounded-full bg-current inset-shadow-xs inset-shadow-black/20 outline -outline-offset-1 outline-foreground/20 transition-[transform,scale,outline,box-shadow,width,height] group-hover:outline-foreground/50 group-data-pressed:size-[calc(100%-4px)]"
+              <motion.span
+                className={cn(
+                  "peer pointer-events-none block aspect-square size-full shrink-0 origin-center rounded-full bg-current inset-shadow-xs inset-ring inset-shadow-black/20 inset-ring-foreground/20 group-hover:bg-[color-mix(in_srgb,currentColor_90%,var(--color-background))] group-hover:inset-ring-foreground/50 group-data-pressed:size-[calc(100%-4px)]"
+                )}
                 aria-hidden
+                animate={{
+                  scale: selected.includes(swatch.value) ? 0.9 : 1,
+                  outlineWidth: 4,
+                  outlineOffset: 2,
+                  outlineColor: selected.includes(swatch.value) ? swatch.color : "transparent",
+                }}
+                transition={{ type: "spring", visualDuration: 50 }}
               />
+              {/* {selected.includes(swatch.value) ? (
+                <motion.span
+                  key={`color-swatch-group-ring-${swatch.value}`}
+                  className="absolute inset-0 rounded-full border-transparent opacity-0"
+                  initial={{ borderWidth: 0, borderColor: "transparent", inset: 0, opacity: 0 }}
+                  animate={{ borderWidth: 4, borderColor: swatch.color, inset: -4, opacity: 1 }}
+                  layoutId="selected-color-ring"
+                  transition={{ type: "spring", duration: 0.3, bounce: 0.15 }}
+                />
+              ) : null} */}
             </TooltipTrigger>
           ))}
           {allowCustomColors ? (
@@ -164,11 +188,7 @@ export function ColorSwatchGroup({
                           aria-label="Custom color value"
                         />
                         <InputGroupAddon align="inline-end">
-                          <InputGroupButton
-                            type="submit"
-                            variant="ghost"
-                            // disabled={!isCustomColorValid}
-                          >
+                          <InputGroupButton type="submit" variant="ghost" disabled={!isCustomColorValid}>
                             Add{" "}
                             <Kbd data-icon="inline-end" className="translate-x-0.5">
                               ⏎

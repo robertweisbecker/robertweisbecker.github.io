@@ -7,20 +7,20 @@
 
 /* Default neutral — taupe; `:where` gives zero specificity so [data-neutral] wins */
 :where(:root) {
-  --neutral-25: var(--color-sand-25);
-  --neutral-50: var(--color-sand-50);
-  --neutral-75: var(--color-sand-75);
-  --neutral-100: var(--color-sand-100);
-  --neutral-200: var(--color-sand-200);
-  --neutral-300: var(--color-sand-300);
-  --neutral-400: var(--color-sand-400);
-  --neutral-500: var(--color-sand-500);
-  --neutral-600: var(--color-sand-600);
-  --neutral-700: var(--color-sand-700);
-  --neutral-800: var(--color-sand-800);
-  --neutral-900: var(--color-sand-900);
-  --neutral-950: var(--color-sand-950);
-  --neutral-975: var(--color-sand-975);
+  --neutral-25: var(--color-black-25);
+  --neutral-50: var(--color-black-50);
+  --neutral-75: var(--color-black-75);
+  --neutral-100: var(--color-black-100);
+  --neutral-200: var(--color-black-200);
+  --neutral-300: var(--color-black-300);
+  --neutral-400: var(--color-black-400);
+  --neutral-500: var(--color-black-500);
+  --neutral-600: var(--color-black-600);
+  --neutral-700: var(--color-black-700);
+  --neutral-800: var(--color-black-800);
+  --neutral-900: var(--color-black-900);
+  --neutral-950: var(--color-black-950);
+  --neutral-975: var(--color-black-975);
 
   --hue-25: var(--color-sand-25);
   --hue-50: var(--color-sand-50);
@@ -101,7 +101,8 @@
 /* ------------------------------------------------------------------ */
 /*  Ruby                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="ruby"] {
+[data-hue="ruby"],
+.hue-ruby {
   --hue-25: var(--color-ruby-25);
   --hue-50: var(--color-ruby-50);
   --hue-100: var(--color-ruby-100);
@@ -148,7 +149,8 @@
 /* ------------------------------------------------------------------ */
 /*  Red                                                                */
 /* ------------------------------------------------------------------ */
-[data-hue="red"] {
+[data-hue="red"],
+.hue-red {
   --hue-25: var(--color-red-25);
   --hue-50: var(--color-red-50);
   --hue-100: var(--color-red-100);
@@ -181,7 +183,8 @@
 /* ------------------------------------------------------------------ */
 /*  Orange                                                             */
 /* ------------------------------------------------------------------ */
-[data-hue="orange"] {
+[data-hue="orange"],
+.hue-orange {
   --hue-25: var(--color-orange-25);
   --hue-50: var(--color-orange-50);
   --hue-100: var(--color-orange-100);
@@ -214,7 +217,8 @@
 /* ------------------------------------------------------------------ */
 /*  Yellow                                                             */
 /* ------------------------------------------------------------------ */
-[data-hue="yellow"] {
+[data-hue="yellow"],
+.hue-yellow {
   --hue-25: var(--color-yellow-25);
   --hue-50: var(--color-yellow-50);
   --hue-100: var(--color-yellow-100);
@@ -261,7 +265,8 @@
 /* ------------------------------------------------------------------ */
 /*  Gold                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="gold"] {
+[data-hue="gold"],
+.hue-gold {
   --hue-25: var(--color-gold-25);
   --hue-50: var(--color-gold-50);
   --hue-100: var(--color-gold-100);
@@ -308,7 +313,8 @@
 /* ------------------------------------------------------------------ */
 /*  Lime                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="lime"] {
+[data-hue="lime"],
+.hue-lime {
   --hue-25: var(--color-lime-25);
   --hue-50: var(--color-lime-50);
   --hue-100: var(--color-lime-100);
@@ -341,7 +347,8 @@
 /* ------------------------------------------------------------------ */
 /*  Green                                                              */
 /* ------------------------------------------------------------------ */
-[data-hue="green"] {
+[data-hue="green"],
+.hue-green {
   --hue-25: var(--color-green-25);
   --hue-50: var(--color-green-50);
   --hue-100: var(--color-green-100);
@@ -388,7 +395,8 @@
 /* ------------------------------------------------------------------ */
 /*  Jade                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="jade"] {
+[data-hue="jade"],
+.hue-jade {
   --hue-25: var(--color-jade-25);
   --hue-50: var(--color-jade-50);
   --hue-100: var(--color-jade-100);
@@ -421,7 +429,8 @@
 /* ------------------------------------------------------------------ */
 /*  Teal                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="teal"] {
+[data-hue="teal"],
+.hue-teal {
   --hue-25: var(--color-teal-25);
   --hue-50: var(--color-teal-50);
   --hue-100: var(--color-teal-100);
@@ -454,7 +463,8 @@
 /* ------------------------------------------------------------------ */
 /*  Cyan                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="cyan"] {
+[data-hue="cyan"],
+.hue-cyan {
   --hue-25: var(--color-cyan-25);
   --hue-50: var(--color-cyan-50);
   --hue-100: var(--color-cyan-100);
@@ -487,7 +497,8 @@
 /* ------------------------------------------------------------------ */
 /*  Blue                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="blue"] {
+[data-hue="blue"],
+.hue-blue {
   --hue-25: var(--color-blue-25);
   --hue-50: var(--color-blue-50);
   --hue-100: var(--color-blue-100);
@@ -520,7 +531,8 @@
 /* ------------------------------------------------------------------ */
 /*  Navy                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="navy"] {
+[data-hue="navy"],
+.hue-navy {
   --hue-25: var(--color-navy-25);
   --hue-50: var(--color-navy-50);
   --hue-100: var(--color-navy-100);
@@ -553,7 +565,8 @@
 /* ------------------------------------------------------------------ */
 /*  Indigo                                                             */
 /* ------------------------------------------------------------------ */
-[data-hue="indigo"] {
+[data-hue="indigo"],
+.hue-indigo {
   --hue-25: var(--color-indigo-25);
   --hue-50: var(--color-indigo-50);
   --hue-100: var(--color-indigo-100);
@@ -586,7 +599,8 @@
 /* ------------------------------------------------------------------ */
 /*  Violet                                                             */
 /* ------------------------------------------------------------------ */
-[data-hue="violet"] {
+[data-hue="violet"],
+.hue-violet {
   --hue-25: var(--color-violet-25);
   --hue-50: var(--color-violet-50);
   --hue-100: var(--color-violet-100);
@@ -619,7 +633,8 @@
 /* ------------------------------------------------------------------ */
 /*  Purple                                                             */
 /* ------------------------------------------------------------------ */
-[data-hue="purple"] {
+[data-hue="purple"],
+.hue-purple {
   --hue-25: var(--color-purple-25);
   --hue-50: var(--color-purple-50);
   --hue-100: var(--color-purple-100);
@@ -638,7 +653,8 @@
 /* ------------------------------------------------------------------ */
 /*  Magenta                                                            */
 /* ------------------------------------------------------------------ */
-[data-hue="magenta"] {
+[data-hue="magenta"],
+.hue-magenta {
   --hue-25: var(--color-magenta-25);
   --hue-50: var(--color-magenta-50);
   --hue-100: var(--color-magenta-100);
@@ -657,7 +673,8 @@
 /* ------------------------------------------------------------------ */
 /*  Pink                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="pink"] {
+[data-hue="pink"],
+.hue-pink {
   --hue-25: var(--color-pink-25);
   --hue-50: var(--color-pink-50);
   --hue-100: var(--color-pink-100);
@@ -690,7 +707,8 @@
 /* ------------------------------------------------------------------ */
 /*  Sand                                                               */
 /* ------------------------------------------------------------------ */
-[data-hue="sand"] {
+[data-hue="sand"],
+.hue-sand {
   --hue-25: var(--color-sand-25);
   --hue-50: var(--color-sand-50);
   --hue-100: var(--color-sand-100);
@@ -706,7 +724,8 @@
   --hue-975: var(--color-sand-975);
 }
 
-[data-hue="gray"] {
+[data-hue="gray"],
+.hue-gray {
   --hue-25: var(--color-gray-25);
   --hue-50: var(--color-gray-50);
   --hue-100: var(--color-gray-100);
@@ -722,7 +741,8 @@
   --hue-975: var(--color-gray-975);
 }
 
-[data-hue="zinc"] {
+[data-hue="zinc"],
+.hue-zinc {
   --hue-25: var(--color-zinc-25);
   --hue-50: var(--color-zinc-50);
   --hue-100: var(--color-zinc-100);
@@ -738,7 +758,8 @@
   --hue-975: var(--color-zinc-975);
 }
 
-[data-hue="ash"] {
+[data-hue="ash"],
+.hue-ash {
   --hue-25: var(--color-ash-25);
   --hue-50: var(--color-ash-50);
   --hue-100: var(--color-ash-100);
@@ -754,7 +775,8 @@
   --hue-975: var(--color-ash-975);
 }
 
-[data-hue="sage"] {
+[data-hue="sage"],
+.hue-sage {
   --hue-25: var(--color-sage-25);
   --hue-50: var(--color-sage-50);
   --hue-100: var(--color-sage-100);
@@ -770,7 +792,8 @@
   --hue-975: var(--color-sage-975);
 }
 
-[data-hue="plum"] {
+[data-hue="plum"],
+.hue-plum {
   --hue-25: var(--color-plum-25);
   --hue-50: var(--color-plum-50);
   --hue-100: var(--color-plum-100);
@@ -786,7 +809,8 @@
   --hue-975: var(--color-plum-975);
 }
 
-[data-hue="steel"] {
+[data-hue="steel"],
+.hue-steel {
   --hue-25: var(--color-steel-25);
   --hue-50: var(--color-steel-50);
   --hue-100: var(--color-steel-100);

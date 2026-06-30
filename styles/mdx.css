@@ -67,12 +67,12 @@ Adapted from https://github.com/tailwindlabs/tailwindcss.com/blob/main/src/app/t
 
 .prose h2 {
   color: var(--prose-headings);
-  @apply mt-16 mb-4 scroll-mt-12 text-base font-medium tracking-[-.02em];
+  @apply mt-16 mb-4 scroll-mt-20 text-base font-[550] tracking-[-.02em];
 }
 
 .prose h3 {
   color: var(--prose-headings);
-  @apply mt-12 mb-3 scroll-mt-8 text-[15px] font-medium tracking-[-.016em];
+  @apply mt-12 mb-3 scroll-mt-20 text-[15px] font-medium tracking-[-.016em];
 }
 
 .prose h4 {

@@ -237,7 +237,7 @@
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
   --muted: --alpha(var(--color-neutral-975) / 50%);
-  --muted-foreground: var(--neutral-300);
+  --muted-foreground: var(--neutral-400);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
   --destructive: var(--error-600);
@@ -325,6 +325,7 @@
   }
   .rounded-full {
     /* eslint-disable-next-line css/no-unknown-properties */
+    /* prettier-ignore */
     corner-shape: initial;
   }
 }
@@ -362,8 +363,8 @@
   .mark {
     --mark-origin: -10% 0%;
     --mark-radius: 60% 93% 1ch 55% / 37% 2ch 5ex 160%;
-    --mark-dark: var(--hue-700);
-    --mark-light: var(--hue-200);
+    --mark-dark: var(--color-blue-600);
+    --mark-light: var(--color-blue-200);
     @apply bg-blend-multiply [--mark-bg:var(--mark-light)] [--mark-fg:var(--mark-dark)];
     @variant dark {
       @apply bg-blend-screen [--mark-bg:var(--mark-dark)] [--mark-fg:var(--mark-light)];
@@ -374,6 +375,12 @@
   strong {
     @apply font-[525] tracking-[-0.02em] text-foreground;
   }
+}
+
+mark[data-hue],
+.mark[data-hue] {
+  --mark-dark: var(--hue-600);
+  --mark-light: var(--hue-200);
 }
 
 @utility border-hairline {
@@ -472,20 +479,23 @@
 
 @utility ui-input {
   @apply w-full min-w-0 rounded-md border border-input bg-card/50 bg-clip-padding px-2.5 py-1 text-base text-foreground transition-[color,background-color,border-color,box-shadow] outline-none sm:text-sm;
+  @variant read-only {
+    @apply select-all focus-visible:border-input [data-dirty]:text-muted-foreground;
+  }
   @variant placeholder {
     @apply text-muted-foreground/50;
   }
   @variant hover {
-    @apply border-muted-foreground not-focus:not-focus-within:not-disabled:bg-input/2.5;
+    @apply not-focus-visible:border-muted-foreground not-focus:not-focus-within:not-disabled:bg-input/2.5 focus-visible:border-ring;
   }
   @variant active {
-    @apply border-input;
+    @apply not-focus-visible:border-input focus-within:border-ring focus-visible:border-ring;
   }
   @variant focus-visible {
-    @apply ring-1 ring-ring not-read-only:border-ring;
+    @apply border-ring ring-1 ring-ring not-read-only:border-ring;
   }
   @variant focus-within {
-    @apply ring-1 ring-ring not-read-only:border-ring;
+    @apply border-ring ring-1 ring-ring not-read-only:border-ring hover:border-ring active:border-ring;
   }
   @variant invalid {
     @apply border-destructive ring-1 ring-destructive/25;

@@ -113,7 +113,7 @@ export function CodeBlock({
           size="icon-xs"
           variant="ghost"
           disabled={isUpdating}
-          className="absolute top-2 right-2 z-1 backdrop-blur-xl"
+          className="absolute top-2 right-2 z-1 bg-background"
         />
       )}
       {collapsible ? (

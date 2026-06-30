@@ -26,7 +26,7 @@ function DialogClose({ ...props }: DialogPrimitive.Close.Props) {
 function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) {
   return (
     <DialogPrimitive.Backdrop
-      data-slot="dialog-overlay"
+      data-slot="dialog-backdrop"
       className={cn(
         "data-ending-style:backdrop-blur-0 data-starting-style:backdrop-blur-0 fixed inset-0 z-50 bg-[linear-gradient(to_bottom,hsl(0_0_0%/50%)_0,hsl(0_0_0%/100%)_50%)] opacity-20 backdrop-blur-[1.5px] transition-[backdrop-filter,opacity] duration-600 ease-out data-ending-style:opacity-0 data-ending-style:duration-350 data-ending-style:ease-[cubic-bezier(0.375,0.015,0.545,0.455)] data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute dark:opacity-70",
         className
@@ -40,8 +40,9 @@ function DialogPopup({
   className,
   children,
   showCloseButton = false,
+  unstyled = false,
   ...props
-}: DialogPrimitive.Popup.Props & { showCloseButton?: boolean }) {
+}: DialogPrimitive.Popup.Props & { showCloseButton?: boolean; unstyled?: boolean }) {
   const popupRef = React.useRef<HTMLDivElement>(null);
 
   return (
@@ -50,8 +51,9 @@ function DialogPopup({
       initialFocus={popupRef}
       data-slot="dialog-content"
       className={cn(
-        "relative z-50 grid w-full max-w-dialog gap-4 overflow-hidden rounded-2xl bg-card p-4 text-sm shadow-border-xl duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
-        "w-md",
+        "relative z-50 grid w-full max-w-dialog overflow-hidden duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+
+        unstyled === false && "w-md gap-4 rounded-2xl bg-popover p-4 shadow-border-xl",
         className
       )}
       {...props}
@@ -73,19 +75,26 @@ function DialogPopup({
 function DialogContent({
   className,
   children,
-  showCloseButton = true,
   keepMounted = false,
+  unstyled = false,
   ...props
-}: DialogPrimitive.Popup.Props & {
-  showCloseButton?: boolean;
+}: DialogPrimitive.Viewport.Props & {
   keepMounted?: boolean;
+  unstyled?: boolean;
+  backdrop?: boolean;
 }) {
-  const popupRef = React.useRef<HTMLDivElement>(null);
+  // const popupRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <DialogPortal keepMounted={keepMounted}>
-      <DialogOverlay />
-      <DialogPrimitive.Viewport className="group/dialog fixed inset-0 z-50 grid place-items-center px-4 py-6 lg:py-10">
+      {unstyled ? null : <DialogOverlay />}
+      <DialogPrimitive.Viewport
+        className={cn(
+          "group/dialog fixed inset-0 z-50 supports-[-webkit-touch-callout:none]:absolute",
+          unstyled === false && "grid place-items-center px-4 py-6 lg:py-10"
+        )}
+        {...props}
+      >
         {children}
       </DialogPrimitive.Viewport>
     </DialogPortal>
@@ -111,16 +120,19 @@ function DialogFooter({
   showCloseButton = false,
   variant = "default",
   children,
+  stack = false,
   ...props
 }: React.ComponentProps<"div"> & {
   showCloseButton?: boolean;
   variant?: "default" | "muted";
+  stack?: boolean;
 }) {
   return (
     <div
       data-slot="dialog-footer"
       className={cn(
-        "flex flex-col-reverse gap-2 rounded-b-[inherit] ps-2 sm:flex-row sm:justify-end",
+        "flex justify-end gap-2 rounded-b-[inherit] ps-2",
+        stack && "max-sm:flex-col-reverse max-sm:justify-stretch",
         variant === "muted" && "-mx-6 -mb-6 border-t bg-popover p-3 dark:-mx-[calc(--spacing(6)-1px)] dark:-mb-[calc(--spacing(6)-1px)]",
         className
       )}

@@ -1,10 +1,12 @@
 "use client";
 
 import { BackButton } from "@/components/back-button";
+import { AnimateHeight } from "@/components/animation/animate-height";
+import { MotionText } from "@/components/animation/MotionText";
 import { CodeBlock } from "@/components/code-block";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { Demo } from "@/components/demo";
-import { FocusPolaroidFan } from "@/components/demos/focus-polaroid-fan";
+import { CardFan } from "@/components/demos/card-fan";
 import {
   BaseUiIcon,
   CssIcon,
@@ -19,6 +21,7 @@ import {
 import { Image } from "@/components/image";
 import { ImageModal, ImageModalDrawer } from "@/components/image-modal";
 import forgeBeforeDemo from "@/public/assets/forge/forge-before.png";
+import { IndexList, type IndexListItem } from "@/components/index-list";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
 import { Mark, MarkNote } from "@/components/mark-note";
@@ -44,13 +47,13 @@ import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, 
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@/components/ui/number-field";
-import { Slider } from "@/components/ui/slider";
+import { Slider, SliderControl, SliderGroup, SliderLabel, SliderValue } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Video } from "@/components/video";
 import { IconAlertTriangle, IconInfoCircle, IconSearch, IconUser } from "@tabler/icons-react";
 import * as React from "react";
-import { Section } from "./section";
+import { Section } from "@/components/section";
 
 const FRAMEWORKS = [
   { value: "next", label: "Next.js" },
@@ -88,6 +91,58 @@ const TOC_DEMO_ITEMS = [
   { id: "toc-demo-client-component", text: "Client component", depth: 3 },
   { id: "toc-demo-server-component", text: "Server component", depth: 3 },
   { id: "toc-demo-options", text: "Options", depth: 2 },
+];
+
+const INDEX_LIST_DEMO_ITEMS: IndexListItem[] = [
+  {
+    id: "index-list-demo-foundations",
+    title: "Foundations",
+    description: "Tokens, color, spacing, and shared UI primitives.",
+    date: "2026",
+    path: "/private/qa",
+  },
+  {
+    id: "index-list-demo-navigation",
+    title: "Navigation",
+    description: "Menus, tabs, breadcrumbs, and index pages.",
+    date: "2026",
+    path: "/private/qa",
+  },
+  {
+    id: "index-list-demo-content",
+    title: "Content",
+    description: "MDX layouts, code blocks, callouts, and image treatment.",
+    date: "2025",
+    path: "/private/qa",
+  },
+  {
+    id: "index-list-demo-motion",
+    title: "Motion",
+    description: "Interaction feedback and low-friction transitions.",
+    date: "2025",
+    path: "/private/qa",
+  },
+  {
+    id: "index-list-demo-media",
+    title: "Media",
+    description: "Responsive images, modal viewing, and video embeds.",
+    date: "2024",
+    path: "/private/qa",
+  },
+  {
+    id: "index-list-demo-forms",
+    title: "Forms",
+    description: "Inputs, switches, sliders, and field composition.",
+    date: "2024",
+    path: "/private/qa",
+  },
+  {
+    id: "index-list-demo-feedback",
+    title: "Feedback",
+    description: "Alerts, tooltips, badges, and status indicators.",
+    date: "2023",
+    path: "/private/qa",
+  },
 ];
 
 function ComboboxDemo() {
@@ -161,9 +216,130 @@ function ThemeSettingsFieldsDemo() {
   );
 }
 
+function AnimateHeightDemo() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div className="grid w-full max-w-xl gap-3">
+      <Field orientation="horizontal" className="flex w-auto items-center gap-3 text-sm">
+        <FieldLabel>
+          <Switch checked={open} onCheckedChange={setOpen} />
+          <FieldContent>Expanded</FieldContent>
+        </FieldLabel>
+      </Field>
+      <AnimateHeight initialHeight="3.25rem" open={open} className="rounded-md border bg-card shadow-border-xs">
+        <div className="space-y-3 p-4 text-sm leading-relaxed">
+          <p>Measured content keeps the transition fluid as copy wraps across breakpoints.</p>
+          <p className="text-muted-foreground">
+            The closed state uses a CSS height value, so the preview can stay visible without item-level measurements.
+          </p>
+        </div>
+      </AnimateHeight>
+    </div>
+  );
+}
+
+function MotionTextDemo() {
+  const [replayKey, setReplayKey] = React.useState(0);
+  const [loopRunning, setLoopRunning] = React.useState(true);
+  const [scrambleKey, setScrambleKey] = React.useState(0);
+  const [morphAlternate, setMorphAlternate] = React.useState(false);
+
+  return (
+    <div className="grid w-full max-w-4xl gap-4 lg:grid-cols-2">
+      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-pixel text-[11px] text-muted-foreground uppercase">Reveal</p>
+          <Button size="xs" variant="ghost" type="button" onClick={() => setReplayKey((key) => key + 1)}>
+            Replay
+          </Button>
+        </div>
+        <MotionText.Reveal key={`css-${replayKey}`} className="text-xl font-semibold text-balance" duration={520} stagger={18}>
+          CSS timing keeps editorial text crisp.
+        </MotionText.Reveal>
+        <MotionText.Reveal
+          key={`motion-${replayKey}`}
+          type="motion"
+          as="p"
+          className="text-sm text-muted-foreground"
+          duration={420}
+          stagger={24}
+        >
+          Motion mode uses variants for future composition.
+        </MotionText.Reveal>
+      </div>
+
+      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+        <p className="font-pixel text-[11px] text-muted-foreground uppercase">Effect</p>
+        <MotionText.Effect key={`effect-${replayKey}`} per="word" preset="fade-in-blur" className="text-xl font-semibold text-balance">
+          Words can arrive with presets.
+        </MotionText.Effect>
+        <MotionText.Effect key={`effect-char-${replayKey}`} per="char" preset="slide" as="p" className="text-sm text-muted-foreground">
+          Characters can move independently.
+        </MotionText.Effect>
+      </div>
+
+      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+        <Field orientation="horizontal" className="flex w-auto items-center justify-between gap-3 text-sm">
+          <FieldLabel>
+            <Switch checked={loopRunning} onCheckedChange={setLoopRunning} />
+            <FieldContent>Loop</FieldContent>
+          </FieldLabel>
+        </Field>
+        <p className="text-xl font-semibold">
+          Interfaces feel{" "}
+          <MotionText.Loop trigger={loopRunning} interval={1.35} className="text-primary">
+            {["fast", "calm", "clear"]}
+          </MotionText.Loop>
+          .
+        </p>
+      </div>
+
+      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-pixel text-[11px] text-muted-foreground uppercase">Scramble</p>
+          <Button size="xs" variant="ghost" type="button" onClick={() => setScrambleKey((key) => key + 1)}>
+            Replay
+          </Button>
+        </div>
+        <MotionText.Scramble key={scrambleKey} className="font-mono text-xl font-semibold" duration={0.9}>
+          Signal locked
+        </MotionText.Scramble>
+      </div>
+
+      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+        <p className="font-pixel text-[11px] text-muted-foreground uppercase">Wave</p>
+        <MotionText.Wave className="text-xl font-semibold text-balance" yDistance={-3} zDistance={12} rotateYDistance={14}>
+          Wave through every glyph
+        </MotionText.Wave>
+      </div>
+
+      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-pixel text-[11px] text-muted-foreground uppercase">Morph</p>
+          <Button size="xs" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
+            Swap
+          </Button>
+        </div>
+        <MotionText.Morph className="text-xl font-semibold">
+          {morphAlternate ? "Motion text system" : "Modular text motion"}
+        </MotionText.Morph>
+      </div>
+    </div>
+  );
+}
+
 export function ComponentDemos() {
   return (
     <>
+      <Section title="Animate Height">
+        <AnimateHeightDemo />
+      </Section>
+
+      <Section title="Motion Text">
+        <MotionTextDemo />
+      </Section>
+
       <Section title="Alert">
         <div className="max-w-lg space-y-4">
           <Alert>
@@ -415,6 +591,12 @@ export function ComponentDemos() {
         </div>
       </Section>
 
+      <Section title="Index List">
+        <div className="max-w-2xl">
+          <IndexList items={INDEX_LIST_DEMO_ITEMS} maxVisibleItems={5} />
+        </div>
+      </Section>
+
       <Section title="Kbd">
         <div className="flex flex-wrap items-center gap-4">
           <Kbd>⌘</Kbd>
@@ -445,10 +627,17 @@ export function ComponentDemos() {
       </Section>
 
       <Section title="Slider">
-        <div className="max-w-sm space-y-6">
+        <div className="flex max-w-sm flex-col gap-6">
           <Slider defaultValue={[50]} />
           <Slider defaultValue={[25, 75]} />
           <Slider defaultValue={[40]} showValue orientation="horizontal" />
+          <SliderGroup defaultValue={[64]} className="flex-col items-stretch gap-2">
+            <SliderLabel className="flex items-center justify-between gap-3">
+              <span>Composable value</span>
+              <SliderValue>{(formattedValues) => `${formattedValues[0] ?? 0}%`}</SliderValue>
+            </SliderLabel>
+            <SliderControl />
+          </SliderGroup>
         </div>
       </Section>
 
@@ -640,9 +829,9 @@ export function ComponentDemos() {
         </div>
       </Section>
 
-      <Section title="Focus Polaroid Fan">
+      <Section title="Card Fan">
         <Demo title="Forge gallery" description="Click to center a card" caption="Focus to center" innerClass="min-h-[600px]">
-          <FocusPolaroidFan />
+          <CardFan />
         </Demo>
       </Section>
 
