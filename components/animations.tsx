@@ -3,90 +3,18 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { animate, useMotionValue, useMotionValueEvent, type Transition } from "motion/react";
+import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
 import { ArrowRotateLeft } from "@gravity-ui/icons";
-import { textRevealCharSegmenter, textRevealWordSegmenter } from "@/lib/text-reveal-segmenters";
-
-const iconTransition: Transition = { type: "spring", stiffness: 600, damping: 30 };
-const iconVariants = {
-  hidden: { opacity: 0, scale: 0.5, y: 4 },
-  visible: { opacity: 1, scale: 1, y: 0 },
-};
-
-export function TextReveal({
-  children,
-  style,
-  debug = false,
-  className,
-  duration = 500,
-  stagger = 30,
-  once = false,
-}: {
-  children: React.ReactNode;
-  style?: React.CSSProperties;
-  debug?: boolean;
-  className?: string;
-  splitBy?: "characters" | "words" | "lines";
-  duration?: number;
-  stagger?: number;
-  once?: boolean;
-}) {
-  const id = React.useId();
-  const [reset, setReset] = React.useState(0);
-
-  const text = typeof children === "string" ? children : children?.toString() || "";
-
-  const words = [...textRevealWordSegmenter.segment(text)];
-
-  let charIndex = 0;
-
-  return (
-    <div
-      className={cn(
-        "group/textReveal relative overflow-hidden transition-[opacity,transform]",
-        once ? "animate-text-reveal-initial" : "animate-text-reveal"
-      )}
-      id={id}
-    >
-      <h1
-        className={cn("whitespace-pre-wrap", className)}
-        key={reset}
-        style={{ "--duration": `${duration}ms`, "--stagger": `${stagger}ms`, ...style } as React.CSSProperties}
-      >
-        {words.map((word) => (
-          <span key={word.index} className="inline-block">
-            {[...textRevealCharSegmenter.segment(word.segment)].map((char) => {
-              const stableKey = `${word.index}-${char.index}`;
-              const indexForCss = charIndex++;
-              return (
-                <span
-                  id={`${id}-char-${stableKey}`}
-                  className="character"
-                  key={stableKey}
-                  style={{ "--index": indexForCss } as React.CSSProperties}
-                  aria-hidden
-                >
-                  {char.segment}
-                </span>
-              );
-            })}
-          </span>
-        ))}
-        <span className="sr-only">{text}</span>
-      </h1>
-      {debug && (
-        <Button
-          onClick={() => setReset((r) => r + 1)}
-          className="ease absolute top-1.5 right-0 m-1 translate-y-1 font-pixel text-[11px] opacity-0 transition-[opacity,translate] duration-100 group-hover/textReveal:translate-y-0 group-hover/textReveal:opacity-100"
-          size="icon-xs"
-          variant="ghost"
-        >
-          ↲
-        </Button>
-      )}
-    </div>
-  );
-}
+export {
+  MotionText,
+  MotionTextEffect,
+  MotionTextLoop,
+  MotionTextMorph,
+  MotionTextReveal,
+  MotionTextScramble,
+  MotionTextWave,
+  TextReveal,
+} from "./animation/MotionText";
 
 // //
 //  Pixel Filter
