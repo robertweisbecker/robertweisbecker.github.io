@@ -26,6 +26,8 @@ interface PixelFilterProps {
   crossLayers?: boolean;
 }
 
+const PIXEL_REVEAL_DEFAULT_SIZE = 12;
+
 export function PixelFilter({ id = "pixel-filter", size = 16, crossLayers = false }: PixelFilterProps) {
   return (
     <svg className="absolute inset-0">
@@ -96,10 +98,6 @@ export function PixelReveal({
   const [size, setSize] = React.useState(16);
   const [isAnimating, setIsAnimating] = React.useState(true);
   const [resetKey, setResetKey] = React.useState(0);
-  const PIXEL_DEFAULT_SETTINGS = {
-    size: 12,
-    isAnimating: true,
-  };
 
   useMotionValueEvent(pixelSize, "change", (latest) => {
     setSize(latest);
@@ -111,7 +109,7 @@ export function PixelReveal({
   }, []);
 
   React.useEffect(() => {
-    pixelSize.set(PIXEL_DEFAULT_SETTINGS.size);
+    pixelSize.set(PIXEL_REVEAL_DEFAULT_SIZE);
 
     const controls = animate(pixelSize, 4, {
       duration: duration,
@@ -119,7 +117,7 @@ export function PixelReveal({
       onComplete: () => setIsAnimating(false),
     });
     return controls.stop;
-  }, [resetKey]);
+  }, [duration, pixelSize, resetKey]);
 
   return (
     <div ref={containerRef} {...props} className={cn("group relative", className)}>

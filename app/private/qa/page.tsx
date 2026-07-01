@@ -340,7 +340,7 @@ export default function QaPage() {
                   }}
                 />
               </Button>
-              <Button variant="ghost" className="">
+              <Button variant="ghost">
                 Button 2
               </Button>
             </div>

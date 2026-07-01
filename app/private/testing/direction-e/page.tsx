@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 /*─────────────────────────────────────────────────────────
  * DIRECTION E — Polaroid Fan
  *
@@ -124,7 +126,7 @@ const CARD_W = 228;
 const CARD_H = 288;
 const FOCUS_W = 360;
 const FOCUS_H = 464;
-const FOCUS_SCALE = FOCUS_W / CARD_W; // ≈ 1.58
+const FOCUS_SCALE = Math.min(FOCUS_W / CARD_W, FOCUS_H / CARD_H); // ≈ 1.58
 const SPRING = { type: "spring" as const, visualDuration: 0.4, bounce: 0.15 };
 
 /* ─── Card face (polaroid) ───────────────────────────────── */
@@ -539,7 +541,7 @@ function MinimizedCard({
     <motion.div
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
-      // onClick={onClick}
+      onClick={onClick}
       animate={{
         x: fanConfig.x + neighborDx,
         y: isActive ? 0 : fanConfig.y,
@@ -605,11 +607,10 @@ function MinimizedCard({
 
 type ExpandedCardProps = {
   slide: Slide;
-  startIndex: number;
   onClose: () => void;
 };
 
-function ExpandedCard({ slide, startIndex, onClose }: ExpandedCardProps) {
+function ExpandedCard({ slide, onClose }: ExpandedCardProps) {
   const ids = cardIds(slide);
 
   /* Same structural pattern as MinimizedCard: outer div centers the card
@@ -649,10 +650,10 @@ function ExpandedCard({ slide, startIndex, onClose }: ExpandedCardProps) {
         </MotionCardHeader>
 
         <MotionCardContent layoutId={ids.image} className="min-h-0">
-          <Carousel opts={{ loop: true }} className="">
-            <CarouselViewport className="">
+          <Carousel opts={{ loop: true }}>
+            <CarouselViewport>
               {SLIDES.map((s) => (
-                <CarouselItem key={s.src} className="">
+                <CarouselItem key={s.src}>
                   <div className="relative w-full">
                     <img src={s.src} alt={s.alt} className="aspect-video object-contain" draggable={false} />
                   </div>
@@ -743,7 +744,6 @@ function Variation3() {
                   <ExpandedCard
                     key={expandedSlide.src}
                     slide={expandedSlide}
-                    startIndex={expandedIndex}
                     onClose={() => setExpandedIndex(null)}
                   />
                 )}

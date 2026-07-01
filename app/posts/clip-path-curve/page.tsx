@@ -17,7 +17,7 @@ export default function ClipPathCurvePage() {
     <>
       <div className="mx-auto flex max-w-xl flex-col gap-6">
         <section className="flex flex-col gap-4">
-          <p className="">
+          <p>
             A little UI for experimenting with and generating curves as CSS clip-path values using the{" "}
             <Code>
               shape(){" "}
@@ -42,11 +42,11 @@ export default function ClipPathCurvePage() {
             </Code>{" "}
             function.
           </p>
-          <p className="">
+          <p>
             Generate code as a Tailwind class, CSS, or a computed SVG. Use it for rounded corner cutouts or button addons as an alternative
             to masks.
           </p>
-          <p className="">Here are some examples:</p>
+          <p>Here are some examples:</p>
         </section>
         <section className="flex flex-col gap-2">
           <div className="grid w-full items-stretch gap-4 md:grid-cols-3">
@@ -119,7 +119,7 @@ export default function ClipPathCurvePage() {
             </CollapsibleTrigger>
           </h2>
           <CollapsiblePanel className="prose rounded-xl bg-foreground/2 p-4 md:-mx-4">
-            <ul className="">
+            <ul>
               <li>
                 <strong>Start with a corner. </strong>
                 For simple curves, choose an origin to quickly set the start point to a given corner. The end point will automatically

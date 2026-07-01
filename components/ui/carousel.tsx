@@ -101,7 +101,7 @@ function Carousel({
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [autoplayProgress, setAutoplayProgress] = React.useState(0);
 
-  const autoplay = () => (api?.plugins()?.autoplay as AutoplayType | undefined) ?? null;
+  const getAutoplay = React.useCallback(() => (api?.plugins()?.autoplay as AutoplayType | undefined) ?? null, [api]);
 
   // User-initiated navigation: reset autoplay's timer so the new slide gets a
   // fresh delay instead of inheriting the previous slide's countdown.
@@ -109,23 +109,23 @@ function Carousel({
   const goTo = React.useCallback(
     (index: number) => {
       api?.goTo(index);
-      autoplay()?.reset();
+      getAutoplay()?.reset();
     },
-    [api]
+    [api, getAutoplay]
   );
   const goToPrev = React.useCallback(() => {
     api?.goToPrev();
-    autoplay()?.reset();
-  }, [api]);
+    getAutoplay()?.reset();
+  }, [api, getAutoplay]);
   const goToNext = React.useCallback(() => {
     api?.goToNext();
-    autoplay()?.reset();
-  }, [api]);
+    getAutoplay()?.reset();
+  }, [api, getAutoplay]);
 
   const isFinished = autoplayEnabled && !isLoop && !isPlaying && selectedSnap === snaps.length - 1;
 
   const togglePlay = React.useCallback(() => {
-    const plug = autoplay();
+    const plug = getAutoplay();
     if (!plug) return;
     if (plug.isPlaying()) {
       userPaused.current = true;
@@ -134,15 +134,15 @@ function Carousel({
       userPaused.current = false;
       plug.play();
     }
-  }, [api]);
+  }, [getAutoplay]);
 
   const restartAutoplay = React.useCallback(() => {
-    const plug = autoplay();
+    const plug = getAutoplay();
     if (!plug) return;
     userPaused.current = false;
     api?.goTo(0);
     plug.play();
-  }, [api]);
+  }, [api, getAutoplay]);
 
   const delay = typeof autoplayOpts.delay === "number" ? autoplayOpts.delay : defaultAutoplayDelay;
 
@@ -167,7 +167,7 @@ function Carousel({
 
   // Wire autoplay: start stopped (in-view effect plays), listeners, last-snap interception.
   React.useEffect(() => {
-    const plug = autoplay();
+    const plug = getAutoplay();
     if (!api || !plug) return;
 
     plug.stop();
@@ -199,12 +199,12 @@ function Carousel({
       api.off("autoplay:stop", onStop);
       api.off("autoplay:select", onAutoplaySelect);
     };
-  }, [api, isLoop]);
+  }, [api, getAutoplay, isLoop]);
 
   // Drive the progress meter only while actually playing.
   React.useEffect(() => {
     if (!isPlaying) return;
-    const plug = autoplay();
+    const plug = getAutoplay();
     if (!plug) return;
     let rafId = 0;
     const tick = () => {
@@ -214,15 +214,15 @@ function Carousel({
     };
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [isPlaying, api, delay]);
+  }, [delay, getAutoplay, isPlaying]);
 
   // Lazy autoplay: only play while the carousel is in view (and user hasn't paused).
   React.useEffect(() => {
-    const plug = autoplay();
+    const plug = getAutoplay();
     if (!plug || !autoplayEnabled) return;
     if (isInView && !userPaused.current) plug.play();
     else if (!isInView && plug.isPlaying()) plug.stop();
-  }, [api, autoplayEnabled, isInView]);
+  }, [autoplayEnabled, getAutoplay, isInView]);
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -349,7 +349,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
-  const { orientation, goToPrev, canGoToPrev } = useCarousel();
+  const { goToPrev, canGoToPrev } = useCarousel();
   return (
     <Button
       data-slot="carousel-previous"
@@ -378,7 +378,7 @@ function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ..
 }
 
 function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
-  const { orientation, goToNext, canGoToNext } = useCarousel();
+  const { goToNext, canGoToNext } = useCarousel();
   return (
     <Button
       data-slot="carousel-next"
@@ -407,7 +407,7 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
 }
 
 function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolbar.Group>) {
-  const { snaps, selectedSnap, goTo, autoplayEnabled, isPlaying, autoplayProgress, orientation } = useCarousel();
+  const { snaps, selectedSnap, goTo, autoplayEnabled, isPlaying, autoplayProgress } = useCarousel();
 
   return (
     <Toolbar.Group
@@ -465,7 +465,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
 }
 
 function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolbar.Button>) {
-  const { autoplayEnabled, isPlaying, isFinished, togglePlay, restartAutoplay, orientation } = useCarousel();
+  const { autoplayEnabled, isPlaying, isFinished, togglePlay, restartAutoplay } = useCarousel();
 
   if (!autoplayEnabled) return null;
 

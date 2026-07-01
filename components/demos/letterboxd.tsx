@@ -5,13 +5,10 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { Item, ItemContent, ItemTitle, ItemDescription, ItemHeader, ItemFooter } from "../ui/item";
-import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 import { Vignette } from "../vignette";
-import { LinkButton } from "../ui/link-button";
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "../ui/tooltip";
-import { ScrollArea } from "../ui/scroll-area";
 
 type Film = {
   title: string;
@@ -22,24 +19,12 @@ type Film = {
   rating?: number;
 };
 
-type FilmList = {
-  title: string;
-  url?: string;
-  updatedDate?: string;
-  filmCount?: number;
-  previewFilms: {
-    url: string;
-    title: string;
-  }[];
-};
-
 const MIN_LOADING_VISIBLE_MS = 400;
 const CONTENT_REVEAL_DELAY_MS = 160;
 const MAX_POSTER_SETTLE_WAIT_MS = 800;
 
 export function Letterboxd({ maxFilms = 4 }) {
   const [films, setFilms] = useState<Film[]>([]);
-  const [lists, setLists] = useState<FilmList[]>([]);
   const [loading, setLoading] = useState(true);
   const [contentVisible, setContentVisible] = useState(false);
   const [loadedPosters, setLoadedPosters] = useState(0);
@@ -67,7 +52,6 @@ export function Letterboxd({ maxFilms = 4 }) {
 
         if (!ignore) {
           setFilms(data.films.slice(0, maxFilms));
-          setLists(data.lists);
         }
       } catch (error) {
         if (!ignore) {
@@ -180,7 +164,7 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
           }}
         />
       </div>
-      <ItemHeader className="">
+      <ItemHeader>
         <Vignette.Root transitionLength={16} inset={8} className="h-auto w-full shadow-border-md" radius="var(--radius-md)">
           <Vignette.Image
             src={film.posterUrl}
@@ -195,7 +179,7 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
           />
         </Vignette.Root>
       </ItemHeader>
-      <ItemContent className="">
+      <ItemContent>
         <ItemTitle className="line-clamp-1">
           {film.title}{" "}
           {film.rewatch && (
@@ -224,27 +208,6 @@ function FilmCard({ film, index, onPosterSettled }: { film: Film; index: number;
   );
 }
 
-function ListCard({ list }: { list: FilmList }) {
-  return (
-    <div className="group/list grid gap-2">
-      <div className="flex items-baseline gap-2">
-        <a className="leading-none font-medium" href={list.url}>
-          {list.title}
-        </a>
-        {list.filmCount ? <Badge variant="outline">{list.filmCount}</Badge> : null}
-      </div>
-      <ol className="grid gap-1 text-sm text-muted-foreground">
-        {list.previewFilms.map((film, index) => (
-          <li key={film.url} className="flex min-w-0 gap-2">
-            <span className="font-mono text-xs text-muted-foreground/60">{index + 1}</span>
-            <span className="truncate">{film.title}</span>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
 function LetterboxdSkeleton({ maxFilms }: { maxFilms: number }) {
   return (
     <div className="grid gap-3">
@@ -264,6 +227,8 @@ function LetterboxdSkeleton({ maxFilms }: { maxFilms: number }) {
   );
 }
 
+// Keep the custom SVG asset available for the paused Letterboxd header treatment.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function LetterboxdLogo() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" className="opacity-100!">

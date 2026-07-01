@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 
 function Label({ className, ...props }: React.ComponentProps<"label">) {
   return (
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control -- Primitive; use with Field/FieldLabel + control (Base UI).
     <label
       data-slot="label"
       className={cn(

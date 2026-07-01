@@ -74,7 +74,7 @@ function PolaroidFace({ slide }: { slide: Slide }) {
           draggable={false}
         />
       </div>
-      <div className="">
+      <div>
         <p className="mt-0.5 line-clamp-1 text-xs font-semibold text-foreground">{slide.caption}</p>
       </div>
     </div>

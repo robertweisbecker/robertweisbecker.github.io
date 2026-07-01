@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { ImageModal } from "@/components/image-modal";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -20,7 +22,7 @@ interface ImageToggleProps {
   imageProps?: Omit<ImageProps, "src">;
 }
 
-export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mode = "tabs", description, imageProps }: ImageToggleProps) {
+export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mode = "tabs", imageProps }: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
   const beforeUrl = imageSrc(before);
@@ -60,7 +62,6 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
         <div className="relative overflow-hidden rounded-md">
           <img
             src={beforeUrl}
-            className=""
             // style={{ opacity: 1 - sliderValue / 100 }}
             alt="Before image"
           />
@@ -91,10 +92,10 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
       </TabsList>
       {/* <div className="-mx-4 w-[calc(100%+(--spacing(8)))]"> */}
       <TabsContent value="before" keepMounted>
-        <Image src={before} caption={imageProps?.caption} />
+        <Image src={before} alt={`${tab1} image`} caption={imageProps?.caption} />
       </TabsContent>
       <TabsContent value="after" keepMounted>
-        <Image src={after} caption={imageProps?.caption} loading="eager" />
+        <Image src={after} alt={`${tab2} image`} caption={imageProps?.caption} loading="eager" />
       </TabsContent>
       {/* </div> */}
     </Tabs>

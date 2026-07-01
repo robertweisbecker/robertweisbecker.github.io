@@ -40,7 +40,7 @@ export type IndexListProps = {
 function renderMedia(icon: IndexListItem["icon"]) {
   if (typeof icon === "string") {
     return (
-      <ItemMedia variant="image" className="">
+      <ItemMedia variant="image">
         <Image src={icon} alt="" width={40} height={40} className="object-scale-down!" />
       </ItemMedia>
     );

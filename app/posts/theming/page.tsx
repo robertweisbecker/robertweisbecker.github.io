@@ -104,7 +104,7 @@ export default function ThemingPostPage() {
     <>
       <div className="mx-auto flex max-w-xl flex-col gap-6">
         <section className="flex flex-col gap-4">
-          <p className="">
+          <p>
             A working demo of the theming described in my{" "}
             <Link href="/projects/oklch" className="link">
               writeup

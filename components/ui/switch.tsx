@@ -5,8 +5,6 @@ import { Switch as SwitchPrimitive } from "@base-ui/react/switch";
 import { cva, VariantProps } from "class-variance-authority";
 import * as React from "react";
 
-const activeSelector = "in-[[role=switch]:active,[data-slot=label]:active,[data-slot=field-label]:active]";
-
 const switchVariants = cva(
   [
     // Default styles

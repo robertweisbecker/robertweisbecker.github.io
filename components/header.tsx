@@ -34,7 +34,6 @@ export function Header() {
   const isMobile = useMediaQuery("max-md");
   const pathname = usePathname();
   const anchorRef = React.useRef<HTMLDivElement>(null);
-  const isHome = pathname === "/";
   const previewHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const previewActions = React.useRef<PreviewCardPrimitive.Root.Actions | null>(null);
   const filteredProjects = projects.filter((project) => project.published);

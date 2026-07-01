@@ -72,13 +72,6 @@ const DEMO_SWATCHES = [
   { value: "#ec4899", label: "Pink", color: "#ec4899" },
 ];
 
-const CAROUSEL_SLIDES = [
-  { src: "/assets/udl/foundry-light.png", alt: "Foundry design system – light theme" },
-  { src: "/assets/forge/course-edit-after.png", alt: "Forge – course edit redesign" },
-  { src: "/assets/engage/engage-desktop.png", alt: "Engage – desktop layout" },
-  { src: "/assets/udl/figma-colors.png", alt: "UDL – Figma color tokens" },
-];
-
 const LOREM =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 const LOREM_ALT =

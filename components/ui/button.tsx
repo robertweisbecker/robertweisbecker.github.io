@@ -125,7 +125,7 @@ function Button({
       data-slot="button"
       data-loading={loading}
       disabled={loading || disabled}
-      focusableWhenDisabled={loading}
+      focusableWhenDisabled={focusableWhenDisabled ?? loading}
       className={cn(buttonVariants({ variant, size, rounded, className }))}
       {...props}
     >

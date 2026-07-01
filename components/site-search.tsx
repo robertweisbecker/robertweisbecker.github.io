@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useKeyPress } from "@/hooks/use-key-press";
 import { posts, postIcons } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";
@@ -309,10 +311,10 @@ export function SiteSearch({
           {showKbd ? (
             variant === "input" ? (
               <KbdGroup className="-me-1.5 ml-auto hidden md:block">
-                <Kbd className="" variant="elevated">
+                <Kbd variant="elevated">
                   ⌘
                 </Kbd>
-                <Kbd className="" variant="elevated">
+                <Kbd variant="elevated">
                   /
                 </Kbd>
               </KbdGroup>

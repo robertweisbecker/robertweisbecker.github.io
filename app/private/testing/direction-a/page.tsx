@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 /*─────────────────────────────────────────────────────────
  * DIRECTION A — Bento Annotated
  *
