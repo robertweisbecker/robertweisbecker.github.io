@@ -26,6 +26,7 @@ Run this plan after Plan 002 and Plan 003 so documentation reflects the final ro
 
 ```md
 <!-- AGENTS.md:6 -->
+
 - **Always add a QA example to `app/components/component-demos.tsx` (and a sidebar link in `app/components/page.tsx` if not already present) whenever a new component is created or a major feature is added to an existing one.**
 ```
 
@@ -58,6 +59,7 @@ const QA_TOC: TocItem[] = [
 
 ```md
 <!-- AGENTS.md:11 -->
+
 - This is a static Next.js 16 App Router site with MDX content, no database, no API routes, and no required environment variables.
 ```
 
@@ -71,14 +73,15 @@ const LETTERBOXD_RSS_URL = "https://letterboxd.com/weisbecker/rss/";
 
 - README says `npm run build` generates a static export to `out`, but the current Next config does not set `output: "export"` and the package script is now the default `next build`.
 
-~~~md
+````md
 <!-- README.md:20-24 -->
+
 ```
 npm run build
 ```
 
 Generates a static export to the `out` directory.
-~~~
+````
 
 ```json
 // package.json:11-12
@@ -88,13 +91,13 @@ Generates a static export to the `out` directory.
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-|---------|---------|---------------------|
-| Install | `npm install` | exit 0 |
-| Typecheck | `npm run typecheck` | exit 0 |
-| Check | `npm run check` | exit 0 |
-| Lint | `npm run lint` | exit 0 |
-| Format check | `npm run format:check` | exit 0 |
+| Purpose      | Command                | Expected on success |
+| ------------ | ---------------------- | ------------------- |
+| Install      | `npm install`          | exit 0              |
+| Typecheck    | `npm run typecheck`    | exit 0              |
+| Check        | `npm run check`        | exit 0              |
+| Lint         | `npm run lint`         | exit 0              |
+| Format check | `npm run format:check` | exit 0              |
 
 ## Scope
 

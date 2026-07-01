@@ -311,12 +311,8 @@ export function SiteSearch({
           {showKbd ? (
             variant === "input" ? (
               <KbdGroup className="-me-1.5 ml-auto hidden md:block">
-                <Kbd variant="elevated">
-                  ⌘
-                </Kbd>
-                <Kbd variant="elevated">
-                  /
-                </Kbd>
+                <Kbd variant="elevated">⌘</Kbd>
+                <Kbd variant="elevated">/</Kbd>
               </KbdGroup>
             ) : (
               <Kbd data-icon="inline-end" className="-me-1.5 ml-auto">

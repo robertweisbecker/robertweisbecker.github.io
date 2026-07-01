@@ -17,12 +17,12 @@ Not audited: full browser rendering, production Vercel behavior, generated `.nex
 
 ## Vetted Findings
 
-| # | Finding | Category | Impact | Effort | Risk | Evidence |
-|---|---------|----------|--------|--------|------|----------|
-| 1 | Add a lightweight verification baseline before more refactors | DX | This personal portfolio/playground does not need broad tests by default, but lint warnings alone miss TypeScript, route, MDX, and production-build failures. | S | LOW | `package.json:6-19`, no `typecheck` script, no test/spec/config files found |
-| 2 | Reduce build time and shared bundle cost | performance / DX | Production builds are high for a personal portfolio because private QA/prototype routes still ship, `/playground` is monolithic, and shared client boundaries pull too much into common route chunks. | L | MED | `app/private/**`, `app/playground/page.tsx`, `.next/diagnostics/route-bundle-stats.json` from the merged optimization pass |
-| 3 | Cache and normalize the Letterboxd feed route | performance / correctness | The homepage calls `/api/letterboxd`; each route hit currently parses the remote RSS URL directly and returns loosely typed external URLs/rating values. | M | MED | `app/page.tsx:369-380`, `components/demos/letterboxd.tsx:13-72`, `app/api/letterboxd/route.ts:15-93`, `next.config.ts:4-11` |
-| 4 | Refresh stale repo guidance after route/build/API changes | docs / DX | Agent guidance still points executors at deleted paths and stale route/build facts; after private routes become dev-only and playground splits, docs should describe the final shape. | S | LOW | `AGENTS.md`, `README.md`, `app/private/qa/page.tsx`, `app/api/letterboxd/route.ts`, `package.json` |
+| #   | Finding                                                       | Category                  | Impact                                                                                                                                                                                                | Effort | Risk | Evidence                                                                                                                    |
+| --- | ------------------------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---- | --------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Add a lightweight verification baseline before more refactors | DX                        | This personal portfolio/playground does not need broad tests by default, but lint warnings alone miss TypeScript, route, MDX, and production-build failures.                                          | S      | LOW  | `package.json:6-19`, no `typecheck` script, no test/spec/config files found                                                 |
+| 2   | Reduce build time and shared bundle cost                      | performance / DX          | Production builds are high for a personal portfolio because private QA/prototype routes still ship, `/playground` is monolithic, and shared client boundaries pull too much into common route chunks. | L      | MED  | `app/private/**`, `app/playground/page.tsx`, `.next/diagnostics/route-bundle-stats.json` from the merged optimization pass  |
+| 3   | Cache and normalize the Letterboxd feed route                 | performance / correctness | The homepage calls `/api/letterboxd`; each route hit currently parses the remote RSS URL directly and returns loosely typed external URLs/rating values.                                              | M      | MED  | `app/page.tsx:369-380`, `components/demos/letterboxd.tsx:13-72`, `app/api/letterboxd/route.ts:15-93`, `next.config.ts:4-11` |
+| 4   | Refresh stale repo guidance after route/build/API changes     | docs / DX                 | Agent guidance still points executors at deleted paths and stale route/build facts; after private routes become dev-only and playground splits, docs should describe the final shape.                 | S      | LOW  | `AGENTS.md`, `README.md`, `app/private/qa/page.tsx`, `app/api/letterboxd/route.ts`, `package.json`                          |
 
 ## Direction Options
 
@@ -31,12 +31,12 @@ Not audited: full browser rendering, production Vercel behavior, generated `.nex
 
 ## Execution Order & Status
 
-| Plan | Title | Priority | Effort | Depends on | Status |
-|------|-------|----------|--------|------------|--------|
-| 001 | Add a lightweight verification baseline | P1 | S | - | TODO |
-| 002 | Reduce build and bundle cost | P1 | L | 001 | TODO |
-| 003 | Cache and normalize the Letterboxd API route | P2 | M | 001 | TODO |
-| 004 | Refresh stale repo guidance | P2 | S | 001, 002, 003 | TODO |
+| Plan | Title                                        | Priority | Effort | Depends on    | Status |
+| ---- | -------------------------------------------- | -------- | ------ | ------------- | ------ |
+| 001  | Add a lightweight verification baseline      | P1       | S      | -             | DONE   |
+| 002  | Reduce build and bundle cost                 | P1       | L      | 001           | TODO   |
+| 003  | Cache and normalize the Letterboxd API route | P2       | M      | 001           | TODO   |
+| 004  | Refresh stale repo guidance                  | P2       | S      | 001, 002, 003 | TODO   |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 

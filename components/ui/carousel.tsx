@@ -78,10 +78,7 @@ function Carousel({
   const autoplayOpts = React.useMemo(() => (typeof autoplayOption === "object" ? autoplayOption : {}), [autoplayOption]);
   const isLoop = opts?.loop ?? true;
   const builtInPlugins = React.useMemo(
-    () => [
-      ...(fadeEnabled ? [Fade()] : []),
-      ...(autoplayEnabled ? [Autoplay({ delay: defaultAutoplayDelay, ...autoplayOpts })] : []),
-    ],
+    () => [...(fadeEnabled ? [Fade()] : []), ...(autoplayEnabled ? [Autoplay({ delay: defaultAutoplayDelay, ...autoplayOpts })] : [])],
     [autoplayEnabled, autoplayOpts, fadeEnabled]
   );
 

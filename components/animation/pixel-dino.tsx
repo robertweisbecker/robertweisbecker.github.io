@@ -154,7 +154,7 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
         }}
         aria-pressed={isPlaying}
         data-pressed={isPlaying}
-        className="focus-visible:outline-ring absolute inset-e-1 top-1 z-1 inline-flex h-button-xs items-center justify-center gap-1 rounded-sm px-2 py-1 font-pixel text-2xs font-[475] uppercase transition-colors hover:bg-accent/50 hover:text-accent-foreground focus-visible:outline-2 disabled:pointer-events-none disabled:opacity-50"
+        className="absolute inset-e-1 top-1 z-1 inline-flex h-button-xs items-center justify-center gap-1 rounded-sm px-2 py-1 font-pixel text-2xs font-[475] uppercase transition-colors hover:bg-accent/50 hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-ring disabled:pointer-events-none disabled:opacity-50"
         aria-label={isPlaying ? "Pause" : "Play"}
       >
         {isPlaying ? (
@@ -165,9 +165,7 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
         ) : (
           <>
             <PixelPlayIcon aria-hidden="true" className="size-[11px]" data-icon="inline-start" />
-            <span className="min-w-[5ch]">
-              Play
-            </span>
+            <span className="min-w-[5ch]">Play</span>
           </>
         )}
       </button>

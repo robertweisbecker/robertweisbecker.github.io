@@ -110,13 +110,13 @@ Repo conventions to preserve:
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-|---------|---------|---------------------|
-| Install | `npm install` | exit 0 |
-| Typecheck | `npm run typecheck` | exit 0 |
-| Check | `npm run check` | exit 0 |
-| Lint | `npm run lint` | exit 0 |
-| Build | `npm run build` | exit 0 |
+| Purpose   | Command             | Expected on success |
+| --------- | ------------------- | ------------------- |
+| Install   | `npm install`       | exit 0              |
+| Typecheck | `npm run typecheck` | exit 0              |
+| Check     | `npm run check`     | exit 0              |
+| Lint      | `npm run lint`      | exit 0              |
+| Build     | `npm run build`     | exit 0              |
 
 ## Scope
 

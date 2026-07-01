@@ -741,11 +741,7 @@ function Variation3() {
 
               <AnimatePresence>
                 {expanded && expandedSlide && (
-                  <ExpandedCard
-                    key={expandedSlide.src}
-                    slide={expandedSlide}
-                    onClose={() => setExpandedIndex(null)}
-                  />
+                  <ExpandedCard key={expandedSlide.src} slide={expandedSlide} onClose={() => setExpandedIndex(null)} />
                 )}
               </AnimatePresence>
             </div>

@@ -50,13 +50,13 @@ Repo conventions to preserve:
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-|---------|---------|---------------------|
-| Install | `npm install` | exit 0 and dependencies installed |
-| Typecheck | `npm run typecheck` | exit 0, no TypeScript errors |
-| Check | `npm run check` | exit 0 after typecheck, lint, and format check |
-| Production build | `npm run build` | exit 0 using the default Next/Turbopack build |
-| Fallback build | `npm run build:webpack` | exit 0 when explicitly checking webpack fallback |
+| Purpose          | Command                 | Expected on success                              |
+| ---------------- | ----------------------- | ------------------------------------------------ |
+| Install          | `npm install`           | exit 0 and dependencies installed                |
+| Typecheck        | `npm run typecheck`     | exit 0, no TypeScript errors                     |
+| Check            | `npm run check`         | exit 0 after typecheck, lint, and format check   |
+| Production build | `npm run build`         | exit 0 using the default Next/Turbopack build    |
+| Fallback build   | `npm run build:webpack` | exit 0 when explicitly checking webpack fallback |
 
 ## Scope
 

@@ -311,7 +311,12 @@ export function ClipPathEditorAdvanced({ className }: React.ComponentProps<"div"
                       initial={{ opacity: 0, y: -6, scale: 0.97 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -4, scale: 0.97 }}
-                      transition={{ layout: SLIDER_LAYOUT_SPRING, opacity: SLIDER_ENTER_EXIT, y: SLIDER_ENTER_EXIT, scale: SLIDER_ENTER_EXIT }}
+                      transition={{
+                        layout: SLIDER_LAYOUT_SPRING,
+                        opacity: SLIDER_ENTER_EXIT,
+                        y: SLIDER_ENTER_EXIT,
+                        scale: SLIDER_ENTER_EXIT,
+                      }}
                       style={{ transformOrigin: "top" }}
                     >
                       <PointSliders
@@ -346,7 +351,12 @@ export function ClipPathEditorAdvanced({ className }: React.ComponentProps<"div"
                       initial={{ opacity: 0, y: -6, scale: 0.97 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                      transition={{ layout: SLIDER_LAYOUT_SPRING, opacity: SLIDER_ENTER_EXIT, y: SLIDER_ENTER_EXIT, scale: SLIDER_ENTER_EXIT }}
+                      transition={{
+                        layout: SLIDER_LAYOUT_SPRING,
+                        opacity: SLIDER_ENTER_EXIT,
+                        y: SLIDER_ENTER_EXIT,
+                        scale: SLIDER_ENTER_EXIT,
+                      }}
                       style={{ transformOrigin: "top" }}
                     >
                       <PointSliders

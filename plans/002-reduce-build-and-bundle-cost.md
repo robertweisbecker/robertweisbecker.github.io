@@ -34,17 +34,17 @@ The product decision is now explicit:
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-|---------|---------|---------------------|
-| Install | `npm install` | exit 0 |
-| Baseline build | `rm -rf .next && npm run build` | exit 0 and emits route diagnostics |
-| Baseline type diagnostics | `npx tsc --noEmit --extendedDiagnostics --incremental false --pretty false` | exit 0 with timing summary |
-| Full typecheck | `npm run typecheck` | exit 0 |
-| Build graph typecheck | `npm run typecheck:build` | exit 0 |
-| Lint | `npm run lint` | exit 0 |
-| Analyze build | `npm run analyze:build` | prints top routes and gradient check |
-| Production build | `rm -rf .next && npm run build` | exit 0 |
-| Fallback comparison | `npm run build:webpack` | exit 0 only when explicitly comparing fallback behavior |
+| Purpose                   | Command                                                                     | Expected on success                                     |
+| ------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
+| Install                   | `npm install`                                                               | exit 0                                                  |
+| Baseline build            | `rm -rf .next && npm run build`                                             | exit 0 and emits route diagnostics                      |
+| Baseline type diagnostics | `npx tsc --noEmit --extendedDiagnostics --incremental false --pretty false` | exit 0 with timing summary                              |
+| Full typecheck            | `npm run typecheck`                                                         | exit 0                                                  |
+| Build graph typecheck     | `npm run typecheck:build`                                                   | exit 0                                                  |
+| Lint                      | `npm run lint`                                                              | exit 0                                                  |
+| Analyze build             | `npm run analyze:build`                                                     | prints top routes and gradient check                    |
+| Production build          | `rm -rf .next && npm run build`                                             | exit 0                                                  |
+| Fallback comparison       | `npm run build:webpack`                                                     | exit 0 only when explicitly comparing fallback behavior |
 
 ## Scope
 
