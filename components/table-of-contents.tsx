@@ -10,11 +10,8 @@ export type TableOfContentsMaxDepth = 2 | 3 | 4 | 5 | 6;
 
 const titleScrollThreshold = 200;
 
-function getActiveItem(ids: string[], viewportHeight: number | null) {
-  if (typeof document === "undefined" || !viewportHeight) return null;
-  const headings = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => Boolean(el));
-  if (!headings.length) return null;
-
+function getActiveItem(headings: HTMLElement[], viewportHeight: number | null) {
+  if (!viewportHeight || !headings.length) return null;
   const activationLine = viewportHeight / 2;
   let nextActiveId: string | null = null;
 
@@ -29,6 +26,10 @@ function getActiveItem(ids: string[], viewportHeight: number | null) {
   return nextActiveId;
 }
 
+function getHeadingElements(ids: string[]) {
+  return ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => Boolean(el));
+}
+
 export type TableOfContentsProps = {
   toc: TocItem[];
   title?: string;
@@ -39,10 +40,25 @@ export type TableOfContentsProps = {
 export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOfContentsProps) {
   const visibleToc = React.useMemo(() => toc.filter((item) => item.depth <= maxDepth), [toc, maxDepth]);
   const ids = React.useMemo(() => visibleToc.map((item) => item.id), [visibleToc]);
+  const headingsRef = React.useRef<HTMLElement[]>([]);
+  const [activeId, setActiveId] = React.useState<string | null>(null);
   const [{ y: scrollY }] = useWindowScroll();
   const { height: viewportHeight } = useWindowSize();
-  const activeId = getActiveItem(ids, viewportHeight);
+  const scrollPosition = scrollY ?? 0;
   const isTitleVisible = Boolean(title) && (scrollY ?? 0) >= titleScrollThreshold;
+
+  React.useEffect(() => {
+    headingsRef.current = getHeadingElements(ids);
+  }, [ids]);
+
+  React.useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const nextActiveId = getActiveItem(headingsRef.current, viewportHeight);
+      setActiveId((currentActiveId) => (currentActiveId === nextActiveId ? currentActiveId : nextActiveId));
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [ids, scrollPosition, viewportHeight]);
 
   if (!visibleToc.length) return null;
 
