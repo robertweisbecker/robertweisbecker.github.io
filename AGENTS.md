@@ -15,7 +15,7 @@
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
 - `ToggleGrid` preserves intended toggle styling by extending `ToggleGroup` context with `grid?: boolean`.
 - Tailwind v4.3 custom variants such as `@stuck-top` are valid here; see **Known Bugs & Workarounds** for the Turbopack stale-CSS bug that makes errors persist past the fix.
-- The optional Agentation development toolbar adds a large dev-only client graph and can make reloads feel heavier; it is not required for local development.
+- The Agentation development toolbar and packages were removed because they added a large optional dev-only graph; do not reintroduce them unless the user explicitly asks for Agentation again.
 - `@vercel/analytics` and `@vercel/speed-insights` are no-ops locally and only activate on Vercel deployments.
 - The homepage doubles as the About page at `/`; there is no separate `/about` route in the nav.
 - `/oklch-colors` is heavier than many project routes because its MDX renders hundreds of color swatches/palette nodes plus a large inline SVG.
@@ -24,6 +24,9 @@
 - Pixel morph pairing strategies are `match`, `nearest`, `reading`, `radial`, `scatter`, and `compress`; animation types are `linear`, `ease`, and `spring`. `match` is the default and should pin rects with identical coordinates before nearest-matching the remaining rects. Keep scatter/compress as strategies, not animation types, and avoid spring multi-keyframes for midpoint strategies.
 - Pixel morph demos are post-specific: `components/demos/pixel-icon-morph-visualizer.tsx` renders directly in `app/posts/pixel-icons/page.tsx` without a `Demo` wrapper, while `components/demos/pixel-icon-morph-toggles.tsx` is wrapped in `Demo` on that post. Do not add these pixel morph demos to `app/components/component-demos.tsx` or the components sidebar unless explicitly requested.
 - In the pixel morph visualizer, the left card contains the interactive icon, sequence dots, picker, and `CardAction` play/clear buttons; the right card contains controls. Use `ToggleGroup` for succinct controls and `Select` for more verbose ones to avoid truncation. Speed values are intentionally inverse duration labels: `1x` is 200ms, `0.5x` is 400ms, and `0.25x` is 800ms.
+- iOS/Safari viewport color is intentionally handled in two layers: static `viewport.themeColor` in `app/layout.tsx` for the pre-JS paint, then the root `Theme` provider updates all `meta[name="theme-color"]` tags from the computed `document.body` background color. Do not replace this with a hard-coded light/dark `next-themes` updater unless the CSS-token-based sync breaks.
+- Unused public media/assets removed during the 2026-07 cleanup were backed up outside the repo at `/Users/robertweisbecker/Desktop/bob-fyi-unused-component-assets-2026-07-01/`, with videos under its `videos/` subfolder.
+- Git may report existing loose-object maintenance debt through `.git/gc.log`; do not run `git prune` or other repository cleanup commands unless the user explicitly asks.
 
 ## Refactoring Notes
 
