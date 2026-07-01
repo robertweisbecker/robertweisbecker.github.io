@@ -1,20 +1,11 @@
 "use client";
 
-import {
-  ClipPathEditor,
-  ClipPathEditorAdvanced,
-  ClipPathEditorCanvas,
-  ClipPathEditorOutput,
-  ClipPathEditorResetControl,
-  ClipPathEditorSettings,
-  ClipPathEditorStyle,
-} from "@/components/demos/clip-path-editor";
+import { ClipPathCurveTool } from "@/components/demos/clip-path-editor";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Heading } from "@/components/ui/heading";
@@ -163,42 +154,7 @@ export default function ClipPathCurvePage() {
           </CollapsiblePanel>
         </Collapsible>
       </div>
-      <ClipPathEditor className="w-full">
-        <div className="grid items-stretch gap-2 sm:grid-cols-4">
-          <Card className="self-start sm:col-span-2">
-            <CardHeader>
-              <CardTitle>Playground</CardTitle>
-              <CardAction>
-                <ClipPathEditorResetControl />
-              </CardAction>
-            </CardHeader>
-            <CardContent className="mb-4">
-              <ClipPathEditorCanvas />
-            </CardContent>
-          </Card>
-          <div className="flex min-w-0 flex-col gap-1 sm:col-span-2">
-            <Card variant="muted">
-              <CardHeader>
-                <CardTitle>Customize</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ClipPathEditorSettings />
-              </CardContent>
-            </Card>
-            <ClipPathEditorAdvanced />
-
-            <Card variant="muted">
-              <CardHeader>
-                <CardTitle>Style</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ClipPathEditorStyle />
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-        <ClipPathEditorOutput />
-      </ClipPathEditor>
+      <ClipPathCurveTool />
       <Separator variant="dotted" />
       <section className="prose">
         <Heading level={2}>Resources</Heading>
