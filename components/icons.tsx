@@ -515,7 +515,7 @@ export function BatteryIcon(props: React.ComponentProps<"svg">) {
 
 export function PlayIcon(props: React.ComponentProps<"svg">) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" {...props}>
       <path d="m14 22.5868v-9.1675c0-.9342.5631-1.4248 1.2609-1.4248.3849 0 .6266.0643.966.2728l7.4683 4.4023c.6617.3903 1.0191.7077 1.0191 1.3245 0 .6176-.3574.935-1.0191 1.3253l-7.4683 4.4023c-.3394.2084-.5811.2728-.966.2728-.6977 0-1.2609-.4727-1.2609-1.4077" />
     </svg>
   );

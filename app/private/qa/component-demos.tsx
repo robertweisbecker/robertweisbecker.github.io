@@ -29,8 +29,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
 import { Stats } from "@/components/stats";
 import { TableOfContents } from "@/components/table-of-contents";
-import { Theme } from "@/components/theme";
-import { ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme-settings";
+import { Theme, ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme";
 import { Alert, AlertAction, AlertContent, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -71,13 +70,6 @@ const DEMO_SWATCHES = [
   { value: "#3b82f6", label: "Blue", color: "#3b82f6" },
   { value: "#8b5cf6", label: "Violet", color: "#8b5cf6" },
   { value: "#ec4899", label: "Pink", color: "#ec4899" },
-];
-
-const CAROUSEL_SLIDES = [
-  { src: "/assets/udl/foundry-light.png", alt: "Foundry design system – light theme" },
-  { src: "/assets/forge/course-edit-after.png", alt: "Forge – course edit redesign" },
-  { src: "/assets/engage/engage-desktop.png", alt: "Engage – desktop layout" },
-  { src: "/assets/udl/figma-colors.png", alt: "UDL – Figma color tokens" },
 ];
 
 const LOREM =

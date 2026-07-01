@@ -1,7 +1,7 @@
 "use client";
 
 import { ModeToggle } from "@/components/mode-toggle";
-import { ThemeSettings } from "@/components/theme-settings";
+import { ThemeSettingsPopover } from "@/components/theme";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
@@ -34,7 +34,6 @@ export function Header() {
   const isMobile = useMediaQuery("max-md");
   const pathname = usePathname();
   const anchorRef = React.useRef<HTMLDivElement>(null);
-  const isHome = pathname === "/";
   const previewHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const previewActions = React.useRef<PreviewCardPrimitive.Root.Actions | null>(null);
   const filteredProjects = projects.filter((project) => project.published);
@@ -262,7 +261,7 @@ export function Header() {
           </>
         )}
         <Separator orientation="vertical" className="h-4" />
-        <ThemeSettings className="rounded-full" size={isMobile ? "md" : "sm"} />
+        <ThemeSettingsPopover className="rounded-full" size={isMobile ? "md" : "sm"} />
         <ModeToggle size={isMobile ? "md" : "sm"} className="rounded-full" variant="ghost" label={true} />
       </div>
       <div

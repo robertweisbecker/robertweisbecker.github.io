@@ -15,7 +15,6 @@ import * as React from "react";
 import { CopyButton } from "./ui/copy-button";
 import { Skeleton } from "./ui/skeleton";
 import { useBattery } from "@uidotdev/usehooks";
-import { ScrollArea } from "./ui/scroll-area";
 
 const glassClass =
   "flex items-center justify-center rounded-full bg-radial-[at_50%_-50%] from-card/60 to-popover/30 bg-cover text-foreground/80 shadow-[0px_1px_20px_-1px_rgba(0,0,0,0.04),0px_0.65px_5px_rgba(0,0,0,0.12),inset_0.65px_0.65px_1px_-0.65px_rgba(255,255,255,0.8),inset_-0.65px_-0.65px_2px_-0.65px_rgba(255,255,255,0.4),0px_1px_.5px_1px_rgba(0,0,0,0.02),var(--shadow-sm)] backdrop-blur-xs bg-blend-difference";
@@ -53,32 +52,6 @@ export interface PhoneProps extends React.ComponentProps<"div"> {
   address?: React.ReactNode;
   indicator?: boolean;
   gutter?: boolean;
-}
-
-function BatteryDisplay({
-  loading,
-  supported,
-  level,
-  charging,
-}: {
-  loading: boolean;
-  supported: boolean;
-  level: number;
-  charging: boolean;
-}) {
-  const batteryLevel = supported ? Math.round((level ?? 0) * 100) : 67;
-  const batteryColor = batteryLevel > 50 ? "var(--success-primary)" : "var(--warning-primary)";
-  return (
-    <div className="z-1 me-[-.125em] flex items-center font-[system-ui] text-[2.4cqw] font-bold tracking-tighter text-white">
-      {loading ? (
-        <Skeleton className="absolute inset-0 rounded-sm" />
-      ) : (
-        <>
-          {batteryLevel} {charging && <IconBoltFilled className="size-[.9em] scale-y-110" />}
-        </>
-      )}
-    </div>
-  );
 }
 
 function Phone({ className, children, island = true, toolbar = true, address = "bob.fyi", gutter = false, ...props }: PhoneProps) {

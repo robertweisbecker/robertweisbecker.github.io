@@ -1,4 +1,6 @@
 "use client";
+import { DotMatrix } from "@/components/animation/dot-matrix";
+import { TreeIconFile } from "@/components/icons-tree";
 import { Marker, MarkerContent } from "@/components/ui/marker";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { MotionText, TextReveal } from "@/components/animation/shared";
@@ -37,7 +39,7 @@ import {
   IconTrashFilled,
 } from "@tabler/icons-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "motion/react";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { cn } from "@/lib/utils";
 import { Slider as BaseSlider } from "@base-ui/react";
@@ -100,118 +102,6 @@ const MOTION_TEXT_PRESETS: { value: MotionTextPreset; label: string }[] = [
 
 const CHROME_TAB_DVD_COLORS = ["currentColor"];
 
-const PIXEL_ICONS = [
-  { Icon: PixelIcons.PixelAtSignIcon, name: "At Sign" },
-  { Icon: PixelIcons.PixelAutoIcon, name: "Auto" },
-  { Icon: PixelIcons.PixelBigArrowDownIcon, name: "Big Arrow Down" },
-  { Icon: PixelIcons.PixelBillIcon, name: "Bill" },
-  { Icon: PixelIcons.PixelBookIcon, name: "Book" },
-  { Icon: PixelIcons.PixelBookOpenIcon, name: "Book Open" },
-  { Icon: PixelIcons.PixelCalendarIcon, name: "Calendar" },
-  { Icon: PixelIcons.PixelCaptionsIcon, name: "Captions" },
-  { Icon: PixelIcons.PixelCheckboxIcon, name: "Checkbox" },
-  { Icon: PixelIcons.PixelChefHatIcon, name: "Chef Hat" },
-  { Icon: PixelIcons.PixelChevronDownIcon, name: "Chevron Down" },
-  { Icon: PixelIcons.PixelChevronsIcon, name: "Chevrons" },
-  { Icon: PixelIcons.PixelClipboardIcon, name: "Clipboard" },
-  { Icon: PixelIcons.PixelClipboardCheckIcon, name: "Clipboard Check" },
-  { Icon: PixelIcons.PixelCommentIcon, name: "Comment" },
-  { Icon: PixelIcons.PixelComputerOutlineIcon, name: "Computer Outline" },
-  { Icon: PixelIcons.PixelComputerRetroIcon, name: "Computer Retro" },
-  { Icon: PixelIcons.PixelCopyIcon, name: "Copy" },
-  { Icon: PixelIcons.PixelCursor2Icon, name: "Cursor 2" },
-  { Icon: PixelIcons.PixelDownloadIcon, name: "Download" },
-  { Icon: PixelIcons.PixelDownloadWideIcon, name: "Download Wide" },
-  { Icon: PixelIcons.PixelDropdownIcon, name: "Dropdown" },
-  { Icon: PixelIcons.PixelEnvelopeIcon, name: "Envelope" },
-  { Icon: PixelIcons.PixelExternalIcon, name: "External" },
-  { Icon: PixelIcons.PixelEyeIcon, name: "Eye" },
-  { Icon: PixelIcons.PixelEyeClosedIcon, name: "Eye Closed" },
-  { Icon: PixelIcons.PixelFileIcon, name: "File" },
-  { Icon: PixelIcons.PixelFileFoldedIcon, name: "File Folded" },
-  { Icon: PixelIcons.PixelFinderIcon, name: "Finder" },
-  { Icon: PixelIcons.PixelFolderIcon, name: "Folder" },
-  { Icon: PixelIcons.PixelFolderOpenIcon, name: "Folder Open" },
-  { Icon: PixelIcons.PixelGithubIcon, name: "GitHub" },
-  { Icon: PixelIcons.PixelGithubOutlineIcon, name: "GitHub Outline" },
-  { Icon: PixelIcons.PixelGradientIcon, name: "Gradient" },
-  { Icon: PixelIcons.PixelGraduationCapIcon, name: "Graduation Cap" },
-  { Icon: PixelIcons.PixelHelpIcon, name: "Help" },
-  { Icon: PixelIcons.PixelHelp2Icon, name: "Help 2" },
-  { Icon: PixelIcons.PixelHelp3Icon, name: "Help 3" },
-  { Icon: PixelIcons.PixelHomeIcon, name: "Home" },
-  { Icon: PixelIcons.PixelHouseIcon, name: "House" },
-  { Icon: PixelIcons.PixelHouseChimneyIcon, name: "House Chimney" },
-  { Icon: PixelIcons.PixelHouseWindowIcon, name: "House Window" },
-  { Icon: PixelIcons.PixelIphoneXIcon, name: "iPhone X" },
-  { Icon: PixelIcons.PixelInfoIcon, name: "Info" },
-  { Icon: PixelIcons.PixelInfoCircleIcon, name: "Info Circle" },
-  { Icon: PixelIcons.PixelInfoCircleLowercaseIcon, name: "Info Circle Lowercase" },
-  { Icon: PixelIcons.PixelLightbulbIcon, name: "Lightbulb" },
-  { Icon: PixelIcons.PixelLinkedinIcon, name: "LinkedIn" },
-  { Icon: PixelIcons.PixelLinkedinOutlineIcon, name: "LinkedIn Outline" },
-  { Icon: PixelIcons.PixelListIcon, name: "List" },
-  { Icon: PixelIcons.PixelLoaderIcon, name: "Loader" },
-  { Icon: PixelIcons.PixelMarkdownIcon, name: "Markdown" },
-  { Icon: PixelIcons.PixelMarkdown2Icon, name: "Markdown 2" },
-  { Icon: PixelIcons.PixelMessage2Icon, name: "Message 2" },
-  { Icon: PixelIcons.PixelMonitorIcon, name: "Monitor" },
-  { Icon: PixelIcons.PixelMoonIcon, name: "Moon" },
-  { Icon: PixelIcons.PixelMoon2Icon, name: "Moon 2" },
-  { Icon: PixelIcons.PixelNewsIcon, name: "News" },
-  { Icon: PixelIcons.PixelNewspaperIcon, name: "Newspaper" },
-  { Icon: PixelIcons.PixelNoteIcon, name: "Note" },
-  { Icon: PixelIcons.PixelNotepadIcon, name: "Notepad" },
-  { Icon: PixelIcons.PixelOscarIcon, name: "Oscar" },
-  { Icon: PixelIcons.PixelOscar2Icon, name: "Oscar2" },
-  { Icon: PixelIcons.PixelPaletteIcon, name: "Palette" },
-  { Icon: PixelIcons.PixelPaperclipIcon, name: "Paperclip" },
-  { Icon: PixelIcons.PixelPauseIcon, name: "Pause" },
-  { Icon: PixelIcons.PixelPause2Icon, name: "Pause2" },
-  { Icon: PixelIcons.PixelPauseOutlineIcon, name: "PauseOutline" },
-  { Icon: PixelIcons.PixelPauseOutlineRoundedIcon, name: "PauseOutlineRounded" },
-  { Icon: PixelIcons.PixelPenToolIcon, name: "Pen Tool" },
-  { Icon: PixelIcons.PixelPersonIcon, name: "Person" },
-  { Icon: PixelIcons.PixelPlayIcon, name: "Play" },
-  { Icon: PixelIcons.PixelPlayFilledIcon, name: "PlayFilled" },
-  { Icon: PixelIcons.PixelPlayOutlineIcon, name: "PlayOutline" },
-  { Icon: PixelIcons.PixelMessageIcon, name: "Message" },
-  { Icon: PixelIcons.PixelPointerIcon, name: "Pointer" },
-  { Icon: PixelIcons.PixelPointer2Icon, name: "Pointer 2" },
-  { Icon: PixelIcons.PixelPresentationIcon, name: "Presentation" },
-  { Icon: PixelIcons.PixelQuestionCircleIcon, name: "Question Circle" },
-  { Icon: PixelIcons.PixelRadioIcon, name: "Radio" },
-  { Icon: PixelIcons.PixelReceiptIcon, name: "Receipt" },
-  { Icon: PixelIcons.PixelRedoIcon, name: "Redo" },
-  { Icon: PixelIcons.PixelScribbleIcon, name: "Scribble" },
-  { Icon: PixelIcons.PixelShovelIcon, name: "Shovel" },
-  { Icon: PixelIcons.PixelShuffleIcon, name: "Shuffle" },
-  { Icon: PixelIcons.PixelSparklesIcon, name: "Sparkles" },
-  { Icon: PixelIcons.PixelStarIcon, name: "Star" },
-  { Icon: PixelIcons.PixelStar2Icon, name: "Star2" },
-  { Icon: PixelIcons.PixelStar3Icon, name: "Star3" },
-  { Icon: PixelIcons.PixelStarburstIcon, name: "Starburst" },
-  { Icon: PixelIcons.PixelStarburst2Icon, name: "Starburst2" },
-  { Icon: PixelIcons.PixelSunIcon, name: "Sun" },
-  { Icon: PixelIcons.PixelSun2Icon, name: "Sun2" },
-  { Icon: PixelIcons.PixelSunSmallIcon, name: "SunSmall" },
-  { Icon: PixelIcons.PixelSwirlIcon, name: "Swirl" },
-  { Icon: PixelIcons.PixelTargetIcon, name: "Target" },
-  { Icon: PixelIcons.PixelTilesIcon, name: "Tiles" },
-  { Icon: PixelIcons.PixelTvIcon, name: "TV" },
-  { Icon: PixelIcons.PixelUserIcon, name: "User" },
-  { Icon: PixelIcons.PixelVercelIcon, name: "Vercel" },
-  { Icon: PixelIcons.PixelVercelOutlineIcon, name: "Vercel Outline" },
-  { Icon: PixelIcons.PixelVideoCameraIcon, name: "Video Camera" },
-  { Icon: PixelIcons.PixelVolumeIcon, name: "Volume" },
-  { Icon: PixelIcons.PixelVolumeMutedIcon, name: "Volume Muted" },
-  { Icon: PixelIcons.PixelWalletIcon, name: "Wallet" },
-  { Icon: PixelIcons.PixelWarningIcon, name: "Warning" },
-  { Icon: PixelIcons.PixelWarningCircleIcon, name: "Warning Circle" },
-  { Icon: PixelIcons.PixelWindowIcon, name: "Window" },
-  { Icon: PixelIcons.PixelYinYangIcon, name: "Yin Yang" },
-];
-
 export default function PlaygroundPage() {
   const [morphIcon, setMorphIcon] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
@@ -220,6 +110,44 @@ export default function PlaygroundPage() {
     <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10">
       <h1 className="w-full text-h1">Playground</h1>
       <FoldedCardDemo />
+      <DotMatrix rows={11} cols={11} palette={{ on: "white", off: "black" }} />
+      <div className="group/tab-bar flex h-12 w-full items-center justify-center bg-[#070707]">
+        <div className="group squircle relative isolate flex h-7 max-w-[200px] items-center overflow-hidden rounded-md bg-transparent text-xs font-medium text-zinc-400 transition-colors group-hover/tab-bar:bg-neutral-900/30 group-hover/tab-bar:hover:bg-neutral-800/60 group-hover/tab-bar:hover:text-zinc-200">
+          <button
+            type="button"
+            title="untitled"
+            className="relative z-0 flex h-full min-w-0 flex-1 items-center gap-1.5 rounded-md pr-3 pl-2 text-left"
+          >
+            <TreeIconFile className="h-4 w-4 shrink-0 text-white/40" />
+            <span className="block truncate">untitled</span>
+          </button>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-12 bg-linear-to-l from-neutral-900 via-neutral-900 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+          />
+
+          <button
+            type="button"
+            title="Close tab"
+            aria-label="Close untitled"
+            className="squircle absolute top-1/2 right-1 z-20 flex h-5 w-5 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm bg-neutral-800 text-neutral-500 opacity-0 transition-opacity group-hover:opacity-100 hover:text-zinc-100 focus:opacity-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentcolor"
+              viewBox="0 0 16 16"
+              width={16}
+              height={16}
+              className="pi h-3 w-3"
+              aria-hidden="true"
+            >
+              <path d="M3.22 3.22a.75.75 0 0 1 1.06 0L8 6.94l3.72-3.72a.75.75 0 1 1 1.06 1.06L9.06 8l3.72 3.72a.75.75 0 1 1-1.06 1.06L8 9.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06L6.94 8 3.22 4.28a.75.75 0 0 1 0-1.06" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <div className="flex w-full flex-col gap-14">
         <PlaygroundSection id="motion-systems" title="Motion">
           <Demo title="DVD Loader" className="lg:col-span-4">
@@ -232,7 +160,6 @@ export default function PlaygroundPage() {
             title="TextReveal"
             centerContent
             variant="muted"
-            plain
             className="lg:col-span-4"
             innerClass="min-h-60"
             controls={
@@ -300,7 +227,7 @@ export default function PlaygroundPage() {
           <Demo title="Keys" centerContent className="lg:col-span-4" innerClass="flex flex-col gap-2">
             <Kbd variant="elevated">⌘/</Kbd>
             <Kbd>⌘I</Kbd>
-            <KbdGroup className="">
+            <KbdGroup>
               <Kbd variant="big">⌘</Kbd>
               <Kbd variant="big">K</Kbd>
             </KbdGroup>
@@ -711,7 +638,6 @@ function MotionTextOptionGrid<T extends string>({
         if (next) onValueChange(next as T);
       }}
       variant="elevated"
-      size="xs"
       columns={columns}
       className="w-full"
     >
@@ -772,9 +698,9 @@ function MotionTextSliderControl({
         step={step}
         onValueCommitted={commitValue}
       >
-        <SliderLabel className="flex w-full items-center justify-between gap-3 text-xs">
-          <FieldTitle>{label}</FieldTitle>
-          <SliderValue className="font-mono">
+        <SliderLabel className="flex w-full items-center justify-between gap-2">
+          {label}
+          <SliderValue>
             {(formattedValues) => {
               const formattedValue = formattedValues[0] ?? String(value);
               return `${formattedValue}${suffix}`;
@@ -828,7 +754,7 @@ function MotionTextPlaygroundDemo() {
   return (
     <div className="grid w-full gap-4 xl:grid-cols-[minmax(0,1fr)_18rem]" data-testid="motion-text-playground">
       <div className="flex min-w-0 flex-col gap-5">
-        <MotionTextSample label="Reveal">
+        <MotionTextSample label="Entrance">
           <MotionText.Reveal
             key={`reveal-${resetKey}-${type}-${per}-${duration}-${stagger}`}
             type={type}
@@ -841,7 +767,7 @@ function MotionTextPlaygroundDemo() {
           </MotionText.Reveal>
         </MotionTextSample>
 
-        <MotionTextSample label="Effect">
+        <MotionTextSample label="Effects">
           <MotionText.Effect
             key={`effect-${resetKey}-${preset}-${per}-${duration}-${stagger}`}
             per={per}
@@ -858,12 +784,14 @@ function MotionTextPlaygroundDemo() {
           label="Loop"
           action={
             <Field orientation="horizontal" className="w-auto items-center gap-2">
-              <FieldLabel className="text-xs">Run</FieldLabel>
-              <Switch checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
+              <FieldLabel className="text-xs" htmlFor="motion-text-loop">
+                Play
+              </FieldLabel>
+              <Switch id="motion-text-loop" checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
             </Field>
           }
         >
-          <p>
+          <p className="text-muted-foreground">
             Feels{" "}
             <MotionText.Loop trigger={loopRunning} interval={1.2} className="text-primary">
               {["snappy", "calm", "clear"]}
@@ -903,7 +831,7 @@ function MotionTextPlaygroundDemo() {
         </MotionTextSample>
 
         <MotionTextSample label="Shimmer">
-          <p className="shimmer shimmer-color-primary/70 shimmer-duration-1400 text-sm leading-6 text-muted-foreground">
+          <p className="shimmer text-sm leading-6 text-muted-foreground shimmer-color-primary/70 shimmer-duration-1400">
             Generating response&hellip;
           </p>
         </MotionTextSample>
@@ -1204,15 +1132,19 @@ function SkeletonDemo() {
   const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    setLoaded(false);
     const timeout = window.setTimeout(() => setLoaded(true), 4000);
     return () => window.clearTimeout(timeout);
   }, [replayKey]);
 
+  const replay = React.useCallback(() => {
+    setLoaded(false);
+    setReplayKey((key) => key + 1);
+  }, []);
+
   return (
     <div className="grid w-full max-w-sm gap-3" data-testid="skeleton-demo" data-loaded={loaded}>
       <div className="order-last flex justify-center">
-        <Button variant="outline" rounded onClick={() => setReplayKey((key) => key + 1)} data-testid="skeleton-replay">
+        <Button variant="outline" rounded onClick={replay} data-testid="skeleton-replay">
           Reload
           <PixelIcons.PixelRedoIcon data-icon="inline-end" />
         </Button>
@@ -1277,19 +1209,6 @@ function SkeletonDemo() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function PixelIconsGridDemo() {
-  return (
-    <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-2">
-      {PIXEL_ICONS.map(({ Icon, name }) => (
-        <div key={name} className="flex min-w-0 flex-col items-center gap-1 rounded-md border bg-card px-1 py-2 text-center">
-          <Icon className="size-[22px] shrink-0" aria-hidden="true" />
-          <div className="w-full truncate font-pixel text-2xs/none text-muted-foreground">{name}</div>
-        </div>
-      ))}
     </div>
   );
 }

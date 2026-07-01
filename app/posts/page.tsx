@@ -33,7 +33,7 @@ export default function PostsPage() {
         </AlertContent>
       </Alert>
 
-      <ItemGroup className="">
+      <ItemGroup>
         {posts.map((post, index) => (
           <React.Fragment key={post.id}>
             <Item render={<Link href={post.path} />} className="-mx-4">

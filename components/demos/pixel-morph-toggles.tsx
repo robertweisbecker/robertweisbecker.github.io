@@ -7,7 +7,7 @@ import { PixelMorph, type PixelMorphAnimation } from "@/components/pixel-morph";
 import type { MorphablePixelIconName } from "@/components/icons-pixel";
 import { Toggle } from "@/components/ui/toggle";
 import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupButton } from "../ui/input-group";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type PixelMorphToggleItem = {
   from: MorphablePixelIconName;
@@ -66,7 +66,7 @@ function PixelMorphToggle({ item }: { item: PixelMorphToggleItem }) {
   const [pressed, setPressed] = React.useState(false);
 
   return (
-    <Toggle pressed={pressed} onPressedChange={setPressed} aria-label={item.label} size="lg" className="" shape="column">
+    <Toggle pressed={pressed} onPressedChange={setPressed} aria-label={item.label} size="lg" shape="column">
       <PixelMorph
         from={item.from}
         to={item.to}
@@ -104,7 +104,7 @@ export function PixelIconPasswordToggle({ className }: { className?: string }) {
             className="aspect-square"
             size="icon-sm"
 
-            // render={<Toggle pressed={pressed} onPressedChange={setPressed} aria-label="Hide" size="lg" className="" shape="column" />}
+            // render={<Toggle pressed={pressed} onPressedChange={setPressed} aria-label="Hide" size="lg" shape="column" />}
           >
             <PixelMorph
               from="PixelEyeClosedIcon"

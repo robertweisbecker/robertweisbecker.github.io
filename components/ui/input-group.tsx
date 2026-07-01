@@ -97,6 +97,7 @@ function InputGroupButton({
       size={size}
       variant={variant}
       className={cn(
+        inputGroupButtonVariants({ size }),
         size === "icon-xs" && "size-button-xs rounded-xs [--button-xs:--spacing(5)]",
         size === "icon-sm" && "size-button-xs rounded-sm p-0 has-[>svg]:p-0",
         size === "xs" && "gap-1 rounded px-1.5 [&>svg:not([class*='size-'])]:size-3",

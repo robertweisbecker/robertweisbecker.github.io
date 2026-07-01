@@ -1,15 +1,13 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import * as React from "react";
 import Link from "next/link";
 
 import {
   BaseUiIcon,
-  FigmaIcon,
-  GithubIcon,
   LinkedinIcon,
   NextJsIcon,
   CursorIcon,
-  MarkdownIcon,
   VercelIcon,
   CodexIcon,
 } from "@/components/icons";
@@ -27,7 +25,7 @@ import { PixelDino } from "@/components/animation/pixel-dino";
 import { Float } from "@/components/animation/float";
 import { cn } from "@/lib/utils";
 import { posts, postIcons } from "@/lib/data/posts";
-import { IconCalendar, IconFile, IconLink, IconMailFilled } from "@tabler/icons-react";
+import { IconCalendar, IconFile, IconLink } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "@/components/layout-grid";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
@@ -156,7 +154,7 @@ export default function Home() {
               </PreviewCard>
               &nbsp;reached more than 45 million learners worldwide.
             </p>
-            <p className="">
+            <p>
               This is my little slice of the internet.
               <br /> Have a look around.
             </p>
@@ -656,6 +654,7 @@ function KrogerIcon(props: React.ComponentProps<"svg">) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function TruistIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg viewBox="0 0 55 55" width={12} height={12} {...props}>
@@ -695,6 +694,7 @@ function ProjectLink({ href, text, ...props }: React.ComponentProps<typeof Link>
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function LetterboxdLogo() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" className="opacity-100!">

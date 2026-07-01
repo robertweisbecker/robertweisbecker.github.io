@@ -30,7 +30,7 @@ const demoContainerVariants = cva("rounded-[calc(var(--radius-xl)-1px)] max-w-[c
       card: "bg-card shadow-border-xs",
       outline: "bg-muted",
       plain: "bg-transparent",
-      muted: "bg-muted",
+      muted: "m-0 max-w-[unset]",
     },
   },
   defaultVariants: {
@@ -67,7 +67,7 @@ function DemoBody({
   centerContent: boolean;
   innerClass?: string;
 }) {
-  const demoInnerClasses = cn("p-5 flex-1 overflow-hidden", centerContent && "grid place-items-center", innerClass);
+  const demoInnerClasses = cn("p-4 flex-1 overflow-hidden", centerContent && "grid place-items-center", innerClass);
 
   if (overflowBehavior === "resize") {
     return (
@@ -125,11 +125,11 @@ export function Demo({
   const hasCode = code?.value !== undefined;
 
   return (
-    <figure data-demo className={cn("not-prose flex min-w-0 flex-col rounded-xl", !plain ? "bg-muted" : "", className)} {...props}>
+    <figure data-demo className={cn("not-prose flex min-w-0 flex-col rounded-xl", !plain ? "bg-muted/50" : "", className)} {...props}>
       {hasHeader ? (
         <header
           className={cn(
-            "flex items-center justify-between gap-2 ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-sm",
+            "flex items-center justify-between gap-2 ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-xs",
             headerClassName
           )}
         >

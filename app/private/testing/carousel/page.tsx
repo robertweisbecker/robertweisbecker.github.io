@@ -131,7 +131,7 @@ export default function CarouselTestingPage() {
             <p className="text-sm text-muted-foreground">Vertical + toolbar</p>
             <div className="h-80">
               <Carousel orientation="vertical" className="h-64 bg-muted">
-                <CarouselViewport className="">
+                <CarouselViewport>
                   <SlideItems carouselId="carousel-testing-row-1-v" />
                 </CarouselViewport>
                 <CarouselToolbar />

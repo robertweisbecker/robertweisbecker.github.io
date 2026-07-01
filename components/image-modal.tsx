@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -65,12 +67,9 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
 // Shared modal image with skeleton
 // ---------------------------------------------------------------------------
 function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; alt: string; imgAspect?: string }) {
-  const [loaded, setLoaded] = React.useState(false);
   const url = imageSrc(src);
-
-  React.useEffect(() => {
-    setLoaded(false);
-  }, [url]);
+  const [loadedImage, setLoadedImage] = React.useState<{ url: string; loaded: boolean }>(() => ({ url, loaded: false }));
+  const loaded = loadedImage.url === url && loadedImage.loaded;
 
   return (
     <>
@@ -78,7 +77,7 @@ function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; al
       <img
         src={url}
         alt={alt}
-        onLoad={() => setLoaded(true)}
+        onLoad={() => setLoadedImage({ url, loaded: true })}
         style={{
           aspectRatio: imgAspect,
           borderRadius: 20,
@@ -181,7 +180,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
   );
 }
 
-export function ImageModalDrawer({ src, src2, caption }: ImageModalProps) {
+export function ImageModalDrawer({ src, caption }: ImageModalProps) {
   return (
     <DrawerBase.Provider>
       <div className="relative w-full overflow-hidden rounded-xl shadow-border-sm">
@@ -480,8 +479,7 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
   );
 }
 
-export function ImageModalPopover2({ src, src2, caption }: ImageModalProps) {
-  const [open, setOpen] = React.useState(false);
+export function ImageModalPopover2({ src, caption }: ImageModalProps) {
   const { imgAspect, handleImgLoad } = useImageAspect();
   const layoutId = React.useId();
   const layoutGroupId = React.useId();
@@ -590,6 +588,7 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
 
   React.useEffect(() => {
     if (!open) return;
+    const trigger = triggerRef.current;
 
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setOpen(false);
@@ -602,7 +601,7 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
-      triggerRef.current?.focus();
+      trigger?.focus();
     };
   }, [open]);
 

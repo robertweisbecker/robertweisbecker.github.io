@@ -91,7 +91,8 @@ function DialogContent({
       <DialogPrimitive.Viewport
         className={cn(
           "group/dialog fixed inset-0 z-50 supports-[-webkit-touch-callout:none]:absolute",
-          unstyled === false && "grid place-items-center px-4 py-6 lg:py-10"
+          unstyled === false && "grid place-items-center px-4 py-6 lg:py-10",
+          className
         )}
         {...props}
       >

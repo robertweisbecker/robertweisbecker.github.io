@@ -1,20 +1,11 @@
 "use client";
 
-import {
-  ClipPathEditor,
-  ClipPathEditorAdvanced,
-  ClipPathEditorCanvas,
-  ClipPathEditorOutput,
-  ClipPathEditorResetControl,
-  ClipPathEditorSettings,
-  ClipPathEditorStyle,
-} from "@/components/demos/clip-path-editor";
+import { ClipPathCurveTool } from "@/components/demos/clip-path-editor";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { Collapsible, CollapsibleIcon, CollapsiblePanel, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Heading } from "@/components/ui/heading";
@@ -26,7 +17,7 @@ export default function ClipPathCurvePage() {
     <>
       <div className="mx-auto flex max-w-xl flex-col gap-6">
         <section className="flex flex-col gap-4">
-          <p className="">
+          <p>
             A little UI for experimenting with and generating curves as CSS clip-path values using the{" "}
             <Code>
               shape(){" "}
@@ -51,11 +42,11 @@ export default function ClipPathCurvePage() {
             </Code>{" "}
             function.
           </p>
-          <p className="">
+          <p>
             Generate code as a Tailwind class, CSS, or a computed SVG. Use it for rounded corner cutouts or button addons as an alternative
             to masks.
           </p>
-          <p className="">Here are some examples:</p>
+          <p>Here are some examples:</p>
         </section>
         <section className="flex flex-col gap-2">
           <div className="grid w-full items-stretch gap-4 md:grid-cols-3">
@@ -128,7 +119,7 @@ export default function ClipPathCurvePage() {
             </CollapsibleTrigger>
           </h2>
           <CollapsiblePanel className="prose rounded-xl bg-foreground/2 p-4 md:-mx-4">
-            <ul className="">
+            <ul>
               <li>
                 <strong>Start with a corner. </strong>
                 For simple curves, choose an origin to quickly set the start point to a given corner. The end point will automatically
@@ -163,42 +154,7 @@ export default function ClipPathCurvePage() {
           </CollapsiblePanel>
         </Collapsible>
       </div>
-      <ClipPathEditor className="w-full">
-        <div className="grid items-stretch gap-2 sm:grid-cols-4">
-          <Card className="self-start sm:col-span-2">
-            <CardHeader>
-              <CardTitle>Playground</CardTitle>
-              <CardAction>
-                <ClipPathEditorResetControl />
-              </CardAction>
-            </CardHeader>
-            <CardContent className="mb-4">
-              <ClipPathEditorCanvas />
-            </CardContent>
-          </Card>
-          <div className="flex min-w-0 flex-col gap-1 sm:col-span-2">
-            <Card variant="muted">
-              <CardHeader>
-                <CardTitle>Customize</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ClipPathEditorSettings />
-              </CardContent>
-            </Card>
-            <ClipPathEditorAdvanced />
-
-            <Card variant="muted">
-              <CardHeader>
-                <CardTitle>Style</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ClipPathEditorStyle />
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-        <ClipPathEditorOutput />
-      </ClipPathEditor>
+      <ClipPathCurveTool />
       <Separator variant="dotted" />
       <section className="prose">
         <Heading level={2}>Resources</Heading>

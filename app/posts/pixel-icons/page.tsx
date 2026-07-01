@@ -1,6 +1,5 @@
 import { Demo } from "@/components/demo";
 import {
-  DepartureMonoSymbolDemo,
   DepartureMonoTextDemo,
   MorphablePixelIconScrollDemo,
   PixelIconDataInspectorDemo,
@@ -38,9 +37,9 @@ export default function PixelIconsPage() {
           <Demo caption="Just look at this progress bar!">
             <div className="mx-auto max-w-3xs text-center">
               <span className="inline border border-dotted border-current font-pixel text-2xs text-info-primary">
-                <span className="">████████</span>
-                <span className="">▒▒▒▒▒</span>
-                <span className="">░░░░░░░░░░</span>
+                <span>████████</span>
+                <span>▒▒▒▒▒</span>
+                <span>░░░░░░░░░░</span>
               </span>
             </div>
           </Demo>

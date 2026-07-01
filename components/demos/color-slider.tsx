@@ -12,7 +12,6 @@ function HueSlider({
   min = 0,
   max = 100,
   showValue,
-  label,
   ...props
 }: SliderPrimitive.Root.Props & { label?: string; showValue?: boolean }) {
   const _values = React.useMemo(

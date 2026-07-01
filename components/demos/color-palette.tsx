@@ -155,11 +155,11 @@ function ColorPalette({ group = "all", showLabels = true, showNames = true, clas
       {sections.map((section) => (
         <div key={section.title ?? section.names[0]} className="flex flex-col gap-3">
           {section.title && <p className="text-base font-medium">{section.title}</p>}
-          <div className={cn("relative grid grid-cols-1 gap-5 sm:grid-cols-[auto_1fr] sm:gap-4")}>
+          <div className={cn("relative grid grid-cols-1 gap-5 sm:gap-4", showNames && "sm:grid-cols-[auto_1fr]")}>
             {!showLabels && (
               <>
-                <div className="" />
-                <StepColumnHeader steps={stepsFor(section.names[0])} className="" />
+                {showNames && <div />}
+                <StepColumnHeader steps={stepsFor(section.names[0])} />
               </>
             )}
 
@@ -167,9 +167,9 @@ function ColorPalette({ group = "all", showLabels = true, showNames = true, clas
               const steps = stepsFor(name);
               return (
                 <div className="col-span-full grid grid-cols-subgrid gap-1 sm:gap-3" key={name}>
-                  <div className={cn("self-center text-2xs font-medium capitalize max-sm:order-2 sm:text-sm")}>{name}</div>
+                  {showNames && <div className={cn("self-center text-2xs font-medium capitalize max-sm:order-2 sm:text-sm")}>{name}</div>}
                   <PaletteRow
-                    className="col-start-2"
+                    className={showNames ? "sm:col-start-2" : undefined}
                     name={name}
                     steps={steps}
                     showName={false}

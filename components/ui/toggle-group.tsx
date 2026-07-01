@@ -135,6 +135,7 @@ function ToggleGrid({
       data-grid
       style={
         {
+          ...style,
           gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
           "--gap": spacing,
         } as React.CSSProperties

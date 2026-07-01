@@ -75,10 +75,7 @@ export function PostTableOfContents({ contentId = "post-content", ...props }: Po
 
   React.useEffect(() => {
     const root = document.getElementById(contentId);
-    if (!root) {
-      setToc([]);
-      return;
-    }
+    if (!root) return;
 
     let frame = 0;
     const updateToc = () => setToc(collectToc(root));
@@ -87,14 +84,13 @@ export function PostTableOfContents({ contentId = "post-content", ...props }: Po
       frame = window.requestAnimationFrame(updateToc);
     };
 
-    updateToc();
-
     const observer = new MutationObserver(scheduleUpdate);
     observer.observe(root, {
       childList: true,
       subtree: true,
       characterData: true,
     });
+    scheduleUpdate();
 
     return () => {
       window.cancelAnimationFrame(frame);

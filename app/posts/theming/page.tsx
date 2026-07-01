@@ -3,8 +3,7 @@
 import { CodeBlock } from "@/components/code-block";
 import { Demo } from "@/components/demo";
 import { CheckIconStraight } from "@/components/icons";
-import { Theme } from "@/components/theme";
-import { ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme-settings";
+import { Theme, ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -105,7 +104,7 @@ export default function ThemingPostPage() {
     <>
       <div className="mx-auto flex max-w-xl flex-col gap-6">
         <section className="flex flex-col gap-4">
-          <p className="">
+          <p>
             A working demo of the theming described in my{" "}
             <Link href="/projects/oklch" className="link">
               writeup
