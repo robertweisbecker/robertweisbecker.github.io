@@ -1,47 +1,61 @@
 "use client";
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons-pixel";
 import { cn } from "@/lib/utils";
 import { animate, motion, useMotionValue } from "motion/react";
 import { useKeyPress } from "@/hooks/use-key-press";
-import { useEffect, useRef, useState } from "react";
 import { Kbd } from "@/components/ui/kbd";
 
 export function PixelDino({ className, ...props }: React.ComponentProps<"div">) {
   const y = useMotionValue(0);
-  const isAirborne = useRef(false);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
+  const isAirborne = React.useRef(false);
+  const svgRef = React.useRef<SVGSVGElement>(null);
+  const jumpAnimationRef = React.useRef<{ stop: () => void } | null>(null);
+  const resetAnimationRef = React.useRef<{ stop: () => void } | null>(null);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isPressed, setIsPressed] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
     if (isPlaying) {
       svg.unpauseAnimations();
     } else {
       svg.pauseAnimations();
-      animate(y, 0, { duration: 0.15 });
+      jumpAnimationRef.current?.stop();
+      jumpAnimationRef.current = null;
+      resetAnimationRef.current?.stop();
+      resetAnimationRef.current = animate(y, 0, { duration: 0.15 });
       isAirborne.current = false;
     }
   }, [isPlaying, y]);
 
-  const jump = () => {
+  React.useEffect(() => {
+    return () => {
+      jumpAnimationRef.current?.stop();
+      resetAnimationRef.current?.stop();
+    };
+  }, []);
+
+  const jump = React.useCallback(() => {
     if (!isPlaying || isAirborne.current) return;
     isAirborne.current = true;
     setIsPressed(true);
-    animate(y, [0, -16, 0], {
+    resetAnimationRef.current?.stop();
+    const controls = animate(y, [0, -16, 0], {
       duration: 0.3,
       ease: ["linear", "linear"],
       times: [0, 0.5, 1],
       onComplete: () => {
+        if (jumpAnimationRef.current !== controls) return;
+        jumpAnimationRef.current = null;
         isAirborne.current = false;
         setIsPressed(false);
       },
     });
-  };
+    jumpAnimationRef.current = controls;
+  }, [isPlaying, y]);
 
   useKeyPress(" ", jump, { enabled: isPlaying });
 
@@ -126,13 +140,12 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
             Space
           </Kbd>
         ) : (
-          <p className={cn("font-pixel text-[11px] text-muted-foreground")}>You know how to play…</p>
+          <p className={cn("font-pixel text-[11px] text-muted-foreground")}>You know how to play...</p>
         )}
       </div>
 
-      <Button
-        size="xs"
-        variant="ghost"
+      <button
+        type="button"
         onClick={() => {
           if (isPlaying) {
             setIsPressed(false);
@@ -141,23 +154,23 @@ export function PixelDino({ className, ...props }: React.ComponentProps<"div">) 
         }}
         aria-pressed={isPlaying}
         data-pressed={isPlaying}
-        className="absolute inset-e-1 top-1 z-1 font-pixel text-2xs uppercase"
+        className="focus-visible:outline-ring absolute inset-e-1 top-1 z-1 inline-flex h-button-xs items-center justify-center gap-1 rounded-sm px-2 py-1 font-pixel text-2xs font-[475] uppercase transition-colors hover:bg-accent/50 hover:text-accent-foreground focus-visible:outline-2 disabled:pointer-events-none disabled:opacity-50"
         aria-label={isPlaying ? "Pause" : "Play"}
       >
         {isPlaying ? (
           <>
             <PixelPauseIcon aria-hidden="true" className="size-[11px]" data-icon="inline-start" />
-            <span aria-hidden="true">Pause</span>
+            <span>Pause</span>
           </>
         ) : (
           <>
             <PixelPlayIcon aria-hidden="true" className="size-[11px]" data-icon="inline-start" />
-            <span aria-hidden="true" className="min-w-[5ch]">
+            <span className="min-w-[5ch]">
               Play
             </span>
           </>
         )}
-      </Button>
+      </button>
     </div>
   );
 }

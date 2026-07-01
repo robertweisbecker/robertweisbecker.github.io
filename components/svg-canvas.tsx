@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { motion, useReducedMotion } from "motion/react";
 import * as React from "react";
 
@@ -241,18 +242,10 @@ export function DraggablePoint({
   const prefersReducedMotion = useReducedMotion();
   const [isDragging, setIsDragging] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
-  const [isCoarsePointer, setIsCoarsePointer] = React.useState(false);
+  const isCoarsePointer = useMediaQuery({ pointer: "coarse" });
   const pointerIdRef = React.useRef<number | null>(null);
   const pointRef = React.useRef<SVGCircleElement | null>(null);
   const onDragEndRef = React.useRef(onDragEnd);
-
-  React.useEffect(() => {
-    const mq = window.matchMedia("(pointer: coarse)");
-    setIsCoarsePointer(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsCoarsePointer(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
 
   const hitRadius = hitRadiusProp ?? (isCoarsePointer ? HIT_RADIUS_TOUCH : HIT_RADIUS);
 
@@ -383,7 +376,7 @@ export function DraggablePoint({
 
   return (
     <g style={{ color }}>
-      {/* Hit area — invisible, handles all pointer/keyboard events */}
+      {/* Hit area: invisible, handles all pointer/keyboard events */}
       <circle
         ref={pointRef}
         cx={x}
@@ -415,7 +408,7 @@ export function DraggablePoint({
         onKeyDown={disabled ? undefined : handleKeyDown}
       />
 
-      {/* Halo ring — hover/drag visual feedback, SVG attributes only */}
+      {/* Halo ring: hover/drag visual feedback, SVG attributes only */}
       <motion.circle
         cx={x}
         cy={y}
@@ -437,7 +430,7 @@ export function DraggablePoint({
         transition={transition}
       />
 
-      {/* Point marker — transforms on <g> wrapper, SVG attrs on shape */}
+      {/* Point marker: transforms on <g> wrapper, SVG attrs on shape */}
       {isSquare ? (
         <motion.g animate={{ scale: pointScale }} transition={transition} style={{ transformOrigin: `${x}px ${y}px` }}>
           <motion.rect
