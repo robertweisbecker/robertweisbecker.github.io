@@ -7,7 +7,7 @@ import { PixelMorph, type PixelMorphAnimation } from "@/components/pixel-morph";
 import type { MorphablePixelIconName } from "@/components/icons-pixel";
 import { Toggle } from "@/components/ui/toggle";
 import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupButton } from "../ui/input-group";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 type PixelMorphToggleItem = {
   from: MorphablePixelIconName;

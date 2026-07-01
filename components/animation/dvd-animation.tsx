@@ -19,6 +19,8 @@ const DEFAULT_LOGO_ASPECT_RATIO = LOGO_VIEW_BOX_WIDTH / LOGO_VIEW_BOX_HEIGHT;
 const DEFAULT_DURATION = 90;
 const DEFAULT_LOGO_COLORS = ["#0ff", "#ff0", "#0ff", "#f0f", "#0f0"];
 const DEFAULT_MINI_BALLOON_COLORS = ["#fafafa", "#e4e4e7", "#d4d4d8", "#a1a1aa"];
+const getInitialIsPlaying = () =>
+  typeof window === "undefined" ? true : !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // These preserve the original DVD-style motion relationship:
 // x repeats 10 times and y repeats 9 times before the full pattern returns.
@@ -197,7 +199,7 @@ export function DvdAnimationRoot({
   const lastCornerHitIndexRef = React.useRef(0);
   const previousReportedCornerHitsRef = React.useRef(0);
   const [cornerHits, setCornerHits] = React.useState(0);
-  const [isPlaying, setIsPlaying] = React.useState(defaultPlaying);
+  const [isPlaying, setIsPlaying] = React.useState(() => defaultPlaying && getInitialIsPlaying());
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -208,7 +210,6 @@ export function DvdAnimationRoot({
       }
     }
 
-    syncReducedMotionPreference();
     mediaQuery.addEventListener("change", syncReducedMotionPreference);
 
     return () => {
@@ -266,9 +267,6 @@ export function DvdAnimationRoot({
       logo.style.color = color;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setIsPlaying(false);
-    }
   }, [animationKey, colors]);
 
   React.useEffect(() => {

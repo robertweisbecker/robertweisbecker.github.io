@@ -429,11 +429,11 @@ export function MotionTextScramble({
 }: MotionTextScrambleProps) {
   const shouldReduceMotion = useReducedMotion();
   const Component = as;
-  const [displayText, setDisplayText] = React.useState(children);
+  const [scrambledText, setScrambledText] = React.useState(children);
+  const displayText = trigger === false || shouldReduceMotion ? children : scrambledText;
 
   React.useEffect(() => {
     if (trigger === false || shouldReduceMotion) {
-      setDisplayText(children);
       return;
     }
 
@@ -447,7 +447,7 @@ export function MotionTextScramble({
       const progress = Math.min(1, frame / totalFrames);
       const resolvedCount = Math.floor(progress * chars.length);
 
-      setDisplayText(
+      setScrambledText(
         chars
           .map((char, index) => {
             if (char.trim() === "") return char;
@@ -459,7 +459,7 @@ export function MotionTextScramble({
 
       if (progress >= 1) {
         window.clearInterval(timer);
-        setDisplayText(children);
+        setScrambledText(children);
         onScrambleComplete?.();
       }
     }, speed * 1000);

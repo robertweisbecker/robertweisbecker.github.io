@@ -61,27 +61,8 @@ const buttonVariants = cva(
           "focus-visible:outline-offset-2",
         ],
         glass: [
-          "relative isolate inline-flex items-center justify-center overflow-hidden",
-          "rounded-full",
-          "text-white/90 transition",
-          "[backdrop-filter:blur(1.5px)_saturate(1.5)_brightness(1.1)]",
-          // Main glass fill
-          "[--button-color:rgba(248,240,248,0.1)]",
-          "[background-image:linear-gradient(0deg,rgba(248,248,248,0.2),rgba(248,248,248,0.2)),linear-gradient(0deg,rgba(68,68,68,0.6),rgba(68,68,68,0.6)),linear-gradient(0deg,rgba(255,255,255,0.25),rgba(255,255,255,0.25)),linear-gradient(0deg,rgba(0,0,0,0.25),rgba(0,0,0,0.25))]",
-          "[background-blend-mode:luminosity,plus-lighter,normal,normal]",
-
-          "[box-shadow:1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,var(--card)_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
-          // specular
-          "before:pointer-events-none before:absolute before:inset-0 before:-z-1",
-          "before:rounded-[inherit]",
-          "before:bg-white/10",
-          "before:[mask-image:linear-gradient(to_bottom,black,transparent_70%)]",
-
-          // edge
-          "after:pointer-events-none after:absolute after:inset-0 after:-z-1",
-          "after:rounded-[inherit]",
-          "after:bg-black/10",
-          "after:[mask-image:linear-gradient(to_top,black,transparent_55%)]",
+          "relative size-10 rounded-full backdrop-[blur(1.5px)_saturate(1.5)_brightness(1.1)] bg-[rgba(248,240,248,0.1)] shadow-glass before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/90 before:mix-blend-hard-light before:blur-[2px]",
+          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,white_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
         ],
         overlay: [
           "[--button-color:white] bg-neutral-700/60 hover:bg-neutral-700/70 backdrop-blur-xl text-white outline outline-white/10 ring-1 ring-black/60 -outline-offset-1 ",

@@ -25,6 +25,14 @@
 - Pixel morph demos are post-specific: `components/demos/pixel-icon-morph-visualizer.tsx` renders directly in `app/posts/pixel-icons/page.tsx` without a `Demo` wrapper, while `components/demos/pixel-icon-morph-toggles.tsx` is wrapped in `Demo` on that post. Do not add these pixel morph demos to `app/components/component-demos.tsx` or the components sidebar unless explicitly requested.
 - In the pixel morph visualizer, the left card contains the interactive icon, sequence dots, picker, and `CardAction` play/clear buttons; the right card contains controls. Use `ToggleGroup` for succinct controls and `Select` for more verbose ones to avoid truncation. Speed values are intentionally inverse duration labels: `1x` is 200ms, `0.5x` is 400ms, and `0.25x` is 800ms.
 
+## Refactoring Notes
+
+- Breaking internal imports is allowed because this repo is the only consumer.
+- Behavior should remain the same except where current behavior is a state-sync or maintainability bug.
+- Prefer local hooks when they encode repo semantics, especially hooks/use-media-query.ts.
+- A hooks library is installed at @uidotdev/usehooks. For example, you might prefer this for browser subscription state when it replaces custom effect plumbing without weakening behavior.
+- Do not spend time preserving old barrel exports or backwards-compatible aliases.
+
 ## Known Bugs & Workarounds
 
 ### Turbopack + Tailwind v4 Stale CSS Bug (open as of May 2026)
@@ -46,3 +54,11 @@
 - Current evidence: `next build` uses Turbopack and failed to complete even a scoped `app/about/page.tsx` build after ~100s, while `next build --webpack` completed the full production build reliably.
 - Re-test Turbopack after relevant changes, such as a Next/Turbopack upgrade, MDX config changes, removing dev-only packages from the root/client graph, clearing `.next` with the dev server stopped, or trimming private/demo routes from production.
 - Exit criteria for returning `npm run build` to plain `next build`: both scoped-route and full `npx next build` complete reliably within roughly the same range as webpack and do not hang.
+
+### Next webpack/cssnano conic-gradient minification bug (open as of June 2026)
+
+- **Symptom:** Tailwind `bg-conic` gradients render locally in development but disappear after production deployment/build; affected elements can compute `background-image: none` even when the Tailwind classes are correct.
+- **Root cause:** Next's webpack production CSS minimizer (`next/dist/compiled/cssnano-simple`) rewrites Tailwind's `@property --tw-gradient-from-position { syntax: "<length-percentage>"; initial-value: 0%; }` to `initial-value: 0`. Browsers then treat the value as a length (`0px`), which invalidates conic-gradient color stops.
+- **Tracked upstream:** [vercel/next.js #79149](https://github.com/vercel/next.js/issues/79149), [tailwindlabs/tailwindcss #17977](https://github.com/tailwindlabs/tailwindcss/issues/17977), and the upstream cssnano fix path [cssnano/cssnano #1702](https://github.com/cssnano/cssnano/pull/1702).
+- **Current verification:** Bumping from Next `16.2.6` to `16.2.9` did not fix this repo's `npm run build` path; the generated `.next/static/css/*.css` still emitted `@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0}`. `npx next build` (Turbopack/Lightning path) still hung for several minutes and was stopped.
+- **Workaround:** Keep an explicit post-Tailwind override such as `:where(.bg-conic, [class*="bg-conic/"]) { --tw-gradient-from-position: 0%; }` when conic gradients are used in production. Do not remove it until `npm run build` emits `initial-value:0%` for `--tw-gradient-from-position` and production browser QA confirms conic gradients render.

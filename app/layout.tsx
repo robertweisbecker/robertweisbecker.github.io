@@ -9,7 +9,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrollReset } from "@/components/scroll-reset";
-import { AgentationToolbar } from "@/components/agentation-toolbar";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -83,8 +82,6 @@ export default function RootLayout({
             <div className="root isolate">{children}</div>
           </main>
           <Footer />
-
-          <AgentationToolbar />
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />

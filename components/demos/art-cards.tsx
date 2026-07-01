@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Image, { type StaticImageData } from "next/image";
 import * as React from "react";
 

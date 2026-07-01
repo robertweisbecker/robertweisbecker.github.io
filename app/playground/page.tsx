@@ -1,4 +1,6 @@
 "use client";
+import { DotMatrix } from "@/components/animation/dot-matrix";
+import { TreeIconFile } from "@/components/icons-tree";
 import { Marker, MarkerContent } from "@/components/ui/marker";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { MotionText, TextReveal } from "@/components/animation/shared";
@@ -37,7 +39,7 @@ import {
   IconTrashFilled,
 } from "@tabler/icons-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from "motion/react";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { cn } from "@/lib/utils";
 import { Slider as BaseSlider } from "@base-ui/react";
@@ -220,6 +222,44 @@ export default function PlaygroundPage() {
     <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10">
       <h1 className="w-full text-h1">Playground</h1>
       <FoldedCardDemo />
+      <DotMatrix rows={11} cols={11} palette={{ on: "white", off: "black" }} />
+      <div className="group/tab-bar flex h-12 w-full items-center justify-center bg-[#070707]">
+        <div className="group squircle relative isolate flex h-7 max-w-[200px] items-center overflow-hidden rounded-md bg-transparent text-xs font-medium text-zinc-400 transition-colors group-hover/tab-bar:bg-neutral-900/30 group-hover/tab-bar:hover:bg-neutral-800/60 group-hover/tab-bar:hover:text-zinc-200">
+          <button
+            type="button"
+            title="untitled"
+            className="relative z-0 flex h-full min-w-0 flex-1 items-center gap-1.5 rounded-md pr-3 pl-2 text-left"
+          >
+            <TreeIconFile className="h-4 w-4 shrink-0 text-white/40" />
+            <span className="block truncate">untitled</span>
+          </button>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-12 bg-linear-to-l from-neutral-900 via-neutral-900 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+          />
+
+          <button
+            type="button"
+            title="Close tab"
+            aria-label="Close untitled"
+            className="squircle absolute top-1/2 right-1 z-20 flex h-5 w-5 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm bg-neutral-800 text-neutral-500 opacity-0 transition-opacity group-hover:opacity-100 hover:text-zinc-100 focus:opacity-100"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentcolor"
+              viewBox="0 0 16 16"
+              width={16}
+              height={16}
+              className="pi h-3 w-3"
+              aria-hidden="true"
+            >
+              <path d="M3.22 3.22a.75.75 0 0 1 1.06 0L8 6.94l3.72-3.72a.75.75 0 1 1 1.06 1.06L9.06 8l3.72 3.72a.75.75 0 1 1-1.06 1.06L8 9.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06L6.94 8 3.22 4.28a.75.75 0 0 1 0-1.06" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <div className="flex w-full flex-col gap-14">
         <PlaygroundSection id="motion-systems" title="Motion">
           <Demo title="DVD Loader" className="lg:col-span-4">
@@ -232,7 +272,6 @@ export default function PlaygroundPage() {
             title="TextReveal"
             centerContent
             variant="muted"
-            plain
             className="lg:col-span-4"
             innerClass="min-h-60"
             controls={
@@ -711,7 +750,6 @@ function MotionTextOptionGrid<T extends string>({
         if (next) onValueChange(next as T);
       }}
       variant="elevated"
-      size="xs"
       columns={columns}
       className="w-full"
     >
@@ -772,9 +810,9 @@ function MotionTextSliderControl({
         step={step}
         onValueCommitted={commitValue}
       >
-        <SliderLabel className="flex w-full items-center justify-between gap-3 text-xs">
-          <FieldTitle>{label}</FieldTitle>
-          <SliderValue className="font-mono">
+        <SliderLabel className="flex w-full items-center justify-between gap-2">
+          {label}
+          <SliderValue>
             {(formattedValues) => {
               const formattedValue = formattedValues[0] ?? String(value);
               return `${formattedValue}${suffix}`;
@@ -828,7 +866,7 @@ function MotionTextPlaygroundDemo() {
   return (
     <div className="grid w-full gap-4 xl:grid-cols-[minmax(0,1fr)_18rem]" data-testid="motion-text-playground">
       <div className="flex min-w-0 flex-col gap-5">
-        <MotionTextSample label="Reveal">
+        <MotionTextSample label="Entrance">
           <MotionText.Reveal
             key={`reveal-${resetKey}-${type}-${per}-${duration}-${stagger}`}
             type={type}
@@ -841,7 +879,7 @@ function MotionTextPlaygroundDemo() {
           </MotionText.Reveal>
         </MotionTextSample>
 
-        <MotionTextSample label="Effect">
+        <MotionTextSample label="Effects">
           <MotionText.Effect
             key={`effect-${resetKey}-${preset}-${per}-${duration}-${stagger}`}
             per={per}
@@ -858,12 +896,14 @@ function MotionTextPlaygroundDemo() {
           label="Loop"
           action={
             <Field orientation="horizontal" className="w-auto items-center gap-2">
-              <FieldLabel className="text-xs">Run</FieldLabel>
-              <Switch checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
+              <FieldLabel className="text-xs" htmlFor="motion-text-loop">
+                Play
+              </FieldLabel>
+              <Switch id="motion-text-loop" checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
             </Field>
           }
         >
-          <p>
+          <p className="text-muted-foreground">
             Feels{" "}
             <MotionText.Loop trigger={loopRunning} interval={1.2} className="text-primary">
               {["snappy", "calm", "clear"]}
@@ -903,7 +943,7 @@ function MotionTextPlaygroundDemo() {
         </MotionTextSample>
 
         <MotionTextSample label="Shimmer">
-          <p className="shimmer shimmer-color-primary/70 shimmer-duration-1400 text-sm leading-6 text-muted-foreground">
+          <p className="shimmer text-sm leading-6 text-muted-foreground shimmer-color-primary/70 shimmer-duration-1400">
             Generating response&hellip;
           </p>
         </MotionTextSample>
@@ -1204,15 +1244,19 @@ function SkeletonDemo() {
   const [loaded, setLoaded] = React.useState(false);
 
   React.useEffect(() => {
-    setLoaded(false);
     const timeout = window.setTimeout(() => setLoaded(true), 4000);
     return () => window.clearTimeout(timeout);
   }, [replayKey]);
 
+  const replay = React.useCallback(() => {
+    setLoaded(false);
+    setReplayKey((key) => key + 1);
+  }, []);
+
   return (
     <div className="grid w-full max-w-sm gap-3" data-testid="skeleton-demo" data-loaded={loaded}>
       <div className="order-last flex justify-center">
-        <Button variant="outline" rounded onClick={() => setReplayKey((key) => key + 1)} data-testid="skeleton-replay">
+        <Button variant="outline" rounded onClick={replay} data-testid="skeleton-replay">
           Reload
           <PixelIcons.PixelRedoIcon data-icon="inline-end" />
         </Button>

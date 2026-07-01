@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/autocomplete";
 import { Kbd } from "./kbd";
 import { ChevronLeft } from "@gravity-ui/icons";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
 import { useIsMobile } from "@/hooks/use-media-query";
 import { IconSearch } from "@tabler/icons-react";
 

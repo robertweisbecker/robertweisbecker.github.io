@@ -105,9 +105,13 @@ export function PixelReveal({
     setSize(latest);
   });
 
+  const replay = React.useCallback(() => {
+    setIsAnimating(true);
+    setResetKey((k) => k + 1);
+  }, []);
+
   React.useEffect(() => {
     pixelSize.set(PIXEL_DEFAULT_SETTINGS.size);
-    setIsAnimating(true);
 
     const controls = animate(pixelSize, 4, {
       duration: duration,
@@ -122,7 +126,7 @@ export function PixelReveal({
       {isAnimating && <PixelFilter id={`${id}-pixel-filter`} size={size} />}
       {resetButton ? (
         <Button
-          onClick={() => setResetKey((k) => k + 1)}
+          onClick={replay}
           size="icon-xs"
           disabled={isAnimating}
           variant="secondary"

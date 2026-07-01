@@ -65,12 +65,9 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
 // Shared modal image with skeleton
 // ---------------------------------------------------------------------------
 function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; alt: string; imgAspect?: string }) {
-  const [loaded, setLoaded] = React.useState(false);
   const url = imageSrc(src);
-
-  React.useEffect(() => {
-    setLoaded(false);
-  }, [url]);
+  const [loadedImage, setLoadedImage] = React.useState<{ url: string; loaded: boolean }>(() => ({ url, loaded: false }));
+  const loaded = loadedImage.url === url && loadedImage.loaded;
 
   return (
     <>
@@ -78,7 +75,7 @@ function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; al
       <img
         src={url}
         alt={alt}
-        onLoad={() => setLoaded(true)}
+        onLoad={() => setLoadedImage({ url, loaded: true })}
         style={{
           aspectRatio: imgAspect,
           borderRadius: 20,

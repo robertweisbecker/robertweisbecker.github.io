@@ -21,6 +21,8 @@ const iconVariants = {
   visible: { opacity: 1, scale: 1, y: 0 },
 };
 
+const defaultAutoplayDelay = 4000;
+
 type CarouselApi = EmblaCarouselType | undefined;
 
 type CarouselProps = {
@@ -73,15 +75,19 @@ function Carousel({
   const autoplayEnabled = !!autoplayOption;
   const fadeEnabled = !!fadeOption;
 
-  const autoplayOpts = typeof autoplayOption === "object" ? autoplayOption : {};
+  const autoplayOpts = React.useMemo(() => (typeof autoplayOption === "object" ? autoplayOption : {}), [autoplayOption]);
   const isLoop = opts?.loop ?? true;
-  const autoplayPlugin = React.useRef(autoplayEnabled ? Autoplay({ delay: 4000, ...autoplayOpts }) : null);
+  const builtInPlugins = React.useMemo(
+    () => [
+      ...(fadeEnabled ? [Fade()] : []),
+      ...(autoplayEnabled ? [Autoplay({ delay: defaultAutoplayDelay, ...autoplayOpts })] : []),
+    ],
+    [autoplayEnabled, autoplayOpts, fadeEnabled]
+  );
 
   const [intersectionRef, entry] = useIntersectionObserver({ threshold: 0.3 });
   const isInView = entry?.isIntersecting ?? false;
   const userPaused = React.useRef(false);
-
-  const builtInPlugins = [...(fadeEnabled ? [Fade()] : []), ...(autoplayPlugin.current ? [autoplayPlugin.current] : [])];
 
   const [carouselRef, api] = useEmblaCarousel({ loop: true, ...opts, axis: orientation === "horizontal" ? "x" : "y" }, [
     ...builtInPlugins,
@@ -138,7 +144,7 @@ function Carousel({
     plug.play();
   }, [api]);
 
-  const delay = typeof autoplayOpts.delay === "number" ? autoplayOpts.delay : 4000;
+  const delay = typeof autoplayOpts.delay === "number" ? autoplayOpts.delay : defaultAutoplayDelay;
 
   // Sync selection state from embla.
   React.useEffect(() => {
@@ -165,7 +171,6 @@ function Carousel({
     if (!api || !plug) return;
 
     plug.stop();
-    setIsPlaying(plug.isPlaying());
 
     const onPlay = () => setIsPlaying(true);
     const onStop = () => {
