@@ -10,8 +10,8 @@
 
 - This is a static Next.js 16 App Router site with MDX content, no database, no API routes, and no required environment variables.
 - Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, and `npm run format:check`.
-- `npm run build` produces the static site output, while `npm run dev:fresh` clears `.next` before starting dev.
-- `npm run build` intentionally uses `next build --webpack` while production Turbopack builds are unreliable in this repo.
+- `npm run build` produces the static site output with the default Next/Turbopack production build, while `npm run dev:fresh` clears `.next` before starting dev.
+- Explicit webpack fallback scripts remain available as `npm run dev:webpack`, `npm run dev:fresh:webpack`, `npm run build:webpack`, and `npm run preview:webpack`.
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
 - `ToggleGrid` preserves intended toggle styling by extending `ToggleGroup` context with `grid?: boolean`.
 - Tailwind v4.3 custom variants such as `@stuck-top` are valid here; see **Known Bugs & Workarounds** for the Turbopack stale-CSS bug that makes errors persist past the fix.
@@ -53,15 +53,15 @@
 
 ### Production build bundler fallback
 
-- Use `next build --webpack` for production builds while Turbopack production builds remain slower or unreliable in this repo.
-- Current evidence: `next build` uses Turbopack and failed to complete even a scoped `app/about/page.tsx` build after ~100s, while `next build --webpack` completed the full production build reliably.
-- Re-test Turbopack after relevant changes, such as a Next/Turbopack upgrade, MDX config changes, removing dev-only packages from the root/client graph, clearing `.next` with the dev server stopped, or trimming private/demo routes from production.
-- Exit criteria for returning `npm run build` to plain `next build`: both scoped-route and full `npx next build` complete reliably within roughly the same range as webpack and do not hang.
+- The forced webpack production path was retired on 2026-07-01 after dependency updates to Next `16.2.9`, Tailwind `4.3.2`, and `@tailwindcss/postcss` `4.3.2`.
+- Current evidence: after clearing `.next`, plain `npx next build` completed successfully with Turbopack: compile in 62s, TypeScript in 29.6s, and static generation for 57/57 pages in 5.2s.
+- Keep explicit webpack scripts for fallback testing only: `npm run build:webpack` and `npm run preview:webpack`.
+- If Turbopack production builds regress, compare against `npm run build:webpack`, clear `.next`, and update this file with the new evidence before making webpack the default again.
 
 ### Next webpack/cssnano conic-gradient minification bug (open as of June 2026)
 
 - **Symptom:** Tailwind `bg-conic` gradients render locally in development but disappear after production deployment/build; affected elements can compute `background-image: none` even when the Tailwind classes are correct.
 - **Root cause:** Next's webpack production CSS minimizer (`next/dist/compiled/cssnano-simple`) rewrites Tailwind's `@property --tw-gradient-from-position { syntax: "<length-percentage>"; initial-value: 0%; }` to `initial-value: 0`. Browsers then treat the value as a length (`0px`), which invalidates conic-gradient color stops.
 - **Tracked upstream:** [vercel/next.js #79149](https://github.com/vercel/next.js/issues/79149), [tailwindlabs/tailwindcss #17977](https://github.com/tailwindlabs/tailwindcss/issues/17977), and the upstream cssnano fix path [cssnano/cssnano #1702](https://github.com/cssnano/cssnano/pull/1702).
-- **Current verification:** Bumping from Next `16.2.6` to `16.2.9` did not fix this repo's `npm run build` path; the generated `.next/static/css/*.css` still emitted `@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0}`. `npx next build` (Turbopack/Lightning path) still hung for several minutes and was stopped.
-- **Workaround:** Keep an explicit post-Tailwind override such as `:where(.bg-conic, [class*="bg-conic/"]) { --tw-gradient-from-position: 0%; }` when conic gradients are used in production. Do not remove it until `npm run build` emits `initial-value:0%` for `--tw-gradient-from-position` and production browser QA confirms conic gradients render.
+- **Current verification:** The default `npm run build` now uses Turbopack and emits `@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0%}` under `.next/static/chunks/*.css`. The webpack/cssnano bug still matters when using `npm run build:webpack`.
+- **Workaround:** Keep an explicit post-Tailwind override such as `:where(.bg-conic, [class*="bg-conic/"]) { --tw-gradient-from-position: 0%; }` while webpack fallback builds are still used for comparison. Reconsider it only after production browser QA confirms conic gradients render on the default Turbopack build and fallback webpack builds no longer emit `initial-value:0`.
