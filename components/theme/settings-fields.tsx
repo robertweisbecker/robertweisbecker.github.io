@@ -1,47 +1,28 @@
 "use client";
-import { cn } from "@/lib/utils";
+
 import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-group";
+import { PixelResetSmallIcon } from "@/components/icons-pixel";
 import { NumberSlider } from "@/components/number-slider";
-import { ALL_HUE_OPTIONS, COLOR_MAP, HUE_OPTIONS, NEUTRAL_OPTIONS, useTheme, type HueName, type NeutralName } from "@/components/theme";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { isOneOf } from "@/lib/is-one-of";
+import { cn } from "@/lib/utils";
 import {
-  Popover,
-  PopoverContent,
-  PopoverDescription,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTitle,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  ALL_HUE_OPTIONS,
+  COLOR_MAP,
+  HUE_OPTIONS,
+  NEUTRAL_OPTIONS,
+  type HueName,
+} from "./model";
+import { useTheme } from "./provider";
 
-import { PixelResetSmallIcon } from "@/components/icons-pixel";
-import { IconWheel } from "@tabler/icons-react";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { Separator } from "./ui/separator";
-import { LinkButton } from "./ui/link-button";
+const hueNames = ALL_HUE_OPTIONS.map((option) => option.value);
+const neutralNames = NEUTRAL_OPTIONS.map((option) => option.value);
 
-const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({
-  value: opt.value,
-  label: opt.label,
-  color: opt.preview,
-}));
-
-const NEUTRAL_SWATCHES: ColorSwatch[] = NEUTRAL_OPTIONS.map((opt) => ({
-  value: opt.value,
-  label: opt.label,
-  color: opt.preview,
-}));
+const ALL_SWATCHES: ColorSwatch[] = ALL_HUE_OPTIONS.map((opt) => ({ value: opt.value, label: opt.label, color: opt.preview }));
+const NEUTRAL_SWATCHES: ColorSwatch[] = NEUTRAL_OPTIONS.map((opt) => ({ value: opt.value, label: opt.label, color: opt.preview }));
 
 function ThemeFieldReset({
   className,
@@ -63,11 +44,7 @@ function ThemeFieldReset({
             variant="ghost"
             size="icon-xs"
             rounded
-            className={cn(
-              "-my-1 -ms-1 size-3 shrink-0 text-muted-foreground opacity-100 transition-opacity",
-              !dirty && "pointer-events-none opacity-0!",
-              className
-            )}
+            className={cn("-my-1 -ms-1 size-3 shrink-0 text-muted-foreground opacity-100 transition-opacity", !dirty && "pointer-events-none opacity-0!", className)}
             disabled={!dirty}
             onClick={onReset}
             aria-label={ariaLabel}
@@ -92,47 +69,7 @@ export function ThemeResetAllButton({ variant = "ghost", size = "sm", ...props }
 }
 
 export function HueSwatch({ hue }: { hue: HueName }) {
-  return (
-    <span
-      className="inline-block size-3 shrink-0 rounded-full border ring ring-popover"
-      style={{ backgroundColor: COLOR_MAP.get(hue)?.preview }}
-    />
-  );
-}
-
-export function ThemeSettings({ className, ...props }: Omit<React.ComponentProps<typeof Button>, "aria-label">) {
-  return (
-    <Popover>
-      <PopoverTrigger render={<Button variant="ghost" {...props} aria-label="Theme settings" />} className={cn(className)}>
-        <span className="-ms-1.5 size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720">
-          <IconWheel strokeWidth={1.5} />
-        </span>
-        Theme
-      </PopoverTrigger>
-      <PopoverContent align="end" className="w-xs overflow-hidden">
-        <PopoverHeader className="">
-          <PopoverTitle>Theme</PopoverTitle>
-          <PopoverDescription>Adjust the theme to your heart&apos;s content.</PopoverDescription>
-        </PopoverHeader>
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-          <LinkButton variant="link" href="/posts/theming">
-            How it works
-          </LinkButton>
-          <span className="text-muted-foreground" aria-hidden>
-            ∙
-          </span>
-          <LinkButton variant="link" href="/oklch-colors#palettes">
-            View palettes
-          </LinkButton>
-        </div>
-        <Separator />
-        <ThemeSettingsPanel className="" />
-        <PopoverFooter>
-          <ThemeResetAllButton variant="outline" size="md" className="w-full flex-1" />
-        </PopoverFooter>
-      </PopoverContent>
-    </Popover>
-  );
+  return <span className="inline-block size-3 shrink-0 rounded-full border ring ring-popover" style={{ backgroundColor: COLOR_MAP.get(hue)?.preview }} />;
 }
 
 export type ThemeColorDisplayMode = "select" | "swatches";
@@ -174,6 +111,9 @@ export function ThemePrimaryColorField({
 }: ThemePrimaryColorFieldProps) {
   const { hue, defaultHue, set } = useTheme();
   const hueDirty = hue !== defaultHue;
+  const setHue = (value: unknown) => {
+    if (isOneOf(value, hueNames)) set({ hue: value });
+  };
 
   return (
     <Field className={className} {...props}>
@@ -187,7 +127,7 @@ export function ThemePrimaryColorField({
         showValue={showValue}
       />
       {display === "select" ? (
-        <Select value={hue} onValueChange={(v) => set({ hue: v as HueName })}>
+        <Select value={hue} onValueChange={setHue}>
           <SelectTrigger className="w-full">
             <SelectValue>
               <HueSwatch hue={hue} />
@@ -217,7 +157,7 @@ export function ThemePrimaryColorField({
           </SelectContent>
         </Select>
       ) : (
-        <ColorSwatchGroup colors={ALL_SWATCHES} value={hue} onValueChange={(v) => set({ hue: v as HueName })} allowCustomColors={false} />
+        <ColorSwatchGroup colors={ALL_SWATCHES} value={hue} onValueChange={setHue} allowCustomColors={false} />
       )}
     </Field>
   );
@@ -240,6 +180,9 @@ export function ThemeNeutralColorField({
 }: ThemeNeutralColorFieldProps) {
   const { neutral, defaultNeutral, set } = useTheme();
   const neutralDirty = neutral !== defaultNeutral;
+  const setNeutral = (value: unknown) => {
+    if (isOneOf(value, neutralNames)) set({ neutral: value });
+  };
 
   return (
     <Field className={className} {...props}>
@@ -254,14 +197,9 @@ export function ThemeNeutralColorField({
       />
 
       {display === "swatches" ? (
-        <ColorSwatchGroup
-          colors={NEUTRAL_SWATCHES}
-          value={neutral}
-          onValueChange={(v) => set({ neutral: v as NeutralName })}
-          allowCustomColors={false}
-        />
+        <ColorSwatchGroup colors={NEUTRAL_SWATCHES} value={neutral} onValueChange={setNeutral} allowCustomColors={false} />
       ) : (
-        <Select value={neutral} onValueChange={(v) => set({ neutral: v as NeutralName })}>
+        <Select value={neutral} onValueChange={setNeutral}>
           <SelectTrigger className="w-full">
             <SelectValue>
               <HueSwatch hue={neutral} />
@@ -297,18 +235,6 @@ export type ThemeRadiusFieldProps = Omit<
   unit?: string;
 };
 
-export type ThemeDensityFieldProps = Omit<
-  React.ComponentProps<typeof NumberSlider>,
-  "label" | "labelAction" | "min" | "max" | "step" | "value" | "onValueChange" | "unit"
-> & {
-  label?: string;
-  max?: number;
-  min?: number;
-  showReset?: boolean;
-  step?: number;
-  unit?: string;
-};
-
 export function ThemeRadiusField({
   label = "Radius",
   max = 32,
@@ -324,16 +250,12 @@ export function ThemeRadiusField({
   return (
     <NumberSlider
       label={label}
-      labelAction={
-        showReset ? (
-          <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" />
-        ) : null
-      }
+      labelAction={showReset ? <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" /> : null}
       min={min}
       max={max}
       step={step}
       value={radius}
-      onValueChange={(v) => set({ radius: v })}
+      onValueChange={(value) => set({ radius: value })}
       unit={unit}
       {...props}
     />
@@ -345,13 +267,7 @@ export type ThemeSettingsPanelProps = React.ComponentProps<typeof FieldGroup> & 
   neutralDisplay?: ThemeColorDisplayMode;
 };
 
-export function ThemeSettingsPanel({
-  className,
-  hueDisplay = "select",
-  neutralDisplay = "swatches",
-  children,
-  ...props
-}: ThemeSettingsPanelProps) {
+export function ThemeSettingsPanel({ className, hueDisplay = "select", neutralDisplay = "swatches", children, ...props }: ThemeSettingsPanelProps) {
   return (
     <FieldGroup className={className} {...props}>
       {children ?? (
@@ -365,8 +281,6 @@ export function ThemeSettingsPanel({
           </FieldSet>
           <FieldSeparator />
           <ThemeRadiusField />
-          {/* TODO: Get this working */}
-          {/* <ThemeDensityField /> */}
         </>
       )}
     </FieldGroup>

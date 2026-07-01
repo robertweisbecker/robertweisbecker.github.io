@@ -1,7 +1,7 @@
 "use client";
 
 import { ModeToggle } from "@/components/mode-toggle";
-import { ThemeSettings } from "@/components/theme-settings";
+import { ThemeSettingsPopover } from "@/components/theme";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
@@ -262,7 +262,7 @@ export function Header() {
           </>
         )}
         <Separator orientation="vertical" className="h-4" />
-        <ThemeSettings className="rounded-full" size={isMobile ? "md" : "sm"} />
+        <ThemeSettingsPopover className="rounded-full" size={isMobile ? "md" : "sm"} />
         <ModeToggle size={isMobile ? "md" : "sm"} className="rounded-full" variant="ghost" label={true} />
       </div>
       <div
