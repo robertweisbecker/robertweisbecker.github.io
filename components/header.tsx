@@ -146,8 +146,11 @@ export function Header() {
                                 src={project.heroImage}
                                 alt={`${project.title} hero preview`}
                                 fill
+                                width={320}
+                                height={180}
                                 sizes="(max-width: 768px) 100vw, 320px"
                                 className="object-cover object-top"
+                                loading="eager"
                                 preload
                               />
                             </div>

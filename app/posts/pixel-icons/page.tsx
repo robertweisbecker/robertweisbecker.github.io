@@ -1,4 +1,4 @@
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import {
   DepartureMonoTextDemo,
   MorphablePixelIconScrollDemo,
@@ -34,7 +34,7 @@ export default function PixelIconsPage() {
             some great ones for box drawings and ASCII art.
           </p>
 
-          <Demo caption="Just look at this progress bar!">
+          <DemoContainer caption="Just look at this progress bar!">
             <div className="mx-auto max-w-3xs text-center">
               <span className="inline border border-dotted border-current font-pixel text-2xs text-info-primary">
                 <span>████████</span>
@@ -42,20 +42,20 @@ export default function PixelIconsPage() {
                 <span>░░░░░░░░░░</span>
               </span>
             </div>
-          </Demo>
+          </DemoContainer>
 
           <p>
             I&apos;m using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other
             places. At first glance, it seemed like we Departure would let me replace my Tabler icons with symbols.
           </p>
-          <Demo caption="A few Departure Mono symbols">
+          <DemoContainer caption="A few Departure Mono symbols">
             <div className="text-center font-pixel text-[22px]">
               {"❰ ❮ ❬ < ‹ › > ❭ ❯ ❱"}
               <br />
               ↖ ↗ ↘ ↙ ← ↑ ↓ →<br /> ↕ ↰ ↱ ↲ ↳ ↴
               <br />× ★ ☆ ♥ ♦ ✦ ✧ √
             </div>
-          </Demo>
+          </DemoContainer>
           <p>
             One issue: all the chevrons are horizontal. I don&apos;t want to rotate a single character every time a need a downward-facing
             one. Time to make some custom icons.
@@ -67,9 +67,9 @@ export default function PixelIconsPage() {
             at font-size multiples of 11px, you can use a half-step at 16.5px to make each &quot;pixel&quot; land on a pixel edge on at
             least one side. This equates to an icon with a 1.5px stroke (like Lucide) and remains decently crisp.{" "}
           </p>
-          <Demo caption="A few Departure Mono text sizes">
+          <DemoContainer caption="A few Departure Mono text sizes">
             <DepartureMonoTextDemo />
-          </Demo>
+          </DemoContainer>
           <p>That means we should be able use the trio of 11 / 16.5 / 22px in place of common SVG sizes like 12, 16, 20, and 24px.</p>
           <p>
             For monospacing, the em box of a given character is 8×14, with ascenders or descenders exceeding the 11px bounding box. This
@@ -94,7 +94,7 @@ export default function PixelIconsPage() {
             </li>
           </ol>
 
-          <Demo centerContent className="not-prose" title="Static icons" innerClass="min-h-[300px]">
+          <DemoContainer centerContent className="not-prose" title="Static icons" innerClass="min-h-[300px]">
             <div className="grid grid-cols-3 items-baseline gap-3 gap-y-5 text-sm font-medium text-muted-foreground **:shrink-0">
               <span className="flex flex-col items-center gap-1">
                 <PixelIcons.PixelChevronDownIcon className="size-[33px] shrink-0 text-primary" /> <p>ChevronDown</p>
@@ -115,22 +115,22 @@ export default function PixelIconsPage() {
                 <PixelIcons.PixelFinderIcon className="size-[48px]! shrink-0 text-primary" /> <p>Finder</p>
               </span>
             </div>
-          </Demo>
-          <Demo title="Animated" description="∙ click each to morph" centerContent innerClass="min-h-[300px]">
+          </DemoContainer>
+          <DemoContainer title="Animated" description="∙ click each to morph" centerContent innerClass="min-h-[300px]">
             <PixelMorphToggles />
-          </Demo>
-          <Demo title="Password toggle" description="∙ type or hide your password" centerContent innerClass="min-h-[300px]">
+          </DemoContainer>
+          <DemoContainer title="Password toggle" description="∙ type or hide your password" centerContent innerClass="min-h-[300px]">
             <PixelIconPasswordToggle />
-          </Demo>
+          </DemoContainer>
           <Heading level={2}>Twenty-eight pixels</Heading>
           <p>
             The 28-pixel constraint started with the light/dark mode toggle. I wanted to do something I&apos;d seen before: a sun icon
             rotates into a moon icon and call it a day. With a regular SVG, this works just fine.
           </p>
           <p>We can rig this up with Tabler and Motion:</p>
-          <Demo caption="The original idea works naturally with path-based SVGs." centerContent className="min-h-[400px]">
+          <DemoContainer caption="The original idea works naturally with path-based SVGs." centerContent className="min-h-[400px]">
             <TablerRotationIdeaDemo />
-          </Demo>
+          </DemoContainer>
         </section>
 
         <section className="prose">
@@ -168,9 +168,9 @@ export default function PixelIconsPage() {
             Motion animates each&apos;s <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new
             position.
           </p>{" "}
-          <Demo caption="Rotating paths vs. rearranging pixels" centerContent className="min-h-[400px]">
+          <DemoContainer caption="Rotating paths vs. rearranging pixels" centerContent className="min-h-[400px]">
             <PixelSunMoonMorphDemo />
-          </Demo>
+          </DemoContainer>
           <p>
             It&apos;s self-evident that the path-based approach is smoother, but that&apos;s not the point:
             <mark>
@@ -189,9 +189,9 @@ export default function PixelIconsPage() {
           </p>
           <p>A lot, it turns out.</p>
 
-          <Demo caption="The current 28-rect morphable set." innerClass="p-3">
+          <DemoContainer caption="The current 28-rect morphable set." innerClass="p-3">
             <MorphablePixelIconScrollDemo />
-          </Demo>
+          </DemoContainer>
 
           <p>
             (Some of these are duplicates or variants of others, mostly different attempts at getting the shapes right. They&apos;re still
@@ -211,9 +211,9 @@ export default function PixelIconsPage() {
             generates icons from the X/Y coordinates of each 1x1 layer per frame. Icons then become a string it parses from Figma, and the
             helper renders <Code variant="inline-component">rect</Code> elements inside a shared SVG wrapper.
           </p>
-          <Demo caption="Click an icon to inspect the coordinate string behind it." innerClass="p-1">
+          <DemoContainer caption="Click an icon to inspect the coordinate string behind it." innerClass="p-1">
             <PixelIconDataInspectorDemo />
-          </Demo>
+          </DemoContainer>
         </div>
 
         <div className="prose prose-sm max-w-none">

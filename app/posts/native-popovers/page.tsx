@@ -1,6 +1,6 @@
 "use client";
 
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import { Button } from "@/components/ui/button";
 import { Code } from "@/components/ui/code";
 import { Badge } from "@/components/ui/badge";
@@ -122,7 +122,7 @@ export default function NativePopoversAnchoringPage() {
       <Heading level={2} className="mt-4">
         Anchored popovers
       </Heading>
-      <Demo title="Anchored" code={{ ...demoCode, value: anchoredPopoverCode }} centerContent={true}>
+      <DemoContainer title="Anchored" code={{ ...demoCode, value: anchoredPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-anchor" variant="outline" className="[anchor-name:--trigger2]">
             Open popover
@@ -142,7 +142,7 @@ export default function NativePopoversAnchoringPage() {
             </p>
           </div>
         </div>
-      </Demo>
+      </DemoContainer>
       <p>
         One thing I noticed: you seem to need <Code>transition-all</Code> on the popover content to get the exit transition working;{" "}
         <Code>transition-[properties]</Code> doesn&apos;t work, at least with Tailwind.
@@ -152,7 +152,7 @@ export default function NativePopoversAnchoringPage() {
         clicking outside.
       </p>
       <Heading level={2}>Toast popovers</Heading>
-      <Demo title="Manual close" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
+      <DemoContainer title="Manual close" code={{ ...demoCode, value: toastPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button
             popoverTarget="popover-toast"
@@ -200,13 +200,13 @@ export default function NativePopoversAnchoringPage() {
             </Button>
           </div>
         </div>
-      </Demo>
+      </DemoContainer>
       <p>
         The next one has a backdrop just to see how it works. But don{"'"}t be fooled, it{"'"}s not modal, nor does it lock scroll position
         or focus. In reality, you might use a <Code>{"<dialog>"}</Code> here if you{"'"}re going native.
       </p>
       <Heading level={2}>Backdrop</Heading>
-      <Demo title="Non-modal" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
+      <DemoContainer title="Non-modal" code={{ ...demoCode, value: backdropPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button popoverTarget="popover-backdrop" variant="outline" className="relative">
             With backdrop
@@ -238,10 +238,10 @@ export default function NativePopoversAnchoringPage() {
             </p>
           </div>
         </div>
-      </Demo>
+      </DemoContainer>
       <p>You can have some fun with the backdrops too. This one also requires an explicit close.</p>
 
-      <Demo title="Manual + backdrop" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
+      <DemoContainer title="Manual + backdrop" code={{ ...demoCode, value: dangerPopoverCode }} centerContent={true}>
         <div className="grid min-h-48 place-items-center">
           <Button
             popoverTarget="popover-backdrop-2"
@@ -314,7 +314,7 @@ export default function NativePopoversAnchoringPage() {
             </Button>
           </div>
         </div>
-      </Demo>
+      </DemoContainer>
     </div>
   );
 }

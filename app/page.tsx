@@ -3,14 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 
-import {
-  BaseUiIcon,
-  LinkedinIcon,
-  NextJsIcon,
-  CursorIcon,
-  VercelIcon,
-  CodexIcon,
-} from "@/components/icons";
+import { BaseUiIcon, LinkedinIcon, NextJsIcon, CursorIcon, VercelIcon, CodexIcon } from "@/components/icons";
 import { PixelMarkdown2Icon, PixelShuffleIcon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons-pixel";
 import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
@@ -257,7 +250,7 @@ export default function Home() {
             </span>
             ,{" "}
             <span className="whitespace-nowrap text-foreground">
-              <MetaIcon className="-mt-[3px] inline-block size-4 opacity-50 grayscale" />
+              <MetaIcon className="mt-[-3px] inline-block size-4 opacity-50 grayscale" />
                Meta
             </span>
             ,{" "}

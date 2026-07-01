@@ -360,7 +360,7 @@ export function PixelMorphVisualizer({ className }: { className?: string }) {
                 <CurrentIcon style={fallbackPreviewStyle} aria-hidden />
               ) : (
                 <span
-                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
+                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,transparent_0_50%)] bg-size-[8px_8px]"
                   aria-hidden
                 />
               )}
@@ -550,17 +550,14 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
     }
   }, []);
 
-  const finishMorph = React.useCallback(
-    (to: PixelIcons.MorphablePixelIconName) => {
-      setActiveIcon(to);
-      setMorphFrom(null);
-      setMorphTo(null);
-      setMorphActive(false);
-      isAnimatingRef.current = false;
-      timerRef.current = null;
-    },
-    []
-  );
+  const finishMorph = React.useCallback((to: PixelIcons.MorphablePixelIconName) => {
+    setActiveIcon(to);
+    setMorphFrom(null);
+    setMorphTo(null);
+    setMorphActive(false);
+    isAnimatingRef.current = false;
+    timerRef.current = null;
+  }, []);
 
   const triggerMorph = React.useCallback(
     (from: PixelIcons.MorphablePixelIconName, to: PixelIcons.MorphablePixelIconName) => {
@@ -631,10 +628,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
         </CardHeader>
         <CardContent>
           <div className="grid h-[110px] place-items-center" data-section="preview">
-            <div
-              className="grid size-[88px] place-items-center rounded-xl border border-border"
-              data-testid="pixel-morph-preview-v2"
-            >
+            <div className="grid size-[88px] place-items-center rounded-xl border border-border" data-testid="pixel-morph-preview-v2">
               {previewFrom && previewTo ? (
                 <PixelMorph
                   from={previewFrom}
@@ -649,7 +643,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
                 />
               ) : (
                 <span
-                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,_transparent_0_50%)] bg-[length:8px_8px]"
+                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,transparent_0_50%)] bg-size-[8px_8px]"
                   aria-hidden
                 />
               )}
@@ -697,13 +691,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
         <CardContent className="gap-3">
           <AnimationControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
           <AnimationControl type="select" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />
-          <AnimationControl
-            type="toggle"
-            label="Speed"
-            value={speedScale}
-            options={SPEED_OPTIONS}
-            onValueChange={setSpeedScale}
-          />
+          <AnimationControl type="toggle" label="Speed" value={speedScale} options={SPEED_OPTIONS} onValueChange={setSpeedScale} />
           <NumberSlider
             label="Stagger"
             min={0}

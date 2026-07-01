@@ -16,7 +16,7 @@ import {
 import { useState, type ReactNode } from "react";
 
 import { CodeBlock } from "@/components/code-block";
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import { InfoIcon } from "@/components/icons";
 import { Alert, AlertContent, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
@@ -305,7 +305,7 @@ export default function TabIndicatorPostPage() {
 
       <p>Here&apos;s the end result:</p>
 
-      <Demo title="Demo" centerContent innerClass="grid gap-4 w-full">
+      <DemoContainer title="Demo" centerContent innerClass="grid gap-4 w-full">
         <TabsPrimitive.Root defaultValue="1" className="w-full rounded-xl border p-1">
           <TabsPrimitive.List className="flex w-full overflow-hidden">
             {numbers.map((value) => (
@@ -318,7 +318,7 @@ export default function TabIndicatorPostPage() {
             <NumberPanels />
           </div>
         </TabsPrimitive.Root>
-      </Demo>
+      </DemoContainer>
 
       <p>
         Sure, this is trivial with Motion or Base UI, but if you&apos;re using Radix or have a component library that doesn&apos;t support
@@ -334,7 +334,7 @@ export default function TabIndicatorPostPage() {
         when a different tab is active, we move the indicator to line up with <em>that</em> tab.
       </p>
 
-      <Demo title="Synchronization" centerContent innerClass="min-h-56">
+      <DemoContainer title="Synchronization" centerContent innerClass="min-h-56">
         <ToggleGroupPrimitive defaultValue={["1"]} className="isolate flex -rotate-15 skew-x-15 justify-center gap-0">
           {numbers.map((value, index) => (
             <TraceToggle key={value} value={value} color={colorClasses[index]} offset={staggerOffsets[index]}>
@@ -342,7 +342,7 @@ export default function TabIndicatorPostPage() {
             </TraceToggle>
           ))}
         </ToggleGroupPrimitive>
-      </Demo>
+      </DemoContainer>
       <p>
         If we sync them up correctly, the active tab&apos;s indicator will move toward the new tab at the same time the new tab&apos;s
         indicator does. When the two indicators meet, we crossfade them, and it looks like as if a single indicator is moving between
@@ -350,7 +350,7 @@ export default function TabIndicatorPostPage() {
       </p>
 
       <p>Here&apos;s that same example unskewed, so you can see how they overlap when adjacent siblings are selected:</p>
-      <Demo title="Handoff" centerContent innerClass="pb-16">
+      <DemoContainer title="Handoff" centerContent innerClass="pb-16">
         <ToggleGroupPrimitive defaultValue={["1"]} className="isolate flex justify-center gap-0">
           {numbers.map((value, index) => (
             <TraceToggle key={value} value={value} color={colorClasses[index]} offset="after:top-10 data-pressed:after:opacity-20">
@@ -358,7 +358,7 @@ export default function TabIndicatorPostPage() {
             </TraceToggle>
           ))}
         </ToggleGroupPrimitive>
-      </Demo>
+      </DemoContainer>
       <p>
         Thankfully, Tailwind has an abstraction for this kind of thing: <code>group</code> and <code>peer</code>. We can use these classes
         to make adjacent triggers &quot;hand off&quot; the indicator from one trigger to another by flipping the animation direction based
@@ -395,20 +395,20 @@ export default function TabIndicatorPostPage() {
         <code>translate-x-full</code>. When active, we also want the indicator to slide in from the right, so we set{" "}
         <code>origin-right</code> on its initial state.
       </p>
-      <Demo title="Park the pseudo-element" code={demoCode(parkedButtonCode)} centerContent>
+      <DemoContainer title="Park the pseudo-element" code={demoCode(parkedButtonCode)} centerContent>
         <ButtonPrimitive
           className={`${baseButton} after:absolute after:inset-0 after:grid-stack after:origin-right after:translate-x-full after:rounded-[inherit] after:outline-2 after:outline-offset-1 after:outline-primary`}
         >
           Trigger
         </ButtonPrimitive>
-      </Demo>
+      </DemoContainer>
       <p>
         Next, target the active/pressed state. We&apos;ll snap <code>translateX</code> back to <code className="whitespace-nowrap">0</code>{" "}
         when the trigger is pressed. This moves the indicator atop our trigger on click. Be sure to add some duration and easing to the
         transformation.
       </p>
 
-      <Demo title="Active state snaps into place" code={demoCode(activeButtonCode)} centerContent>
+      <DemoContainer title="Active state snaps into place" code={demoCode(activeButtonCode)} centerContent>
         <div className="grid min-h-40 place-items-center gap-8">
           <ButtonPrimitive
             type="button"
@@ -435,7 +435,7 @@ export default function TabIndicatorPostPage() {
             fields={["location"]}
           />
         </div>
-      </Demo>
+      </DemoContainer>
 
       <Alert variant="info" className="not-prose my-4">
         <InfoIcon data-icon="inline-start" className="size-3" />
@@ -460,7 +460,7 @@ export default function TabIndicatorPostPage() {
         The two classes we need to add are <code>after:-translate-x-full</code> and <code>after:origin-left</code>, each prefixed with the{" "}
         <code>peer-data-pressed</code> selector.
       </p>
-      <Demo title="Peer state changes the parked side" code={demoCode(peerSwapCode)} centerContent innerClass="min-h-40">
+      <DemoContainer title="Peer state changes the parked side" code={demoCode(peerSwapCode)} centerContent innerClass="min-h-40">
         <div className="grid min-h-40 place-items-center gap-8">
           <ToggleGroupPrimitive value={peerDemoValue} onValueChange={setPeerDemoValue}>
             <TogglePrimitive value="1" className={`${baseButton} peer text-red-500!`}>
@@ -478,9 +478,9 @@ export default function TabIndicatorPostPage() {
             fields={["location", "origin"]}
           />
         </div>
-      </Demo>
+      </DemoContainer>
       <p>Let&apos;s refine this by adding a transition to our indicator, and have it fade in/out as it moves.</p>
-      <Demo title="Fade the handoff" code={demoCode(fadeSwapCode)} centerContent innerClass="min-h-40">
+      <DemoContainer title="Fade the handoff" code={demoCode(fadeSwapCode)} centerContent innerClass="min-h-40">
         <div className="grid min-h-40 place-items-center gap-8">
           <ToggleGroupPrimitive value={fadeDemoValue} onValueChange={setFadeDemoValue}>
             <TogglePrimitive value="1" className={`${baseButton} peer text-red-500!`}>
@@ -497,7 +497,7 @@ export default function TabIndicatorPostPage() {
             state={getTargetReadout(fadeDemoValue, { visibility: "hidden", location: "after", origin: "right" }, "left")}
           />
         </div>
-      </Demo>
+      </DemoContainer>
       <p>
         You may be wondering how we account for cases where subsequent siblings are active if we can&apos;t target them with{" "}
         <code>peer</code>...well, we don&apos;t have to! Since we initially set the indicator&apos;s position to the right of the trigger,
@@ -505,7 +505,7 @@ export default function TabIndicatorPostPage() {
       </p>
       <p>We can string this together with 3+ triggers, and give each one its own indicator.</p>
 
-      <Demo title="Every trigger owns an indicator" code={demoCode(allTriggersCode)} centerContent innerClass="min-h-44">
+      <DemoContainer title="Every trigger owns an indicator" code={demoCode(allTriggersCode)} centerContent innerClass="min-h-44">
         <div className="grid min-h-48 place-items-center gap-10">
           <ToggleGroupPrimitive value={allTriggersValue} onValueChange={setAllTriggersValue}>
             <TogglePrimitive
@@ -529,13 +529,13 @@ export default function TabIndicatorPostPage() {
           </ToggleGroupPrimitive>
           <PseudoElementReadout state={getTargetReadout(allTriggersValue, { visibility: "hidden", location: "after", origin: "right" })} />
         </div>
-      </Demo>
+      </DemoContainer>
 
       <p>
         Now, all we need to do is give them matching styles and line them up. This should give the illusion of a single indicator in the
         final version.
       </p>
-      <Demo title="Single-color illusion" code={demoCode(singleColorCode)} centerContent>
+      <DemoContainer title="Single-color illusion" code={demoCode(singleColorCode)} centerContent>
         <ToggleGroupPrimitive defaultValue={["1"]} className="isolate flex justify-center gap-0">
           {numbers.map((value) => (
             <MatchingToggle key={value} value={value}>
@@ -543,12 +543,12 @@ export default function TabIndicatorPostPage() {
             </MatchingToggle>
           ))}
         </ToggleGroupPrimitive>
-      </Demo>
+      </DemoContainer>
       <hr />
       <Heading level={2} className="mt-8">
         Final result
       </Heading>
-      <Demo title="Pill tabs" code={demoCode(finalTabsCode)} centerContent innerClass="grid gap-4">
+      <DemoContainer title="Pill tabs" code={demoCode(finalTabsCode)} centerContent innerClass="grid gap-4">
         <TabsPrimitive.Root defaultValue="1" className="grid w-full gap-2 rounded-xl border p-1">
           <TabsPrimitive.List className="flex overflow-hidden">
             {numbers.map((value) => (
@@ -559,11 +559,11 @@ export default function TabIndicatorPostPage() {
           </TabsPrimitive.List>
           <NumberPanels />
         </TabsPrimitive.Root>
-      </Demo>
+      </DemoContainer>
 
       <p>For underline tabs, all we need to do is change the height and positioning of the indicators.</p>
 
-      <Demo title="Underline indicator" code={demoCode(underlineTabsCode)} centerContent innerClass="grid gap-4">
+      <DemoContainer title="Underline indicator" code={demoCode(underlineTabsCode)} centerContent innerClass="grid gap-4">
         <TabsPrimitive.Root defaultValue="1" className="w-full rounded-xl border">
           <TabsPrimitive.List className="flex overflow-hidden px-1 pt-1 shadow-[inset_0_-1px_var(--border)]">
             {numbers.map((value) => (
@@ -576,14 +576,14 @@ export default function TabIndicatorPostPage() {
             <NumberPanels />
           </div>
         </TabsPrimitive.Root>
-      </Demo>
+      </DemoContainer>
 
       <p>
         And for vertical tabs, just swap the orientation and translate + origin directions of the indicators from x/left/right to
         y/top/bottom.
       </p>
 
-      <Demo title="Vertical tabs" code={demoCode(verticalTabsCode)} centerContent innerClass="grid gap-4">
+      <DemoContainer title="Vertical tabs" code={demoCode(verticalTabsCode)} centerContent innerClass="grid gap-4">
         <TabsPrimitive.Root
           defaultValue="1"
           orientation="vertical"
@@ -600,7 +600,7 @@ export default function TabIndicatorPostPage() {
             <NumberPanels />
           </div>
         </TabsPrimitive.Root>
-      </Demo>
+      </DemoContainer>
 
       <Heading level={2}>Gotchas</Heading>
       <p>A few things to watch out for when using this approach:</p>

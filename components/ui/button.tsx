@@ -61,8 +61,8 @@ const buttonVariants = cva(
           "focus-visible:outline-offset-2",
         ],
         glass: [
-          "relative rounded-full backdrop-[blur(1.5px)_saturate(1.5)_brightness(1.1)] bg-[rgba(248,240,248,0.1)] before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/90 before:mix-blend-hard-light before:blur-[2px]",
-          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,white_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
+          "relative rounded-full [backdrop-filter:blur(1.5px)_saturate(1.5)_brightness(1.1)] bg-[rgba(248,240,248,0.1)] before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/90 before:mix-blend-hard-light before:blur-[2px]",
+          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,canvas_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
         ],
         overlay: [
           "[--button-color:white] bg-neutral-700/60 hover:bg-neutral-700/70 backdrop-blur-xl text-white outline outline-white/10 ring-1 ring-black/60 -outline-offset-1 ",

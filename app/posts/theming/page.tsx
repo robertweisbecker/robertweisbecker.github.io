@@ -1,7 +1,7 @@
 "use client";
 
 import { CodeBlock } from "@/components/code-block";
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import { CheckIconStraight } from "@/components/icons";
 import { Theme, ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
@@ -155,9 +155,9 @@ export default function ThemingPostPage() {
             </CardFooter>
           </Card>
 
-          <Demo title="Preview" className="sm:col-span-3">
+          <DemoContainer title="Preview" className="sm:col-span-3">
             <ThemeDemo />
-          </Demo>
+          </DemoContainer>
         </div>
       </Theme>
 

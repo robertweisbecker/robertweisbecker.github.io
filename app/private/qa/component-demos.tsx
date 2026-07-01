@@ -5,7 +5,7 @@ import { AnimateHeight } from "@/components/animation/animate-height";
 import { MotionText } from "@/components/animation/MotionText";
 import { CodeBlock } from "@/components/code-block";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
-import { Demo } from "@/components/demo";
+import { Demo, DemoContainer } from "@/components/demo";
 import { CardFan } from "@/components/demos/card-fan";
 import {
   BaseUiIcon,
@@ -735,7 +735,7 @@ export function ComponentDemos() {
 
       <Section title="Demo">
         <div className="grid gap-6">
-          <Demo
+          <DemoContainer
             title="Overflow: wrap (default)"
             controls={<Badge variant="secondary">wrap</Badge>}
             caption="Long prose wraps naturally with centered layout disabled."
@@ -743,21 +743,21 @@ export function ComponentDemos() {
             code={{
               filename: "demo-wrap.tsx",
               language: "tsx",
-              value: `<Demo title="Overflow: wrap" centerContent={false}>
+              value: `<DemoContainer title="Overflow: wrap" centerContent={false}>
   <article className="max-w-2xl space-y-3">
     <p>...lorem ipsum...</p>
     <p>...lorem ipsum...</p>
   </article>
-</Demo>`,
+</DemoContainer>`,
             }}
           >
             <article className="max-w-2xl space-y-3 text-sm leading-relaxed text-muted-foreground">
               <p>{LOREM}</p>
               <p>{LOREM_ALT}</p>
             </article>
-          </Demo>
+          </DemoContainer>
 
-          <Demo
+          <DemoContainer
             title="Overflow: scroll + maxHeight"
             controls={<Badge variant="secondary">scroll</Badge>}
             caption="Constrained height with vertical and horizontal scrolling support."
@@ -767,11 +767,11 @@ export function ComponentDemos() {
             code={{
               filename: "demo-scroll.tsx",
               language: "ts",
-              value: `<Demo maxHeight={220} overflowBehavior="scroll" centerContent={false}>
+              value: `<DemoContainer maxHeight={220} overflowBehavior="scroll" centerContent={false}>
   <div className="min-w-176 space-y-3">
     <p>...lorem ipsum...</p>
   </div>
-</Demo>`,
+</DemoContainer>`,
             }}
           >
             <div className="min-w-[44rem] space-y-3 text-sm leading-relaxed text-muted-foreground">
@@ -779,9 +779,9 @@ export function ComponentDemos() {
               <p>{LOREM_ALT}</p>
               <p>{LOREM}</p>
             </div>
-          </Demo>
+          </DemoContainer>
 
-          <Demo
+          <DemoContainer
             title="Overflow: resize"
             controls={<Badge variant="secondary">resize</Badge>}
             caption="Drag the handle to resize horizontally and observe reflow."
@@ -790,20 +790,20 @@ export function ComponentDemos() {
             code={{
               filename: "demo-resize.tsx",
               language: "tsx",
-              value: `<Demo overflowBehavior="resize" centerContent={false}>
+              value: `<DemoContainer overflowBehavior="resize" centerContent={false}>
   <article className="space-y-3">
     <p>...lorem ipsum...</p>
   </article>
-</Demo>`,
+</DemoContainer>`,
             }}
           >
             <article className="space-y-3 text-sm leading-relaxed text-muted-foreground">
               <p>{LOREM}</p>
               <p>{LOREM_ALT}</p>
             </article>
-          </Demo>
+          </DemoContainer>
 
-          <Demo
+          <DemoContainer
             title="Overflow: wrap (long line)"
             controls={<Badge variant="secondary">wrap</Badge>}
             caption="Content wraps naturally within the card - no scrolling, no resize handle."
@@ -811,20 +811,48 @@ export function ComponentDemos() {
             code={{
               filename: "demo-wrap-long.tsx",
               language: "tsx",
-              value: `<Demo centerContent={false}>
+              value: `<DemoContainer centerContent={false}>
   <p>...very long single line...</p>
-</Demo>`,
+</DemoContainer>`,
             }}
           >
             <p className="text-sm text-muted-foreground">{`${LOREM} ${LOREM_ALT}`}</p>
-          </Demo>
+          </DemoContainer>
+
+          <Demo.Root className="border border-dashed border-border/70 bg-secondary/35">
+            <Demo.Header className="bg-card/70">
+              <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-0">
+                <Demo.Title>Primitive composition</Demo.Title>
+                <Demo.Description>responsive title metadata</Demo.Description>
+                <Badge variant="secondary">Demo.Root</Badge>
+              </div>
+              <Badge variant="outline">slots</Badge>
+            </Demo.Header>
+            <Demo.Content variant="outline" overflowBehavior="scroll" maxHeight={180} centerContent={false} innerClass="grid gap-3">
+              <p className="text-sm text-muted-foreground">
+                This example styles the root, header, content, and footer independently while keeping the same resize and overflow options
+                available to the legacy wrapper.
+              </p>
+              <div className="grid min-w-[36rem] grid-cols-4 gap-2 text-xs">
+                {["Root", "Header", "Content", "Footer"].map((slot) => (
+                  <div key={slot} className="rounded-md border border-border/70 bg-background px-3 py-2 font-medium text-foreground">
+                    Demo.{slot}
+                  </div>
+                ))}
+              </div>
+            </Demo.Content>
+            <Demo.Footer className="flex flex-wrap items-center justify-between gap-2">
+              <span>Footer slot for captions or composed code blocks.</span>
+              <Code className="text-[11px]">{'<Demo.Content overflowBehavior="scroll" />'}</Code>
+            </Demo.Footer>
+          </Demo.Root>
         </div>
       </Section>
 
       <Section title="Card Fan">
-        <Demo title="Forge gallery" description="Click to center a card" caption="Focus to center" innerClass="min-h-[600px]">
+        <DemoContainer title="Forge gallery" description="Click to center a card" caption="Focus to center" innerClass="min-h-[600px]">
           <CardFan />
-        </Demo>
+        </DemoContainer>
       </Section>
 
       <Section title="Info Tip">

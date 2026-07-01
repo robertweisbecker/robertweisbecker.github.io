@@ -1,12 +1,11 @@
 "use client";
-import { DotMatrix } from "@/components/animation/dot-matrix";
 import { TreeIconFile } from "@/components/icons-tree";
 import { Marker, MarkerContent } from "@/components/ui/marker";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { MotionText, TextReveal } from "@/components/animation/shared";
 import { PixelDino } from "@/components/animation/pixel-dino";
 import { CodeBlock } from "@/components/code-block";
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import { DeviceFrame } from "@/components/device-frame";
 import { Favicon, GithubIcon, VercelIcon } from "@/components/icons";
 import * as PixelIcons from "@/components/icons-pixel";
@@ -15,10 +14,11 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ChromeTabs } from "@/components/chrome-tabs";
 import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
 import { CardFan } from "@/components/demos/card-fan";
+import { PixelMorphToggles } from "@/components/demos/pixel-morph-toggles";
 import { Card, CardTitle, CardContent } from "@/components/ui/card";
 import { Code } from "@/components/ui/code";
 import { CopyButton } from "@/components/ui/copy-button";
-import { Slider, SliderControl, SliderGroup, SliderLabel, SliderValue } from "@/components/ui/slider";
+import { Slider } from "@/components/ui/slider";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
 import * as React from "react";
@@ -58,6 +58,7 @@ import luminanceBw from "@/public/assets/oklch/luminance-bw.png";
 import { LinkButton } from "@/components/ui/link-button";
 import { DvdAnimationDemo, DvdAnimationRoot, DvdAnimationStage } from "@/components/animation/dvd-animation";
 import { BubbleDemo } from "@/components/demos/chat-demo";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const CAROUSEL_SLIDES = [
   { src: "/assets/oklch/status-error.png", alt: "OKLCH status error palette" },
@@ -67,12 +68,10 @@ const CAROUSEL_SLIDES = [
   { src: "/assets/oklch/status-highlight.png", alt: "OKLCH status highlight palette" },
 ];
 
-type MotionTextRevealType = "css" | "motion";
 type MotionTextPer = "char" | "word" | "line";
 type MotionTextPreset = "fade" | "fade-in-blur" | "slide" | "scale" | "blur-sm";
 
 const MOTION_TEXT_DEFAULTS = {
-  type: "motion" as MotionTextRevealType,
   per: "word" as MotionTextPer,
   preset: "fade-in-blur" as MotionTextPreset,
   duration: 560,
@@ -80,17 +79,6 @@ const MOTION_TEXT_DEFAULTS = {
   waveDepth: 12,
   loopRunning: true,
 };
-
-const MOTION_TEXT_TYPES: { value: MotionTextRevealType; label: string }[] = [
-  { value: "css", label: "CSS" },
-  { value: "motion", label: "Motion" },
-];
-
-const MOTION_TEXT_PER_OPTIONS: { value: MotionTextPer; label: string }[] = [
-  { value: "char", label: "Char" },
-  { value: "word", label: "Word" },
-  { value: "line", label: "Line" },
-];
 
 const MOTION_TEXT_PRESETS: { value: MotionTextPreset; label: string }[] = [
   { value: "fade", label: "Fade" },
@@ -110,7 +98,7 @@ export default function PlaygroundPage() {
     <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10">
       <h1 className="w-full text-h1">Playground</h1>
       <FoldedCardDemo />
-      <DotMatrix rows={11} cols={11} palette={{ on: "white", off: "black" }} />
+
       <div className="group/tab-bar flex h-12 w-full items-center justify-center bg-[#070707]">
         <div className="group squircle relative isolate flex h-7 max-w-[200px] items-center overflow-hidden rounded-md bg-transparent text-xs font-medium text-zinc-400 transition-colors group-hover/tab-bar:bg-neutral-900/30 group-hover/tab-bar:hover:bg-neutral-800/60 group-hover/tab-bar:hover:text-zinc-200">
           <button
@@ -150,13 +138,10 @@ export default function PlaygroundPage() {
 
       <div className="flex w-full flex-col gap-14">
         <PlaygroundSection id="motion-systems" title="Motion">
-          <Demo title="DVD Loader" className="lg:col-span-4">
-            <DvdAnimationDemo className="dark bg-background" />
-          </Demo>
-          <Demo title="Motion cards" className="lg:col-span-8" innerClass="min-h-[400px]">
+          <DemoContainer title="Motion cards" className="lg:col-span-8" innerClass="min-h-[400px]">
             <CardFan />
-          </Demo>
-          <Demo
+          </DemoContainer>
+          <DemoContainer
             title="TextReveal"
             centerContent
             variant="muted"
@@ -177,88 +162,97 @@ export default function PlaygroundPage() {
             >
               Interfaces should feel alive, but never impatient.
             </TextReveal>
-          </Demo>
-          <Demo
+          </DemoContainer>
+          <DemoContainer
             title="MotionText"
-            caption="Variants + shared timing controls"
-            className="lg:col-span-8 lg:row-span-3"
-            innerClass="min-h-[520px]"
+            caption="Inline playback controls"
+            className="lg:col-span-8 lg:row-span-2"
+            innerClass="min-h-[420px]"
           >
             <MotionTextPlaygroundDemo />
-          </Demo>
+          </DemoContainer>
+          <DemoContainer title="Skeleton" centerContent className="lg:col-span-4">
+            <SkeletonDemo />
+          </DemoContainer>
+          <DemoContainer
+            title="Emoji Feedback"
+            description="A remix of Vercel's Feedback component"
+            controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
+            className="lg:col-span-8"
+            innerClass="min-h-72"
+          >
+            <EmojiFeedbackDemo />
+          </DemoContainer>
+          <DemoContainer title="Motion chart" description="Hover to animate" centerContent className="lg:col-span-4">
+            <ChartDemo />
+          </DemoContainer>
+          <DemoContainer title="ColorCode" description="Click to copy" centerContent className="lg:col-span-3">
+            <ColorCode value="#0b0b0b" />
+          </DemoContainer>
+          <DemoContainer title="ColorSwatchGroup" centerContent className="lg:col-span-5">
+            <ColorSwatchGroupDemo />
+          </DemoContainer>
+          <DemoContainer title="Animated icon buttons" centerContent className="lg:col-span-6">
+            <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
+              <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
+                <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
+              </Toggle>
+              <p className="row-2">Line morph</p>
+              <ModeToggle size="icon" variant="outline" />
+              <p className="row-2">Mode toggle: pixel morph</p>
+              <CopyButton value="Hello, world!" size="icon" variant="outline" />
+              <p className="row-2">Icon swap, stroke anim, inline toast</p>
+            </div>
+          </DemoContainer>
+        </PlaygroundSection>
 
-          <Demo title="Dino Animation" caption="SVG animation, so no cacti" centerContent className="lg:col-span-4">
+        <PlaygroundSection id="pixel-demos" title="Pixels">
+          <DemoContainer title="DVD Loader" className="lg:col-span-5">
+            <DvdAnimationDemo className="dark bg-background" />
+          </DemoContainer>
+          <DemoContainer title="Dino Animation" caption="SVG animation, so no cacti" centerContent className="lg:col-span-3">
             <PixelDino />
-          </Demo>
+          </DemoContainer>
+          <DemoContainer title="Pixel morph toggles" centerContent className="lg:col-span-4">
+            <PixelMorphToggles />
+          </DemoContainer>
         </PlaygroundSection>
 
         <PlaygroundSection id="interaction-components" title="Controls">
-          <Demo
-            caption={"CSS shape + masking for cutouts"}
-            title="Chrome Tabs"
-            className="lg:col-span-5 lg:row-span-2"
-            centerContent
-            controls={
-              <LinkButton variant="ghost" size="xs" href="/posts/clip-path-curve">
-                Clip-path playground
-                <IconArrowUpRight data-icon="inline-end" />
-              </LinkButton>
-            }
-          >
-            <ChromeTabsDemo />
-          </Demo>
-          <Demo title="Site search" caption="A Raycast-style command palette" centerContent className="lg:col-span-5">
-            <SiteSearch className="w-full max-w-xs" variant="input" />
-          </Demo>
-          <Demo title="Grouped Popups" centerContent className="lg:col-span-7" innerClass="min-h-60">
-            <GroupedPopupsDemo />
-          </Demo>
-          <Demo title="Tabs" caption="Elevated, line, and pill variants" className="lg:col-span-full">
+          <DemoContainer title="Tabs" caption="Elevated, line, and pill variants" className="lg:col-span-full">
             <TabsVariantsDemo />
-          </Demo>
-          <Demo title="ToggleGrid" centerContent className="lg:col-span-4">
+          </DemoContainer>
+          <DemoContainer title="ToggleGrid" centerContent className="lg:col-span-4">
             <ToggleVariantsDemo />
-          </Demo>
-          <Demo title="Switch" centerContent className="lg:col-span-4">
+          </DemoContainer>
+          <DemoContainer title="Switch" centerContent className="lg:col-span-4">
             <div className="grid-stack aspect-square w-32">
               <SwitchDemo />
             </div>
-          </Demo>
-          <Demo title="Keys" centerContent className="lg:col-span-4" innerClass="flex flex-col gap-2">
-            <Kbd variant="elevated">⌘/</Kbd>
-            <Kbd>⌘I</Kbd>
-            <KbdGroup>
-              <Kbd variant="big">⌘</Kbd>
-              <Kbd variant="big">K</Kbd>
-            </KbdGroup>
-          </Demo>
+          </DemoContainer>
+          <DemoContainer title="Base UI + CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-4">
+            <AnchoredSliderDemo />
+          </DemoContainer>
+          <DemoContainer title="Slider" centerContent className="lg:col-span-4">
+            <SliderDemo />
+          </DemoContainer>
+          <DemoContainer caption="CodeBlock" centerContent className="lg:col-span-4 lg:row-span-2">
+            <CodeBlock
+              code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
+              language="tsx"
+              filename="button-demo.tsx"
+            />
+          </DemoContainer>
         </PlaygroundSection>
 
         <PlaygroundSection id="media-comparison" title="Frames">
-          <Demo
-            title="DeviceFrame · Phone"
-            overflowBehavior="resize"
-            centerContent
-            className="lg:col-span-5 lg:row-span-2"
-            caption="A remix of Geist's Phone component. Responds to color mode and uses your device's clock and battery level (except on iOS)."
-          >
-            <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
-              <BubbleDemo />
-            </DeviceFrame.Phone>
-          </Demo>
-          <Demo caption="CarouselToolbar" centerContent className="lg:col-span-3">
+          <DemoContainer caption="CarouselToolbar" centerContent className="lg:col-span-3">
             <CarouselDemo />
-          </Demo>
-          <Demo title="ImageToggle" caption="Tabs variant" centerContent className="lg:col-span-3">
+          </DemoContainer>
+          <DemoContainer title="ImageToggle" caption="Select a variant" centerContent className="lg:col-span-5">
             <ImageToggleDemo />
-          </Demo>
-          <Demo title="ImageToggle" caption="Slider variant" centerContent className="lg:col-span-3">
-            <ImageToggleDemo mode="slider" />
-          </Demo>
-          <Demo title="ImageToggle" caption="Comparison variant" centerContent className="lg:col-span-3">
-            <ImageToggleDemo mode="comparison" />
-          </Demo>
-          <Demo
+          </DemoContainer>
+          <DemoContainer
             title="Video Player"
             caption={
               <>
@@ -274,32 +268,11 @@ export default function PlaygroundPage() {
               preload="metadata"
               className="my-0 w-full max-w-4xl"
             />
-          </Demo>
-          <Demo title="DeviceFrame · Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
-            <DeviceFrame.Browser address="bob.fyi">
-              <BrowserFramePreview />
-            </DeviceFrame.Browser>
-          </Demo>
+          </DemoContainer>
         </PlaygroundSection>
 
-        <PlaygroundSection id="forms-feedback" title="Feedback">
-          <Demo title="Skeleton" centerContent className="lg:col-span-4">
-            <SkeletonDemo />
-          </Demo>
-          <Demo title="Base UI + CSS-anchored value" centerContent innerClass="min-h-[280px]" className="lg:col-span-4">
-            <AnchoredSliderDemo />
-          </Demo>
-          <Demo title="Slider" centerContent className="lg:col-span-4">
-            <SliderDemo />
-          </Demo>
-          <Demo caption="CodeBlock" centerContent className="lg:col-span-4 lg:row-span-2">
-            <CodeBlock
-              code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
-              language="tsx"
-              filename="button-demo.tsx"
-            />
-          </Demo>
-          <Demo caption="Loading button" centerContent className="lg:col-span-4">
+        <PlaygroundSection id="buttons" title="Buttons">
+          <DemoContainer caption="Loading button" centerContent className="lg:col-span-4">
             <Button
               rounded
               loading={isLoading}
@@ -310,57 +283,71 @@ export default function PlaygroundPage() {
             >
               Confirm
             </Button>
-          </Demo>
-          <Demo
-            title="Emoji Feedback"
-            description="A remix of Vercel's Feedback component"
-            controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
-            className="lg:col-span-full"
-            innerClass="min-h-72 "
-          >
-            <EmojiFeedbackDemo />
-          </Demo>
+          </DemoContainer>
+          <DemoContainer caption="Hover effects" centerContent className="lg:col-span-8">
+            <AnimatedButtonDemo />
+          </DemoContainer>
+          <DemoContainer caption="Metallic button" centerContent className="lg:col-span-4">
+            <CobotButtonDemo />
+          </DemoContainer>
+          <DemoContainer caption="iOS 27 icon" centerContent className="lg:col-span-3" innerClass="bg-card dark">
+            <MacAppIconDemo />
+          </DemoContainer>
+          <DemoContainer caption="Glass button" centerContent className="[var(--bg:var(--primary))] lg:col-span-3">
+            <GlassButtonDemo />
+            <Button variant="glass">Glass</Button>
+          </DemoContainer>
+          <DemoContainer caption="Delete button" centerContent className="lg:col-span-2">
+            <DeleteButtonDemo />
+          </DemoContainer>
         </PlaygroundSection>
 
         <PlaygroundSection id="visual-details" title="Verisimilitude">
-          <Demo title="Motion chart" description="Hover to animate" centerContent className="lg:col-span-4">
-            <ChartDemo />
-          </Demo>
-          <Demo title="ColorCode" description="Click to copy" centerContent className="lg:col-span-3">
-            <ColorCode value="#0b0b0b" />
-          </Demo>
-          <Demo title="ColorSwatchGroup" centerContent className="lg:col-span-5">
-            <ColorSwatchGroupDemo />
-          </Demo>
-          <Demo caption="Hover effects" centerContent className="lg:col-span-6">
-            <AnimatedButtonDemo />
-          </Demo>
-          <Demo caption="Metallic button" centerContent className="lg:col-span-6">
-            <CobotButtonDemo />
-          </Demo>
-          <Demo caption="iOS 27 icon" centerContent className="lg:col-span-3" innerClass="bg-card dark">
-            <MacAppIconDemo />
-          </Demo>
-          <Demo caption="Glass button" centerContent className="[var(--bg:var(--primary))] lg:col-span-3">
-            <GlassButtonDemo />
-            <Button variant="glass">Glass</Button>
-          </Demo>
-          <Demo caption="Delete button" centerContent className="lg:col-span-3">
-            <DeleteButtonDemo />
-          </Demo>
-          <Demo title="Animated icon buttons" centerContent className="lg:col-span-6">
-            <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
-              <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
-                <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
-              </Toggle>
-              <p className="row-2">Line morph</p>
-              <ModeToggle size="icon" variant="outline" />
-              <p className="row-2">Mode toggle: pixel morph</p>
-              <CopyButton value="Hello, world!" size="icon" variant="outline" />
-              <p className="row-2">Icon swap, stroke anim, inline toast</p>
-            </div>
-          </Demo>
-          <Demo
+          <DemoContainer
+            caption={"CSS shape + masking for cutouts"}
+            title="Chrome Tabs"
+            className="lg:col-span-6 lg:row-span-2"
+            centerContent
+            controls={
+              <LinkButton variant="ghost" size="xs" href="/posts/clip-path-curve">
+                Clip-path playground
+                <IconArrowUpRight data-icon="inline-end" />
+              </LinkButton>
+            }
+          >
+            <ChromeTabsDemo />
+          </DemoContainer>
+          <DemoContainer title="Site search" caption="A Raycast-style command palette" centerContent className="lg:col-span-6">
+            <SiteSearch className="w-full max-w-xs" variant="input" />
+          </DemoContainer>
+          <DemoContainer title="Grouped Popups" centerContent className="lg:col-span-6" innerClass="min-h-60">
+            <GroupedPopupsDemo />
+          </DemoContainer>
+          <DemoContainer title="Keys" centerContent className="lg:col-span-3" innerClass="flex flex-col gap-2">
+            <Kbd variant="elevated">⌘/</Kbd>
+            <Kbd>⌘I</Kbd>
+            <KbdGroup>
+              <Kbd variant="big">⌘</Kbd>
+              <Kbd variant="big">K</Kbd>
+            </KbdGroup>
+          </DemoContainer>
+          <DemoContainer
+            title="DeviceFrame · Phone"
+            overflowBehavior="resize"
+            centerContent
+            className="lg:col-span-5 lg:row-span-2"
+            caption="A remix of Geist's Phone component. Responds to color mode and uses your device's clock and battery level (except on iOS)."
+          >
+            <DeviceFrame.Phone island toolbar address="bob.fyi" gutter className="max-w-xs">
+              <BubbleDemo />
+            </DeviceFrame.Phone>
+          </DemoContainer>
+          <DemoContainer title="DeviceFrame · Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
+            <DeviceFrame.Browser address="bob.fyi">
+              <BrowserFramePreview />
+            </DeviceFrame.Browser>
+          </DemoContainer>
+          <DemoContainer
             title="Custom mark styles"
             description="with CSS corner-shape"
             className="lg:col-span-full"
@@ -402,7 +389,7 @@ export default function PlaygroundPage() {
                 <mark className="text-foreground [--mark-bg:var(--color-gold-200)]">classic highlighter</mark> look.
               </p>
             </div>
-          </Demo>
+          </DemoContainer>
         </PlaygroundSection>
       </div>
     </div>
@@ -619,100 +606,6 @@ function SliderDemo() {
   );
 }
 
-function MotionTextOptionGrid<T extends string>({
-  value,
-  options,
-  columns,
-  onValueChange,
-}: {
-  value: T;
-  options: { value: T; label: string }[];
-  columns: number;
-  onValueChange: (value: T) => void;
-}) {
-  return (
-    <ToggleGrid
-      value={[value]}
-      onValueChange={(nextValue) => {
-        const next = Array.isArray(nextValue) ? nextValue[0] : nextValue;
-        if (next) onValueChange(next as T);
-      }}
-      variant="elevated"
-      columns={columns}
-      className="w-full"
-    >
-      {options.map((option) => (
-        <ToggleGroupItem
-          key={option.value}
-          value={option.value}
-          aria-label={option.label}
-          data-testid={`motion-text-option-${option.value}`}
-        >
-          {option.label}
-        </ToggleGroupItem>
-      ))}
-    </ToggleGrid>
-  );
-}
-
-function MotionTextSliderControl({
-  label,
-  value,
-  min,
-  max,
-  step,
-  suffix,
-  onValueChange,
-}: {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  step: number;
-  suffix: string;
-  onValueChange: (value: number) => void;
-}) {
-  const readSliderValue = React.useCallback(
-    (nextValue: number | readonly number[]) => {
-      const next = Array.isArray(nextValue) ? nextValue[0] : nextValue;
-      return Math.round(next ?? value);
-    },
-    [value]
-  );
-
-  const commitValue = React.useCallback(
-    (nextValue: number | readonly number[]) => {
-      onValueChange(readSliderValue(nextValue));
-    },
-    [onValueChange, readSliderValue]
-  );
-
-  return (
-    <Field className="gap-2">
-      <SliderGroup
-        key={value}
-        className="flex-col items-stretch gap-2"
-        defaultValue={[value]}
-        min={min}
-        max={max}
-        step={step}
-        onValueCommitted={commitValue}
-      >
-        <SliderLabel className="flex w-full items-center justify-between gap-2">
-          {label}
-          <SliderValue>
-            {(formattedValues) => {
-              const formattedValue = formattedValues[0] ?? String(value);
-              return `${formattedValue}${suffix}`;
-            }}
-          </SliderValue>
-        </SliderLabel>
-        <SliderControl />
-      </SliderGroup>
-    </Field>
-  );
-}
-
 function MotionTextSample({ label, action, children }: { label: string; action?: React.ReactNode; children: React.ReactNode }) {
   return (
     <div className="grid min-w-0 gap-1.5">
@@ -725,146 +618,156 @@ function MotionTextSample({ label, action, children }: { label: string; action?:
   );
 }
 
-function MotionTextPlaygroundDemo() {
-  const [type, setType] = React.useState<MotionTextRevealType>(MOTION_TEXT_DEFAULTS.type);
-  const [per, setPer] = React.useState<MotionTextPer>(MOTION_TEXT_DEFAULTS.per);
-  const [preset, setPreset] = React.useState<MotionTextPreset>(MOTION_TEXT_DEFAULTS.preset);
-  const [duration, setDuration] = React.useState(MOTION_TEXT_DEFAULTS.duration);
-  const [stagger, setStagger] = React.useState(MOTION_TEXT_DEFAULTS.stagger);
-  const [waveDepth, setWaveDepth] = React.useState(MOTION_TEXT_DEFAULTS.waveDepth);
-  const [loopRunning, setLoopRunning] = React.useState(MOTION_TEXT_DEFAULTS.loopRunning);
-  const [morphAlternate, setMorphAlternate] = React.useState(false);
-  const [resetKey, setResetKey] = React.useState(0);
-
-  const effectSpeedReveal = 480 / duration;
-  const effectSpeedSegment = 40 / stagger;
-
-  function reset() {
-    setType(MOTION_TEXT_DEFAULTS.type);
-    setPer(MOTION_TEXT_DEFAULTS.per);
-    setPreset(MOTION_TEXT_DEFAULTS.preset);
-    setDuration(MOTION_TEXT_DEFAULTS.duration);
-    setStagger(MOTION_TEXT_DEFAULTS.stagger);
-    setWaveDepth(MOTION_TEXT_DEFAULTS.waveDepth);
-    setLoopRunning(MOTION_TEXT_DEFAULTS.loopRunning);
-    setMorphAlternate(false);
-    setResetKey((key) => key + 1);
-  }
+function MotionTextPresetSelect({ value, onValueChange }: { value: MotionTextPreset; onValueChange: (value: MotionTextPreset) => void }) {
+  const selectedLabel = MOTION_TEXT_PRESETS.find((preset) => preset.value === value)?.label;
 
   return (
-    <div className="grid w-full gap-4 xl:grid-cols-[minmax(0,1fr)_18rem]" data-testid="motion-text-playground">
-      <div className="flex min-w-0 flex-col gap-5">
-        <MotionTextSample label="Entrance">
-          <MotionText.Reveal
-            key={`reveal-${resetKey}-${type}-${per}-${duration}-${stagger}`}
-            type={type}
-            per={per}
-            duration={duration}
-            stagger={stagger}
-            className="text-sm leading-6 text-balance"
-          >
-            Motion text makes expressive systems feel reusable.
-          </MotionText.Reveal>
-        </MotionTextSample>
+    <Select value={value} onValueChange={(nextValue) => onValueChange(nextValue as MotionTextPreset)}>
+      <SelectTrigger size="sm" aria-label="Text effect preset" className="min-w-28">
+        <SelectValue>{selectedLabel}</SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        {MOTION_TEXT_PRESETS.map((preset) => (
+          <SelectItem key={preset.value} value={preset.value}>
+            {preset.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}
 
-        <MotionTextSample label="Effects">
-          <MotionText.Effect
-            key={`effect-${resetKey}-${preset}-${per}-${duration}-${stagger}`}
-            per={per}
-            preset={preset}
-            speedReveal={effectSpeedReveal}
-            speedSegment={effectSpeedSegment}
-            className="text-sm leading-6 text-balance"
-          >
-            Presets share the timing controls.
-          </MotionText.Effect>
-        </MotionTextSample>
+function MotionTextPlaygroundDemo() {
+  const [preset, setPreset] = React.useState<MotionTextPreset>(MOTION_TEXT_DEFAULTS.preset);
+  const [loopRunning, setLoopRunning] = React.useState(MOTION_TEXT_DEFAULTS.loopRunning);
+  const [morphAlternate, setMorphAlternate] = React.useState(false);
+  const [waveDepth, setWaveDepth] = React.useState(MOTION_TEXT_DEFAULTS.waveDepth);
+  const [revealKey, setRevealKey] = React.useState(0);
+  const [scrambleKey, setScrambleKey] = React.useState(0);
 
-        <MotionTextSample
-          label="Loop"
-          action={
-            <Field orientation="horizontal" className="w-auto items-center gap-2">
-              <FieldLabel className="text-xs" htmlFor="motion-text-loop">
-                Play
-              </FieldLabel>
-              <Switch id="motion-text-loop" checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
-            </Field>
-          }
+  const replayReveal = React.useCallback(() => setRevealKey((key) => key + 1), []);
+  const replayScramble = React.useCallback(() => setScrambleKey((key) => key + 1), []);
+  const effectSpeedReveal = 480 / MOTION_TEXT_DEFAULTS.duration;
+  const effectSpeedSegment = 40 / MOTION_TEXT_DEFAULTS.stagger;
+
+  return (
+    <div className="grid w-full gap-5 sm:grid-cols-2" data-testid="motion-text-playground">
+      <MotionTextSample
+        label="Entrance"
+        action={
+          <Button size="xs" variant="ghost" type="button" onClick={replayReveal}>
+            Replay
+            <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+          </Button>
+        }
+      >
+        <MotionText.Reveal
+          key={`reveal-${revealKey}`}
+          type="motion"
+          per={MOTION_TEXT_DEFAULTS.per}
+          duration={MOTION_TEXT_DEFAULTS.duration}
+          stagger={MOTION_TEXT_DEFAULTS.stagger}
+          className="text-sm leading-6 text-balance"
         >
-          <p className="text-muted-foreground">
-            Feels{" "}
-            <MotionText.Loop trigger={loopRunning} interval={1.2} className="text-primary">
-              {["snappy", "calm", "clear"]}
-            </MotionText.Loop>
-          </p>
-        </MotionTextSample>
+          Motion text makes expressive systems feel reusable.
+        </MotionText.Reveal>
+      </MotionTextSample>
 
-        <MotionTextSample label="Scramble">
-          <MotionText.Scramble key={`scramble-${resetKey}-${duration}`} duration={duration / 1000} className="font-mono text-sm leading-6">
-            Interface signal
-          </MotionText.Scramble>
-        </MotionTextSample>
+      <MotionTextSample label="TextEffect" action={<MotionTextPresetSelect value={preset} onValueChange={setPreset} />}>
+        <MotionText.Effect
+          key={`effect-${preset}`}
+          per={MOTION_TEXT_DEFAULTS.per}
+          preset={preset}
+          speedReveal={effectSpeedReveal}
+          speedSegment={effectSpeedSegment}
+          className="text-sm leading-6 text-balance"
+        >
+          Presets live beside the text effect.
+        </MotionText.Effect>
+      </MotionTextSample>
 
-        <MotionTextSample label="Wave">
+      <MotionTextSample
+        label="Loop"
+        action={
+          <Field orientation="horizontal" className="w-auto items-center gap-2">
+            <FieldLabel className="text-xs" htmlFor="motion-text-loop">
+              Play
+            </FieldLabel>
+            <Switch id="motion-text-loop" checked={loopRunning} onCheckedChange={setLoopRunning} data-testid="motion-text-loop" />
+          </Field>
+        }
+      >
+        <p className="text-muted-foreground">
+          Feels{" "}
+          <MotionText.Loop trigger={loopRunning} interval={1.2} className="text-primary">
+            {["snappy", "calm", "clear"]}
+          </MotionText.Loop>
+        </p>
+      </MotionTextSample>
+
+      <MotionTextSample
+        label="Scramble"
+        action={
+          <Button size="xs" variant="ghost" type="button" onClick={replayScramble}>
+            Replay
+            <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+          </Button>
+        }
+      >
+        <MotionText.Scramble
+          key={`scramble-${scrambleKey}`}
+          duration={MOTION_TEXT_DEFAULTS.duration / 1000}
+          className="font-mono text-sm leading-6"
+        >
+          Interface signal
+        </MotionText.Scramble>
+      </MotionTextSample>
+
+      <MotionTextSample label="Wave">
+        <div className="grid gap-2">
           <MotionText.Wave
-            duration={duration / 1000}
+            duration={MOTION_TEXT_DEFAULTS.duration / 1000}
             zDistance={waveDepth}
             yDistance={Math.round(waveDepth / -4)}
             rotateYDistance={waveDepth}
             className="text-sm leading-6 text-balance"
           >
-            Waves respect shared duration
+            Waves keep their own rhythm
           </MotionText.Wave>
-        </MotionTextSample>
-
-        <MotionTextSample
-          label="Morph"
-          action={
-            <Button size="xs" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
-              Swap
-            </Button>
-          }
-        >
-          <MotionText.Morph className="text-sm leading-6">
-            {morphAlternate ? "Motion variants compose cleanly" : "Variant controls compose motion"}
-          </MotionText.Morph>
-        </MotionTextSample>
-
-        <MotionTextSample label="Shimmer">
-          <p className="shimmer text-sm leading-6 text-muted-foreground shimmer-color-primary/70 shimmer-duration-1400">
-            Generating response&hellip;
-          </p>
-        </MotionTextSample>
-      </div>
-
-      <div className="grid h-fit gap-4 rounded-md bg-muted/50 p-3">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-xs font-medium text-muted-foreground">Timing</p>
-          <Button size="xs" variant="ghost" type="button" onClick={reset} data-testid="motion-text-reset">
-            Reset
-            <PixelIcons.PixelRedoIcon data-icon="inline-end" />
-          </Button>
+          <Slider
+            label="Depth"
+            showValue
+            value={[waveDepth]}
+            min={0}
+            max={28}
+            step={1}
+            onValueChange={(value) => {
+              const nextValue = Array.isArray(value) ? value[0] : value;
+              setWaveDepth(Math.round(nextValue ?? MOTION_TEXT_DEFAULTS.waveDepth));
+            }}
+            className="max-w-xs"
+          />
         </div>
+      </MotionTextSample>
 
-        <Field className="gap-2">
-          <FieldLabel className="text-xs">Reveal type</FieldLabel>
-          <MotionTextOptionGrid value={type} options={MOTION_TEXT_TYPES} columns={2} onValueChange={setType} />
-        </Field>
+      <MotionTextSample
+        label="Morph"
+        action={
+          <Button size="xs" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
+            Swap
+          </Button>
+        }
+      >
+        <MotionText.Morph className="text-sm leading-6">
+          {morphAlternate ? "Motion variants compose cleanly" : "Variant controls compose motion"}
+        </MotionText.Morph>
+      </MotionTextSample>
 
-        <Field className="gap-2">
-          <FieldLabel className="text-xs">Split</FieldLabel>
-          <MotionTextOptionGrid value={per} options={MOTION_TEXT_PER_OPTIONS} columns={3} onValueChange={setPer} />
-        </Field>
-
-        <Field className="gap-2">
-          <FieldLabel className="text-xs">Preset</FieldLabel>
-          <MotionTextOptionGrid value={preset} options={MOTION_TEXT_PRESETS} columns={2} onValueChange={setPreset} />
-        </Field>
-
-        <MotionTextSliderControl label="Duration" value={duration} min={220} max={1200} step={20} suffix="ms" onValueChange={setDuration} />
-        <MotionTextSliderControl label="Stagger" value={stagger} min={8} max={96} step={2} suffix="ms" onValueChange={setStagger} />
-        <MotionTextSliderControl label="Wave depth" value={waveDepth} min={0} max={28} step={1} suffix="px" onValueChange={setWaveDepth} />
-      </div>
+      <MotionTextSample label="Shimmer">
+        <p className="shimmer text-sm leading-6 text-muted-foreground shimmer-color-primary/70 shimmer-duration-1400">
+          Generating response&hellip;
+        </p>
+      </MotionTextSample>
     </div>
   );
 }
@@ -896,40 +799,23 @@ function GroupedPopupsDemo() {
   ];
 
   return (
-    <div className="grid w-full max-w-lg gap-6 md:grid-cols-2">
-      <div className="space-y-3">
-        <p className="text-xs font-medium text-muted-foreground">TooltipGroup</p>
-        <TooltipGroup side="top" sideOffset={8} delay={100} closeDelay={0}>
-          <div className="flex flex-wrap gap-2">
-            <TooltipTrigger tooltip="Pointer" render={<Button size="icon" variant="outline" aria-label="Pointer" />}>
-              <PixelIcons.PixelPointerIcon />
-            </TooltipTrigger>
-            <TooltipTrigger tooltip="Scribble" render={<Button size="icon" variant="outline" aria-label="Scribble" />}>
-              <PixelIcons.PixelScribbleIcon />
-            </TooltipTrigger>
-            <TooltipTrigger tooltip="Clipboard" render={<Button size="icon" variant="outline" aria-label="Clipboard" />}>
-              <PixelIcons.PixelClipboardIcon />
-            </TooltipTrigger>
-          </div>
-        </TooltipGroup>
-      </div>
-      <div className="mx-auto space-y-3">
-        <p className="text-xs font-medium text-muted-foreground">PreviewCardGroup</p>
-        <PreviewCardGroup>
-          <div className="flex flex-wrap gap-2">
-            {links.map((link) => (
-              <PreviewCardTrigger
-                key={link.url}
-                preview={<GroupedLinkPreview {...link} />}
-                render={<a href={link.url} target="_blank" rel="noreferrer" className="link" />}
-              >
-                {link.title}
-              </PreviewCardTrigger>
-            ))}
-          </div>
-        </PreviewCardGroup>
-      </div>
-    </div>
+    <p className="max-w-md text-sm leading-7 text-muted-foreground">
+      Inline references can carry previews without leaving paragraph flow. Open{" "}
+      <PreviewCardGroup>
+        {links.map((link, index) => (
+          <React.Fragment key={link.url}>
+            <PreviewCardTrigger
+              preview={<GroupedLinkPreview {...link} />}
+              render={<a href={link.url} target="_blank" rel="noreferrer" className="link font-medium" />}
+            >
+              {link.title}
+            </PreviewCardTrigger>
+            {index < links.length - 1 ? <span>, </span> : null}
+          </React.Fragment>
+        ))}
+      </PreviewCardGroup>{" "}
+      for quick context before committing to a new tab.
+    </p>
   );
 }
 
@@ -979,10 +865,33 @@ function CarouselDemo() {
   );
 }
 
-function ImageToggleDemo({ mode }: { mode?: "slider" | "comparison" }) {
+type ImageToggleMode = "tabs" | "slider" | "comparison";
+
+const IMAGE_TOGGLE_MODES: { value: ImageToggleMode; label: string }[] = [
+  { value: "tabs", label: "Tabs" },
+  { value: "slider", label: "Slider" },
+  { value: "comparison", label: "Comparison" },
+];
+
+function ImageToggleDemo() {
+  const [mode, setMode] = React.useState<ImageToggleMode>("tabs");
+  const selectedLabel = IMAGE_TOGGLE_MODES.find((option) => option.value === mode)?.label;
+
   return (
-    <div className="w-full">
-      <ImageToggle mode={mode} before={luminance} after={luminanceBw} tab1="Color" tab2="Grayscale" />
+    <div className="grid w-full gap-3">
+      <Select value={mode} onValueChange={(nextMode) => setMode(nextMode as ImageToggleMode)}>
+        <SelectTrigger size="sm" aria-label="Image toggle variant" className="justify-self-end">
+          <SelectValue>{selectedLabel}</SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          {IMAGE_TOGGLE_MODES.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <ImageToggle mode={mode === "tabs" ? undefined : mode} before={luminance} after={luminanceBw} tab1="Color" tab2="Grayscale" />
     </div>
   );
 }
@@ -1092,37 +1001,33 @@ function TabsVariantsDemo() {
 }
 
 function ToggleVariantsDemo() {
+  const corners = [
+    { value: "up-left", label: "Top-left", icon: <IconArrowUpLeft /> },
+    { value: "up", label: "Top", icon: <IconArrowUp /> },
+    { value: "up-right", label: "Top-right", icon: <IconArrowUpRight /> },
+    { value: "left", label: "Left", icon: <IconArrowLeft /> },
+    { value: "center", label: "Center", icon: <IconPoint /> },
+    { value: "right", label: "Right", icon: <IconArrowRight /> },
+    { value: "down-left", label: "Bottom-left", icon: <IconArrowDownLeft /> },
+    { value: "down", label: "Bottom", icon: <IconArrowDown /> },
+    { value: "down-right", label: "Bottom-right", icon: <IconArrowDownRight /> },
+  ];
+
   return (
     <div className="flex items-center justify-center">
-      <ToggleGrid variant="elevated" columns={3} defaultValue={["center"]} className="w-40">
-        <ToggleGroupItem value="up-left" aria-label="Up left">
-          <IconArrowUpLeft />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="up" aria-label="Up">
-          <IconArrowUp />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="up-right" aria-label="Up right">
-          <IconArrowUpRight />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="left" aria-label="Left">
-          <IconArrowLeft />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="center" aria-label="Center">
-          <IconPoint />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="right" aria-label="Right">
-          <IconArrowRight />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="down-left" aria-label="Down left">
-          <IconArrowDownLeft />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="down" aria-label="Down">
-          <IconArrowDown />
-        </ToggleGroupItem>
-        <ToggleGroupItem value="down-right" aria-label="Down right">
-          <IconArrowDownRight />
-        </ToggleGroupItem>
-      </ToggleGrid>
+      <TooltipGroup side="top" sideOffset={8} delay={100} closeDelay={0}>
+        <ToggleGrid variant="elevated" columns={3} defaultValue={["center"]} className="w-40">
+          {corners.map((corner) => (
+            <TooltipTrigger
+              key={corner.value}
+              tooltip={corner.label}
+              render={<ToggleGroupItem value={corner.value} aria-label={corner.label} />}
+            >
+              {corner.icon}
+            </TooltipTrigger>
+          ))}
+        </ToggleGrid>
+      </TooltipGroup>
     </div>
   );
 }
@@ -1338,8 +1243,8 @@ function FoldedCardDemo() {
         "hover:before:size-[42px] hover:before:border-input",
         "after:drop-shadow-black/32 hover:after:translate-x-0 hover:after:translate-y-0 hover:after:rounded-bl-[8px] hover:after:drop-shadow-md",
 
-        "[mask-image-radial-gradient(white,black)] transition-180ms decoration-none relative z-2 m-0 block h-full w-full overflow-hidden border [border-style:none] bg-size-[100%_100%] p-[20px_16px_18px] inset-shadow-[0_0_0_1px_var(--border)] [border-image:initial]",
-        "before:absolute before:top-0 before:right-0 before:z-2 before:z-3 before:size-7.5 before:translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:bg-background before:shadow-[-1px_1px] before:shadow-[color-mix(in_srgb,var(--border)_75%,var(--background))] before:transition-[inherit]",
+        "[mask-image-radial-gradient(white,black)] transition-180ms decoration-none relative z-2 m-0 block h-full w-full overflow-hidden border border-transparent bg-size-[100%_100%] p-[20px_16px_18px] inset-shadow-[0_0_0_1px_var(--border)] [border-image:initial]",
+        "before:absolute before:top-0 before:right-0 before:z-3 before:size-7.5 before:translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:bg-background before:shadow-[-1px_1px] before:shadow-[color-mix(in_srgb,var(--border)_75%,var(--background))] before:transition-[inherit]",
 
         "after:linear after:absolute after:top-0 after:right-0 after:z-2 after:size-7 after:translate-x-2 after:-translate-y-2 after:rounded-bl-[6px] after:bg-[color-mix(in_srgb,var(--border)_50%,var(--card))] after:shadow-[-.5px_.5px_0_.5px_var(--border)] after:transition-all after:duration-180"
       )}

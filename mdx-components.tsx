@@ -1,5 +1,5 @@
 import { ColorPalette, ColorSwatch, ColorRamp } from "@/components/demos/color-palette";
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import { DeviceFrame } from "@/components/device-frame";
 import { Image } from "@/components/image";
 import { ImageModal } from "@/components/image-modal";
@@ -56,7 +56,7 @@ export function useMDXComponents(): MDXComponents {
     Image,
     ImageModal,
     ImageToggle,
-    Demo,
+    Demo: DemoContainer,
     DeviceFrame: DeviceFrame.Phone,
     ProjectImageCarousel,
     ProjectCarousel: ProjectImageCarousel,

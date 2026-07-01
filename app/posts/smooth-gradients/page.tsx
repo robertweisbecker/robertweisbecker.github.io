@@ -1,7 +1,7 @@
 "use client";
 
 import { CodeBlock } from "@/components/code-block";
-import { Demo } from "@/components/demo";
+import { DemoContainer } from "@/components/demo";
 import { LinkOut } from "@/components/link-out";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Code } from "@/components/ui/code";
@@ -134,7 +134,7 @@ export default function SmoothGradientsPage() {
         stops, with a smaller (but not abrupt) transition.
       </p>
 
-      <Demo
+      <DemoContainer
         title="Example 1"
         code={{ value: colorGradientCode, language: "html" }}
         centerContent={false}
@@ -142,7 +142,7 @@ export default function SmoothGradientsPage() {
       >
         <GradientSquare label="Linear (default)" className="bg-linear-to-b from-yellow-200 to-pink-500" />
         <GradientSquare label="Eased (via-smooth)" className="via-smooth bg-linear-to-b from-yellow-200 to-pink-500" />
-      </Demo>
+      </DemoContainer>
 
       <p>
         Even if you manipulate the color stops on a basic linear gradient, you can still end up with banding, like in the example below. To
@@ -156,7 +156,7 @@ export default function SmoothGradientsPage() {
         </Code>{" "}
         to smooth things out. And your mileage may vary depending on the difference in intensity and lightness of the colors.
       </p>
-      <Demo
+      <DemoContainer
         title="Example 2"
         code={{ value: colorGradientCode2, language: "html" }}
         centerContent={false}
@@ -164,18 +164,18 @@ export default function SmoothGradientsPage() {
       >
         <GradientSquare label="Linear (from-20% to-80%)" className="bg-linear-to-b from-blue-300 from-20% to-green-500 to-80%" />
         <GradientSquare label="Eased (via-smooth)" className="via-smooth bg-linear-to-b from-blue-300 to-green-500" />
-      </Demo>
+      </DemoContainer>
 
       <p>The difference is most apparent when transitioning from transparent to opaque, like with image overlays:</p>
 
-      <Demo
+      <DemoContainer
         title="Image overlay"
         code={{ value: imageOverlayCode, language: "html" }}
         centerContent={false}
         innerClass="grid w-full grid-cols-2 gap-4"
       >
         <ImageOverlayDemo />
-      </Demo>
+      </DemoContainer>
       <Heading level={2}>Usage</Heading>
       <p>
         Just drop the snippet into wherever your Tailwind theme is defined, like <Code>globals.css</Code>. The class overrides
