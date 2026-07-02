@@ -2,8 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- app/api/letterboxd/route.ts components/demos/letterboxd.tsx next.config.ts` If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it
-> as a STOP condition.
+> **Drift check (run first)**: `git diff --stat b72fe64..HEAD -- app/api/letterboxd/route.ts components/demos/letterboxd.tsx next.config.ts` If any in-scope file changed since Plan 001 merged, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
 
@@ -13,6 +12,7 @@
 - **Depends on**: `plans/001-add-verification-baseline.md`
 - **Category**: performance / correctness
 - **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Reconciled at**: commit `b72fe64`, 2026-07-01 (Plan 001 merged; use `npm run check` for verification)
 
 ## Why this matters
 

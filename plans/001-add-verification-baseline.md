@@ -2,7 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- package.json` If `package.json` changed since this plan was written, compare the "Current state" excerpt against the live code before proceeding; on a mismatch, treat it as a STOP condition.
+> **Drift check (run first)**: `git diff --stat b72fe64..HEAD -- package.json` If `package.json` changed since Plan 001 merged, compare the "As-built state" excerpt against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
 
@@ -12,14 +12,16 @@
 - **Depends on**: none
 - **Category**: DX
 - **Planned at**: commit `f87f0ad`, 2026-07-01
-- **Completed at**: commit `8fecd46` on branch `cursor/lightweight-verification-baseline-5d22`, PR #12, 2026-07-01
+- **Completed at**: merge commit `b72fe64` on `master` (PR #12 squash merge), 2026-07-01
 
 ## Why this matters
 
 This repo is a personal design-engineering portfolio and playground for React, design systems, animation, and visual experiments. Broad unit/component test infrastructure would add more maintenance overhead than payoff right now. Lint warnings alone are still too narrow, though: TypeScript and
 production builds catch different failures in App Router routes, MDX imports, generated metadata, and component prop contracts. Add the smallest useful baseline: a named typecheck script and a single check script that runs the cheap non-mutating gates.
 
-## Current state
+## Current state (at plan time)
+
+Historical snapshot from commit `f87f0ad` before execution:
 
 - `package.json` owns canonical scripts. It has `dev`, `build`, `build:webpack`, `lint`, `format`, `format:check`, and preview scripts, but no `typecheck` or aggregate `check`.
 
@@ -42,6 +44,13 @@ production builds catch different failures in App Router routes, MDX imports, ge
 ```
 
 - No `*.test.*`, `*.spec.*`, `vitest.config.*`, `jest.config.*`, or `playwright.config.*` files were found during audit. Leave that as-is for now.
+
+## As-built state (master `b72fe64`)
+
+- `package.json` scripts include `typecheck`, `check`, `build`, `build:webpack`, `lint`, `format`, and `format:check`.
+- `types/static-asset-imports.d.ts` declares `@/public/**` image modules for standalone `tsc`.
+- `.prettierrc` applies `printWidth: 300` to `*.md` and `*.mdx`; `.prettierignore` excludes build artifacts; VS Code points at workspace Prettier.
+- `prettier` is pinned to `3.9.4` in `package.json`.
 
 Repo conventions to preserve:
 

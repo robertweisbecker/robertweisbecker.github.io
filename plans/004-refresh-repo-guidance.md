@@ -2,8 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- README.md AGENTS.md app/private/qa app/api/letterboxd package.json` If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a
-> STOP condition.
+> **Drift check (run first)**: `git diff --stat b72fe64..HEAD -- README.md AGENTS.md app/private/qa app/api/letterboxd package.json .prettierrc .prettierignore` If any in-scope file changed since Plan 001 merged, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
 
@@ -13,6 +12,7 @@
 - **Depends on**: `plans/001-add-verification-baseline.md`, `plans/002-reduce-build-and-bundle-cost.md`, `plans/003-cache-normalize-letterboxd-api.md`
 - **Category**: docs / DX
 - **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Reconciled at**: commit `b72fe64`, 2026-07-01 (Plan 001 merged; README/AGENTS still stale)
 
 ## Why this matters
 
@@ -85,10 +85,33 @@ Generates a static export to the `out` directory.
 ````
 
 ```json
-// package.json:11-12
+// package.json:11-18
 "build": "next build",
 "build:webpack": "next build --webpack",
+"lint": "eslint",
+"typecheck": "tsc --noEmit --incremental false --pretty false",
+"check": "npm run typecheck && npm run lint && npm run format:check",
+"format": "prettier --write .",
+"format:check": "prettier --check .",
 ```
+
+- README documents `dev`, `build`, `lint`, and `format` but not `typecheck` or `check`.
+
+````md
+<!-- README.md:26-36 (stale — missing verification scripts) -->
+
+```
+npm run lint
+```
+
+Runs ESLint across the project.
+
+```
+npm run format
+```
+
+Formats all files with Prettier.
+````
 
 ## Commands you will need
 
@@ -113,7 +136,7 @@ Generates a static export to the `out` directory.
 - Removing the Letterboxd API route.
 - Moving QA back to `app/components`.
 - Editing memory files outside this repo.
-- Changing package scripts except if Plan 001 has not landed; in that case, STOP and ask whether to execute Plan 001 first.
+- Changing package scripts (Plan 001 has landed on `b72fe64`).
 
 ## Git workflow
 
@@ -154,13 +177,19 @@ Update the workspace fact that says there are no API routes. Suggested replaceme
 
 Keep the webpack build fallback and Tailwind workaround sections intact.
 
+Add a workspace-fact bullet for the verification baseline (Plan 001 on `b72fe64`):
+
+```md
+- Canonical non-mutating verification: `npm run check` (typecheck + lint + format check). Use `npm run typecheck`, `npm run build`, and `npm run build:webpack` when a step needs isolation.
+```
+
 **Verify**:
 
 ```sh
-rg -n "no API routes|app/api/letterboxd|mostly static" AGENTS.md
+rg -n "no API routes|app/api/letterboxd|mostly static|npm run check|typecheck" AGENTS.md
 ```
 
-Expected: no `no API routes` claim remains, and the Letterboxd API route is named.
+Expected: no `no API routes` claim remains; the Letterboxd API route and verification scripts are named.
 
 ### Step 3: Fix README build/setup language
 
@@ -176,7 +205,7 @@ Do not claim it writes `out` unless `next.config.ts` has been changed to `output
 
 Optionally mention `npm run build:webpack` as the explicit fallback script documented in `AGENTS.md`.
 
-Optionally add `npm run format:check` and, if Plan 001 has landed, `npm run typecheck` and `npm run check` to the README command list. Do not add `npm run test` unless the repo later adopts a test runner intentionally.
+Add `npm run typecheck`, `npm run check`, and `npm run format:check` to the README command list. Do not add `npm run test` unless the repo later adopts a test runner intentionally.
 
 **Verify**:
 
@@ -184,7 +213,7 @@ Optionally add `npm run format:check` and, if Plan 001 has landed, `npm run type
 rg -n "npm install|next build|build:webpack|out directory|typecheck|npm run check|npm run test" README.md
 ```
 
-Expected: `npm install` and `next build` are present; `out directory` is absent unless a real static export was added elsewhere; `npm run test` is absent unless a test runner was intentionally added later.
+Expected: `npm install` and `next build` are present; `out directory` is absent unless a real static export was added elsewhere; `npm run test` is absent unless a test runner was intentionally added later; `typecheck` and `npm run check` are documented.
 
 ### Step 4: Run verification
 
@@ -212,6 +241,7 @@ Expected: all exit 0.
 - [ ] `AGENTS.md` no longer claims there are no API routes.
 - [ ] `README.md` no longer claims `npm run build` writes a static export to `out`.
 - [ ] `README.md` mentions `npm install`.
+- [ ] `README.md` documents `npm run typecheck` and `npm run check`.
 - [ ] Grep verification in Steps 1-3 matches expected output.
 - [ ] `npm run typecheck`, `npm run check`, `npm run lint`, and `npm run format:check` exit 0.
 - [ ] No files outside the in-scope list are modified.
@@ -224,7 +254,6 @@ Stop and report if:
 - `app/private/qa` no longer exists or has moved again.
 - The repo has added `output: "export"` and README's `out` language is now correct.
 - `app/api/letterboxd/route.ts` has been deleted before this plan starts.
-- Plan 001 has not landed and the requested verification scripts do not exist.
 
 ## Maintenance Notes
 

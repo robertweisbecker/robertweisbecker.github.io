@@ -2,8 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- package.json next.config.ts tsconfig.json app/private app/playground components/header.tsx components/footer.tsx components/ui/button.tsx components/ui/link-button.tsx lib/data` If any in-scope file changed since this plan was written,
-> compare the current state against the live code before proceeding; on a mismatch, update this plan or stop and report.
+> **Drift check (run first)**: `git diff --stat b72fe64..HEAD -- package.json next.config.ts tsconfig.json app/private app/playground components/header.tsx components/footer.tsx components/ui/button.tsx components/ui/link-button.tsx lib/data` If any in-scope file changed since Plan 001 merged, compare the current state against the live code before proceeding; on a mismatch, update this plan or stop and report.
 
 ## Status
 
@@ -13,6 +12,7 @@
 - **Depends on**: `plans/001-add-verification-baseline.md`
 - **Category**: performance / DX
 - **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Reconciled at**: commit `b72fe64`, 2026-07-01 (Plan 001 merged; dependency satisfied)
 
 ## Why this matters
 
@@ -27,7 +27,7 @@ The product decision is now explicit:
 
 ## Current state
 
-- `package.json` has `build` and `build:webpack`, but no named typecheck/build-diagnostic scripts until Plan 001 lands.
+- `package.json` has `typecheck`, `check`, `build`, and `build:webpack` after Plan 001 (`b72fe64`). This plan still adds `typecheck:build` and `analyze:build` for the trimmed production type graph.
 - `next.config.ts` includes all `tsx` route convention files in every environment through `pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"]`.
 - `app/private/**` contains QA and prototype pages that are useful locally but should not appear in production route output.
 - `app/playground/page.tsx` is still one large public client page instead of route-level demo groups.
