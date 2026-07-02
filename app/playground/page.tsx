@@ -3,11 +3,12 @@ import { FoldedCardDemo } from "@/components/playground/folded-card-demo";
 import { LinkButton } from "@/components/ui/link-button";
 
 const PLAYGROUND_ROUTES = [
-  { href: "/playground/motion", label: "Motion" },
-  { href: "/playground/feedback", label: "Feedback" },
-  { href: "/playground/controls", label: "Controls" },
-  { href: "/playground/frames", label: "Frames" },
-  { href: "/playground/visual-details", label: "Visual details" },
+  { href: "/playground/motion-systems", label: "Motion" },
+  { href: "/playground/pixel-demos", label: "Pixels" },
+  { href: "/playground/interaction-components", label: "Controls" },
+  { href: "/playground/media-comparison", label: "Frames" },
+  { href: "/playground/buttons", label: "Buttons" },
+  { href: "/playground/visual-details", label: "Verisimilitude" },
 ] as const;
 
 export default function PlaygroundPage() {

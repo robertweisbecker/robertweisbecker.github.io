@@ -3,11 +3,11 @@
 import * as React from "react";
 import dynamic from "next/dynamic";
 import { TextReveal } from "@/components/animation/shared";
-import { PixelDino } from "@/components/animation/pixel-dino";
 import { DemoContainer } from "@/components/demo";
+import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
 import * as PixelIcons from "@/components/icons-pixel";
 import { ModeToggle } from "@/components/mode-toggle";
-import { PixelMorphToggles } from "@/components/demos/pixel-morph-toggles";
+import { LinkOut } from "@/components/link-out";
 import { Button } from "@/components/ui/button";
 import { ColorCode } from "@/components/ui/color-code";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -27,13 +27,6 @@ const MotionTextPlaygroundDemo = dynamic(
     import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextPlaygroundDemo })),
   {
     loading: () => <p className="text-sm text-muted-foreground">Loading motion text…</p>,
-  }
-);
-
-const DvdAnimationDemo = dynamic(
-  () => import("@/components/animation/dvd-animation").then((module) => ({ default: module.DvdAnimationDemo })),
-  {
-    loading: () => <p className="text-sm text-muted-foreground">Loading DVD animation…</p>,
   }
 );
 
@@ -80,6 +73,15 @@ export function MotionPlayground() {
         <DemoContainer title="Skeleton" centerContent className="lg:col-span-4">
           <SkeletonDemo />
         </DemoContainer>
+        <DemoContainer
+          title="Emoji Feedback"
+          description="A remix of Vercel's Feedback component"
+          controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
+          className="lg:col-span-8"
+          innerClass="min-h-72"
+        >
+          <EmojiFeedbackDemo />
+        </DemoContainer>
         <DemoContainer title="Motion chart" description="Hover to animate" centerContent className="lg:col-span-4">
           <ChartDemo />
         </DemoContainer>
@@ -100,18 +102,6 @@ export function MotionPlayground() {
             <CopyButton value="Hello, world!" size="icon" variant="outline" />
             <p className="row-2">Icon swap, stroke anim, inline toast</p>
           </div>
-        </DemoContainer>
-      </PlaygroundSection>
-
-      <PlaygroundSection id="pixel-demos" title="Pixels">
-        <DemoContainer title="DVD Loader" className="lg:col-span-5">
-          <DvdAnimationDemo className="dark bg-background" />
-        </DemoContainer>
-        <DemoContainer title="Dino Animation" caption="SVG animation, so no cacti" centerContent className="lg:col-span-3">
-          <PixelDino />
-        </DemoContainer>
-        <DemoContainer title="Pixel morph toggles" centerContent className="lg:col-span-4">
-          <PixelMorphToggles />
         </DemoContainer>
       </PlaygroundSection>
     </div>

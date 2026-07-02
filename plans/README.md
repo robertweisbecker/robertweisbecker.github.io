@@ -59,7 +59,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
 - **Plan 001 executed** (PR #12, branch `cursor/lightweight-verification-baseline-5d22`, commit `8fecd46`): added `typecheck` and `check` scripts. Two blockers surfaced during verification:
   - Standalone `tsc` failed on `@/public/**` image imports while `next build` passed; fixed with `types/static-asset-imports.d.ts`.
   - `format:check` failed on 20 pre-existing files; fixed with a one-time `npm run format` (formatting-only). Follow-up aligned `.prettierrc`, `.prettierignore`, VS Code settings, and pinned `prettier@3.9.4` so format-on-save matches `npm run format:check`.
-- **Plan 002 executed** (branch `cursor/reduce-build-bundle-cost-5d22`, 2026-07-01): private routes dev-only via `.private.tsx`; playground split into index + 5 child routes; header/footer client graph reduced. Production build: 48 static pages (was 57), no `/private/**` routes; `/playground` index 1200 kB first-load JS (was 1897 kB).
+- **Plan 002 executed** (branch `cursor/reduce-build-bundle-cost-5d22`, 2026-07-01): private routes dev-only via `.private.tsx`; playground split into index + 6 section routes (`motion-systems`, `pixel-demos`, `interaction-components`, `media-comparison`, `buttons`, `visual-details`); header/footer client graph reduced. Production build: 49 static pages (was 57), no `/private/**` routes; `/playground` index 1200 kB first-load JS (was 1897 kB).
 
 ## Findings Considered and Rejected
 
