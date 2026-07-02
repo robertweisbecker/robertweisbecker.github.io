@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useIntersectionObserver as useVideoIntersectionObserver } from "@uidotdev/usehooks";
 import {
   MediaControlBar,
   MediaController,
@@ -118,8 +119,30 @@ function VideoFullscreenMorphIcon({ className, scale, slot }: VideoMorphIconProp
 }
 
 export function Video({ src, caption, className, children, unmuted = false, ...props }: VideoProps) {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [intersectionRef, entry] = useVideoIntersectionObserver({ threshold: 0.3 });
+  const isInView = entry?.isIntersecting ?? false;
+
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video || props.autoPlay) {
+      return;
+    }
+
+    if (isInView) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
+      video.play().catch(() => {});
+    } else if (!video.paused) {
+      video.pause();
+    }
+  }, [isInView, props.autoPlay]);
+
   const wrapper = (
     <div
+      ref={intersectionRef}
       className={cn(
         "not-prose content-visibility-auto squircle relative mx-auto my-4 overflow-hidden rounded-2xl outline -outline-offset-1 outline-border/50",
         className
@@ -171,14 +194,14 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
         }
       >
         <video
+          ref={videoRef}
           suppressHydrationWarning={true}
           width="100%"
           // height="auto"
           slot="media"
           playsInline
-          autoPlay
           muted={!unmuted}
-          preload="auto"
+          preload="metadata"
           src={src}
           {...props}
         >
