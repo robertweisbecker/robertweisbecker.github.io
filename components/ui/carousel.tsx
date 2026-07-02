@@ -98,7 +98,8 @@ function Carousel({
 
   const getAutoplay = React.useCallback(() => (api?.plugins()?.autoplay as AutoplayType | undefined) ?? null, [api]);
   const writeAutoplayProgress = React.useCallback((progress: number) => {
-    carouselRootRef.current?.style.setProperty("--autoplay-progress", String(progress));
+    const normalizedProgress = Number.isFinite(progress) ? Math.min(Math.max(progress, 0), 1) : 0;
+    carouselRootRef.current?.style.setProperty("--autoplay-progress", String(normalizedProgress));
   }, []);
   const setCarouselRootRef = React.useCallback(
     (node: HTMLDivElement | null) => {
@@ -216,7 +217,7 @@ function Carousel({
     let rafId = 0;
     const tick = () => {
       const t = plug.timeUntilNext();
-      writeAutoplayProgress(t !== null ? ((delay - t) / delay) * 100 : 0);
+      writeAutoplayProgress(t !== null ? (delay - t) / delay : 0);
       rafId = requestAnimationFrame(tick);
     };
     rafId = requestAnimationFrame(tick);
@@ -446,18 +447,13 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
             )}
           >
             {autoplayEnabled && isActive && (
-              <div
-                role="progressbar"
-                aria-label="Autoplay progress"
-                aria-hidden="true"
-                className="absolute inset-0 overflow-hidden rounded-full"
-              >
+              <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-full">
                 <div
                   className={cn(
                     "h-full origin-left rounded-full bg-white duration-0",
                     isFillingSlide ? "transition-transform" : "transition-none"
                   )}
-                  style={{ transform: "scaleX(calc(var(--autoplay-progress, 0) / 100))" }}
+                  style={{ transform: "scaleX(var(--autoplay-progress, 0))" }}
                 />
               </div>
             )}
