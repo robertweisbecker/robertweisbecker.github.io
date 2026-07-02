@@ -88,7 +88,7 @@ function TooltipGroup({
                     "flex origin-(--transform-origin) text-center",
                     "h-(--popup-height,auto) w-(--popup-width,auto) min-w-10",
                     "rounded-md bg-popover text-[0.8125rem] text-popover-foreground",
-                    "shadow-border-lg drop-shadow-md/2 dark:shadow-black/50",
+                    "shadow-[var(--shadow-border-lg),inset_0_1px_1px_--alpha(white/10%)] drop-shadow-md/2",
                     "transition-[width,height,opacity,scale]",
                     "duration-[0.35s]",
                     "ease-[cubic-bezier(0.22,1,0.36,1)]",

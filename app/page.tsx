@@ -195,15 +195,15 @@ export default function Home() {
               className="group/resource relative gap-0.5 transition-shadow focus-within:ring-2 focus-within:ring-ring hover:outline hover:-outline-offset-1 hover:outline-primary"
             >
               <CardHeader>
-                <CardTitle>
+                <CardTitle className="truncate font-normal">
                   <a href={resource.href} className="outline-none before:absolute before:inset-0" target="_blank" rel="noopener noreferrer">
                     {resource.title}
                   </a>
                 </CardTitle>
                 <CardAction>
-                  <div className="size-lh grid-stack text-muted-foreground">
+                  <div className="size-lh -me-0.5 -mt-px grid-stack self-center text-muted-foreground">
                     <PixelFigmaIcon
-                      scale={1}
+                      scale={1.5}
                       className="ease shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
                       aria-label="Figma Community"
                     />
@@ -211,7 +211,7 @@ export default function Home() {
                       className="ease shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
                       aria-hidden
                     >
-                      <PixelExternalIcon />
+                      <PixelExternalIcon scale={1.5} />
                     </span>
                   </div>
                 </CardAction>

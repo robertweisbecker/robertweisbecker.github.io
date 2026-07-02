@@ -10,9 +10,9 @@
 - **Priority**: P1
 - **Effort**: L
 - **Risk**: MED
-- **Depends on**: `plans/001-add-verification-baseline.md`
+- **Depends on**: [`plans/001-add-verification-baseline.md`](./001-add-verification-baseline.md)
 - **Category**: performance / DX
-- **Reconciled at**: commit `b72fe64`, 2026-07-01 (Plan 001 merged; dependency satisfied)
+- **Reconciled at**: commit `b72fe64`, 2026-07-01 ([Plan 001](./001-add-verification-baseline.md) merged; dependency satisfied)
 - **Completed at**: branch `cursor/reduce-build-bundle-cost-5d22`, 2026-07-01
 
 ## Why this matters
@@ -28,7 +28,7 @@ The product decision is now explicit:
 
 ## Current state
 
-- `package.json` has `build` and `build:webpack`, but no named typecheck/build-diagnostic scripts until Plan 001 lands.
+- `package.json` has `build` and `build:webpack`, but no named typecheck/build-diagnostic scripts until [Plan 001](./001-add-verification-baseline.md) lands.
 - `next.config.ts` includes all `tsx` route convention files in every environment through `pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"]`.
 - `app/private/**` contains QA and prototype pages that are useful locally but should not appear in production route output.
 - `app/playground/page.tsx` is still one large public client page instead of route-level demo groups.
@@ -70,8 +70,8 @@ The product decision is now explicit:
 - Removing SVG/icon assets.
 - Removing `/playground` from the public site.
 - Changing visual design beyond the minimum needed to split pages cleanly.
-- Implementing Plan 003 Letterboxd cache work.
-- Final README/AGENTS cleanup; leave that to Plan 004 after this plan lands.
+- Implementing [Plan 003](./003-cache-normalize-letterboxd-api.md) Letterboxd cache work.
+- Final README/AGENTS cleanup; leave that to [Plan 004](./004-refresh-repo-guidance.md) after this plan lands.
 
 ## Git workflow
 
@@ -87,7 +87,7 @@ The product decision is now explicit:
 
 ### Step 1: Ensure the verification baseline exists
 
-If Plan 001 has not landed, execute it first or include its scripts in the first commit:
+If [Plan 001](./001-add-verification-baseline.md) has not landed, execute it first or include its scripts in the first commit:
 
 ```json
 "typecheck": "tsc --noEmit --incremental false --pretty false",
@@ -357,4 +357,4 @@ Stop and report if:
 
 ## Maintenance Notes
 
-The superseded robots-only plan is retained as `plans/005-superseded-private-route-robots-layout.md` for history, but do not execute it. Noindex metadata is weaker than removing local-only routes from the production graph and does not solve the build-time issue.
+The superseded robots-only plan is retained as [`plans/005-superseded-private-route-robots-layout.md`](./005-superseded-private-route-robots-layout.md) for history, but do not execute it. Noindex metadata is weaker than removing local-only routes from the production graph and does not solve the build-time issue.

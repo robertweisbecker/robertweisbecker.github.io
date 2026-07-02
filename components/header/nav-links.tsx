@@ -60,8 +60,8 @@ export function NavLinks() {
         label="Play"
         icon={<PixelPointerIcon data-icon={"inline-start"} scale={1.5} />}
         mobileIconOnly={false}
-        href="/playground"
-        aria-current={pathname === "/playground" ? "true" : "false"}
+        href="/playground/motion"
+        aria-current={pathname.startsWith("/playground") ? "true" : "false"}
         className="max-md:hidden"
       />
 

@@ -2,19 +2,23 @@
 
 import * as React from "react";
 import { MotionText } from "@/components/animation/shared";
-import * as PixelIcons from "@/components/icons-pixel";
+import { PixelRedoIcon, PixelShuffleIcon } from "@/components/icons-pixel";
 import { Button } from "@/components/ui/button";
 import { Field, FieldLabel } from "@/components/ui/field";
+import { Loader } from "@/components/ui/loader";
+import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
 
 type MotionTextPer = "char" | "word" | "line";
 type MotionTextPreset = "fade" | "fade-in-blur" | "slide" | "scale" | "blur-sm";
 
 const MOTION_TEXT_DEFAULTS = {
   per: "word" as MotionTextPer,
-  preset: "fade-in-blur" as MotionTextPreset,
+  preset: "blur" as MotionTextPreset,
   duration: 560,
   stagger: 36,
   waveDepth: 12,
@@ -23,22 +27,38 @@ const MOTION_TEXT_DEFAULTS = {
 
 const MOTION_TEXT_PRESETS: { value: MotionTextPreset; label: string }[] = [
   { value: "fade", label: "Fade" },
-  { value: "fade-in-blur", label: "Blur +" },
-  { value: "slide", label: "Slide" },
-  { value: "scale", label: "Scale" },
   { value: "blur-sm", label: "Blur" },
+  { value: "slide", label: "Slide" },
+  { value: "fade-in-blur", label: "Fade up blur" },
+  { value: "scale", label: "Scale" },
 ];
 
-function MotionTextSample({ label, action, children }: { label: string; action?: React.ReactNode; children: React.ReactNode }) {
+function MotionTextSample({
+  label,
+  action,
+  children,
+  contentClassName,
+}: {
+  label: string;
+  action?: React.ReactNode;
+  children: React.ReactNode;
+  contentClassName?: string;
+}) {
   return (
-    <div className="grid min-w-0 gap-1.5">
-      <div className="flex min-h-button-xs items-center justify-between gap-3">
-        <p className="text-xs font-medium text-muted-foreground">{label}</p>
-        {action}
-      </div>
-      <div className="min-w-0 text-sm leading-6 text-foreground">{children}</div>
+    <div data-slot="motion-text-sample" className="grid min-w-0 justify-items-center gap-3 text-center">
+      <p className="mb-3 font-pixel text-2xs text-muted-foreground uppercase">{label}</p>
+      <div className={cn("min-w-0 leading-6 text-foreground", contentClassName)}>{children}</div>
+      {action ? (
+        <div data-slot="motion-text-action" className="flex min-h-button-sm flex-wrap items-center justify-center gap-2">
+          {action}
+        </div>
+      ) : null}
     </div>
   );
+}
+
+function MotionTextSampleSeparator() {
+  return <Separator className="bg-border/70" />;
 }
 
 function MotionTextPresetSelect({ value, onValueChange }: { value: MotionTextPreset; onValueChange: (value: MotionTextPreset) => void }) {
@@ -74,27 +94,29 @@ export function MotionTextPlaygroundDemo() {
   const effectSpeedSegment = 40 / MOTION_TEXT_DEFAULTS.stagger;
 
   return (
-    <div className="grid w-full gap-5 sm:grid-cols-2" data-testid="motion-text-playground">
+    <div className="grid w-full gap-6" data-testid="motion-text-playground">
       <MotionTextSample
         label="Entrance"
         action={
-          <Button size="xs" variant="ghost" type="button" onClick={replayReveal}>
+          <Button size="sm" variant="outline" type="button" onClick={replayReveal}>
+            <PixelRedoIcon data-icon="inline-start" scale={1.5} />
             Replay
-            <PixelIcons.PixelRedoIcon data-icon="inline-end" />
           </Button>
         }
       >
         <MotionText.Reveal
           key={`reveal-${revealKey}`}
           type="motion"
-          per={MOTION_TEXT_DEFAULTS.per}
+          per={"characters"}
           duration={MOTION_TEXT_DEFAULTS.duration}
           stagger={MOTION_TEXT_DEFAULTS.stagger}
-          className="text-sm leading-6 text-balance"
+          className="text-h1"
         >
-          Motion text makes expressive systems feel reusable.
+          A little motion can make text more expressive.
         </MotionText.Reveal>
       </MotionTextSample>
+
+      <MotionTextSampleSeparator />
 
       <MotionTextSample label="TextEffect" action={<MotionTextPresetSelect value={preset} onValueChange={setPreset} />}>
         <MotionText.Effect
@@ -103,11 +125,13 @@ export function MotionTextPlaygroundDemo() {
           preset={preset}
           speedReveal={effectSpeedReveal}
           speedSegment={effectSpeedSegment}
-          className="text-sm leading-6 text-balance"
+          className="text-lg text-balance"
         >
-          Presets live beside the text effect.
+          I have all sorts of options.
         </MotionText.Effect>
       </MotionTextSample>
+
+      <MotionTextSampleSeparator />
 
       <MotionTextSample
         label="Loop"
@@ -120,20 +144,23 @@ export function MotionTextPlaygroundDemo() {
           </Field>
         }
       >
-        <p className="text-muted-foreground">
-          Feels{" "}
-          <MotionText.Loop trigger={loopRunning} interval={1.2} className="text-primary">
-            {["snappy", "calm", "clear"]}
+        <p className="transition-width min-w-64 text-left text-lg font-medium text-muted-foreground/72">
+          Should designers{" "}
+          <MotionText.Loop trigger={loopRunning} interval={2} className="text-primary">
+            {["code", "prompt", "tweet"]}
           </MotionText.Loop>
+          ?
         </p>
       </MotionTextSample>
+
+      <MotionTextSampleSeparator />
 
       <MotionTextSample
         label="Scramble"
         action={
-          <Button size="xs" variant="ghost" type="button" onClick={replayScramble}>
+          <Button size="sm" variant="outline" type="button" onClick={replayScramble}>
+            <PixelRedoIcon data-icon="inline-start" />
             Replay
-            <PixelIcons.PixelRedoIcon data-icon="inline-end" />
           </Button>
         }
       >
@@ -146,17 +173,11 @@ export function MotionTextPlaygroundDemo() {
         </MotionText.Scramble>
       </MotionTextSample>
 
-      <MotionTextSample label="Wave">
-        <div className="grid gap-2">
-          <MotionText.Wave
-            duration={MOTION_TEXT_DEFAULTS.duration / 1000}
-            zDistance={waveDepth}
-            yDistance={Math.round(waveDepth / -4)}
-            rotateYDistance={waveDepth}
-            className="text-sm leading-6 text-balance"
-          >
-            Waves keep their own rhythm
-          </MotionText.Wave>
+      <MotionTextSampleSeparator />
+
+      <MotionTextSample
+        label="Wave"
+        action={
           <Slider
             label="Depth"
             showValue
@@ -168,28 +189,60 @@ export function MotionTextPlaygroundDemo() {
               const nextValue = Array.isArray(value) ? value[0] : value;
               setWaveDepth(Math.round(nextValue ?? MOTION_TEXT_DEFAULTS.waveDepth));
             }}
-            className="max-w-xs"
+            className="w-72 max-w-full"
           />
-        </div>
+        }
+      >
+        <MotionText.Wave
+          duration={MOTION_TEXT_DEFAULTS.duration / 1000}
+          zDistance={waveDepth}
+          yDistance={Math.round(waveDepth / -4)}
+          rotateYDistance={waveDepth}
+          className="text-sm leading-6 text-balance"
+        >
+          How deep is your love?
+        </MotionText.Wave>
       </MotionTextSample>
+
+      <MotionTextSampleSeparator />
 
       <MotionTextSample
         label="Morph"
         action={
-          <Button size="xs" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
-            Swap
+          <Button size="sm" variant="outline" type="button" onClick={() => setMorphAlternate((value) => !value)}>
+            <PixelShuffleIcon data-icon="inline-start" /> Swap
           </Button>
         }
       >
-        <MotionText.Morph className="text-sm leading-6">
-          {morphAlternate ? "Motion variants compose cleanly" : "Variant controls compose motion"}
-        </MotionText.Morph>
+        <MotionText.Morph>{morphAlternate ? "Motion variants compose cleanly" : "Variant controls compose motion"}</MotionText.Morph>
       </MotionTextSample>
 
-      <MotionTextSample label="Shimmer">
-        <p className="shimmer text-sm leading-6 text-muted-foreground shimmer-color-primary/70 shimmer-duration-1400">
-          Generating response&hellip;
-        </p>
+      <MotionTextSampleSeparator />
+
+      <MotionTextSample label="Shimmer" contentClassName="w-full">
+        <div className="grid justify-items-center gap-3">
+          <Marker className="w-auto justify-center text-sm">
+            <MarkerIcon>
+              <Loader className="text-primary" />
+            </MarkerIcon>
+            <MarkerContent className="shimmer shimmer-color-foreground shimmer-duration-1400">Generating response&hellip;</MarkerContent>
+          </Marker>
+          <Marker className="w-auto justify-center text-sm">
+            <MarkerIcon>
+              <Loader className="text-fuchsia-400" />
+            </MarkerIcon>
+            <MarkerContent
+              className="shimmer shimmer-duration-1200"
+              style={
+                {
+                  "--shimmer-image": "linear-gradient(90deg in oklch longer hue,#fb7185,#facc15,#4ade80,#22d3ee,#a78bfa,#fb7185)",
+                } as React.CSSProperties
+              }
+            >
+              Streaming rainbow tokens&hellip;
+            </MarkerContent>
+          </Marker>
+        </div>
       </MotionTextSample>
     </div>
   );

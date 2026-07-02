@@ -230,7 +230,7 @@
 .dark,
 .dark [data-theme] {
   --background: var(--neutral-950);
-  --foreground: var(--neutral-50);
+  --foreground: var(--neutral-100);
   --card: var(--neutral-900);
   --card-foreground: var(--neutral-300);
   --popover: var(--neutral-800);
@@ -239,7 +239,7 @@
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-neutral-975) / 50%);
+  --muted: --alpha(var(--color-neutral-700) / 24%);
   --muted-foreground: var(--neutral-400);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);

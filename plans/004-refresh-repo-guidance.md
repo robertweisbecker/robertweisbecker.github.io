@@ -10,7 +10,7 @@
 - **Priority**: P2
 - **Effort**: S
 - **Risk**: LOW
-- **Depends on**: `plans/001-add-verification-baseline.md`, `plans/002-reduce-build-and-bundle-cost.md`, `plans/003-cache-normalize-letterboxd-api.md`
+- **Depends on**: [`plans/001-add-verification-baseline.md`](./001-add-verification-baseline.md), [`plans/002-reduce-build-and-bundle-cost.md`](./002-reduce-build-and-bundle-cost.md), [`plans/003-cache-normalize-letterboxd-api.md`](./003-cache-normalize-letterboxd-api.md)
 - **Category**: docs / DX
 - **Completed at**: branch `cursor/execute-plans-003-004-5d22`, 2026-07-01
 
@@ -19,7 +19,7 @@
 This repo is frequently edited by agents. Stale repo instructions are not harmless: they can send future executors to deleted paths, cause them to miss the current API route, or make them expect a static export directory that the current config does not produce. Keep README and AGENTS aligned with
 the actual App Router tree and package scripts.
 
-Run this plan after Plan 002 and Plan 003 so documentation reflects the final route/build/API shape instead of intermediate private-route and Letterboxd states.
+Run this plan after [Plan 002](./002-reduce-build-and-bundle-cost.md) and [Plan 003](./003-cache-normalize-letterboxd-api.md) so documentation reflects the final route/build/API shape instead of intermediate private-route and Letterboxd states.
 
 ## Current state
 
@@ -113,7 +113,7 @@ Generates a static export to the `out` directory.
 - Removing the Letterboxd API route.
 - Moving QA back to `app/components`.
 - Editing memory files outside this repo.
-- Changing package scripts except if Plan 001 has not landed; in that case, STOP and ask whether to execute Plan 001 first.
+- Changing package scripts except if [Plan 001](./001-add-verification-baseline.md) has not landed; in that case, STOP and ask whether to execute [Plan 001](./001-add-verification-baseline.md) first.
 
 ## Git workflow
 
@@ -134,7 +134,7 @@ Keep the existing plugin-style guidance about labeled sub-examples.
 
 Also update the pixel morph exception line so it says not to add those post-specific demos to `app/private/qa/component-demos.tsx` or the private QA TOC unless explicitly requested.
 
-If Plan 002 has landed, document that `/private/**` is a dev-only route tree and should not appear in production builds.
+If [Plan 002](./002-reduce-build-and-bundle-cost.md) has landed, document that `/private/**` is a dev-only route tree and should not appear in production builds.
 
 **Verify**:
 
@@ -142,7 +142,7 @@ If Plan 002 has landed, document that `/private/**` is a dev-only route tree and
 rg -n "app/components|app/private/qa/component-demos|CUSTOM_TOC_ITEMS|UI_TOC_ITEMS" AGENTS.md
 ```
 
-Expected: no stale `app/components` references remain, the current private QA paths are present, and dev-only private route behavior is documented if Plan 002 has landed.
+Expected: no stale `app/components` references remain, the current private QA paths are present, and dev-only private route behavior is documented if [Plan 002](./002-reduce-build-and-bundle-cost.md) has landed.
 
 ### Step 2: Fix workspace facts in AGENTS
 
@@ -176,7 +176,7 @@ Do not claim it writes `out` unless `next.config.ts` has been changed to `output
 
 Optionally mention `npm run build:webpack` as the explicit fallback script documented in `AGENTS.md`.
 
-Optionally add `npm run format:check` and, if Plan 001 has landed, `npm run typecheck` and `npm run check` to the README command list. Do not add `npm run test` unless the repo later adopts a test runner intentionally.
+Optionally add `npm run format:check` and, if [Plan 001](./001-add-verification-baseline.md) has landed, `npm run typecheck` and `npm run check` to the README command list. Do not add `npm run test` unless the repo later adopts a test runner intentionally.
 
 **Verify**:
 
@@ -208,7 +208,7 @@ Expected: all exit 0.
 
 - [ ] `AGENTS.md` points QA additions at `app/private/qa/component-demos.tsx`.
 - [ ] `AGENTS.md` points sidebar/TOC additions at `app/private/qa/page.private.tsx` and names `CUSTOM_TOC_ITEMS` / `UI_TOC_ITEMS`.
-- [ ] If Plan 002 has landed, `AGENTS.md` documents `/private/**` as dev-only and absent from production builds.
+- [ ] If [Plan 002](./002-reduce-build-and-bundle-cost.md) has landed, `AGENTS.md` documents `/private/**` as dev-only and absent from production builds.
 - [ ] `AGENTS.md` no longer claims there are no API routes.
 - [ ] `README.md` no longer claims `npm run build` writes a static export to `out`.
 - [ ] `README.md` mentions `npm install`.
@@ -224,7 +224,7 @@ Stop and report if:
 - `app/private/qa` no longer exists or has moved again.
 - The repo has added `output: "export"` and README's `out` language is now correct.
 - `app/api/letterboxd/route.ts` has been deleted before this plan starts.
-- Plan 001 has not landed and the requested verification scripts do not exist.
+- [Plan 001](./001-add-verification-baseline.md) has not landed and the requested verification scripts do not exist.
 
 ## Maintenance Notes
 

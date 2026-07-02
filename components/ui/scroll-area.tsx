@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 function ScrollArea({
   className,
   innerClass,
+  contentClass,
   children,
   showScrollbar = false,
   scrollFade = false,
@@ -17,10 +18,12 @@ function ScrollArea({
   scrollbarGutter?: boolean;
   showScrollbar?: boolean;
   innerClass?: string;
+  contentClass?: string;
   orientation?: "vertical" | "horizontal" | "both";
 }) {
   const hasVerticalScrollbar = orientation !== "horizontal";
   const hasHorizontalScrollbar = orientation !== "vertical";
+  const shouldWrapContent = hasHorizontalScrollbar || contentClass !== undefined;
 
   return (
     <ScrollAreaPrimitive.Root
@@ -43,7 +46,13 @@ function ScrollArea({
         )}
         data-slot="scroll-area-viewport"
       >
-        {children}
+        {shouldWrapContent ? (
+          <ScrollAreaPrimitive.Content data-slot="scroll-area-content" className={cn(contentClass)}>
+            {children}
+          </ScrollAreaPrimitive.Content>
+        ) : (
+          children
+        )}
       </ScrollAreaPrimitive.Viewport>
       {hasVerticalScrollbar ? <ScrollBar orientation="vertical" visible={showScrollbar} /> : null}
       {hasHorizontalScrollbar ? <ScrollBar orientation="horizontal" visible={showScrollbar} /> : null}

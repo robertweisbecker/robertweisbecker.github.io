@@ -39,7 +39,7 @@ export const posts: Post[] = [
   {
     id: "pixel-icons",
     title: "28-Pixel Icons",
-    description: "Creating animated 11x11 icons with Figma + Codex.",
+    description: "Creating animated 11x11 icons with Figma + Codex",
     category: "Demo",
     date: "06/11/2026",
     path: "/posts/pixel-icons",

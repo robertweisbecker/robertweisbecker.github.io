@@ -1,6 +1,6 @@
 # Superseded Plan: Protect private routes with parent robots metadata
 
-> **Do not execute this plan.** It is retained for audit history only. It was superseded by `plans/002-reduce-build-and-bundle-cost.md` after the product decision changed from "private routes may ship but should be noindexed" to "private QA/prototype routes should not ship in production."
+> **Do not execute this plan.** It is retained for audit history only. It was superseded by [`plans/002-reduce-build-and-bundle-cost.md`](./002-reduce-build-and-bundle-cost.md) after the product decision changed from "private routes may ship but should be noindexed" to "private QA/prototype routes should not ship in production."
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
@@ -11,7 +11,7 @@
 - **Priority**: superseded
 - **Effort**: S
 - **Risk**: LOW
-- **Depends on**: superseded by `plans/002-reduce-build-and-bundle-cost.md`
+- **Depends on**: superseded by [`plans/002-reduce-build-and-bundle-cost.md`](./002-reduce-build-and-bundle-cost.md)
 - **Category**: security / docs / superseded
 - **Planned at**: commit `f87f0ad`, 2026-07-01
 
@@ -20,7 +20,7 @@
 The site has a `/private` route tree with prototypes and QA surfaces. Some pages set `robots: "noindex, nofollow"`, but several child pages do not. In Next App Router, metadata in `app/private/page.tsx` does not apply to child routes; a parent `layout.tsx` would be the right place to apply this
 policy across `/private/**` if private routes continued to ship.
 
-This is no longer the preferred target. Private QA/prototype routes should be excluded from the production route and type-check graph, which is covered by `plans/002-reduce-build-and-bundle-cost.md`.
+This is no longer the preferred target. Private QA/prototype routes should be excluded from the production route and type-check graph, which is covered by [`plans/002-reduce-build-and-bundle-cost.md`](./002-reduce-build-and-bundle-cost.md).
 
 ## Current state
 
@@ -170,7 +170,7 @@ Expected: all exit 0.
 - [ ] Existing private page titles/descriptions still exist where they existed before.
 - [ ] `npm run typecheck`, `npm run check`, `npm run lint`, `npm run format:check`, and `npm run build` exit 0.
 - [ ] No files outside the in-scope list are modified.
-- [ ] `plans/README.md` status row for Plan 002 is updated.
+- [ ] `plans/README.md` status row for [Plan 002](./002-reduce-build-and-bundle-cost.md) is updated.
 
 ## STOP Conditions
 

@@ -36,16 +36,16 @@ export function MotionPlayground() {
 
   return (
     <div className="flex w-full flex-col gap-14">
-      <PlaygroundSection id="motion-systems" title="Motion">
-        <DemoContainer title="Motion cards" className="lg:col-span-8" innerClass="min-h-[400px]">
+      <PlaygroundSection id="motion" title="Motion">
+        <DemoContainer title="Motion cards" variant="muted" className="lg:col-span-full" innerClass="min-h-[400px]">
           <CardFan />
         </DemoContainer>
         <DemoContainer
           title="TextReveal"
           centerContent
           variant="muted"
-          className="lg:col-span-4"
-          innerClass="min-h-60"
+          className="lg:col-span-full"
+          innerClass="min-h-[300px]"
           controls={
             <Button size="xs" variant="ghost" onClick={() => setResetKey((key) => key + 1)}>
               Replay
@@ -65,33 +65,35 @@ export function MotionPlayground() {
         <DemoContainer
           title="MotionText"
           caption="Inline playback controls"
-          className="lg:col-span-8 lg:row-span-2"
+          variant="muted"
+          className="lg:col-span-full lg:row-span-2"
           innerClass="min-h-[420px]"
         >
           <MotionTextPlaygroundDemo />
         </DemoContainer>
-        <DemoContainer title="Skeleton" centerContent className="lg:col-span-4">
+        <DemoContainer title="Skeleton" variant="muted" centerContent className="lg:col-span-full">
           <SkeletonDemo />
         </DemoContainer>
         <DemoContainer
           title="Emoji Feedback"
           description="A remix of Vercel's Feedback component"
           controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
-          className="lg:col-span-8"
-          innerClass="min-h-72"
+          variant="muted"
+          className="lg:col-span-full"
+          innerClass="min-h-[300px]"
         >
           <EmojiFeedbackDemo />
         </DemoContainer>
-        <DemoContainer title="Motion chart" description="Hover to animate" centerContent className="lg:col-span-4">
+        <DemoContainer title="Motion chart" description="Hover to animate" variant="muted" centerContent className="lg:col-span-full">
           <ChartDemo />
         </DemoContainer>
-        <DemoContainer title="ColorCode" description="Click to copy" centerContent className="lg:col-span-3">
+        <DemoContainer title="ColorCode" description="Click to copy" variant="muted" centerContent className="lg:col-span-full">
           <ColorCode value="#0b0b0b" />
         </DemoContainer>
-        <DemoContainer title="ColorSwatchGroup" centerContent className="lg:col-span-5">
+        <DemoContainer title="ColorSwatchGroup" variant="muted" centerContent className="lg:col-span-full">
           <ColorSwatchGroupDemo />
         </DemoContainer>
-        <DemoContainer title="Animated icon buttons" centerContent className="lg:col-span-6">
+        <DemoContainer title="Animated icon buttons" variant="muted" centerContent className="lg:col-span-full">
           <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
             <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />

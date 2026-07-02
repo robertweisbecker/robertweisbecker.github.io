@@ -27,6 +27,7 @@ import { LinkOut } from "@/components/link-out";
 import { Mark, MarkNote } from "@/components/mark-note";
 import { ModeToggle } from "@/components/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
+import { PixelIconsPostHero } from "@/components/demos/pixel-icons-post-hero";
 import { Stats } from "@/components/stats";
 import { TableOfContents } from "@/components/table-of-contents";
 import { Theme, ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme";
@@ -45,6 +46,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
+import { Loader } from "@/components/ui/loader";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@/components/ui/number-field";
 import { Slider, SliderControl, SliderGroup, SliderLabel, SliderValue } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
@@ -330,6 +332,26 @@ export function ComponentDemos() {
 
       <Section title="Motion Text">
         <MotionTextDemo />
+      </Section>
+
+      <Section title="Loader">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
+          <span className="inline-flex items-center gap-2 text-primary">
+            <Loader />
+            Primary
+          </span>
+          <span className="inline-flex items-center gap-2 text-muted-foreground">
+            <Loader />
+            Muted
+          </span>
+          <Button loading size="sm">
+            Loading
+          </Button>
+        </div>
+      </Section>
+
+      <Section title="Pixel Icons Post Hero" id="pixel-icons-post-hero">
+        <PixelIconsPostHero />
       </Section>
 
       <Section title="Alert">

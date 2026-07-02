@@ -33,7 +33,7 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "group/select-trigger flex w-fit items-center justify-between gap-1.5 truncate rounded-md bg-card py-2 ps-2.5 pe-2 text-sm whitespace-nowrap text-foreground shadow-border-xs outline outline-transparent transition-[background-color,color,box-shadow,outline] select-none hover:bg-card hover:not-data-disabled:outline-border focus-visible:outline-2 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/50 data-placeholder:text-muted-foreground/50 data-[size=default]:h-button data-[size=sm]:h-7 data-[size=sm]:rounded-sm *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-current/5 dark:-outline-offset-1 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "group/select-trigger squircle flex w-fit items-center justify-between gap-1.5 truncate rounded-md bg-card py-2 ps-2.5 pe-2 text-sm whitespace-nowrap text-foreground shadow-border-sm outline outline-transparent transition-[background-color,color,box-shadow,outline] select-none hover:bg-card hover:not-data-disabled:outline-border focus-visible:outline-2 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/50 data-placeholder:text-muted-foreground/50 data-[size=default]:h-button data-[size=sm]:h-button-sm data-[size=sm]:rounded-sm *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-current/5 dark:-outline-offset-1 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
         className
       )}
       {...props}
@@ -69,7 +69,7 @@ function SelectContent({
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
-            "relative isolate z-50 max-h-(--available-height) w-[calc(var(--anchor-width)+--spacing(6))] min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto ui-popup rounded-lg duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            "squircle relative isolate z-50 max-h-(--available-height) w-[calc(var(--anchor-width)+--spacing(6))] min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto ui-popup rounded-xl duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-start-2 data-[side=inline-start]:slide-in-from-end-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
             className
           )}
           {...props}
@@ -98,7 +98,7 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "group/select-item relative flex w-full items-center gap-2 rounded-md py-2 ps-7 pe-3 text-sm/none text-popover-foreground outline-none select-none",
+        "group/select-item squircle relative flex w-full items-center gap-2 rounded-lg py-2 ps-7 pe-3 text-sm/none text-popover-foreground outline-none select-none",
         // "[:is([data-selected])]:not-focus:bg-accent [:is([data-selected])]:not-focus:text-popover-foreground",
         "focus:bg-info-primary focus:text-white focus:shadow-border-xs focus:**:text-white",
         "data-disabled:pointer-events-none data-disabled:opacity-50",

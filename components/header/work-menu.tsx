@@ -98,7 +98,7 @@ export function WorkMenu({ projects }: WorkMenuProps) {
             </DropdownMenuItem>
             <DropdownMenuItem
               className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
-              render={<Link href="/playground" />}
+              render={<Link href="/playground/motion" />}
               nativeButton={false}
             >
               <div className={mobileIconClasses} data-slot="icon">
@@ -122,7 +122,6 @@ export function WorkMenu({ projects }: WorkMenuProps) {
                         <Image
                           src={project.heroImage}
                           alt={`${project.title} hero preview`}
-                          fill
                           width={320}
                           height={180}
                           sizes="(max-width: 768px) 100vw, 320px"

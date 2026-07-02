@@ -15,10 +15,10 @@ export function FramesPlayground() {
   return (
     <div className="flex w-full flex-col gap-14">
       <PlaygroundSection id="media-comparison" title="Frames">
-        <DemoContainer caption="CarouselToolbar" centerContent className="lg:col-span-3">
+        <DemoContainer caption="CarouselToolbar" variant="muted" centerContent className="lg:col-span-full">
           <CarouselDemo />
         </DemoContainer>
-        <DemoContainer title="ImageToggle" caption="Select a variant" centerContent className="lg:col-span-5">
+        <DemoContainer title="ImageToggle" caption="Select a variant" variant="muted" centerContent className="lg:col-span-full">
           <ImageToggleDemo />
         </DemoContainer>
         <DemoContainer
@@ -28,6 +28,7 @@ export function FramesPlayground() {
               Built with <LinkOut href="https://www.media-chrome.org/" text="media-chrome" /> + Base UI Toolbar
             </>
           }
+          variant="muted"
           centerContent
           className="lg:col-span-full"
         >

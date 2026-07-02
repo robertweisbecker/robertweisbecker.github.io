@@ -19,6 +19,7 @@ export type ColorSwatch = {
   value: string;
   label: string;
   color: string;
+  preview?: string;
 };
 
 type ColorSwatchGroupProps = {
@@ -28,6 +29,7 @@ type ColorSwatchGroupProps = {
   columns?: number;
   className?: string;
   allowCustomColors?: boolean;
+  allowDeselect?: boolean;
   onValueChange: (value: string) => void;
 };
 
@@ -37,6 +39,7 @@ export function ColorSwatchGroup({
   columns = colors.length,
   className,
   allowCustomColors = true,
+  allowDeselect = false,
   onValueChange,
   tooltipSide = "top",
 }: ColorSwatchGroupProps) {
@@ -44,7 +47,7 @@ export function ColorSwatchGroup({
   const [isCustomOpen, setIsCustomOpen] = React.useState(false);
   const [customColorInput, setCustomColorInput] = React.useState("");
   const customColorInputRef = React.useRef<HTMLInputElement>(null);
-  const selected = React.useMemo(() => [value], [value]);
+  const selected = React.useMemo(() => (value ? [value] : []), [value]);
   const allColors = React.useMemo(() => [...colors, ...customColors], [colors, customColors]);
 
   const isCustomColorValid = React.useMemo(() => {
@@ -78,10 +81,10 @@ export function ColorSwatchGroup({
     (swatchValue: string) => {
       setCustomColors((prev) => prev.filter((customColor) => customColor.value !== swatchValue));
       if (value === swatchValue && colors[0]) {
-        onValueChange(colors[0].value);
+        onValueChange(allowDeselect ? "" : colors[0].value);
       }
     },
-    [colors, onValueChange, value]
+    [allowDeselect, colors, onValueChange, value]
   );
 
   React.useEffect(() => {
@@ -99,7 +102,14 @@ export function ColorSwatchGroup({
           value={selected}
           onValueChange={(next) => {
             const nextValue = Array.isArray(next) ? next[0] : undefined;
-            if (nextValue) onValueChange(nextValue);
+            if (nextValue) {
+              onValueChange(nextValue);
+              return;
+            }
+
+            if (allowDeselect) {
+              onValueChange("");
+            }
           }}
           size="sm"
           spacing={0.5}
@@ -129,9 +139,10 @@ export function ColorSwatchGroup({
             >
               <motion.span
                 className={cn(
-                  "peer pointer-events-none block aspect-square size-full shrink-0 origin-center rounded-full bg-current inset-shadow-xs inset-ring inset-shadow-black/20 inset-ring-foreground/20 group-hover:bg-[color-mix(in_srgb,currentColor_90%,var(--color-background))] group-hover:inset-ring-foreground/50 group-data-pressed:size-[calc(100%-4px)]"
+                  "peer pointer-events-none block aspect-square size-full shrink-0 origin-center rounded-full inset-shadow-xs inset-ring inset-shadow-black/20 inset-ring-foreground/20 group-hover:inset-ring-foreground/50 group-data-pressed:size-[calc(100%-4px)]"
                 )}
                 aria-hidden
+                style={{ background: swatch.preview ?? swatch.color }}
                 animate={{
                   scale: selected.includes(swatch.value) ? 0.9 : 1,
                   outlineWidth: 4,

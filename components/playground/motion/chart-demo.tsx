@@ -3,6 +3,10 @@
 import * as React from "react";
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "motion/react";
 
+const COLOR_CHART_LINE_PATH =
+  "M1 136L50.463 122.769L99.927 102.132L149.382 77.621L198.846 47.444L248.309 24L297.772 27.874L347.228 40.706L396.691 56.232L446.154 66.966L495.618 87.913L545.073 106.02L594.537 116.271L644 123.465";
+const COLOR_CHART_AREA_PATH = `${COLOR_CHART_LINE_PATH}L644 188H1V136Z`;
+
 export function ChartDemo() {
   const SPRING = {
     damping: 18,
@@ -63,15 +67,8 @@ export function ChartDemo() {
         className="mt-auto w-full"
         onPointerMove={onPointerMove}
       >
-        <path
-          stroke="var(--success-primary)"
-          strokeWidth="2"
-          d="M1 118.5s82.308-15.501 113.735-29 74.769-1.713 121.217-12c37.596-8.328 58.517-15.006 93.781-30.5 80.146-35.215 123.213-16 154.141-24.5S635.97.849 644 1.5"
-        ></path>
-        <motion.path
-          fill="url(#paint0_linear_540_31)"
-          d="M113.912 89.012C82.437 102.511 1 118.01 1 118.01V188h643V1.023c-8.043-.65-129.399 12.499-160.375 20.998-30.976 8.498-74.11-10.714-154.38 24.496-35.319 15.493-56.272 22.17-93.927 30.497-46.52 10.286-89.93-1.5-121.406 11.998"
-        ></motion.path>
+        <path stroke="var(--success-primary)" strokeWidth="2" d={COLOR_CHART_LINE_PATH}></path>
+        <motion.path fill="url(#paint0_linear_540_31)" d={COLOR_CHART_AREA_PATH}></motion.path>
         <defs>
           <linearGradient id="paint0_linear_540_31" x1="322.5" x2="322.5" y1="1" y2="188" gradientUnits="userSpaceOnUse">
             <stop stopColor="var(--success-primary)" stopOpacity="0.4"></stop>

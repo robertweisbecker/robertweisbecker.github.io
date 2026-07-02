@@ -126,7 +126,7 @@ export function DemoContent({
   maxHeight,
   ...props
 }: DemoContentProps) {
-  const demoInnerClasses = cn("p-4 flex-1 overflow-hidden", centerContent && "grid place-items-center", innerClass);
+  const demoInnerClasses = cn("min-h-[300px] p-4 flex-1 overflow-hidden", centerContent && "grid place-items-center", innerClass);
   const contentStyle = maxHeight === undefined ? style : ({ maxHeight, ...style } satisfies React.CSSProperties);
 
   if (overflowBehavior === "resize") {
@@ -137,7 +137,7 @@ export function DemoContent({
             defaultSize="100%"
             minSize="25%"
             maxSize="100%"
-            className={cn(demoContentVariants({ variant }), "h-full min-h-56")}
+            className={cn(demoContentVariants({ variant }), "h-full min-h-[300px]")}
           >
             <div className={demoInnerClasses}>{children}</div>
           </ResizablePanel>
@@ -155,7 +155,12 @@ export function DemoContent({
       <div
         data-slot="demo-content"
         data-overflow="scroll"
-        className={cn(demoContentVariants({ variant }), maxHeight === undefined && "max-h-56", "min-h-14 max-w-full min-w-0", className)}
+        className={cn(
+          demoContentVariants({ variant }),
+          maxHeight === undefined && "max-h-[300px]",
+          "min-h-[300px] max-w-full min-w-0",
+          className
+        )}
         style={contentStyle}
         {...props}
       >
@@ -170,7 +175,7 @@ export function DemoContent({
     <div
       data-slot="demo-content"
       data-overflow="wrap"
-      className={cn(demoContentVariants({ variant }), "min-h-14", demoInnerClasses, className)}
+      className={cn(demoContentVariants({ variant }), demoInnerClasses, className)}
       style={contentStyle}
       {...props}
     >

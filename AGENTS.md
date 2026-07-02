@@ -4,6 +4,8 @@
 - Prefer Base UI + existing design-system wrappers (e.g., `Switch`, `Autocomplete`, `FieldSet`) over native inputs in this codebase.
 - When a "start corner" changes for clip-path curve generators, apply the full preset set of parameters (`from`, `destX/destY`, `ctrlX/ctrlY`) to avoid degenerate straight-line paths.
 - **Always add a QA example to `app/private/qa/component-demos.tsx` (and a TOC/sidebar entry in `app/private/qa/page.private.tsx` via `CUSTOM_TOC_ITEMS` or `UI_TOC_ITEMS` if not already present) whenever a new component is created or a major feature is added to an existing one.** For plugin-style features (e.g. carousel variants), add a labeled sub-example per variant inside the existing section rather than a new top-level section.
+- **Always update sitemap coverage and Open Graph images/metadata when a new route or page is created.** For dev-only/private routes that should not be indexed, explicitly confirm the sitemap exclusion and still decide whether route-specific OG metadata is needed.
+- Do not delete commented-out experimental code or custom SVG/icon components as "dead code"; preserve them or move them into reusable modules such as `components/icons.tsx`.
 - Do not remove valid Tailwind v4.3 custom/arbitrary variant patterns as a stale-CSS workaround; restore the intended syntax and verify the CSS graph instead.
 
 ## Learned Workspace Facts

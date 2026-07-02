@@ -1,19 +1,10 @@
 import { TreeIconFile } from "@/components/icons-tree";
 import { FoldedCardDemo } from "@/components/playground/folded-card-demo";
-import { LinkButton } from "@/components/ui/link-button";
-
-const PLAYGROUND_ROUTES = [
-  { href: "/playground/motion-systems", label: "Motion" },
-  { href: "/playground/pixel-demos", label: "Pixels" },
-  { href: "/playground/interaction-components", label: "Controls" },
-  { href: "/playground/media-comparison", label: "Frames" },
-  { href: "/playground/buttons", label: "Buttons" },
-  { href: "/playground/visual-details", label: "Verisimilitude" },
-] as const;
+import { PlaygroundRouteNav } from "@/components/playground/playground-route-nav";
 
 export default function PlaygroundPage() {
   return (
-    <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-10">
+    <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 md:gap-16">
       <h1 className="w-full text-h1">Playground</h1>
       <FoldedCardDemo />
 
@@ -54,13 +45,7 @@ export default function PlaygroundPage() {
         </div>
       </div>
 
-      <nav className="flex w-full flex-wrap gap-2">
-        {PLAYGROUND_ROUTES.map((route) => (
-          <LinkButton key={route.href} href={route.href} variant="outline">
-            {route.label}
-          </LinkButton>
-        ))}
-      </nav>
+      <PlaygroundRouteNav size="md" />
     </div>
   );
 }

@@ -591,6 +591,8 @@ const UI_TOC_ITEMS = [
 const CUSTOM_TOC_ITEMS = [
   { id: "animate-height", text: "Animate Height" },
   { id: "motion-text", text: "Motion Text" },
+  { id: "loader", text: "Loader" },
+  { id: "pixel-icons-post-hero", text: "Pixel Icons Post Hero" },
   { id: "alert", text: "Alert" },
   { id: "avatar", text: "Avatar" },
   { id: "checkbox", text: "Checkbox" },

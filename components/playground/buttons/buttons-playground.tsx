@@ -16,7 +16,7 @@ export function ButtonsPlayground() {
   return (
     <div className="flex w-full flex-col gap-14">
       <PlaygroundSection id="buttons" title="Buttons">
-        <DemoContainer caption="Loading button" centerContent className="lg:col-span-4">
+        <DemoContainer caption="Loading button" variant="muted" centerContent className="lg:col-span-full">
           <Button
             rounded
             loading={isLoading}
@@ -28,20 +28,20 @@ export function ButtonsPlayground() {
             Confirm
           </Button>
         </DemoContainer>
-        <DemoContainer caption="Hover effects" centerContent className="lg:col-span-8">
+        <DemoContainer caption="Hover effects" variant="muted" centerContent className="lg:col-span-full">
           <AnimatedButtonDemo />
         </DemoContainer>
-        <DemoContainer caption="Metallic button" centerContent className="lg:col-span-4">
+        <DemoContainer caption="Metallic button" variant="muted" centerContent className="lg:col-span-full">
           <CobotButtonDemo />
         </DemoContainer>
-        <DemoContainer caption="iOS 27 icon" centerContent className="lg:col-span-3" innerClass="bg-card dark">
+        <DemoContainer caption="iOS 27 icon" variant="muted" centerContent className="lg:col-span-full" innerClass="bg-card dark">
           <MacAppIconDemo />
         </DemoContainer>
-        <DemoContainer caption="Glass button" centerContent className="[var(--bg:var(--primary))] lg:col-span-3">
+        <DemoContainer caption="Glass button" variant="muted" centerContent className="[var(--bg:var(--primary))] lg:col-span-full">
           <GlassButtonDemo />
           <Button variant="glass">Glass</Button>
         </DemoContainer>
-        <DemoContainer caption="Delete button" centerContent className="lg:col-span-2">
+        <DemoContainer caption="Delete button" variant="muted" centerContent className="lg:col-span-full">
           <DeleteButtonDemo />
         </DemoContainer>
       </PlaygroundSection>

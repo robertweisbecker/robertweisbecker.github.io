@@ -7,8 +7,8 @@ import { Code } from "@/components/ui/code";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { LinkButton } from "@/components/ui/link-button";
 import { PlaygroundSection } from "@/components/playground/playground-section";
-import { ChromeTabsDemo } from "@/components/playground/visual-details/chrome-tabs-demo";
-import { GroupedPopupsDemo } from "@/components/playground/visual-details/grouped-popups-demo";
+import { ChromeTabsDemo } from "@/components/playground/verisimilitude/chrome-tabs-demo";
+import { GroupedPopupsDemo } from "@/components/playground/verisimilitude/grouped-popups-demo";
 
 const SiteSearch = dynamic(() => import("@/components/site-search").then((module) => ({ default: module.SiteSearch })), {
   loading: () => <p className="text-sm text-muted-foreground">Loading site search…</p>,
@@ -16,7 +16,7 @@ const SiteSearch = dynamic(() => import("@/components/site-search").then((module
 
 const PhoneDeviceFrameDemo = dynamic(
   () =>
-    import("@/components/playground/visual-details/phone-device-frame-demo").then((module) => ({ default: module.PhoneDeviceFrameDemo })),
+    import("@/components/playground/verisimilitude/phone-device-frame-demo").then((module) => ({ default: module.PhoneDeviceFrameDemo })),
   {
     loading: () => <p className="text-sm text-muted-foreground">Loading phone frame…</p>,
   }
@@ -24,7 +24,7 @@ const PhoneDeviceFrameDemo = dynamic(
 
 const BrowserDeviceFrameDemo = dynamic(
   () =>
-    import("@/components/playground/visual-details/browser-device-frame-demo").then((module) => ({
+    import("@/components/playground/verisimilitude/browser-device-frame-demo").then((module) => ({
       default: module.BrowserDeviceFrameDemo,
     })),
   {
@@ -32,14 +32,15 @@ const BrowserDeviceFrameDemo = dynamic(
   }
 );
 
-export function VisualDetailsPlayground() {
+export function VerisimilitudePlayground() {
   return (
     <div className="flex w-full flex-col gap-14">
-      <PlaygroundSection id="visual-details" title="Verisimilitude">
+      <PlaygroundSection id="verisimilitude" title="Verisimilitude">
         <DemoContainer
           caption={"CSS shape + masking for cutouts"}
           title="Chrome Tabs"
-          className="lg:col-span-6 lg:row-span-2"
+          variant="muted"
+          className="lg:col-span-full lg:row-span-2"
           centerContent
           controls={
             <LinkButton variant="ghost" size="xs" href="/posts/clip-path-curve">
@@ -50,13 +51,19 @@ export function VisualDetailsPlayground() {
         >
           <ChromeTabsDemo />
         </DemoContainer>
-        <DemoContainer title="Site search" caption="A Raycast-style command palette" centerContent className="lg:col-span-6">
+        <DemoContainer
+          title="Site search"
+          caption="A Raycast-style command palette"
+          variant="muted"
+          centerContent
+          className="lg:col-span-full"
+        >
           <SiteSearch className="w-full max-w-xs" variant="input" />
         </DemoContainer>
-        <DemoContainer title="Grouped Popups" centerContent className="lg:col-span-6" innerClass="min-h-60">
+        <DemoContainer title="Grouped Popups" variant="muted" centerContent className="lg:col-span-full" innerClass="min-h-[300px]">
           <GroupedPopupsDemo />
         </DemoContainer>
-        <DemoContainer title="Keys" centerContent className="lg:col-span-3" innerClass="flex flex-col gap-2">
+        <DemoContainer title="Keys" variant="muted" centerContent className="lg:col-span-full" innerClass="flex flex-col gap-2">
           <Kbd variant="elevated">⌘/</Kbd>
           <Kbd>⌘I</Kbd>
           <KbdGroup>
@@ -66,19 +73,21 @@ export function VisualDetailsPlayground() {
         </DemoContainer>
         <DemoContainer
           title="DeviceFrame · Phone"
+          variant="muted"
           overflowBehavior="resize"
           centerContent
-          className="lg:col-span-5 lg:row-span-2"
+          className="lg:col-span-full lg:row-span-2"
           caption="A remix of Geist's Phone component. Responds to color mode and uses your device's clock and battery level (except on iOS)."
         >
           <PhoneDeviceFrameDemo />
         </DemoContainer>
-        <DemoContainer title="DeviceFrame · Browser" variant="outline" className="lg:col-span-7" centerContent overflowBehavior="resize">
+        <DemoContainer title="DeviceFrame · Browser" variant="muted" className="lg:col-span-full" centerContent overflowBehavior="resize">
           <BrowserDeviceFrameDemo />
         </DemoContainer>
         <DemoContainer
           title="Custom mark styles"
           description="with CSS corner-shape"
+          variant="muted"
           className="lg:col-span-full"
           innerClass="grid divide-y text-sm/6 text-muted-foreground sm:grid-cols-3 sm:divide-x sm:divide-y-0"
         >
