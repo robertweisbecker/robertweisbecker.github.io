@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 /*─────────────────────────────────────────────────────────
  * DIRECTION B — Film Strip / Gallery
  *
@@ -22,6 +20,7 @@
  *─────────────────────────────────────────────────────────*/
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -144,9 +143,11 @@ function ChapterSection({
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
         {/* ── Hero ── */}
         <div className="group/hero relative flex min-h-0 flex-1 items-center justify-center overflow-hidden bg-black/95">
-          <img
+          <Image
             src={displaySlide.src}
             alt={displaySlide.alt}
+            fill
+            sizes="(min-width: 1024px) 75vw, 100vw"
             className={`h-full w-full object-contain transition-opacity duration-200 ${fading ? "opacity-0" : "opacity-100"}`}
           />
 
@@ -214,6 +215,7 @@ function ChapterSection({
             <div className="grid grid-cols-2 gap-2">
               {chapter.slides.map((slide, i) => (
                 <button
+                  type="button"
                   key={slide.src}
                   onClick={() => goTo(i)}
                   aria-label={slide.caption}
@@ -222,7 +224,7 @@ function ChapterSection({
                   }`}
                   style={{ aspectRatio: "16/9" }}
                 >
-                  <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" />
+                  <Image src={slide.src} alt={slide.alt} fill sizes="144px" className="h-full w-full object-cover object-top" />
                 </button>
               ))}
             </div>
@@ -241,21 +243,20 @@ function ChapterNav({ chapters, activeId }: { chapters: Chapter[]; activeId: str
       {chapters.map((ch, i) => {
         const isActive = ch.id === activeId;
         return (
-          <a
+          <button
+            type="button"
             key={ch.id}
-            href={`#chapter-${ch.id}`}
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={() => {
               document.getElementById(`chapter-${ch.id}`)?.scrollIntoView({ behavior: "smooth" });
             }}
-            className={`flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition-colors duration-100 ${
+            className={`flex items-center gap-2 rounded-lg px-2 py-2 text-left text-sm transition-colors duration-100 ${
               isActive ? "bg-accent font-medium text-accent-foreground" : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
             }`}
           >
             <span className={`h-1 w-1 shrink-0 rounded-full transition-colors duration-150 ${isActive ? "bg-primary" : "bg-border"}`} />
             <span className="font-pixel text-[11px]">{String(i + 1).padStart(2, "0")}</span>
             {ch.label}
-          </a>
+          </button>
         );
       })}
     </nav>
@@ -317,6 +318,7 @@ export default function DirectionB() {
       <div className="fixed bottom-4 left-1/2 z-30 flex -translate-x-1/2 gap-1.5 xl:hidden">
         {CHAPTERS.map((ch) => (
           <button
+            type="button"
             key={ch.id}
             aria-label={ch.label}
             onClick={() => document.getElementById(`chapter-${ch.id}`)?.scrollIntoView({ behavior: "smooth" })}

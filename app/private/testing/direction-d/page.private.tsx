@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 /*─────────────────────────────────────────────────────────
  * DIRECTION D — Annotated Diagram (two variations)
  *
@@ -16,6 +14,7 @@
  *─────────────────────────────────────────────────────────*/
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Popover } from "@base-ui/react/popover";
 import { Button } from "@/components/ui/button";
@@ -44,13 +43,23 @@ type ImageCard = {
   src: string;
   alt: string;
   caption: string;
+  width: number;
+  height: number;
 };
 
 const CARDS: ImageCard[] = [
-  { src: "/assets/forge/dark.png", alt: "Forge dark mode", caption: "Forge — after the refresh" },
-  { src: "/assets/forge/colors-all.png", alt: "Color palettes", caption: "New color system — all palettes" },
-  { src: "/assets/forge/density-compare.png", alt: "Density comparison", caption: "Before & after — 60% shorter" },
+  { src: "/assets/forge/dark.png", alt: "Forge dark mode", caption: "Forge — after the refresh", width: 2883, height: 1803 },
+  { src: "/assets/forge/colors-all.png", alt: "Color palettes", caption: "New color system — all palettes", width: 4590, height: 1600 },
+  {
+    src: "/assets/forge/density-compare.png",
+    alt: "Density comparison",
+    caption: "Before & after — 60% shorter",
+    width: 2000,
+    height: 2100,
+  },
 ];
+
+type Line = { x1: number; y1: number; x2: number; y2: number };
 
 const ALL_ANNOTATIONS: Annotation[] = [
   {
@@ -202,7 +211,13 @@ function Variation1() {
           return (
             <Card key={card.src} variant="muted" size="sm" className="overflow-visible">
               <div className="relative mx-3 mt-3 overflow-hidden rounded-lg">
-                <img src={card.src} alt={card.alt} className="w-full object-cover object-top" />
+                <Image
+                  src={card.src}
+                  alt={card.alt}
+                  width={card.width}
+                  height={card.height}
+                  className="h-auto w-full object-cover object-top"
+                />
                 {cardAnns.map((ann) => (
                   <Popover.Trigger
                     key={ann.tid}
@@ -343,37 +358,36 @@ function Variation2() {
   const triggerRefs = React.useRef<Map<number, HTMLButtonElement>>(new Map());
   const imageRefs = React.useRef<Map<number, HTMLDivElement>>(new Map()); // card image containers
 
-  const [line, setLine] = React.useState<{ x1: number; y1: number; x2: number; y2: number } | null>(null);
+  const [line, setLine] = React.useState<Line | null>(null);
 
-  React.useEffect(() => {
-    if (!activeAnn || !layoutRef.current) {
-      setLine(null);
-      return;
-    }
-    const triggerEl = triggerRefs.current.get(activeAnn.id);
-    const imageEl = imageRefs.current.get(activeAnn.cardIndex);
-    if (!triggerEl || !imageEl) {
-      setLine(null);
-      return;
-    }
-
+  function lineForAnnotation(annotation: Annotation): Line | null {
+    if (!layoutRef.current) return null;
+    const triggerEl = triggerRefs.current.get(annotation.id);
+    const imageEl = imageRefs.current.get(annotation.cardIndex);
+    if (!triggerEl || !imageEl) return null;
     const container = layoutRef.current;
     const from = getRelativeCenter(triggerEl, container);
     const imgR = imageEl.getBoundingClientRect();
     const cR = container.getBoundingClientRect();
     // target point = annotation's x/y% within the image element
     const to = {
-      x: imgR.left - cR.left + (activeAnn.x / 100) * imgR.width,
-      y: imgR.top - cR.top + (activeAnn.y / 100) * imgR.height,
+      x: imgR.left - cR.left + (annotation.x / 100) * imgR.width,
+      y: imgR.top - cR.top + (annotation.y / 100) * imgR.height,
     };
-    setLine({ x1: from.x, y1: from.y, x2: to.x, y2: to.y });
-  }, [activeAnn]);
+    return { x1: from.x, y1: from.y, x2: to.x, y2: to.y };
+  }
 
   function openById(id: number) {
     const ann = ALL_ANNOTATIONS.find((a) => a.id === id);
     if (!ann) return;
     setActiveId(id);
+    setLine(lineForAnnotation(ann));
     sidebarHandle.open(ann.tid);
+  }
+
+  function closeActiveAnnotation() {
+    setActiveId(null);
+    setLine(null);
   }
 
   function prev() {
@@ -428,11 +442,16 @@ function Variation2() {
                 nativeButton
                 render={
                   <button
+                    type="button"
                     ref={(el) => {
                       if (el) triggerRefs.current.set(ann.id, el);
                       else triggerRefs.current.delete(ann.id);
                     }}
-                    onClick={() => setActiveId(isActive ? null : ann.id)}
+                    onClick={() => {
+                      if (isActive) closeActiveAnnotation();
+                      else openById(ann.id);
+                    }}
+                    aria-label={`Annotation ${ann.id}: ${ann.label}`}
                     className={cn(
                       "flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm transition-colors duration-100",
                       isActive
@@ -472,7 +491,13 @@ function Variation2() {
                     isHighlighted && "z-10 outline-3 outline-offset-2 outline-primary"
                   )}
                 >
-                  <img src={card.src} alt={card.alt} className="w-full object-cover object-top" />
+                  <Image
+                    src={card.src}
+                    alt={card.alt}
+                    width={card.width}
+                    height={card.height}
+                    className="h-auto w-full object-cover object-top"
+                  />
                 </div>
                 <p className="px-3 pt-2 pb-3 font-pixel text-[10px] text-muted-foreground">{card.caption}</p>
               </Card>
@@ -485,7 +510,7 @@ function Variation2() {
       <Popover.Root
         handle={sidebarHandle}
         onOpenChange={(open) => {
-          if (!open) setActiveId(null);
+          if (!open) closeActiveAnnotation();
         }}
       >
         {({ payload: ann }) => (
@@ -526,7 +551,7 @@ function Variation2() {
                       onNext={next}
                       onClose={() => {
                         sidebarHandle.close();
-                        setActiveId(null);
+                        closeActiveAnnotation();
                       }}
                     />
                   )}

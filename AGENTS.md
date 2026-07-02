@@ -35,13 +35,14 @@
 
 ## React Doctor Tracking
 
-- Current React Doctor score: 53/100
-- Last checked `master` commit: `34a48dfdd922`
-- Last checked at: 2026-07-02T16:02:01-07:00
-- Command: `npx react-doctor@latest --verbose`
+- Current React Doctor score: 56/100
+- Last checked `master` commit: `f41eb75431d3`
+- Last checked at: 2026-07-02T16:26:55-07:00
+- Command: `env npm_config_cache=/private/tmp/codex-npm-cache /Users/robertweisbecker/.nvm/versions/node/v24.9.0/bin/npx react-doctor@latest --verbose`
 - Latest run log: `.scratch/react-doctor/latest-run.md`
-- Major issue policy: report only React Doctor diagnostics with `severity: error`; keep warning totals as counts only.
-- After each new `master` commit, run React Doctor, report major violations in Markdown with links to local files and line numbers, update `.scratch/react-doctor/latest-run.md` with the latest major issues, then update this section with the latest score, commit, and run timestamp.
+- React Doctor action policy: if any diagnostics have `severity: error`, list only those major issues as the next actionable items and format them as a ready-for-agent task; if there are 0 major issues, list the top 20 most severe remaining diagnostics instead.
+- Latest run note: 0 major issues; score improved from 53/100 to 56/100 after addressing the previous top 20 warnings, and the latest log lists the current top 20 remaining diagnostics. Use the absolute `npx` path plus `/private/tmp/codex-npm-cache` so automation shells do not depend on `nvm` PATH setup or the broken user npm cache.
+- After each new `master` commit range that changes at least one `.ts` or `.tsx` file, run React Doctor, report the action-policy diagnostics in Markdown with links to local files and line numbers, update `.scratch/react-doctor/latest-run.md` with those diagnostics, then update this section with the latest score, commit, and run timestamp. If `master` advances without `.ts`/`.tsx` changes, skip React Doctor and update only the checked commit/timestamp plus a skip note so the same non-TypeScript commit is not rescanned repeatedly.
 
 ## Refactoring Notes
 

@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 /*─────────────────────────────────────────────────────────
  * DIRECTION C — Mosaic with Dialogs
  *
@@ -12,6 +10,7 @@
  *─────────────────────────────────────────────────────────*/
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Dialog, DialogContent, DialogPopup, DialogHeader, DialogTitle, DialogDescription, DialogBody } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -102,6 +101,23 @@ const SECTIONS: Section[] = [
   },
 ];
 
+const FORGE_IMAGE_SIZES: Record<string, { width: number; height: number }> = {
+  "/assets/forge/buttons.png": { width: 2400, height: 1600 },
+  "/assets/forge/colors-all.png": { width: 4590, height: 1600 },
+  "/assets/forge/colors-neutral.png": { width: 1920, height: 1080 },
+  "/assets/forge/colors-teal.png": { width: 1920, height: 1080 },
+  "/assets/forge/dark.png": { width: 2883, height: 1803 },
+  "/assets/forge/density-compare.png": { width: 2000, height: 2100 },
+  "/assets/forge/density-inputs.png": { width: 1920, height: 1080 },
+  "/assets/forge/dialogs.png": { width: 2400, height: 1350 },
+  "/assets/forge/fields.png": { width: 2290, height: 1356 },
+  "/assets/forge/light.png": { width: 2883, height: 1803 },
+};
+
+function forgeImageSize(src: string) {
+  return FORGE_IMAGE_SIZES[src] ?? { width: 1920, height: 1080 };
+}
+
 /* ─── Before/After toggle ───────────────────────────────── */
 function BeforeAfter({
   before,
@@ -116,6 +132,8 @@ function BeforeAfter({
 }) {
   const [showing, setShowing] = React.useState<"before" | "after">("after");
   const [fading, setFading] = React.useState(false);
+  const visibleSrc = showing === "before" ? before : after;
+  const visibleSize = forgeImageSize(visibleSrc);
 
   function toggle(next: "before" | "after") {
     if (next === showing) return;
@@ -136,10 +154,12 @@ function BeforeAfter({
         ))}
       </div>
       <div className="overflow-hidden rounded-xl border border-border">
-        <img
-          src={showing === "before" ? before : after}
+        <Image
+          src={visibleSrc}
           alt={showing === "before" ? beforeLabel : afterLabel}
-          className={`w-full object-cover transition-opacity duration-150 ${fading ? "opacity-0" : "opacity-100"}`}
+          width={visibleSize.width}
+          height={visibleSize.height}
+          className={`h-auto w-full object-cover transition-opacity duration-150 ${fading ? "opacity-0" : "opacity-100"}`}
         />
       </div>
     </div>
@@ -170,12 +190,21 @@ function SectionDialogContent({ section }: { section: Section }) {
           <>
             <Separator className="my-1" />
 
-            {section.images.map((img) => (
-              <figure key={img.src} className="flex flex-col gap-1">
-                <img src={img.src} alt={img.caption ?? ""} className="w-full rounded-xl border border-border object-cover" />
-                {img.caption && <figcaption className="text-xs text-muted-foreground">{img.caption}</figcaption>}
-              </figure>
-            ))}
+            {section.images.map((img) => {
+              const size = forgeImageSize(img.src);
+              return (
+                <figure key={img.src} className="flex flex-col gap-1">
+                  <Image
+                    src={img.src}
+                    alt={img.caption ?? ""}
+                    width={size.width}
+                    height={size.height}
+                    className="h-auto w-full rounded-xl border border-border object-cover"
+                  />
+                  {img.caption && <figcaption className="text-xs text-muted-foreground">{img.caption}</figcaption>}
+                </figure>
+              );
+            })}
           </>
         )}
       </DialogBody>
@@ -205,12 +234,15 @@ function MosaicTile({ section, onClick, className = "" }: { section: Section; on
   return (
     <div className={`flex flex-col ${className}`}>
       <button
+        type="button"
         onClick={onClick}
         className="group relative flex-1 overflow-hidden rounded-xl bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
       >
-        <img
+        <Image
           src={section.thumb}
           alt={section.alt}
+          fill
+          sizes="(min-width: 1024px) 33vw, 100vw"
           className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
         {/* Hover scrim — via-smooth for feathered fade */}

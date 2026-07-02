@@ -1,6 +1,6 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import {
@@ -120,7 +120,7 @@ export default function Home() {
               I&apos;m a principal designer at <LinkOut href="https://everfi.com" text="Everfi" className="text-foreground" /> working on
               products, tools, and systems to help drive social good through education.
             </p>
-            <p className="text-balance">
+            <div className="text-balance">
               These things have&nbsp;
               <PreviewCard>
                 <PreviewCardTrigger
@@ -159,7 +159,7 @@ export default function Home() {
                 </PreviewCardPopup>
               </PreviewCard>
               &nbsp;reached more than 45 million learners worldwide.
-            </p>
+            </div>
             <p>
               This is my little slice of the internet.
               <br /> Have a look around.
@@ -230,9 +230,12 @@ export default function Home() {
                 </CardAction>
               </CardHeader>
               {resource.thumbnail && (
-                <img
+                <Image
                   src={resource.thumbnail}
                   alt=""
+                  width={320}
+                  height={180}
+                  sizes="(min-width: 640px) 33vw, 50vw"
                   className="pointer-events-none m-px aspect-video w-[calc(100%-2px)] rounded-md object-contain shadow-border-xs -outline-offset-1 dark:brightness-50 dark:grayscale-50"
                   data-slot="media"
                 />

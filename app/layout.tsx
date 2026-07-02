@@ -1,5 +1,4 @@
 import "@/styles/globals.css";
-import Script from "next/script";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
 import localFont from "next/font/local";
@@ -61,12 +60,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${Departure_Mono.variable} ${Display.variable}`} suppressHydrationWarning>
-      <head>
-        <Script src="https://www.googletagmanager.com/gtag/js?id=UA-100486484-1" strategy="afterInteractive" />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','UA-100486484-1',{send_page_view:false});`}
-        </Script>
-      </head>
       <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
         <ScrollReset />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

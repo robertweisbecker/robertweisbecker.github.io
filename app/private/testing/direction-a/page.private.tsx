@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 /*─────────────────────────────────────────────────────────
  * DIRECTION A — Bento Annotated
  *
@@ -14,6 +12,7 @@
  *─────────────────────────────────────────────────────────*/
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 /* ─── Annotation component ─────────────────────────────── */
@@ -63,11 +62,12 @@ function BentoCell({
 }) {
   return (
     <div className={`group relative overflow-hidden rounded-xl bg-muted ${className}`} tabIndex={0} style={style}>
-      <img
+      <Image
         src={src}
         alt={alt}
+        fill
+        sizes="(min-width: 1024px) 33vw, 100vw"
         className="h-full w-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-        loading="lazy"
       />
       <Annotation position={annotationPos} label={annotationLabel}>
         {annotation}
