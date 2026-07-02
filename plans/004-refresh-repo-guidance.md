@@ -2,8 +2,8 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- README.md AGENTS.md app/private/qa app/api/letterboxd package.json`
-> If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
+> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- README.md AGENTS.md app/private/qa app/api/letterboxd package.json` If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a
+> STOP condition.
 
 ## Status
 
@@ -16,7 +16,8 @@
 
 ## Why this matters
 
-This repo is frequently edited by agents. Stale repo instructions are not harmless: they can send future executors to deleted paths, cause them to miss the current API route, or make them expect a static export directory that the current config does not produce. Keep README and AGENTS aligned with the actual App Router tree and package scripts.
+This repo is frequently edited by agents. Stale repo instructions are not harmless: they can send future executors to deleted paths, cause them to miss the current API route, or make them expect a static export directory that the current config does not produce. Keep README and AGENTS aligned with
+the actual App Router tree and package scripts.
 
 Run this plan after Plan 002 and Plan 003 so documentation reflects the final route/build/API shape instead of intermediate private-route and Letterboxd states.
 

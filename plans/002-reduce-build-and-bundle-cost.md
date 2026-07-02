@@ -2,8 +2,8 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- package.json next.config.ts tsconfig.json app/private app/playground components/header.tsx components/footer.tsx components/ui/button.tsx components/ui/link-button.tsx lib/data`
-> If any in-scope file changed since this plan was written, compare the current state against the live code before proceeding; on a mismatch, update this plan or stop and report.
+> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- package.json next.config.ts tsconfig.json app/private app/playground components/header.tsx components/footer.tsx components/ui/button.tsx components/ui/link-button.tsx lib/data` If any in-scope file changed since this plan was written,
+> compare the current state against the live code before proceeding; on a mismatch, update this plan or stop and report.
 
 ## Status
 
@@ -16,7 +16,8 @@
 
 ## Why this matters
 
-Production build times are high for a personal portfolio/playground because local-only private routes, the monolithic public playground, and shared client boundaries all participate in the production route, type-check, and bundle graphs. The build output itself is not broken, but the current graph shape makes every production build do more work than the public site needs.
+Production build times are high for a personal portfolio/playground because local-only private routes, the monolithic public playground, and shared client boundaries all participate in the production route, type-check, and bundle graphs. The build output itself is not broken, but the current graph
+shape makes every production build do more work than the public site needs.
 
 The product decision is now explicit:
 

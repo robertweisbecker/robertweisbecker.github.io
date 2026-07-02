@@ -2,8 +2,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- package.json`
-> If `package.json` changed since this plan was written, compare the "Current state" excerpt against the live code before proceeding; on a mismatch, treat it as a STOP condition.
+> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- package.json` If `package.json` changed since this plan was written, compare the "Current state" excerpt against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
 
@@ -17,7 +16,8 @@
 
 ## Why this matters
 
-This repo is a personal design-engineering portfolio and playground for React, design systems, animation, and visual experiments. Broad unit/component test infrastructure would add more maintenance overhead than payoff right now. Lint warnings alone are still too narrow, though: TypeScript and production builds catch different failures in App Router routes, MDX imports, generated metadata, and component prop contracts. Add the smallest useful baseline: a named typecheck script and a single check script that runs the cheap non-mutating gates.
+This repo is a personal design-engineering portfolio and playground for React, design systems, animation, and visual experiments. Broad unit/component test infrastructure would add more maintenance overhead than payoff right now. Lint warnings alone are still too narrow, though: TypeScript and
+production builds catch different failures in App Router routes, MDX imports, generated metadata, and component prop contracts. Add the smallest useful baseline: a named typecheck script and a single check script that runs the cheap non-mutating gates.
 
 ## Current state
 
@@ -162,15 +162,24 @@ After adding the scripts, `npm run typecheck` failed with 44 `TS2307` errors on 
 
 **Resolution**: ran `npm run format` once so the new aggregate gate is usable. All changes were formatting-only (no logic edits). Future executors should expect `npm run check` to enforce format going forward.
 
+**Follow-up (same PR)**: aligned editor and CLI formatting so save/format and `npm run format:check` use the same Prettier install and config:
+
+- Pinned `prettier` to `3.9.4` (was `^3`) so CLI and the VS Code extension resolve the same version.
+- Added `.prettierignore` for build artifacts (`.next`, `out`, etc.).
+- Extended `.prettierrc` markdown override to `*.md` as well as `*.mdx` (`printWidth: 300`) so `plans/**` tables match MDX prose width.
+- Pointed `.vscode/settings.json` at `./node_modules/prettier` with `prettier.requireConfig: true` so format-on-save loads `prettier-plugin-tailwindcss` from the repo config instead of a global/default Prettier.
+
+Root cause of the original drift: `plans/*.md` used the default `printWidth: 140` while MDX used `300`, and VS Code was not guaranteed to use the workspace Prettier + Tailwind plugin that `npm run format:check` invokes.
+
 ### Scope reconciliation
 
 The original done criterion "No files outside `package.json` are modified" was not achievable without leaving `npm run typecheck` or `npm run check` red. Files touched beyond `package.json`:
 
-| File / area | Reason |
-| ----------- | ------ |
-| `types/static-asset-imports.d.ts` | Make standalone `tsc` resolve `@/public/**` static image imports |
-| 14 component/style files + 6 `plans/**` markdown files | Pre-existing Prettier drift surfaced by `format:check` |
-| `plans/README.md` | Status row update (required by plan) |
+| File / area                                            | Reason                                                           |
+| ------------------------------------------------------ | ---------------------------------------------------------------- |
+| `types/static-asset-imports.d.ts`                      | Make standalone `tsc` resolve `@/public/**` static image imports |
+| 14 component/style files + 6 `plans/**` markdown files | Pre-existing Prettier drift surfaced by `format:check`           |
+| `plans/README.md`                                      | Status row update (required by plan)                             |
 
 ### Verification results (all exit 0)
 
