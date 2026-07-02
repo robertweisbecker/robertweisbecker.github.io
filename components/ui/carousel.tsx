@@ -10,7 +10,7 @@ import { IconChevronLeft, IconChevronRight, IconPlayerPauseFilled, IconPlayerPla
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Meter, Toolbar } from "@base-ui/react";
+import { Toolbar } from "@base-ui/react";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
 
 const iconTransition: Transition = { type: "spring", stiffness: 600, damping: 30 };
@@ -46,7 +46,6 @@ type CarouselContextProps = {
   selectedSnap: number;
   isPlaying: boolean;
   togglePlay: () => void;
-  autoplayProgress: number;
   autoplayEnabled: boolean;
   isFinished: boolean;
   restartAutoplay: () => void;
@@ -95,9 +94,21 @@ function Carousel({
   const [snaps, setSnaps] = React.useState<number[]>([]);
   const [selectedSnap, setSelectedSnap] = React.useState(0);
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [autoplayProgress, setAutoplayProgress] = React.useState(0);
+  const carouselRootRef = React.useRef<HTMLDivElement | null>(null);
 
   const getAutoplay = React.useCallback(() => (api?.plugins()?.autoplay as AutoplayType | undefined) ?? null, [api]);
+  const writeAutoplayProgress = React.useCallback((progress: number) => {
+    carouselRootRef.current?.style.setProperty("--autoplay-progress", String(progress));
+  }, []);
+  const setCarouselRootRef = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      carouselRootRef.current = node;
+      if (autoplayEnabled) {
+        intersectionRef(node);
+      }
+    },
+    [autoplayEnabled, intersectionRef]
+  );
 
   // User-initiated navigation: reset autoplay's timer so the new slide gets a
   // fresh delay instead of inheriting the previous slide's countdown.
@@ -171,10 +182,10 @@ function Carousel({
     const onPlay = () => setIsPlaying(true);
     const onStop = () => {
       setIsPlaying(false);
-      setAutoplayProgress(0);
+      writeAutoplayProgress(0);
     };
     const onAutoplaySelect = (emblaApi: EmblaCarouselType, { detail }: { detail: { sourceSnap: number; targetSnap: number } }) => {
-      setAutoplayProgress(0);
+      writeAutoplayProgress(0);
       // Non-loop: intercept autoplay's wrap from last→0 and stop on the last slide.
       // The library calls startAutoplay() right after this event fires, so defer via
       // microtask to override. goTo(..., true) is instant and runs before paint.
@@ -195,7 +206,7 @@ function Carousel({
       api.off("autoplay:stop", onStop);
       api.off("autoplay:select", onAutoplaySelect);
     };
-  }, [api, getAutoplay, isLoop]);
+  }, [api, getAutoplay, isLoop, writeAutoplayProgress]);
 
   // Drive the progress meter only while actually playing.
   React.useEffect(() => {
@@ -205,12 +216,12 @@ function Carousel({
     let rafId = 0;
     const tick = () => {
       const t = plug.timeUntilNext();
-      setAutoplayProgress(t !== null ? ((delay - t) / delay) * 100 : 0);
+      writeAutoplayProgress(t !== null ? ((delay - t) / delay) * 100 : 0);
       rafId = requestAnimationFrame(tick);
     };
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [delay, getAutoplay, isPlaying]);
+  }, [delay, getAutoplay, isPlaying, writeAutoplayProgress]);
 
   // Lazy autoplay: only play while the carousel is in view (and user hasn't paused).
   React.useEffect(() => {
@@ -247,7 +258,6 @@ function Carousel({
       selectedSnap,
       isPlaying,
       togglePlay,
-      autoplayProgress,
       autoplayEnabled,
       isFinished,
       restartAutoplay,
@@ -265,7 +275,6 @@ function Carousel({
       selectedSnap,
       isPlaying,
       togglePlay,
-      autoplayProgress,
       autoplayEnabled,
       isFinished,
       restartAutoplay,
@@ -275,7 +284,7 @@ function Carousel({
   return (
     <CarouselContext.Provider value={carouselContextValue}>
       <div
-        ref={autoplayEnabled ? intersectionRef : undefined}
+        ref={setCarouselRootRef}
         onKeyDownCapture={handleKeyDown}
         data-orientation={orientation}
         className={cn(
@@ -403,7 +412,7 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
 }
 
 function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolbar.Group>) {
-  const { snaps, selectedSnap, goTo, autoplayEnabled, isPlaying, autoplayProgress } = useCarousel();
+  const { snaps, selectedSnap, goTo, autoplayEnabled, isPlaying } = useCarousel();
 
   return (
     <Toolbar.Group
@@ -437,21 +446,20 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
             )}
           >
             {autoplayEnabled && isActive && (
-              <Meter.Root
-                value={autoplayProgress}
-                min={0}
-                max={100}
-                className="absolute inset-0 overflow-hidden"
+              <div
+                role="progressbar"
                 aria-label="Autoplay progress"
+                aria-hidden="true"
+                className="absolute inset-0 overflow-hidden rounded-full"
               >
-                <Meter.Track className="size-full overflow-hidden rounded-full">
-                  <Meter.Indicator
-                    className={cn("min-w-px rounded-full bg-white duration-0", isFillingSlide ? "transition-[width]" : "transition-none")}
-                    style={{ width: `${autoplayProgress}%` }}
-                  />
-                </Meter.Track>
-                <Meter.Value className="sr-only" />
-              </Meter.Root>
+                <div
+                  className={cn(
+                    "h-full origin-left rounded-full bg-white duration-0",
+                    isFillingSlide ? "transition-transform" : "transition-none"
+                  )}
+                  style={{ transform: "scaleX(calc(var(--autoplay-progress, 0) / 100))" }}
+                />
+              </div>
             )}
           </Toolbar.Button>
         );

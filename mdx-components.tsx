@@ -23,10 +23,17 @@ import { Badge } from "./components/ui/badge";
 import { ColorCode } from "./components/ui/color-code";
 import { TextReveal } from "@/components/animation/shared";
 
-function createHeading(level: number) {
+function getDedupedHeadingId(text: string, usedIds: Map<string, number>) {
+  const id = slugify(text);
+  const count = usedIds.get(id) ?? 0;
+  usedIds.set(id, count + 1);
+  return count === 0 ? id : `${id}-${count + 1}`;
+}
+
+function createHeading(level: number, usedIds: Map<string, number>) {
   const HeadingTag = `h${level}` as "h2" | "h3" | "h4";
   const Heading = ({ children }: { children?: React.ReactNode }) => {
-    const slug = slugify(String(children));
+    const slug = getDedupedHeadingId(String(children), usedIds);
     return (
       <HeadingTag id={slug}>
         <a href={`#${slug}`} className="anchor group/anchor relative">
@@ -43,6 +50,8 @@ function createHeading(level: number) {
 }
 
 export function useMDXComponents(): MDXComponents {
+  const usedHeadingIds = new Map<string, number>();
+
   return {
     ColorPalette,
     ColorSwatch,
@@ -75,9 +84,9 @@ export function useMDXComponents(): MDXComponents {
       const code = String(codeElement?.props?.children ?? "").replace(/\n$/, "");
       return <CodeBlock {...props} code={code} language={language as CodeBlockProps["language"]} title={language as string} />;
     },
-    h2: createHeading(2),
-    h3: createHeading(3),
-    h4: createHeading(4),
+    h2: createHeading(2, usedHeadingIds),
+    h3: createHeading(3, usedHeadingIds),
+    h4: createHeading(4, usedHeadingIds),
     img: (props) => {
       const { src, alt, className, width, height, loading } = props as React.ImgHTMLAttributes<HTMLImageElement>;
       if (!src || typeof src !== "string") return null;

@@ -48,5 +48,8 @@ export function clipPathEditorReducer(state: ClipPathEditorState, action: ClipPa
       return { ...state, isDragging: action.isDragging };
     case "reset":
       return DEFAULT_CLIP_PATH_EDITOR_STATE;
+    default:
+      void (action satisfies never);
+      return state;
   }
 }

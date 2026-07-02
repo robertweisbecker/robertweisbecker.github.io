@@ -10,7 +10,11 @@ export function parsePostDateString(dateStr: string): Date | null {
     const day = Number(us[2]);
     const year = Number(us[3]);
     if (month >= 0 && month <= 11 && day >= 1 && day <= 31 && year >= 1) {
-      return new Date(Date.UTC(year, month, day, 12, 0, 0));
+      const date = new Date(Date.UTC(year, month, day, 12, 0, 0));
+      if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month || date.getUTCDate() !== day) {
+        return null;
+      }
+      return date;
     }
   }
   const iso = /^\d{4}-\d{2}-\d{2}/.exec(trimmed);
