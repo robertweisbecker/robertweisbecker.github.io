@@ -58,7 +58,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
 - The earlier robots-only private route plan was superseded: private QA/prototype routes should not ship in production, so noindex metadata alone is the wrong target.
 - **Plan 001 executed** (PR #12, branch `cursor/lightweight-verification-baseline-5d22`, commit `8fecd46`): added `typecheck` and `check` scripts. Two blockers surfaced during verification:
   - Standalone `tsc` failed on `@/public/**` image imports while `next build` passed; fixed with `types/static-asset-imports.d.ts`.
-  - `format:check` failed on 20 pre-existing files; fixed with a one-time `npm run format` (formatting-only). Future plans can rely on `npm run check`.
+  - `format:check` failed on 20 pre-existing files; fixed with a one-time `npm run format` (formatting-only). Follow-up aligned `.prettierrc`, `.prettierignore`, VS Code settings, and pinned `prettier@3.9.4` so format-on-save matches `npm run format:check`.
 
 ## Findings Considered and Rejected
 
