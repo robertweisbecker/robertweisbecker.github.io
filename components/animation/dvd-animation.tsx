@@ -19,6 +19,7 @@ const DEFAULT_LOGO_ASPECT_RATIO = LOGO_VIEW_BOX_WIDTH / LOGO_VIEW_BOX_HEIGHT;
 const DEFAULT_DURATION = 90;
 const DEFAULT_LOGO_COLORS = ["#0ff", "#ff0", "#0ff", "#f0f", "#0f0"];
 const DEFAULT_MINI_BALLOON_COLORS = ["#fafafa", "#e4e4e7", "#d4d4d8", "#a1a1aa"];
+const SCORE_PULSE_DURATION_MS = 650;
 const getInitialIsPlaying = () => (typeof window === "undefined" ? true : !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
 // These preserve the original DVD-style motion relationship:
@@ -51,6 +52,13 @@ type MiniBalloon = {
   delay: number;
   duration: number;
   color: string;
+};
+
+type ScoreAnimationState = {
+  previousCornerHits: number;
+  popKey: number;
+  pulseKey: number;
+  settledPulseKey: number;
 };
 
 function getAnimationTiming(duration: number): AnimationTiming {
@@ -393,10 +401,13 @@ export function DvdAnimationScore({
 }: DvdAnimationScoreProps) {
   const { cornerHits } = useDvdAnimationContext("DvdAnimationScore");
   const scoreRef = React.useRef<HTMLDivElement | null>(null);
-  const previousCornerHitsRef = React.useRef(cornerHits);
   const [miniBalloons, setMiniBalloons] = React.useState<MiniBalloon[]>([]);
-  const [isPulsing, setIsPulsing] = React.useState(false);
-  const [scorePopKey, setScorePopKey] = React.useState(0);
+  const [scoreAnimationState, setScoreAnimationState] = React.useState<ScoreAnimationState>(() => ({
+    previousCornerHits: cornerHits,
+    popKey: 0,
+    pulseKey: 0,
+    settledPulseKey: 0,
+  }));
   const balloonTimeoutsRef = React.useRef<number[]>([]);
 
   React.useEffect(() => {
@@ -440,26 +451,48 @@ export function DvdAnimationScore({
     balloonTimeoutsRef.current.push(timeoutId);
   }, [burstColors]);
 
-  React.useEffect(() => {
-    if (cornerHits <= previousCornerHitsRef.current) {
-      previousCornerHitsRef.current = cornerHits;
-      return;
-    }
-
-    previousCornerHitsRef.current = cornerHits;
-    setScorePopKey((currentKey) => currentKey + 1);
-    setIsPulsing(true);
-
-    const timeout = window.setTimeout(() => {
-      setIsPulsing(false);
-    }, 650);
-
+  const createScoreBurst = React.useEffectEvent(() => {
     if (showBurst) {
       createMiniBalloonBurst();
     }
+  });
+
+  if (cornerHits !== scoreAnimationState.previousCornerHits) {
+    const cornerHitsAdvanced = cornerHits > scoreAnimationState.previousCornerHits;
+
+    setScoreAnimationState({
+      previousCornerHits: cornerHits,
+      popKey: cornerHitsAdvanced ? scoreAnimationState.popKey + 1 : scoreAnimationState.popKey,
+      pulseKey: cornerHitsAdvanced ? scoreAnimationState.pulseKey + 1 : scoreAnimationState.pulseKey,
+      settledPulseKey: scoreAnimationState.settledPulseKey,
+    });
+  }
+
+  const isPulsing = scoreAnimationState.pulseKey !== scoreAnimationState.settledPulseKey;
+  const scorePopKey = scoreAnimationState.popKey;
+
+  React.useEffect(() => {
+    if (!isPulsing) return;
+
+    const pulseKey = scoreAnimationState.pulseKey;
+
+    const timeout = window.setTimeout(() => {
+      setScoreAnimationState((currentState) => {
+        if (currentState.pulseKey !== pulseKey || currentState.settledPulseKey === pulseKey) {
+          return currentState;
+        }
+
+        return {
+          ...currentState,
+          settledPulseKey: pulseKey,
+        };
+      });
+    }, SCORE_PULSE_DURATION_MS);
+
+    createScoreBurst();
 
     return () => window.clearTimeout(timeout);
-  }, [cornerHits, createMiniBalloonBurst, showBurst]);
+  }, [isPulsing, scoreAnimationState.pulseKey]);
 
   return (
     <>

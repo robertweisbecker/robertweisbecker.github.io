@@ -35,11 +35,13 @@
 
 ## React Doctor Tracking
 
-- Current React Doctor score: 46/100
-- Last checked `master` commit: `fad62256673a`
-- Last checked at: 2026-07-02 (user-provided baseline; no local React Doctor run in this setup turn)
+- Current React Doctor score: 53/100
+- Last checked `master` commit: `34a48dfdd922`
+- Last checked at: 2026-07-02T16:02:01-07:00
 - Command: `npx react-doctor@latest --verbose`
-- After each new `master` commit, run React Doctor, report violations in Markdown with links to local files and line numbers, then update this section with the latest score, commit, and run timestamp.
+- Latest run log: `.scratch/react-doctor/latest-run.md`
+- Major issue policy: report only React Doctor diagnostics with `severity: error`; keep warning totals as counts only.
+- After each new `master` commit, run React Doctor, report major violations in Markdown with links to local files and line numbers, update `.scratch/react-doctor/latest-run.md` with the latest major issues, then update this section with the latest score, commit, and run timestamp.
 
 ## Refactoring Notes
 

@@ -304,8 +304,8 @@ export function PixelMorph({
     >
       {pairs.map((pair, index) => (
         <motion.rect
-          key={`${pair.from.index}-${pair.to.index}`}
           {...(dots ? { rx: 1, x: 0.05, y: 0.05, width: 0.9, height: 0.9 } : { width: 1, height: 1 })}
+          key={`${pair.from.index}-${pair.to.index}`}
           fill="currentColor"
           initial={false}
           animate={getAnimateTarget(pair, active, strategy, animation, shouldReduceMotion)}

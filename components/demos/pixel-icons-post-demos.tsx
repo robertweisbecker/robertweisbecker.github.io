@@ -253,7 +253,7 @@ export function PixelAnimationOptionsDemo() {
   return (
     <div className="grid gap-2 md:grid-cols-3">
       {animationOptions.map((option) => (
-        <AnimationOptionCard key={option.animation} {...option} />
+        <AnimationOptionCard {...option} key={option.animation} />
       ))}
     </div>
   );
