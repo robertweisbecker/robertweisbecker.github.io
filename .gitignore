@@ -44,7 +44,9 @@ AGENTS.md
 .cursorignore
 skills-lock.json
 .cursor
-
+.scratch
+/.scratch
+/plans/
 
 # typescript
 *.tsbuildinfo
