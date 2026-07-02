@@ -23,8 +23,8 @@ Not audited: full browser rendering, production Vercel behavior, generated `.nex
 | --- | ------------------------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ---- | -------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | Add a lightweight verification baseline before more refactors | DX                        | This personal portfolio/playground does not need broad tests by default, but lint warnings alone miss TypeScript, route, MDX, and production-build failures.                                          | S      | LOW  | **RESOLVED** on `b72fe64` — `npm run typecheck`, `npm run check`                                                                 |
 | 2   | Reduce build time and shared bundle cost                      | performance / DX          | Production builds are high for a personal portfolio because private QA/prototype routes still ship, `/playground` is monolithic, and shared client boundaries pull too much into common route chunks. | L      | MED  | **RESOLVED** on `cursor/reduce-build-bundle-cost-5d22` — dev-only private routes, playground split, header/footer client islands |
-| 3   | Cache and normalize the Letterboxd feed route                 | performance / correctness | The homepage calls `/api/letterboxd`; each route hit currently parses the remote RSS URL directly and returns loosely typed external URLs/rating values.                                              | M      | MED  | `app/page.tsx:369-380`, `components/demos/letterboxd.tsx:13-72`, `app/api/letterboxd/route.ts:15-93`, `next.config.ts:4-11`      |
-| 4   | Refresh stale repo guidance after route/build/API changes     | docs / DX                 | Agent guidance still points executors at deleted paths and stale route/build facts; after private routes become dev-only and playground splits, docs should describe the final shape.                 | S      | LOW  | `AGENTS.md`, `README.md`, `app/private/qa/page.tsx`, `app/api/letterboxd/route.ts`, `package.json`                               |
+| 3   | Cache and normalize the Letterboxd feed route                 | performance / correctness | The homepage calls `/api/letterboxd`; each route hit currently parses the remote RSS URL directly and returns loosely typed external URLs/rating values.                                              | M      | MED  | **RESOLVED** on `cursor/execute-plans-003-004-5d22` — cached fetch, normalized URLs/ratings, explicit Cache-Control              |
+| 4   | Refresh stale repo guidance after route/build/API changes     | docs / DX                 | Agent guidance still points executors at deleted paths and stale route/build facts; after private routes become dev-only and playground splits, docs should describe the final shape.                 | S      | LOW  | **RESOLVED** on `cursor/execute-plans-003-004-5d22` — AGENTS.md and README.md aligned with current routes/build/API              |
 
 ## Direction Options
 
@@ -37,15 +37,14 @@ Not audited: full browser rendering, production Vercel behavior, generated `.nex
 | ---- | -------------------------------------------- | -------- | ------ | ------------- | ------ |
 | 001  | Add a lightweight verification baseline      | P1       | S      | -             | DONE   |
 | 002  | Reduce build and bundle cost                 | P1       | L      | 001           | DONE   |
-| 003  | Cache and normalize the Letterboxd API route | P2       | M      | 001           | TODO   |
-| 004  | Refresh stale repo guidance                  | P2       | S      | 001, 002, 003 | TODO   |
+| 003  | Cache and normalize the Letterboxd API route | P2       | M      | 001           | DONE   |
+| 004  | Refresh stale repo guidance                  | P2       | S      | 001, 002, 003 | DONE   |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJECTED (with one-line rationale)
 
 ## Dependency Notes
 
-- Plan 001 is **DONE** on master (`b72fe64`). Plan 002 is **DONE** on `cursor/reduce-build-bundle-cost-5d22`. Plan 003 should use `npm run check` before and after implementation.
-- Plan 004 should run after Plan 003 so README and AGENTS document the final route/build/API shape.
+- Plan 001 is **DONE** on master (`b72fe64`). Plan 002 is **DONE** on master (`8f76986`). Plans 003 and 004 are **DONE** on `cursor/execute-plans-003-004-5d22`.
 - Do not add a test runner by default. Add tests later only for pure logic that repeatedly regresses or becomes hard to verify through typecheck/build/browser QA.
 
 ## Reconcile Notes
@@ -60,6 +59,7 @@ Status values: TODO | IN PROGRESS | DONE | BLOCKED (with one-line reason) | REJE
   - Standalone `tsc` failed on `@/public/**` image imports while `next build` passed; fixed with `types/static-asset-imports.d.ts`.
   - `format:check` failed on 20 pre-existing files; fixed with a one-time `npm run format` (formatting-only). Follow-up aligned `.prettierrc`, `.prettierignore`, VS Code settings, and pinned `prettier@3.9.4` so format-on-save matches `npm run format:check`.
 - **Plan 002 executed** (branch `cursor/reduce-build-bundle-cost-5d22`, 2026-07-01): private routes dev-only via `.private.tsx`; playground split into index + 6 section routes (`motion-systems`, `pixel-demos`, `interaction-components`, `media-comparison`, `buttons`, `visual-details`); header/footer client graph reduced. Production build: 49 static pages (was 57), no `/private/**` routes; `/playground` index 1200 kB first-load JS (was 1897 kB).
+- **Plans 003 and 004 executed** (branch `cursor/execute-plans-003-004-5d22`, 2026-07-01): Letterboxd API uses cached `fetch` with 1h revalidation, normalized poster/URL/rating fields, and explicit `Cache-Control`; `lists` removed from response (no callers). AGENTS.md and README.md updated for private QA paths, dev-only `/private/**`, playground child routes, Letterboxd API route, and current build/check scripts.
 
 ## Findings Considered and Rejected
 

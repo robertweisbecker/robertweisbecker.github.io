@@ -3,13 +3,13 @@
 - Persist browser preview CSS/Tailwind adjustments back into the generator's TSX (e.g., padding/breathing room).
 - Prefer Base UI + existing design-system wrappers (e.g., `Switch`, `Autocomplete`, `FieldSet`) over native inputs in this codebase.
 - When a "start corner" changes for clip-path curve generators, apply the full preset set of parameters (`from`, `destX/destY`, `ctrlX/ctrlY`) to avoid degenerate straight-line paths.
-- **Always add a QA example to `app/components/component-demos.tsx` (and a sidebar link in `app/components/page.tsx` if not already present) whenever a new component is created or a major feature is added to an existing one.** For plugin-style features (e.g. carousel variants), add a labeled sub-example per variant inside the existing section rather than a new top-level section.
+- **Always add a QA example to `app/private/qa/component-demos.tsx` (and a TOC/sidebar entry in `app/private/qa/page.private.tsx` via `CUSTOM_TOC_ITEMS` or `UI_TOC_ITEMS` if not already present) whenever a new component is created or a major feature is added to an existing one.** For plugin-style features (e.g. carousel variants), add a labeled sub-example per variant inside the existing section rather than a new top-level section.
 - Do not remove valid Tailwind v4.3 custom/arbitrary variant patterns as a stale-CSS workaround; restore the intended syntax and verify the CSS graph instead.
 
 ## Learned Workspace Facts
 
-- This is a static Next.js 16 App Router site with MDX content, no database, no API routes, and no required environment variables.
-- Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, and `npm run format:check`.
+- This is a mostly static Next.js 16 App Router site with MDX content, no database, and no required environment variables. The only current API route is `app/api/letterboxd/route.ts`, which backs the homepage Letterboxd widget.
+- Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, `npm run format:check`, `npm run typecheck`, `npm run typecheck:build`, `npm run check`, and `npm run analyze:build`.
 - `npm run build` produces the static site output with the default Next/Turbopack production build, while `npm run dev:fresh` clears `.next` before starting dev.
 - Explicit webpack fallback scripts remain available as `npm run dev:webpack`, `npm run dev:fresh:webpack`, `npm run build:webpack`, and `npm run preview:webpack`.
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
@@ -22,7 +22,9 @@
 - Pixel icon morphing is implemented in `components/pixel-icon-morph.tsx` and is intentionally limited to `MorphablePixelIconName` icons from `components/icons-pixel.tsx`: 11x11 `createPixelIcon(...)` data icons with exactly 28 points. Non-28 data icons remain normal pixel icons but are excluded from `morphablePixelIconNames`.
 - `PixelIconMorph` renders exactly 28 `motion.rect` elements. Parent components own interaction state and pass `active`; the component should not infer pressed/active state from parent DOM.
 - Pixel morph pairing strategies are `match`, `nearest`, `reading`, `radial`, `scatter`, and `compress`; animation types are `linear`, `ease`, and `spring`. `match` is the default and should pin rects with identical coordinates before nearest-matching the remaining rects. Keep scatter/compress as strategies, not animation types, and avoid spring multi-keyframes for midpoint strategies.
-- Pixel morph demos are post-specific: `components/demos/pixel-icon-morph-visualizer.tsx` renders directly in `app/posts/pixel-icons/page.tsx` without a `Demo` wrapper, while `components/demos/pixel-icon-morph-toggles.tsx` is wrapped in `Demo` on that post. Do not add these pixel morph demos to `app/components/component-demos.tsx` or the components sidebar unless explicitly requested.
+- `/private/**` is dev-only (`.private.tsx` route convention) and does not appear in production builds.
+- `/playground` is a lightweight index plus six child routes: `motion-systems`, `pixel-demos`, `interaction-components`, `media-comparison`, `buttons`, and `visual-details`.
+- Pixel morph demos are post-specific: `components/demos/pixel-icon-morph-visualizer.tsx` renders directly in `app/posts/pixel-icons/page.tsx` without a `Demo` wrapper, while `components/demos/pixel-icon-morph-toggles.tsx` is wrapped in `Demo` on that post. Do not add these pixel morph demos to `app/private/qa/component-demos.tsx` or the private QA TOC unless explicitly requested.
 - In the pixel morph visualizer, the left card contains the interactive icon, sequence dots, picker, and `CardAction` play/clear buttons; the right card contains controls. Use `ToggleGroup` for succinct controls and `Select` for more verbose ones to avoid truncation. Speed values are intentionally inverse duration labels: `1x` is 200ms, `0.5x` is 400ms, and `0.25x` is 800ms.
 - iOS/Safari viewport color is intentionally handled in two layers: static `viewport.themeColor` in `app/layout.tsx` for the pre-JS paint, then the root `Theme` provider updates all `meta[name="theme-color"]` tags from the computed `document.body` background color. Do not replace this with a hard-coded light/dark `next-themes` updater unless the CSS-token-based sync breaks.
 - Unused public media/assets removed during the 2026-07 cleanup were backed up outside the repo at `/Users/robertweisbecker/Desktop/bob-fyi-unused-component-assets-2026-07-01/`, with videos under its `videos/` subfolder.
@@ -54,7 +56,7 @@
 ### Production build bundler fallback
 
 - The forced webpack production path was retired on 2026-07-01 after dependency updates to Next `16.2.9`, Tailwind `4.3.2`, and `@tailwindcss/postcss` `4.3.2`.
-- Current evidence: after clearing `.next`, plain `npx next build` completed successfully with Turbopack: compile in 62s, TypeScript in 29.6s, and static generation for 57/57 pages in 5.2s.
+- Current evidence: after clearing `.next`, plain `npx next build` completed successfully with Turbopack: compile in 62s, TypeScript in 29.6s, and static generation for 49 static pages in 5.2s (no `/private/**` routes in production).
 - Keep explicit webpack scripts for fallback testing only: `npm run build:webpack` and `npm run preview:webpack`.
 - If Turbopack production builds regress, compare against `npm run build:webpack`, clear `.next`, and update this file with the new evidence before making webpack the default again.
 

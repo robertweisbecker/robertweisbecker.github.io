@@ -12,7 +12,7 @@
 - **Risk**: LOW
 - **Depends on**: `plans/001-add-verification-baseline.md`, `plans/002-reduce-build-and-bundle-cost.md`, `plans/003-cache-normalize-letterboxd-api.md`
 - **Category**: docs / DX
-- **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Completed at**: branch `cursor/execute-plans-003-004-5d22`, 2026-07-01
 
 ## Why this matters
 
@@ -34,7 +34,7 @@ Run this plan after Plan 002 and Plan 003 so documentation reflects the final ro
 - The live QA surface is under `app/private/qa`.
 
 ```tsx
-// app/private/qa/page.tsx:629-634
+// app/private/qa/page.private.tsx:629-634
 const QA_TOC: TocItem[] = [
   { id: "ui-components", text: "UI components", depth: 2 },
   ...UI_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
@@ -128,7 +128,7 @@ Generates a static export to the `out` directory.
 Update the QA preference in `AGENTS.md` to point at:
 
 - `app/private/qa/component-demos.tsx` for custom component demos when running local development.
-- `app/private/qa/page.tsx` for adding the TOC/sidebar entry in `CUSTOM_TOC_ITEMS` or `UI_TOC_ITEMS` when running local development.
+- `app/private/qa/page.private.tsx` for adding the TOC/sidebar entry in `CUSTOM_TOC_ITEMS` or `UI_TOC_ITEMS` when running local development.
 
 Keep the existing plugin-style guidance about labeled sub-examples.
 
@@ -207,7 +207,7 @@ Expected: all exit 0.
 ## Done Criteria
 
 - [ ] `AGENTS.md` points QA additions at `app/private/qa/component-demos.tsx`.
-- [ ] `AGENTS.md` points sidebar/TOC additions at `app/private/qa/page.tsx` and names `CUSTOM_TOC_ITEMS` / `UI_TOC_ITEMS`.
+- [ ] `AGENTS.md` points sidebar/TOC additions at `app/private/qa/page.private.tsx` and names `CUSTOM_TOC_ITEMS` / `UI_TOC_ITEMS`.
 - [ ] If Plan 002 has landed, `AGENTS.md` documents `/private/**` as dev-only and absent from production builds.
 - [ ] `AGENTS.md` no longer claims there are no API routes.
 - [ ] `README.md` no longer claims `npm run build` writes a static export to `out`.

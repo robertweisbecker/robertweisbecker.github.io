@@ -12,6 +12,12 @@
 ## Local Development
 
 ```
+npm install
+```
+
+Installs project dependencies.
+
+```
 npm run dev
 ```
 
@@ -21,7 +27,25 @@ Starts the Next.js dev server on [http://localhost:3000](http://localhost:3000) 
 npm run build
 ```
 
-Generates a static export to the `out` directory.
+Builds the Next.js production output with the default Next/Turbopack build (`next build`).
+
+```
+npm run build:webpack
+```
+
+Builds with the explicit webpack fallback (`next build --webpack`).
+
+```
+npm run typecheck
+```
+
+Runs TypeScript type checking without emitting files.
+
+```
+npm run check
+```
+
+Runs typecheck, lint, and format check in sequence.
 
 ```
 npm run lint
@@ -34,6 +58,12 @@ npm run format
 ```
 
 Formats all files with Prettier.
+
+```
+npm run format:check
+```
+
+Checks formatting without writing changes.
 
 ## Deployment
 
