@@ -12,7 +12,7 @@
 - **Risk**: LOW
 - **Depends on**: `plans/001-add-verification-baseline.md`, `plans/002-reduce-build-and-bundle-cost.md`, `plans/003-cache-normalize-letterboxd-api.md`
 - **Category**: docs / DX
-- **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Completed at**: branch `cursor/execute-plans-003-004-5d22`, 2026-07-01
 
 ## Why this matters
 

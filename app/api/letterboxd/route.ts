@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Parser from "rss-parser";
 
 const LETTERBOXD_RSS_URL = "https://letterboxd.com/weisbecker/rss/";
+const LETTERBOXD_REVALIDATE_SECONDS = 60 * 60;
 
 const parser = new Parser({
   customFields: {
@@ -9,32 +10,47 @@ const parser = new Parser({
   },
 });
 
-const MAX_LISTS = 3;
-const MAX_LIST_FILMS = 5;
-
 function getPosterUrl(description = "") {
   return description.match(/<img[^>]+src="([^"]+)"/)?.[1] ?? "";
 }
 
-function decodeText(text = "") {
-  return text
-    .replaceAll("&amp;", "&")
-    .replaceAll("&quot;", '"')
-    .replaceAll("&#39;", "'")
-    .replaceAll("&ndash;", "–")
-    .replaceAll("&mdash;", "—");
+function parseRating(value: unknown): number | undefined {
+  const rating = typeof value === "number" ? value : Number(value);
+  return Number.isFinite(rating) ? rating : undefined;
 }
 
-function getListFilms(description = "") {
-  return [...description.matchAll(/<li>\s*<a href="(https:\/\/letterboxd\.com\/film\/[^"]+)">([^<]+)<\/a>/g)].map((match) => ({
-    url: match[1],
-    title: decodeText(match[2]),
-  }));
+function normalizeLetterboxdUrl(value: unknown): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:" || url.hostname !== "letterboxd.com") {
+      return undefined;
+    }
+
+    return url.toString();
+  } catch {
+    return undefined;
+  }
 }
 
-function getListFilmCount(description = "", previewCount = 0) {
-  const plusMore = Number(description.match(/\.\.\.plus\s+(\d+)\s+more/)?.[1] ?? 0);
-  return previewCount + plusMore;
+function normalizePosterUrl(value: string): string | undefined {
+  if (!value) {
+    return undefined;
+  }
+
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "https:" || url.hostname !== "a.ltrbxd.com") {
+      return undefined;
+    }
+
+    return url.toString();
+  } catch {
+    return undefined;
+  }
 }
 
 function formatShortDate(date?: string) {
@@ -58,37 +74,42 @@ function formatShortDate(date?: string) {
   }).format(parsedDate);
 }
 
+async function fetchLetterboxdFeed() {
+  const response = await fetch(LETTERBOXD_RSS_URL, {
+    next: { revalidate: LETTERBOXD_REVALIDATE_SECONDS },
+  });
+
+  if (!response.ok) {
+    throw new Error("Letterboxd feed request failed");
+  }
+
+  return parser.parseString(await response.text());
+}
+
 export async function GET() {
   try {
-    const feed = await parser.parseURL(LETTERBOXD_RSS_URL);
+    const feed = await fetchLetterboxdFeed();
     const films = feed.items
       .filter((item) => item["letterboxd:filmTitle"])
       .map((item) => ({
         title: item["letterboxd:filmTitle"] || item.title || "Untitled",
         year: item["letterboxd:filmYear"],
-        rating: item["letterboxd:memberRating"],
+        rating: parseRating(item["letterboxd:memberRating"]),
         watchedDate: formatShortDate(String(item["letterboxd:watchedDate"])),
         rewatch: item["letterboxd:rewatch"] === "Yes",
-        posterUrl: getPosterUrl(item.content || item.contentSnippet),
-        url: item.link,
+        posterUrl: normalizePosterUrl(getPosterUrl(item.content || item.contentSnippet)),
+        url: normalizeLetterboxdUrl(item.link),
       }))
       .filter((film) => film.posterUrl);
 
-    const listItems = feed.items.filter((item) => String(item.guid || "").startsWith("letterboxd-list-")).slice(0, MAX_LISTS);
-    const lists = listItems.map((item) => {
-      const description = item.content || item.contentSnippet || "";
-      const listFilms = getListFilms(description);
-
-      return {
-        title: item.title || "Untitled list",
-        url: item.link,
-        updatedDate: formatShortDate(item.pubDate),
-        filmCount: getListFilmCount(description, listFilms.length),
-        previewFilms: listFilms.slice(0, MAX_LIST_FILMS),
-      };
-    });
-
-    return NextResponse.json({ films, lists });
+    return NextResponse.json(
+      { films },
+      {
+        headers: {
+          "Cache-Control": `public, s-maxage=${LETTERBOXD_REVALIDATE_SECONDS}, stale-while-revalidate=${LETTERBOXD_REVALIDATE_SECONDS}`,
+        },
+      }
+    );
   } catch {
     return NextResponse.json({ error: "Unable to load Letterboxd feed." }, { status: 500 });
   }

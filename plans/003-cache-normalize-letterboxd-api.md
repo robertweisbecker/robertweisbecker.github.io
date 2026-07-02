@@ -12,7 +12,7 @@
 - **Risk**: MED
 - **Depends on**: `plans/001-add-verification-baseline.md`
 - **Category**: performance / correctness
-- **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Completed at**: branch `cursor/execute-plans-003-004-5d22`, 2026-07-01
 
 ## Why this matters
 
