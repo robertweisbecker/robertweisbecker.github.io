@@ -24,10 +24,22 @@ npm run dev
 Starts the Next.js dev server on [http://localhost:3000](http://localhost:3000) with hot reload.
 
 ```
+npm run dev:fresh
+```
+
+Clears `.next` before starting the Next.js dev server.
+
+```
 npm run build
 ```
 
 Builds the Next.js production output with the default Next/Turbopack build (`next build`).
+
+```
+npm run analyze:build
+```
+
+Reports build output diagnostics from the latest production build.
 
 ```
 npm run build:webpack
@@ -42,10 +54,18 @@ npm run typecheck
 Runs TypeScript type checking without emitting files.
 
 ```
+npm run typecheck:build
+```
+
+Runs the production build graph TypeScript check.
+
+```
 npm run check
 ```
 
 Runs typecheck, lint, and format check in sequence.
+
+CI runs `npm run check && npm run build` on every push to `master` and every pull request. Vercel deploys independently, so a red check means `master` deployed unverified; fix forward.
 
 ```
 npm run lint
