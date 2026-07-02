@@ -69,3 +69,17 @@
 - **Tracked upstream:** [vercel/next.js #79149](https://github.com/vercel/next.js/issues/79149), [tailwindlabs/tailwindcss #17977](https://github.com/tailwindlabs/tailwindcss/issues/17977), and the upstream cssnano fix path [cssnano/cssnano #1702](https://github.com/cssnano/cssnano/pull/1702).
 - **Current verification:** The default `npm run build` now uses Turbopack and emits `@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0%}` under `.next/static/chunks/*.css`. The webpack/cssnano bug still matters when using `npm run build:webpack`.
 - **Workaround:** Keep an explicit post-Tailwind override such as `:where(.bg-conic, [class*="bg-conic/"]) { --tw-gradient-from-position: 0%; }` while webpack fallback builds are still used for comparison. Reconsider it only after production browser QA confirms conic gradients render on the default Turbopack build and fallback webpack builds no longer emit `initial-value:0`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs are tracked as local markdown files under `.scratch/<feature-slug>/`; external PRs are not a triage surface. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The default labels are used except AFK-ready work is `yo-agent` and human-ready work is `yo-bob`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This repo uses a single-context layout with root `CONTEXT.md` and root `docs/adr/`. See `docs/agents/domain.md`.
