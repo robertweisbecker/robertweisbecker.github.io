@@ -4,7 +4,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { animate, useMotionValue, useMotionValueEvent } from "motion/react";
-import { ArrowRotateLeft } from "@gravity-ui/icons";
+import { IconRotateClockwise } from "@tabler/icons-react";
 
 export {
   MotionText,
@@ -134,7 +134,7 @@ export function PixelReveal({
             "squircle absolute inset-e-1 bottom-1 scale-95 opacity-0 transition-transform duration-100 ease-out-quad group-hover:scale-100 group-hover:opacity-100"
           )}
         >
-          <ArrowRotateLeft />
+          <IconRotateClockwise />
         </Button>
       ) : null}
       <div
@@ -146,29 +146,5 @@ export function PixelReveal({
         {children}
       </div>
     </div>
-  );
-}
-
-export function GlitchFilter({ offsetX = 1, offsetY = 1, id }: { offsetX?: number; offsetY?: number; id?: string }) {
-  return (
-    <svg width="0" height="0">
-      <filter id={`glitch-${id}`}>
-        <feOffset in="SourceGraphic" dx={offsetX} dy={offsetY} result="layer-one" />
-        <feComponentTransfer in="layer-one" result="red">
-          <feFuncR type="identity" />
-          <feFuncG type="discrete" tableValues="0" />
-          <feFuncB type="discrete" tableValues="0" />
-        </feComponentTransfer>
-
-        <feOffset in="SourceGraphic" dx={offsetX * -1} dy={offsetY * -1} result="layer-two" />
-        <feComponentTransfer in="layer-two" result="cyan">
-          <feFuncR type="discrete" tableValues="0" />
-          <feFuncG type="identity" />
-          <feFuncB type="identity" />
-        </feComponentTransfer>
-
-        <feBlend in="red" in2="cyan" mode="screen" result="color-split" />
-      </filter>
-    </svg>
   );
 }

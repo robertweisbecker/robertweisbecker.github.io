@@ -16,10 +16,9 @@ import {
   AutocompleteSeparator,
 } from "@/components/ui/autocomplete";
 import { Kbd } from "./kbd";
-import { ChevronLeft } from "@gravity-ui/icons";
 import { AnimatePresence, motion } from "motion/react";
 import { useIsMobile } from "@/hooks/use-media-query";
-import { IconSearch } from "@tabler/icons-react";
+import { IconChevronLeft, IconSearch } from "@tabler/icons-react";
 
 export const CommandDialog: typeof CommandDialogPrimitive.Root = CommandDialogPrimitive.Root;
 
@@ -125,7 +124,7 @@ export function CommandInputGroup({ className, children, ...props }: React.Compo
             />
           }
         >
-          <ChevronLeft className="pointer-events-none mt-0.5" />
+          <IconChevronLeft className="pointer-events-none mt-0.5" />
         </AutocompletePrimitive.Clear>
       </AnimatePresence>
       {children}
@@ -173,7 +172,7 @@ export function CommandInput({
               />
             }
           >
-            <ChevronLeft className="pointer-events-none" />
+            <IconChevronLeft className="pointer-events-none" />
           </AutocompletePrimitive.Clear>
         </AnimatePresence>
       </div>

@@ -6,13 +6,12 @@ import Autoplay, { type AutoplayType } from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion, type Transition } from "motion/react";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import { IconChevronLeft, IconChevronRight, IconPlayerPauseFilled, IconPlayerPlayFilled, IconRotateClockwise } from "@tabler/icons-react";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Meter, Toolbar } from "@base-ui/react";
 import { useIntersectionObserver } from "@uidotdev/usehooks";
-import { PauseFill, PlayFill, ArrowRotateLeft } from "@gravity-ui/icons";
 
 const iconTransition: Transition = { type: "spring", stiffness: 600, damping: 30 };
 
@@ -488,11 +487,11 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
           transition={iconTransition}
         >
           {isFinished ? (
-            <ArrowRotateLeft className="relative" />
+            <IconRotateClockwise className="relative" />
           ) : isPlaying ? (
-            <PauseFill className="relative" />
+            <IconPlayerPauseFilled className="relative" />
           ) : (
-            <PlayFill className="relative" />
+            <IconPlayerPlayFilled className="relative" />
           )}
         </motion.div>
       </AnimatePresence>
