@@ -1,6 +1,9 @@
 import createMDX from "@next/mdx";
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+const basePageExtensions = ["js", "jsx", "md", "mdx", "ts", "tsx"] as const;
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -11,7 +14,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "s3-figma-hubfile-images-production.figma.com" },
     ],
   },
-  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  pageExtensions: isDev ? [...basePageExtensions, "private.tsx"] : [...basePageExtensions],
+  typescript: {
+    tsconfigPath: "tsconfig.build.json",
+  },
   experimental: {
     optimizePackageImports: ["@tabler/icons-react"],
     viewTransition: true,

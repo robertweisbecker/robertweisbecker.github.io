@@ -12,7 +12,8 @@
 - **Risk**: MED
 - **Depends on**: `plans/001-add-verification-baseline.md`
 - **Category**: performance / DX
-- **Planned at**: commit `f87f0ad`, 2026-07-01
+- **Reconciled at**: commit `b72fe64`, 2026-07-01 (Plan 001 merged; dependency satisfied)
+- **Completed at**: branch `cursor/reduce-build-bundle-cost-5d22`, 2026-07-01
 
 ## Why this matters
 
@@ -175,12 +176,13 @@ Expected:
 
 Convert `/playground` into a lightweight server-rendered index page.
 
-Create focused child routes:
+Create focused child routes (one per `PlaygroundSection` from commit `6aa410b`):
 
-- `/playground/motion`
-- `/playground/controls`
-- `/playground/frames`
-- `/playground/feedback`
+- `/playground/motion-systems`
+- `/playground/pixel-demos`
+- `/playground/interaction-components`
+- `/playground/media-comparison`
+- `/playground/buttons`
 - `/playground/visual-details`
 
 Move demo groups from the current monolithic `app/playground/page.tsx` into category-scoped client islands under `components/playground/`.
@@ -210,10 +212,11 @@ npm run analyze:build
 Browser-check:
 
 - `/playground`
-- `/playground/motion`
-- `/playground/controls`
-- `/playground/frames`
-- `/playground/feedback`
+- `/playground/motion-systems`
+- `/playground/pixel-demos`
+- `/playground/interaction-components`
+- `/playground/media-comparison`
+- `/playground/buttons`
 - `/playground/visual-details`
 
 ### Step 5: Reduce shared client graph leakage
@@ -289,19 +292,56 @@ npm run analyze:build
 
 ## Done Criteria
 
-- [ ] `typecheck:build` exists and uses `tsconfig.build.json`.
-- [ ] `analyze:build` exists and reports route count, top route bundles, and conic-gradient CSS output.
-- [ ] `/private/**` routes are absent from production build output.
-- [ ] `/private/qa` still works in `npm run dev`.
-- [ ] Full `npm run typecheck` still covers private files.
-- [ ] `/playground` is a lightweight public index.
-- [ ] Playground child routes exist and render.
-- [ ] Shared first-load JS is reduced from baseline or remaining blockers are documented.
-- [ ] Turbopack remains the default `npm run build`.
-- [ ] Webpack fallback scripts still exist.
-- [ ] `npm run lint`, `npm run typecheck`, `npm run typecheck:build`, `npm run check`, `npm run build`, and `npm run analyze:build` exit 0.
-- [ ] No SVG/icon assets were removed.
-- [ ] `plans/README.md` status row for Plan 002 is updated.
+- [x] `typecheck:build` exists and uses `tsconfig.build.json`.
+- [x] `analyze:build` exists and reports route count, top route bundles, and conic-gradient CSS output.
+- [x] `/private/**` routes are absent from production build output.
+- [x] `/private/qa` still works in `npm run dev` (via `page.private.tsx` + dev-only `pageExtensions`).
+- [x] Full `npm run typecheck` still covers private files.
+- [x] `/playground` is a lightweight public index.
+- [x] Playground child routes exist and render.
+- [x] Shared first-load JS is reduced from baseline or remaining blockers are documented.
+- [x] Turbopack remains the default `npm run build`.
+- [x] Webpack fallback scripts still exist.
+- [x] `npm run lint`, `npm run typecheck`, `npm run typecheck:build`, `npm run check`, `npm run build`, and `npm run analyze:build` exit 0.
+- [x] No SVG/icon assets were removed.
+- [x] `plans/README.md` status row for Plan 002 is updated.
+
+## Execution Notes
+
+Executed 2026-07-01 on `cursor/reduce-build-bundle-cost-5d22` using parallel implementation subagents for Steps 3–5.
+
+### Baseline (pre-optimization, master + diagnostics only)
+
+| Metric                      | Value              |
+| --------------------------- | ------------------ |
+| Static pages                | 57                 |
+| Compile                     | ~9.1s              |
+| TypeScript                  | ~7.9s              |
+| `/playground` first-load JS | 1896.9 kB          |
+| Private routes in build     | 14 (`/private/**`) |
+
+### Final (after all steps)
+
+| Metric                            | Value                                            |
+| --------------------------------- | ------------------------------------------------ |
+| Static pages                      | 49 (−8 net; −14 private, +6 playground children) |
+| Compile                           | ~9.4s                                            |
+| TypeScript                        | ~7.9s                                            |
+| `/playground` index first-load JS | 1199.6 kB (−697 kB)                              |
+| Playground child routes           | ~1200–1484 kB each (split from monolith)         |
+| Private routes in build           | 0                                                |
+
+### Changes by step
+
+1. **Diagnostics** — `scripts/analyze-build.mjs`, `tsconfig.build.json`, `typecheck:build`, `analyze:build`.
+2. **Dev-only private routes** — 14× `page.private.tsx`, 1× `layout.private.tsx`; conditional `pageExtensions` + `typescript.tsconfigPath`.
+3. **Playground split** — server index + 6 section routes (`motion-systems`, `pixel-demos`, `interaction-components`, `media-comparison`, `buttons`, `visual-details`) under `components/playground/**` with `next/dynamic` for heavy demos.
+4. **Header/Footer** — `button-variants.ts` extracted; server `header.tsx`/`footer.tsx` shells with focused client islands; lazy `ThemeSettingsPopover`.
+
+### Targets not fully met
+
+- `/playground/media-comparison` at 1484 kB is slightly above the 1.3 MB child-route target (Video + carousel demos).
+- Shared non-playground first-load JS (~1.36 MB on `/`) unchanged in broad terms; header/footer split reduces shared client boundary surface but full `analyze:build` comparison on `/` needs follow-up browser QA.
 
 ## STOP Conditions
 
