@@ -99,7 +99,14 @@ function Carousel({
   const getAutoplay = React.useCallback(() => (api?.plugins()?.autoplay as AutoplayType | undefined) ?? null, [api]);
   const writeAutoplayProgress = React.useCallback((progress: number) => {
     const normalizedProgress = Number.isFinite(progress) ? Math.min(Math.max(progress, 0), 1) : 0;
-    carouselRootRef.current?.style.setProperty("--autoplay-progress", String(normalizedProgress));
+    const root = carouselRootRef.current;
+    root?.style.setProperty("--autoplay-progress", String(normalizedProgress));
+
+    const valueNow = String(Math.round(normalizedProgress * 100));
+    const progressbar = root?.querySelector<HTMLElement>('[data-slot="carousel-autoplay-progress"]');
+    if (progressbar && progressbar.getAttribute("aria-valuenow") !== valueNow) {
+      progressbar.setAttribute("aria-valuenow", valueNow);
+    }
   }, []);
   const setCarouselRootRef = React.useCallback(
     (node: HTMLDivElement | null) => {
@@ -447,7 +454,15 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
             )}
           >
             {autoplayEnabled && isActive && (
-              <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-full">
+              <div
+                role="progressbar"
+                aria-label="Autoplay progress"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={0}
+                data-slot="carousel-autoplay-progress"
+                className="absolute inset-0 overflow-hidden rounded-full"
+              >
                 <div
                   className={cn(
                     "h-full origin-left rounded-full bg-white duration-0",
