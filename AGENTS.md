@@ -3,7 +3,7 @@
 - Persist browser preview CSS/Tailwind adjustments back into the generator's TSX (e.g., padding/breathing room).
 - Prefer Base UI + existing design-system wrappers (e.g., `Switch`, `Autocomplete`, `FieldSet`) over native inputs in this codebase.
 - When a "start corner" changes for clip-path curve generators, apply the full preset set of parameters (`from`, `destX/destY`, `ctrlX/ctrlY`) to avoid degenerate straight-line paths.
-- **Always add a QA example to `app/private/qa/component-demos.tsx` (and a TOC/sidebar entry in `app/private/qa/page.tsx` via `CUSTOM_TOC_ITEMS` or `UI_TOC_ITEMS` if not already present) whenever a new component is created or a major feature is added to an existing one.** For plugin-style features (e.g. carousel variants), add a labeled sub-example per variant inside the existing section rather than a new top-level section.
+- **Always add a QA example to `app/private/qa/component-demos.tsx` (and a TOC/sidebar entry in `app/private/qa/page.private.tsx` via `CUSTOM_TOC_ITEMS` or `UI_TOC_ITEMS` if not already present) whenever a new component is created or a major feature is added to an existing one.** For plugin-style features (e.g. carousel variants), add a labeled sub-example per variant inside the existing section rather than a new top-level section.
 - Do not remove valid Tailwind v4.3 custom/arbitrary variant patterns as a stale-CSS workaround; restore the intended syntax and verify the CSS graph instead.
 
 ## Learned Workspace Facts
