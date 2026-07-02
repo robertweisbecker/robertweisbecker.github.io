@@ -364,7 +364,20 @@ export function SiteSearch({
                         exit={{ opacity: 0, filter: "blur(4px)", width: 0, paddingInline: 0 }}
                         transition={{ type: "spring", visualDuration: 0.2, bounce: 0 }}
                       >
-                        <Toolbar.Group render={<ToggleGroup spacing={1} size="xs" defaultValue={["All"]} />} id="site-search-filters">
+                        <Toolbar.Group
+                          render={
+                            <ToggleGroup
+                              spacing={1}
+                              size="xs"
+                              value={[activeTab]}
+                              onValueChange={(value) => {
+                                const next = value[0] as FilterTab | undefined;
+                                setActiveTab(next ?? "All");
+                              }}
+                            />
+                          }
+                          id="site-search-filters"
+                        >
                           <Label htmlFor="site-search-filters" className="sr-only">
                             Filter by:
                           </Label>
@@ -372,7 +385,6 @@ export function SiteSearch({
                             <Toolbar.Button
                               key={`command-tab-${String(tab.value)}`}
                               render={<ToggleGroupItem value={tab.value} className="bg-transparent! font-normal!" />}
-                              onClick={() => setActiveTab(tab.value)}
                             >
                               {/* {tab.icon} */}
                               {tab.value}
