@@ -19,6 +19,7 @@
 - Tailwind v4.3 custom variants such as `@stuck-top` are valid here; see **Known Bugs & Workarounds** for the Turbopack stale-CSS bug that makes errors persist past the fix.
 - The Agentation development toolbar and packages were removed because they added a large optional dev-only graph; do not reintroduce them unless the user explicitly asks for Agentation again.
 - `@vercel/analytics` and `@vercel/speed-insights` are no-ops locally and only activate on Vercel deployments.
+- The only current `overrides` entry is `postcss: ^8.5.15`, kept for GHSA-qx2v-qp2m-jg93 while allowing `@tailwindcss/postcss` to resolve within its declared range; previous dev-only `hono`/`qs` overrides were removed on 2026-07-02.
 - The homepage doubles as the About page at `/`; there is no separate `/about` route in the nav.
 - `/oklch-colors` is heavier than many project routes because its MDX renders hundreds of color swatches/palette nodes plus a large inline SVG.
 - Pixel icon morphing is implemented in `components/pixel-icon-morph.tsx` and is intentionally limited to `MorphablePixelIconName` icons from `components/icons-pixel.tsx`: 11x11 `createPixelIcon(...)` data icons with exactly 28 points. Non-28 data icons remain normal pixel icons but are excluded from `morphablePixelIconNames`.

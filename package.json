@@ -27,7 +27,6 @@
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.2.9",
     "@tabler/icons-react": "^3.44.0",
-    "@types/mdx": "^2.0.13",
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
@@ -35,6 +34,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dither-plugin": "^1.1.1",
+    "embla-carousel": "^9.0.0-rc02",
     "embla-carousel-autoplay": "^9.0.0-rc02",
     "embla-carousel-fade": "^9.0.0-rc02",
     "embla-carousel-react": "^9.0.0-rc02",
@@ -55,6 +55,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.2",
+    "@types/mdx": "^2.0.13",
     "@types/node": "^26.0.1",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -67,8 +68,6 @@
     "typescript": "^6.0.3"
   },
   "overrides": {
-    "hono": "4.12.27",
-    "postcss": "8.5.12",
-    "qs": "6.15.2"
+    "postcss": "^8.5.15"
   }
 }
