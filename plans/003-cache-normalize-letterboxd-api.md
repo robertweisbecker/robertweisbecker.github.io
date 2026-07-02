@@ -2,8 +2,8 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- app/api/letterboxd/route.ts components/demos/letterboxd.tsx next.config.ts`
-> If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
+> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- app/api/letterboxd/route.ts components/demos/letterboxd.tsx next.config.ts` If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it
+> as a STOP condition.
 
 ## Status
 
@@ -16,7 +16,8 @@
 
 ## Why this matters
 
-The homepage renders a client Letterboxd widget that calls `/api/letterboxd`. The route currently asks `rss-parser` to fetch the remote RSS URL directly on every GET and returns values parsed from RSS HTML without central URL validation or numeric normalization. Caching and normalizing this boundary will reduce external latency/rate risk and make the widget's film data contract match the component types.
+The homepage renders a client Letterboxd widget that calls `/api/letterboxd`. The route currently asks `rss-parser` to fetch the remote RSS URL directly on every GET and returns values parsed from RSS HTML without central URL validation or numeric normalization. Caching and normalizing this boundary
+will reduce external latency/rate risk and make the widget's film data contract match the component types.
 
 ## Current state
 
@@ -110,13 +111,13 @@ Repo conventions to preserve:
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-|---------|---------|---------------------|
-| Install | `npm install` | exit 0 |
-| Typecheck | `npm run typecheck` | exit 0 |
-| Check | `npm run check` | exit 0 |
-| Lint | `npm run lint` | exit 0 |
-| Build | `npm run build` | exit 0 |
+| Purpose   | Command             | Expected on success |
+| --------- | ------------------- | ------------------- |
+| Install   | `npm install`       | exit 0              |
+| Typecheck | `npm run typecheck` | exit 0              |
+| Check     | `npm run check`     | exit 0              |
+| Lint      | `npm run lint`      | exit 0              |
+| Build     | `npm run build`     | exit 0              |
 
 ## Scope
 
@@ -189,7 +190,8 @@ Update film mapping so:
 - `url` is normalized with `normalizeLetterboxdUrl(item.link)`.
 - Films without a normalized `posterUrl` are filtered out.
 
-The client no longer renders `lists`, but the route still returns them. Either normalize list URLs and preview film URLs too, or remove `lists` from the response entirely if no current caller consumes it. If removing `lists`, update tests to assert the new response shape and keep the client unchanged.
+The client no longer renders `lists`, but the route still returns them. Either normalize list URLs and preview film URLs too, or remove `lists` from the response entirely if no current caller consumes it. If removing `lists`, update tests to assert the new response shape and keep the client
+unchanged.
 
 **Verify**: `npm run typecheck` -> exit 0.
 

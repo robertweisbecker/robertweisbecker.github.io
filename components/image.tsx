@@ -8,8 +8,7 @@ type Common = {
 } & Pick<NextImageProps, "priority" | "sizes" | "quality" | "placeholder" | "loading">;
 
 export type ImageProps =
-  | (Common & { src: StaticImageData; width?: number; height?: number })
-  | (Common & { src: string; width: number; height: number });
+  (Common & { src: StaticImageData; width?: number; height?: number }) | (Common & { src: string; width: number; height: number });
 
 const imgClassName =
   "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)---spacing(0.5))] overflow-hidden outline outline-border/50 -outline-offset-1 squircle";

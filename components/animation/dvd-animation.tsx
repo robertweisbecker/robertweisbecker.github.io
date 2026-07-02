@@ -19,8 +19,7 @@ const DEFAULT_LOGO_ASPECT_RATIO = LOGO_VIEW_BOX_WIDTH / LOGO_VIEW_BOX_HEIGHT;
 const DEFAULT_DURATION = 90;
 const DEFAULT_LOGO_COLORS = ["#0ff", "#ff0", "#0ff", "#f0f", "#0f0"];
 const DEFAULT_MINI_BALLOON_COLORS = ["#fafafa", "#e4e4e7", "#d4d4d8", "#a1a1aa"];
-const getInitialIsPlaying = () =>
-  typeof window === "undefined" ? true : !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const getInitialIsPlaying = () => (typeof window === "undefined" ? true : !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
 // These preserve the original DVD-style motion relationship:
 // x repeats 10 times and y repeats 9 times before the full pattern returns.
@@ -266,7 +265,6 @@ export function DvdAnimationRoot({
       logo.setAttribute("fill", color);
       logo.style.color = color;
     }
-
   }, [animationKey, colors]);
 
   React.useEffect(() => {

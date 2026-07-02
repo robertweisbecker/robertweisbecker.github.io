@@ -4,8 +4,7 @@
 
 > **Executor instructions**: Follow this plan step by step. Run every verification command and confirm the expected result before moving to the next step. If anything in the "STOP conditions" section occurs, stop and report. When done, update the status row for this plan in `plans/README.md`.
 >
-> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- app/private`
-> If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
+> **Drift check (run first)**: `git diff --stat f87f0ad..HEAD -- app/private` If any in-scope file changed since this plan was written, compare the "Current state" excerpts against the live code before proceeding; on a mismatch, treat it as a STOP condition.
 
 ## Status
 
@@ -18,7 +17,8 @@
 
 ## Why this matters
 
-The site has a `/private` route tree with prototypes and QA surfaces. Some pages set `robots: "noindex, nofollow"`, but several child pages do not. In Next App Router, metadata in `app/private/page.tsx` does not apply to child routes; a parent `layout.tsx` would be the right place to apply this policy across `/private/**` if private routes continued to ship.
+The site has a `/private` route tree with prototypes and QA surfaces. Some pages set `robots: "noindex, nofollow"`, but several child pages do not. In Next App Router, metadata in `app/private/page.tsx` does not apply to child routes; a parent `layout.tsx` would be the right place to apply this
+policy across `/private/**` if private routes continued to ship.
 
 This is no longer the preferred target. Private QA/prototype routes should be excluded from the production route and type-check graph, which is covered by `plans/002-reduce-build-and-bundle-cost.md`.
 
@@ -72,13 +72,13 @@ Repo convention: private routes are hidden from the production header/search lin
 
 ## Commands you will need
 
-| Purpose | Command | Expected on success |
-|---------|---------|---------------------|
-| Install | `npm install` | exit 0 |
-| Typecheck | `npm run typecheck` | exit 0 |
-| Check | `npm run check` | exit 0 |
-| Lint | `npm run lint` | exit 0 |
-| Build | `npm run build` | exit 0 |
+| Purpose   | Command             | Expected on success |
+| --------- | ------------------- | ------------------- |
+| Install   | `npm install`       | exit 0              |
+| Typecheck | `npm run typecheck` | exit 0              |
+| Check     | `npm run check`     | exit 0              |
+| Lint      | `npm run lint`      | exit 0              |
+| Build     | `npm run build`     | exit 0              |
 
 ## Scope
 

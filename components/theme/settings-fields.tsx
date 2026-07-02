@@ -5,17 +5,20 @@ import { PixelResetSmallIcon } from "@/components/icons-pixel";
 import { NumberSlider } from "@/components/number-slider";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { isOneOf } from "@/lib/is-one-of";
 import { cn } from "@/lib/utils";
-import {
-  ALL_HUE_OPTIONS,
-  COLOR_MAP,
-  HUE_OPTIONS,
-  NEUTRAL_OPTIONS,
-  type HueName,
-} from "./model";
+import { ALL_HUE_OPTIONS, COLOR_MAP, HUE_OPTIONS, NEUTRAL_OPTIONS, type HueName } from "./model";
 import { useTheme } from "./provider";
 
 const hueNames = ALL_HUE_OPTIONS.map((option) => option.value);
@@ -44,7 +47,11 @@ function ThemeFieldReset({
             variant="ghost"
             size="icon-xs"
             rounded
-            className={cn("-my-1 -ms-1 size-3 shrink-0 text-muted-foreground opacity-100 transition-opacity", !dirty && "pointer-events-none opacity-0!", className)}
+            className={cn(
+              "-my-1 -ms-1 size-3 shrink-0 text-muted-foreground opacity-100 transition-opacity",
+              !dirty && "pointer-events-none opacity-0!",
+              className
+            )}
             disabled={!dirty}
             onClick={onReset}
             aria-label={ariaLabel}
@@ -69,7 +76,12 @@ export function ThemeResetAllButton({ variant = "ghost", size = "sm", ...props }
 }
 
 export function HueSwatch({ hue }: { hue: HueName }) {
-  return <span className="inline-block size-3 shrink-0 rounded-full border ring ring-popover" style={{ backgroundColor: COLOR_MAP.get(hue)?.preview }} />;
+  return (
+    <span
+      className="inline-block size-3 shrink-0 rounded-full border ring ring-popover"
+      style={{ backgroundColor: COLOR_MAP.get(hue)?.preview }}
+    />
+  );
 }
 
 export type ThemeColorDisplayMode = "select" | "swatches";
@@ -250,7 +262,11 @@ export function ThemeRadiusField({
   return (
     <NumberSlider
       label={label}
-      labelAction={showReset ? <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" /> : null}
+      labelAction={
+        showReset ? (
+          <ThemeFieldReset dirty={radiusDirty} onReset={() => set({ radius: defaultRadius })} aria-label="Reset radius to default" />
+        ) : null
+      }
       min={min}
       max={max}
       step={step}
@@ -267,7 +283,13 @@ export type ThemeSettingsPanelProps = React.ComponentProps<typeof FieldGroup> & 
   neutralDisplay?: ThemeColorDisplayMode;
 };
 
-export function ThemeSettingsPanel({ className, hueDisplay = "select", neutralDisplay = "swatches", children, ...props }: ThemeSettingsPanelProps) {
+export function ThemeSettingsPanel({
+  className,
+  hueDisplay = "select",
+  neutralDisplay = "swatches",
+  children,
+  ...props
+}: ThemeSettingsPanelProps) {
   return (
     <FieldGroup className={className} {...props}>
       {children ?? (
