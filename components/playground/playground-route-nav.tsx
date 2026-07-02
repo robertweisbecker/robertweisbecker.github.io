@@ -3,7 +3,7 @@
 import * as React from "react";
 import { usePathname } from "next/navigation";
 
-import { PLAYGROUND_ROUTES } from "@/components/playground/playground-routes";
+import { playgroundRoutes } from "@/lib/data/playground";
 import { LinkButton } from "@/components/ui/link-button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -32,7 +32,7 @@ export function PlaygroundRouteNav({ className, hideOnRoot = false, size = "sm" 
     <div ref={rootRef} className={cn("mx-auto w-full max-w-7xl", className)}>
       <ScrollArea orientation="horizontal" scrollFade className="w-full" contentClass="min-w-full">
         <nav aria-label="Playground sections" className="flex w-max min-w-full items-center gap-3 py-px">
-          {PLAYGROUND_ROUTES.map((route) => {
+          {playgroundRoutes.map((route) => {
             const isCurrent = pathname === route.href;
 
             return (

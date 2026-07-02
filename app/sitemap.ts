@@ -1,10 +1,11 @@
+import { playgroundRoutes } from "@/lib/data/playground";
 import { posts } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";
 import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://bob.fyi";
 
-const staticRoutes = ["/", "/about", "/posts"] as const;
+const staticRoutes = ["/", "/about", "/posts", "/art", "/playground"] as const;
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -29,5 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       : []
   );
 
-  return [...staticEntries, ...postEntries, ...projectEntries];
+  const playgroundEntries: MetadataRoute.Sitemap = playgroundRoutes.map((route) => ({
+    url: `${SITE_URL}${route.href}`,
+    lastModified: new Date(),
+  }));
+
+  return [...staticEntries, ...postEntries, ...projectEntries, ...playgroundEntries];
 }

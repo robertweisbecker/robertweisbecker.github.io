@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useKeyPress } from "@/hooks/use-key-press";
+import { playgroundRoutes } from "@/lib/data/playground";
 import { posts, postIcons } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
@@ -120,6 +121,13 @@ const staticPages: SearchItem[] = [
   { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(PixelNewsIcon), group: "Pages" },
   { value: "art", label: "Art", path: "/art", icon: itemIcon(PixelScribbleIcon), group: "Pages" },
   { value: "playground", label: "Playground", path: "/playground", icon: itemIcon(IconMonkeybar), group: "Pages" },
+  ...playgroundRoutes.map((route) => ({
+    value: `playground-${route.slug}`,
+    label: `Playground: ${route.label}`,
+    path: route.href,
+    icon: itemIcon(IconMonkeybar),
+    group: "Pages",
+  })),
 ];
 
 const privatePages: SearchItem[] = [
