@@ -15,7 +15,8 @@ const SiteSearch = dynamic(() => import("@/components/site-search").then((module
 });
 
 const PhoneDeviceFrameDemo = dynamic(
-  () => import("@/components/playground/visual-details/phone-device-frame-demo").then((module) => ({ default: module.PhoneDeviceFrameDemo })),
+  () =>
+    import("@/components/playground/visual-details/phone-device-frame-demo").then((module) => ({ default: module.PhoneDeviceFrameDemo })),
   {
     loading: () => <p className="text-sm text-muted-foreground">Loading phone frame…</p>,
   }
@@ -106,8 +107,8 @@ export function VisualDetailsPlayground() {
                 </Code>{" "}
                 applied to make the shape span line breaks.
               </mark>{" "}
-              Notice how the nested <Code variant="inline-component">code</Code>&nbsp;inherited a little treatment too? I think
-              that&apos;s a nice touch.
+              Notice how the nested <Code variant="inline-component">code</Code>&nbsp;inherited a little treatment too? I think that&apos;s
+              a nice touch.
             </p>
           </div>
           <div className="space-y-4 p-4 sm:pe-0">

@@ -65,7 +65,7 @@ if (!stats) {
   process.exit(1);
 }
 
-const routes = Array.isArray(stats.routes) ? stats.routes : Array.isArray(stats) ? stats : stats.routeStats ?? [];
+const routes = Array.isArray(stats.routes) ? stats.routes : Array.isArray(stats) ? stats : (stats.routeStats ?? []);
 
 console.log(`Route count: ${routes.length}`);
 

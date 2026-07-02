@@ -53,9 +53,7 @@ export function WorkMenu({ projects }: WorkMenuProps) {
           }
         }}
       >
-        <DropdownMenuTrigger
-          render={<Button variant="ghost" size="sm" rounded className={cn(responsiveNavButtonSize, "group/trigger")} />}
-        >
+        <DropdownMenuTrigger render={<Button variant="ghost" size="sm" rounded className={cn(responsiveNavButtonSize, "group/trigger")} />}>
           <span className="max-md:hidden">Work</span>
           <span className="md:hidden">Menu</span>
           <PixelMorph
@@ -78,19 +76,31 @@ export function WorkMenu({ projects }: WorkMenuProps) {
               </div>
               About
             </DropdownMenuItem>
-            <DropdownMenuItem className="grid grid-rows-2 place-items-center gap-0.5 text-xs" render={<Link href="/posts" />} nativeButton={false}>
+            <DropdownMenuItem
+              className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
+              render={<Link href="/posts" />}
+              nativeButton={false}
+            >
               <div className={mobileIconClasses} data-slot="icon">
                 <PixelNewspaperIcon scale={1.5} className="text-blue-500 dark:text-blue-400" />
               </div>
               Posts
             </DropdownMenuItem>
-            <DropdownMenuItem className="grid grid-rows-2 place-items-center gap-0.5 text-xs" render={<Link href="/art" />} nativeButton={false}>
+            <DropdownMenuItem
+              className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
+              render={<Link href="/art" />}
+              nativeButton={false}
+            >
               <div className={mobileIconClasses} data-slot="icon">
                 <PixelScribbleIcon scale={1.5} className="text-violet-500 dark:text-violet-400" />
               </div>
               Art
             </DropdownMenuItem>
-            <DropdownMenuItem className="grid grid-rows-2 place-items-center gap-0.5 text-xs" render={<Link href="/playground" />} nativeButton={false}>
+            <DropdownMenuItem
+              className="grid grid-rows-2 place-items-center gap-0.5 text-xs"
+              render={<Link href="/playground" />}
+              nativeButton={false}
+            >
               <div className={mobileIconClasses} data-slot="icon">
                 <PixelPointerIcon scale={1.5} className="text-green-500 dark:text-green-400" />
               </div>

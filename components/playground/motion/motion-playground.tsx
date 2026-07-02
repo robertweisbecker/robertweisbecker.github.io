@@ -23,7 +23,8 @@ const CardFan = dynamic(() => import("@/components/demos/card-fan").then((module
 });
 
 const MotionTextPlaygroundDemo = dynamic(
-  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextPlaygroundDemo })),
+  () =>
+    import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextPlaygroundDemo })),
   {
     loading: () => <p className="text-sm text-muted-foreground">Loading motion text…</p>,
   }
