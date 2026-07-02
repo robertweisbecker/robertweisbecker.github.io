@@ -33,6 +33,14 @@
 - Unused public media/assets removed during the 2026-07 cleanup were backed up outside the repo at `/Users/robertweisbecker/Desktop/bob-fyi-unused-component-assets-2026-07-01/`, with videos under its `videos/` subfolder.
 - Git may report existing loose-object maintenance debt through `.git/gc.log`; do not run `git prune` or other repository cleanup commands unless the user explicitly asks.
 
+## React Doctor Tracking
+
+- Current React Doctor score: 46/100
+- Last checked `master` commit: `fad62256673a`
+- Last checked at: 2026-07-02 (user-provided baseline; no local React Doctor run in this setup turn)
+- Command: `npx react-doctor@latest --verbose`
+- After each new `master` commit, run React Doctor, report violations in Markdown with links to local files and line numbers, then update this section with the latest score, commit, and run timestamp.
+
 ## Refactoring Notes
 
 - Breaking internal imports is allowed because this repo is the only consumer.

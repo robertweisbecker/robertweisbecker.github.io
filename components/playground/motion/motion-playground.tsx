@@ -37,7 +37,7 @@ export function MotionPlayground() {
   return (
     <div className="flex w-full flex-col gap-14">
       <PlaygroundSection id="motion" title="Motion">
-        <DemoContainer title="Motion cards" variant="muted" className="lg:col-span-full" innerClass="min-h-[400px]">
+        <DemoContainer caption="Card fan" variant="muted" className="lg:col-span-full" innerClass="min-h-[400px]">
           <CardFan />
         </DemoContainer>
         <DemoContainer

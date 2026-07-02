@@ -21,7 +21,7 @@ export function ThemeSettingsPopover({ className, ...props }: Omit<React.Compone
   return (
     <Popover>
       <PopoverTrigger render={<Button variant="ghost" {...props} aria-label="Theme settings" />} className={cn(className)}>
-        <span className="-ms-1.5 size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720">
+        <span className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border transition-[rotate] duration-400 ease-in-out-quad in-data-popup-open:rotate-720">
           <IconWheel strokeWidth={1.5} />
         </span>
         Theme

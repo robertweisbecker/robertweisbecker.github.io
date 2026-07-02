@@ -144,7 +144,7 @@ export function MotionTextPlaygroundDemo() {
           </Field>
         }
       >
-        <p className="transition-width min-w-64 text-left text-lg font-medium text-muted-foreground/72">
+        <p className="transition-width min-w-64 text-left text-2xl font-medium text-muted-foreground/72">
           Should designers{" "}
           <MotionText.Loop trigger={loopRunning} interval={2} className="text-primary">
             {["code", "prompt", "tweet"]}

@@ -11,6 +11,7 @@ export const buttonVariants = cva(
     "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:text-muted-foreground ",
     "not-[.w-full]:active:scale-[0.975] will-change-transform",
     "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[475]",
+    "after:absolute before:absolute",
     iconClasses,
   ],
   {
@@ -54,8 +55,8 @@ export const buttonVariants = cva(
           "focus-visible:outline-offset-2",
         ],
         glass: [
-          "relative rounded-full! [backdrop-filter:blur(1.5px)_saturate(1.5)_brightness(1.1)] bg-[rgba(248,240,248,0.1)] before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-hard-light before:blur-[2px]",
-          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,canvas_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
+          "relative rounded-full! items-center [backdrop-filter:blur(1.5px)_saturate(1.5)_brightness(1.1)] bg-[rgba(248,240,248,0.1)] before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-hard-light before:blur-[2px]",
+          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,canvas_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)] after:inset-0 after:absolute after:inset-0 after:rounded-[inherit] after:-z-1 isolate",
         ],
         overlay: [
           "[--button-color:white] bg-neutral-700/60 hover:bg-neutral-700/70 backdrop-blur-xl text-white outline outline-white/10 ring-1 ring-black/60 -outline-offset-1 ",
@@ -65,11 +66,11 @@ export const buttonVariants = cva(
       size: {
         md: "[--button-x:--spacing(3)] [--button-y:--spacing(2)] h-button",
         xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-sm)] text-[0.6875rem]/4 gap-1",
-        sm: "h-button-sm [--button-x:--spacing(2.5)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)]  gap-(--spacing)",
+        sm: "h-button-sm [--button-x:--spacing(2.5)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)]  gap-(--spacing) text-sm",
         lg: "h-button-lg [--button-x:--spacing(3)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-base",
         icon: "size-button [&_svg:not([class*='size-'])]:size-4",
         "icon-xs": "size-button-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-xs)]",
-        "icon-sm": "size-button-sm [--button-radius:var(--radius-md)] [&_svg:not([class*='size-'])]:size-3.5",
+        "icon-sm": "size-button-sm [--button-radius:var(--radius-md)] [&_svg:not([class*='size-'])]:size-4",
         "icon-lg": "size-button-lg [--button-radius:var(--radius-lg)] [&_svg:not([class*='size-'])]:size-5",
       },
       rounded: {
@@ -98,4 +99,4 @@ export const buttonVariants = cva(
 );
 
 /** sm on md+, md dimensions on viewports below md */
-export const responsiveNavButtonSize = "max-md:h-button max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";
+export const responsiveNavButtonSize = "max-md:h-button font-normal text-muted-foreground max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";

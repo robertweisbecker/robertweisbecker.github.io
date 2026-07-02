@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")}>
-      <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 py-2 max-sm:px-2">
+      <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 px-2 py-2 max-sm:px-2">
         <HomeLink />
         <div className="me-auto" />
         <WorkMenu projects={menuProjects} />

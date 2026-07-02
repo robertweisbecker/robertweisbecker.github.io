@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const ThemeSettingsPopover = dynamic(() => import("@/components/theme/settings-popover").then((mod) => mod.ThemeSettingsPopover), {
   loading: () => (
     <Button variant="ghost" size="sm" className={cn("rounded-full", responsiveNavButtonSize)} aria-label="Theme settings">
-      <span className="-ms-1.5 size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border">
+      <span className="size-4 shrink-0 rounded-full bg-conic/longer from-red-400 to-pink-400 text-background inset-ring inset-ring-border">
         <IconWheel strokeWidth={1.5} className="size-4" />
       </span>
       Theme
@@ -25,7 +25,7 @@ export function ThemeActions() {
     <>
       <Separator orientation="vertical" className="h-4" />
       <ThemeSettingsPopover className={cn("rounded-full", responsiveNavButtonSize)} size="sm" />
-      <ModeToggle size="sm" className={cn("rounded-full", responsiveNavButtonSize)} variant="ghost" label={true} />
+      <ModeToggle size="icon-sm" className={cn("rounded-full", responsiveNavButtonSize)} variant="ghost" />
     </>
   );
 }

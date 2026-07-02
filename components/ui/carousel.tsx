@@ -427,6 +427,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
       role="tablist"
       className={cn(
         "flex h-button-sm shrink-0 items-center justify-center rounded-full border bg-neutral-700/60 px-2.5 py-1.5 backdrop-blur-xl backdrop-invert-50",
+        "bg-glass!",
         // orientation === "vertical" && "h-auto rotate-90",
         className
       )}
@@ -465,7 +466,7 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
               >
                 <div
                   className={cn(
-                    "h-full origin-left rounded-full bg-white duration-0",
+                    "h-full origin-left rounded-full bg-current/80 backdrop-contrast-150 duration-0",
                     isFillingSlide ? "transition-transform" : "transition-none"
                   )}
                   style={{ transform: "scaleX(var(--autoplay-progress, 0))" }}
@@ -490,7 +491,7 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
       onClick={isFinished ? restartAutoplay : togglePlay}
       aria-label={isFinished ? "Restart" : isPlaying ? "Pause" : "Play"}
       className={cn(
-        buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }),
+        buttonVariants({ variant: "glass", size: "icon-sm", rounded: true }),
         // orientation === "vertical" && "-rotate-90",
         className
       )}
@@ -528,7 +529,7 @@ function CarouselToolbar({ className, inset = true, ...props }: React.ComponentP
       data-layout={layout}
       orientation={orientation}
       className={cn(
-        "z-10 flex shrink-0 items-center gap-3 text-white",
+        "z-10 flex shrink-0 items-center gap-3 text-foreground",
         orientation === "horizontal" && "w-fit flex-row",
         orientation === "vertical" && "rotate-90",
         inset && orientation === "horizontal" && "absolute bottom-4 left-1/2 -translate-x-1/2",

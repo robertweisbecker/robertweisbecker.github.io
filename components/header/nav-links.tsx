@@ -19,15 +19,15 @@ function HeaderLinkButton({ label, icon, mobileIconOnly = false, className, ...p
       variant="ghost"
       rounded={true}
       size="sm"
-      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", className)}
+      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "font-normal text-xs text-muted-foreground", className)}
       {...props}
     >
       {icon && (
         <>
-          <span data-icon="inline-start" className={cn(mobileIconOnly && "max-md:hidden")}>
+          <span className={cn(mobileIconOnly && "max-md:hidden")}>
             {icon}
           </span>
-          {mobileIconOnly ? <span className="md:hidden">{icon}</span> : null}
+          {mobileIconOnly ? <span className="md:hidden m-0!">{icon}</span> : null}
         </>
       )}
       <span className={cn(mobileIconOnly && "max-md:sr-only")}>{label}</span>
@@ -42,7 +42,7 @@ export function NavLinks() {
     <>
       <HeaderLinkButton
         label="Posts"
-        icon={<PixelNewspaperIcon scale={1.5} />}
+        icon={<PixelNewspaperIcon scale={1.5}  />}
         mobileIconOnly={false}
         href="/posts"
         aria-current={pathname.startsWith("/posts") ? "true" : "false"}
@@ -50,15 +50,15 @@ export function NavLinks() {
       />
       <HeaderLinkButton
         label="Art"
-        icon={<PixelScribbleIcon scale={1.5} />}
-        mobileIconOnly={false}
+        icon={<PixelScribbleIcon scale={1.5}  />}
+        mobileIconOnly={true}
         href="/art"
         aria-current={pathname === "/art" ? "true" : "false"}
         className="max-md:hidden"
       />
       <HeaderLinkButton
         label="Play"
-        icon={<PixelPointerIcon data-icon={"inline-start"} scale={1.5} />}
+        icon={<PixelPointerIcon  scale={1.5}  />}
         mobileIconOnly={false}
         href="/playground/motion"
         aria-current={pathname.startsWith("/playground") ? "true" : "false"}
@@ -68,7 +68,7 @@ export function NavLinks() {
       {process.env.NODE_ENV === "development" && (
         <HeaderLinkButton
           label="Dev"
-          icon={<PixelEyeIcon scale={1.5} />}
+          icon={<PixelEyeIcon scale={1.5} data-icon="inline-start" />}
           mobileIconOnly={true}
           href="/private"
           aria-current={pathname === "/private" ? "true" : "false"}

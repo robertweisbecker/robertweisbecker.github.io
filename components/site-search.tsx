@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useKeyPress } from "@/hooks/use-key-press";
+import { getPlaygroundRouteIcon } from "@/components/playground/playground-route-icons";
 import { playgroundRoutes } from "@/lib/data/playground";
 import { posts, postIcons } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";
@@ -67,7 +68,7 @@ type SearchGroup = {
   items: SearchItem[];
 };
 
-type FilterTab = "All" | "Projects" | "Posts" | "Private";
+type FilterTab = "All" | "Projects" | "Posts" | "Playground" | "Private";
 
 const FILTER_TABS: { value: FilterTab; icon?: React.ReactNode }[] = [
   { value: "All", icon: <IconLayoutGridFilled /> },
@@ -96,6 +97,7 @@ const FILTER_TABS: { value: FilterTab; icon?: React.ReactNode }[] = [
       />
     ),
   },
+  { value: "Playground", icon: <IconMonkeybar /> },
   { value: "Private", icon: <CursorIcon /> },
 ];
 
@@ -120,13 +122,16 @@ const staticPages: SearchItem[] = [
   { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
   { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(PixelNewsIcon), group: "Pages" },
   { value: "art", label: "Art", path: "/art", icon: itemIcon(PixelScribbleIcon), group: "Pages" },
-  { value: "playground", label: "Playground", path: "/playground", icon: itemIcon(IconMonkeybar), group: "Pages" },
+];
+
+const playgroundPages: SearchItem[] = [
+  { value: "playground", label: "Playground", path: "/playground", icon: itemIcon(IconMonkeybar), group: "Playground" },
   ...playgroundRoutes.map((route) => ({
     value: `playground-${route.slug}`,
-    label: `Playground: ${route.label}`,
+    label: route.label,
     path: route.href,
-    icon: itemIcon(IconMonkeybar),
-    group: "Pages",
+    icon: itemIcon(getPlaygroundRouteIcon(route.slug)),
+    group: "Playground",
   })),
 ];
 
@@ -237,6 +242,7 @@ export function SiteSearch({
   const allGroups = useMemo<SearchGroup[]>(
     () => [
       { value: "Pages", items: staticPages },
+      { value: "Playground", icon: <IconMonkeybar />, items: playgroundPages },
       {
         value: "Projects",
         icon: <FolderIcon />,
@@ -275,6 +281,7 @@ export function SiteSearch({
     if (activeTab === "All") return allGroups;
     if (activeTab === "Projects") return allGroups.filter((g) => g.value === "Projects");
     if (activeTab === "Posts") return allGroups.filter((g) => g.value === "Posts");
+    if (activeTab === "Playground") return allGroups.filter((g) => g.value === "Playground");
     if (activeTab === "Private") return allGroups.filter((g) => g.value === "Private");
     return allGroups;
   }, [allGroups, activeTab]);
