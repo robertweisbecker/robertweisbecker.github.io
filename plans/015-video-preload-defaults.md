@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- components/video.tsx`
+> `git diff --stat 9088a10..HEAD -- components/video.tsx`
 > If the file changed since this plan was written, compare the "Current
 > state" excerpt against the live code before proceeding; on a mismatch,
 > treat it as a STOP condition.
@@ -21,6 +21,8 @@
 - **Depends on**: none
 - **Category**: perf
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `9088a10`, 2026-07-02 — no relevant source
+  drift since planning.
 
 ## Why this matters
 

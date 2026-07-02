@@ -87,13 +87,13 @@ Conventions to honor:
 
 ## Commands you will need
 
-| Purpose      | Command               | Expected on success                  |
-| ------------ | --------------------- | ------------------------------------ |
-| Install      | `npm install`         | exit 0                               |
-| All checks   | `npm run check`       | exit 0                               |
-| Prod build   | `npm run build`       | exit 0; note per-route first-load JS |
-| Bundle diff  | save `npm run build` output before/after | first-load JS for `/` and `/posts/*` decreases |
-| Dev server   | `npm run dev`         | serves on :3000                      |
+| Purpose     | Command                                  | Expected on success                            |
+| ----------- | ---------------------------------------- | ---------------------------------------------- |
+| Install     | `npm install`                            | exit 0                                         |
+| All checks  | `npm run check`                          | exit 0                                         |
+| Prod build  | `npm run build`                          | exit 0; note per-route first-load JS           |
+| Bundle diff | save `npm run build` output before/after | first-load JS for `/` and `/posts/*` decreases |
+| Dev server  | `npm run dev`                            | serves on :3000                                |
 
 ## Suggested executor toolkit
 
@@ -198,8 +198,8 @@ Letterboxd widget loads; no hydration warnings in the console.
      (`smooth-gradients`, `native-popovers`, `tab-indicator`,
      `clip-path-curve`, `theming`, `pixel-icons`) into `(detail)/`.
    - Delete the old `app/posts/layout.tsx`.
-   Route groups don't change URLs: `/posts` and `/posts/<slug>` stay
-   identical.
+     Route groups don't change URLs: `/posts` and `/posts/<slug>` stay
+     identical.
 
 **Verify**: `npm run check` → exit 0. `npm run build` → exit 0 with the SAME
 route list as the baseline (`/posts` + six post routes — group segments must

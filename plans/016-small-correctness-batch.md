@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- lib/parse-post-date.ts lib/projects.ts components/demos/clip-path-editor/state.ts components/ui/carousel.tsx`
+> `git diff --stat 9088a10..HEAD -- lib/parse-post-date.ts lib/projects.ts components/demos/clip-path-editor/state.ts components/ui/carousel.tsx`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat the affected fix as a STOP condition (the others may
@@ -22,6 +22,9 @@
 - **Depends on**: none
 - **Category**: bug / perf
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `9088a10`, 2026-07-02 — Plan 010 changed
+  carousel icon imports from Gravity to Tabler, but the `autoplayProgress`
+  state/rAF excerpt below is still present.
 
 ## Why this matters
 
@@ -116,6 +119,11 @@ React.useEffect(() => {
 Find where `autoplayProgress` state is declared and consumed in the same
 file (a progress meter in the carousel toolbar) before changing anything —
 the consumer determines the exact CSS-variable target.
+
+Reconcile note: as of `9088a10`, `components/ui/carousel.tsx` imports
+`IconRotateClockwise` from `@tabler/icons-react` instead of Gravity's
+`ArrowRotateLeft`; do not reintroduce Gravity icons while editing the
+carousel.
 
 ## Commands you will need
 

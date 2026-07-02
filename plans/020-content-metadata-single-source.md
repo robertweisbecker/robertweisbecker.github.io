@@ -171,10 +171,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 Known drift (registry vs hardcoded metadata) to resolve — **registry wins**:
 
-| Post | Registry | Hardcoded metadata |
-|---|---|---|
-| pixel-icons | "28-Pixel Icons" / "…animated 11x11 icons with Figma + Codex." | "28-pixel Icons" / "…animated 11x11 pixel icons with Figma + Codex" |
-| native-popovers | "HTML \<popover\>, anchoring, and starting-style" | "HTML popover, anchoring, and starting-style" |
+| Post            | Registry                                                       | Hardcoded metadata                                                  |
+| --------------- | -------------------------------------------------------------- | ------------------------------------------------------------------- |
+| pixel-icons     | "28-Pixel Icons" / "…animated 11x11 icons with Figma + Codex." | "28-pixel Icons" / "…animated 11x11 pixel icons with Figma + Codex" |
+| native-popovers | "HTML \<popover\>, anchoring, and starting-style"              | "HTML popover, anchoring, and starting-style"                       |
 
 (The others match exactly.)
 
@@ -223,9 +223,9 @@ Usage across `content/projects/*.mdx`, verified at `9ed1acd` with
   `ProjectImageCarousel` and drop the alias.
 
 The architecture principle this establishes (put it in a comment at the top
-of `useMDXComponents`): *the registry holds shortcodes used across multiple
+of `useMDXComponents`): _the registry holds shortcodes used across multiple
 MDX files plus HTML-element mappings; anything used by a single file is
-imported directly in that file* (the pattern `oklch-colors.mdx` and
+imported directly in that file_ (the pattern `oklch-colors.mdx` and
 `furnace.mdx` already follow for `ColorDiagrams`, `Tabs`, `Collapsible`).
 
 ### Excerpt: the MDX plugin chain and the markdown-image side channel
@@ -287,7 +287,7 @@ markdown-image side channel so that convention is the only pipeline.
 Registry `title`/`date` and frontmatter `title`/`date` differ on purpose
 (card copy vs page copy): e.g. registry "OkLCH Color System" / "2025" vs
 frontmatter "OkLCH Color Palettes" / "2025—2026". Do not merge them; this
-plan only makes the *structural* relationship (slug ↔ file ↔ published)
+plan only makes the _structural_ relationship (slug ↔ file ↔ published)
 checked and single-sourced.
 
 ### Uncommitted working-tree state at planning time
@@ -298,12 +298,12 @@ checked and single-sourced.
 
 ## Commands you will need
 
-| Purpose    | Command         | Expected on success                          |
-| ---------- | --------------- | -------------------------------------------- |
-| Install    | `npm install`   | exit 0                                       |
-| All checks | `npm run check` | exit 0 (typecheck + lint + format:check)     |
-| Prod build | `npm run build` | exit 0; prints the per-route table           |
-| Dev server | `npm run dev`   | serves on :3000                              |
+| Purpose    | Command         | Expected on success                      |
+| ---------- | --------------- | ---------------------------------------- |
+| Install    | `npm install`   | exit 0                                   |
+| All checks | `npm run check` | exit 0 (typecheck + lint + format:check) |
+| Prod build | `npm run build` | exit 0; prints the per-route table       |
+| Dev server | `npm run dev`   | serves on :3000                          |
 
 ## Coordination with other plans (read before starting)
 
@@ -502,12 +502,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 }
 ```
 
-   Post ids (from `lib/data/posts.ts`): `theming`, `clip-path-curve`,
-   `via-smooth` (for `smooth-gradients/`), `tab-indicator`,
-   `native-popovers`.
-4. In `app/posts/pixel-icons/page.tsx`, replace the hardcoded `metadata`
-   object (lines 17–20) with `export const metadata = postMetadata("pixel-icons");`
-   and drop the unused `Metadata` type import.
+Post ids (from `lib/data/posts.ts`): `theming`, `clip-path-curve`,
+`via-smooth` (for `smooth-gradients/`), `tab-indicator`,
+`native-popovers`. 4. In `app/posts/pixel-icons/page.tsx`, replace the hardcoded `metadata`
+object (lines 17–20) with `export const metadata = postMetadata("pixel-icons");`
+and drop the unused `Metadata` type import.
 
 The registry strings are canonical — the pixel-icons and native-popovers
 `<title>`/description therefore change slightly (see the drift table in
@@ -579,15 +578,12 @@ the markdown-image side channel". Do NOT touch `remarkPlugins` — only
 <img src="https://m.media-amazon.com/images/I/811RjQaNsIL._AC_UF1000,1000_QL80_.jpg" alt="Frosty the Snowman" />
 ```
 
-   Leave line ~138 (`![[Pasted image ...]]` inside an indented block)
-   untouched.
-2. In `mdx-components.tsx`, delete the `img` mapping (the
-   `img: (props) => { ... }` entry) and the now-unused `NextImage` import
-   (`import NextImage from "next/image"`) — but first confirm nothing else
-   in the file uses `NextImage`.
-3. In `next.config.ts`, remove `rehypePlugins: ["rehype-unwrap-images"]`
-   (keep `remarkPlugins: ["remark-gfm"]` exactly as is).
-4. Run `npm uninstall rehype-unwrap-images`.
+Leave line ~138 (`![[Pasted image ...]]` inside an indented block)
+untouched. 2. In `mdx-components.tsx`, delete the `img` mapping (the
+`img: (props) => { ... }` entry) and the now-unused `NextImage` import
+(`import NextImage from "next/image"`) — but first confirm nothing else
+in the file uses `NextImage`. 3. In `next.config.ts`, remove `rehypePlugins: ["rehype-unwrap-images"]`
+(keep `remarkPlugins: ["remark-gfm"]` exactly as is). 4. Run `npm uninstall rehype-unwrap-images`.
 
 **Verify**:
 

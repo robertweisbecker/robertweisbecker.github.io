@@ -8,10 +8,14 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- components/animations.tsx components/animation/ components/icons.tsx lib/data/cv.ts lib/data/pages.ts hooks/use-mouse.js components/ui/message-scroller.tsx types/balloons-js.d.ts app/page.tsx components/demos/letterboxd.tsx package.json`
+> `git diff --stat bc51942..HEAD -- components/animations.tsx components/animation/shared.tsx components/animation/balloons-button.tsx components/animation/axis-cursor.tsx components/icons.tsx lib/data/pages.ts components/ui/message-scroller.tsx types/balloons-js.d.ts app/page.tsx components/demos/letterboxd.tsx components/ui/command.tsx components/ui/carousel.tsx components/image-modal.tsx package.json package-lock.json`
 > If any in-scope file changed since this plan was written, re-verify the
 > "zero importers" claims below (Step 1 does this anyway); on a mismatch in
 > the excerpts, treat it as a STOP condition.
+>
+> **Reconciled scope update**: On 2026-07-02, the maintainer explicitly added
+> removing `@gravity-ui/icons` and replacing its live imports with Tabler
+> equivalents. This is now part of this plan.
 
 ## Status
 
@@ -21,16 +25,25 @@
 - **Depends on**: none (recommended after [009](./009-ci-deploy-gate.md) so CI gates it)
 - **Category**: tech-debt
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `bc51942`, 2026-07-02 — `lib/data/cv.ts` and
+  `hooks/use-mouse.js` were already removed independently; this plan now covers
+  only the remaining dead files plus homepage experiment/icon extraction.
+- **Reconciled build baseline**: 48 generated static pages after the current
+  `.private` route convention and playground route set; this plan must not
+  delete any `app/**/page` route.
 
 ## Why this matters
 
 The repo carries several hundred lines of code with zero import sites, including a
 verbatim duplicate of a live module (`components/animations.tsx` duplicates
 `components/animation/shared.tsx` — the next animation edit will drift them),
-a broken hook that escapes typecheck (`hooks/use-mouse.js` uses `React`
-without importing it and isn't in the TS graph), and two runtime dependencies
+and two runtime dependencies
 (`balloons-js`, `@shadcn/react`) whose only consumers are themselves dead.
 Removing the genuinely dead pieces shrinks install size and kills drift traps.
+The repo also has one extra icon package, `@gravity-ui/icons`, for five icons
+that already have Tabler equivalents available through the live
+`@tabler/icons-react` dependency. Removing it reduces install and typecheck
+surface without losing any custom SVG assets.
 The homepage also contains active experiments and inline SVG assets; this plan
 preserves those by promoting them into proper modules instead of deleting them.
 That clears the ground for the homepage refactor in [plan 017](./017-server-client-boundaries.md)
@@ -39,26 +52,26 @@ without losing scratch work.
 ## Current state
 
 Every item below was verified to have **zero external importers** at commit
-`9ed1acd` (Step 1 re-verifies before deleting):
+`bc51942` (Step 1 re-verifies before deleting):
 
-| Target | What it is |
-| ------ | ---------- |
-| `components/animations.tsx` (173 lines) | Near-verbatim copy of `components/animation/shared.tsx` (only diffs: a relative import path and a comment). All live imports use `@/components/animation/shared`. |
-| `lib/data/cv.ts` (87 lines) | Unused `jobs`/`education` registry; content also drifted from the live CV on the homepage. |
-| `lib/data/pages.ts` (12 lines) | Unused `pageData` object. |
-| `components/animation/balloons-button.tsx` (24 lines) | `BalloonsButton`; sole consumer of `balloons-js`. |
-| `types/balloons-js.d.ts` | Ambient module shim for `balloons-js`. |
-| `hooks/use-mouse.js` (49 lines) | Plain-JS hook using `React.*` with no React import (would throw `ReferenceError` if ever used); only reference is a commented-out block in `app/page.tsx:546-581`. |
-| `components/ui/message-scroller.tsx` (~105 lines) | Wrapper over `@shadcn/react/message-scroller`; sole consumer of the `@shadcn/react` runtime dep. |
-| `GlitchFilter` export in `components/animation/shared.tsx` (line ~152) | Exported, zero import sites. Delete the export (and its implementation if nothing internal uses it). |
-| `app/page.tsx` active experiments and inline SVGs | The commented `AxisCursor` block is active scratch work; do **not** delete it. Copy its behavior into a new `components/animation/axis-cursor.tsx` component. The homepage-local SVG components (`GoogleIcon`, `MetaIcon`, `KrogerIcon`, `TruistIcon`, `BeyondMeatIcon`, `LetterboxdLogo`) should move to `components/icons.tsx` and be imported where used. Preserve commented-out JSX blocks. |
-| `components/demos/letterboxd.tsx` local `LetterboxdLogo` | Duplicate custom SVG asset kept for a paused header treatment. Move the SVG to `components/icons.tsx`, import it here, and preserve the commented header-treatment block. |
+| Target                                                                 | What it is                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `components/animations.tsx` (173 lines)                                | Near-verbatim copy of `components/animation/shared.tsx` (only diffs: a relative import path and a comment). All live imports use `@/components/animation/shared`.                                                                                                                                                                                                                                      |
+| `lib/data/pages.ts` (12 lines)                                         | Unused `pageData` object.                                                                                                                                                                                                                                                                                                                                                                              |
+| `components/animation/balloons-button.tsx` (24 lines)                  | `BalloonsButton`; sole consumer of `balloons-js`.                                                                                                                                                                                                                                                                                                                                                      |
+| `types/balloons-js.d.ts`                                               | Ambient module shim for `balloons-js`.                                                                                                                                                                                                                                                                                                                                                                 |
+| `components/ui/message-scroller.tsx` (~105 lines)                      | Wrapper over `@shadcn/react/message-scroller`; sole consumer of the `@shadcn/react` runtime dep.                                                                                                                                                                                                                                                                                                       |
+| `GlitchFilter` export in `components/animation/shared.tsx` (line ~152) | Exported, zero import sites. Delete the export (and its implementation if nothing internal uses it).                                                                                                                                                                                                                                                                                                   |
+| `app/page.tsx` active experiments and inline SVGs                      | The commented `AxisCursor` block is active scratch work; do **not** delete it. Copy its behavior into a new `components/animation/axis-cursor.tsx` component. The homepage-local SVG components (`GoogleIcon`, `MetaIcon`, `KrogerIcon`, `TruistIcon`, `BeyondMeatIcon`, `LetterboxdLogo`) should move to `components/icons.tsx` and be imported where used. Preserve commented-out JSX blocks.        |
+| `components/demos/letterboxd.tsx` local `LetterboxdLogo`               | Duplicate custom SVG asset kept for a paused header treatment. Move the SVG to `components/icons.tsx`, import it here, and preserve the commented header-treatment block.                                                                                                                                                                                                                              |
+| `@gravity-ui/icons` imports                                            | Live Gravity icon imports remain in `components/ui/command.tsx`, `components/ui/carousel.tsx`, `components/image-modal.tsx`, `components/animation/shared.tsx`, and the soon-to-delete `components/animations.tsx`. Replace the live imports with Tabler equivalents (`IconChevronLeft`, `IconPlayerPauseFilled`, `IconPlayerPlayFilled`, `IconRotateClockwise`, `IconX`) and then remove the package. |
 
 Dependencies to remove from `package.json` once their consumers are gone:
 
 - `"balloons-js": "^0.0.3"` (dependencies)
 - `"@shadcn/react": "^0.2.0"` (dependencies) — do NOT touch the separate
   `shadcn` CLI in devDependencies.
+- `"@gravity-ui/icons": "^2.18.0"` (devDependencies)
 
 Repo conventions that apply:
 
@@ -70,27 +83,41 @@ Repo conventions that apply:
 
 ## Commands you will need
 
-| Purpose    | Command         | Expected on success       |
-| ---------- | --------------- | ------------------------- |
-| Install    | `npm install`   | exit 0, lockfile updated  |
-| All checks | `npm run check` | exit 0                    |
-| Prod build | `npm run build` | exit 0                    |
+| Purpose    | Command         | Expected on success      |
+| ---------- | --------------- | ------------------------ |
+| Install    | `npm install`   | exit 0, lockfile updated |
+| All checks | `npm run check` | exit 0                   |
+| Prod build | `npm run build` | exit 0                   |
+
+`npm run check` reads generated Next.js type files under `.next/types`. If it
+fails only because `.next/types/validator.ts` still references removed or
+renamed `app/private/**` routes, treat that as stale generated cache, run
+`rm -rf .next`, and re-run the exact same verification once. Any non-cache
+failure, or the same failure after clearing `.next`, remains a STOP condition.
 
 ## Scope
 
 **In scope** (the only files you should modify or delete):
 
-- Delete: `components/animations.tsx`, `lib/data/cv.ts`, `lib/data/pages.ts`,
+- Delete: `components/animations.tsx`, `lib/data/pages.ts`,
   `components/animation/balloons-button.tsx`, `types/balloons-js.d.ts`,
-  `hooks/use-mouse.js`, `components/ui/message-scroller.tsx`
+  `components/ui/message-scroller.tsx`
 - Create: `components/animation/axis-cursor.tsx`
 - Edit: `components/animation/shared.tsx` (remove `GlitchFilter` only),
   `components/icons.tsx` (add the homepage SVG icons),
   `app/page.tsx` (import moved SVG icons; preserve commented experiments),
   `components/demos/letterboxd.tsx` (import moved `LetterboxdLogo`; preserve
   the commented header-treatment block),
+  `components/ui/command.tsx`, `components/ui/carousel.tsx`,
+  `components/image-modal.tsx` (replace Gravity icon imports with Tabler
+  equivalents only),
   `package.json` + `package-lock.json` (dependency removal)
 - `plans/README.md` (status row)
+
+When this plan is dispatched through an `improve execute` reviewer, the
+reviewer may own separate markdown formatting/index changes under `plans/`.
+The executor must not stage or commit those reviewer-owned plan files; source
+scope review should ignore those existing plan-only changes.
 
 **Out of scope** (do NOT touch, even though they look related):
 
@@ -116,6 +143,8 @@ Repo conventions that apply:
   homepage experiment/icon extraction), imperative messages, e.g. "Remove duplicate
   animations barrel and unused data registries".
 - Do NOT push or open a PR unless the operator instructed it.
+- If dispatched by a reviewer, stage and commit only the implementation files
+  from the source/package scope above. Leave `plans/*` changes for the reviewer.
 
 ## Steps
 
@@ -124,22 +153,22 @@ Repo conventions that apply:
 For each deletion target, confirm no live import sites:
 
 ```bash
-rg -n 'components/animations"|from "@/lib/data/cv"|from "@/lib/data/pages"|balloons-button|balloons-js|message-scroller|use-mouse|GlitchFilter' \
-  app components lib hooks content mdx-components.tsx --glob '!components/animations.tsx' --glob '!components/animation/balloons-button.tsx' --glob '!components/ui/message-scroller.tsx' --glob '!hooks/use-mouse.js'
+rg -n 'components/animations"|from "@/lib/data/pages"|balloons-button|balloons-js|message-scroller|GlitchFilter' \
+  app components lib hooks content mdx-components.tsx --glob '!components/animations.tsx' --glob '!components/animation/balloons-button.tsx' --glob '!components/ui/message-scroller.tsx'
 ```
 
-Expected: matches only inside the files being deleted themselves, the
-commented-out `AxisCursor` block in `app/page.tsx`, `types/balloons-js.d.ts`,
-and `components/animation/shared.tsx`'s own `GlitchFilter` definition. Any
-OTHER match is a STOP condition (something started using the "dead" code).
+Expected: matches only inside the files being deleted themselves,
+`types/balloons-js.d.ts`, `package.json`, `package-lock.json`, and
+`components/animation/shared.tsx`'s own `GlitchFilter` definition. Any OTHER
+match is a STOP condition (something started using the "dead" code).
 
 **Verify**: output matches the expectation above.
 
 ### Step 2: Delete the fully dead files
 
-Delete: `components/animations.tsx`, `lib/data/cv.ts`, `lib/data/pages.ts`,
+Delete: `components/animations.tsx`, `lib/data/pages.ts`,
 `components/animation/balloons-button.tsx`, `types/balloons-js.d.ts`,
-`hooks/use-mouse.js`, `components/ui/message-scroller.tsx`.
+`components/ui/message-scroller.tsx`.
 
 **Verify**: `npm run check` → exit 0.
 
@@ -168,18 +197,30 @@ Delete: `components/animations.tsx`, `lib/data/cv.ts`, `lib/data/pages.ts`,
 `rg -n "export function (GoogleIcon|MetaIcon|KrogerIcon|TruistIcon|BeyondMeatIcon|LetterboxdLogo)" components/icons.tsx` → all six icons are exported.
 `rg -n "function AxisCursor|export function AxisCursor" components/animation/axis-cursor.tsx` → one exported component.
 
-### Step 4: Remove the stranded dependencies
+### Step 4: Replace Gravity icons and remove stranded dependencies
 
-Remove `balloons-js` and `@shadcn/react` from `package.json` dependencies,
-then run `npm install` to update `package-lock.json`.
+Replace remaining Gravity icon imports with Tabler icons:
 
-**Verify**: `npm ls balloons-js @shadcn/react` → both report `(empty)` /
-not found. `npm run check` → exit 0.
+- `ChevronLeft` → `IconChevronLeft`
+- `PauseFill` → `IconPlayerPauseFilled`
+- `PlayFill` → `IconPlayerPlayFilled`
+- `ArrowRotateLeft` → `IconRotateClockwise`
+- `Xmark` → `IconX`
+
+Keep existing icon sizing/className behavior at each call site. Then remove
+`balloons-js` and `@shadcn/react` from `package.json` dependencies, remove
+`@gravity-ui/icons` from `package.json` devDependencies, and run `npm install`
+to update `package-lock.json`.
+
+**Verify**: `npm ls balloons-js @shadcn/react @gravity-ui/icons` → all three
+report `(empty)` / not found.
+`rg -n '@gravity-ui/icons|from "@gravity-ui/icons"' app components lib hooks content mdx-components.tsx package.json` → no matches.
+`npm run check` → exit 0.
 
 ### Step 5: Full build
 
-**Verify**: `npm run build` → exit 0, static generation completes (49 pages
-expected as of this plan; the count must not decrease).
+**Verify**: `npm run build` → exit 0, static generation completes (48 pages
+expected as of this reconciled plan; the count must not decrease).
 
 ## Test plan
 
@@ -192,15 +233,18 @@ homepage renders all sections.
 
 Machine-checkable. ALL must hold:
 
-- [ ] All seven files listed in Step 2 no longer exist
+- [ ] All five files listed in Step 2 no longer exist
 - [ ] `components/animation/axis-cursor.tsx` exists and exports `AxisCursor`
 - [ ] `components/icons.tsx` exports `GoogleIcon`, `MetaIcon`, `KrogerIcon`, `TruistIcon`, `BeyondMeatIcon`, and `LetterboxdLogo`
 - [ ] No local homepage/demo icon definitions remain: `rg -n "function (GoogleIcon|MetaIcon|KrogerIcon|TruistIcon|BeyondMeatIcon|LetterboxdLogo)" app/page.tsx components/demos/letterboxd.tsx` returns no matches
 - [ ] `rg -n "GlitchFilter|useMouse" app components hooks` returns no matches outside preserved comments
-- [ ] `rg -n "balloons-js|@shadcn/react" package.json` returns no matches
+- [ ] `rg -n "balloons-js|@shadcn/react|@gravity-ui/icons" package.json` returns no matches
+- [ ] `rg -n '@gravity-ui/icons|from "@gravity-ui/icons"' app components lib hooks content mdx-components.tsx package.json` returns no matches
 - [ ] `npm run check` exits 0
-- [ ] `npm run build` exits 0 with ≥49 static pages
-- [ ] No files outside the in-scope list are modified (`git status`)
+- [ ] `npm run build` exits 0 with ≥48 static pages
+- [ ] No source/package files outside the in-scope list are modified
+      (`git status`; ignore reviewer-owned `plans/*` changes only when this was
+      dispatched through `improve execute`)
 - [ ] `plans/README.md` status row updated
 
 ## STOP conditions

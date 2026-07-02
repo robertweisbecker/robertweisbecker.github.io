@@ -79,15 +79,15 @@ stop before code changes.
 
 ## Commands you will need
 
-| Purpose      | Command                | Expected on success                |
-| ------------ | ---------------------- | ---------------------------------- |
-| Install      | `npm install`          | exit 0                             |
-| Typecheck    | `npm run typecheck`    | exit 0, no errors                  |
-| Lint         | `npm run lint`         | exit 0                             |
-| Format check | `npm run format:check` | exit 0                             |
-| All checks   | `npm run check`        | exit 0                             |
+| Purpose      | Command                | Expected on success                 |
+| ------------ | ---------------------- | ----------------------------------- |
+| Install      | `npm install`          | exit 0                              |
+| Typecheck    | `npm run typecheck`    | exit 0, no errors                   |
+| Lint         | `npm run lint`         | exit 0                              |
+| Format check | `npm run format:check` | exit 0                              |
+| All checks   | `npm run check`        | exit 0                              |
 | Prod build   | `npm run build`        | exit 0, static generation completes |
-| Dev server   | `npm run dev`          | serves on http://localhost:3000    |
+| Dev server   | `npm run dev`          | serves on http://localhost:3000     |
 
 There is no test runner in this repo by policy. Verification is typecheck,
 lint, format, build, and manual browser QA.
@@ -110,7 +110,7 @@ lint, format, build, and manual browser QA.
   `card-grid` or `hybrid`)
 - `app/playground/page.tsx`
 - `app/playground/layout.tsx`
-- the six or current `app/playground/*/page.tsx` child pages only if the
+- the current public `app/playground/*/page.tsx` child pages only if the
   selected direction needs a route-level title target
 - `components/back-button.tsx` and `components/ui/link-button.tsx` only if
   directional transition props cannot otherwise be forwarded
@@ -167,7 +167,7 @@ cards. The card/nav surface should reflect the canonical current routes only.
 
 **Verify**:
 
-`rg -n "PLAYGROUND_ROUTES|/playground/motion-systems" app/ components/ lib/data/playground.ts`
+`rg -n "PLAYGROUND_ROUTES|/playground/motion" app/ components/ lib/data/playground.ts`
 matches only the canonical route entries or a thin compatibility re-export.
 
 ### Step 3: Extend shared View Transition helpers for playground

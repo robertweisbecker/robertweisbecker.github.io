@@ -114,20 +114,20 @@ Repo conventions to honor:
   `ViewTransition` / transition props.
 - AGENTS.md Known Bugs: Turbopack + Tailwind v4 stale CSS can persist after
   CSS syntax errors. If View Transition CSS appears stuck in dev, `touch
-  styles/globals.css` or run `npm run dev:fresh`; do not remove valid CSS as a
+styles/globals.css` or run `npm run dev:fresh`; do not remove valid CSS as a
   workaround.
 
 ## Commands you will need
 
-| Purpose      | Command                | Expected on success                |
-| ------------ | ---------------------- | ---------------------------------- |
-| Install      | `npm install`          | exit 0                             |
-| Typecheck    | `npm run typecheck`    | exit 0, no errors                  |
-| Lint         | `npm run lint`         | exit 0                             |
-| Format check | `npm run format:check` | exit 0                             |
-| All checks   | `npm run check`        | exit 0                             |
+| Purpose      | Command                | Expected on success                 |
+| ------------ | ---------------------- | ----------------------------------- |
+| Install      | `npm install`          | exit 0                              |
+| Typecheck    | `npm run typecheck`    | exit 0, no errors                   |
+| Lint         | `npm run lint`         | exit 0                              |
+| Format check | `npm run format:check` | exit 0                              |
+| All checks   | `npm run check`        | exit 0                              |
 | Prod build   | `npm run build`        | exit 0, static generation completes |
-| Dev server   | `npm run dev`          | serves on http://localhost:3000    |
+| Dev server   | `npm run dev`          | serves on http://localhost:3000     |
 
 There is no test runner in this repo by policy. Verification is typecheck,
 lint, format, build, and manual browser QA.
@@ -333,17 +333,17 @@ Manual browser QA in Chrome with `npm run dev`:
 Machine-checkable. ALL must hold:
 
 - [ ] `styles/view-transitions.css` exists and is imported once from
-  `styles/globals.css`
+      `styles/globals.css`
 - [ ] `components/view-transitions.tsx` exists and exports
-  `pageTitleTransitionName` plus `TitleMorph`
+      `pageTitleTransitionName` plus `TitleMorph`
 - [ ] `npm run check` exits 0
 - [ ] `npm run build` exits 0
 - [ ] `rg -n 'viewTransitionName: "title"' app/` returns no matches
 - [ ] `rg -n 'item\.viewTransitionName \?\? item\.title' components/` returns
-  no matches
+      no matches
 - [ ] `rg -n "@view-transition" styles/globals.css` returns no matches
 - [ ] No `app/playground/**`, `components/playground/**`, or
-  `lib/data/playground.ts` files are modified by this plan
+      `lib/data/playground.ts` files are modified by this plan
 - [ ] Browser QA flows 1-6 pass
 - [ ] No files outside the in-scope list are modified (`git status`)
 - [ ] `plans/README.md` status row updated

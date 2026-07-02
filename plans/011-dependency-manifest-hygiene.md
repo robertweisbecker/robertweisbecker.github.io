@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- package.json package-lock.json`
+> `git diff --stat 9088a10..HEAD -- package.json package-lock.json`
 > If the manifest changed since this plan was written, re-read it and adapt;
 > if a dependency this plan moves/removes is gone already, skip that step.
 
@@ -21,31 +21,30 @@
   land [010](./010-dead-code-sweep.md) first to avoid conflicts — not a hard logical dependency)
 - **Category**: migration / deps
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `9088a10`, 2026-07-02 — Plan 010 removed
+  `@gravity-ui/icons` entirely and replaced its imports with Tabler icons.
+  This plan must keep Gravity absent, not reclassify it.
 
 ## Why this matters
 
-The manifest misstates what production needs: `@gravity-ui/icons` is a
-devDependency but is imported by production components (carousel, command
-palette, image modal — the first two sit in shared/MDX chunks), so any
-`--omit=dev` install breaks the build. `@types/mdx` is the inverse (types
-shipped as a runtime dep). `components/ui/carousel.tsx` imports types from
-`embla-carousel`, which is not declared and only resolves via hoisting. And
-the `overrides` block pins `postcss` to 8.5.12 — *below* the `^8.5.15`
-minimum that `@tailwindcss/postcss@4.3.2` declares — while the `hono`/`qs`
-overrides affect only the dev-only `shadcn` CLI subtree and are undocumented.
+The manifest still misstates what production needs after Plan 010:
+`@types/mdx` is a compile-time type package shipped as a runtime dependency;
+`components/ui/carousel.tsx` imports types from `embla-carousel`, which is not
+declared directly and only resolves via hoisting; and the `overrides` block
+pins `postcss` to 8.5.12 — _below_ the `^8.5.15` minimum that
+`@tailwindcss/postcss@4.3.2` declares — while the `hono`/`qs` overrides affect
+only the dev-only `shadcn` CLI subtree and are undocumented. Plan 010 already
+removed the extra Gravity icon package, so this plan must not reintroduce it.
 
 ## Current state
 
-- `package.json` (as of `9ed1acd`):
+- `package.json` (as of `9088a10`):
   - Line 31: `"@types/mdx": "^2.0.13"` under `dependencies`.
   - Lines 40–42: `embla-carousel-autoplay` / `-fade` / `-react` all
     `"^9.0.0-rc02"` under `dependencies`; no direct `embla-carousel` entry.
-  - Line 59: `"@gravity-ui/icons": "^2.18.0"` under `devDependencies`.
   - Lines 72–76: `"overrides": { "hono": "4.12.27", "postcss": "8.5.12", "qs": "6.15.2" }`.
-- Production import sites for `@gravity-ui/icons` (verified):
-  `components/ui/carousel.tsx:15`, `components/ui/command.tsx:19`,
-  `components/image-modal.tsx:11`, `components/animation/shared.tsx:7`
-  (also `components/animations.tsx:7`, deleted by [plan 010](./010-dead-code-sweep.md)).
+- `@gravity-ui/icons` is no longer present in `package.json` or source after
+  [plan 010](./010-dead-code-sweep.md); keep it absent.
 - Type-only import of the undeclared core package:
   `components/ui/carousel.tsx:4` —
   `import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from "embla-carousel";`
@@ -58,13 +57,13 @@ overrides affect only the dev-only `shadcn` CLI subtree and are undocumented.
 
 ## Commands you will need
 
-| Purpose        | Command                                   | Expected on success            |
-| -------------- | ----------------------------------------- | ------------------------------ |
-| Install        | `npm install`                             | exit 0, lockfile updated       |
-| Dep audit      | `npm audit --audit-level=high --omit=dev` | "found 0 vulnerabilities"      |
-| Resolution     | `npm ls postcss @gravity-ui/icons embla-carousel` | expected versions, no errors |
-| All checks     | `npm run check`                           | exit 0                         |
-| Prod build     | `npm run build`                           | exit 0                         |
+| Purpose    | Command                                   | Expected on success          |
+| ---------- | ----------------------------------------- | ---------------------------- |
+| Install    | `npm install`                             | exit 0, lockfile updated     |
+| Dep audit  | `npm audit --audit-level=high --omit=dev` | "found 0 vulnerabilities"    |
+| Resolution | `npm ls postcss embla-carousel`           | expected versions, no errors |
+| All checks | `npm run check`                           | exit 0                       |
+| Prod build | `npm run build`                           | exit 0                       |
 
 ## Scope
 
@@ -81,6 +80,7 @@ overrides affect only the dev-only `shadcn` CLI subtree and are undocumented.
   deliberately deferred (no stable 9.x exists yet; see index).
 - `components/ui/carousel.tsx` or any source file — this is manifest-only.
 - Removing `balloons-js` / `@shadcn/react` — that is [plan 010](./010-dead-code-sweep.md).
+- Re-adding or moving `@gravity-ui/icons` — Plan 010 intentionally removed it.
 - The `prettier` exact pin — intentional ([plan 001](./001-add-verification-baseline.md) decision).
 
 ## Git workflow
@@ -92,13 +92,14 @@ overrides affect only the dev-only `shadcn` CLI subtree and are undocumented.
 
 ## Steps
 
-### Step 1: Reclassify the two misplaced packages
+### Step 1: Reclassify the misplaced MDX types package
 
 In `package.json`:
 
-1. Move `"@gravity-ui/icons": "^2.18.0"` from `devDependencies` to
-   `dependencies`.
-2. Move `"@types/mdx": "^2.0.13"` from `dependencies` to `devDependencies`.
+1. Move `"@types/mdx": "^2.0.13"` from `dependencies` to
+   `devDependencies`.
+2. Confirm `"@gravity-ui/icons"` is absent from both dependency blocks. Do
+   not re-add it.
 
 Keep both blocks alphabetically sorted (they currently are).
 
@@ -163,7 +164,7 @@ which exercises the postcss/Tailwind pipeline the override change touches.
 
 Machine-checkable. ALL must hold:
 
-- [ ] `node -e "const p=require('./package.json'); process.exit(p.dependencies['@gravity-ui/icons'] && p.devDependencies['@types/mdx'] && p.dependencies['embla-carousel'] && !p.dependencies['@types/mdx'] && !p.devDependencies['@gravity-ui/icons'] ? 0 : 1)"` exits 0
+- [ ] `node -e "const p=require('./package.json'); process.exit(p.devDependencies['@types/mdx'] && p.dependencies['embla-carousel'] && !p.dependencies['@types/mdx'] && !p.dependencies['@gravity-ui/icons'] && !p.devDependencies['@gravity-ui/icons'] ? 0 : 1)"` exits 0
 - [ ] `npm ls postcss` resolves ≥ 8.5.15 with no invalid/conflict markers
 - [ ] `npm audit --audit-level=high --omit=dev` reports 0 vulnerabilities
 - [ ] `npm run check` exits 0 and `npm run typecheck:build` exits 0

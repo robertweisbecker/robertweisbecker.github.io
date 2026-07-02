@@ -28,8 +28,7 @@ The published post at `/posts/theming` links to `/projects/oklch` and
 `/projects/unified-design-language`. Neither route exists — project pages in
 this repo are served at the top level via the `app/[slug]` catch-all (e.g.
 `/oklch-colors`, `/unified-design-language`), and there is no `/projects/*`
-prefix anywhere. Every visitor who clicks these links from a live post gets a
-404. The fix is two href corrections plus a sweep to confirm no other internal
+prefix anywhere. Every visitor who clicks these links from a live post gets a 404. The fix is two href corrections plus a sweep to confirm no other internal
 link points at a nonexistent route.
 
 ## Current state
@@ -64,12 +63,12 @@ The second link's target is `/unified-design-language`.
 
 ## Commands you will need
 
-| Purpose      | Command                | Expected on success |
-| ------------ | ---------------------- | ------------------- |
-| Install      | `npm install`          | exit 0              |
-| All checks   | `npm run check`        | exit 0              |
-| Prod build   | `npm run build`        | exit 0              |
-| Dev server   | `npm run dev`          | serves on :3000     |
+| Purpose    | Command         | Expected on success |
+| ---------- | --------------- | ------------------- |
+| Install    | `npm install`   | exit 0              |
+| All checks | `npm run check` | exit 0              |
+| Prod build | `npm run build` | exit 0              |
+| Dev server | `npm run dev`   | serves on :3000     |
 
 ## Scope
 

@@ -139,13 +139,13 @@ Conventions to match:
 
 ## Commands you will need
 
-| Purpose            | Command                         | Expected on success                          |
-| ------------------ | ------------------------------- | -------------------------------------------- |
-| Dev server         | `npm run dev`                   | serves on localhost:3000                     |
-| Typecheck          | `npm run typecheck`             | exit 0                                       |
-| Full check         | `npm run check`                 | exit 0 (typecheck + lint + format:check)     |
-| Production build   | `npm run build`                 | exit 0; 49+ static pages; no `/private/**`   |
-| Format             | `npx prettier --write <files>`  | exit 0                                       |
+| Purpose          | Command                        | Expected on success                        |
+| ---------------- | ------------------------------ | ------------------------------------------ |
+| Dev server       | `npm run dev`                  | serves on localhost:3000                   |
+| Typecheck        | `npm run typecheck`            | exit 0                                     |
+| Full check       | `npm run check`                | exit 0 (typecheck + lint + format:check)   |
+| Production build | `npm run build`                | exit 0; 49+ static pages; no `/private/**` |
+| Format           | `npx prettier --write <files>` | exit 0                                     |
 
 There is no test runner in this repo (deliberate policy — see `plans/README.md`). Verification is typecheck + lint + build + browser QA.
 

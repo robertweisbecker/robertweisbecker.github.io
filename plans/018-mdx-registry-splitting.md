@@ -90,12 +90,12 @@ already lazy-loads `CardFan` and `MotionTextPlaygroundDemo` via
 
 ## Commands you will need
 
-| Purpose     | Command         | Expected on success                  |
-| ----------- | --------------- | ------------------------------------ |
-| Install     | `npm install`   | exit 0                               |
-| All checks  | `npm run check` | exit 0                               |
-| Prod build  | `npm run build` | exit 0; record First Load JS deltas  |
-| Dev server  | `npm run dev`   | serves on :3000                      |
+| Purpose    | Command         | Expected on success                 |
+| ---------- | --------------- | ----------------------------------- |
+| Install    | `npm install`   | exit 0                              |
+| All checks | `npm run check` | exit 0                              |
+| Prod build | `npm run build` | exit 0; record First Load JS deltas |
+| Dev server | `npm run dev`   | serves on :3000                     |
 
 ## Scope
 
@@ -199,7 +199,7 @@ sites keep working without edits.
    others surfaced by `rg` over header/footer/mode-toggle/site-search/video
    imports (run the grep; the list above was compiled at `9ed1acd`).
 3. Rewrite `components/icons-pixel.tsx` as: `export * from "./pixel-icons/core";
-   export * from "./pixel-icons/chrome";` followed by all REMAINING icon
+export * from "./pixel-icons/chrome";` followed by all REMAINING icon
    definitions (importing `createPixelIcon` from `./pixel-icons/core`).
    Every existing `@/components/icons-pixel` import site keeps compiling.
 4. Update the global-chrome import sites (`nav-links`, `work-menu`,

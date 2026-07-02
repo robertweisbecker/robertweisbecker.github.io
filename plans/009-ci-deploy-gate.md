@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- package.json README.md .github/`
+> `git diff --stat 9088a10..HEAD -- package.json README.md .github/`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -21,6 +21,9 @@
 - **Depends on**: none
 - **Category**: dx
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `9088a10`, 2026-07-02 — Plan 010 changed
+  dependencies only; the verification scripts and empty `.github/workflows/`
+  state still match this plan.
 
 ## Why this matters
 
@@ -38,7 +41,8 @@ larger refactor plans ([017](./017-server-client-boundaries.md), [018](./018-mdx
 
 - `.github/workflows/` — exists, contains no files.
 - `package.json` scripts (lines 6–23): `"build": "next build"` (line 11),
-  `"lint": "eslint"` (line 14), `"typecheck"` (line 15),
+  `"lint": "eslint --cache --cache-location .next/cache/eslint/"` (line 14),
+  `"typecheck"` (line 15),
   `"check": "npm run typecheck && npm run lint && npm run format:check"`
   (line 17).
 - `next.config.ts:18-20` — production TypeScript uses `tsconfig.build.json`
@@ -56,12 +60,12 @@ larger refactor plans ([017](./017-server-client-boundaries.md), [018](./018-mdx
 
 ## Commands you will need
 
-| Purpose            | Command                          | Expected on success |
-| ------------------ | -------------------------------- | ------------------- |
-| Install (CI-style) | `npm ci`                         | exit 0              |
-| All checks         | `npm run check`                  | exit 0              |
-| Prod build         | `npm run build`                  | exit 0              |
-| Workflow lint      | `gh workflow list` (after push)  | workflow listed     |
+| Purpose            | Command                         | Expected on success |
+| ------------------ | ------------------------------- | ------------------- |
+| Install (CI-style) | `npm ci`                        | exit 0              |
+| All checks         | `npm run check`                 | exit 0              |
+| Prod build         | `npm run build`                 | exit 0              |
+| Workflow lint      | `gh workflow list` (after push) | workflow listed     |
 
 ## Scope
 
@@ -126,15 +130,29 @@ Notes: the default branch is `master` (not `main`) — verify with
 `npm run check` runs the FULL-graph typecheck (`tsconfig.json`), which
 includes `/private/**` dev routes — that is intentional.
 
-**Verify**: `npx yaml-lint .github/workflows/check.yml` if available, else
-`node -e "require('js-yaml')"` is NOT guaranteed to exist — instead verify
-with `python3 -c "import yaml,sys; yaml.safe_load(open('.github/workflows/check.yml'))"`
-→ exit 0.
+**Verify**: if a YAML parser is already available, use it. Do not add a
+package only for workflow linting. PyYAML is not installed in this repo's
+current local environment, so this stdlib-safe structural check is acceptable:
+
+```bash
+node -e "const fs=require('fs'); const y=fs.readFileSync('.github/workflows/check.yml','utf8'); for (const s of ['name: Check','pull_request:','branches: [master]','npm ci','npm run check','npm run build']) { if (!y.includes(s)) process.exit(1); }"
+```
+
+Expected: exit 0.
 
 ### Step 2: Run the same gate locally to prove it passes
 
 ```bash
 npm ci && npm run check && npm run build
+```
+
+If `npm ci` fails only with an `EPERM`/permission error inside the user's
+global npm cache (for example `~/.npm/_cacache/tmp/...`), treat that as local
+machine cache ownership drift, not lockfile drift. Re-run the install once
+with a repo-local ignored cache:
+
+```bash
+npm_config_cache=.next/cache/npm npm ci && npm run check && npm run build
 ```
 
 If `npm run check` fails on pre-existing violations, fix ONLY formatting via
@@ -184,8 +202,9 @@ Stop and report back (do not improvise) if:
   formatting) — the baseline is broken and must be reported, not patched
   around inside this plan.
 - The default branch turns out not to be `master`.
-- `npm ci` fails (lockfile drift) — report; do not `npm install` to
-  regenerate the lockfile inside this plan.
+- `npm ci` fails for lockfile drift — report; do not `npm install` to
+  regenerate the lockfile inside this plan. If the only failure is global npm
+  cache permissions, use the repo-local cache retry documented in Step 2.
 
 ## Maintenance notes
 
