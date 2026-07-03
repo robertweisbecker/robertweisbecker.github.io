@@ -34,7 +34,7 @@ function TooltipTrigger({
   /** Tooltip content shown when inside a TooltipGroup. Accepts any ReactNode. */
   tooltip?: React.ReactNode;
 }) {
-  const groupContext = React.useContext(TooltipGroupContext);
+  const groupContext = React.use(TooltipGroupContext);
   const handle = handleProp ?? groupContext?.handle;
   const payload = payloadProp ?? (groupContext ? tooltip : undefined);
 

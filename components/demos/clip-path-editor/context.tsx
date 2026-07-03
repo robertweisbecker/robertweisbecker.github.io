@@ -13,7 +13,7 @@ type ClipPathEditorContextValue = {
 const ClipPathEditorContext = React.createContext<ClipPathEditorContextValue | null>(null);
 
 export function useClipPathEditor() {
-  const context = React.useContext(ClipPathEditorContext);
+  const context = React.use(ClipPathEditorContext);
   if (!context) throw new Error("useClipPathEditor must be used within <ClipPathEditorProvider>.");
   return context;
 }

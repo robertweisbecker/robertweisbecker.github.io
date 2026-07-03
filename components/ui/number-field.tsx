@@ -99,7 +99,7 @@ export function NumberFieldScrubArea({
 }: NumberFieldPrimitive.ScrubArea.Props & {
   label?: string;
 }): React.ReactElement {
-  const context = React.useContext(NumberFieldContext);
+  const context = React.use(NumberFieldContext);
 
   if (!context) {
     throw new Error("NumberFieldScrubArea must be used within a NumberField component for accessibility.");

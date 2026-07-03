@@ -55,7 +55,7 @@ function DataListRoot({ orientation = "horizontal", size = "md", className, ...p
 }
 
 function DataListItem({ className, ...props }: React.ComponentProps<"div">) {
-  const { orientation } = React.useContext(DataListContext);
+  const { orientation } = React.use(DataListContext);
   return (
     <div
       data-slot="data-list-item"
@@ -70,7 +70,7 @@ function DataListItem({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
-  const { orientation, size } = React.useContext(DataListContext);
+  const { orientation, size } = React.use(DataListContext);
   return (
     <dt
       data-slot="data-list-label"

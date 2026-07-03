@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { createContext, useContext, useId, useMemo } from "react";
+import { createContext, use, useId, useMemo } from "react";
 
 type MarkNoteContextValue = {
   noteId: string;
@@ -114,7 +114,7 @@ type MarkProps = {
 };
 
 export function Mark({ children, className }: MarkProps) {
-  const ctx = useContext(MarkNoteContext);
+  const ctx = use(MarkNoteContext);
 
   return (
     <mark

@@ -84,7 +84,7 @@ function ToggleGroupItem({
   shape = "default",
   ...props
 }: TogglePrimitive.Props & VariantProps<typeof toggleVariants>) {
-  const context = React.useContext(ToggleGroupContext);
+  const context = React.use(ToggleGroupContext);
   const isGrid = context.grid === true;
 
   return (

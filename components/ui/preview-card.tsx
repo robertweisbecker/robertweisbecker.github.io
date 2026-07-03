@@ -42,7 +42,7 @@ export function PreviewCardTrigger({
   /** Preview content shown when inside a PreviewCardGroup. */
   preview?: React.ReactNode;
 }): React.ReactElement {
-  const groupContext = React.useContext(PreviewCardGroupContext);
+  const groupContext = React.use(PreviewCardGroupContext);
   const handle = handleProp ?? groupContext?.handle;
   const payload = payloadProp ?? (groupContext ? preview : undefined);
 

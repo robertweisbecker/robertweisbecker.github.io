@@ -23,7 +23,7 @@ type ThemeContextValue = ThemeSettings & {
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
 export function useTheme() {
-  const themeContext = React.useContext(ThemeContext);
+  const themeContext = React.use(ThemeContext);
   if (!themeContext) throw new Error("useTheme must be used within a <Theme> provider");
   return themeContext;
 }
@@ -68,7 +68,7 @@ export function Theme({
   style,
   ...props
 }: ThemeProps) {
-  const parentContext = React.useContext(ThemeContext);
+  const parentContext = React.use(ThemeContext);
   const isRoot = parentContext === null;
   const baseline = React.useMemo<ThemeSettings>(
     () =>
