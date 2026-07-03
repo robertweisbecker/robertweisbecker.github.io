@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { LazyMotion, domAnimation, m } from "motion/react";
 import { cn } from "@/lib/utils";
 
 type MorphIconName = keyof typeof morphIcons;
@@ -43,23 +43,25 @@ export function MorphIcon({
   const lines = active ? morphIcons[to] : morphIcons[from];
 
   return (
-    <motion.svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={cn("block overflow-visible", className)} aria-hidden>
-      {lines.map((line, index) => (
-        <motion.line
-          key={index}
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-          initial={false}
-          animate={line}
-          transition={{
-            type: "spring",
-            stiffness: 520,
-            damping: 38,
-            mass: 0.7,
-          }}
-        />
-      ))}
-    </motion.svg>
+    <LazyMotion features={domAnimation}>
+      <m.svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={cn("block overflow-visible", className)} aria-hidden>
+        {lines.map((line, index) => (
+          <m.line
+            key={index}
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            initial={false}
+            animate={line}
+            transition={{
+              type: "spring",
+              stiffness: 520,
+              damping: 38,
+              mass: 0.7,
+            }}
+          />
+        ))}
+      </m.svg>
+    </LazyMotion>
   );
 }

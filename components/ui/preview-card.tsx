@@ -42,7 +42,7 @@ export function PreviewCardTrigger({
   /** Preview content shown when inside a PreviewCardGroup. */
   preview?: React.ReactNode;
 }): React.ReactElement {
-  const groupContext = React.useContext(PreviewCardGroupContext);
+  const groupContext = React.use(PreviewCardGroupContext);
   const handle = handleProp ?? groupContext?.handle;
   const payload = payloadProp ?? (groupContext ? preview : undefined);
 
@@ -67,9 +67,10 @@ export function PreviewCardGroup({
 }: PreviewCardGroupProps) {
   const internalHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const handle = handleProp ?? internalHandle;
+  const contextValue = React.useMemo(() => ({ handle }), [handle]);
 
   return (
-    <PreviewCardGroupContext.Provider value={{ handle }}>
+    <PreviewCardGroupContext.Provider value={contextValue}>
       {children}
       <PreviewCardPrimitive.Root
         handle={handle}

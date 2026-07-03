@@ -2,58 +2,60 @@
 
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import * as React from "react";
 
 function ColorCode({ value, className, ...props }: Omit<React.ComponentProps<"button">, "children"> & { value: string }) {
   const { copyToClipboard, isCopied } = useCopyToClipboard({ timeout: 1000 });
 
   return (
-    <button
-      type="button"
-      className={cn(
-        "focus-visible:outline-focus inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-sm bg-foreground/8 px-1 py-1 align-baseline font-pixel text-[11px] leading-none text-foreground transition-colors hover:bg-foreground/12 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-foreground/16 dark:hover:bg-foreground/24",
-        className
-      )}
-      aria-label={`Copy color ${value}`}
-      onClick={() => copyToClipboard(value)}
-      {...props}
-    >
-      <motion.span
-        data-slot="swatch"
-        className="inline-block size-[0.9em] shrink-0 rounded-xs ring inset-ring ring-muted inset-ring-border"
-        aria-hidden="true"
-        style={{ backgroundColor: value }}
-        animate={{ scale: isCopied ? 1.25 : 1, rotate: isCopied ? 90 : 0 }}
-        transition={{ duration: 0.15 }}
-      />
-
-      <span data-slot="value" className="relative inline-flex">
-        <AnimatePresence initial={false} mode="popLayout">
-          {isCopied ? (
-            <motion.span
-              key="copied"
-              initial={{ y: 8, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 2, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-              className="absolute inset-x-0 text-center"
-            >
-              Copied!
-            </motion.span>
-          ) : null}
-        </AnimatePresence>
-        <motion.span
-          key="value"
-          // initial={{ y: -8, opacity: 0 }}
-          animate={{ y: isCopied ? -8 : 0, opacity: isCopied ? 0 : 1 }}
-          // exit={{ y: -2, opacity: 0 }}
+    <LazyMotion features={domAnimation}>
+      <button
+        type="button"
+        className={cn(
+          "focus-visible:outline-focus inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-sm bg-foreground/8 px-1 py-1 align-baseline font-pixel text-[11px] leading-none text-foreground transition-colors hover:bg-foreground/12 focus-visible:outline-2 focus-visible:outline-offset-2 dark:bg-foreground/16 dark:hover:bg-foreground/24",
+          className
+        )}
+        aria-label={`Copy color ${value}`}
+        onClick={() => copyToClipboard(value)}
+        {...props}
+      >
+        <m.span
+          data-slot="swatch"
+          className="inline-block size-[0.9em] shrink-0 rounded-xs ring inset-ring ring-muted inset-ring-border"
+          aria-hidden="true"
+          style={{ backgroundColor: value }}
+          animate={{ scale: isCopied ? 1.25 : 1, rotate: isCopied ? 90 : 0 }}
           transition={{ duration: 0.15 }}
-        >
-          {value}
-        </motion.span>
-      </span>
-    </button>
+        />
+
+        <span data-slot="value" className="relative inline-flex">
+          <AnimatePresence initial={false} mode="popLayout">
+            {isCopied ? (
+              <m.span
+                key="copied"
+                initial={{ y: 8, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 2, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+                className="absolute inset-x-0 text-center"
+              >
+                Copied!
+              </m.span>
+            ) : null}
+          </AnimatePresence>
+          <m.span
+            key="value"
+            // initial={{ y: -8, opacity: 0 }}
+            animate={{ y: isCopied ? -8 : 0, opacity: isCopied ? 0 : 1 }}
+            // exit={{ y: -2, opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            {value}
+          </m.span>
+        </span>
+      </button>
+    </LazyMotion>
   );
 }
 

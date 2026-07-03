@@ -2,13 +2,13 @@
 
 import { type MorphablePixelIconName, type PixelIconPoint, morphablePixelIconNames, pixelIconData } from "@/components/icons-pixel";
 import { cn } from "@/lib/utils";
-import { motion, useReducedMotion, type Transition } from "motion/react";
+import { LazyMotion, domAnimation, m, useReducedMotion, type Transition } from "motion/react";
 import * as React from "react";
 
 export type PixelMorphStrategy = "match" | "nearest" | "reading" | "radial" | "scatter" | "compress";
 export type PixelMorphAnimation = "linear" | "ease" | "spring";
 
-export type PixelMorphProps = Omit<React.ComponentProps<typeof motion.svg>, "children"> & {
+export type PixelMorphProps = Omit<React.ComponentProps<typeof m.svg>, "children"> & {
   from: MorphablePixelIconName;
   to: MorphablePixelIconName;
   active?: boolean;
@@ -292,26 +292,28 @@ export function PixelMorph({
         };
 
   return (
-    <motion.svg
-      width={scale ? SCALE_SIZE : ICON_SIZE}
-      height={scale ? SCALE_SIZE : ICON_SIZE}
-      viewBox={`0 0 ${ICON_SIZE} ${ICON_SIZE}`}
-      fill="currentColor"
-      className={cn("block size-(--pixel-morph-size) shrink-0 overflow-visible", className)}
-      style={{ imageRendering: undefined, ...scaledStyle, ...style } as React.CSSProperties}
-      aria-hidden={ariaHidden}
-      {...props}
-    >
-      {pairs.map((pair, index) => (
-        <motion.rect
-          {...(dots ? { rx: 1, x: 0.05, y: 0.05, width: 0.9, height: 0.9 } : { width: 1, height: 1 })}
-          key={`${pair.from.index}-${pair.to.index}`}
-          fill="currentColor"
-          initial={false}
-          animate={getAnimateTarget(pair, active, strategy, animation, shouldReduceMotion)}
-          transition={getTransition(animation, strategy, duration, shouldReduceMotion ? 0 : index * stagger, shouldReduceMotion)}
-        />
-      ))}
-    </motion.svg>
+    <LazyMotion features={domAnimation}>
+      <m.svg
+        width={scale ? SCALE_SIZE : ICON_SIZE}
+        height={scale ? SCALE_SIZE : ICON_SIZE}
+        viewBox={`0 0 ${ICON_SIZE} ${ICON_SIZE}`}
+        fill="currentColor"
+        className={cn("block size-(--pixel-morph-size) shrink-0 overflow-visible", className)}
+        style={{ imageRendering: undefined, ...scaledStyle, ...style } as React.CSSProperties}
+        aria-hidden={ariaHidden}
+        {...props}
+      >
+        {pairs.map((pair, index) => (
+          <m.rect
+            {...(dots ? { rx: 1, x: 0.05, y: 0.05, width: 0.9, height: 0.9 } : { width: 1, height: 1 })}
+            key={`${pair.from.index}-${pair.to.index}`}
+            fill="currentColor"
+            initial={false}
+            animate={getAnimateTarget(pair, active, strategy, animation, shouldReduceMotion)}
+            transition={getTransition(animation, strategy, duration, shouldReduceMotion ? 0 : index * stagger, shouldReduceMotion)}
+          />
+        ))}
+      </m.svg>
+    </LazyMotion>
   );
 }

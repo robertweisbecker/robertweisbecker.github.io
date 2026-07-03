@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 import { ImageModal } from "@/components/image-modal";
 import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,8 +7,7 @@ import * as React from "react";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "./ui/resizable";
 import { Badge } from "./ui/badge";
 import { Image, ImageProps } from "./image";
-import { imageSrc } from "@/lib/image-src";
-import type { StaticImageData } from "next/image";
+import NextImage, { type StaticImageData } from "next/image";
 
 interface ImageToggleProps {
   before: StaticImageData;
@@ -25,15 +22,12 @@ interface ImageToggleProps {
 export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mode = "tabs", imageProps }: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
 
-  const beforeUrl = imageSrc(before);
-  const afterUrl = imageSrc(after);
-
   if (mode === "comparison") {
     return (
       <figure className="not-prose flex flex-col justify-center">
         <ResizablePanelGroup className="squircle relative aspect-video rounded-xl" orientation="horizontal">
           <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="squircle group relative rounded-s-xl rounded-e-xs">
-            <img src={beforeUrl} className="h-full w-auto object-cover object-left" alt="" />
+            <NextImage src={before} className="h-full w-auto max-w-none object-cover object-left" alt="" />
             <Badge
               variant="outline"
               className="absolute top-2 left-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
@@ -43,7 +37,7 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="squircle group relative rounded-s-xs rounded-e-xl">
-            <img src={afterUrl} className="h-full w-auto object-cover object-right" alt="" />
+            <NextImage src={after} className="h-full w-auto max-w-none object-cover object-right" alt="" />
             <Badge
               variant="outline"
               className="absolute top-2 right-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
@@ -60,12 +54,18 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
     return (
       <figure className="not-prose flex flex-col justify-center">
         <div className="relative overflow-hidden rounded-md">
-          <img
-            src={beforeUrl}
+          <NextImage
+            src={before}
+            className="h-auto w-full"
             // style={{ opacity: 1 - sliderValue / 100 }}
             alt="Before image"
           />
-          <img src={afterUrl} className="absolute inset-0 z-1" style={{ opacity: sliderValue / 100 }} alt="After image" />
+          <NextImage
+            src={after}
+            className="absolute inset-0 z-1 h-full w-full object-cover"
+            style={{ opacity: sliderValue / 100 }}
+            alt="After image"
+          />
         </div>
         <figcaption className="mx-auto grid w-full max-w-sm flex-1 grid-cols-[auto_1fr_auto] items-center gap-4 p-3 text-xs text-muted-foreground">
           <p>{tab1}</p>

@@ -10,10 +10,20 @@ interface DataListContextValue {
   size: DataListSize;
 }
 
-const DataListContext = React.createContext<DataListContextValue>({
-  orientation: "horizontal",
-  size: "md",
-});
+const DATA_LIST_CONTEXT_VALUES: Record<DataListOrientation, Record<DataListSize, DataListContextValue>> = {
+  horizontal: {
+    sm: { orientation: "horizontal", size: "sm" },
+    md: { orientation: "horizontal", size: "md" },
+    lg: { orientation: "horizontal", size: "lg" },
+  },
+  vertical: {
+    sm: { orientation: "vertical", size: "sm" },
+    md: { orientation: "vertical", size: "md" },
+    lg: { orientation: "vertical", size: "lg" },
+  },
+};
+
+const DataListContext = React.createContext<DataListContextValue>(DATA_LIST_CONTEXT_VALUES.horizontal.md);
 
 interface DataListRootProps extends Omit<React.ComponentProps<"dl">, "size"> {
   orientation?: DataListOrientation;
@@ -21,8 +31,10 @@ interface DataListRootProps extends Omit<React.ComponentProps<"dl">, "size"> {
 }
 
 function DataListRoot({ orientation = "horizontal", size = "md", className, ...props }: DataListRootProps) {
+  const contextValue = DATA_LIST_CONTEXT_VALUES[orientation][size];
+
   return (
-    <DataListContext.Provider value={{ orientation, size }}>
+    <DataListContext.Provider value={contextValue}>
       <dl
         data-slot="data-list-root"
         data-orientation={orientation}
@@ -55,7 +67,7 @@ function DataListRoot({ orientation = "horizontal", size = "md", className, ...p
 }
 
 function DataListItem({ className, ...props }: React.ComponentProps<"div">) {
-  const { orientation } = React.useContext(DataListContext);
+  const { orientation } = React.use(DataListContext);
   return (
     <div
       data-slot="data-list-item"
@@ -70,7 +82,7 @@ function DataListItem({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 function DataListLabel({ className, ...props }: React.ComponentProps<"dt">) {
-  const { orientation, size } = React.useContext(DataListContext);
+  const { orientation, size } = React.use(DataListContext);
   return (
     <dt
       data-slot="data-list-label"

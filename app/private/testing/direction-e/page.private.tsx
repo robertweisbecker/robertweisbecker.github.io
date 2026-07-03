@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 /*─────────────────────────────────────────────────────────
  * DIRECTION E — Polaroid Fan
  *
@@ -22,8 +20,9 @@
  *─────────────────────────────────────────────────────────*/
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence, LayoutGroup } from "motion/react";
+import { AnimatePresence, LazyMotion, LayoutGroup, domAnimation, m } from "motion/react";
 import {
   Dialog,
   DialogContent,
@@ -134,7 +133,7 @@ function PolaroidFace({ slide }: { slide: Slide }) {
   return (
     <div className="flex h-full w-full flex-col p-3">
       <div className="relative flex-1 overflow-hidden rounded-lg bg-muted">
-        <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" draggable={false} />
+        <Image src={slide.src} alt={slide.alt} fill sizes={`${CARD_W}px`} className="object-cover object-top" draggable={false} />
       </div>
       <div className="pt-2.5">
         <p className="font-pixel text-[9px] tracking-wider text-muted-foreground uppercase">{slide.label}</p>
@@ -200,7 +199,7 @@ function Variation1() {
             const cfg = FAN[i];
             const isHovered = hoveredId === slide.src;
             return (
-              <motion.button
+              <m.button
                 key={slide.src}
                 onClick={() => openAt(i)}
                 onHoverStart={() => setHoveredId(slide.src)}
@@ -223,7 +222,7 @@ function Variation1() {
                 }}
               >
                 <PolaroidFace slide={slide} />
-              </motion.button>
+              </m.button>
             );
           })}
         </div>
@@ -272,7 +271,15 @@ function Variation1() {
                       i === activeSlide && !fading ? "opacity-100" : "pointer-events-none opacity-0"
                     )}
                   >
-                    <img src={slide.src} alt={slide.alt} className="max-h-full max-w-full rounded-xl object-contain" />
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={slide.src}
+                        alt={slide.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, calc(100vw - 16rem)"
+                        className="rounded-xl object-contain"
+                      />
+                    </div>
                   </div>
                 ))}
 
@@ -299,14 +306,14 @@ function Variation1() {
               </div>
 
               <aside className="dark grid w-64 shrink-0 items-start justify-center gap-4 border-s bg-popover p-6">
-                <motion.div layout className={cn("flex flex-col gap-3")}>
+                <m.div layout className={cn("flex flex-col gap-3")}>
                   <AnimatePresence mode="popLayout" initial={false}>
                     <>
                       <Badge
                         variant="outline"
                         className="dark"
                         render={
-                          <motion.span
+                          <m.span
                             // layoutId="badge-label"
                             // key={`motion-badge-label-${activeSlide}`}
                             initial={false}
@@ -318,25 +325,25 @@ function Variation1() {
                       >
                         {SLIDES[activeSlide].label}
                       </Badge>
-                      <motion.p
+                      <m.p
                         // layout
                         // key={`motion-caption-${activeSlide}`}
                         // layoutId="caption"
                         className="text-base font-semibold text-white"
                       >
                         {SLIDES[activeSlide].caption}
-                      </motion.p>
-                      <motion.p
+                      </m.p>
+                      <m.p
                         // layout
                         // key={`motion-detail-${activeSlide}`}
                         // layoutId="detail"
                         className="text-sm leading-relaxed text-white/60"
                       >
                         {SLIDES[activeSlide].detail}
-                      </motion.p>
+                      </m.p>
                     </>
                   </AnimatePresence>
-                </motion.div>
+                </m.div>
                 <Separator className="bg-white/10" />
                 <div className="flex flex-col gap-1 overflow-y-auto">
                   {SLIDES.map((slide, i) => (
@@ -368,7 +375,7 @@ function Variation1() {
                   )}
                   style={{ aspectRatio: "16/9" }}
                 >
-                  <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" />
+                  <Image src={slide.src} alt={slide.alt} fill sizes="86px" className="object-cover object-top" />
                 </button>
               ))}
             </DialogFooter>
@@ -416,7 +423,7 @@ function Variation2() {
               const scale = isFocused ? FOCUS_SCALE : isOther ? 0.7 : isHovered ? 1.03 : 1;
 
               return (
-                <motion.button
+                <m.button
                   key={slide.src}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -437,7 +444,7 @@ function Variation2() {
                   className="absolute top-1/2 left-1/2 cursor-pointer rounded-2xl bg-white shadow-lg outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 >
                   <PolaroidFace slide={slide} />
-                </motion.button>
+                </m.button>
               );
             })}
           </div>
@@ -480,12 +487,12 @@ const HOVER_BUFFER = 28;
 const NEIGHBOR_GAP = 32;
 const CLUSTER_SPACING = 48;
 
-const MotionCard = motion.create(Card);
-const MotionCardHeader = motion.create(CardHeader);
-const MotionCardTitle = motion.create(CardTitle);
-const MotionCardContent = motion.create(CardContent);
-const MotionCardDescription = motion.create(CardDescription);
-const MotionCardAction = motion.create(CardAction);
+const MotionCard = m.create(Card);
+const MotionCardHeader = m.create(CardHeader);
+const MotionCardTitle = m.create(CardTitle);
+const MotionCardContent = m.create(CardContent);
+const MotionCardDescription = m.create(CardDescription);
+const MotionCardAction = m.create(CardAction);
 
 /* Build a stable set of layoutIds for a given slide so both
  * MinimizedCard and ExpandedCard can reference them. */
@@ -538,7 +545,7 @@ function MinimizedCard({
    * and animates *only* between "minimized box" and "expanded box",
    * eliminating the two-phase snap on return. */
   return (
-    <motion.div
+    <m.div
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
       onClick={onClick}
@@ -596,10 +603,12 @@ function MinimizedCard({
           }}
           // layoutId={ids.image}
         >
-          <img src={slide.src} alt={slide.alt} className="aspect-square rounded-sm object-cover object-top" draggable={false} />
+          <div className="relative aspect-square w-full overflow-hidden rounded-sm">
+            <Image src={slide.src} alt={slide.alt} fill sizes={`${CARD_W}px`} className="object-cover object-top" draggable={false} />
+          </div>
         </MotionCardContent>
       </MotionCard>
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -654,8 +663,8 @@ function ExpandedCard({ slide, onClose }: ExpandedCardProps) {
             <CarouselViewport>
               {SLIDES.map((s) => (
                 <CarouselItem key={s.src}>
-                  <div className="relative w-full">
-                    <img src={s.src} alt={s.alt} className="aspect-video object-contain" draggable={false} />
+                  <div className="relative aspect-video w-full">
+                    <Image src={s.src} alt={s.alt} fill sizes={`${EXPANDED_W}px`} className="object-contain" draggable={false} />
                   </div>
                 </CarouselItem>
               ))}
@@ -761,31 +770,33 @@ function Variation3() {
  * ═══════════════════════════════════════════════════════════ */
 export default function DirectionE() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex items-center gap-4 border-b border-border px-5 py-3">
-        <Link href="/private/testing" className="font-pixel text-[11px] text-muted-foreground hover:text-foreground">
-          ← directions
-        </Link>
-        <span className="text-sm font-semibold">Forge Editor</span>
-        <Badge variant="default" className="ml-auto">
-          Direction E · Polaroid Fan
-        </Badge>
-      </div>
+    <LazyMotion features={domAnimation}>
+      <div className="min-h-screen bg-background">
+        <div className="flex items-center gap-4 border-b border-border px-5 py-3">
+          <Link href="/private/testing" className="font-pixel text-[11px] text-muted-foreground hover:text-foreground">
+            ← directions
+          </Link>
+          <span className="text-sm font-semibold">Forge Editor</span>
+          <Badge variant="default" className="ml-auto">
+            Direction E · Polaroid Fan
+          </Badge>
+        </div>
 
-      <div className="mx-auto max-w-4xl space-y-24 px-4 py-10">
-        <header>
-          <p className="mb-1 font-pixel text-[11px] text-muted-foreground">Everfi · 2022</p>
-          <h1 className="text-3xl font-semibold tracking-tight">Forge Editor</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Two polaroid-fan explorations.</p>
-        </header>
+        <div className="mx-auto max-w-4xl space-y-24 px-4 py-10">
+          <header>
+            <p className="mb-1 font-pixel text-[11px] text-muted-foreground">Everfi · 2022</p>
+            <h1 className="text-3xl font-semibold tracking-tight">Forge Editor</h1>
+            <p className="mt-2 text-sm text-muted-foreground">Two polaroid-fan explorations.</p>
+          </header>
 
-        <Separator />
-        <Variation1 />
-        <Separator />
-        <Variation2 />
-        <Separator />
-        <Variation3 />
+          <Separator />
+          <Variation1 />
+          <Separator />
+          <Variation2 />
+          <Separator />
+          <Variation3 />
+        </div>
       </div>
-    </div>
+    </LazyMotion>
   );
 }

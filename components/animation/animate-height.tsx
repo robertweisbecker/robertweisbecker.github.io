@@ -1,7 +1,7 @@
 "use client";
 
 import { useMeasure } from "@uidotdev/usehooks";
-import { motion, type HTMLMotionProps } from "motion/react";
+import { LazyMotion, domAnimation, m, type HTMLMotionProps } from "motion/react";
 import * as React from "react";
 
 export type AnimateHeightProps = Omit<HTMLMotionProps<"div">, "animate" | "children" | "exit" | "initial"> &
@@ -39,19 +39,21 @@ export function AnimateHeight({
   const resolvedInitialHeight = resolveHeightValue(initialHeight, measuredHeight);
 
   return (
-    <motion.div
-      data-slot="animate-height"
-      className={className}
-      initial={{ height: resolvedInitialHeight }}
-      animate={{ height: open ? measuredHeight : resolvedInitialHeight }}
-      exit={{ height: resolvedInitialHeight }}
-      transition={transition}
-      style={{ ...style, overflowY: "hidden" }}
-      {...props}
-    >
-      <div ref={measureRef} className={innerClassName}>
-        {children}
-      </div>
-    </motion.div>
+    <LazyMotion features={domAnimation}>
+      <m.div
+        data-slot="animate-height"
+        className={className}
+        initial={{ height: resolvedInitialHeight }}
+        animate={{ height: open ? measuredHeight : resolvedInitialHeight }}
+        exit={{ height: resolvedInitialHeight }}
+        transition={transition}
+        style={{ ...style, overflowY: "hidden" }}
+        {...props}
+      >
+        <div ref={measureRef} className={innerClassName}>
+          {children}
+        </div>
+      </m.div>
+    </LazyMotion>
   );
 }

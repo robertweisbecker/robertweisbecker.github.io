@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { motion, useReducedMotion } from "motion/react";
+import { LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import * as React from "react";
 
 type Point = { x: number; y: number };
@@ -375,98 +375,100 @@ export function DraggablePoint({
   const isSquare = shape === "square";
 
   return (
-    <g style={{ color }}>
-      {/* Hit area: invisible, handles all pointer/keyboard events */}
-      <circle
-        ref={pointRef}
-        cx={x}
-        cy={y}
-        r={hitRadius}
-        fill="transparent"
-        stroke="none"
-        className={cn(
-          "outline-none",
-          disabled ? "pointer-events-none cursor-not-allowed opacity-50" : isDragging ? "cursor-grabbing" : "cursor-grab",
-          className
-        )}
-        style={{ touchAction: "none" }}
-        onPointerDown={disabled ? undefined : handlePointerDown}
-        onPointerMove={disabled ? undefined : handlePointerMove}
-        onPointerUp={disabled ? undefined : handlePointerUp}
-        onPointerCancel={disabled ? undefined : handlePointerUp}
-        onLostPointerCapture={disabled ? undefined : handleLostPointerCapture}
-        onPointerEnter={() => setIsHovered(true)}
-        onPointerLeave={() => setIsHovered(false)}
-        tabIndex={disabled ? -1 : 0}
-        role="slider"
-        aria-label={label}
-        aria-disabled={disabled}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(x)}
-        aria-valuetext={`x ${Math.round(x)}, y ${Math.round(y)}`}
-        onKeyDown={disabled ? undefined : handleKeyDown}
-      />
+    <LazyMotion features={domAnimation}>
+      <g style={{ color }}>
+        {/* Hit area: invisible, handles all pointer/keyboard events */}
+        <circle
+          ref={pointRef}
+          cx={x}
+          cy={y}
+          r={hitRadius}
+          fill="transparent"
+          stroke="none"
+          className={cn(
+            "outline-none",
+            disabled ? "pointer-events-none cursor-not-allowed opacity-50" : isDragging ? "cursor-grabbing" : "cursor-grab",
+            className
+          )}
+          style={{ touchAction: "none" }}
+          onPointerDown={disabled ? undefined : handlePointerDown}
+          onPointerMove={disabled ? undefined : handlePointerMove}
+          onPointerUp={disabled ? undefined : handlePointerUp}
+          onPointerCancel={disabled ? undefined : handlePointerUp}
+          onLostPointerCapture={disabled ? undefined : handleLostPointerCapture}
+          onPointerEnter={() => setIsHovered(true)}
+          onPointerLeave={() => setIsHovered(false)}
+          tabIndex={disabled ? -1 : 0}
+          role="slider"
+          aria-label={label}
+          aria-disabled={disabled}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(x)}
+          aria-valuetext={`x ${Math.round(x)}, y ${Math.round(y)}`}
+          onKeyDown={disabled ? undefined : handleKeyDown}
+        />
 
-      {/* Halo ring: hover/drag visual feedback, SVG attributes only */}
-      <motion.circle
-        cx={x}
-        cy={y}
-        r={POINT_RADIUS}
-        fill={color}
-        fillOpacity={0}
-        stroke={color}
-        strokeOpacity={0}
-        strokeWidth={0}
-        pointerEvents="none"
-        aria-hidden="true"
-        initial={false}
-        animate={{
-          r: haloR,
-          fillOpacity: isHovered && !isDragging ? 0.15 : 0,
-          strokeOpacity: isDragging ? 1 : 0,
-          strokeWidth: isDragging ? 0.5 : 0,
-        }}
-        transition={transition}
-      />
-
-      {/* Point marker: transforms on <g> wrapper, SVG attrs on shape */}
-      {isSquare ? (
-        <motion.g animate={{ scale: pointScale }} transition={transition} style={{ transformOrigin: `${x}px ${y}px` }}>
-          <motion.rect
-            x={x - POINT_RADIUS}
-            y={y - POINT_RADIUS}
-            width={POINT_RADIUS * 2}
-            height={POINT_RADIUS * 2}
-            fill={pointFill}
-            className={cn(inverted ? "drop-shadow-xs/100" : "drop-shadow-xs/20")}
-            stroke={pointStroke}
-            strokeWidth={0.5}
-            rx={0}
-            pointerEvents="none"
-            aria-hidden="true"
-            initial={false}
-            animate={{ rx: isDragging || isHovered ? 10 : 0 }}
-            transition={{ duration: 0.15, ease: "easeOut" }}
-          />
-        </motion.g>
-      ) : (
-        <motion.circle
+        {/* Halo ring: hover/drag visual feedback, SVG attributes only */}
+        <m.circle
           cx={x}
           cy={y}
           r={POINT_RADIUS}
-          fill={pointFill}
-          className="drop-shadow-xs/20"
-          stroke={pointStroke}
-          strokeWidth={0.5}
+          fill={color}
+          fillOpacity={0}
+          stroke={color}
+          strokeOpacity={0}
+          strokeWidth={0}
           pointerEvents="none"
           aria-hidden="true"
           initial={false}
-          animate={{ r: pointR }}
+          animate={{
+            r: haloR,
+            fillOpacity: isHovered && !isDragging ? 0.15 : 0,
+            strokeOpacity: isDragging ? 1 : 0,
+            strokeWidth: isDragging ? 0.5 : 0,
+          }}
           transition={transition}
         />
-      )}
-    </g>
+
+        {/* Point marker: transforms on <g> wrapper, SVG attrs on shape */}
+        {isSquare ? (
+          <m.g animate={{ scale: pointScale }} transition={transition} style={{ transformOrigin: `${x}px ${y}px` }}>
+            <m.rect
+              x={x - POINT_RADIUS}
+              y={y - POINT_RADIUS}
+              width={POINT_RADIUS * 2}
+              height={POINT_RADIUS * 2}
+              fill={pointFill}
+              className={cn(inverted ? "drop-shadow-xs/100" : "drop-shadow-xs/20")}
+              stroke={pointStroke}
+              strokeWidth={0.5}
+              rx={0}
+              pointerEvents="none"
+              aria-hidden="true"
+              initial={false}
+              animate={{ rx: isDragging || isHovered ? 10 : 0 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+            />
+          </m.g>
+        ) : (
+          <m.circle
+            cx={x}
+            cy={y}
+            r={POINT_RADIUS}
+            fill={pointFill}
+            className="drop-shadow-xs/20"
+            stroke={pointStroke}
+            strokeWidth={0.5}
+            pointerEvents="none"
+            aria-hidden="true"
+            initial={false}
+            animate={{ r: pointR }}
+            transition={transition}
+          />
+        )}
+      </g>
+    </LazyMotion>
   );
 }
 

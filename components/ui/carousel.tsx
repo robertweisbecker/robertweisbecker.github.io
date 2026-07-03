@@ -5,7 +5,7 @@ import type { EmblaCarouselType, EmblaOptionsType, EmblaPluginType } from "embla
 import Autoplay, { type AutoplayType } from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
-import { AnimatePresence, motion, type Transition } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m, type Transition } from "motion/react";
 import { IconChevronLeft, IconChevronRight, IconPlayerPauseFilled, IconPlayerPlayFilled, IconRotateClockwise } from "@tabler/icons-react";
 
 import { cn } from "@/lib/utils";
@@ -54,7 +54,7 @@ type CarouselContextProps = {
 const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
 function useCarousel() {
-  const context = React.useContext(CarouselContext);
+  const context = React.use(CarouselContext);
   if (!context) throw new Error("useCarousel must be used within a <Carousel />");
   return context;
 }
@@ -290,27 +290,29 @@ function Carousel({
   );
 
   return (
-    <CarouselContext.Provider value={carouselContextValue}>
-      <div
-        ref={setCarouselRootRef}
-        onKeyDownCapture={handleKeyDown}
-        data-orientation={orientation}
-        className={cn(
-          "group relative",
-          "[--carousel-height:var(--container-xs)]",
-          "[--carousel-gap:--spacing(4)]",
-          orientation === "vertical" &&
-            "has-data-[slot=carousel-next]:not-has-data-[slot=carousel-toolbar]:pb-button-sm has-data-[slot=carousel-previous]:not-has-data-[slot=carousel-toolbar]:pt-button-sm has-data-[slot=carousel-toolbar]:not-has-data-[layout=inset]:ps-button-sm",
-          className
-        )}
-        role="region"
-        aria-roledescription="carousel"
-        data-slot="carousel"
-        {...props}
-      >
-        {children}
-      </div>
-    </CarouselContext.Provider>
+    <LazyMotion features={domAnimation}>
+      <CarouselContext.Provider value={carouselContextValue}>
+        <div
+          ref={setCarouselRootRef}
+          onKeyDownCapture={handleKeyDown}
+          data-orientation={orientation}
+          className={cn(
+            "group relative",
+            "[--carousel-height:var(--container-xs)]",
+            "[--carousel-gap:--spacing(4)]",
+            orientation === "vertical" &&
+              "has-data-[slot=carousel-next]:not-has-data-[slot=carousel-toolbar]:pb-button-sm has-data-[slot=carousel-previous]:not-has-data-[slot=carousel-toolbar]:pt-button-sm has-data-[slot=carousel-toolbar]:not-has-data-[layout=inset]:ps-button-sm",
+            className
+          )}
+          role="region"
+          aria-roledescription="carousel"
+          data-slot="carousel"
+          {...props}
+        >
+          {children}
+        </div>
+      </CarouselContext.Provider>
+    </LazyMotion>
   );
 }
 
@@ -369,7 +371,7 @@ function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ..
       variant={variant}
       size={size}
       rounded
-      render={<motion.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
+      render={<m.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
         // orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
@@ -398,7 +400,7 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
       variant={variant}
       size={size}
       rounded
-      render={<motion.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
+      render={<m.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
         // orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
@@ -495,10 +497,10 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
         // orientation === "vertical" && "-rotate-90",
         className
       )}
-      render={<motion.button />}
+      render={<m.button />}
     >
       <AnimatePresence mode="popLayout" initial={false}>
-        <motion.div
+        <m.div
           key={isFinished ? "restart" : isPlaying ? "pause" : "play"}
           variants={iconVariants}
           initial="hidden"
@@ -513,7 +515,7 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
           ) : (
             <IconPlayerPlayFilled className="relative" />
           )}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </Toolbar.Button>
   );

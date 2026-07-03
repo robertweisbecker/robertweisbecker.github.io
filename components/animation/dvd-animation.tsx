@@ -162,7 +162,7 @@ type DvdAnimationContextValue = {
 const DvdAnimationContext = React.createContext<DvdAnimationContextValue | null>(null);
 
 function useDvdAnimationContext(componentName: string) {
-  const context = React.useContext(DvdAnimationContext);
+  const context = React.use(DvdAnimationContext);
 
   if (!context) {
     throw new Error(`${componentName} must be used inside <DvdAnimationRoot />.`);

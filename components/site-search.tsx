@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 import { useKeyPress } from "@/hooks/use-key-press";
 import { getPlaygroundRouteIcon } from "@/components/playground/playground-route-icons";
 import { playgroundRoutes } from "@/lib/data/playground";
@@ -38,6 +36,7 @@ import {
 } from "./ui/command";
 import { Kbd, KbdGroup } from "./ui/kbd";
 import { Dialog } from "@base-ui/react/dialog";
+import Image from "next/image";
 import { Favicon, FolderIcon, CursorIcon } from "./icons";
 import { PixelNewsIcon, PixelFinderIcon, PixelScribbleIcon } from "./icons-pixel";
 import { TreeIconFile } from "./icons-tree";
@@ -49,7 +48,7 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { LinkButton } from "./ui/link-button";
 import { Toggle } from "./ui/toggle";
-import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, LayoutGroup, domAnimation, m } from "motion/react";
 
 type SearchItem = {
   value: string;
@@ -90,10 +89,13 @@ const FILTER_TABS: { value: FilterTab; icon?: React.ReactNode }[] = [
   {
     value: "Posts",
     icon: (
-      <img
+      <Image
         src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-e0904rWYQ29GCwVnLKDYLOjvAXcSXy.png&w=1000&q=75"
         alt="Posts"
+        width={16}
+        height={16}
         className="size-4"
+        unoptimized
       />
     ),
   },
@@ -114,7 +116,7 @@ function itemIcon(Icon: React.ComponentType<{ className?: string }>): ReactNode 
 }
 
 function itemImage(src: string): ReactNode {
-  return <img src={src} alt="" />;
+  return <Image src={src} alt="" width={40} height={40} className="size-full object-cover" unoptimized={src.endsWith(".svg")} />;
 }
 
 const staticPages: SearchItem[] = [
@@ -297,7 +299,7 @@ export function SiteSearch({
   );
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <CommandDialog
         open={open}
         onOpenChange={(next) => {
@@ -349,7 +351,7 @@ export function SiteSearch({
                       aria-label="Show filters"
                       pressed={showFilters}
                       onPressedChange={setShowFilters}
-                      render={<motion.button className={cn("order-last transition-all", filterActive ? "w-auto" : "w-button-xs")} />}
+                      render={<m.button className={cn("order-last transition-all", filterActive ? "w-auto" : "w-button-xs")} />}
                     />
                   }
                 >
@@ -357,13 +359,13 @@ export function SiteSearch({
                   <AnimatePresence mode="popLayout" initial={false}>
                     {activeTab !== "All" && !showFilters && (
                       <>
-                        <motion.span
+                        <m.span
                           key="filter-indicator"
                           className="absolute top-0 right-0 size-1.5 rounded-full bg-info-primary whitespace-nowrap"
                           initial={{ opacity: 0, filter: "blur(2px)", scale: 0.5 }}
                           animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                           exit={{ opacity: 0, filter: "blur(2px)", scale: 0.5 }}
-                        ></motion.span>
+                        ></m.span>
                       </>
                     )}
                   </AnimatePresence>
@@ -371,7 +373,7 @@ export function SiteSearch({
                 <AnimatePresence mode="wait" initial={false}>
                   {showFilters && (
                     <>
-                      <motion.div
+                      <m.div
                         key="filter-group"
                         className="flex overflow-hidden"
                         initial={{ opacity: 0, filter: "blur(8px)", width: 0, paddingInline: 0 }}
@@ -404,7 +406,7 @@ export function SiteSearch({
                               {/* {tab.icon} */}
                               {tab.value}
                               {tab.value === activeTab && (
-                                <motion.div
+                                <m.div
                                   layoutId="filter-tab-indicator"
                                   className="absolute bottom-0 left-0 size-full rounded-[inherit] bg-accent"
                                   transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
@@ -413,7 +415,7 @@ export function SiteSearch({
                             </Toolbar.Button>
                           ))}
                         </Toolbar.Group>
-                      </motion.div>
+                      </m.div>
                     </>
                   )}
                 </AnimatePresence>
@@ -496,6 +498,6 @@ export function SiteSearch({
           </Command>
         </CommandDialogPopup>
       </CommandDialog>
-    </>
+    </LazyMotion>
   );
 }
