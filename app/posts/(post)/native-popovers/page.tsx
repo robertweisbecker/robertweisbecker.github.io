@@ -1,5 +1,3 @@
-"use client";
-
 import { DemoContainer } from "@/components/demo";
 import { Button } from "@/components/ui/button";
 import { Code } from "@/components/ui/code";
