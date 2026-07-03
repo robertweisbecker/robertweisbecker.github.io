@@ -16,7 +16,7 @@ import {
   AutocompleteSeparator,
 } from "@/components/ui/autocomplete";
 import { Kbd } from "./kbd";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import { useIsMobile } from "@/hooks/use-media-query";
 import { IconChevronLeft, IconSearch } from "@tabler/icons-react";
 
@@ -98,60 +98,13 @@ export function Command(props: CommandFlatProps<unknown>): React.ReactElement {
 
 export function CommandInputGroup({ className, children, ...props }: React.ComponentProps<"div">): React.ReactElement {
   return (
-    <div className={cn("flex items-baseline gap-0 border-b border-border/50 px-2.5 pt-1.5", className)} {...props}>
-      <AnimatePresence mode="popLayout" initial={false}>
-        <AutocompletePrimitive.Clear
-          render={
-            <motion.button
-              className="grid-stack h-full min-w-0 rounded-md hover:bg-accent"
-              initial={{
-                transform: "translateX(4px)",
-                filter: "blur(4px)",
-                opacity: 0,
-                width: 0,
-                marginInlineStart: 0,
-                marginInlineEnd: 0,
-              }}
-              animate={{
-                transform: "translateX(0px)",
-                filter: "blur(0px)",
-                opacity: 1,
-                width: 24,
-                marginInlineStart: -4,
-                marginInlineEnd: -8,
-              }}
-              exit={{ transform: "translateX(4px)", filter: "blur(4px)", opacity: 0, width: 0, marginInlineStart: 0, marginInlineEnd: 0 }}
-            />
-          }
-        >
-          <IconChevronLeft className="pointer-events-none mt-0.5" />
-        </AutocompletePrimitive.Clear>
-      </AnimatePresence>
-      {children}
-    </div>
-  );
-}
-
-export function CommandInput({
-  className,
-  placeholder = undefined,
-  ...props
-}: React.ComponentProps<typeof AutocompleteInput>): React.ReactElement {
-  const isMobile = useIsMobile;
-  return (
-    <div className="flex items-center gap-0 border-b border-border/50 px-2.5 pt-1.5">
-      <div className="grid-stack size-6 min-w-0 self-center">
-        <IconSearch
-          data-slot="autocomplete-icon"
-          className="stroke-1.5 size-4.5 self-center text-muted-foreground/64 has-[+[data-slot=autocomplete-clear]]:absolute has-[+[data-slot=autocomplete-clear]]:hidden"
-        />
-
+    <LazyMotion features={domAnimation}>
+      <div className={cn("flex items-baseline gap-0 border-b border-border/50 px-2.5 pt-1.5", className)} {...props}>
         <AnimatePresence mode="popLayout" initial={false}>
           <AutocompletePrimitive.Clear
-            data-slot="autocomplete-clear"
             render={
-              <motion.button
-                className="grid-stack h-6 w-6 min-w-0 self-center rounded-sm text-muted-foreground hover:bg-accent"
+              <m.button
+                className="grid-stack h-full min-w-0 rounded-md hover:bg-accent"
                 initial={{
                   transform: "translateX(4px)",
                   filter: "blur(4px)",
@@ -172,18 +125,76 @@ export function CommandInput({
               />
             }
           >
-            <IconChevronLeft className="pointer-events-none" />
+            <IconChevronLeft className="pointer-events-none mt-0.5" />
           </AutocompletePrimitive.Clear>
         </AnimatePresence>
+        {children}
       </div>
-      <AutocompleteInput
-        autoFocus={!isMobile}
-        className={cn("min-w-0 border-none! bg-transparent! shadow-none! outline-none! focus-visible:ring-0", className)}
-        placeholder={placeholder}
-        size="lg"
-        {...props}
-      />
-    </div>
+    </LazyMotion>
+  );
+}
+
+export function CommandInput({
+  className,
+  placeholder = undefined,
+  ...props
+}: React.ComponentProps<typeof AutocompleteInput>): React.ReactElement {
+  const isMobile = useIsMobile;
+  return (
+    <LazyMotion features={domAnimation}>
+      <div className="flex items-center gap-0 border-b border-border/50 px-2.5 pt-1.5">
+        <div className="grid-stack size-6 min-w-0 self-center">
+          <IconSearch
+            data-slot="autocomplete-icon"
+            className="stroke-1.5 size-4.5 self-center text-muted-foreground/64 has-[+[data-slot=autocomplete-clear]]:absolute has-[+[data-slot=autocomplete-clear]]:hidden"
+          />
+
+          <AnimatePresence mode="popLayout" initial={false}>
+            <AutocompletePrimitive.Clear
+              data-slot="autocomplete-clear"
+              render={
+                <m.button
+                  className="grid-stack h-6 w-6 min-w-0 self-center rounded-sm text-muted-foreground hover:bg-accent"
+                  initial={{
+                    transform: "translateX(4px)",
+                    filter: "blur(4px)",
+                    opacity: 0,
+                    width: 0,
+                    marginInlineStart: 0,
+                    marginInlineEnd: 0,
+                  }}
+                  animate={{
+                    transform: "translateX(0px)",
+                    filter: "blur(0px)",
+                    opacity: 1,
+                    width: 24,
+                    marginInlineStart: -4,
+                    marginInlineEnd: -8,
+                  }}
+                  exit={{
+                    transform: "translateX(4px)",
+                    filter: "blur(4px)",
+                    opacity: 0,
+                    width: 0,
+                    marginInlineStart: 0,
+                    marginInlineEnd: 0,
+                  }}
+                />
+              }
+            >
+              <IconChevronLeft className="pointer-events-none" />
+            </AutocompletePrimitive.Clear>
+          </AnimatePresence>
+        </div>
+        <AutocompleteInput
+          autoFocus={!isMobile}
+          className={cn("min-w-0 border-none! bg-transparent! shadow-none! outline-none! focus-visible:ring-0", className)}
+          placeholder={placeholder}
+          size="lg"
+          {...props}
+        />
+      </div>
+    </LazyMotion>
   );
 }
 

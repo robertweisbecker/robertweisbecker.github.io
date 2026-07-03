@@ -8,7 +8,7 @@ import { Drawer as DrawerBase } from "@base-ui/react/drawer";
 import { Popover } from "@base-ui/react/popover";
 import { IconArrowsDiagonal, IconX } from "@tabler/icons-react";
 import { Cambio } from "cambio";
-import { AnimatePresence, HTMLMotionProps, LayoutGroup, motion } from "motion/react";
+import { AnimatePresence, HTMLMotionProps, LazyMotion, LayoutGroup, domAnimation, m } from "motion/react";
 import * as React from "react";
 import { createPortal } from "react-dom";
 
@@ -16,6 +16,7 @@ import { imageSrc } from "@/lib/image-src";
 import NextImage, { type StaticImageData } from "next/image";
 
 const SPRING = { type: "spring" as const, damping: 28, stiffness: 220 };
+const MotionNextImage = m.create(NextImage);
 
 export interface ImageModalProps {
   src: StaticImageData;
@@ -234,42 +235,28 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
   const popupRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <DialogBase.Root open={open} onOpenChange={setOpen}>
-      <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
-        <div className="not-prose relative mb-2">
-          {!open ? (
-            <motion.div
-              className="w-full shadow-border-sm"
-              style={{
-                aspectRatio: imgAspect,
-                borderRadius: 12,
-                padding: 4,
-                width: "100%",
-                background: "var(--card)",
-              }}
-            >
-              <motion.img
-                layoutId={layoutId}
-                // transition={{ layout: SPRING }}
-                src={imageSrc(src)}
-                alt={typeof caption === "string" ? caption : ""}
-                onLoad={handleImgLoad}
+    <LazyMotion features={domAnimation}>
+      <DialogBase.Root open={open} onOpenChange={setOpen}>
+        <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
+          <div className="not-prose relative mb-2">
+            {!open ? (
+              <m.div
+                className="w-full shadow-border-sm"
                 style={{
                   aspectRatio: imgAspect,
-                  borderRadius: 8,
-                  display: "block",
+                  borderRadius: 12,
+                  padding: 4,
                   width: "100%",
-                  height: "auto",
+                  background: "var(--card)",
                 }}
-              />
-            </motion.div>
-          ) : (
-            <div aria-hidden style={{ opacity: 0 }}>
-              <div style={{ padding: 4, borderRadius: 12 }}>
-                <NextImage
+              >
+                <MotionNextImage
+                  layoutId={layoutId}
+                  // transition={{ layout: SPRING }}
                   src={src}
-                  alt=""
+                  alt={typeof caption === "string" ? caption : ""}
                   placeholder="blur"
+                  onLoad={handleImgLoad}
                   style={{
                     aspectRatio: imgAspect,
                     borderRadius: 8,
@@ -278,92 +265,110 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
                     height: "auto",
                   }}
                 />
-              </div>
-            </div>
-          )}
-
-          <DialogBase.Trigger
-            render={
-              <motion.button
-                layoutId={`${layoutId}-button`}
-                className={cn(buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }))}
-                style={{
-                  position: "absolute",
-                  right: 12,
-                  bottom: 12,
-                  zIndex: 10,
-                }}
-              />
-            }
-            aria-label="View fullscreen image"
-          >
-            <IconArrowsDiagonal />
-          </DialogBase.Trigger>
-        </div>
-
-        <AnimatePresence initial={false} mode="sync">
-          {open && (
-            <DialogBase.Portal keepMounted>
-              <DialogBase.Backdrop className="fixed inset-0 z-50 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50" />
-              <DialogBase.Viewport
-                className={cn(
-                  "fixed inset-0 z-50 flex max-h-none items-start justify-center overflow-y-auto overscroll-contain p-0 sm:p-4",
-                  "pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
-                )}
-              >
-                <DialogBase.Popup
-                  ref={popupRef}
-                  initialFocus={popupRef}
-                  className="group/popup relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
-                >
-                  <DialogBase.Title className="sr-only">Image</DialogBase.Title>
-                  <DialogBase.Close
-                    aria-label="Close"
-                    render={
-                      <motion.button
-                        layoutId={`${layoutId}-button`}
-                        className={cn(
-                          "group/close pointer-events-auto",
-                          buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true })
-                        )}
-                        style={{
-                          position: "absolute",
-                          top: -12,
-                          right: -12,
-                          zIndex: 10,
-                        }}
-                      />
-                    }
-                  >
-                    <IconX />
-                  </DialogBase.Close>
-                  <motion.img
-                    layoutId={layoutId}
-                    // transition={{ layout: SPRING }}
-                    src={imageSrc(src2 ?? src)}
-                    alt={typeof caption === "string" ? caption : ""}
-                    onLoad={handleImgLoad}
-                    className="w-full max-w-none min-w-0"
+              </m.div>
+            ) : (
+              <div aria-hidden style={{ opacity: 0 }}>
+                <div style={{ padding: 4, borderRadius: 12 }}>
+                  <NextImage
+                    src={src}
+                    alt=""
+                    placeholder="blur"
                     style={{
-                      borderRadius: 12,
                       aspectRatio: imgAspect,
+                      borderRadius: 8,
+                      display: "block",
                       width: "100%",
                       height: "auto",
-                      objectFit: "contain",
-                      objectPosition: "center",
-                      transformOrigin: "center",
-                      scale: open ? 1 : 0.5,
                     }}
                   />
-                </DialogBase.Popup>
-              </DialogBase.Viewport>
-            </DialogBase.Portal>
-          )}
-        </AnimatePresence>
+                </div>
+              </div>
+            )}
 
-        {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
-      </figure>
-    </DialogBase.Root>
+            <DialogBase.Trigger
+              render={
+                <m.button
+                  layoutId={`${layoutId}-button`}
+                  className={cn(buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }))}
+                  style={{
+                    position: "absolute",
+                    right: 12,
+                    bottom: 12,
+                    zIndex: 10,
+                  }}
+                />
+              }
+              aria-label="View fullscreen image"
+            >
+              <IconArrowsDiagonal />
+            </DialogBase.Trigger>
+          </div>
+
+          <AnimatePresence initial={false} mode="sync">
+            {open && (
+              <DialogBase.Portal keepMounted>
+                <DialogBase.Backdrop className="fixed inset-0 z-50 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50" />
+                <DialogBase.Viewport
+                  className={cn(
+                    "fixed inset-0 z-50 flex max-h-none items-start justify-center overflow-y-auto overscroll-contain p-0 sm:p-4",
+                    "pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
+                  )}
+                >
+                  <DialogBase.Popup
+                    ref={popupRef}
+                    initialFocus={popupRef}
+                    className="group/popup relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]"
+                  >
+                    <DialogBase.Title className="sr-only">Image</DialogBase.Title>
+                    <DialogBase.Close
+                      aria-label="Close"
+                      render={
+                        <m.button
+                          layoutId={`${layoutId}-button`}
+                          className={cn(
+                            "group/close pointer-events-auto",
+                            buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true })
+                          )}
+                          style={{
+                            position: "absolute",
+                            top: -12,
+                            right: -12,
+                            zIndex: 10,
+                          }}
+                        />
+                      }
+                    >
+                      <IconX />
+                    </DialogBase.Close>
+                    <MotionNextImage
+                      layoutId={layoutId}
+                      // transition={{ layout: SPRING }}
+                      src={src2 ?? src}
+                      alt={typeof caption === "string" ? caption : ""}
+                      placeholder="blur"
+                      onLoad={handleImgLoad}
+                      className="w-full max-w-none min-w-0"
+                      style={{
+                        borderRadius: 12,
+                        aspectRatio: imgAspect,
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "contain",
+                        objectPosition: "center",
+                        transformOrigin: "center",
+                        scale: open ? 1 : 0.5,
+                      }}
+                    />
+                  </DialogBase.Popup>
+                </DialogBase.Viewport>
+              </DialogBase.Portal>
+            )}
+          </AnimatePresence>
+
+          {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
+        </figure>
+      </DialogBase.Root>
+    </LazyMotion>
   );
 }
 
@@ -376,47 +381,48 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
   const layoutId = React.useId();
 
   return (
-    <Popover.Root open={open} onOpenChange={setOpen}>
-      <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
-        <div className="not-prose relative mb-2">
-          <Popover.Trigger
-            nativeButton={false}
-            render={
-              <motion.div
-                layoutId={layoutId}
-                transition={{ layout: SPRING }}
-                className="cursor-pointer overflow-hidden shadow-border-sm"
+    <LazyMotion features={domAnimation}>
+      <Popover.Root open={open} onOpenChange={setOpen}>
+        <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
+          <div className="not-prose relative mb-2">
+            <Popover.Trigger
+              nativeButton={false}
+              render={
+                <m.div
+                  layoutId={layoutId}
+                  transition={{ layout: SPRING }}
+                  className="cursor-pointer overflow-hidden shadow-border-sm"
+                  style={{
+                    aspectRatio: imgAspect,
+                    borderRadius: 12,
+                    padding: 4,
+                    background: "var(--card)",
+                  }}
+                />
+              }
+            >
+              <NextImage
+                src={src}
+                alt={typeof caption === "string" ? caption : ""}
+                placeholder="blur"
+                onLoad={handleImgLoad}
                 style={{
                   aspectRatio: imgAspect,
-                  borderRadius: 12,
-                  padding: 4,
-                  background: "var(--card)",
+                  borderRadius: 8,
+                  display: "block",
+                  width: "100%",
+                  height: "auto",
                 }}
               />
-            }
-          >
-            <NextImage
-              src={src}
-              alt={typeof caption === "string" ? caption : ""}
-              placeholder="blur"
-              onLoad={handleImgLoad}
-              style={{
-                aspectRatio: imgAspect,
-                borderRadius: 8,
-                display: "block",
-                width: "100%",
-                height: "auto",
-              }}
-            />
-          </Popover.Trigger>
-        </div>
+            </Popover.Trigger>
+          </div>
 
-        <AnimatePresence>
-          {open && (
-            <Popover.Portal keepMounted>
-              {/* <Popover.Backdrop
+          <AnimatePresence>
+            {open && (
+              <Popover.Portal keepMounted>
+                {/* <Popover.Backdrop
                 render={
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -425,34 +431,34 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
                 }
                 // className="fixed inset-0 z-50 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50"
               /> */}
-              <Popover.Positioner
-                positionMethod="fixed"
-                // side="bottom"
-                sideOffset={0}
-                className="z-50 overflow-auto"
-              >
-                <Popover.Popup
-                  // className="-translate-y-full"
-                  render={
-                    <motion.div
-                      // layoutId={layoutId}
-                      // transition={{ layout: SPRING }}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                    />
-                  }
+                <Popover.Positioner
+                  positionMethod="fixed"
+                  // side="bottom"
+                  sideOffset={0}
+                  className="z-50 overflow-auto"
                 >
-                  <Popover.Title className="sr-only">Image</Popover.Title>
-
-                  <Popover.Close
-                    // render={<CloseButton />}
-                    // aria-label="Close"
-                    className="pointer-events-auto"
+                  <Popover.Popup
+                    // className="-translate-y-full"
+                    render={
+                      <m.div
+                        // layoutId={layoutId}
+                        // transition={{ layout: SPRING }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                      />
+                    }
                   >
-                    Close
-                  </Popover.Close>
-                  {/* <motion.div
+                    <Popover.Title className="sr-only">Image</Popover.Title>
+
+                    <Popover.Close
+                      // render={<CloseButton />}
+                      // aria-label="Close"
+                      className="pointer-events-auto"
+                    >
+                      Close
+                    </Popover.Close>
+                    {/* <m.div
                     layoutId={layoutId}
                     transition={{ layout: SPRING }}
                     className="relative overflow-hidden shadow-border-2xl"
@@ -463,21 +469,22 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
                       background: "var(--card)",
                     }}
                   > */}
-                  <ModalImage
-                    src={src2 ?? src}
-                    alt={typeof caption === "string" ? caption : ""}
-                    // imgAspect={imgAspect}
-                  />
-                  {/* </motion.div> */}
-                </Popover.Popup>
-              </Popover.Positioner>
-            </Popover.Portal>
-          )}
-        </AnimatePresence>
+                    <ModalImage
+                      src={src2 ?? src}
+                      alt={typeof caption === "string" ? caption : ""}
+                      // imgAspect={imgAspect}
+                    />
+                    {/* </m.div> */}
+                  </Popover.Popup>
+                </Popover.Positioner>
+              </Popover.Portal>
+            )}
+          </AnimatePresence>
 
-        {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
-      </figure>
-    </Popover.Root>
+          {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
+        </figure>
+      </Popover.Root>
+    </LazyMotion>
   );
 }
 
@@ -487,77 +494,78 @@ export function ImageModalPopover2({ src, caption }: ImageModalProps) {
   const layoutGroupId = React.useId();
   const ref = React.useRef<HTMLDivElement>(null);
   return (
-    <Popover.Root>
-      <LayoutGroup id={layoutGroupId}>
-        <motion.div
-          ref={ref}
-          // layoutId={layoutId}
-          // transition={{ layout: SPRING }}
-          className="text-center shadow-border-sm"
-          style={{
-            // aspectRatio: imgAspect,
-            borderRadius: 12,
-            padding: 4,
-            // overflow: "hidden",
-            // background: "var(--card)",
-          }}
-        >
-          <motion.img
-            layoutId={layoutId}
+    <LazyMotion features={domAnimation}>
+      <Popover.Root>
+        <LayoutGroup id={layoutGroupId}>
+          <m.div
+            ref={ref}
+            // layoutId={layoutId}
             // transition={{ layout: SPRING }}
-            src={imageSrc(src)}
-            alt={typeof caption === "string" ? caption : ""}
-            onLoad={handleImgLoad}
+            className="text-center shadow-border-sm"
             style={{
               // aspectRatio: imgAspect,
-              transformOrigin: "center",
-              borderRadius: 8,
-              display: "block",
-              width: "100%",
+              borderRadius: 12,
+              padding: 4,
+              // overflow: "hidden",
+              // background: "var(--card)",
             }}
-          />
-          <Popover.Trigger className="mx-auto">Open</Popover.Trigger>
-        </motion.div>
-
-        <Popover.Portal container={undefined} keepMounted>
-          <Popover.Positioner
-            side="bottom"
-            // disableAnchorTracking
-            positionMethod="fixed"
-            align="center"
-            sideOffset={({ anchor, positioner }) => {
-              return positioner.height * -1 - anchor.height;
-            }}
-            className="z-100 origin-(--transform-origin)"
           >
-            <Popover.Popup
-              render={(props, state) => (
-                <motion.div
-                  transition={{ layout: SPRING }}
-                  {...(props as HTMLMotionProps<"div">)}
-                  initial={false}
-                  animate={{
-                    opacity: state.open ? 1 : 0,
-                    transformOrigin: "bottom",
-                    // scale: state.open ? 1 : 0.8,
-                  }}
-                >
-                  <AnimatePresence>
-                    {state.open && (
-                      <motion.img
-                        layoutId={layoutId}
-                        src={imageSrc(src)}
-                        alt={typeof caption === "string" ? caption : ""}
-                        style={{
-                          aspectRatio: imgAspect,
-                        }}
-                      />
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              )}
+            <m.img
+              layoutId={layoutId}
+              // transition={{ layout: SPRING }}
+              src={imageSrc(src)}
+              alt={typeof caption === "string" ? caption : ""}
+              onLoad={handleImgLoad}
+              style={{
+                // aspectRatio: imgAspect,
+                transformOrigin: "center",
+                borderRadius: 8,
+                display: "block",
+                width: "100%",
+              }}
+            />
+            <Popover.Trigger className="mx-auto">Open</Popover.Trigger>
+          </m.div>
+
+          <Popover.Portal container={undefined} keepMounted>
+            <Popover.Positioner
+              side="bottom"
+              // disableAnchorTracking
+              positionMethod="fixed"
+              align="center"
+              sideOffset={({ anchor, positioner }) => {
+                return positioner.height * -1 - anchor.height;
+              }}
+              className="z-100 origin-(--transform-origin)"
             >
-              {/* <motion.img
+              <Popover.Popup
+                render={(props, state) => (
+                  <m.div
+                    transition={{ layout: SPRING }}
+                    {...(props as HTMLMotionProps<"div">)}
+                    initial={false}
+                    animate={{
+                      opacity: state.open ? 1 : 0,
+                      transformOrigin: "bottom",
+                      // scale: state.open ? 1 : 0.8,
+                    }}
+                  >
+                    <AnimatePresence>
+                      {state.open && (
+                        <m.img
+                          layoutId={layoutId}
+                          src={imageSrc(src)}
+                          alt={typeof caption === "string" ? caption : ""}
+                          style={{
+                            aspectRatio: imgAspect,
+                          }}
+                        />
+                      )}
+                    </AnimatePresence>
+                  </m.div>
+                )}
+              >
+                {/* <m.img
                   // layoutId={layoutId}
                   // transition={{ layout: SPRING }}
                   src={src}
@@ -570,11 +578,12 @@ export function ImageModalPopover2({ src, caption }: ImageModalProps) {
                     // width: "100%",
                   }}
                 /> */}
-            </Popover.Popup>
-          </Popover.Positioner>
-        </Popover.Portal>
-      </LayoutGroup>
-    </Popover.Root>
+              </Popover.Popup>
+            </Popover.Positioner>
+          </Popover.Portal>
+        </LayoutGroup>
+      </Popover.Root>
+    </LazyMotion>
   );
 }
 
@@ -608,93 +617,95 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
   }, [open]);
 
   return (
-    <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
-      <div className="not-prose relative mb-2">
-        <motion.div
-          ref={triggerRef}
-          layoutId={layoutId}
-          transition={{ layout: SPRING }}
-          className="cursor-pointer overflow-hidden shadow-border-sm"
-          style={{
-            // aspectRatio: imgAspect,
-            borderRadius: 12,
-            padding: 4,
-            background: "var(--card)",
-          }}
-          onClick={() => setOpen(true)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setOpen(true);
-            }
-          }}
-          aria-label="View fullscreen image"
-        >
-          <NextImage
-            src={src}
-            alt={typeof caption === "string" ? caption : ""}
-            placeholder="blur"
-            onLoad={handleImgLoad}
+    <LazyMotion features={domAnimation}>
+      <figure className="group/figure block [.prose>*+&]:mx-auto [.prose>*+&]:my-6 [.prose>*+&]:max-w-3xl">
+        <div className="not-prose relative mb-2">
+          <m.div
+            ref={triggerRef}
+            layoutId={layoutId}
+            transition={{ layout: SPRING }}
+            className="cursor-pointer overflow-hidden shadow-border-sm"
             style={{
-              aspectRatio: imgAspect,
-              borderRadius: 8,
-              display: "block",
-              width: "100%",
-              height: "auto",
+              // aspectRatio: imgAspect,
+              borderRadius: 12,
+              padding: 4,
+              background: "var(--card)",
             }}
-          />
-        </motion.div>
-      </div>
+            onClick={() => setOpen(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setOpen(true);
+              }
+            }}
+            aria-label="View fullscreen image"
+          >
+            <MotionNextImage
+              src={src}
+              alt={typeof caption === "string" ? caption : ""}
+              placeholder="blur"
+              onLoad={handleImgLoad}
+              style={{
+                aspectRatio: imgAspect,
+                borderRadius: 8,
+                display: "block",
+                width: "100%",
+                height: "auto",
+              }}
+            />
+          </m.div>
+        </div>
 
-      {typeof document !== "undefined" &&
-        createPortal(
-          <AnimatePresence>
-            {open && (
-              <div
-                ref={overlayRef}
-                role="dialog"
-                aria-modal="true"
-                aria-label="Image"
-                tabIndex={-1}
-                className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain px-0 py-10 outline-none sm:px-4 xl:py-6"
-              >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3, delay: 0.05 }}
-                  className="fixed inset-0 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50"
-                  onClick={() => setOpen(false)}
-                />
+        {typeof document !== "undefined" &&
+          createPortal(
+            <AnimatePresence>
+              {open && (
+                <div
+                  ref={overlayRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="Image"
+                  tabIndex={-1}
+                  className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain px-0 py-10 outline-none sm:px-4 xl:py-6"
+                >
+                  <m.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, delay: 0.05 }}
+                    className="fixed inset-0 bg-neutral-950/25 backdrop-blur-[2px] dark:bg-neutral-950/50"
+                    onClick={() => setOpen(false)}
+                  />
 
-                <motion.div className="relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]" layout>
-                  <CloseButton onClick={() => setOpen(false)} />
+                  <m.div className="relative w-full max-w-none sm:w-[min(var(--container-7xl),calc(100vw-2rem))]" layout>
+                    <CloseButton onClick={() => setOpen(false)} />
 
-                  <motion.div
-                    layoutId={layoutId}
-                    transition={{ layout: SPRING }}
-                    className="relative overflow-hidden shadow-border-2xl"
-                    style={{
-                      // aspectRatio: imgAspect,
-                      borderRadius: 24,
-                      padding: 8,
-                      background: "var(--card)",
-                      maxWidth: "1024px",
-                      minHeight: "512px",
-                    }}
-                  >
-                    <ModalImage src={src2 ?? src} alt={typeof caption === "string" ? caption : ""} imgAspect={imgAspect} />
-                  </motion.div>
-                </motion.div>
-              </div>
-            )}
-          </AnimatePresence>,
-          document.body
-        )}
+                    <m.div
+                      layoutId={layoutId}
+                      transition={{ layout: SPRING }}
+                      className="relative overflow-hidden shadow-border-2xl"
+                      style={{
+                        // aspectRatio: imgAspect,
+                        borderRadius: 24,
+                        padding: 8,
+                        background: "var(--card)",
+                        maxWidth: "1024px",
+                        minHeight: "512px",
+                      }}
+                    >
+                      <ModalImage src={src2 ?? src} alt={typeof caption === "string" ? caption : ""} imgAspect={imgAspect} />
+                    </m.div>
+                  </m.div>
+                </div>
+              )}
+            </AnimatePresence>,
+            document.body
+          )}
 
-      {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
-    </figure>
+        {caption && <figcaption className="max-w-prose text-pretty md:px-4">{caption}</figcaption>}
+      </figure>
+    </LazyMotion>
   );
 }

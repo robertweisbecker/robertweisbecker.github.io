@@ -5,7 +5,10 @@ import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
   LayoutGroup,
-  motion,
+  LazyMotion,
+  domAnimation,
+  domMax,
+  m,
   useReducedMotion,
   type AnimatePresenceProps,
   type Transition,
@@ -163,51 +166,53 @@ export function MotionTextReveal({
     const itemTransition: Transition = { duration: Math.max(0.01, duration / 1000), ease: [0.22, 1, 0.36, 1] };
 
     return (
-      <div className="group/textReveal relative overflow-visible" id={id}>
-        <Component className={cn("whitespace-pre-wrap", className)} key={reset} style={style}>
-          <span aria-hidden className={segmentWrapperClassName}>
-            <motion.span
-              className="contents"
-              initial={shouldReduceMotion ? "visible" : "hidden"}
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: {
-                  transition: shouldReduceMotion
-                    ? { staggerChildren: 0 }
-                    : { staggerChildren: stagger / 1000, delayChildren: once ? 0 : 0 },
-                },
-              }}
+      <LazyMotion features={domAnimation}>
+        <div className="group/textReveal relative overflow-visible" id={id}>
+          <Component className={cn("whitespace-pre-wrap", className)} key={reset} style={style}>
+            <span aria-hidden className={segmentWrapperClassName}>
+              <m.span
+                className="contents"
+                initial={shouldReduceMotion ? "visible" : "hidden"}
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: shouldReduceMotion
+                      ? { staggerChildren: 0 }
+                      : { staggerChildren: stagger / 1000, delayChildren: once ? 0 : 0 },
+                  },
+                }}
+              >
+                {renderTextSegments(text, normalizedPer, (segment, index, wrapClassName) => (
+                  <m.span
+                    className={cn("inline-block", wrapClassName, segmentClassName)}
+                    key={`${segment}-${index}`}
+                    variants={{
+                      hidden: { opacity: 0, filter: "blur(8px)", y: "-10%" },
+                      visible: { opacity: 1, filter: "blur(0px)", y: 0 },
+                    }}
+                    transition={itemTransition}
+                  >
+                    {segment}
+                  </m.span>
+                ))}
+              </m.span>
+            </span>
+            <span className="sr-only">{text}</span>
+          </Component>
+          {debug && (
+            <Button
+              onClick={() => setReset((value) => value + 1)}
+              className="ease absolute top-1.5 right-0 m-1 translate-y-1 font-pixel text-[11px] opacity-0 transition-[opacity,translate] duration-100 group-hover/textReveal:translate-y-0 group-hover/textReveal:opacity-100"
+              size="icon-xs"
+              variant="ghost"
+              type="button"
             >
-              {renderTextSegments(text, normalizedPer, (segment, index, wrapClassName) => (
-                <motion.span
-                  className={cn("inline-block", wrapClassName, segmentClassName)}
-                  key={`${segment}-${index}`}
-                  variants={{
-                    hidden: { opacity: 0, filter: "blur(8px)", y: "-10%" },
-                    visible: { opacity: 1, filter: "blur(0px)", y: 0 },
-                  }}
-                  transition={itemTransition}
-                >
-                  {segment}
-                </motion.span>
-              ))}
-            </motion.span>
-          </span>
-          <span className="sr-only">{text}</span>
-        </Component>
-        {debug && (
-          <Button
-            onClick={() => setReset((value) => value + 1)}
-            className="ease absolute top-1.5 right-0 m-1 translate-y-1 font-pixel text-[11px] opacity-0 transition-[opacity,translate] duration-100 group-hover/textReveal:translate-y-0 group-hover/textReveal:opacity-100"
-            size="icon-xs"
-            variant="ghost"
-            type="button"
-          >
-            {"\u23ce"}
-          </Button>
-        )}
-      </div>
+              {"\u23ce"}
+            </Button>
+          )}
+        </div>
+      </LazyMotion>
     );
   }
 
@@ -314,29 +319,31 @@ export function MotionTextEffect({
   }, [children, delay, onAnimationComplete, onAnimationStart, segments.length, shouldReduceMotion, speedReveal, speedSegment, trigger]);
 
   return (
-    <Component className={cn("whitespace-pre-wrap", className)} style={style}>
-      <span aria-hidden className={segmentWrapperClassName}>
-        <motion.span
-          className="contents"
-          initial={trigger ? "hidden" : "visible"}
-          animate={trigger ? "visible" : "hidden"}
-          variants={containerVariants}
-          transition={resolvedContainerTransition}
-        >
-          {renderTextSegments(children, per, (segment, index, wrapClassName) => (
-            <motion.span
-              className={cn("inline-block will-change-transform", wrapClassName, segmentClassName)}
-              key={`${segment}-${index}`}
-              variants={itemVariants}
-              transition={resolvedSegmentTransition}
-            >
-              {segment}
-            </motion.span>
-          ))}
-        </motion.span>
-      </span>
-      <span className="sr-only">{children}</span>
-    </Component>
+    <LazyMotion features={domAnimation}>
+      <Component className={cn("whitespace-pre-wrap", className)} style={style}>
+        <span aria-hidden className={segmentWrapperClassName}>
+          <m.span
+            className="contents"
+            initial={trigger ? "hidden" : "visible"}
+            animate={trigger ? "visible" : "hidden"}
+            variants={containerVariants}
+            transition={resolvedContainerTransition}
+          >
+            {renderTextSegments(children, per, (segment, index, wrapClassName) => (
+              <m.span
+                className={cn("inline-block will-change-transform", wrapClassName, segmentClassName)}
+                key={`${segment}-${index}`}
+                variants={itemVariants}
+                transition={resolvedSegmentTransition}
+              >
+                {segment}
+              </m.span>
+            ))}
+          </m.span>
+        </span>
+        <span className="sr-only">{children}</span>
+      </Component>
+    </LazyMotion>
   );
 }
 
@@ -386,21 +393,23 @@ export function MotionTextLoop({
   if (items.length === 0) return null;
 
   return (
-    <span className={cn("relative inline-grid overflow-hidden align-bottom", className)}>
-      <AnimatePresence mode={mode} initial={false}>
-        <motion.span
-          className="col-start-1 row-start-1 inline-block whitespace-nowrap"
-          key={index}
-          initial={shouldReduceMotion ? false : "initial"}
-          animate="animate"
-          exit={shouldReduceMotion ? undefined : "exit"}
-          variants={variants}
-          transition={shouldReduceMotion ? { duration: 0 } : transition}
-        >
-          {items[index]}
-        </motion.span>
-      </AnimatePresence>
-    </span>
+    <LazyMotion features={domAnimation}>
+      <span className={cn("relative inline-grid overflow-hidden align-bottom", className)}>
+        <AnimatePresence mode={mode} initial={false}>
+          <m.span
+            className="col-start-1 row-start-1 inline-block whitespace-nowrap"
+            key={index}
+            initial={shouldReduceMotion ? false : "initial"}
+            animate="animate"
+            exit={shouldReduceMotion ? undefined : "exit"}
+            variants={variants}
+            transition={shouldReduceMotion ? { duration: 0 } : transition}
+          >
+            {items[index]}
+          </m.span>
+        </AnimatePresence>
+      </span>
+    </LazyMotion>
   );
 }
 
@@ -511,43 +520,45 @@ export function MotionTextWave({
   const chars = splitText(children, "char");
 
   return (
-    <Component className={cn("whitespace-pre-wrap", className)} style={{ perspective: 240, ...style }}>
-      <span aria-hidden>
-        {chars.map((char, index) => (
-          <motion.span
-            className={cn("inline-block transform-3d", segmentClassName)}
-            key={`${char}-${index}`}
-            animate={
-              shouldReduceMotion
-                ? undefined
-                : {
-                    opacity: [0.68, 1, 0.68],
-                    x: [0, xDistance, 0],
-                    y: [0, yDistance, 0],
-                    z: [0, zDistance, 0],
-                    scale: [1, scaleDistance, 1],
-                    rotateY: [0, rotateYDistance, 0],
-                  }
-            }
-            transition={
-              shouldReduceMotion
-                ? { duration: 0 }
-                : {
-                    duration,
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    ease: "easeInOut",
-                    delay: index * 0.045 * spread,
-                    ...transition,
-                  }
-            }
-          >
-            {getReadableSegment(char)}
-          </motion.span>
-        ))}
-      </span>
-      <span className="sr-only">{children}</span>
-    </Component>
+    <LazyMotion features={domAnimation}>
+      <Component className={cn("whitespace-pre-wrap", className)} style={{ perspective: 240, ...style }}>
+        <span aria-hidden>
+          {chars.map((char, index) => (
+            <m.span
+              className={cn("inline-block transform-3d", segmentClassName)}
+              key={`${char}-${index}`}
+              animate={
+                shouldReduceMotion
+                  ? undefined
+                  : {
+                      opacity: [0.68, 1, 0.68],
+                      x: [0, xDistance, 0],
+                      y: [0, yDistance, 0],
+                      z: [0, zDistance, 0],
+                      scale: [1, scaleDistance, 1],
+                      rotateY: [0, rotateYDistance, 0],
+                    }
+              }
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0 }
+                  : {
+                      duration,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      ease: "easeInOut",
+                      delay: index * 0.045 * spread,
+                      ...transition,
+                    }
+              }
+            >
+              {getReadableSegment(char)}
+            </m.span>
+          ))}
+        </span>
+        <span className="sr-only">{children}</span>
+      </Component>
+    </LazyMotion>
   );
 }
 
@@ -566,33 +577,35 @@ export function MotionTextMorph({ children, as = "p", className, style }: Motion
   const chars = splitText(children, "char");
 
   return (
-    <LayoutGroup id={id}>
-      <Component className={cn("inline-flex flex-wrap whitespace-pre-wrap", className)} style={style} aria-label={children}>
-        <AnimatePresence mode="popLayout" initial={false}>
-          {chars.map((char, index) => {
-            const occurrence = occurrenceMap.get(char) ?? 0;
-            occurrenceMap.set(char, occurrence + 1);
-            const readableChar = getReadableSegment(char);
+    <LazyMotion features={domMax}>
+      <LayoutGroup id={id}>
+        <Component className={cn("inline-flex flex-wrap whitespace-pre-wrap", className)} style={style} aria-label={children}>
+          <AnimatePresence mode="popLayout" initial={false}>
+            {chars.map((char, index) => {
+              const occurrence = occurrenceMap.get(char) ?? 0;
+              occurrenceMap.set(char, occurrence + 1);
+              const readableChar = getReadableSegment(char);
 
-            return (
-              <motion.span
-                aria-hidden
-                className="inline-block"
-                key={`${children}-${char}-${index}`}
-                layout={!shouldReduceMotion}
-                layoutId={`${char}-${occurrence}`}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 0, filter: "blur(2px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8, filter: "blur(4px)" }}
-                transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
-              >
-                {readableChar}
-              </motion.span>
-            );
-          })}
-        </AnimatePresence>
-      </Component>
-    </LayoutGroup>
+              return (
+                <m.span
+                  aria-hidden
+                  className="inline-block"
+                  key={`${children}-${char}-${index}`}
+                  layout={!shouldReduceMotion}
+                  layoutId={`${char}-${occurrence}`}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 0, filter: "blur(2px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8, filter: "blur(4px)" }}
+                  transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
+                >
+                  {readableChar}
+                </m.span>
+              );
+            })}
+          </AnimatePresence>
+        </Component>
+      </LayoutGroup>
+    </LazyMotion>
   );
 }
 

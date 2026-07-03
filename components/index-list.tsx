@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/ui/item";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { LazyMotion, domMax, m } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
@@ -103,43 +103,45 @@ export function IndexList({ items = defaultItems, className, itemClassName, maxV
   if (!canCollapse) return list;
 
   return (
-    <div className="group/index-list relative -mx-3">
-      <AnimateHeight
-        id={listId}
-        open={open}
-        initialHeight={`${collapsedHeightPercent}%`}
-        className="relative w-full min-w-0 overflow-x-visible! px-3"
-        transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
-      >
-        {list}
-      </AnimateHeight>
-      <motion.div
-        layout="position"
-        key={`scrim-${open ? "open" : "closed"}`}
-        transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
-        className={cn(
-          "absolute inset-x-0 z-10 flex h-18 items-end justify-center px-4",
-          open
-            ? "top-full -bottom-10 pt-0 pb-0"
-            : "via-smooth bottom-0 bg-linear-to-t from-background via-background/75 to-transparent pb-4"
-        )}
-      >
-        <Button
-          variant="ghost"
-          render={<motion.button />}
-          onClick={() => setOpen((value) => !value)}
-          className="pointer-events-auto"
-          aria-controls={listId}
-          aria-expanded={open}
+    <LazyMotion features={domMax}>
+      <div className="group/index-list relative -mx-3">
+        <AnimateHeight
+          id={listId}
+          open={open}
+          initialHeight={`${collapsedHeightPercent}%`}
+          className="relative w-full min-w-0 overflow-x-visible! px-3"
+          transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
         >
-          <MotionText.Morph as="span">
-            {open
-              ? `Hide ${filteredItems.length - resolvedMaxVisibleItems} items`
-              : `Show ${filteredItems.length - resolvedMaxVisibleItems} more`}
-          </MotionText.Morph>
-          <PixelMorph from="PixelChevronDownIcon" to="PixelChevronUpIcon" active={open} />
-        </Button>
-      </motion.div>
-    </div>
+          {list}
+        </AnimateHeight>
+        <m.div
+          layout="position"
+          key={`scrim-${open ? "open" : "closed"}`}
+          transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
+          className={cn(
+            "absolute inset-x-0 z-10 flex h-18 items-end justify-center px-4",
+            open
+              ? "top-full -bottom-10 pt-0 pb-0"
+              : "via-smooth bottom-0 bg-linear-to-t from-background via-background/75 to-transparent pb-4"
+          )}
+        >
+          <Button
+            variant="ghost"
+            render={<m.button />}
+            onClick={() => setOpen((value) => !value)}
+            className="pointer-events-auto"
+            aria-controls={listId}
+            aria-expanded={open}
+          >
+            <MotionText.Morph as="span">
+              {open
+                ? `Hide ${filteredItems.length - resolvedMaxVisibleItems} items`
+                : `Show ${filteredItems.length - resolvedMaxVisibleItems} more`}
+            </MotionText.Morph>
+            <PixelMorph from="PixelChevronDownIcon" to="PixelChevronUpIcon" active={open} />
+          </Button>
+        </m.div>
+      </div>
+    </LazyMotion>
   );
 }

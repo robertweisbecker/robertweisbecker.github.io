@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useAnimationFrame, useMotionValue } from "motion/react";
+import { LazyMotion, domAnimation, m, useAnimationFrame, useMotionValue } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -54,19 +54,21 @@ export function Float({
   });
 
   return (
-    <motion.div
-      style={{
-        x,
-        y,
-        z,
-        rotateX,
-        rotateY,
-        rotateZ,
-        transformStyle: "preserve-3d",
-      }}
-      className={cn("will-change-transform", className)}
-    >
-      {children}
-    </motion.div>
+    <LazyMotion features={domAnimation}>
+      <m.div
+        style={{
+          x,
+          y,
+          z,
+          rotateX,
+          rotateY,
+          rotateZ,
+          transformStyle: "preserve-3d",
+        }}
+        className={cn("will-change-transform", className)}
+      >
+        {children}
+      </m.div>
+    </LazyMotion>
   );
 }

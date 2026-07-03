@@ -48,7 +48,7 @@ import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { LinkButton } from "./ui/link-button";
 import { Toggle } from "./ui/toggle";
-import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, LayoutGroup, domAnimation, m } from "motion/react";
 
 type SearchItem = {
   value: string;
@@ -299,7 +299,7 @@ export function SiteSearch({
   );
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <CommandDialog
         open={open}
         onOpenChange={(next) => {
@@ -351,7 +351,7 @@ export function SiteSearch({
                       aria-label="Show filters"
                       pressed={showFilters}
                       onPressedChange={setShowFilters}
-                      render={<motion.button className={cn("order-last transition-all", filterActive ? "w-auto" : "w-button-xs")} />}
+                      render={<m.button className={cn("order-last transition-all", filterActive ? "w-auto" : "w-button-xs")} />}
                     />
                   }
                 >
@@ -359,13 +359,13 @@ export function SiteSearch({
                   <AnimatePresence mode="popLayout" initial={false}>
                     {activeTab !== "All" && !showFilters && (
                       <>
-                        <motion.span
+                        <m.span
                           key="filter-indicator"
                           className="absolute top-0 right-0 size-1.5 rounded-full bg-info-primary whitespace-nowrap"
                           initial={{ opacity: 0, filter: "blur(2px)", scale: 0.5 }}
                           animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                           exit={{ opacity: 0, filter: "blur(2px)", scale: 0.5 }}
-                        ></motion.span>
+                        ></m.span>
                       </>
                     )}
                   </AnimatePresence>
@@ -373,7 +373,7 @@ export function SiteSearch({
                 <AnimatePresence mode="wait" initial={false}>
                   {showFilters && (
                     <>
-                      <motion.div
+                      <m.div
                         key="filter-group"
                         className="flex overflow-hidden"
                         initial={{ opacity: 0, filter: "blur(8px)", width: 0, paddingInline: 0 }}
@@ -406,7 +406,7 @@ export function SiteSearch({
                               {/* {tab.icon} */}
                               {tab.value}
                               {tab.value === activeTab && (
-                                <motion.div
+                                <m.div
                                   layoutId="filter-tab-indicator"
                                   className="absolute bottom-0 left-0 size-full rounded-[inherit] bg-accent"
                                   transition={{ type: "spring", stiffness: 500, damping: 40, mass: 0.8 }}
@@ -415,7 +415,7 @@ export function SiteSearch({
                             </Toolbar.Button>
                           ))}
                         </Toolbar.Group>
-                      </motion.div>
+                      </m.div>
                     </>
                   )}
                 </AnimatePresence>
@@ -498,6 +498,6 @@ export function SiteSearch({
           </Command>
         </CommandDialogPopup>
       </CommandDialog>
-    </>
+    </LazyMotion>
   );
 }
