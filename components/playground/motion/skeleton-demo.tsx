@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Marker, MarkerContent } from "@/components/ui/marker";
-import * as PixelIcons from "@/components/icons-pixel";
+import { PixelRedoIcon } from "@/components/icons-pixel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -27,7 +27,7 @@ export function SkeletonDemo() {
       <div className="order-last flex justify-center">
         <Button variant="outline" rounded onClick={replay} data-testid="skeleton-replay">
           Reload
-          <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+          <PixelRedoIcon data-icon="inline-end" />
         </Button>
       </div>
 
