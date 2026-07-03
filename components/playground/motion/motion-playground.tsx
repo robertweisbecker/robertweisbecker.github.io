@@ -4,8 +4,7 @@ import * as React from "react";
 import dynamic from "next/dynamic";
 import { TextReveal } from "@/components/animation/shared";
 import { DemoContainer } from "@/components/demo";
-import { EmojiFeedbackDemo } from "@/components/demos/emoji-feedback";
-import * as PixelIcons from "@/components/icons-pixel";
+import { PixelRedoIcon } from "@/components/icons-pixel";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LinkOut } from "@/components/link-out";
 import { Button } from "@/components/ui/button";
@@ -14,19 +13,41 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { MorphIcon } from "@/components/morph-icon";
 import { Toggle } from "@/components/ui/toggle";
 import { PlaygroundSection } from "@/components/playground/playground-section";
-import { ChartDemo } from "@/components/playground/motion/chart-demo";
-import { ColorSwatchGroupDemo } from "@/components/playground/motion/color-swatch-group-demo";
-import { SkeletonDemo } from "@/components/playground/motion/skeleton-demo";
 
 const CardFan = dynamic(() => import("@/components/demos/card-fan").then((module) => ({ default: module.CardFan })), {
   loading: () => <p className="text-sm text-muted-foreground">Loading motion cards…</p>,
 });
+
+const ChartDemo = dynamic(() => import("@/components/playground/motion/chart-demo").then((module) => ({ default: module.ChartDemo })), {
+  loading: () => <p className="text-sm text-muted-foreground">Loading motion chart…</p>,
+});
+
+const ColorSwatchGroupDemo = dynamic(
+  () => import("@/components/playground/motion/color-swatch-group-demo").then((module) => ({ default: module.ColorSwatchGroupDemo })),
+  {
+    loading: () => <p className="text-sm text-muted-foreground">Loading color swatches…</p>,
+  }
+);
+
+const EmojiFeedbackDemo = dynamic(
+  () => import("@/components/demos/emoji-feedback").then((module) => ({ default: module.EmojiFeedbackDemo })),
+  {
+    loading: () => <p className="text-sm text-muted-foreground">Loading feedback controls…</p>,
+  }
+);
 
 const MotionTextPlaygroundDemo = dynamic(
   () =>
     import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextPlaygroundDemo })),
   {
     loading: () => <p className="text-sm text-muted-foreground">Loading motion text…</p>,
+  }
+);
+
+const SkeletonDemo = dynamic(
+  () => import("@/components/playground/motion/skeleton-demo").then((module) => ({ default: module.SkeletonDemo })),
+  {
+    loading: () => <p className="text-sm text-muted-foreground">Loading skeleton…</p>,
   }
 );
 
@@ -49,7 +70,7 @@ export function MotionPlayground() {
           controls={
             <Button size="xs" variant="ghost" onClick={() => setResetKey((key) => key + 1)}>
               Replay
-              <PixelIcons.PixelRedoIcon data-icon="inline-end" />
+              <PixelRedoIcon data-icon="inline-end" />
             </Button>
           }
         >
