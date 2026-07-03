@@ -69,21 +69,22 @@ const postItems: IndexListItem[] = posts.map((post) => {
 
 export default async function Home() {
   const projectItems: IndexListItem[] = await Promise.all(
-    projects.map(async (project) => {
-      const slug = project.path.replace(/^\//, "");
-      const frontmatter = await getProjectFrontmatter(slug);
+    projects
+      .filter((project) => project.published ?? true)
+      .map(async (project) => {
+        const slug = project.path.replace(/^\//, "");
+        const frontmatter = await getProjectFrontmatter(slug);
 
-      return {
-        id: project.id,
-        title: frontmatter.title,
-        description: project.description,
-        date: project.date,
-        path: project.path,
-        icon: project.icon,
-        published: project.published,
-        viewTransitionName: pageTitleTransitionName("project", slug),
-      };
-    })
+        return {
+          id: project.id,
+          title: frontmatter.title,
+          description: project.description,
+          date: project.date,
+          path: project.path,
+          icon: project.icon,
+          viewTransitionName: pageTitleTransitionName("project", slug),
+        };
+      })
   );
 
   return (
