@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 import { useKeyPress } from "@/hooks/use-key-press";
 import { getPlaygroundRouteIcon } from "@/components/playground/playground-route-icons";
 import { playgroundRoutes } from "@/lib/data/playground";
@@ -38,6 +36,7 @@ import {
 } from "./ui/command";
 import { Kbd, KbdGroup } from "./ui/kbd";
 import { Dialog } from "@base-ui/react/dialog";
+import Image from "next/image";
 import { Favicon, FolderIcon, CursorIcon } from "./icons";
 import { PixelNewsIcon, PixelFinderIcon, PixelScribbleIcon } from "./icons-pixel";
 import { TreeIconFile } from "./icons-tree";
@@ -90,10 +89,13 @@ const FILTER_TABS: { value: FilterTab; icon?: React.ReactNode }[] = [
   {
     value: "Posts",
     icon: (
-      <img
+      <Image
         src="https://www.thiings.co/_next/image?url=https%3A%2F%2Flftz25oez4aqbxpq.public.blob.vercel-storage.com%2Fimage-e0904rWYQ29GCwVnLKDYLOjvAXcSXy.png&w=1000&q=75"
         alt="Posts"
+        width={16}
+        height={16}
         className="size-4"
+        unoptimized
       />
     ),
   },
@@ -114,7 +116,7 @@ function itemIcon(Icon: React.ComponentType<{ className?: string }>): ReactNode 
 }
 
 function itemImage(src: string): ReactNode {
-  return <img src={src} alt="" />;
+  return <Image src={src} alt="" width={40} height={40} className="size-full object-cover" unoptimized={src.endsWith(".svg")} />;
 }
 
 const staticPages: SearchItem[] = [

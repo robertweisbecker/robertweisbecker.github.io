@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -65,7 +63,7 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
 // ---------------------------------------------------------------------------
 // Shared modal image with skeleton
 // ---------------------------------------------------------------------------
-function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; alt: string; imgAspect?: string }) {
+function ModalImage({ src, alt, imgAspect }: { src: StaticImageData; alt: string; imgAspect?: string }) {
   const url = imageSrc(src);
   const [loadedImage, setLoadedImage] = React.useState<{ url: string; loaded: boolean }>(() => ({ url, loaded: false }));
   const loaded = loadedImage.url === url && loadedImage.loaded;
@@ -73,9 +71,10 @@ function ModalImage({ src, alt, imgAspect }: { src: StaticImageData | string; al
   return (
     <>
       {!loaded && imgAspect && <Skeleton className="inset-2 h-100 rounded-[20px]" />}
-      <img
-        src={url}
+      <NextImage
+        src={src}
         alt={alt}
+        placeholder="blur"
         onLoad={() => setLoadedImage({ url, loaded: true })}
         style={{
           aspectRatio: imgAspect,
@@ -267,14 +266,16 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
           ) : (
             <div aria-hidden style={{ opacity: 0 }}>
               <div style={{ padding: 4, borderRadius: 12 }}>
-                <img
-                  src={imageSrc(src)}
+                <NextImage
+                  src={src}
                   alt=""
+                  placeholder="blur"
                   style={{
                     aspectRatio: imgAspect,
                     borderRadius: 8,
                     display: "block",
                     width: "100%",
+                    height: "auto",
                   }}
                 />
               </div>
@@ -394,15 +395,17 @@ export function ImageModalPopover({ src, src2, caption }: ImageModalProps) {
               />
             }
           >
-            <img
-              src={imageSrc(src)}
+            <NextImage
+              src={src}
               alt={typeof caption === "string" ? caption : ""}
+              placeholder="blur"
               onLoad={handleImgLoad}
               style={{
                 aspectRatio: imgAspect,
                 borderRadius: 8,
                 display: "block",
                 width: "100%",
+                height: "auto",
               }}
             />
           </Popover.Trigger>
@@ -629,15 +632,17 @@ export function ImageModalMotion2({ src, src2, caption }: ImageModalProps) {
           }}
           aria-label="View fullscreen image"
         >
-          <img
-            src={imageSrc(src)}
+          <NextImage
+            src={src}
             alt={typeof caption === "string" ? caption : ""}
+            placeholder="blur"
             onLoad={handleImgLoad}
             style={{
               aspectRatio: imgAspect,
               borderRadius: 8,
               display: "block",
               width: "100%",
+              height: "auto",
             }}
           />
         </motion.div>

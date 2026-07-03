@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element */
-
 /*─────────────────────────────────────────────────────────
  * DIRECTION E — Polaroid Fan
  *
@@ -22,6 +20,7 @@
  *─────────────────────────────────────────────────────────*/
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import {
@@ -134,7 +133,7 @@ function PolaroidFace({ slide }: { slide: Slide }) {
   return (
     <div className="flex h-full w-full flex-col p-3">
       <div className="relative flex-1 overflow-hidden rounded-lg bg-muted">
-        <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" draggable={false} />
+        <Image src={slide.src} alt={slide.alt} fill sizes={`${CARD_W}px`} className="object-cover object-top" draggable={false} />
       </div>
       <div className="pt-2.5">
         <p className="font-pixel text-[9px] tracking-wider text-muted-foreground uppercase">{slide.label}</p>
@@ -272,7 +271,15 @@ function Variation1() {
                       i === activeSlide && !fading ? "opacity-100" : "pointer-events-none opacity-0"
                     )}
                   >
-                    <img src={slide.src} alt={slide.alt} className="max-h-full max-w-full rounded-xl object-contain" />
+                    <div className="relative h-full w-full">
+                      <Image
+                        src={slide.src}
+                        alt={slide.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, calc(100vw - 16rem)"
+                        className="rounded-xl object-contain"
+                      />
+                    </div>
                   </div>
                 ))}
 
@@ -368,7 +375,7 @@ function Variation1() {
                   )}
                   style={{ aspectRatio: "16/9" }}
                 >
-                  <img src={slide.src} alt={slide.alt} className="h-full w-full object-cover object-top" />
+                  <Image src={slide.src} alt={slide.alt} fill sizes="86px" className="object-cover object-top" />
                 </button>
               ))}
             </DialogFooter>
@@ -596,7 +603,9 @@ function MinimizedCard({
           }}
           // layoutId={ids.image}
         >
-          <img src={slide.src} alt={slide.alt} className="aspect-square rounded-sm object-cover object-top" draggable={false} />
+          <div className="relative aspect-square w-full overflow-hidden rounded-sm">
+            <Image src={slide.src} alt={slide.alt} fill sizes={`${CARD_W}px`} className="object-cover object-top" draggable={false} />
+          </div>
         </MotionCardContent>
       </MotionCard>
     </motion.div>
@@ -654,8 +663,8 @@ function ExpandedCard({ slide, onClose }: ExpandedCardProps) {
             <CarouselViewport>
               {SLIDES.map((s) => (
                 <CarouselItem key={s.src}>
-                  <div className="relative w-full">
-                    <img src={s.src} alt={s.alt} className="aspect-video object-contain" draggable={false} />
+                  <div className="relative aspect-video w-full">
+                    <Image src={s.src} alt={s.alt} fill sizes={`${EXPANDED_W}px`} className="object-contain" draggable={false} />
                   </div>
                 </CarouselItem>
               ))}
