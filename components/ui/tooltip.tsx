@@ -55,10 +55,11 @@ function TooltipGroup({
   actionsRef,
 }: TooltipPrimitive.Root.Props & TooltipGroupProps) {
   const handle = React.useMemo(() => TooltipPrimitive.createHandle<React.ReactNode>(), []);
+  const contextValue = React.useMemo(() => ({ handle }), [handle]);
 
   return (
     <TooltipProvider data-slot="tooltip-group-provider" delay={delay} closeDelay={closeDelay} timeout={timeout}>
-      <TooltipGroupContext.Provider value={{ handle }}>
+      <TooltipGroupContext.Provider value={contextValue}>
         {children}
         <TooltipPrimitive.Root
           data-slot="tooltip-group"

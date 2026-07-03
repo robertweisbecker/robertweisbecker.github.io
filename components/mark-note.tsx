@@ -26,9 +26,10 @@ export function MarkNote({ note, children, className }: MarkNoteProps) {
     for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
     return 5 + (h % 500) / 100;
   }, [rawId]);
+  const contextValue = useMemo(() => ({ noteId }), [noteId]);
 
   return (
-    <MarkNoteContext.Provider value={{ noteId }}>
+    <MarkNoteContext.Provider value={contextValue}>
       <div className={cn("group/mark-note relative block", className)}>
         <div style={{ anchorName } as React.CSSProperties}>{children}</div>
         <svg

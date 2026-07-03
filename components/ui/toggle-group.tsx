@@ -36,6 +36,8 @@ function ToggleGroup({
   VariantProps<typeof toggleVariants> & {
     spacing?: number;
   }) {
+  const contextValue = React.useMemo(() => ({ variant, size, spacing, orientation, shape }), [orientation, shape, size, spacing, variant]);
+
   return (
     <ToggleGroupPrimitive
       data-slot="toggle-group"
@@ -54,7 +56,7 @@ function ToggleGroup({
       )}
       {...props}
     >
-      <ToggleGroupContext.Provider value={{ variant, size, spacing, orientation, shape }}>{children}</ToggleGroupContext.Provider>
+      <ToggleGroupContext.Provider value={contextValue}>{children}</ToggleGroupContext.Provider>
     </ToggleGroupPrimitive>
   );
 }
@@ -126,6 +128,17 @@ function ToggleGrid({
     columns?: number;
     spacing?: number;
   }) {
+  const contextValue = React.useMemo(
+    () => ({
+      variant: variant,
+      size: size ?? "sm",
+      spacing: 0,
+      orientation: "vertical" as const,
+      grid: true,
+    }),
+    [size, variant]
+  );
+
   return (
     <ToggleGroupPrimitive
       data-slot="toggle-grid"
@@ -147,17 +160,7 @@ function ToggleGrid({
       )}
       {...props}
     >
-      <ToggleGroupContext.Provider
-        value={{
-          variant: variant,
-          size: size ?? "sm",
-          spacing: 0,
-          orientation: "vertical",
-          grid: true,
-        }}
-      >
-        {children}
-      </ToggleGroupContext.Provider>
+      <ToggleGroupContext.Provider value={contextValue}>{children}</ToggleGroupContext.Provider>
     </ToggleGroupPrimitive>
   );
 }

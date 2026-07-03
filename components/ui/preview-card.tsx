@@ -67,9 +67,10 @@ export function PreviewCardGroup({
 }: PreviewCardGroupProps) {
   const internalHandle = React.useMemo(() => PreviewCardPrimitive.createHandle<React.ReactNode>(), []);
   const handle = handleProp ?? internalHandle;
+  const contextValue = React.useMemo(() => ({ handle }), [handle]);
 
   return (
-    <PreviewCardGroupContext.Provider value={{ handle }}>
+    <PreviewCardGroupContext.Provider value={contextValue}>
       {children}
       <PreviewCardPrimitive.Root
         handle={handle}
