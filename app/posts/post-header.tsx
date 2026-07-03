@@ -29,7 +29,7 @@ export function PostHeader() {
           <h1 className="text-h1">{post.title}</h1>
         </TitleMorph>
       ) : (
-        <h1 className="text-h1" />
+        <h1 className="text-h1">Post</h1>
       )}
     </div>
   );
