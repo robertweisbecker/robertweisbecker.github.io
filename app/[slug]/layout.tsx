@@ -3,7 +3,7 @@ import { BackButton } from "@/components/back-button";
 import { Pagination } from "@/components/pagination";
 import { ProjectMeta } from "@/components/project-meta";
 import { TableOfContents } from "@/components/table-of-contents";
-import { TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
+import { NAV_BACK_TRANSITION, TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { projects } from "@/lib/data/projects";
 import { getProjectToc } from "@/lib/projects";
 import type { ProjectFrontmatter } from "@/lib/types";
@@ -25,14 +25,16 @@ export default async function MDXLayout({ children, params }: { children: React.
   return (
     <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
       <aside id="toc" className="not-prose @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-32">
-        <BackButton href="/#projects">Back</BackButton>
+        <BackButton href="/#projects" transitionTypes={NAV_BACK_TRANSITION}>
+          Back
+        </BackButton>
 
         <TableOfContents toc={toc} title={fm.title} />
       </aside>
 
       <div id="content-max" className="col-start-2 min-w-0">
         <div id="content-header" className="mx-auto flex max-w-xl flex-col items-start gap-4">
-          <BackButton href="/#projects" className="mb-8 lg:hidden">
+          <BackButton href="/#projects" className="mb-8 lg:hidden" transitionTypes={NAV_BACK_TRANSITION}>
             Projects
           </BackButton>
 

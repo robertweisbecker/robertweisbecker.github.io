@@ -37,7 +37,7 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { ArtCards } from "@/components/demos/art-cards";
 import { Letterboxd } from "@/components/demos/letterboxd";
 import { HomePortrait } from "@/components/home-portrait";
-import { pageTitleTransitionName } from "@/components/view-transitions";
+import { NAV_FORWARD_TRANSITION, pageTitleTransitionName } from "@/components/view-transitions";
 
 const postItems: IndexListItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -144,14 +144,14 @@ export default function Home() {
         <h2 className="mb-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
           I. Work
         </h2>
-        <IndexList />
+        <IndexList transitionTypes={NAV_FORWARD_TRANSITION} />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-pixel text-[11px] uppercase" id="resources">
           II. Posts
         </h2>
-        <IndexList items={postItems} maxVisibleItems={3} />
+        <IndexList items={postItems} maxVisibleItems={3} transitionTypes={NAV_FORWARD_TRANSITION} />
       </section>
 
       <section>

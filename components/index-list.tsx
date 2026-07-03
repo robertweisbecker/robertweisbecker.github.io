@@ -26,6 +26,7 @@ export type IndexListItem = {
   tags?: React.ReactNode;
   /** Valid title transition name from pageTitleTransitionName. Defaults to the project path. */
   viewTransitionName?: string;
+  transitionTypes?: string[];
   /** Whether the item is published. Defaults to true. */
   published?: boolean;
 };
@@ -34,6 +35,7 @@ export type IndexListProps = {
   items?: IndexListItem[];
   className?: string;
   itemClassName?: string;
+  transitionTypes?: string[];
   /** Collapses the list after this many fully visible items. `true` uses 5. */
   maxVisibleItems?: number | true;
 };
@@ -66,7 +68,7 @@ const defaultItems: IndexListItem[] = projects.map((p) => ({
   published: p.published,
 }));
 
-export function IndexList({ items = defaultItems, className, itemClassName, maxVisibleItems }: IndexListProps) {
+export function IndexList({ items = defaultItems, className, itemClassName, transitionTypes, maxVisibleItems }: IndexListProps) {
   const filteredItems = items.filter((item) => item.published ?? true);
   const resolvedMaxVisibleItems = maxVisibleItems === true ? 5 : maxVisibleItems;
   const canCollapse =
@@ -84,7 +86,7 @@ export function IndexList({ items = defaultItems, className, itemClassName, maxV
         return (
           <React.Fragment key={item.id}>
             <Item
-              render={<Link href={item.path} />}
+              render={<Link href={item.path} transitionTypes={item.transitionTypes ?? transitionTypes} />}
               size="default"
               className={cn("peer hover:text-secondary-foreground sm:-mx-3", itemClassName)}
             >

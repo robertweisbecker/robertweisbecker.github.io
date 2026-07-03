@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ScrollReset } from "@/components/scroll-reset";
+import { PageViewTransition } from "@/components/view-transitions";
 
 const Departure_Mono = localFont({
   variable: "--font-departure-mono",
@@ -72,7 +73,9 @@ export default function RootLayout({
 
           <Header />
           <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
-            <div className="root isolate">{children}</div>
+            <PageViewTransition>
+              <div className="root isolate">{children}</div>
+            </PageViewTransition>
           </main>
           <Footer />
         </ThemeProvider>
