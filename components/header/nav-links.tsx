@@ -19,15 +19,13 @@ function HeaderLinkButton({ label, icon, mobileIconOnly = false, className, ...p
       variant="ghost"
       rounded={true}
       size="sm"
-      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "font-normal text-xs text-muted-foreground", className)}
+      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "text-xs font-normal text-muted-foreground", className)}
       {...props}
     >
       {icon && (
         <>
-          <span className={cn(mobileIconOnly && "max-md:hidden")}>
-            {icon}
-          </span>
-          {mobileIconOnly ? <span className="md:hidden m-0!">{icon}</span> : null}
+          <span className={cn(mobileIconOnly && "max-md:hidden")}>{icon}</span>
+          {mobileIconOnly ? <span className="m-0! md:hidden">{icon}</span> : null}
         </>
       )}
       <span className={cn(mobileIconOnly && "max-md:sr-only")}>{label}</span>
@@ -42,7 +40,7 @@ export function NavLinks() {
     <>
       <HeaderLinkButton
         label="Posts"
-        icon={<PixelNewspaperIcon scale={1.5}  />}
+        icon={<PixelNewspaperIcon scale={1.5} />}
         mobileIconOnly={false}
         href="/posts"
         aria-current={pathname.startsWith("/posts") ? "true" : "false"}
@@ -50,7 +48,7 @@ export function NavLinks() {
       />
       <HeaderLinkButton
         label="Art"
-        icon={<PixelScribbleIcon scale={1.5}  />}
+        icon={<PixelScribbleIcon scale={1.5} />}
         mobileIconOnly={true}
         href="/art"
         aria-current={pathname === "/art" ? "true" : "false"}
@@ -58,7 +56,7 @@ export function NavLinks() {
       />
       <HeaderLinkButton
         label="Play"
-        icon={<PixelPointerIcon  scale={1.5}  />}
+        icon={<PixelPointerIcon scale={1.5} />}
         mobileIconOnly={false}
         href="/playground/motion"
         aria-current={pathname.startsWith("/playground") ? "true" : "false"}
