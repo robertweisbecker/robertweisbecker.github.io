@@ -2,7 +2,7 @@
  * Parses post frontmatter dates like `MM/DD/YYYY` deterministically so
  * server and client agree (avoids `new Date("04/02/2026")` ambiguity).
  */
-export function parsePostDateString(dateStr: string): Date | null {
+function parsePostDateString(dateStr: string): Date | null {
   const trimmed = dateStr.trim();
   const us = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(trimmed);
   if (us) {
