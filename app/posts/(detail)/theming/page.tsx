@@ -1,5 +1,3 @@
-"use client";
-
 import { CodeBlock } from "@/components/code-block";
 import { DemoContainer } from "@/components/demo";
 import { CheckIconStraight } from "@/components/icons";

@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,7 +16,7 @@ import {
 } from "@/components/icons";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Preserved for the commented Letterboxd header treatment below.
 import { LetterboxdLogo } from "@/components/icons";
-import { PixelMarkdown2Icon, PixelShuffleIcon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons-pixel";
+import { PixelMarkdown2Icon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons-pixel";
 import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
 import { IndexList, type IndexListItem } from "@/components/index-list";
@@ -25,14 +24,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverDescription, PopoverTrigger } from "@/components/ui/popover";
 import { resources } from "@/lib/data/resources";
-import { PixelReveal } from "@/components/animation/shared";
-import { PixelPortrait } from "@/components/animation/pixel-portrait";
-import { PixelDino } from "@/components/animation/pixel-dino";
-import { Float } from "@/components/animation/float";
 import { cn } from "@/lib/utils";
 import { posts, postIcons } from "@/lib/data/posts";
 import { IconCalendar, IconFile, IconLink } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "@/components/layout-grid";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import { LinkButton } from "@/components/ui/link-button";
@@ -42,6 +36,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
 import { ArtCards } from "@/components/demos/art-cards";
 import { Letterboxd } from "@/components/demos/letterboxd";
+import { HomePortrait } from "@/components/home-portrait";
 
 const postItems: IndexListItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -69,7 +64,6 @@ const postItems: IndexListItem[] = posts.map((post) => {
 });
 
 export default function Home() {
-  const [isDinoVisible, setIsDinoVisible] = React.useState(false);
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
       <section>
@@ -78,31 +72,7 @@ export default function Home() {
             Robert
             <br /> Weisbecker
           </h1>
-          <div className="rounded-md bg-muted max-sm:order-last max-sm:justify-self-end">
-            <Float
-              className="group/pixel relative isolate w-fit rounded-md bg-card p-1 shadow-border-lg"
-              speed={0.5}
-              amplitude={[4, 8, 4]}
-              rotationRange={[1, 1, 3]}
-            >
-              <div className="relative size-[150px] overflow-hidden rounded-[calc(var(--radius-md)-4px)] bg-background sm:size-50">
-                <PixelPortrait className="outline-2 outline-card" />
-                {isDinoVisible && (
-                  <PixelReveal className="absolute inset-0 size-full">
-                    <PixelDino />
-                  </PixelReveal>
-                )}
-              </div>
-              <Button
-                onClick={() => setIsDinoVisible((v) => !v)}
-                variant="ghost"
-                size="icon-xs"
-                className="pointer-fine:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none pointer-fine:-translate-y-1 pointer-fine:opacity-0"
-              >
-                {isDinoVisible ? "⟨" : <PixelShuffleIcon className="size-[11px]" />}
-              </Button>
-            </Float>
-          </div>
+          <HomePortrait />
           <div className="w-full space-y-3.5 text-base max-sm:col-span-2">
             <p className="text-pretty">
               You can call me{" "}

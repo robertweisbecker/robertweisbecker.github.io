@@ -1,5 +1,3 @@
-"use client";
-
 import { ClipPathCurveTool } from "@/components/demos/clip-path-editor";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
