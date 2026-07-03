@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import type { Viewport } from "next";
-import { ViewTransition } from "react";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -73,9 +72,7 @@ export default function RootLayout({
 
           <Header />
           <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
-            <ViewTransition update="vt-page" default="none">
-              <div className="root isolate">{children}</div>
-            </ViewTransition>
+            <div className="root isolate">{children}</div>
           </main>
           <Footer />
         </ThemeProvider>

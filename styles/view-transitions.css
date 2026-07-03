@@ -1,29 +1,5 @@
 :root {
-  --vt-exit: 150ms;
-  --vt-enter: 210ms;
   --vt-move: 400ms;
-}
-
-@keyframes vt-fade {
-  from {
-    opacity: 0;
-    filter: blur(3px);
-  }
-
-  to {
-    opacity: 1;
-    filter: blur(0);
-  }
-}
-
-@keyframes vt-rise {
-  from {
-    transform: translateY(10px);
-  }
-
-  to {
-    transform: translateY(0);
-  }
 }
 
 @keyframes via-blur {
@@ -32,22 +8,12 @@
   }
 }
 
-::view-transition-group(morph) {
+::view-transition-group(.morph) {
   animation-duration: var(--vt-move);
 }
 
-::view-transition-image-pair(morph) {
+::view-transition-image-pair(.morph) {
   animation-name: via-blur;
-}
-
-::view-transition-old(vt-page) {
-  animation: var(--vt-exit) ease-in vt-fade reverse both;
-}
-
-::view-transition-new(vt-page) {
-  animation:
-    var(--vt-enter) ease-out var(--vt-exit) vt-fade both,
-    var(--vt-enter) ease-out var(--vt-exit) vt-rise both;
 }
 
 ::view-transition-group(site-header),
@@ -70,6 +36,7 @@
   ::view-transition-old(*),
   ::view-transition-new(*),
   ::view-transition-group(*) {
-    animation: none;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }
