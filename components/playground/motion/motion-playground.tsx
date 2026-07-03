@@ -10,29 +10,42 @@ import { LinkOut } from "@/components/link-out";
 import { Button } from "@/components/ui/button";
 import { ColorCode } from "@/components/ui/color-code";
 import { CopyButton } from "@/components/ui/copy-button";
+import { Loader } from "@/components/ui/loader";
+import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
 import { MorphIcon } from "@/components/morph-icon";
 import { Toggle } from "@/components/ui/toggle";
 import { PlaygroundSection } from "@/components/playground/playground-section";
 
+function DemoLoadingMarker() {
+  return (
+    <Marker className="w-auto justify-center text-sm">
+      <MarkerIcon>
+        <Loader className="text-primary" />
+      </MarkerIcon>
+      <MarkerContent className="shimmer shimmer-color-foreground shimmer-duration-1400">Loading demo&hellip;</MarkerContent>
+    </Marker>
+  );
+}
+
 const CardFan = dynamic(() => import("@/components/demos/card-fan").then((module) => ({ default: module.CardFan })), {
-  loading: () => <p className="text-sm text-muted-foreground">Loading motion cards…</p>,
+  loading: () => <DemoLoadingMarker />,
 });
 
 const ChartDemo = dynamic(() => import("@/components/playground/motion/chart-demo").then((module) => ({ default: module.ChartDemo })), {
-  loading: () => <p className="text-sm text-muted-foreground">Loading motion chart…</p>,
+  loading: () => <DemoLoadingMarker />,
 });
 
 const ColorSwatchGroupDemo = dynamic(
   () => import("@/components/playground/motion/color-swatch-group-demo").then((module) => ({ default: module.ColorSwatchGroupDemo })),
   {
-    loading: () => <p className="text-sm text-muted-foreground">Loading color swatches…</p>,
+    loading: () => <DemoLoadingMarker />,
   }
 );
 
 const EmojiFeedbackDemo = dynamic(
   () => import("@/components/demos/emoji-feedback").then((module) => ({ default: module.EmojiFeedbackDemo })),
   {
-    loading: () => <p className="text-sm text-muted-foreground">Loading feedback controls…</p>,
+    loading: () => <DemoLoadingMarker />,
   }
 );
 
@@ -40,14 +53,14 @@ const MotionTextPlaygroundDemo = dynamic(
   () =>
     import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextPlaygroundDemo })),
   {
-    loading: () => <p className="text-sm text-muted-foreground">Loading motion text…</p>,
+    loading: () => <DemoLoadingMarker />,
   }
 );
 
 const SkeletonDemo = dynamic(
   () => import("@/components/playground/motion/skeleton-demo").then((module) => ({ default: module.SkeletonDemo })),
   {
-    loading: () => <p className="text-sm text-muted-foreground">Loading skeleton…</p>,
+    loading: () => <DemoLoadingMarker />,
   }
 );
 
