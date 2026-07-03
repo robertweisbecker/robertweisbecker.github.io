@@ -1,6 +1,7 @@
 import { Alert, AlertTitle, AlertDescription, AlertContent } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/ui/item";
+import { TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { postIcons, posts, type PostIconName } from "@/lib/data/posts";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@tabler/icons-react";
@@ -21,19 +22,19 @@ function PostListIcon({ name }: { name?: PostIconName }) {
 export default function PostsPage() {
   return (
     <div className="mx-auto grid gap-12">
-      <div>
+      <div className="animate-stagger-enter [--stagger:0]">
         <h1 className="mb-4 text-h1">Posts</h1>
         <p className="text-sm text-balance">Code experiments and small tools.</p>
       </div>
 
-      <Alert variant="warning">
+      <Alert variant="warning" className="animate-stagger-enter [--stagger:1]">
         <AlertContent>
           <AlertTitle>Heads up!</AlertTitle>
           <AlertDescription>Some of the posts below use new or experimental features that may not work in all browsers.</AlertDescription>
         </AlertContent>
       </Alert>
 
-      <ItemGroup>
+      <ItemGroup className="animate-stagger-enter [--stagger:2]">
         {posts.map((post, index) => (
           <React.Fragment key={post.id}>
             <Item render={<Link href={post.path} />} className="-mx-4">
@@ -41,7 +42,9 @@ export default function PostsPage() {
                 <PostListIcon name={post.icon} />
               </ItemMedia>
               <ItemContent>
-                <ItemTitle>{post.title}</ItemTitle>
+                <TitleMorph name={pageTitleTransitionName("post", post.id)}>
+                  <ItemTitle>{post.title}</ItemTitle>
+                </TitleMorph>
                 <ItemDescription>{post.description}</ItemDescription>
               </ItemContent>
               <ItemActions>

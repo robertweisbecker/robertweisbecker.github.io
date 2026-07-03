@@ -37,6 +37,7 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { ArtCards } from "@/components/demos/art-cards";
 import { Letterboxd } from "@/components/demos/letterboxd";
 import { HomePortrait } from "@/components/home-portrait";
+import { pageTitleTransitionName } from "@/components/view-transitions";
 
 const postItems: IndexListItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -47,6 +48,7 @@ const postItems: IndexListItem[] = posts.map((post) => {
     date: post.date,
     path: post.path,
     icon: <Icon aria-hidden strokeWidth={1} className="opacity-72" />,
+    viewTransitionName: pageTitleTransitionName("post", post.id),
     tags: post.category ? (
       <Badge
         variant={"inherit"}

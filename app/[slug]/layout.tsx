@@ -3,6 +3,7 @@ import { BackButton } from "@/components/back-button";
 import { Pagination } from "@/components/pagination";
 import { ProjectMeta } from "@/components/project-meta";
 import { TableOfContents } from "@/components/table-of-contents";
+import { TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { projects } from "@/lib/data/projects";
 import { getProjectToc } from "@/lib/projects";
 import type { ProjectFrontmatter } from "@/lib/types";
@@ -35,9 +36,9 @@ export default async function MDXLayout({ children, params }: { children: React.
             Projects
           </BackButton>
 
-          <h1 style={{ viewTransitionName: "title" }} className="scroll-mt-16 text-h1 text-balance">
-            {fm.title}
-          </h1>
+          <TitleMorph name={pageTitleTransitionName("project", slug)}>
+            <h1 className="scroll-mt-16 text-h1 text-balance">{fm.title}</h1>
+          </TitleMorph>
           <p className="mb-4 max-w-prose text-base leading-tight text-balance text-muted-foreground">{fm.subtitle}</p>
           <ProjectMeta
             role={fm.role}

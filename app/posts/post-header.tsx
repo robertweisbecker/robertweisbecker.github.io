@@ -2,6 +2,7 @@
 
 import { BackButton } from "@/components/back-button";
 import { PostTableOfContents } from "@/components/post-table-of-contents";
+import { TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { posts } from "@/lib/data/posts";
 import { formatPostDateForDisplay } from "@/lib/parse-post-date";
 import { usePathname } from "next/navigation";
@@ -23,7 +24,13 @@ export function PostHeader() {
   return (
     <div className="flex w-full max-w-xl flex-col gap-8">
       <PostTopBar date={post?.date} />
-      <h1 className="text-h1">{post?.title}</h1>
+      {post ? (
+        <TitleMorph name={pageTitleTransitionName("post", post.id)}>
+          <h1 className="text-h1">{post.title}</h1>
+        </TitleMorph>
+      ) : (
+        <h1 className="text-h1" />
+      )}
     </div>
   );
 }

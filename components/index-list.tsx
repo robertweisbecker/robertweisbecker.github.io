@@ -12,6 +12,7 @@ import * as React from "react";
 import { TreeIconFile } from "./icons-tree";
 import { PixelMorph } from "./pixel-morph";
 import { MotionText } from "./animation/MotionText";
+import { TitleMorph, pageTitleTransitionName } from "./view-transitions";
 
 export type IndexListItem = {
   id: string | number;
@@ -23,7 +24,7 @@ export type IndexListItem = {
   icon?: string | React.ReactNode;
   /** Optional content rendered in the trailing actions slot (e.g. a Badge). */
   tags?: React.ReactNode;
-  /** Enables CSS view-transition on the title. Defaults to the title string. */
+  /** Valid title transition name from pageTitleTransitionName. Defaults to the project path. */
   viewTransitionName?: string;
   /** Whether the item is published. Defaults to true. */
   published?: boolean;
@@ -77,26 +78,32 @@ export function IndexList({ items = defaultItems, className, itemClassName, maxV
 
   const list = (
     <ItemGroup className={className}>
-      {filteredItems.map((item, index) => (
-        <React.Fragment key={item.id}>
-          <Item
-            render={<Link href={item.path} />}
-            size="default"
-            className={cn("peer hover:text-secondary-foreground sm:-mx-3", itemClassName)}
-          >
-            {renderMedia(item.icon)}
-            <ItemContent>
-              <ItemTitle style={{ viewTransitionName: item.viewTransitionName ?? item.title }}>{item.title} </ItemTitle>
-              {item.description && <ItemDescription className="max-sm:hidden">{item.description}</ItemDescription>}
-            </ItemContent>
-            <ItemActions>
-              {item.tags && <span className="max-sm:hidden">{item.tags}</span>}
-              {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
-            </ItemActions>
-          </Item>
-          {index !== filteredItems.length - 1 && <ItemSeparator />}
-        </React.Fragment>
-      ))}
+      {filteredItems.map((item, index) => {
+        const titleTransitionName = item.viewTransitionName ?? pageTitleTransitionName("project", item.path.replace(/^\//, ""));
+
+        return (
+          <React.Fragment key={item.id}>
+            <Item
+              render={<Link href={item.path} />}
+              size="default"
+              className={cn("peer hover:text-secondary-foreground sm:-mx-3", itemClassName)}
+            >
+              {renderMedia(item.icon)}
+              <ItemContent>
+                <TitleMorph name={titleTransitionName}>
+                  <ItemTitle>{item.title} </ItemTitle>
+                </TitleMorph>
+                {item.description && <ItemDescription className="max-sm:hidden">{item.description}</ItemDescription>}
+              </ItemContent>
+              <ItemActions>
+                {item.tags && <span className="max-sm:hidden">{item.tags}</span>}
+                {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
+              </ItemActions>
+            </Item>
+            {index !== filteredItems.length - 1 && <ItemSeparator />}
+          </React.Fragment>
+        );
+      })}
     </ItemGroup>
   );
 

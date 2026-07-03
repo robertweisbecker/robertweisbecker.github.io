@@ -10,7 +10,7 @@ export function Header() {
   const menuProjects = toHeaderMenuProjects(projects);
 
   return (
-    <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")}>
+    <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")} style={{ viewTransitionName: "site-header" }}>
       <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 px-2 py-2 max-sm:px-2">
         <HomeLink />
         <div className="me-auto" />

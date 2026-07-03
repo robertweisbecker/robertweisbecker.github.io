@@ -6,6 +6,7 @@
 @import "./mdx.css" layer(components);
 @import "./syntax.css" layer(components);
 @import "./animations.css" layer(utilities);
+@import "./view-transitions.css";
 @import "./hues.css";
 
 @custom-variant dark (&:is(.dark *));
@@ -137,13 +138,6 @@
   --article-gap-x: --spacing(8);
   --article-prose-width: var(--container-xl);
   --article-sidebar-width: calc(var(--container-3xs) - var(--article-gap-x));
-
-  /* TODO: figure out why this errors
-  @media (prefers-reduced-motion: no-preference) {
-    @view-transition {
-      navigation: auto;
-    }
-  } */
 }
 
 :root,
