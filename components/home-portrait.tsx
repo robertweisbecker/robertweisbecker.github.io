@@ -30,11 +30,13 @@ export function HomePortrait() {
         </div>
         <Button
           onClick={() => setIsDinoVisible((v) => !v)}
+          aria-label="Toggle pixel artwork"
+          aria-pressed={isDinoVisible}
           variant="ghost"
           size="icon-xs"
           className="pointer-fine:blur-2xs absolute inset-s-2 top-2 z-100 transform font-pixel text-[11px] uppercase transition-[opacity,translate,filter] duration-300 group-hover/pixel:translate-y-0 group-hover/pixel:opacity-100 group-hover/pixel:blur-none pointer-fine:-translate-y-1 pointer-fine:opacity-0"
         >
-          {isDinoVisible ? "⟨" : <PixelShuffleIcon className="size-[11px]" />}
+          <span aria-hidden="true">{isDinoVisible ? "⟨" : <PixelShuffleIcon className="size-[11px]" />}</span>
         </Button>
       </Float>
     </div>
