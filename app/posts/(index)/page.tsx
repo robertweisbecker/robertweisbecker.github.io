@@ -42,9 +42,11 @@ export default function PostsPage() {
                 <PostListIcon name={post.icon} />
               </ItemMedia>
               <ItemContent>
-                <TitleMorph name={pageTitleTransitionName("post", post.id)}>
-                  <ItemTitle>{post.title}</ItemTitle>
-                </TitleMorph>
+                <ItemTitle>
+                  <TitleMorph name={pageTitleTransitionName("post", post.id)}>
+                    <span className="inline-block w-fit">{post.title}</span>
+                  </TitleMorph>
+                </ItemTitle>
                 <ItemDescription>{post.description}</ItemDescription>
               </ItemContent>
               <ItemActions>

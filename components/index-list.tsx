@@ -92,9 +92,11 @@ export function IndexList({ items = defaultItems, className, itemClassName, tran
             >
               {renderMedia(item.icon)}
               <ItemContent>
-                <TitleMorph name={titleTransitionName}>
-                  <ItemTitle>{item.title} </ItemTitle>
-                </TitleMorph>
+                <ItemTitle>
+                  <TitleMorph name={titleTransitionName}>
+                    <span className="inline-block w-fit">{item.title}</span>
+                  </TitleMorph>
+                </ItemTitle>
                 {item.description && <ItemDescription className="max-sm:hidden">{item.description}</ItemDescription>}
               </ItemContent>
               <ItemActions>

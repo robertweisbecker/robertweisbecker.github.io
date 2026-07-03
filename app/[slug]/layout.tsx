@@ -5,22 +5,29 @@ import { ProjectMeta } from "@/components/project-meta";
 import { TableOfContents } from "@/components/table-of-contents";
 import { NAV_BACK_TRANSITION, TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { projects } from "@/lib/data/projects";
-import { getProjectToc } from "@/lib/projects";
-import type { ProjectFrontmatter } from "@/lib/types";
+import { getProjectFrontmatter, getProjectToc } from "@/lib/projects";
 import { resolveNeighbors } from "@/lib/utils";
 
 export default async function MDXLayout({ children, params }: { children: React.ReactNode; params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   // Template import: slug is from generateStaticParams only (dynamicParams = false).
-  const { frontmatter } = await import(`@/content/projects/${slug}.mdx`);
-  const fm = frontmatter as ProjectFrontmatter;
+  const fm = await getProjectFrontmatter(slug);
   const toc = getProjectToc(slug);
+  const projectNavItems = await Promise.all(
+    projects.flatMap((project) => {
+      if (!project.published) return [];
 
-  const neighbors = resolveNeighbors(
-    projects.flatMap((p) => (p.published ? [{ title: p.title, path: p.path }] : [])),
-    `/${slug}`,
-    { title: "Projects", href: "/#projects" }
+      const projectSlug = project.path.replace(/^\//, "");
+
+      return getProjectFrontmatter(projectSlug).then((frontmatter) => ({
+        title: frontmatter.title,
+        path: project.path,
+        titleTransitionName: pageTitleTransitionName("project", projectSlug),
+      }));
+    })
   );
+
+  const neighbors = resolveNeighbors(projectNavItems, `/${slug}`, { title: "Projects", href: "/#projects" });
 
   return (
     <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">

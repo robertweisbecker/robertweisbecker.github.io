@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import type { TocItem } from "./types";
+import type { ProjectFrontmatter } from "./types";
 import { slugify } from "./utils";
 
 const projectsDir = path.join(process.cwd(), "content", "projects");
@@ -32,4 +33,10 @@ export function getProjectToc(slug: string): TocItem[] {
       id: getDedupedHeadingId(text, usedIds),
     };
   });
+}
+
+export async function getProjectFrontmatter(slug: string): Promise<ProjectFrontmatter> {
+  const { frontmatter } = await import(`@/content/projects/${slug}.mdx`);
+
+  return frontmatter as ProjectFrontmatter;
 }
