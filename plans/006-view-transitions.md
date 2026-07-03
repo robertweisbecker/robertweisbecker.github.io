@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 61bf9081..HEAD -- next.config.ts app/layout.tsx app/page.tsx "app/[slug]/layout.tsx" app/posts components/index-list.tsx components/header.tsx components/footer.tsx styles/`
+> `git diff --stat b9298c8..HEAD -- next.config.ts app/layout.tsx app/page.tsx "app/[slug]/layout.tsx" app/posts components/index-list.tsx components/header.tsx components/footer.tsx styles/`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition. Playground-specific work is now
@@ -27,6 +27,10 @@
   `components/index-list.tsx` still derives a list-side transition name from
   display text, `app/[slug]/layout.tsx` still hardcodes `"title"`, and
   `styles/globals.css` still contains the commented `@view-transition` TODO.
+- **Reconciled at**: commit `b9298c8`, 2026-07-03 — still TODO after PR #19
+  and PR #20 landed. Post routes now live under `app/posts/(index)` and
+  `app/posts/(post)`, and the post detail title is rendered by the client
+  `app/posts/post-header.tsx` island.
 
 ## Why this matters
 
@@ -52,12 +56,14 @@ Relevant files and their roles:
 - `app/[slug]/layout.tsx` — project detail shell; hardcodes
   `viewTransitionName: "title"` on the project `<h1>` at line 38, which never
   matches the homepage list side.
-- `app/page.tsx` — homepage; currently 606 lines and still maps `posts` into
-  `postItems` for the shared `IndexList`.
-- `app/posts/page.tsx` — `/posts` index; renders each post `ItemTitle`
+- `app/page.tsx` — homepage; maps `posts` into `postItems` for the shared
+  `IndexList`.
+- `app/posts/(index)/page.tsx` — `/posts` index; renders each post `ItemTitle`
   without a transition name.
-- `app/posts/layout.tsx` — client layout; renders the post detail `<h1>`
-  resolved from `usePathname()`.
+- `app/posts/(post)/layout.tsx` — server post detail shell; renders the client
+  `PostHeader` island and pagination.
+- `app/posts/post-header.tsx` — client island that resolves the current post
+  from `usePathname()` and renders the post detail `<h1>`.
 - `app/layout.tsx` — root layout; route slot is
   `<div className="root isolate">{children}</div>` inside `<main id="main">`.
 - `components/header.tsx`, `components/footer.tsx` — site chrome roots to
@@ -159,10 +165,13 @@ lint, format, build, and manual browser QA.
 - `components/index-list.tsx`
 - `app/page.tsx` (post items mapping only)
 - `app/[slug]/layout.tsx`
-- `app/posts/page.tsx`
-- `app/posts/layout.tsx`
+- `app/posts/(index)/page.tsx`
+- `app/posts/(post)/layout.tsx`
+- `app/posts/post-header.tsx`
 - `AGENTS.md`
 - `plans/README.md`
+- `.scratch/006-view-transitions/view-transitions-qa.webm` (create only for
+  the requested PR screen recording)
 
 **Out of scope** (do NOT touch, even though they look related):
 
@@ -180,11 +189,13 @@ lint, format, build, and manual browser QA.
 
 ## Git workflow
 
-- Branch: `cursor/006-core-view-transitions` from `master`.
+- Branch: `codex/006-core-view-transitions` from `master`.
 - Commit per logical phase: CSS/helpers, shell/chrome, title morphs, docs.
   Use plain imperative messages matching the repo history, e.g. "Add
   view-transition CSS and helpers".
-- Do NOT push or open a PR unless the operator instructed it.
+- This execution is explicitly instructed to push and open a PR. The PR body
+  must include a "Screen recording" section with a link to the committed
+  `.scratch/006-view-transitions/view-transitions-qa.webm` artifact.
 
 ## Steps
 
@@ -269,11 +280,13 @@ move.
 3. `app/[slug]/layout.tsx`: remove `style={{ viewTransitionName: "title" }}`
    from the project `<h1>` and wrap it in
    `<TitleMorph name={pageTitleTransitionName("project", slug)}>`.
-4. `app/posts/page.tsx`: wrap each post `ItemTitle` in
+4. `app/posts/(index)/page.tsx`: wrap each post `ItemTitle` in
    `<TitleMorph name={pageTitleTransitionName("post", post.id)}>`.
-5. `app/posts/layout.tsx`: wrap the post detail `<h1>` in
+5. `app/posts/post-header.tsx`: wrap the post detail `<h1>` in
    `<TitleMorph name={pageTitleTransitionName("post", post.id)}>` when `post`
-   exists; render the plain `<h1>` if `post` is undefined.
+   exists; render the plain `<h1>` if `post` is undefined. Keep
+   `app/posts/(post)/layout.tsx` as the shell; do not move pathname logic back
+   into the layout.
 
 **Verify**: `npm run check` -> exit 0.
 `rg -n 'viewTransitionName: "title"' app/` -> no matches.
@@ -282,7 +295,7 @@ move.
 ### Step 5: Stagger the posts index only
 
 Apply the homepage's existing `animate-stagger-enter` pattern to
-`app/posts/page.tsx`:
+`app/posts/(index)/page.tsx`:
 
 - heading block: `animate-stagger-enter [--stagger:0]`
 - warning alert: `animate-stagger-enter [--stagger:1]`
@@ -319,6 +332,17 @@ Run the complete checks and browser QA.
 **Verify**: `npm run check` -> exit 0.
 `npm run build` -> exit 0, static generation completes.
 
+Capture a short screen recording for the PR:
+
+- Start the app with `npm run dev` or `npm run dev:fresh` if stale generated
+  CSS/type artifacts appear.
+- Record Chrome navigation for at least: homepage project -> project detail,
+  project detail -> homepage, homepage post -> post detail, `/posts` -> post
+  detail, and reduced-motion mode.
+- Save the recording at `.scratch/006-view-transitions/view-transitions-qa.webm`.
+- Include a "Screen recording" section in the PR body linking to the committed
+  recording file.
+
 ## Test plan
 
 Manual browser QA in Chrome with `npm run dev`:
@@ -332,6 +356,13 @@ Manual browser QA in Chrome with `npm run dev`:
    instantly.
 6. Firefox/no-support smoke check: navigation still works with no animation and
    no console errors.
+
+PR artifact:
+
+- `.scratch/006-view-transitions/view-transitions-qa.webm` exists, is committed
+  on the PR branch, and shows the browser QA flows above.
+- The PR description contains a "Screen recording" section linking to that
+  artifact.
 
 ## Done criteria
 
@@ -351,7 +382,10 @@ Machine-checkable. ALL must hold:
       `lib/data/playground.ts` files are modified by this plan
 - [ ] Browser QA flows 1-6 pass
 - [ ] No files outside the in-scope list are modified (`git status`)
-- [ ] `plans/README.md` status row updated
+- [ ] `.scratch/006-view-transitions/view-transitions-qa.webm` exists and the
+      PR body links to it under "Screen recording"
+- [ ] `plans/README.md` status row updated, unless a reviewer dispatched the
+      executor and explicitly said the reviewer maintains the index
 
 ## STOP conditions
 
@@ -365,6 +399,8 @@ Stop and report back (do not improvise) if:
   (first check for duplicate `view-transition-name` console errors).
 - A fix appears to require touching `app/playground/**`,
   `components/playground/**`, `components/scroll-reset.tsx`, or `next.config.ts`.
+- A screen recording cannot be captured or committed without adding a large
+  artifact over 25 MB; stop and report the file size instead of committing it.
 - The Turbopack stale-CSS bug persists after both `touch styles/globals.css`
   and `npm run dev:fresh`.
 
@@ -376,7 +412,7 @@ Stop and report back (do not improvise) if:
 - If a post/project detail ever renders on the same page as its list item, the
   shared name will collide; scope names or drop one side.
 - Post-to-post pagination may cross-morph adjacent titles because
-  `app/posts/layout.tsx` persists; if this reads poorly, key `TitleMorph` by
-  pathname or gate it by transition type in a follow-up.
+  `app/posts/(post)/layout.tsx` persists; if this reads poorly, key
+  `TitleMorph` by pathname or gate it by transition type in a follow-up.
 - Reviewer scrutiny: root-layout `ViewTransition update` boundary, valid custom
   ident sanitization, duplicate names on a single page, and reduced-motion CSS.
