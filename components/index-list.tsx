@@ -121,7 +121,7 @@ export function IndexList({ items = defaultItems, className, itemClassName, maxV
           className={cn(
             "absolute inset-x-0 z-10 flex h-18 items-end justify-center px-4",
             open
-              ? "top-full -bottom-10 pt-0 pb-0"
+              ? "top-full -bottom-5 pt-0 pb-0"
               : "via-smooth bottom-0 bg-linear-to-t from-background via-background/75 to-transparent pb-4"
           )}
         >

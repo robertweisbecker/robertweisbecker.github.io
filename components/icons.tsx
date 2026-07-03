@@ -350,17 +350,17 @@ export function ArrowSvg(props: React.ComponentProps<"svg">) {
     <svg width="20" height="10" viewBox="0 0 20 10" fill="none" {...props}>
       <path
         d="M9.66 2.6L4.81 6.97C4.07 7.63 3.12 8 2.13 8H0V10H20V8H18.53C17.55 8 16.59 7.63 15.86 6.97L11 2.6C10.62 2.26 10.04 2.26 9.66 2.6Z"
-        className="fill-popover"
+        className="fill-popover in-data-[slot=tooltip-popup]:fill-card dark:in-data-[slot=tooltip-popup]:fill-neutral-700"
       />
       <path
         d="M9 1.86C9.76 1.17 10.91 1.17 11.67 1.86L16.53 6.23C17.08 6.73 17.79 7 18.53 7L15.89 7L11 2.6C10.62 2.26 10.04 2.26 9.66 2.6L4.78 7L2.13 7C2.87 7 3.59 6.73 4.14 6.23L9 1.86Z"
         className="fill-border dark:fill-none"
       />
-      <path
+      {/* <path
         d="M10.33 3.35L5.48 7.72C4.56 8.54 3.37 9 2.13 9H0V8H2.13C3.12 8 4.07 7.63 4.81 6.97L9.66 2.6C10.04 2.26 10.62 2.26 11 2.6L15.86 6.97C16.59 7.63 17.55 8 18.53 8H20V9H18.53C17.3 9 16.11 8.54 15.19 7.72L10.33 3.35Z"
         className="dark:fill-black/90"
         transform="translate(0, -0.5)"
-      />
+      /> */}
       <path
         d="M10.33 3.35L5.48 7.72C4.56 8.54 3.37 9 2.13 9H0V8H2.13C3.12 8 4.07 7.63 4.81 6.97L9.66 2.6C10.04 2.26 10.62 2.26 11 2.6L15.86 6.97C16.59 7.63 17.55 8 18.53 8H20V9H18.53C17.3 9 16.11 8.54 15.19 7.72L10.33 3.35Z"
         className="dark:fill-white/4 dark:in-data-[side=bottom]:fill-white/20"

@@ -229,17 +229,15 @@ export default function Home() {
                   </div>
                 </CardAction>
               </CardHeader>
-              {resource.thumbnail && (
-                <Image
-                  src={resource.thumbnail}
-                  alt=""
-                  width={320}
-                  height={180}
-                  sizes="(min-width: 640px) 33vw, 50vw"
-                  className="pointer-events-none m-px aspect-video w-[calc(100%-2px)] rounded-md object-contain shadow-border-xs -outline-offset-1 dark:brightness-50 dark:grayscale-50"
-                  data-slot="media"
-                />
-              )}
+              <Image
+                src={resource.thumbnail}
+                alt=""
+                width={320}
+                height={180}
+                sizes="(min-width: 640px) 33vw, 50vw"
+                className="pointer-events-none m-px aspect-video w-[calc(100%-2px)] rounded-md object-contain shadow-border-xs -outline-offset-1 dark:brightness-50 dark:grayscale-50"
+                data-slot="media"
+              />
             </Card>
           ))}
         </div>

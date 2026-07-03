@@ -122,8 +122,7 @@ export function WorkMenu({ projects }: WorkMenuProps) {
                         <Image
                           src={project.heroImage}
                           alt={`${project.title} hero preview`}
-                          width={320}
-                          height={180}
+                          fill
                           sizes="(max-width: 768px) 100vw, 320px"
                           className="object-cover object-top"
                           loading="eager"

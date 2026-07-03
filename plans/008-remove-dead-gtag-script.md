@@ -21,6 +21,11 @@
 - **Depends on**: none
 - **Category**: perf / security
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Rejected at**: commit `61bf9081`, 2026-07-02 — fixed independently by
+  commit `abcdb15d`. Current source grep finds no `gtag`, `dataLayer`,
+  `googletagmanager`, `GoogleAnalytics`, or `Google Analytics` references
+  outside plans; `app/layout.tsx` still keeps Vercel Analytics and Speed
+  Insights.
 
 ## Why this matters
 
@@ -34,6 +39,12 @@ working analytics via `@vercel/analytics` (rendered in the same layout).
 Removing the dead tag is a pure win.
 
 ## Current state
+
+Current state as of `61bf9081`: this plan is retired. The root layout no
+longer imports `next/script`, no longer renders the Universal Analytics tags,
+and still renders the working Vercel analytics components. Do not execute the
+implementation steps below unless a future commit reintroduces a dead gtag
+script.
 
 - `app/layout.tsx` — root layout. Loads the gtag script and inline init in
   `<head>` (lines 65–68) via `next/script`, imported at line 2. Vercel

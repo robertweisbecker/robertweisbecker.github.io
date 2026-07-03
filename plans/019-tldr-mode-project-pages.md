@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- "app/[slug]/layout.tsx" lib/types.ts content/projects/forge.mdx components/tldr-mode.tsx components/ui/toggle.tsx components/ui/badge.tsx components/image.tsx components/image-modal.tsx components/image-toggle.tsx components/video.tsx components/project-image-carousel.tsx app/private/qa/`
+> `git diff --stat 61bf9081..HEAD -- "app/[slug]/layout.tsx" lib/types.ts content/projects/forge.mdx components/tldr-mode.tsx components/ui/toggle.tsx components/ui/badge.tsx components/image.tsx components/image-modal.tsx components/image-toggle.tsx components/video.tsx components/project-image-carousel.tsx app/private/qa/`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition. Known coordination: [plan 006](./006-view-transitions.md)
@@ -29,6 +29,10 @@
 - **Category**: direction
 - **Planned at**: commit `9ed1acd`, 2026-07-01
 - **Reconciled at**: commit `9ed1acd` plus dirty worktree, 2026-07-02 — narrowed the drift check so unrelated `components/device/**` deletion does not stop this plan.
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — still TODO.
+  Media primitives changed after Plan 015; re-verify the extraction behavior
+  against the live `ImageModal`, `ImageToggle`, `Video`, and carousel DOM
+  before implementation.
 
 ## Why this matters
 

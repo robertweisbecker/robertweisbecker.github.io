@@ -80,22 +80,22 @@ function TooltipGroup({
                   "transition-[top,left,right,bottom,transform]",
                   "duration-[0.35s]",
                   "ease-[cubic-bezier(0.22,1,0.36,1)]",
-                  "data-instant:duration-0"
+                  "data-instant:transition-none"
                 )}
               >
                 <TooltipPrimitive.Popup
-                  data-slot="tooltip-group-popup"
+                  data-slot="tooltip-popup"
                   className={cn(
                     "flex origin-(--transform-origin) text-center",
                     "h-(--popup-height,auto) w-(--popup-width,auto) min-w-10",
-                    "rounded-md bg-popover text-[0.8125rem] text-popover-foreground",
+                    "rounded-md bg-card text-[0.8125rem] text-popover-foreground dark:bg-neutral-700",
                     "shadow-[var(--shadow-border-lg),inset_0_1px_1px_--alpha(white/10%)] drop-shadow-md/2",
-                    "transition-[width,height,opacity,scale]",
+                    "transition-[width,height,opacity,transform]",
                     "duration-[0.35s]",
                     "ease-[cubic-bezier(0.22,1,0.36,1)]",
-                    "data-starting-style:scale-90 data-starting-style:opacity-0",
-                    "data-ending-style:scale-90 data-ending-style:opacity-0",
-                    "data-instant:duration-0",
+                    "data-starting-style:[transform:scale(0.9)] data-starting-style:opacity-0",
+                    "data-ending-style:[transform:scale(0.9)] data-ending-style:opacity-0",
+                    "data-instant:transition-none",
                     "data-[side=left]:*:data-[slot=tooltip-arrow]:hidden data-[side=right]:*:data-[slot=tooltip-arrow]:hidden",
                     popupClassName
                   )}
@@ -114,7 +114,7 @@ function TooltipGroup({
                       "data-[side=top]:-bottom-2 data-[side=top]:rotate-180"
                     )}
                   >
-                    <ArrowSvg />
+                    <ArrowSvg className="fill-card dark:fill-neutral-700" />
                   </TooltipPrimitive.Arrow>
                   <TooltipPrimitive.Viewport
                     data-slot="tooltip-group-viewport"
@@ -179,7 +179,7 @@ function TooltipContent({
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={cn(
-            "origin-(--transform-origin) rounded-md bg-popover px-1.5 py-1 text-[0.8125rem] text-popover-foreground shadow-border-lg drop-shadow-md/2 transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-90 data-starting-style:opacity-0 dark:shadow-black/50",
+            "origin-(--transform-origin) rounded-md bg-card px-1.5 py-1 text-[0.8125rem] text-popover-foreground shadow-border-lg drop-shadow-md/2 transition-[transform,scale,opacity] data-ending-style:scale-90 data-ending-style:opacity-0 data-instant:transition-none data-starting-style:scale-90 data-starting-style:opacity-0 dark:bg-neutral-700 dark:shadow-black/50",
             "data-[side=left]:*:data-[slot=tooltip-arrow]:hidden data-[side=right]:*:data-[slot=tooltip-arrow]:hidden",
             className
           )}

@@ -11,7 +11,6 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "a.ltrbxd.com" },
       { protocol: "https", hostname: "avatar.vercel.sh" },
-      { protocol: "https", hostname: "s3-figma-hubfile-images-production.figma.com" },
     ],
   },
   pageExtensions: isDev ? [...basePageExtensions, "private.tsx"] : [...basePageExtensions],

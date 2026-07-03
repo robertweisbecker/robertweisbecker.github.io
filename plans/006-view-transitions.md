@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- next.config.ts app/layout.tsx app/page.tsx "app/[slug]/layout.tsx" app/posts components/index-list.tsx components/header.tsx components/footer.tsx styles/`
+> `git diff --stat 61bf9081..HEAD -- next.config.ts app/layout.tsx app/page.tsx "app/[slug]/layout.tsx" app/posts components/index-list.tsx components/header.tsx components/footer.tsx styles/`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition. Playground-specific work is now
@@ -23,6 +23,10 @@
 - **Category**: direction (feature / motion design)
 - **Planned at**: commit `9ed1acd`, 2026-07-02
 - **Reconciled at**: commit `9ed1acd` plus dirty worktree, 2026-07-02 — playground index/card-grid work was split into [Plan 021](./021-playground-index-view-transitions.md) because the index direction is undecided.
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — still TODO.
+  `components/index-list.tsx` still derives a list-side transition name from
+  display text, `app/[slug]/layout.tsx` still hardcodes `"title"`, and
+  `styles/globals.css` still contains the commented `@view-transition` TODO.
 
 ## Why this matters
 
@@ -43,12 +47,13 @@ Relevant files and their roles:
 
 - `next.config.ts` — `experimental.viewTransition: true` is already set.
 - `components/index-list.tsx` — shared list for homepage projects and posts;
-  currently sets a broken inline `viewTransitionName` from `item.title`.
+  currently sets a broken inline `viewTransitionName` from `item.title` at
+  line 89.
 - `app/[slug]/layout.tsx` — project detail shell; hardcodes
-  `viewTransitionName: "title"` on the project `<h1>`, which never matches
-  the homepage list side.
-- `app/page.tsx` — homepage; maps `posts` into `postItems` for the shared
-  `IndexList`.
+  `viewTransitionName: "title"` on the project `<h1>` at line 38, which never
+  matches the homepage list side.
+- `app/page.tsx` — homepage; currently 606 lines and still maps `posts` into
+  `postItems` for the shared `IndexList`.
 - `app/posts/page.tsx` — `/posts` index; renders each post `ItemTitle`
   without a transition name.
 - `app/posts/layout.tsx` — client layout; renders the post detail `<h1>`

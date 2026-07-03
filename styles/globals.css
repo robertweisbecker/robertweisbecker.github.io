@@ -229,17 +229,17 @@
 
 .dark,
 .dark [data-theme] {
-  --background: var(--neutral-950);
+  --background: var(--neutral-975);
   --foreground: var(--neutral-100);
-  --card: var(--neutral-900);
+  --card: var(--neutral-950);
   --card-foreground: var(--neutral-300);
-  --popover: var(--neutral-800);
+  --popover: var(--neutral-900);
   --popover-foreground: var(--neutral-50);
   --primary: var(--hue-500);
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-neutral-700) / 24%);
+  --muted: --alpha(var(--color-neutral-600) / 25%);
   --muted-foreground: var(--neutral-400);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);

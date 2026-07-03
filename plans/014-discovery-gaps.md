@@ -8,15 +8,11 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat c883eec..HEAD -- app/sitemap.ts components/site-search.tsx app/playground/page.tsx app/playground/layout.tsx components/playground/playground-routes.ts components/playground/playground-route-nav.tsx lib/data/`
+> `git diff --stat 61bf9081..HEAD -- app/sitemap.ts components/site-search.tsx app/playground/page.tsx app/playground/layout.tsx components/playground/playground-route-nav.tsx components/playground/playground-route-icons.tsx lib/data/playground.ts`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
-> mismatch, treat it as a STOP condition. In particular: if
-> `lib/data/playground.ts` already exists, USE it instead of creating a new
-> registry — see Step 1. If
-> `components/playground/playground-routes.ts` exists instead, treat it as
-> partial local work and migrate/reuse its route array instead of duplicating
-> the current route entries.
+> mismatch, treat it as a STOP condition. This plan is DONE; if it is ever
+> reopened, use `lib/data/playground.ts` as the only route source.
 
 ## Status
 
@@ -26,7 +22,9 @@
 - **Depends on**: none
 - **Category**: dx / seo
 - **Planned at**: commit `9ed1acd`, 2026-07-02
-- **Reconciled at**: commit `9ed1acd` plus dirty worktree, 2026-07-02 — partial playground route navigation exists locally; sitemap/search work is still pending.
+- **Earlier reconcile**: commit `9ed1acd` plus dirty worktree, 2026-07-02 —
+  partial playground route navigation existed locally before sitemap/search
+  work landed.
 - **Reconciled again**: commit `9088a10`, 2026-07-02 — the partial
   playground route navigation is now committed and has five public child
   routes: `/playground/motion`, `/playground/svg`, `/playground/ui`,
@@ -34,48 +32,43 @@
 - **Reconciled after Plan 013**: commit `c883eec`, 2026-07-02 — site search
   now uses a controlled filter `ToggleGroup`; preserve that code while adding
   playground search entries.
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — DONE. The canonical
+  playground registry lives at `lib/data/playground.ts` and feeds route nav,
+  sitemap entries, site search, the Playground search section/filter, and the
+  route icon helper.
 
 ## Why this matters
 
 The header nav promotes `/art` and `/playground`, but the sitemap lists only
 `/`, `/about`, and `/posts` (plus post/project entries) — so crawlers never
 see Art, Playground, or the five playground child routes. The site's command
-palette has the same blind spot: it indexes the `/playground` index but none
-of its children. A partial playground route registry already exists for the
-page/nav; the fix is to promote that data into a canonical registry consumed
-by the page/nav, the sitemap, and the search index.
+palette had the same blind spot: it indexed the `/playground` index but none
+of its children. The completed fix promotes playground route data into a
+canonical registry consumed by the page/nav, the sitemap, and the search
+index.
 
 ## Current state
 
-- `app/sitemap.ts` — sitemap; static routes at line 7:
-  `const staticRoutes = ["/", "/about", "/posts"] as const;`
-  followed by post entries and published-project entries.
-- `components/playground/playground-routes.ts` — current partial registry:
+Current state as of `61bf9081`: this plan is done.
 
-```tsx
-const PLAYGROUND_ROUTES = [
-  { href: "/playground/motion", label: "Motion" },
-  { href: "/playground/svg", label: "SVG" },
-  { href: "/playground/ui", label: "UI" },
-  { href: "/playground/buttons", label: "Buttons" },
-  { href: "/playground/verisimilitude", label: "Verisimilitude" },
-] as const;
-```
+- `lib/data/playground.ts` exports the canonical `playgroundRoutes` registry:
+  `/playground/motion`, `/playground/svg`, `/playground/ui`,
+  `/playground/buttons`, and `/playground/verisimilitude`.
+- `components/playground/playground-route-nav.tsx` consumes
+  `playgroundRoutes`.
+- `components/playground/playground-route-icons.tsx` maps the requested Tabler
+  icons for the playground pieces.
+- `app/sitemap.ts` and `components/site-search.tsx` consume the canonical
+  route data instead of a duplicate local route list.
+- `/private/**` remains dev-only and should not enter sitemap coverage.
 
 - `app/playground/page.tsx` consumes `PlaygroundRouteNav` and no longer has a
   local route array.
-- `components/playground/playground-route-nav.tsx` imports the partial
-  `PLAYGROUND_ROUTES` array and renders route buttons, including through
+- `components/playground/playground-route-nav.tsx` imports the canonical
+  `playgroundRoutes` array and renders route buttons, including through
   `app/playground/layout.tsx`.
-- The route data still needs a `slug`, should become the sitemap/search
-  source of truth, and must not be duplicated in a second registry.
-
-- `components/site-search.tsx` — command palette; `staticPages` at
-  lines 117–123 lists Home, About, Posts, Art, Playground (index only).
-  Search items have the shape
-  `{ value, label, path, icon, group, category?, date? }` (see the
-  `SearchItem` type near the top of the file and `staticPages` for the
-  pattern).
+- `components/site-search.tsx` includes a Playground filter/section rather
+  than pushing every playground route into the top command list section.
 - `lib/data/` — existing registries (`posts.ts`, `projects.ts`,
   `resources.ts`) are plain typed const arrays; match that style.
 - Note: [`plans/021-playground-index-view-transitions.md`](./021-playground-index-view-transitions.md) depends on this
@@ -95,13 +88,8 @@ const PLAYGROUND_ROUTES = [
 
 **In scope** (the only files you should modify or create):
 
-- `lib/data/playground.ts` (create — or reuse if it already exists). If the
-  dirty-worktree `components/playground/playground-routes.ts` exists, migrate
-  that route array into `lib/data/playground.ts` or have it re-export the
-  canonical data; do not keep two route arrays.
-- `components/playground/playground-routes.ts` and
-  `components/playground/playground-route-nav.tsx` (only to migrate/repoint the
-  partial route-nav work if present)
+- `lib/data/playground.ts` (canonical route data)
+- `components/playground/playground-route-nav.tsx` (consume canonical data)
 - `app/playground/page.tsx` (consume the registry; no visual changes)
 - `app/playground/layout.tsx` (only to preserve/repoint the existing
   `PlaygroundRouteNav` import if partial route-nav work is present)
@@ -129,12 +117,8 @@ const PLAYGROUND_ROUTES = [
 
 ### Step 1: Extract the playground registry
 
-If `components/playground/playground-routes.ts` exists, start there: preserve
-the current route labels/hrefs and move the canonical data to
-`lib/data/playground.ts` (preferred), then update `PlaygroundRouteNav` to import
-from `@/lib/data/playground`. If `lib/data/playground.ts` already exists, reuse
-it. If neither file exists, create
-`lib/data/playground.ts`:
+Use the canonical `lib/data/playground.ts` route registry. If it is missing in
+a future drifted checkout, recreate it as:
 
 ```ts
 export type PlaygroundRoute = {
@@ -153,14 +137,10 @@ export const playgroundRoutes: PlaygroundRoute[] = [
 ```
 
 If it already exists, add any missing fields non-destructively and use its
-exported shape.
-
-Update `app/playground/page.tsx` and any `PlaygroundRouteNav` module to consume
-the canonical `playgroundRoutes` export. Delete
-`components/playground/playground-routes.ts` if nothing imports it; if keeping
-it for import stability, make it a re-export with no local route array. Delete
-any local `PLAYGROUND_ROUTES` constant or duplicate array; rendering should
-stay visually identical.
+exported shape. Update `app/playground/page.tsx` and `PlaygroundRouteNav` to
+consume the canonical `playgroundRoutes` export. Delete any local
+`PLAYGROUND_ROUTES` constant or duplicate array; rendering should stay visually
+identical.
 
 **Verify**: `npm run typecheck` → exit 0.
 `rg -n "PLAYGROUND_ROUTES" app components lib` → no matches.

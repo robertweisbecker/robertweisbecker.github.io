@@ -1,6 +1,6 @@
 "use client";
 
-import { Cambio } from "cambio";
+import { Dialog } from "@base-ui/react/dialog";
 import { IconX } from "@tabler/icons-react";
 import Image, { ImageProps, type StaticImageData } from "next/image";
 import type { CSSProperties } from "react";
@@ -33,9 +33,9 @@ export function Artwork({
   };
 
   return (
-    <Cambio.Root dismissible>
+    <Dialog.Root>
       <figure className={cn("group relative mb-4 flex min-w-0 flex-col gap-1", className)}>
-        <Cambio.Trigger
+        <Dialog.Trigger
           className="relative w-full cursor-zoom-in overflow-hidden shadow-border-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           style={{ aspectRatio }}
         >
@@ -48,7 +48,7 @@ export function Artwork({
             className="object-contain"
             loading={loading}
           />
-        </Cambio.Trigger>
+        </Dialog.Trigger>
 
         <figcaption className="pointer-events-none absolute inset-0 grid items-start duration-200 ease-out select-none *:px-1 *:opacity-0 *:transition-[transform,translate,opacity] *:group-hover:opacity-100">
           <span className="w-fit -translate-y-1 self-start bg-background font-pixel text-2xs group-hover:translate-y-0">{title}</span>
@@ -58,36 +58,38 @@ export function Artwork({
         </figcaption>
       </figure>
 
-      <Cambio.Portal>
-        <Cambio.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
-        <Cambio.Popup
-          className="relative z-100 flex max-h-dialog w-[min(90vw,calc((100dvh-2rem)*var(--art-ratio)))] max-w-dialog flex-col gap-2 md:max-w-[min(60vw,calc((100dvh-2rem)*var(--art-ratio)))]"
-          style={popupStyle}
-        >
-          <Image
-            src={src}
-            alt={title ? title : ""}
-            fill
-            sizes="(max-width: 768px) 90vw, 60vw"
-            className="rounded-inherit squircle pointer-events-none object-contain select-none"
-            style={{ borderRadius: 20 }}
-            preload
-          />
-          <div className="pointer-events-none absolute top-0 left-0 z-10 flex origin-top-left transform-[rotate(-90deg)_translateX(-100%)_translateY(-100%)] gap-1 font-pixel text-2xs text-white text-shadow-sm">
-            <Cambio.Title className="h-fit px-1">{title}.</Cambio.Title>
-            <Cambio.Description className="h-fit px-1 capitalize">
-              {medium ? `${medium}` : ""} {year}. {size ? `${size}` : ""}
-            </Cambio.Description>
-          </div>
-          <Cambio.Close
-            aria-label="Close image preview"
-            className="absolute inset-e-2 top-2 z-10"
-            render={<Button variant="overlay" size="icon" rounded />}
+      <Dialog.Portal>
+        <Dialog.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
+        <Dialog.Viewport className="fixed inset-0 z-100 flex items-center justify-center p-4">
+          <Dialog.Popup
+            className="relative flex max-h-dialog w-[min(90vw,calc((100dvh-2rem)*var(--art-ratio)))] max-w-dialog flex-col gap-2 md:max-w-[min(60vw,calc((100dvh-2rem)*var(--art-ratio)))]"
+            style={popupStyle}
           >
-            <IconX className="size-6" />
-          </Cambio.Close>
-        </Cambio.Popup>
-      </Cambio.Portal>
-    </Cambio.Root>
+            <Image
+              src={src}
+              alt={title ? title : ""}
+              fill
+              sizes="(max-width: 768px) 90vw, 60vw"
+              className="rounded-inherit squircle pointer-events-none object-contain select-none"
+              style={{ borderRadius: 20 }}
+              preload
+            />
+            <div className="pointer-events-none absolute top-0 left-0 z-10 flex origin-top-left transform-[rotate(-90deg)_translateX(-100%)_translateY(-100%)] gap-1 font-pixel text-2xs text-white text-shadow-sm">
+              <Dialog.Title className="h-fit px-1">{title}.</Dialog.Title>
+              <Dialog.Description className="h-fit px-1 capitalize">
+                {medium ? `${medium}` : ""} {year}. {size ? `${size}` : ""}
+              </Dialog.Description>
+            </div>
+            <Dialog.Close
+              aria-label="Close image preview"
+              className="absolute inset-e-2 top-2 z-10"
+              render={<Button variant="overlay" size="icon" rounded />}
+            >
+              <IconX className="size-6" />
+            </Dialog.Close>
+          </Dialog.Popup>
+        </Dialog.Viewport>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }

@@ -126,7 +126,7 @@ export function DemoContent({
   maxHeight,
   ...props
 }: DemoContentProps) {
-  const demoInnerClasses = cn("min-h-[300px] p-4 flex-1 overflow-hidden", centerContent && "grid place-items-center", innerClass);
+  const demoInnerClasses = cn("min-h-[300px] p-4 flex-1 overflow-hidden", centerContent && "grid place-content-center", innerClass);
   const contentStyle = maxHeight === undefined ? style : ({ maxHeight, ...style } satisfies React.CSSProperties);
 
   if (overflowBehavior === "resize") {

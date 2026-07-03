@@ -8,11 +8,11 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- mdx-components.tsx lib/projects.ts lib/data/posts.ts lib/og.tsx next.config.ts package.json "app/[slug]" app/posts content/projects`
+> `git diff --stat 61bf9081..HEAD -- mdx-components.tsx lib/projects.ts lib/data/posts.ts lib/og.tsx next.config.ts package.json "app/[slug]" app/posts content/projects`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
-> mismatch, treat it as a STOP condition. Plans [016](./016-small-correctness-batch.md), [017](./017-server-client-boundaries.md), and [018](./018-mdx-registry-splitting.md) (all TODO
-> at planning time) touch neighboring code — see "Coordination with other
+> mismatch, treat it as a STOP condition. Plans [017](./017-server-client-boundaries.md) and [018](./018-mdx-registry-splitting.md) still touch neighboring code; [016](./016-small-correctness-batch.md) is now DONE and its
+> project-date/heading-id fixes must be preserved — see "Coordination with other
 > plans" below before starting.
 
 ## Status
@@ -27,6 +27,9 @@
 - **Planned at**: commit `9ed1acd`, 2026-07-01; amended 2026-07-02 against
   the same commit (added Step 5: markdown-image pipeline removal; recorded
   the keep-`remark-gfm` verdict)
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — still TODO. Plan 016 is
+  now DONE; preserve `getDedupedHeadingId`/post-date correctness while moving
+  metadata.
 
 ## Why this matters
 

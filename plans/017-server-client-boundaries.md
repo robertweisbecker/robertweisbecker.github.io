@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- app/page.tsx app/posts/ components/demos/letterboxd.tsx components/index-list.tsx`
+> `git diff --stat 61bf9081..HEAD -- app/page.tsx app/posts/ components/demos/letterboxd.tsx components/index-list.tsx`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition. [Plan 006](./006-view-transitions.md) (view transitions) also
@@ -26,11 +26,14 @@
   guard rail. Coordinate with [plans/006-view-transitions.md](./006-view-transitions.md) (shared files).
 - **Category**: perf
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — still TODO. The
+  homepage remains one 606-line `"use client"` page with a single local dino
+  toggle state; `app/posts/layout.tsx` is still client-side.
 
 ## Why this matters
 
 The site's most-visited routes opt entirely out of server rendering:
-`app/page.tsx` (732 lines) is one `"use client"` component, `app/posts/layout.tsx`
+`app/page.tsx` (606 lines as of `61bf9081`) is one `"use client"` component, `app/posts/layout.tsx`
 is a client layout wrapping every post, and five of the six post pages are
 page-level `"use client"`. The static content — bio prose, CV lists, post
 bodies, code samples — is shipped as JS and hydrated instead of arriving as
@@ -44,14 +47,14 @@ smaller. Behavior must not change; this is a boundary refactor.
 the entire page is the portrait dino toggle:
 
 ```tsx
-// app/page.tsx:58-59
+// app/page.tsx:71-72
 export default function Home() {
   const [isDinoVisible, setIsDinoVisible] = React.useState(false);
 ```
 
-used exclusively inside the portrait block (lines 68–92: `Float` >
-`PixelPortrait` + conditional `PixelReveal`/`PixelDino` + toggle `Button` at
-lines 83–90). Everything else on the page is static JSX composed of
+used exclusively inside the portrait block (roughly lines 76–104: `Float` >
+`PixelPortrait` + conditional `PixelReveal`/`PixelDino` + toggle `Button`).
+Everything else on the page is static JSX composed of
 components that are themselves client components where needed (`Popover`,
 `PreviewCard`, `CopyButton`, `InfoTip`, `IndexList`, `ArtCards`,
 `Letterboxd`) — rendering client components from a server page is fine as

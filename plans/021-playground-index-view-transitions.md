@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- components/view-transitions.tsx styles/view-transitions.css styles/globals.css lib/data/playground.ts components/playground/playground-routes.ts components/playground/playground-route-nav.tsx app/playground/page.tsx app/playground/layout.tsx app/playground components/playground components/back-button.tsx components/ui/link-button.tsx app/private/qa/component-demos.tsx app/private/qa/page.private.tsx AGENTS.md`
+> `git diff --stat 61bf9081..HEAD -- components/view-transitions.tsx styles/view-transitions.css styles/globals.css lib/data/playground.ts components/playground/playground-route-nav.tsx components/playground/playground-route-icons.tsx app/playground/page.tsx app/playground/layout.tsx app/playground components/playground components/back-button.tsx components/ui/link-button.tsx app/private/qa/component-demos.tsx app/private/qa/page.private.tsx AGENTS.md`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition. This plan is intentionally blocked
@@ -25,6 +25,10 @@
 - **Split from**: [`plans/006-view-transitions.md`](./006-view-transitions.md) — playground index/card-grid
   work was separated because the maintainer is undecided on the index
   direction.
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — BLOCKED until
+  [plan 006](./006-view-transitions.md) lands and the maintainer chooses
+  `nav-only`, `card-grid`, or `hybrid`. The playground registry and route icon
+  helper now exist; consume them instead of creating route data.
 
 ## Why this matters
 
@@ -59,20 +63,20 @@ stop before code changes.
 - [`plans/006-view-transitions.md`](./006-view-transitions.md) owns the core View Transition primitives:
   `styles/view-transitions.css`, `components/view-transitions.tsx`, route slot
   fade/rise, frozen site chrome, and project/post title morphs.
-- [`plans/014-discovery-gaps.md`](./014-discovery-gaps.md) owns the canonical playground route registry
-  for sitemap/search. Its local reconcile note says the dirty worktree already
-  has partial route-nav work in `components/playground/playground-routes.ts`
-  and `components/playground/playground-route-nav.tsx`, but sitemap/search
-  still need the canonical `lib/data/playground.ts` source of truth.
-- In the current dirty worktree, `app/playground/page.tsx` renders the
-  playground index content plus `<PlaygroundRouteNav size="md" />`.
-- In the current dirty worktree, `app/playground/layout.tsx` renders
-  `<PlaygroundRouteNav hideOnRoot ... />` for child pages.
-- In the current dirty worktree, `components/playground/playground-routes.ts`
-  exports `PLAYGROUND_ROUTES` with live route entries for Motion, Pixels,
-  Components, Buttons, and Verisimilitude. Older route names may still exist
-  as redirects. Use the canonical registry from [Plan 014](./014-discovery-gaps.md) after it lands rather
-  than hardcoding either list in this plan.
+- [`plans/014-discovery-gaps.md`](./014-discovery-gaps.md) established the canonical playground route
+  registry in `lib/data/playground.ts`. Current routes are Motion
+  (`/playground/motion`), SVG (`/playground/svg`), UI (`/playground/ui`),
+  Buttons (`/playground/buttons`), and Verisimilitude
+  (`/playground/verisimilitude`).
+- `components/playground/playground-route-icons.tsx` maps the shared Tabler
+  icons for those routes. Reuse this helper for any new card/nav visuals.
+- `app/playground/page.tsx` renders the playground index content plus
+  `<PlaygroundRouteNav size="md" />`.
+- `app/playground/layout.tsx` renders
+  `<PlaygroundRouteNav hideOnRoot className="mb-10 md:mb-16" />` for child
+  pages.
+- `components/playground/playground-route-nav.tsx` imports `playgroundRoutes`
+  from `@/lib/data/playground`; do not create a second route array.
 - The playground child pages are content-heavy demo pages. They do not yet
   expose a stable route-level title target solely for shared-element morphing.
   Do not add duplicate visible headings just to make a morph possible.
@@ -101,9 +105,9 @@ lint, format, build, and manual browser QA.
 - `styles/view-transitions.css` (directional playground transition classes only
   if [Plan 006](./006-view-transitions.md) does not already provide them)
 - `lib/data/playground.ts` (consume only; [Plan 014](./014-discovery-gaps.md) owns creation)
-- `components/playground/playground-routes.ts` (only to re-export or remove a
-  duplicate route array after [Plan 014](./014-discovery-gaps.md))
 - `components/playground/playground-route-nav.tsx`
+- `components/playground/playground-route-icons.tsx` (consume only unless the
+  selected direction requires a route icon API adjustment)
 - `components/playground/playground-card.tsx` (create only for `card-grid` or
   `hybrid`)
 - `components/playground/playground-card-grid.tsx` (create only for
@@ -158,12 +162,11 @@ Then confirm a maintainer-selected direction from the Direction gate:
 ### Step 2: Reuse the canonical playground registry
 
 Import route data from `@/lib/data/playground` wherever the index or route nav
-needs it. If `components/playground/playground-routes.ts` still exists, make it
-a thin re-export or delete it after updating imports. Do not keep both
-`PLAYGROUND_ROUTES` and `playgroundRoutes` as independent arrays.
+needs it. Do not create a local route array or a compatibility registry file;
+`lib/data/playground.ts` is the source of truth.
 
-If the dirty worktree's redirect routes remain, do not index them as separate
-cards. The card/nav surface should reflect the canonical current routes only.
+If redirect routes are ever introduced, do not index them as separate cards.
+The card/nav surface should reflect the canonical current routes only.
 
 **Verify**:
 

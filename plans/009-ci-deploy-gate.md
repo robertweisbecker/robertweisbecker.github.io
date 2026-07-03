@@ -24,6 +24,9 @@
 - **Reconciled at**: commit `9088a10`, 2026-07-02 — Plan 010 changed
   dependencies only; the verification scripts and empty `.github/workflows/`
   state still match this plan.
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — DONE. The workflow now
+  exists at `.github/workflows/check.yml` and runs `npm ci`,
+  `npm run check`, and `npm run build`.
 
 ## Why this matters
 
@@ -39,7 +42,36 @@ larger refactor plans ([017](./017-server-client-boundaries.md), [018](./018-mdx
 
 ## Current state
 
-- `.github/workflows/` — exists, contains no files.
+Current state as of `61bf9081`: this plan is done. The workflow exists:
+
+```yaml
+name: Check
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run build
+```
+
+- Historical state at planning time: `.github/workflows/` existed but
+  contained no files. This no longer applies as of `61bf9081`.
 - `package.json` scripts (lines 6–23): `"build": "next build"` (line 11),
   `"lint": "eslint --cache --cache-location .next/cache/eslint/"` (line 14),
   `"typecheck"` (line 15),

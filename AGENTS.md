@@ -35,14 +35,14 @@
 
 ## React Doctor Tracking
 
-- Current React Doctor score: 56/100
-- Last checked `master` commit: `f41eb75431d3`
-- Last checked at: 2026-07-02T16:26:55-07:00
-- Command: `env npm_config_cache=/private/tmp/codex-npm-cache /Users/robertweisbecker/.nvm/versions/node/v24.9.0/bin/npx react-doctor@latest --verbose`
+- Current React Doctor score: 58/100
+- Last checked `master` commit: `61bf9081a243`
+- Last checked at: 2026-07-02T20:36:12-0700
+- Command: `env PATH=/Users/robertweisbecker/.nvm/versions/node/v24.9.0/bin:/usr/bin:/bin:/usr/sbin:/sbin npm_config_cache=/private/tmp/codex-npm-cache /Users/robertweisbecker/.nvm/versions/node/v24.9.0/bin/npx react-doctor@latest --verbose`
 - Latest run log: `.scratch/react-doctor/latest-run.md`
-- React Doctor action policy: if any diagnostics have `severity: error`, list only those major issues as the next actionable items and format them as a ready-for-agent task; if there are 0 major issues, list the top 20 most severe remaining diagnostics instead.
-- Latest run note: 0 major issues; score improved from 53/100 to 56/100 after addressing the previous top 20 warnings, and the latest log lists the current top 20 remaining diagnostics. Use the absolute `npx` path plus `/private/tmp/codex-npm-cache` so automation shells do not depend on `nvm` PATH setup or the broken user npm cache.
-- After each new `master` commit range that changes at least one `.ts` or `.tsx` file, run React Doctor, report the action-policy diagnostics in Markdown with links to local files and line numbers, update `.scratch/react-doctor/latest-run.md` with those diagnostics, then update this section with the latest score, commit, and run timestamp. If `master` advances without `.ts`/`.tsx` changes, skip React Doctor and update only the checked commit/timestamp plus a skip note so the same non-TypeScript commit is not rescanned repeatedly.
+- React Doctor action policy: if any diagnostics have `severity: error`, list only those major issues as the next actionable items and format them as a ready-for-agent task; if there are 0 major issues, group warning diagnostics by React Doctor rule and list the top 10 warning rule groups by violation count instead of listing individual top issues.
+- Latest run note: 0 major issues; score improved from 56/100 to 58/100, and the latest log lists the top 10 warning rule groups by violation count. Keep the explicit `PATH` in the command because the absolute `npx` entrypoint uses `/usr/bin/env node`, and non-login automation shells may not otherwise resolve `node`.
+- After each new `master` commit range that changes at least one `.ts` or `.tsx` file, run React Doctor, report the action-policy diagnostics in Markdown with links to local files and line numbers, update `.scratch/react-doctor/latest-run.md` with those diagnostics, then update this section with the latest score, commit, and run timestamp. For warning-only runs, each warning rule group should include the rule/docs link, total warning count, category, a short fix objective, and representative absolute file/line links. If `master` advances without `.ts`/`.tsx` changes, skip React Doctor and update only the checked commit/timestamp plus a skip note so the same non-TypeScript commit is not rescanned repeatedly.
 
 ## Refactoring Notes
 

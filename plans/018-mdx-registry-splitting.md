@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- mdx-components.tsx components/icons-pixel.tsx components/pixel-morph.tsx components/playground/motion/motion-playground.tsx`
+> `git diff --stat 61bf9081..HEAD -- mdx-components.tsx components/icons-pixel.tsx components/pixel-morph.tsx components/playground/motion/motion-playground.tsx components/playground/playground-route-icons.tsx`
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
@@ -23,6 +23,10 @@
   measurements compose; not logically required.
 - **Category**: perf
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — still TODO. Use the
+  current `/playground/motion` route, the shared playground registry in
+  `lib/data/playground.ts`, and the route icon helper when verifying icon
+  consumers. Do not remove icons.
 
 ## Why this matters
 
@@ -38,7 +42,7 @@ Two chunk-level costs hit routes that never use the code:
    registry from the same module), so the entire module lands in the shared
    layout chunk on every route.
 
-Also: `/playground/motion-systems` eagerly imports several demos where the
+Also: `/playground/motion` eagerly imports several demos where the
 file already demonstrates the `next/dynamic` pattern for two others.
 
 ## Current state
@@ -135,7 +139,7 @@ already lazy-loads `CardFan` and `MotionTextPlaygroundDemo` via
 
 Run `npm run build`; record First Load JS for the shared chunk line, `/`,
 two MDX project routes (e.g. `/oklch-colors`, `/forge`), and
-`/playground/motion-systems`.
+`/playground/motion`.
 
 **Verify**: build exits 0; figures recorded.
 
@@ -225,7 +229,8 @@ export * from "./pixel-icons/chrome";` followed by all REMAINING icon
 **Verify**: `npm run check` → exit 0. Browser: header nav icons, work menu,
 mode toggle morph (sun↔moon), site search icons, video player control morphs
 (on `/everfi-engage`), pixel-morph demos on `/posts/pixel-icons` and
-`/playground/pixel-demos` all render and animate. `npm run build` → exit 0;
+`/playground/motion` and the public playground child routes all render and
+animate. `npm run build` → exit 0;
 shared First Load JS drops vs baseline.
 
 ### Step 4: Lazy-load the eager playground motion demos
@@ -239,14 +244,14 @@ of only the icons the file actually uses (`rg -n "PixelIcons\." components/playg
 to enumerate) — if the usage is a dynamic-by-name showcase over many icons,
 move that section into its own dynamically-imported component instead.
 
-**Verify**: `npm run check` → exit 0. `/playground/motion-systems` renders
+**Verify**: `npm run check` → exit 0. `/playground/motion` renders
 all sections with brief loading placeholders; `npm run build` → First Load
 JS for the route drops vs baseline.
 
 ### Step 5: Final measurement
 
 Run `npm run build`; produce the before/after table for shared chunk, `/`,
-the two MDX routes, and `/playground/motion-systems`.
+the two MDX routes, and `/playground/motion`.
 
 **Verify**: build exits 0; no measured route regressed; table in report.
 
@@ -271,7 +276,7 @@ Machine-checkable. ALL must hold:
 - [ ] `rg -n 'import \{ Video \}|import \{ ImageModal \}|import \{ ProjectImageCarousel \}' mdx-components.tsx` → no static matches (dynamic wrappers instead)
 - [ ] `rg -n 'import \* as PixelIcons' components/playground/motion/` → no matches
 - [ ] `npm run check` exits 0
-- [ ] `npm run build` exits 0; shared First Load JS and `/playground/motion-systems` both below baseline
+- [ ] `npm run build` exits 0; shared First Load JS and `/playground/motion` both below baseline
 - [ ] Behavioral regression list passes
 - [ ] No files outside the in-scope list are modified (`git status`)
 - [ ] `plans/README.md` status row updated

@@ -8,7 +8,7 @@
 > maintain the index.
 >
 > **Drift check (run first)**:
-> `git diff --stat 9ed1acd..HEAD -- app/api/letterboxd/route.ts components/demos/letterboxd.tsx`
+> `git diff --stat 61bf9081..HEAD -- app/api/letterboxd/route.ts components/demos/letterboxd.tsx`
 > If either file changed since this plan was written, compare the "Current
 > state" excerpts against the live code before proceeding; on a mismatch,
 > treat it as a STOP condition.
@@ -21,6 +21,9 @@
 - **Depends on**: none
 - **Category**: security / bug
 - **Planned at**: commit `9ed1acd`, 2026-07-02
+- **Reconciled at**: commit `61bf9081`, 2026-07-02 — still TODO.
+  The API fetch still has no timeout/size cap, the client still trusts
+  `data.films`, and the star renderer still renders from raw rating math.
 
 ## Why this matters
 
@@ -44,7 +47,8 @@ tiny validation layer — no behavior change for well-formed feeds.
   URL normalizers already allowlist `https:` + `letterboxd.com` /
   `a.ltrbxd.com` hosts — keep that pattern.
 - `components/demos/letterboxd.tsx` — client widget on the homepage;
-  fetches in a `useEffect` (lines 35–72), renders stars (line 199).
+  fetches in a `useEffect` (starts at line 37), trusts
+  `data.films.slice(0, maxFilms)` at line 56, and renders stars at line 201.
 
 Key excerpts as of `9ed1acd`:
 

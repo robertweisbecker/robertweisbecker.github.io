@@ -202,22 +202,6 @@ const privatePages: SearchItem[] = [
     category: "Testing",
     group: "Private",
   },
-  {
-    value: "device",
-    label: "Device Mockup Prototypes",
-    path: "/private/device",
-    icon: itemIcon(IconFlask),
-    category: "Testing",
-    group: "Private",
-  },
-  {
-    value: "cambio-examples",
-    label: "Cambio examples",
-    path: "/private/cambio",
-    icon: itemIcon(IconFlask),
-    category: "Testing",
-    group: "Private",
-  },
 ];
 
 const isDev = process.env.NODE_ENV === "development";
