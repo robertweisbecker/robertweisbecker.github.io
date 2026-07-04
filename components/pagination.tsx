@@ -1,4 +1,5 @@
 import type { PaginationLink } from "@/lib/utils";
+import { NAV_BACK_TRANSITION, NAV_FORWARD_TRANSITION, TitleMorph } from "@/components/view-transitions";
 import { IconChevronLeft } from "@tabler/icons-react";
 import Link from "next/link";
 
@@ -32,6 +33,7 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
       {previous ? (
         <Link
           href={previous.href}
+          transitionTypes={NAV_BACK_TRANSITION}
           aria-label={`Go to previous page: ${previous.title}`}
           className="group grid grid-cols-[auto_1fr] grid-rows-[auto_auto] gap-x-3"
         >
@@ -43,9 +45,17 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
           </span>
           <span className="col-start-2 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Previous</span>
 
-          <span className="col-start-2 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
-            {previous.title}
-          </span>
+          {previous.titleTransitionName ? (
+            <TitleMorph name={previous.titleTransitionName}>
+              <span className="col-start-2 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
+                {previous.title}
+              </span>
+            </TitleMorph>
+          ) : (
+            <span className="col-start-2 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
+              {previous.title}
+            </span>
+          )}
         </Link>
       ) : (
         <span />
@@ -54,13 +64,22 @@ export function Pagination({ previous, next, backHref, backLabel = "Index" }: Pa
       {next ? (
         <Link
           href={next.href}
+          transitionTypes={NAV_FORWARD_TRANSITION}
           aria-label={`Go to next page: ${next.title}`}
           className="group grid grid-cols-[1fr_auto] grid-rows-[auto_auto] gap-x-3 text-end"
         >
           <span className="col-start-1 text-[0.8125rem] leading-4.5 text-muted-foreground/50">Next</span>
-          <span className="col-start-1 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
-            {next.title}
-          </span>
+          {next.titleTransitionName ? (
+            <TitleMorph name={next.titleTransitionName}>
+              <span className="col-start-1 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
+                {next.title}
+              </span>
+            </TitleMorph>
+          ) : (
+            <span className="col-start-1 truncate font-heading text-lg" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>
+              {next.title}
+            </span>
+          )}
           <span
             className="col-2 row-2 mt-px shrink-0 font-pixel text-[22px] leading-none text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-foreground"
             aria-hidden="true"

@@ -37,6 +37,9 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { ArtCards } from "@/components/demos/art-cards";
 import { Letterboxd } from "@/components/demos/letterboxd";
 import { HomePortrait } from "@/components/home-portrait";
+import { NAV_FORWARD_TRANSITION, pageTitleTransitionName } from "@/components/view-transitions";
+import { projects } from "@/lib/data/projects";
+import { getProjectFrontmatter } from "@/lib/projects";
 
 const postItems: IndexListItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -47,6 +50,7 @@ const postItems: IndexListItem[] = posts.map((post) => {
     date: post.date,
     path: post.path,
     icon: <Icon aria-hidden strokeWidth={1} className="opacity-72" />,
+    viewTransitionName: pageTitleTransitionName("post", post.id),
     tags: post.category ? (
       <Badge
         variant={"inherit"}
@@ -63,7 +67,26 @@ const postItems: IndexListItem[] = posts.map((post) => {
   };
 });
 
-export default function Home() {
+export default async function Home() {
+  const projectItems: IndexListItem[] = await Promise.all(
+    projects
+      .filter((project) => project.published ?? true)
+      .map(async (project) => {
+        const slug = project.path.replace(/^\//, "");
+        const frontmatter = await getProjectFrontmatter(slug);
+
+        return {
+          id: project.id,
+          title: frontmatter.title,
+          description: project.description,
+          date: project.date,
+          path: project.path,
+          icon: project.icon,
+          viewTransitionName: pageTitleTransitionName("project", slug),
+        };
+      })
+  );
+
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
       <section>
@@ -142,14 +165,14 @@ export default function Home() {
         <h2 className="mb-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
           I. Work
         </h2>
-        <IndexList />
+        <IndexList items={projectItems} transitionTypes={NAV_FORWARD_TRANSITION} />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-pixel text-[11px] uppercase" id="resources">
           II. Posts
         </h2>
-        <IndexList items={postItems} maxVisibleItems={3} />
+        <IndexList items={postItems} maxVisibleItems={3} transitionTypes={NAV_FORWARD_TRANSITION} />
       </section>
 
       <section>

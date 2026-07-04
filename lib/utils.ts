@@ -15,8 +15,8 @@ export function slugify(str: string) {
     .replace(/\-\-+/g, "-");
 }
 
-export type PaginationLink = { title: string; href: string };
-type NavItem = { title: string; path: string };
+export type PaginationLink = { title: string; href: string; titleTransitionName?: string };
+type NavItem = { title: string; path: string; titleTransitionName?: string };
 
 export function resolveNeighbors(
   items: NavItem[],
@@ -30,7 +30,7 @@ export function resolveNeighbors(
   const next = items[i + 1];
 
   return {
-    previous: prev ? { title: prev.title, href: prev.path } : indexFallback,
-    next: next ? { title: next.title, href: next.path } : undefined,
+    previous: prev ? { title: prev.title, href: prev.path, titleTransitionName: prev.titleTransitionName } : indexFallback,
+    next: next ? { title: next.title, href: next.path, titleTransitionName: next.titleTransitionName } : undefined,
   };
 }
