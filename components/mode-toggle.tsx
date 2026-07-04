@@ -45,7 +45,7 @@ export function ModeToggle({ label, className, size = "icon-sm", variant = "ghos
           animation="ease"
           duration={0.5}
           stagger={0.025}
-          scale={1.5}
+          scale={1}
         />
         {label && (
           <span suppressHydrationWarning className="min-w-[4ch]">

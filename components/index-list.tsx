@@ -94,7 +94,7 @@ export function IndexList({ items = defaultItems, className, itemClassName, tran
               <ItemContent>
                 <ItemTitle>
                   <TitleMorph name={titleTransitionName}>
-                    <span className="inline-block w-fit">{item.title}</span>
+                    <span className="inline-block w-fit font-heading" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>{item.title}</span>
                   </TitleMorph>
                 </ItemTitle>
                 {item.description && <ItemDescription className="max-sm:hidden">{item.description}</ItemDescription>}

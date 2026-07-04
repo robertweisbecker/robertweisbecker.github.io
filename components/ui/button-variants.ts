@@ -100,4 +100,4 @@ export const buttonVariants = cva(
 
 /** sm on md+, md dimensions on viewports below md */
 export const responsiveNavButtonSize =
-  "max-md:h-button font-normal text-muted-foreground max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";
+  "max-md:h-button max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";

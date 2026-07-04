@@ -75,7 +75,7 @@ export function DvdLoaderDemo() {
       height={640}
       logoScale={0.3}
       colors={[...selectedPalette.colors]}
-      className="dark w-full bg-background"
+      className="dark w-full bg-background max-w-md mx-auto"
       data-testid="dvd-loader-demo"
     >
       <DvdAnimationStage />

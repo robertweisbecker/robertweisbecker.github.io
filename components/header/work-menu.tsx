@@ -53,7 +53,7 @@ export function WorkMenu({ projects }: WorkMenuProps) {
           }
         }}
       >
-        <DropdownMenuTrigger render={<Button variant="ghost" size="sm" rounded className={cn(responsiveNavButtonSize, "group/trigger")} />}>
+        <DropdownMenuTrigger render={<Button variant="ghost" size="sm" rounded className={cn(responsiveNavButtonSize, "group/trigger font-pixel text-2xs uppercase")} />}>
           <span className="max-md:hidden">Work</span>
           <span className="md:hidden">Menu</span>
           <PixelMorph
@@ -64,7 +64,7 @@ export function WorkMenu({ projects }: WorkMenuProps) {
             strategy="radial"
             duration={0.5}
             stagger={0.01}
-            scale={1.5}
+            scale={1}
             data-icon="inline-end"
           />
         </DropdownMenuTrigger>

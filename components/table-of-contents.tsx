@@ -66,7 +66,7 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
     <nav
       aria-label="Table of contents"
       className={cn(
-        "grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-2 py-4 text-xs",
+        "grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-2 text-xs",
         "[--inset:--spacing(3)]",
         className
       )}

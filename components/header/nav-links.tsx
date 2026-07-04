@@ -19,7 +19,7 @@ function HeaderLinkButton({ label, icon, mobileIconOnly = false, className, ...p
       variant="ghost"
       rounded={true}
       size="sm"
-      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "text-xs font-normal text-muted-foreground", className)}
+      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "text-2xs uppercase font-pixel", className)}
       {...props}
     >
       {icon && (
@@ -40,7 +40,7 @@ export function NavLinks() {
     <>
       <HeaderLinkButton
         label="Posts"
-        icon={<PixelNewspaperIcon scale={1.5} />}
+        icon={<PixelNewspaperIcon scale={1} />}
         mobileIconOnly={false}
         href="/posts"
         aria-current={pathname.startsWith("/posts") ? "true" : "false"}
@@ -48,7 +48,7 @@ export function NavLinks() {
       />
       <HeaderLinkButton
         label="Art"
-        icon={<PixelScribbleIcon scale={1.5} />}
+        icon={<PixelScribbleIcon scale={1} />}
         mobileIconOnly={true}
         href="/art"
         aria-current={pathname === "/art" ? "true" : "false"}
@@ -56,7 +56,7 @@ export function NavLinks() {
       />
       <HeaderLinkButton
         label="Play"
-        icon={<PixelPointerIcon scale={1.5} />}
+        icon={<PixelPointerIcon scale={1} />}
         mobileIconOnly={false}
         href="/playground/motion"
         aria-current={pathname.startsWith("/playground") ? "true" : "false"}
@@ -66,7 +66,7 @@ export function NavLinks() {
       {process.env.NODE_ENV === "development" && (
         <HeaderLinkButton
           label="Dev"
-          icon={<PixelEyeIcon scale={1.5} data-icon="inline-start" />}
+          icon={<PixelEyeIcon scale={1} data-icon="inline-start" />}
           mobileIconOnly={true}
           href="/private"
           aria-current={pathname === "/private" ? "true" : "false"}

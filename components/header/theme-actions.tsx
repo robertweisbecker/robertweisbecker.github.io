@@ -24,8 +24,8 @@ export function ThemeActions() {
   return (
     <>
       <Separator orientation="vertical" className="h-4" />
-      <ThemeSettingsPopover className={cn("rounded-full", responsiveNavButtonSize)} size="sm" />
-      <ModeToggle size="icon-sm" className={cn("rounded-full", responsiveNavButtonSize)} variant="ghost" />
+      <ThemeSettingsPopover className={cn("rounded-full text-2xs uppercase font-pixel", responsiveNavButtonSize)} size="sm" />
+      <ModeToggle size="icon-sm" className={cn("rounded-full text-2xs uppercase font-pixel", responsiveNavButtonSize)} variant="ghost" />
     </>
   );
 }
