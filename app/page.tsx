@@ -112,13 +112,12 @@ export default function Home() {
                   render={
                     <LinkOut
                       href="https://everfi.com/press-releases/everfis-suite-of-k-12-educational-content-receives-prestigious-digital-promise-research-based-product-design-certification/#:~:text=Everfi%E2%80%99s%20Impact%2Das%2Da%2DServiceTM%C2%A0solution%20and%20digital%20educational%20content%20have%20reached%20more%20than%2045%20million%20learners%20globally."
+                      text="allegedly"
                       className="decoration-wavy"
                     />
                   }
-                >
-                  allegedly
-                </PreviewCardTrigger>
-                <PreviewCardPopup className="p-2" side="top" align="start">
+                />
+                <PreviewCardPopup className="max-w-sm p-2" side="top" align="start">
                   <Avatar>
                     <AvatarImage src="/assets/logos/everfi-new-purp.png" alt="Everfi logo" />
                     <AvatarFallback>
