@@ -11,7 +11,7 @@ export type ImageProps =
   (Common & { src: StaticImageData; width?: number; height?: number }) | (Common & { src: string; width: number; height: number });
 
 const imgClassName =
-  "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)---spacing(0.5))] overflow-hidden outline outline-border/50 -outline-offset-1 squircle";
+  "sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-2xl)---spacing(1))] overflow-hidden outline outline-border/50 -outline-offset-1";
 
 export function Image(props: ImageProps) {
   const { src, alt = "", caption, className, priority, sizes: sizesProp, quality, placeholder, loading } = props;
@@ -38,7 +38,7 @@ export function Image(props: ImageProps) {
         className
       )}
     >
-      <div className="sm:squircle relative w-full bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1">
+      <div className="relative w-full bg-card py-1 shadow-border-sm squircle sm:rounded-2xl sm:px-1">
         <NextImage
           src={src}
           alt={alt}

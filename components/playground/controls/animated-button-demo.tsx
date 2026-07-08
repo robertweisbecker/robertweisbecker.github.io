@@ -1,15 +1,12 @@
 import { cn } from "@/lib/utils";
 
 export function AnimatedButtonDemo() {
+  const buttonClassName =
+    "group relative **:duration-300 select-none min-w-32 h-button bg-muted overflow-hidden rounded-lg inline-flex h-button items-center justify-center overflow-hidden rounded-lg bg-muted px-(--button-x) py-(--button-y) text-[13px] font-[550] tracking-[-.02em] hover:bg-accent hover:text-accent-foreground [--button-x:--spacing(3)] [--button-y:--spacing(2)]";
   return (
-    <div
-      className={cn(
-        "grid grid-cols-[auto_1fr_auto] gap-2 [--button-x:--spacing(3)] [--button-y:--spacing(2)]",
-        "[&_button]:inline-flex [&_button]:h-button [&_button]:items-center [&_button]:justify-center [&_button]:overflow-hidden [&_button]:rounded-lg [&_button]:bg-muted [&_button]:px-(--button-x) [&_button]:py-(--button-y) [&_button]:text-[13px] [&_button]:font-[550] [&_button]:tracking-[-.02em] [&_button]:hover:bg-accent [&_button]:hover:text-accent-foreground"
-      )}
-    >
+    <div className={cn("grid grid-cols-3 gap-2")}>
       <span />
-      <button className="group relative justify-self-center duration-300 select-none">
+      <button className={cn(buttonClassName, "justify-self-center")}>
         <span className="translate-y-0 blur-none transition-all group-hover:pointer-events-none group-hover:-translate-y-(--button-y) group-hover:opacity-0">
           Hover up
         </span>
@@ -18,7 +15,7 @@ export function AnimatedButtonDemo() {
         </span>
       </button>
       <span />
-      <button className="group relative duration-300 select-none">
+      <button className={buttonClassName}>
         <span className="transition-all group-hover:pointer-events-none group-hover:-translate-x-(--button-x) group-hover:opacity-0 group-hover:blur-[1px]">
           Hover left
         </span>
@@ -26,7 +23,7 @@ export function AnimatedButtonDemo() {
           Hovered! &larr;
         </span>
       </button>
-      <button className="group relative duration-300 select-none">
+      <button className={buttonClassName}>
         <span className="invisible grid-stack" aria-hidden="true">
           <span>Short text</span>
           <span>Some longer text</span>
@@ -38,7 +35,7 @@ export function AnimatedButtonDemo() {
           Some longer text
         </span>
       </button>
-      <button className="group relative duration-300 select-none">
+      <button className={buttonClassName}>
         <span className="transition-all group-hover:pointer-events-none group-hover:translate-x-(--button-x) group-hover:opacity-0 group-hover:blur-[1px]">
           Hover right
         </span>
@@ -47,7 +44,7 @@ export function AnimatedButtonDemo() {
         </span>
       </button>
       <span />
-      <button className="group relative justify-self-center duration-300 select-none">
+      <button className={cn(buttonClassName, "justify-self-center")}>
         <span className="transition-all group-hover:pointer-events-none group-hover:translate-y-(--button-y) group-hover:opacity-0 group-hover:blur-[1px]">
           Hover down
         </span>

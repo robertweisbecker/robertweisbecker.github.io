@@ -18,16 +18,18 @@ export function pageTitleTransitionName(kind: "project" | "post", slug: string):
 export function PageViewTransition({ children }: { children: ReactNode }) {
   return (
     <ViewTransition
-      enter={{
-        "nav-forward": "nav-forward",
-        "nav-back": "nav-back",
-        default: "none",
-      }}
-      exit={{
-        "nav-forward": "nav-forward",
-        "nav-back": "nav-back",
-        default: "none",
-      }}
+      share="auto"
+      enter="auto"
+      // enter={{
+      //   "nav-forward": "nav-forward",
+      //   "nav-back": "nav-back",
+      //   default: "none",
+      // }}
+      // exit={{
+      //   "nav-forward": "nav-forward",
+      //   "nav-back": "nav-back",
+      //   default: "none",
+      // }}
       default="none"
     >
       {children}

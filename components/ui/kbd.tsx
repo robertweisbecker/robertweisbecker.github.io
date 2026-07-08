@@ -16,8 +16,8 @@ const kbdVariants = cva(
           "data-pressed:translate-y-px data-pressed:shadow-[inset_0_-.05em_.5em_#00000006,_inset_0_.05em_var(--popover),_inset_0_.25em_.5em_#00000006,_inset_0_-.025em_.05em_var(--muted),_0_0_0_.05em_var(--border),_0_.04em_.05em_#0003] data-pressed:text-foreground data-pressed:bg-background",
         ],
         big: [
-          "bg-linear-to-b from-black-alpha-700 to-black-alpha-400 text-white  rounded-lg size-16 aspect-square",
-          "before:absolute before:top-px before:inset-x-px before:-z-1 before:bottom-0.5 before:rounded-[calc(var(--radius-lg)-1px)]  before:from-neutral-950 before:to-neutral-700 bg-radial-[at_50%_100%] bg-size-[200%]",
+          "bg-linear-to-b from-black-alpha-700 to-black-alpha-400 text-white rounded-lg size-16 aspect-square",
+          "before:absolute before:top-px before:inset-x-px before:-z-1 before:bottom-0.5 before:rounded-[calc(var(--radius-lg)-1px)] before:from-neutral-950 before:to-red-700 bg-radial-[at_50%_100%] bg-size-[200%]",
           "before:shadow-[inset_1px_.5px_1px_-1px_white,inset_-1px_.5px_1px_-1px_white,inset_0_.5px_0_.5px_var(--color-white-alpha-200),0_2px_1px_.5px_var(--color-black-alpha-400)]",
           "relative isolate  text-shadow-xs text-shadow-black ring-border ring-2 shadow-[inset_0_-1px_0_.5px_var(--color-black-alpha-500)] text-xl",
         ],

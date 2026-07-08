@@ -65,13 +65,15 @@ Stations displaying active contours or coverages were previously only discoverab
 
 To solve this, a bar displaying active stations was overlaid on the top edge of the map, with chips representing each station. Clicking a station chip would navigate to the station and open its details in the sidebar.
 
-<Video src="/assets/npr/maps-desktop-settings-720.mp4" />
+<Browser toolbar={false} copyButton={false} className="lg:max-w-6xl">
+  <Video src="/assets/npr/maps-desktop-settings-720.mp4" className="rounded-none" />
+</Browser>
 
 ## Responsiveness
 
 The most significant change was the newly-responsive design. On a phone, there simply isn't enough real estate to pan around a map and see detailed information, so we decided that modality was the best course of action.
 
-<div className="not-prose">
+<div className="not-prose max-w-xs overflow-hidden rounded-[44px]">
   <Video className="max-w-xs">
     <source src="/assets/npr/maps-mobile-1.mov" />
   </Video>

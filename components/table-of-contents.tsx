@@ -66,14 +66,14 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
     <nav
       aria-label="Table of contents"
       className={cn(
-        "grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-2 text-xs",
+        "grid h-full max-h-[calc(100vh-4rem)] w-full grid-rows-[auto_1fr_auto] justify-items-start gap-4 text-xs",
         "[--inset:--spacing(3)]",
         className
       )}
     >
       {title && (
         <p
-          className="data-visible:blur-0 -translate-y-1.5 transform pt-3 pb-1.5 text-sm font-medium opacity-0 blur-xs transition-[transform,opacity,translate,filter] duration-400 ease-out data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 data-[visible=true]:blur-none"
+          className="data-visible:blur-0 -translate-y-1.5 transform text-xs font-medium opacity-0 blur-xs transition-[transform,opacity,translate,filter] duration-400 ease-out data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 data-[visible=true]:blur-none"
           data-visible={isTitleVisible}
           data-slot="title"
         >
@@ -83,7 +83,7 @@ export function TableOfContents({ toc, title, className, maxDepth = 6 }: TableOf
         </p>
       )}
       <ScrollArea scrollFade scrollbarGutter>
-        <ul className={cn("group relative text-[0.8125rem]/5", isTitleVisible && "opacity-72")}>
+        <ul className={cn("group relative", isTitleVisible && "opacity-72")}>
           {visibleToc.map((item, index) => (
             <li
               key={item.id}

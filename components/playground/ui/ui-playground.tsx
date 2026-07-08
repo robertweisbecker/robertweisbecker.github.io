@@ -9,10 +9,12 @@ import { AnchoredSliderDemo } from "@/components/playground/controls/anchored-sl
 import { SliderDemo } from "@/components/playground/controls/slider-demo";
 import { SwitchDemo } from "@/components/playground/controls/switch-demo";
 import { TabsVariantsDemo } from "@/components/playground/controls/tabs-variants-demo";
-import { ToggleVariantsDemo } from "@/components/playground/controls/toggle-variants-demo";
+import { ToggleGridDemo } from "@/components/playground/controls/toggle-variants-demo";
 import { CarouselDemo } from "@/components/playground/frames/carousel-demo";
 import { ImageToggleDemo } from "@/components/playground/frames/image-toggle-demo";
 import { PlaygroundSection } from "@/components/playground/playground-section";
+import { NumberChip } from "@/components/playground/controls/number-chip";
+import ExampleDrawerNested from "@/components/demos/drawer-demo";
 
 const Video = dynamic(() => import("@/components/video").then((module) => ({ default: module.Video })), {
   loading: () => <p className="text-sm text-muted-foreground">Loading video player...</p>,
@@ -26,7 +28,7 @@ export function UiPlayground() {
           <TabsVariantsDemo />
         </DemoContainer>
         <DemoContainer title="ToggleGrid" variant="muted" centerContent className="lg:col-span-full">
-          <ToggleVariantsDemo />
+          <ToggleGridDemo />
         </DemoContainer>
         <DemoContainer title="Switch" variant="muted" centerContent className="lg:col-span-full">
           <div className="grid-stack aspect-square w-32">
@@ -35,6 +37,9 @@ export function UiPlayground() {
         </DemoContainer>
         <DemoContainer title="Base UI + CSS-anchored value" variant="muted" centerContent className="lg:col-span-full">
           <AnchoredSliderDemo />
+        </DemoContainer>
+        <DemoContainer title="NumberChip" description="Scrub to adjust value" variant="muted" centerContent className="lg:col-span-full">
+          <NumberChip />
         </DemoContainer>
         <DemoContainer title="Slider" variant="muted" centerContent className="lg:col-span-full">
           <SliderDemo />
@@ -69,6 +74,9 @@ export function UiPlayground() {
             preload="metadata"
             className="my-0 w-full max-w-4xl"
           />
+        </DemoContainer>
+        <DemoContainer title="Drawer" caption="Stacked drawers" variant="muted" centerContent className="lg:col-span-full">
+          <ExampleDrawerNested />
         </DemoContainer>
       </PlaygroundSection>
     </div>

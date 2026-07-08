@@ -7,6 +7,7 @@ import { CodeBlock } from "@/components/code-block";
 import { ColorSwatchGroup } from "@/components/color-swatch-group";
 import { Demo, DemoContainer } from "@/components/demo";
 import { CardFan } from "@/components/demos/card-fan";
+import { Card, CardHeader, CardTitle, CardContent, CardAction } from "@/components/ui/card";
 import {
   BaseUiIcon,
   CssIcon,
@@ -241,39 +242,52 @@ function MotionTextDemo() {
 
   return (
     <div className="grid w-full max-w-4xl gap-4 lg:grid-cols-2">
-      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
-        <div className="flex items-center justify-between gap-3">
-          <p className="font-pixel text-[11px] text-muted-foreground uppercase">Reveal</p>
-          <Button size="xs" variant="ghost" type="button" onClick={() => setReplayKey((key) => key + 1)}>
-            Replay
-          </Button>
-        </div>
-        <MotionText.Reveal key={`css-${replayKey}`} className="text-xl font-semibold text-balance" duration={520} stagger={18}>
-          CSS timing keeps editorial text crisp.
-        </MotionText.Reveal>
-        <MotionText.Reveal
-          key={`motion-${replayKey}`}
-          type="motion"
-          as="p"
-          className="text-sm text-muted-foreground"
-          duration={420}
-          stagger={24}
-        >
-          Motion mode uses variants for future composition.
-        </MotionText.Reveal>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Reveal</CardTitle>
+          <CardAction>
+            <Button size="sm" variant="ghost" type="button" onClick={() => setReplayKey((key) => key + 1)}>
+              Replay
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <MotionText.Reveal key={`css-${replayKey}`} className="text-xl font-semibold text-balance" duration={520} stagger={18}>
+            CSS timing keeps editorial text crisp.
+          </MotionText.Reveal>
+          <MotionText.Reveal
+            key={`motion-${replayKey}`}
+            type="motion"
+            as="p"
+            className="text-sm text-muted-foreground"
+            duration={420}
+            stagger={24}
+          >
+            Motion mode uses variants for future composition.
+          </MotionText.Reveal>
+        </CardContent>
+      </Card>
 
-      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
-        <p className="font-pixel text-[11px] text-muted-foreground uppercase">Effect</p>
-        <MotionText.Effect key={`effect-${replayKey}`} per="word" preset="fade-in-blur" className="text-xl font-semibold text-balance">
-          Words can arrive with presets.
-        </MotionText.Effect>
-        <MotionText.Effect key={`effect-char-${replayKey}`} per="char" preset="slide" as="p" className="text-sm text-muted-foreground">
-          Characters can move independently.
-        </MotionText.Effect>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Effect</CardTitle>
+          <CardAction>
+            <Button size="sm" variant="ghost" type="button" onClick={() => setReplayKey((key) => key + 1)}>
+              Replay
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <MotionText.Effect key={`effect-${replayKey}`} per="word" preset="fade-in-blur" className="text-xl font-semibold text-balance">
+            Words can arrive with presets.
+          </MotionText.Effect>
+          <MotionText.Effect key={`effect-char-${replayKey}`} per="char" preset="slide" as="p" className="text-sm text-muted-foreground">
+            Characters can move independently.
+          </MotionText.Effect>
+        </CardContent>
+      </Card>
 
-      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+      <Card>
         <Field orientation="horizontal" className="flex w-auto items-center justify-between gap-3 text-sm">
           <FieldLabel>
             <Switch checked={loopRunning} onCheckedChange={setLoopRunning} />
@@ -287,9 +301,9 @@ function MotionTextDemo() {
           </MotionText.Loop>
           .
         </p>
-      </div>
+      </Card>
 
-      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
+      <Card>
         <div className="flex items-center justify-between gap-3">
           <p className="font-pixel text-[11px] text-muted-foreground uppercase">Scramble</p>
           <Button size="xs" variant="ghost" type="button" onClick={() => setScrambleKey((key) => key + 1)}>
@@ -299,26 +313,39 @@ function MotionTextDemo() {
         <MotionText.Scramble key={scrambleKey} className="font-mono text-xl font-semibold" duration={0.9}>
           Signal locked
         </MotionText.Scramble>
-      </div>
+      </Card>
 
-      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
-        <p className="font-pixel text-[11px] text-muted-foreground uppercase">Wave</p>
-        <MotionText.Wave className="text-xl font-semibold text-balance" yDistance={-3} zDistance={12} rotateYDistance={14}>
-          Wave through every glyph
-        </MotionText.Wave>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Wave</CardTitle>
+          <CardAction>
+            <Button size="sm" variant="ghost" type="button">
+              Pause
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <MotionText.Wave className="text-xl font-semibold text-balance" yDistance={-3} zDistance={12} rotateYDistance={14}>
+            Wave through every glyph
+          </MotionText.Wave>
+        </CardContent>
+      </Card>
 
-      <div className="min-w-0 space-y-3 rounded-md border bg-card p-4 shadow-border-xs">
-        <div className="flex items-center justify-between gap-3">
-          <p className="font-pixel text-[11px] text-muted-foreground uppercase">Morph</p>
-          <Button size="xs" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
-            Swap
-          </Button>
-        </div>
-        <MotionText.Morph className="text-xl font-semibold">
-          {morphAlternate ? "Motion text system" : "Modular text motion"}
-        </MotionText.Morph>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Morph</CardTitle>
+          <CardAction>
+            <Button size="sm" variant="ghost" type="button" onClick={() => setMorphAlternate((value) => !value)}>
+              Swap
+            </Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent>
+          <MotionText.Morph className="text-xl font-semibold">
+            {morphAlternate ? "Motion text system" : "Modular text motion"}
+          </MotionText.Morph>
+        </CardContent>
+      </Card>
     </div>
   );
 }

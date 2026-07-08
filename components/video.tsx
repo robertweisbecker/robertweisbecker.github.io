@@ -112,7 +112,7 @@ function VideoFullscreenMorphIcon({ className, scale, slot }: VideoMorphIconProp
         duration={0.05}
         stagger={0.005}
         scale={scale}
-        className={className}
+        className={cn(className, "text-current!")}
       />
     </span>
   );
@@ -144,7 +144,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
     <div
       ref={intersectionRef}
       className={cn(
-        "not-prose content-visibility-auto squircle relative mx-auto my-4 overflow-hidden rounded-2xl outline -outline-offset-1 outline-border/50",
+        "not-prose content-visibility-auto relative mx-auto overflow-clip rounded-2xl outline -outline-offset-1 outline-border/50 squircle",
         className
       )}
     >
@@ -165,13 +165,13 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
             // "--media-control-padding": "0",
             "--media-font-family": "var(--font-pixel)",
             "--media-font-size": "11px",
-            "--media-range-bar-color": "color-mix(in srgb, var(--foreground) 64%, transparent)",
-            "--media-range-track-background": "color-mix(in srgb, var(--foreground) 10%, transparent)",
-            "--media-time-range-buffered-color": "color-mix(in srgb, var(--foreground) 10%, transparent)",
+            "--media-range-bar-color": "color-mix(in srgb, var(--color-foreground) 64%, transparent)",
+            "--media-range-track-background": "color-mix(in srgb, var(--color-foreground) 10%, transparent)",
+            "--media-time-range-buffered-color": "color-mix(in srgb, var(--color-foreground) 10%, transparent)",
             "--media-range-thumb-background": "var(--color-white)",
             "--media-range-thumb-box-shadow": "var(--shadow-border-xs)",
-            "--media-text-color": "var(--muted-foreground)",
-            "--media-icon-color": "var(--foreground)",
+            "--media-text-color": "var(--color-muted-foreground)",
+            "--media-icon-color": "var(--color-foreground)",
             "--media-tooltip-arrow-display": "none",
             "--media-tooltip-filter": "var(--drop-shadow-xs)",
             "--media-tooltip-distance": "6px",
@@ -181,7 +181,7 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
 
             // "--media-preview-time-background": "var(--muted)",
             "--media-preview-time-box-shadow": "var(--shadow-sm)",
-            // "--media-preview-time-color": "var(--color-background)",
+            "--media-preview-time-color": "var(--color-foreground)",
             "--media-preview-time-border-radius": "var(--radius-sm)",
             // "--media-secondary-color": "var(--color-white)",
             // "--media-tooltip-display": "none",
@@ -218,49 +218,46 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
             // "before:absolute before:-inset-200 before:-z-1"
           )}
         >
-          <VideoPlayMorphIcon slot="icon" scale={3} />
+          <VideoPlayMorphIcon slot="icon" scale={3} className="fill-(--media-icon-color)" />
         </Button>
         <Toolbar.Root
           data-slot="controlbar"
           render={<MediaControlBar />}
           className={cn(
-            "relative isolate m-2 transform-gpu overflow-visible rounded-full bg-background/50 p-1 shadow-border-xl backdrop-blur-sm transition-opacity duration-150 ease-out group-has-[[mediaisfullscreen]]:mx-auto group-has-[[mediaisfullscreen]]:max-w-sm"
+            "bg-glass relative isolate m-2 transform-gpu overflow-visible rounded-full p-1 transition-opacity duration-150 ease-out group-has-[[mediaisfullscreen]]:mx-auto group-has-[[mediaisfullscreen]]:max-w-sm"
             // "has-[[mediapaused]]:invisible"
             // "translate-y-1/2 opacity-0 transition-[translate,opacity] duration-150 ease-out group-hover/media:translate-y-0 group-hover/media:opacity-100"
           )}
         >
           <Toolbar.Group className="w-full">
-            <Toolbar.Button
-              nativeButton={false}
-              render={<MediaPlayButton noTooltip />}
-              size="icon-xs"
-              className="rounded-full! bg-transparent"
-            >
-              <VideoPlayMorphIcon slot="icon" scale={1.5} />
+            <Toolbar.Button nativeButton={false} render={<MediaPlayButton noTooltip />} size="icon-xs" rounded className="bg-transparent">
+              <VideoPlayMorphIcon slot="icon" scale={1.5} className="**:fill-(--media-icon-color)" />
             </Toolbar.Button>
             <MediaTimeRange className="h-4 max-w-full grow rounded-full! bg-transparent"></MediaTimeRange>
-            <MediaTimeDisplay noToggle={true} showDuration className="select-none" />
+            <MediaTimeDisplay
+              noToggle={true}
+              showDuration
+              className="select-none [--media-text-color:var(--foreground)] **:text-(--media-text-color)"
+            />
           </Toolbar.Group>
 
           <Toolbar.Separator />
 
           <Toolbar.Group>
             {unmuted && (
-              <Toolbar.Button
-                data-slot="button"
-                className="rounded-full! bg-transparent [&_svg]:fill-none"
-                render={<MediaMuteButton noTooltip />}
-              >
+              <Toolbar.Button data-slot="button" render={<MediaMuteButton noTooltip />}>
                 <VideoVolumeMorphIcon slot="icon" scale={1.5} />
               </Toolbar.Button>
             )}
 
             <Toolbar.Button
-              render={<MediaFullscreenButton noTooltip className="rounded-full! bg-transparent [&_svg]:fill-none" />}
+              render={<MediaFullscreenButton noTooltip />}
               nativeButton={false}
               size="icon-xs"
+              className="bg-transparent"
+              rounded
             >
-              <VideoFullscreenMorphIcon slot="icon" scale={1.5} />
+              <VideoFullscreenMorphIcon slot="icon" scale={1.5} className="**:fill-foreground" />
             </Toolbar.Button>
           </Toolbar.Group>
         </Toolbar.Root>

@@ -7,7 +7,7 @@ import { AnchoredSliderDemo } from "@/components/playground/controls/anchored-sl
 import { SliderDemo } from "@/components/playground/controls/slider-demo";
 import { SwitchDemo } from "@/components/playground/controls/switch-demo";
 import { TabsVariantsDemo } from "@/components/playground/controls/tabs-variants-demo";
-import { ToggleVariantsDemo } from "@/components/playground/controls/toggle-variants-demo";
+import { ToggleGridDemo } from "@/components/playground/controls/toggle-variants-demo";
 
 export function ControlsPlayground() {
   return (
@@ -17,7 +17,7 @@ export function ControlsPlayground() {
           <TabsVariantsDemo />
         </DemoContainer>
         <DemoContainer title="ToggleGrid" variant="muted" centerContent className="lg:col-span-full">
-          <ToggleVariantsDemo />
+          <ToggleGridDemo />
         </DemoContainer>
         <DemoContainer title="Switch" variant="muted" centerContent className="lg:col-span-full">
           <div className="grid-stack aspect-square w-32">

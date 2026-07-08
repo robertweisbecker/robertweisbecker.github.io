@@ -50,7 +50,7 @@ function ToggleGroup({
       className={cn(
         "group/toggle-group flex w-fit flex-row items-center gap-[--spacing(var(--gap))] rounded-md data-[size=lg]:rounded-lg data-[size=sm]:rounded-sm data-vertical:flex-col data-vertical:items-stretch",
         variant === "elevated" &&
-          "bg-accent p-px data-[size=lg]:rounded-xl data-[size=lg]:p-0.5 data-[size=sm]:rounded-[calc(var(--radius-md)+1px)]",
+          "bg-accent p-px data-[size=lg]:rounded-[calc(var(--radius-lg)+2px)] data-[size=lg]:p-0.5 data-[size=sm]:rounded-[calc(var(--radius-md)+1px)]",
         variant === "default" && !!spacing && "gap-px",
         className
       )}

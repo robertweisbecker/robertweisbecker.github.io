@@ -70,7 +70,7 @@ export function Artwork({
               alt={title ? title : ""}
               fill
               sizes="(max-width: 768px) 90vw, 60vw"
-              className="rounded-inherit squircle pointer-events-none object-contain select-none"
+              className="rounded-inherit pointer-events-none object-contain select-none squircle"
               style={{ borderRadius: 20 }}
               preload
             />

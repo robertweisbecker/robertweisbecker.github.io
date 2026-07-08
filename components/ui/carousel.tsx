@@ -6,7 +6,8 @@ import Autoplay, { type AutoplayType } from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, LazyMotion, domAnimation, m, type Transition } from "motion/react";
-import { IconChevronLeft, IconChevronRight, IconPlayerPauseFilled, IconPlayerPlayFilled, IconRotateClockwise } from "@tabler/icons-react";
+import { PlayIcon } from "@/components/icons";
+import { IconChevronLeft, IconChevronRight, IconPlayerPauseFilled, IconRotateClockwise } from "@tabler/icons-react";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -363,7 +364,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
+function CarouselPrevious({ className, variant = "glass", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
   const { goToPrev, canGoToPrev } = useCarousel();
   return (
     <Button
@@ -371,7 +372,7 @@ function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ..
       variant={variant}
       size={size}
       rounded
-      render={<m.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
+      render={<m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
         // orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
@@ -385,14 +386,14 @@ function CarouselPrevious({ className, variant = "overlay", size = "icon-sm", ..
       onClick={goToPrev}
       {...props}
     >
-      <IconChevronLeft strokeWidth={3} className="-ms-px size-5 rtl:rotate-180" />
+      <IconChevronLeft strokeWidth={2} className="-ms-px size-5 mix-blend-plus-lighter rtl:rotate-180" />
 
       <span className="sr-only">Previous slide</span>
     </Button>
   );
 }
 
-function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
+function CarouselNext({ className, variant = "glass", size = "icon-sm", ...props }: React.ComponentProps<typeof Button>) {
   const { goToNext, canGoToNext } = useCarousel();
   return (
     <Button
@@ -400,7 +401,7 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
       variant={variant}
       size={size}
       rounded
-      render={<m.button whileTap={{ scale: 0.95 }} transition={iconTransition} />}
+      render={<m.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={iconTransition} />}
       className={cn(
         "touch-manipulation",
         // orientation === "vertical" && "in-data-[slot=carousel-toolbar]:-rotate-90",
@@ -414,7 +415,7 @@ function CarouselNext({ className, variant = "overlay", size = "icon-sm", ...pro
       onClick={goToNext}
       {...props}
     >
-      <IconChevronRight strokeWidth={3} className="-me-px size-4.5 rtl:rotate-180" />
+      <IconChevronRight strokeWidth={2} className="-me-px size-4.5 mix-blend-plus-lighter rtl:rotate-180" />
 
       <span className="sr-only">Next slide</span>
     </Button>
@@ -450,10 +451,10 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
             onClick={() => goTo(index)}
             className={cn(
               "relative shrink-0 cursor-pointer rounded-full transition-all duration-500 ease-out not-first:ms-3",
-              "h-2 bg-current/30 hover:not-data-selected:bg-current/50",
+              "h-2 bg-current/30 bg-blend-difference hover:not-data-selected:bg-current/60",
               "after:absolute after:-inset-y-5 after:-inset-s-3 after:-inset-e-1.5",
-              isActive ? "z-1 w-6 bg-current/80 after:hidden" : "w-2",
-              isFillingSlide && "bg-current/30"
+              isActive ? "z-1 w-6 bg-current/60 after:hidden" : "w-2",
+              isFillingSlide && "bg-current/10"
             )}
           >
             {autoplayEnabled && isActive && (
@@ -468,10 +469,10 @@ function CarouselDots({ className, ...props }: React.ComponentProps<typeof Toolb
               >
                 <div
                   className={cn(
-                    "h-full origin-left rounded-full bg-current/80 backdrop-contrast-150 duration-0",
-                    isFillingSlide ? "transition-transform" : "transition-none"
+                    "h-full origin-left rounded-full bg-current/80",
+                    isFillingSlide ? "transition-width linear" : "transition-none"
                   )}
-                  style={{ transform: "scaleX(var(--autoplay-progress, 0))" }}
+                  style={{ width: "calc(var(--autoplay-progress, 0)*100%)" }}
                 />
               </div>
             )}
@@ -509,11 +510,11 @@ function CarouselPlay({ className, ...props }: React.ComponentProps<typeof Toolb
           transition={iconTransition}
         >
           {isFinished ? (
-            <IconRotateClockwise className="relative" />
+            <IconRotateClockwise className="relative mix-blend-difference" />
           ) : isPlaying ? (
-            <IconPlayerPauseFilled className="relative" />
+            <IconPlayerPauseFilled className="relative mix-blend-difference" />
           ) : (
-            <IconPlayerPlayFilled className="relative" />
+            <PlayIcon className="relative ms-0.5 size-5 mix-blend-difference" />
           )}
         </m.div>
       </AnimatePresence>

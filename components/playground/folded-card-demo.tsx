@@ -7,7 +7,7 @@ export function FoldedCardDemo() {
       variant="plain"
       size="sm"
       className={cn(
-        "ease squircle z-2 max-w-3xs overflow-visible rounded-md border bg-[color-mix(in_srgb,var(--background),var(--card))] bg-clip-padding drop-shadow-[0_1px,-1px_2px] drop-shadow-black/4 transition-all duration-180 hover:drop-shadow-[0_1px,-1px_3px_2px] hover:drop-shadow-black/8",
+        "ease z-2 max-w-3xs overflow-visible rounded-md border bg-[color-mix(in_srgb,var(--background),var(--card))] bg-clip-padding drop-shadow-[0_1px,-1px_2px] drop-shadow-black/4 transition-all duration-180 squircle hover:drop-shadow-[0_1px,-1px_3px_2px] hover:drop-shadow-black/8",
         "rounded-se-[26px] hover:rounded-se-[36px]",
         "hover:before:size-[42px] hover:before:border-input",
         "after:drop-shadow-black/32 hover:after:translate-x-0 hover:after:translate-y-0 hover:after:rounded-bl-[8px] hover:after:drop-shadow-md",

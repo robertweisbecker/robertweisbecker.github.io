@@ -61,6 +61,7 @@ function ArtCard({ src, index, count, left, top, rotate, zIndex, isHovered }: Ar
         rotate: isHovered ? 0 : rotate,
       }}
       transition={SPRING}
+      viewport={{ once: true }}
     >
       <Image src={src} placeholder="blur" sizes="100px" fill alt="" className="inset-1 size-full rounded-[inherit] object-cover" />
     </motion.div>

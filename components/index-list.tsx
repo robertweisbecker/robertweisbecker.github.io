@@ -12,7 +12,6 @@ import * as React from "react";
 import { TreeIconFile } from "./icons-tree";
 import { PixelMorph } from "./pixel-morph";
 import { MotionText } from "./animation/MotionText";
-import { TitleMorph, pageTitleTransitionName } from "./view-transitions";
 
 export type IndexListItem = {
   id: string | number;
@@ -81,7 +80,7 @@ export function IndexList({ items = defaultItems, className, itemClassName, tran
   const list = (
     <ItemGroup className={className}>
       {filteredItems.map((item, index) => {
-        const titleTransitionName = item.viewTransitionName ?? pageTitleTransitionName("project", item.path.replace(/^\//, ""));
+        // const titleTransitionName = item.viewTransitionName ?? pageTitleTransitionName("project", item.path.replace(/^\//, ""));
 
         return (
           <React.Fragment key={item.id}>
@@ -91,16 +90,24 @@ export function IndexList({ items = defaultItems, className, itemClassName, tran
               className={cn("peer hover:text-secondary-foreground sm:-mx-3", itemClassName)}
             >
               {renderMedia(item.icon)}
-              <ItemContent>
+              <ItemContent className="gap-0">
                 <ItemTitle>
-                  <TitleMorph name={titleTransitionName}>
-                    <span className="inline-block w-fit font-heading" style={{ fontVariationSettings: '"SERF" 40, "wght" 640' }}>{item.title}</span>
-                  </TitleMorph>
+                  {/* <TitleMorph name={titleTransitionName}> */}
+                  <span
+                    className="inline-block w-fit font-heading text-base leading-6 tracking-[.012em]"
+                    style={{
+                      fontFeatureSettings: '"calt" 1, "zero" 1, "ss01" 0, "ss02" 0, "ss03" 0',
+                      fontVariationSettings: '"slnt" 0, "SERF" 20, "wght" 610',
+                    }}
+                  >
+                    {item.title}
+                  </span>
+                  {/* </TitleMorph> */}
                 </ItemTitle>
                 {item.description && <ItemDescription className="max-sm:hidden">{item.description}</ItemDescription>}
               </ItemContent>
               <ItemActions>
-                {item.tags && <span className="max-sm:hidden">{item.tags}</span>}
+                {/* {item.tags && <span className="max-sm:hidden">{item.tags}</span>} */}
                 {item.date && <ItemDescription className="font-pixel text-[11px] uppercase">{item.date}</ItemDescription>}
               </ItemActions>
             </Item>
@@ -120,7 +127,7 @@ export function IndexList({ items = defaultItems, className, itemClassName, tran
           id={listId}
           open={open}
           initialHeight={`${collapsedHeightPercent}%`}
-          className="relative w-full min-w-0 overflow-x-visible! px-3"
+          className={cn("relative w-full min-w-0 overflow-x-visible! px-3", open ? "pb-10" : "pb-4")}
           transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
         >
           {list}
@@ -137,7 +144,7 @@ export function IndexList({ items = defaultItems, className, itemClassName, tran
           )}
         >
           <Button
-            variant="ghost"
+            variant="elevated"
             render={<m.button />}
             onClick={() => setOpen((value) => !value)}
             className="pointer-events-auto"

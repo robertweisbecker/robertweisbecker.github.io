@@ -143,7 +143,7 @@ export type MotionTextRevealProps = {
 
 export function MotionTextReveal({
   children,
-  as = "h1",
+  as = "p",
   className,
   style,
   type = "css",
@@ -169,7 +169,7 @@ export function MotionTextReveal({
       <LazyMotion features={domAnimation}>
         <div className="group/textReveal relative overflow-visible" id={id}>
           <Component className={cn("whitespace-pre-wrap", className)} key={reset} style={style}>
-            <span aria-hidden className={segmentWrapperClassName}>
+            <span aria-hidden className={cn(segmentWrapperClassName)}>
               <m.span
                 className="contents"
                 initial={shouldReduceMotion ? "visible" : "hidden"}
@@ -323,7 +323,7 @@ export function MotionTextEffect({
       <Component className={cn("whitespace-pre-wrap", className)} style={style}>
         <span aria-hidden className={segmentWrapperClassName}>
           <m.span
-            className="contents"
+            className="transition-width contents"
             initial={trigger ? "hidden" : "visible"}
             animate={trigger ? "visible" : "hidden"}
             variants={containerVariants}
@@ -576,6 +576,19 @@ export function MotionTextMorph({ children, as = "p", className, style }: Motion
   const occurrenceMap = new Map<string, number>();
   const chars = splitText(children, "char");
 
+  const defaultVariants: Variants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  const defaultTransition: Transition = {
+    type: "spring",
+    stiffness: 280,
+    damping: 18,
+    mass: 0.3,
+  };
+
   return (
     <LazyMotion features={domMax}>
       <LayoutGroup id={id}>
@@ -593,10 +606,11 @@ export function MotionTextMorph({ children, as = "p", className, style }: Motion
                   key={`${children}-${char}-${index}`}
                   layout={!shouldReduceMotion}
                   layoutId={`${char}-${occurrence}`}
-                  initial={shouldReduceMotion ? false : { opacity: 0, y: 0, filter: "blur(2px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={shouldReduceMotion ? undefined : { opacity: 0, y: -8, filter: "blur(4px)" }}
-                  transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.8 }}
+                  initial="initial"
+                  animate={shouldReduceMotion ? undefined : "animate"}
+                  exit={shouldReduceMotion ? undefined : "exit"}
+                  variants={defaultVariants}
+                  transition={shouldReduceMotion ? { duration: 0 } : defaultTransition}
                 >
                   {readableChar}
                 </m.span>

@@ -88,9 +88,9 @@ export function CopyButton({ value, className, size = "icon-xs", variant = "ghos
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: -45 }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)", rotate: 0 }}
-                exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)", rotate: 45 }}
+                initial={{ opacity: 0, scale: 0.75, filter: "blur(4px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.75, filter: "blur(4px)" }}
                 transition={{
                   duration: 0.15,
                 }}

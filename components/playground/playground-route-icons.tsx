@@ -1,4 +1,4 @@
-import { IconGridDots, IconKeyframes, IconMonkeybar, IconRipple, IconScanCube, IconZoomPan } from "@tabler/icons-react";
+import { IconGridDots, IconKeyframes, IconMonkeybar, IconRipple, IconLayoutCollage, IconZoomPan } from "@tabler/icons-react";
 import type { ComponentType } from "react";
 
 type PlaygroundRouteIconComponent = ComponentType<{ className?: string }>;
@@ -6,7 +6,7 @@ type PlaygroundRouteIconComponent = ComponentType<{ className?: string }>;
 const playgroundRouteIcons: Record<string, PlaygroundRouteIconComponent> = {
   motion: IconRipple,
   svg: IconKeyframes,
-  verisimilitude: IconScanCube,
+  verisimilitude: IconLayoutCollage,
   pixels: IconGridDots,
   buttons: IconGridDots,
   ui: IconZoomPan,

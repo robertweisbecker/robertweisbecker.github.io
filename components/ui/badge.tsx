@@ -5,11 +5,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  " gap-1 px-1.5 py-px font-[450] transition-all **:data-[icon=inline-end]:-me-0.5 **:data-[icon=inline-start]:-ms-0.5 [&_svg:not([class*='size-'])]:size-[.875em] inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none focus-visible:outlin-2 focus-visible:outline-ring focus-visible:outline-offset-1 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive align-[-1px] overflow-hidden group/badge  tracking-normal ",
+  "gap-1 px-1.5 py-px font-[450] transition-all **:data-[icon=inline-end]:-me-0.5 **:data-[icon=inline-start]:-ms-0.5 [&_svg:not([class*='size-'])]:size-[.875em] inline-flex items-center justify-center w-fit whitespace-nowrap shrink-0 [&>svg]:pointer-events-none align-[-1px] overflow-hidden group/badge tracking-normal [a]:hover:ring",
   {
     variants: {
       variant: {
-        default: "bg-muted text-muted-foreground [a]:hover:bg-muted outline outline-border",
+        default: "bg-muted text-muted-foreground [a]:hover:bg-accent outline outline-border",
         primary: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         secondary: "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
         destructive: "bg-destructive [a]:hover:bg-destructive/20 focus-visible:ring-destructive text-white ",
@@ -26,7 +26,7 @@ const badgeVariants = cva(
         link: "bg-muted dark:bg-white/10 [font-size:inherit] text-foreground hover:underline underline-offset-4 [a]:hover:bg-accent [a]:hover:text-accent-foreground",
       },
       size: {
-        default: "text-xs/none rounded-sm h-5",
+        default: "text-xs/5 rounded-sm h-5",
         sm: "text-[0.625rem]/3 py-0.5 px-1 rounded tracking-[0.015em] h-4 gap-0.5",
       },
     },

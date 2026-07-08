@@ -9,7 +9,7 @@ export default function PlaygroundPage() {
       <FoldedCardDemo />
 
       <div className="group/tab-bar flex h-12 w-full items-center justify-center bg-[#070707]">
-        <div className="group squircle relative isolate flex h-7 max-w-[200px] items-center overflow-hidden rounded-md bg-transparent text-xs font-medium text-zinc-400 transition-colors group-hover/tab-bar:bg-neutral-900/30 group-hover/tab-bar:hover:bg-neutral-800/60 group-hover/tab-bar:hover:text-zinc-200">
+        <div className="group relative isolate flex h-7 max-w-[200px] items-center overflow-hidden rounded-md bg-transparent text-xs font-medium text-zinc-400 transition-colors squircle group-hover/tab-bar:bg-neutral-900/30 group-hover/tab-bar:hover:bg-neutral-800/60 group-hover/tab-bar:hover:text-zinc-200">
           <button
             type="button"
             title="untitled"
@@ -28,7 +28,7 @@ export default function PlaygroundPage() {
             type="button"
             title="Close tab"
             aria-label="Close untitled"
-            className="squircle absolute top-1/2 right-1 z-20 flex h-5 w-5 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm bg-neutral-800 text-neutral-500 opacity-0 transition-opacity group-hover:opacity-100 hover:text-zinc-100 focus:opacity-100"
+            className="absolute top-1/2 right-1 z-20 flex h-5 w-5 -translate-y-1/2 cursor-pointer items-center justify-center rounded-sm bg-neutral-800 text-neutral-500 opacity-0 transition-opacity squircle group-hover:opacity-100 hover:text-zinc-100 focus:opacity-100"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -76,7 +76,8 @@ function TooltipGroup({
                 side={side}
                 sideOffset={sideOffset}
                 className={cn(
-                  "isolate z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width)",
+                  "h-[var(--positioner-height)] w-[var(--positioner-width)]",
+                  "max-w-[var(--available-width)]",
                   "transition-[top,left,right,bottom,transform]",
                   "duration-[0.35s]",
                   "ease-[cubic-bezier(0.22,1,0.36,1)]",
@@ -87,15 +88,16 @@ function TooltipGroup({
                   data-slot="tooltip-popup"
                   className={cn(
                     "flex origin-(--transform-origin) text-center",
-                    "h-(--popup-height,auto) w-(--popup-width,auto) min-w-10",
+                    "max-w-xs",
+                    "h-(--popup-height,auto) w-(--popup-width,auto) min-w-12",
                     "rounded-md bg-card text-[0.8125rem] text-popover-foreground dark:bg-neutral-700",
                     "shadow-[var(--shadow-border-lg),inset_0_1px_1px_--alpha(white/10%)] drop-shadow-md/2",
                     "transition-[width,height,opacity,transform]",
                     "duration-[0.35s]",
                     "ease-[cubic-bezier(0.22,1,0.36,1)]",
-                    "data-starting-style:[transform:scale(0.9)] data-starting-style:opacity-0",
                     "data-ending-style:[transform:scale(0.9)] data-ending-style:opacity-0",
                     "data-instant:transition-none",
+                    "data-starting-style:[transform:scale(0.9)] data-starting-style:opacity-0",
                     "data-[side=left]:*:data-[slot=tooltip-arrow]:hidden data-[side=right]:*:data-[slot=tooltip-arrow]:hidden",
                     popupClassName
                   )}
@@ -119,8 +121,10 @@ function TooltipGroup({
                   <TooltipPrimitive.Viewport
                     data-slot="tooltip-group-viewport"
                     className={cn(
-                      "min-w-10 [--viewport-inline-padding:--spacing(1.5)]",
-                      "relative h-full w-full min-w-fit overflow-clip text-center",
+                      "[--viewport-inline-padding:0.5rem]",
+                      "relative",
+                      "h-full w-full",
+                      "overflow-clip",
                       "px-[var(--viewport-inline-padding)] py-1",
                       "[&_[data-previous]]:w-[calc(var(--popup-width)-2*var(--viewport-inline-padding))]",
                       "[&_[data-previous]]:translate-x-0",

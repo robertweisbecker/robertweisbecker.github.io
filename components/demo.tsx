@@ -46,7 +46,10 @@ export function DemoHeader({ className, ...props }: DemoHeaderProps) {
   return (
     <header
       data-slot="demo-header"
-      className={cn("flex items-center justify-between gap-2 ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-xs", className)}
+      className={cn(
+        "flex items-center justify-between gap-2 rounded-t-xl ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-xs",
+        className
+      )}
       {...props}
     />
   );
@@ -126,7 +129,11 @@ export function DemoContent({
   maxHeight,
   ...props
 }: DemoContentProps) {
-  const demoInnerClasses = cn("min-h-[300px] p-4 flex-1 overflow-hidden", centerContent && "grid place-content-center", innerClass);
+  const demoInnerClasses = cn(
+    "min-h-[300px] p-4 flex-1 overflow-hidden",
+    centerContent && "mx-auto w-full flex flex-col items-center justify-center",
+    innerClass
+  );
   const contentStyle = maxHeight === undefined ? style : ({ maxHeight, ...style } satisfies React.CSSProperties);
 
   if (overflowBehavior === "resize") {

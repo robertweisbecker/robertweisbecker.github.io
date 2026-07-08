@@ -117,7 +117,7 @@ export function ColorSwatchGroup({
             variant="outline"
             shape="round"
             data-columns={columns}
-            className={cn("flex-wrap rounded-full!", className)}
+            className={cn("flex-wrap", className)}
             aria-label="Choose a swatch color"
             render={<m.div />}
           >
@@ -132,7 +132,7 @@ export function ColorSwatchGroup({
                     aria-label={swatch.label}
                     className={cn(
                       "relative aspect-square h-8 w-8 rounded-full p-1",
-                      "group cursor-pointer outline-transparent transition-[border,background,outline-width,outline-offset] ease-out-quint hover:border-current data-pressed:bg-accent data-pressed:outline-3 data-pressed:-outline-offset-1"
+                      "group ease cursor-pointer border-transparent transition-[border,background,outline-width,outline-offset] duration-200 hover:border-border data-pressed:border-3 data-pressed:border-current data-pressed:bg-current/20"
                     )}
                     style={{ touchAction: "manipulation", color: swatch.color }}
                   />
@@ -145,12 +145,12 @@ export function ColorSwatchGroup({
                   aria-hidden
                   style={{ background: swatch.preview ?? swatch.color }}
                   animate={{
-                    scale: selected.includes(swatch.value) ? 0.9 : 1,
+                    scale: selected.includes(swatch.value) ? 0.98 : 1,
                     outlineWidth: 4,
                     outlineOffset: 2,
                     outlineColor: selected.includes(swatch.value) ? swatch.color : undefined,
                   }}
-                  transition={{ type: "spring", visualDuration: 50 }}
+                  transition={{ type: "spring", visualDuration: 200 }}
                 />
                 {/* {selected.includes(swatch.value) ? (
                 <m.span

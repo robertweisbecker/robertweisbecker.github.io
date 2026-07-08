@@ -69,30 +69,32 @@ export function DvdLoaderDemo() {
   const selectedPalette = DVD_LOADER_PALETTES.find((option) => option.value === palette) ?? DVD_LOADER_PALETTES[0];
 
   return (
-    <DvdAnimationRoot
-      duration={60}
-      width={640}
-      height={640}
-      logoScale={0.3}
-      colors={[...selectedPalette.colors]}
-      className="dark w-full bg-background max-w-md mx-auto"
-      data-testid="dvd-loader-demo"
-    >
-      <DvdAnimationStage />
-      <DvdAnimationControls className="dark! flex-col gap-3">
-        <ColorSwatchGroup
-          colors={DVD_LOADER_SWATCHES}
-          value={palette}
-          onValueChange={(nextPalette) => setPalette(isDvdLoaderPalette(nextPalette) ? nextPalette : "rainbow")}
-          allowCustomColors={false}
-          className="bg-background/30 backdrop-blur"
-        />
-        <div className="flex items-center gap-2">
-          <DvdAnimationPlayButton className="text-foreground" />
-          <Separator orientation="vertical" className="h-button-xs" />
-          <DvdAnimationScore />
-        </div>
-      </DvdAnimationControls>
-    </DvdAnimationRoot>
+    <div className="grid grid-cols-[auto_1fr] gap-4">
+      <DvdAnimationRoot
+        duration={60}
+        width={640}
+        height={640}
+        logoScale={0.3}
+        colors={[...selectedPalette.colors]}
+        className="dark mx-auto w-full max-w-md bg-background"
+        data-testid="dvd-loader-demo"
+      >
+        <DvdAnimationStage />
+        <DvdAnimationControls className="dark! flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <DvdAnimationPlayButton className="text-foreground" />
+            <Separator orientation="vertical" className="h-button-xs" />
+            <DvdAnimationScore />
+          </div>
+        </DvdAnimationControls>
+      </DvdAnimationRoot>
+      <ColorSwatchGroup
+        colors={DVD_LOADER_SWATCHES}
+        value={palette}
+        onValueChange={(nextPalette) => setPalette(isDvdLoaderPalette(nextPalette) ? nextPalette : "rainbow")}
+        allowCustomColors={false}
+        className="bg-background/30 backdrop-blur"
+      />
+    </div>
   );
 }

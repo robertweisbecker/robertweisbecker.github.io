@@ -9,7 +9,7 @@ type Slide = {
   id: string;
   caption: string;
   label: string;
-  gradient: string;
+  bg: string;
 };
 
 const SLIDES: Slide[] = [
@@ -17,35 +17,31 @@ const SLIDES: Slide[] = [
     id: "dark-mode",
     label: "01",
     caption: "Dark mode",
-    gradient:
-      "radial-gradient(circle at 20% 18%, #38bdf8 0 12%, transparent 22%), linear-gradient(135deg, #0f172a 0%, #1e3a8a 48%, #c026d3 100%)",
+    bg: "radial-gradient(circle at 20% 18%, #38bdf8 0 12%, transparent 22%), linear-gradient(135deg, #0f172a 0%, #1e3a8a 48%, #c026d3 100%)",
   },
   {
     id: "light-mode",
     label: "02",
     caption: "Light mode",
-    gradient:
-      "radial-gradient(circle at 74% 20%, #fef08a 0 10%, transparent 22%), linear-gradient(135deg, #e0f2fe 0%, #a7f3d0 45%, #f0abfc 100%)",
+    bg: "radial-gradient(circle at 74% 20%, #fef08a 0 10%, transparent 22%), linear-gradient(135deg, #e0f2fe 0%, #a7f3d0 45%, #f0abfc 100%)",
   },
   {
     id: "expanded-palettes",
     label: "03",
     caption: "Expanded palettes",
-    gradient: "conic-gradient(from 210deg at 50% 45%, #ef4444, #f59e0b, #84cc16, #06b6d4, #3b82f6, #a855f7, #ec4899, #ef4444)",
+    bg: "conic-gradient(from 210deg at 50% 45%, #ef4444, #f59e0b, #84cc16, #06b6d4, #3b82f6, #a855f7, #ec4899, #ef4444)",
   },
   {
     id: "neutral-scale",
     label: "04",
     caption: "Neutral scale",
-    gradient:
-      "linear-gradient(135deg, #f8fafc 0 12%, #cbd5e1 12% 24%, #94a3b8 24% 36%, #64748b 36% 48%, #475569 48% 60%, #334155 60% 72%, #1e293b 72% 84%, #020617 84% 100%)",
+    bg: "linear-gradient(135deg, #f8fafc 0 12%, #cbd5e1 12% 24%, #94a3b8 24% 36%, #64748b 36% 48%, #475569 48% 60%, #334155 60% 72%, #1e293b 72% 84%, #020617 84% 100%)",
   },
   {
     id: "density",
     label: "05",
     caption: "Density",
-    gradient:
-      "repeating-linear-gradient(90deg, #14b8a6 0 8px, #0f766e 8px 16px, #7c3aed 16px 24px, #db2777 24px 32px), linear-gradient(135deg, #020617, #172554)",
+    bg: "repeating-linear-gradient(90deg, #14b8a6 0 8px, #0f766e 8px 16px, #7c3aed 16px 24px, #db2777 24px 32px), linear-gradient(135deg, #020617, #172554)",
   },
 ];
 
@@ -74,16 +70,16 @@ const SPRING = { type: "spring" as const, visualDuration: 0.4, bounce: 0.15 };
 function PolaroidFace({ slide }: { slide: Slide }) {
   return (
     <div className="flex h-full w-full flex-col gap-2 p-2">
-      <p className="font-pixel text-[11px] tracking-wider text-muted-foreground uppercase">{slide.label}</p>
       <div
         className="relative aspect-square flex-1 overflow-hidden bg-muted bg-cover bg-center inset-ring inset-ring-input after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_30%_20%,rgb(255_255_255/.45),transparent_38%)]"
-        style={{ backgroundImage: slide.gradient }}
+        style={{ backgroundImage: slide.bg }}
         role="img"
         aria-label={slide.caption}
       >
         <div className="absolute inset-x-3 bottom-3 h-8 rounded-full bg-black/10 blur-md" />
       </div>
       <div>
+        <p className="font-pixel text-[11px] tracking-wider text-muted-foreground uppercase">{slide.label}</p>
         <p className="mt-0.5 line-clamp-1 text-xs font-semibold text-foreground">{slide.caption}</p>
       </div>
     </div>

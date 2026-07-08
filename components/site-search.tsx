@@ -294,7 +294,7 @@ export function SiteSearch({
       >
         <CommandDialogTrigger
           className={cn(
-            "ease squircle flex h-button-sm items-center justify-start gap-2 rounded-md ps-2 pe-3 text-sm transition-colors duration-100",
+            "ease flex h-button-sm items-center justify-start gap-2 rounded-md ps-2 pe-3 text-sm transition-colors duration-100 squircle",
             variant === "button" && "w-fit bg-muted hover:bg-accent hover:text-accent-foreground",
             variant === "input" &&
               "w-full bg-background inset-shadow-border outline -outline-offset-1 outline-border/50 hover:outline-input",
@@ -421,7 +421,7 @@ export function SiteSearch({
                           className={cn(isCurrent && "text-foreground")}
                         >
                           <Item size="sm" className="m-0 overflow-visible rounded-none p-0">
-                            <ItemMedia variant={"icon"} className="squircle relative size-5 rounded-sm bg-card shadow-border-xs">
+                            <ItemMedia variant={"icon"} className="relative size-5 rounded-sm bg-card shadow-border-xs squircle">
                               {item.icon ? item.icon : <TreeIconFile className="size-4 opacity-64" />}
                               {isCurrent && (
                                 <div className="absolute bottom-0 left-1/2 size-[3px] -translate-x-1/2 translate-y-1 rounded-full bg-muted-foreground" />

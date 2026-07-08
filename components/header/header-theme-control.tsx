@@ -5,9 +5,10 @@ import { IconWheel } from "@tabler/icons-react";
 
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { responsiveNavButtonSize } from "@/components/ui/button-variants";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+
+const responsiveNavButtonSize = "max-md:h-button max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";
 
 const ThemeSettingsPopover = dynamic(() => import("@/components/theme/settings-popover").then((mod) => mod.ThemeSettingsPopover), {
   loading: () => (
@@ -24,8 +25,8 @@ export function ThemeActions() {
   return (
     <>
       <Separator orientation="vertical" className="h-4" />
-      <ThemeSettingsPopover className={cn("rounded-full text-2xs uppercase font-pixel", responsiveNavButtonSize)} size="sm" />
-      <ModeToggle size="icon-sm" className={cn("rounded-full text-2xs uppercase font-pixel", responsiveNavButtonSize)} variant="ghost" />
+      <ThemeSettingsPopover className={cn("rounded-full font-pixel text-2xs uppercase", responsiveNavButtonSize)} size="sm" />
+      <ModeToggle size="icon-sm" className={cn("rounded-full font-pixel text-2xs uppercase", responsiveNavButtonSize)} variant="ghost" />
     </>
   );
 }

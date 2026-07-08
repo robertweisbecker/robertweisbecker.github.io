@@ -38,7 +38,7 @@ function ThemeDemo() {
         </Button>
       </div>
       <Separator />
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex items-center gap-2">
         <Badge variant="secondary">Neutral</Badge>
         <Badge variant="info">Info</Badge>
         <Badge variant="success">Success</Badge>
@@ -87,7 +87,7 @@ function ThemeDemo() {
       <Separator />
       <div className="flex flex-col gap-2">
         <Alert variant="neutral">Neutral</Alert>
-        <Alert variant="secondary">Secondary</Alert>
+        <Alert variant="secondary">Brand</Alert>
         <Alert variant="info">Info</Alert>
         <Alert variant="success">Success</Alert>
         <Alert variant="warning">Warning</Alert>
@@ -100,37 +100,35 @@ function ThemeDemo() {
 export default function ThemingPostPage() {
   return (
     <>
-      <div className="mx-auto flex max-w-xl flex-col gap-6">
-        <section className="flex flex-col gap-4">
-          <p>
-            A working demo of the theming described in my{" "}
-            <Link href="/projects/oklch" className="link">
-              writeup
-            </Link>{" "}
-            of the okLCH color system I created for the{" "}
-            <Link href="/projects/unified-design-language" className="link">
-              Unified Design Language
-            </Link>{" "}
-            project. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so we end up with
-            a pretty close approximation.
-          </p>
-          <p>
-            You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the page, but you can always
-            change the whole site&apos;s theme in the header if you land on something you like.
-          </p>
-        </section>
-        <section className="flex flex-col gap-2">
-          <Alert>
-            <AlertTitle>Note</AlertTitle>
-            <AlertDescription>
-              It seems LightningCSS (used by Tailwind) now converts oklch to okLab when compiled as of ~v4.2, so inspected values may not
-              match what&apos;s in the code. Shouldn&apos;t really matter though, since the two convert cleanly, but just FYI.
-            </AlertDescription>
-          </Alert>
-        </section>
-      </div>
+      <section className="prose">
+        <p>
+          A working demo of the theming described in my{" "}
+          <Link href="/projects/oklch" className="link">
+            writeup
+          </Link>{" "}
+          of the okLCH color system I created for the{" "}
+          <Link href="/projects/unified-design-language" className="link">
+            Unified Design Language
+          </Link>{" "}
+          project. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so we end up with a
+          pretty close approximation.
+        </p>
+        <p>
+          You can play around below. The demo is scoped to its container, so it won&apos;t affect the rest of the page, but you can always
+          change the whole site&apos;s theme in the header if you land on something you like.
+        </p>
 
-      <Theme className="relative flex w-full flex-col gap-2 border border-dashed border-purple-500 bg-[canvas]">
+        <Alert>
+          <AlertTitle>Note</AlertTitle>
+          <AlertDescription>
+            It seems LightningCSS (used by Tailwind) now converts <Code variant="plain">oklch</Code> to <Code variant="plain">okLab</Code>{" "}
+            when compiled as of Tailwind ~v4.2, so inspected values may not match what&apos;s in the code. Shouldn&apos;t really matter
+            though, since the two convert cleanly, but just FYI.
+          </AlertDescription>
+        </Alert>
+      </section>
+
+      <Theme className="relative my-24 flex flex-col gap-2 justify-self-center border border-dashed border-purple-500 bg-[canvas] md:max-w-4xl lg:w-6xl">
         <div className="to-canvas absolute left-3 flex -translate-y-1/2 gap-x-1 bg-linear-to-b from-background from-50% to-50% px-2 text-[11px]">
           <div className="bg-purple-500 px-1 font-pixel leading-4 text-white uppercase">{`<Theme>`}</div>
         </div>
@@ -168,25 +166,23 @@ export default function ThemingPostPage() {
         and lighter in dark mode? Shouldn't it just always be quieter? Doesn't having{" "}
         <Code variant="plain">dark:bg-input/10</Code> on a button kind of defeat the point of semantic tokens?
       </p> */}
-      <div className="mx-auto mt-4 flex max-w-xl flex-col gap-6">
+      <div className="prose mx-auto mt-4 flex max-w-xl flex-col gap-6">
         {/* ── How it works ──────────────────────────────────── */}
         <section>
-          <Heading level={2}>
-            How it works<span className="text-muted-foreground">*</span>
-          </Heading>
-          <small className="m-2 block ps-10 text-xs text-muted-foreground italic">* just on this site, not the actual project</small>
+          <Heading level={2}>How it works</Heading>
+          <small className="m-2 block text-xs text-muted-foreground italic">* just on this site, not the actual project</small>
           <br />
           <p>
             Colors are controlled by <Code variant="plain">data-hue</Code> and <Code variant="plain">data-neutral</Code> attributes on the{" "}
             <Code variant="plain">{`<Theme>`}</Code> component, each of which assigns a given color ramp to the alias variables that feed
             into the theme. These will cascade down from any ancestor, so you can scope overrides to a section of the page.
           </p>
-          <pre className="overflow-x-auto font-mono text-[11px] whitespace-pre-wrap text-foreground">
+          <pre className="overflow-x-auto font-pixel text-[11px]/3.5 whitespace-pre-wrap text-foreground">
             {`                    
-            ╔──────────────────╗
-            │    colors.css    │
-            ╚────────┬─────────╝
-                     │
+            ╔──────────────────╗            
+            │    colors.css    │            
+            ╚────────┬─────────╝            
+                     │                        
       ╭──────────────┴──────────────╮
       │                             │
       ▼                             ▼
@@ -210,8 +206,8 @@ export default function ThemingPostPage() {
         </section>
 
         {/* ── Colors ──────────────────────────────────────── */}
-        <section className="flex flex-col gap-2">
-          <Heading level={3}>Colors</Heading>
+        <section className="prose">
+          <Heading level={3}>Aliases</Heading>
 
           <div className="flex flex-col gap-4">
             <p>
@@ -225,7 +221,7 @@ export default function ThemingPostPage() {
               <Code variant="plain">data-hue</Code> or <Code variant="plain">data-neutral</Code> on any ancestor swaps the entire scale for
               another color ramp.
             </p>
-            <Heading level={4}>File structure</Heading>
+            <Heading level={3}>File structure</Heading>
             <CodeBlock
               language="text"
               code={`app/
@@ -257,7 +253,7 @@ components/
   --hue-975: var(--color-blue-975);
 }`}
             />
-            <Heading level={4}>Semantic tokens</Heading>
+            <Heading level={3}>Semantic tokens</Heading>
             <p>
               Semantic tokens like <Code variant="plain">--primary</Code>, <Code variant="plain">--background</Code>, and{" "}
               <Code variant="plain">--ring</Code> are declared on <Code variant="plain">:root, [data-theme]</Code> and reference these

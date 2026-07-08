@@ -7,18 +7,31 @@ import { Code } from "@/components/ui/code";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { LinkButton } from "@/components/ui/link-button";
 import { PlaygroundSection } from "@/components/playground/playground-section";
-import { ChromeTabsDemo } from "@/components/playground/verisimilitude/chrome-tabs-demo";
-import { GroupedPopupsDemo } from "@/components/playground/verisimilitude/grouped-popups-demo";
+import { Loader } from "@/components/ui/loader";
+
+const ChromeTabsDemo = dynamic(
+  () => import("@/components/playground/verisimilitude/chrome-tabs-demo").then((module) => ({ default: module.ChromeTabsDemo })),
+  {
+    loading: () => <Loader />,
+  }
+);
+
+const GroupedPopupsDemo = dynamic(
+  () => import("@/components/playground/verisimilitude/grouped-popups-demo").then((module) => ({ default: module.GroupedPopupsDemo })),
+  {
+    loading: () => <Loader />,
+  }
+);
 
 const SiteSearch = dynamic(() => import("@/components/site-search").then((module) => ({ default: module.SiteSearch })), {
-  loading: () => <p className="text-sm text-muted-foreground">Loading site search…</p>,
+  loading: () => <Loader />,
 });
 
 const PhoneDeviceFrameDemo = dynamic(
   () =>
     import("@/components/playground/verisimilitude/phone-device-frame-demo").then((module) => ({ default: module.PhoneDeviceFrameDemo })),
   {
-    loading: () => <p className="text-sm text-muted-foreground">Loading phone frame…</p>,
+    loading: () => <Loader />,
   }
 );
 
@@ -28,7 +41,7 @@ const BrowserDeviceFrameDemo = dynamic(
       default: module.BrowserDeviceFrameDemo,
     })),
   {
-    loading: () => <p className="text-sm text-muted-foreground">Loading browser frame…</p>,
+    loading: () => <Loader />,
   }
 );
 
@@ -70,6 +83,49 @@ export function VerisimilitudePlayground() {
             <Kbd variant="big">⌘</Kbd>
             <Kbd variant="big">K</Kbd>
           </KbdGroup>
+          <div className="relative isolate size-16 rounded-[35%] bg-black squircle">
+            <div
+              style={{
+                // zIndex: '1',
+                // pointerEvents: 'none',
+                // position: 'absolute',
+                background:
+                  "radial-gradient(35% 35% at 0px 0px, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04) 50%, rgba(0, 0, 0, 0) 80%), radial-gradient(35% 35% at 100% 100%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02) 50%, rgba(0, 0, 0, 0) 80%)",
+                // inset: '0px',
+              }}
+              className="pointer-events-none absolute inset-0 z-1"
+            />
+            <svg
+              className="pointer-events-none absolute inset-0 z-20 h-full w-full"
+              viewBox="0 0 64 64"
+              preserveAspectRatio="none"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <defs>
+                <linearGradient id="glaze-app-icon-border-_r_u_" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="white" stopOpacity="0.45" />
+                  <stop offset="25%" stopColor="white" stopOpacity="0.12" />
+                  <stop offset="50%" stopColor="white" stopOpacity="0.06" />
+                  <stop offset="75%" stopColor="white" stopOpacity="0.1" />
+                  <stop offset="100%" stopColor="white" stopOpacity="0.25" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M0 28.16C0 18.30 0 13.38 1.92 9.60C3.61 6.31 6.31 3.61 9.60 1.92C13.38 0 18.30 0 28.16 0H35.84C45.70 0 50.62 0 54.40 1.92C57.69 3.61 60.39 6.31 62.08 9.60C64 13.38 64 18.30 64 28.16V35.84C64 45.70 64 50.62 62.08 54.40C60.39 57.69 57.69 60.39 54.40 62.08C50.62 64 45.70 64 35.84 64H28.16C18.30 64 13.38 64 9.60 62.08C6.31 60.39 3.61 57.69 1.92 54.40C0 50.62 0 45.70 0 35.84V28.16Z"
+                stroke="url(#glaze-app-icon-border-_r_u_)"
+                strokeWidth={2}
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className="absolute inset-0 -z-1 size-full">
+              <path
+                fill="red"
+                d="M0 28.16C0 18.30 0 13.38 1.92 9.60C3.61 6.31 6.31 3.61 9.60 1.92C13.38 0 18.30 0 28.16 0H35.84C45.70 0 50.62 0 54.40 1.92C57.69 3.61 60.39 6.31 62.08 9.60C64 13.38 64 18.30 64 28.16V35.84C64 45.70 64 50.62 62.08 54.40C60.39 57.69 57.69 60.39 54.40 62.08C50.62 64 45.70 64 35.84 64H28.16C18.30 64 13.38 64 9.60 62.08C6.31 60.39 3.61 57.69 1.92 54.40C0 50.62 0 45.70 0 35.84V28.16Z"
+              />
+            </svg>
+          </div>
         </DemoContainer>
         <DemoContainer
           title="DeviceFrame · Phone"

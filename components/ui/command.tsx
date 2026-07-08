@@ -67,7 +67,7 @@ export function CommandDialogPopup({
       <CommandDialogViewport>
         <CommandDialogPrimitive.Popup
           className={cn(
-            "squircle relative row-start-2 flex max-h-120 min-h-0 w-full max-w-3xl min-w-0 flex-col overflow-hidden ui-popup rounded-3xl transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform outline-none data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0 **:data-[slot=scroll-area-viewport]:data-has-overflow-y:pe-1",
+            "relative row-start-2 flex max-h-120 min-h-0 w-full max-w-3xl min-w-0 flex-col overflow-hidden ui-popup rounded-3xl transition-[scale,opacity,translate] duration-200 ease-in-out will-change-transform outline-none squircle data-ending-style:scale-98 data-ending-style:opacity-0 data-starting-style:scale-98 data-starting-style:opacity-0 **:data-[slot=scroll-area-viewport]:data-has-overflow-y:pe-1",
             className
           )}
           data-slot="command-dialog-popup"
@@ -210,7 +210,7 @@ export function CommandPanel({ className, ...props }: React.ComponentProps<"div"
   return (
     <div
       className={cn(
-        "squircle relative flex min-h-0 flex-1 flex-col rounded-lg bg-background/90 shadow-border-xs backdrop-blur-sm **:data-[slot=scroll-area-scrollbar]:mt-2",
+        "relative flex min-h-0 flex-1 flex-col rounded-lg bg-background/90 shadow-border-xs backdrop-blur-sm squircle **:data-[slot=scroll-area-scrollbar]:mt-2",
         className
       )}
       {...props}
@@ -238,7 +238,7 @@ export function CommandCollection({ ...props }: React.ComponentProps<typeof Auto
 
 export function CommandItem({ className, ...props }: React.ComponentProps<typeof AutocompleteItem>): React.ReactElement {
   return (
-    <AutocompleteItem className={cn("group/command-item squircle gap-2 rounded-lg py-2", className)} data-slot="command-item" {...props} />
+    <AutocompleteItem className={cn("group/command-item gap-2 rounded-lg py-2 squircle", className)} data-slot="command-item" {...props} />
   );
 }
 
@@ -254,7 +254,7 @@ export function CommandFooter({ className, ...props }: React.ComponentProps<"div
   return (
     <div
       className={cn(
-        "squircle flex items-center justify-between gap-2 rounded-b-xl px-5 pt-3 pb-4 text-xs text-muted-foreground shadow-[0_-1px_0_0] shadow-border/50",
+        "flex items-center justify-between gap-2 rounded-b-xl px-5 pt-3 pb-4 text-xs text-muted-foreground shadow-[0_-1px_0_0] shadow-border/50 squircle",
         className
       )}
       data-slot="command-footer"

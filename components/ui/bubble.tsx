@@ -41,28 +41,32 @@ function Bubble({
   align = "start",
   className,
   children,
+  arrow = false,
   ...props
 }: React.ComponentProps<"div"> &
   VariantProps<typeof bubbleVariants> & {
     align?: "start" | "end";
+    arrow?: boolean;
   }) {
   return (
     <div data-slot="bubble" data-variant={variant} data-align={align} className={cn(bubbleVariants({ variant }), className)} {...props}>
       {children}
-      <svg
-        width="20"
-        height="14"
-        viewBox="0 0 20 14"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn(
-          "absolute bottom-0 -z-1 fill-(--message-bg)",
-          align === "start" && "-left-1.5 rotate-y-180",
-          align === "end" && "-right-1.5"
-        )}
-      >
-        <path d="M14.03 0C14.11 4.43 14.4 7.14 15.53 9.36C16.45 11.17 17.76 12.75 19.34 14H14C6.27 14 0 7.73 0 0H14.03Z" />
-      </svg>
+      {arrow && (
+        <svg
+          width="20"
+          height="14"
+          viewBox="0 0 20 14"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          className={cn(
+            "absolute bottom-0 -z-1 fill-(--message-bg)",
+            align === "start" && "-left-1.5 rotate-y-180",
+            align === "end" && "-right-1.5"
+          )}
+        >
+          <path d="M14.03 0C14.11 4.43 14.4 7.14 15.53 9.36C16.45 11.17 17.76 12.75 19.34 14H14C6.27 14 0 7.73 0 0H14.03Z" />
+        </svg>
+      )}
     </div>
   );
 }
@@ -73,7 +77,7 @@ function BubbleContent({ className, render, ...props }: useRender.ComponentProps
     props: mergeProps<"div">(
       {
         className: cn(
-          "w-fit max-w-full min-w-0 overflow-hidden rounded-xl squircle border border-transparent px-3 py-2 wrap-break-word group-data-[align=end]/bubble:self-end [button]:text-start [button,a]:transition-colors [button,a]:outline-none [button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/50",
+          "w-fit max-w-full min-w-0 overflow-hidden rounded-[max(var(--radius-2xl),.5cqh)] squircle border border-transparent px-2.5 py-1 wrap-break-word group-data-[align=end]/bubble:self-end [button]:text-start [button,a]:transition-colors [button,a]:outline-none [button,a]:focus-visible:border-ring [button,a]:focus-visible:ring-3 [button,a]:focus-visible:ring-ring/50",
           className
         ),
       },

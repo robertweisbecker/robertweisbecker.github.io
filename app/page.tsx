@@ -37,7 +37,6 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { ArtCards } from "@/components/demos/art-cards";
 import { Letterboxd } from "@/components/demos/letterboxd";
 import { HomePortrait } from "@/components/home-portrait";
-import { NAV_FORWARD_TRANSITION, pageTitleTransitionName } from "@/components/view-transitions";
 import { projects } from "@/lib/data/projects";
 import { getProjectFrontmatter } from "@/lib/projects";
 
@@ -50,7 +49,7 @@ const postItems: IndexListItem[] = posts.map((post) => {
     date: post.date,
     path: post.path,
     icon: <Icon aria-hidden strokeWidth={1} className="opacity-72" />,
-    viewTransitionName: pageTitleTransitionName("post", post.id),
+    // viewTransitionName: pageTitleTransitionName("post", post.id),
     tags: post.category ? (
       <Badge
         variant={"inherit"}
@@ -82,7 +81,7 @@ export default async function Home() {
           date: project.date,
           path: project.path,
           icon: project.icon,
-          viewTransitionName: pageTitleTransitionName("project", slug),
+          // viewTransitionName: pageTitleTransitionName("project", slug),
         };
       })
   );
@@ -96,7 +95,7 @@ export default async function Home() {
             <br /> Weisbecker
           </h1>
           <HomePortrait />
-          <div className="w-full space-y-3.5 text-base max-sm:col-span-2">
+          <div className="w-full space-y-3.5 text-base text-muted-foreground max-sm:col-span-2">
             <p className="text-pretty">
               You can call me{" "}
               <Popover>
@@ -165,40 +164,33 @@ export default async function Home() {
         <h2 className="mb-3 font-pixel text-[11px]/none whitespace-pre uppercase" id="projects">
           I. Work
         </h2>
-        <IndexList items={projectItems} transitionTypes={NAV_FORWARD_TRANSITION} />
+        <IndexList items={projectItems} />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="font-pixel text-[11px] uppercase" id="resources">
           II. Posts
         </h2>
-        <IndexList items={postItems} maxVisibleItems={3} transitionTypes={NAV_FORWARD_TRANSITION} />
-      </section>
-
-      <section>
-        <h2 className="mb-3 font-pixel text-[11px] uppercase" id="art">
-          III. Art
-        </h2>
-        <ArtCards />
+        <IndexList items={postItems} maxVisibleItems={3} />
       </section>
 
       <section className="flex flex-col gap-5">
         <div className="mb-3 flex w-full items-center justify-between gap-2">
           <h2 className="font-pixel text-[11px] uppercase" id="resources">
-            IV. Resources
+            III. Resources
           </h2>
           <span className="ease text-sm text-muted-foreground opacity-72 hover:opacity-100">
             View on <LinkOut href="https://www.figma.com/@yobob" text="Figma" />
           </span>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {resources.map((resource) => (
             <Card
               key={resource.id}
               size="sm"
               variant="muted"
-              className="group/resource relative gap-0.5 transition-shadow focus-within:ring-2 focus-within:ring-ring hover:outline hover:-outline-offset-1 hover:outline-primary"
+              className="group/resource relative gap-0.5 outline outline-border transition-shadow focus-within:ring-2 focus-within:ring-ring hover:-outline-offset-1 hover:outline-primary dark:outline-black"
             >
               <CardHeader>
                 <CardTitle className="truncate font-normal">
@@ -209,7 +201,7 @@ export default async function Home() {
                 <CardAction>
                   <div className="size-lh -me-0.5 -mt-px grid-stack self-center text-muted-foreground">
                     <PixelFigmaIcon
-                      scale={1.5}
+                      scale={1}
                       className="ease shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
                       aria-label="Figma Community"
                     />
@@ -217,7 +209,7 @@ export default async function Home() {
                       className="ease shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
                       aria-hidden
                     >
-                      <PixelExternalIcon scale={1.5} />
+                      <PixelExternalIcon scale={1} />
                     </span>
                   </div>
                 </CardAction>
@@ -234,6 +226,13 @@ export default async function Home() {
             </Card>
           ))}
         </div>
+      </section>
+
+      <section>
+        <h2 className="mb-3 font-pixel text-[11px] uppercase" id="art">
+          IV. Art
+        </h2>
+        <ArtCards />
       </section>
 
       <section className="flex flex-col gap-3" id="about">
@@ -526,7 +525,7 @@ export default async function Home() {
               <TreeIconClaude className="size-4" />
               Claude, and{" "}
               <span className="inline-flex size-4 items-center justify-center rounded-sm bg-white p-0.5 shadow-button">
-                <CodexIcon className="squircle size-3 fill-indigo-400" />
+                <CodexIcon className="size-3 fill-indigo-400 squircle" />
               </span>
               Codex
             </span>

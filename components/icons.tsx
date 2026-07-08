@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 
 export function Favicon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -9,9 +10,9 @@ export function Favicon(props: React.SVGProps<SVGSVGElement>) {
         stroke="var(--primary)"
         strokeLinecap="square"
       />
-      <rect x={1} y={1} width={2} height={2} rx={1} fill="var(--color-error)" />
-      <rect x={4} y={1} width={2} height={2} rx={1} fill="var(--color-warning)" />
-      <rect x={7} y={1} width={2} height={2} rx={1} fill="var(--color-success)" />
+      <rect x={1} y={1} width={2} height={2} rx={1} fill="var(--error-400)" />
+      <rect x={4} y={1} width={2} height={2} rx={1} fill="var(--warning-400)" />
+      <rect x={7} y={1} width={2} height={2} rx={1} fill="var(--success-400)" />
       <path
         d="M1 5C1 4.45 1.45 4 2 4H14C14.55 4 15 4.45 15 5V10C15 12.76 12.76 15 10 15H4C2.34 15 1 13.66 1 12V5Z"
         fill="var(--secondary)"
@@ -246,13 +247,111 @@ export function ClipboardIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg width={16} height={16} viewBox="0 0 16 16" fill="currentColor" {...props}>
       <path
-        opacity="0.5"
+        opacity="0.3"
         d="M12 3.27C12.6 3.62 13 4.26 13 5V12C13 13.1 12.1 14 11 14H5C3.9 14 3 13.1 3 12V5C3 4.26 3.4 3.62 4 3.27V3.45C4 3.72 4.05 4.09 4.3 4.43C4.74 5.04 5.82 6 8 6C10.18 6 11.26 5.04 11.7 4.43C11.95 4.09 12 3.72 12 3.45V3.27Z"
         fill="currentColor"
       />
       <path
         d="M11 2.83V3.56C11 3.63 10.99 3.7 10.95 3.76C10.76 4.06 10.01 5 8 5C5.99 5 5.24 4.06 5.05 3.76C5.01 3.7 5 3.63 5 3.56V2.83C5 2.56 5.22 2.33 5.5 2.33H6.06C6.3 2.33 6.5 2.13 6.5 1.89C6.5 1.4 6.9 1 7.39 1H8.61C9.1 1 9.5 1.4 9.5 1.89C9.5 2.13 9.7 2.33 9.94 2.33H10.5C10.78 2.33 11 2.56 11 2.83Z"
         fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function CursorBeachballIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props} className={cn("", className)}>
+      <path
+        d="M7.54556 3.04445C8.31902 3.14043 9.08644 3.38963 9.80387 3.80384C12.6736 5.4607 13.6569 9.13024 12 12C10.3432 9.13024 6.67363 8.14699 3.80387 9.80384C3.08748 10.2175 2.48865 10.7565 2.0191 11.3772C2.24379 7.72055 4.43358 4.59534 7.54556 3.04445Z"
+        fill="url(#paint0_linear_6313_24499)"
+      />
+      <path
+        d="M2.01911 11.3772C2.48865 10.7565 3.08748 10.2175 3.80388 9.80384C6.67363 8.14699 10.3432 9.13024 12 12C8.68632 12 6.00003 14.6863 6.00003 18C6.00003 18.8277 6.16763 19.6162 6.47074 20.3336C3.77604 18.5421 2.00003 15.4784 2.00003 12C2.00003 11.7908 2.00645 11.5832 2.01911 11.3772Z"
+        fill="url(#paint1_linear_6313_24499)"
+      />
+      <path
+        d="M6.47074 20.3336C6.16763 19.6163 6.00003 18.8277 6.00003 18C6.00003 14.6863 8.68632 12 12 12C10.3432 14.8698 11.3264 18.5393 14.1962 20.1962C14.9136 20.6104 15.681 20.8596 16.4545 20.9555C15.1132 21.624 13.6005 22 12 22C9.95563 22 8.05451 21.3865 6.47074 20.3336Z"
+        fill="url(#paint2_linear_6313_24499)"
+      />
+      <path
+        d="M16.4545 20.9555C15.681 20.8596 14.9136 20.6104 14.1962 20.1962C11.3264 18.5393 10.3432 14.8698 12 12C13.6569 14.8698 17.3264 15.853 20.1962 14.1962C20.9126 13.7825 21.5114 13.2435 21.981 12.6228C21.7563 16.2794 19.5665 19.4047 16.4545 20.9555Z"
+        fill="url(#paint3_linear_6313_24499)"
+      />
+      <path
+        d="M21.981 12.6228C21.5114 13.2435 20.9126 13.7825 20.1962 14.1962C17.3264 15.853 13.6569 14.8698 12 12C15.3137 12 18 9.31371 18 6.00001C18 5.17231 17.8324 4.38375 17.5293 3.66643C20.224 5.45793 22 8.52156 22 12C22 12.2092 21.9936 12.4168 21.981 12.6228Z"
+        fill="url(#paint4_linear_6313_24499)"
+      />
+      <path
+        d="M17.5293 3.66642C17.8324 4.38375 18 5.1723 18 6C18 9.31371 15.3137 12 12 12C13.6569 9.13024 12.6736 5.4607 9.80388 3.80385C9.08644 3.38964 8.31902 3.14043 7.54556 3.04445C8.8869 2.37599 10.3996 2 12 2C14.0444 2 15.9455 2.61349 17.5293 3.66642Z"
+        fill="url(#paint5_linear_6313_24499)"
+      />
+      <defs>
+        <linearGradient id="paint0_linear_6313_24499" x1="541.308" y1="3.04445" x2="541.308" y2="898.599" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FFD305" style={{ stopColor: "color(display-p3 1.0000 0.8275 0.0196)", stopOpacity: 1 }} />
+          <stop offset={1} stopColor="#FDCF01" style={{ stopColor: "color(display-p3 0.9922 0.8118 0.0039)", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint1_linear_6313_24499" x1={502} y1="8.99899" x2={502} y2="1142.46" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#52CF30" style={{ stopColor: "color(display-p3 0.3216 0.8118 0.1882)", stopOpacity: 1 }} />
+          <stop offset={1} stopColor="#3BBD1C" style={{ stopColor: "color(display-p3 0.2314 0.7412 0.1098)", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint2_linear_6313_24499" x1="528.723" y1={12} x2="528.723" y2={1012} gradientUnits="userSpaceOnUse">
+          <stop stopColor="#14ADF6" style={{ stopColor: "color(display-p3 0.0784 0.6784 0.9647)", stopOpacity: 1 }} />
+          <stop offset={1} stopColor="#1191F4" style={{ stopColor: "color(display-p3 0.0667 0.5686 0.9569)", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint3_linear_6313_24499" x1="550.484" y1={12} x2="550.484" y2="907.555" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#CA70E1" style={{ stopColor: "color(display-p3 0.7922 0.4392 0.8824)", stopOpacity: 1 }} />
+          <stop offset={1} stopColor="#B452CB" style={{ stopColor: "color(display-p3 0.7059 0.3216 0.7961)", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint4_linear_6313_24499" x1={512} y1="3.66643" x2={512} y2="1137.12" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FF645D" style={{ stopColor: "color(display-p3 1.0000 0.3922 0.3647)", stopOpacity: 1 }} />
+          <stop offset={1} stopColor="#FF4332" style={{ stopColor: "color(display-p3 1.0000 0.2627 0.1961)", stopOpacity: 1 }} />
+        </linearGradient>
+        <linearGradient id="paint5_linear_6313_24499" x1="530.269" y1={2} x2="530.269" y2={1002} gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FBB114" style={{ stopColor: "color(display-p3 0.9843 0.6941 0.0784)", stopOpacity: 1 }} />
+          <stop offset={1} stopColor="#FF9508" style={{ stopColor: "color(display-p3 1.0000 0.5843 0.0314)", stopOpacity: 1 }} />
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}
+
+export function CursorEwResizeIcon({ className, ...props }: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width={24}
+      height={24}
+      viewBox="0 0 24 24"
+      fill="none"
+      {...props}
+      className={cn("-translate-y-px drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]", className)}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M15.4594 8C15.6844 8.001 15.9104 8.054 16.1124 8.155L21.6204 10.91C22.1184 11.159 22.4284 11.66 22.4284 12.217C22.4284 12.774 22.1184 13.275 21.6204 13.524L16.1124 16.279C15.9104 16.38 15.6844 16.434 15.4594 16.434C14.6534 16.434 13.9984 15.778 13.9984 14.972V9.462C13.9984 9.062 14.1564 8.687 14.4444 8.411C14.7184 8.146 15.0794 8 15.4594 8ZM8.53601 8.001C9.34201 8.001 9.99801 8.656 9.99801 9.463V14.972C9.99801 15.778 9.34301 16.434 8.53601 16.434C8.31101 16.434 8.08601 16.38 7.88301 16.279L2.37801 13.524C1.88001 13.275 1.57001 12.774 1.57001 12.217C1.57001 11.66 1.88001 11.159 2.37801 10.91L7.88301 8.155C8.08501 8.054 8.31101 8.001 8.53601 8.001Z"
+        fill="white"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21.1733 11.8049L15.6653 9.04988C15.3583 8.89688 14.9983 9.11988 14.9983 9.46288V14.9719C14.9983 15.3149 15.3583 15.5379 15.6653 15.3849L21.1733 12.6299C21.5133 12.4599 21.5133 11.9749 21.1733 11.8049ZM2.82519 12.6298L8.33019 15.3848C8.63719 15.5378 8.99819 15.3148 8.99819 14.9718V9.46278C8.99819 9.11978 8.63719 8.89678 8.33019 9.04978L2.82519 11.8048C2.48519 11.9748 2.48519 12.4598 2.82519 12.6298Z"
+        fill="black"
+      />
+    </svg>
+  );
+}
+
+export function CursorArrowIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="{24}" height="{24}" viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M3.08179 5.38086C2.66391 4.01599 3.88859 2.73508 5.2478 3.04785L5.37964 3.08301L19.6599 7.45312H19.6609L19.8757 7.52832C21.3735 8.13872 21.3905 10.3278 19.8279 10.9375L14.1843 13.1396L14.1765 13.1426C13.9407 13.2358 13.7287 13.3767 13.5525 13.5527H13.5515C13.4158 13.6885 13.3031 13.8442 13.2166 14.0127L13.1394 14.1855L10.9373 19.8291H10.9363C10.3033 21.4535 7.97391 21.367 7.46362 19.6992V19.6982L3.08179 5.38086Z"
+        fill="canvas"
+        stroke="currentColor"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -509,8 +608,8 @@ export function BatteryIcon(props: React.ComponentProps<"svg">) {
 
 export function PlayIcon(props: React.ComponentProps<"svg">) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" {...props}>
-      <path d="m14 22.59v-9.17c0-.93.56-1.42 1.26-1.42.38 0 .63.06.97.27l7.47 4.4c.66.39 1.02.71 1.02 1.32 0 .62-.36.93-1.02 1.33l-7.47 4.4c-.34.21-.58.27-.97.27-.7 0-1.26-.47-1.26-1.41" />
+    <svg width={16} height={16} viewBox="0 0 16 16" fill="currentColor" {...props}>
+      <path d="M3 3.732a1.5 1.5 0 0 1 2.305-1.265l6.706 4.267a1.5 1.5 0 0 1 0 2.531l-6.706 4.268A1.5 1.5 0 0 1 3 12.267V3.732Z" />
     </svg>
   );
 }

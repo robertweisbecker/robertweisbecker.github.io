@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
 @import "tw-animate-css";
-@import "dither-plugin";
 @import "./colors.css";
 @import "./mdx.css" layer(components);
 @import "./syntax.css" layer(components);
@@ -29,7 +28,7 @@
   --font-sans: system-ui, ui-sans-serif, sans-serif;
   --font-heading: var(--font-display), var(--font-sans);
   --font-heading--font-variation-settings: "SERF" 30, "wght" 680, "slnt" -5;
-  --font-heading--font-feature-settings: "ss01", "ss02", "calt", "dlig";
+  --font-heading--font-feature-settings: "ss01" 0, "ss02" 0, "calt", "dlig";
   --font-serif: var(--font-heading), Georgia, ui-serif, serif;
   --font-pixel: var(--font-departure-mono), "DepartureMono", ui-monospace, monospace;
 
@@ -127,6 +126,8 @@
   --text-md--letter-spacing: -0.005em;
 
   --spacing: calc(var(--density, 1) * 0.25rem);
+
+  --color-button-bg: var(--button-bg);
 }
 
 /* Not themeable, so not regenerated under data-theme */
@@ -157,12 +158,12 @@
   --background: var(--neutral-50);
   --foreground: var(--neutral-700);
   --card: --alpha(var(--color-white) / 98%);
-  --card-foreground: var(--neutral-800);
+  --card-foreground: var(--neutral-600);
   --popover: var(--neutral-25);
-  --popover-foreground: var(--foreground);
+  --popover-foreground: var(--neutral-900);
   --primary: var(--hue-500);
   --primary-foreground: var(--hue-25);
-  --secondary: var(--hue-100);
+  --secondary: var(--hue-200);
   --secondary-foreground: var(--hue-700);
   --muted: --alpha(var(--neutral-600) / 6%);
   /* --muted: var(--neutral-75); */
@@ -202,9 +203,10 @@
   --popover-shadow:
     0 0 0 1px var(--border), inset 0 1px hsl(0 0 100% / 50%), inset 0 1px 2px 1px hsl(0 0 100% / 20%),
     0 10px 28px hsl(0 0 0% / 12%), 0 24px 68px hsl(0 0 0% / 0.08), var(--shadow-lg);
+
   --shadow-button-inset:
     inset 0 1.5px 0 0 --alpha(currentColor / 20%), inset 0 0 0 1.5px --alpha(currentColor / 10%),
-    inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, hsl(0 0 0% / 30%));
+    inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, var(--tw-shadow-color));
   --shadow-button-inset-pressed: inset 0 2px 0 0px hsl(0 0 0% / 10%), inset 0 0 0 1px hsl(0 0 0% / 10%);
 }
 
@@ -225,19 +227,19 @@
 .dark [data-theme] {
   --background: var(--neutral-975);
   --foreground: var(--neutral-100);
-  --card: var(--neutral-950);
+  --card: var(--neutral-900);
   --card-foreground: var(--neutral-300);
-  --popover: var(--neutral-900);
+  --popover: var(--neutral-800);
   --popover-foreground: var(--neutral-50);
   --primary: var(--hue-500);
   --primary-foreground: var(--hue-50);
   --secondary: var(--hue-800);
   --secondary-foreground: var(--hue-200);
-  --muted: --alpha(var(--color-neutral-600) / 25%);
+  --muted: --alpha(var(--color-neutral-700) / 25%);
   --muted-foreground: var(--neutral-400);
   --accent: --alpha(var(--neutral-500) / 10%);
   --accent-foreground: var(--neutral-100);
-  --destructive: var(--error-600);
+  --destructive: var(--error-500);
   --destructive-foreground: var(--error-25);
   --error: var(--error-900);
   --error-foreground: var(--error-300);
@@ -288,8 +290,8 @@
   [data-hue="sand"],
   [data-hue="sage"],
   [data-hue="steel"] {
-    --primary: var(--hue-100);
-    --primary-foreground: var(--hue-900);
+    --primary: var(--hue-200);
+    --primary-foreground: var(--hue-800);
   }
 }
 
@@ -302,7 +304,7 @@
   /* Safari workarounds */
   html {
     background-color: var(--background);
-    color-scheme: light;
+    /* color-scheme: light; */
     overflow-x: clip;
   }
   html.dark {
@@ -329,6 +331,9 @@
     /* eslint-disable-next-line css/no-unknown-properties */
     /* prettier-ignore */
     corner-shape: initial;
+  }
+  .font-pixel {
+    font-synthesis: initial;
   }
 }
 
@@ -538,7 +543,7 @@ mark[data-hue],
 }
 
 @utility ui-popup {
-  @apply rounded-xl bg-popover/80 text-popover-foreground shadow-popover backdrop-blur-2xl;
+  @apply rounded-xl bg-popover/80 text-popover-foreground shadow-popover backdrop-blur-lg squircle;
 }
 
 @utility shadow-button {
@@ -560,7 +565,7 @@ mark[data-hue],
   }
 }
 
-.squircle {
+@utility squircle {
   @supports (corner-shape: squircle) {
     corner-shape: superellipse(1.4);
     --ellipse-factor: 1.4;
@@ -691,5 +696,5 @@ mark[data-hue],
 }
 
 @utility bg-glass {
-  @apply relative rounded-full border-0! bg-[rgba(248,240,248,0.3)] shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),0px_0px_0px_0.5px_--alpha(var(--foreground)/14%),0px_8px_6px_-4px_color-mix(in_srgb,var(--muted-foreground)_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.24),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,.33),inset_0px_-1px_2px_rgba(255,255,255,0.4),inset_0px_6px_7px_4px_rgba(0,0,0,0.04)] [backdrop-filter:blur(1.5px)_saturate(1.5)_brightness(1.1)] before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/50 before:mix-blend-hard-light before:blur-[2px] after:pointer-events-none after:absolute after:inset-x-px after:inset-y-1 after:-z-1 after:translate-y-1/2 after:scale-x-90 after:rounded-[inherit] after:rounded-t-none after:bg-linear-to-b after:from-popover/0 after:to-white/30 after:mix-blend-hard-light after:blur-sm dark:bg-popover/60 dark:ring-[0.5px] dark:ring-background;
+  @apply relative rounded-2xl border-0! bg-popover/5 [background-blend-mode:luminosity,plus-lighter,normal,normal] shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),0px_0px_0px_0.5px_--alpha(var(--foreground)/14%),0px_8px_10px_-4px_color-mix(in_srgb,var(--muted-foreground)_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.24),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,.33),inset_0px_-1px_2px_rgba(255,255,255,0.4),inset_0px_12px_7px_12px_rgba(0,0,0,0.04)] [backdrop-filter:blur(2px)_saturate(1.5)_contrast(.8)_brightness(1.1)] before:pointer-events-none before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-difference before:blur-xs after:pointer-events-none after:absolute after:inset-x-px after:inset-y-1 after:-z-1 after:translate-y-1/2 after:scale-x-90 after:rounded-[inherit] after:rounded-t-none after:bg-linear-to-b after:via-card/20 after:mix-blend-hard-light after:blur-sm dark:bg-popover/40 dark:ring-[0.5px] dark:ring-background;
 }

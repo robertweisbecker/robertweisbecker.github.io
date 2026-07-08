@@ -19,7 +19,7 @@ function HeaderLinkButton({ label, icon, mobileIconOnly = false, className, ...p
       variant="ghost"
       rounded={true}
       size="sm"
-      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "text-2xs uppercase font-pixel", className)}
+      className={cn(mobileIconOnly && "max-md:size-button max-md:gap-0", "font-pixel text-2xs uppercase", className)}
       {...props}
     >
       {icon && (

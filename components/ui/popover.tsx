@@ -92,7 +92,7 @@ function PopoverFooter({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="popover-footer"
       className={cn(
-        "squircle -mx-(--popover-padding) -mb-(--popover-padding) flex items-center gap-1 rounded-b-[inherit] px-(--popover-padding) pt-[calc(var(--popover-padding)/1.5)] pb-(--popover-padding) text-current/80",
+        "-mx-(--popover-padding) -mb-(--popover-padding) flex items-center gap-1 rounded-b-[inherit] px-(--popover-padding) pt-[calc(var(--popover-padding)/1.5)] pb-(--popover-padding) text-current/80 squircle",
         className
       )}
       {...props}

@@ -25,8 +25,8 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
   if (mode === "comparison") {
     return (
       <figure className="not-prose flex flex-col justify-center">
-        <ResizablePanelGroup className="squircle relative aspect-video rounded-xl" orientation="horizontal">
-          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="squircle group relative rounded-s-xl rounded-e-xs">
+        <ResizablePanelGroup className="relative aspect-video rounded-xl squircle" orientation="horizontal">
+          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="group relative rounded-s-xl rounded-e-xs squircle">
             <NextImage src={before} className="h-full w-auto max-w-none object-cover object-left" alt="" />
             <Badge
               variant="outline"
@@ -36,8 +36,8 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
             </Badge>
           </ResizablePanel>
           <ResizableHandle withHandle />
-          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="squircle group relative rounded-s-xs rounded-e-xl">
-            <NextImage src={after} className="h-full w-auto max-w-none object-cover object-right" alt="" />
+          <ResizablePanel defaultSize="50%" minSize="0%" maxSize="100%" className="group relative rounded-s-xs rounded-e-xl squircle">
+            <NextImage src={after} className="absolute right-0 h-full w-auto max-w-none object-cover object-right" alt="" />
             <Badge
               variant="outline"
               className="absolute top-2 right-2 z-1 translate-y-0.5 opacity-0 transition-[translate,opacity] duration-100 ease-out group-hover:translate-0 group-hover:opacity-100"
@@ -53,13 +53,8 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
   if (mode === "slider") {
     return (
       <figure className="not-prose flex flex-col justify-center">
-        <div className="relative overflow-hidden rounded-md">
-          <NextImage
-            src={before}
-            className="h-auto w-full"
-            // style={{ opacity: 1 - sliderValue / 100 }}
-            alt="Before image"
-          />
+        <div className="relative overflow-hidden rounded-2xl">
+          <NextImage src={before} className="h-auto w-full" alt="Before image" />
           <NextImage
             src={after}
             className="absolute inset-0 z-1 h-full w-full object-cover"
@@ -67,7 +62,7 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
             alt="After image"
           />
         </div>
-        <figcaption className="mx-auto grid w-full max-w-sm flex-1 grid-cols-[auto_1fr_auto] items-center gap-4 p-3 text-xs text-muted-foreground">
+        <figcaption className="mx-auto grid w-full max-w-xs flex-1 grid-cols-[auto_1fr_auto] items-center gap-4 p-3 text-xs text-muted-foreground">
           <p>{tab1}</p>
           <Slider
             min={0}

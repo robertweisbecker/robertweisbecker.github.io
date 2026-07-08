@@ -32,6 +32,7 @@ import chi2025 from "@/public/art/2025_chi.jpeg";
 import ruth2025 from "@/public/art/2025_ruth.jpeg";
 import sprayBasquiat2010 from "@/public/art/2010_spray-basquiat.jpeg";
 import sprayCig2010 from "@/public/art/2010_spray-cig.jpeg";
+import nana2026 from "@/public/art/2026_nana.jpeg";
 
 import { Artwork } from "./artwork";
 import { LinkOut } from "@/components/link-out";
@@ -94,6 +95,7 @@ export default function ArtPage() {
           </h2>
         </div>
         <section className="columns-2 gap-4 md:columns-3">
+          <Artwork year={2025} src={nana2026} title="Nancy" medium="digital" loading="eager" />
           <Artwork year={2025} src={br2025} title="Brent and Nellie" medium="digital" loading="eager" />
           <Artwork year={2020} src={gr2020} title="Chita" medium="digital" loading="eager" />
           <Artwork year={2025} src={at2025} title="Ashtyn" medium="digital" loading="eager" />
@@ -111,8 +113,8 @@ export default function ArtPage() {
           </h2>
         </div>
         <section className="columns-2 gap-4">
-          <Artwork year={2025} src={chi2025} title="Harold Washington Library, Chicago" medium="digital" />
-          <Artwork year={2022} src={cm2022} title="937 Beach" medium="digital" />
+          <Artwork year={2025} src={chi2025} title="Library, Chicago" medium="digital" />
+          <Artwork year={2022} src={cm2022} title="937" medium="digital" />
         </section>
 
         <div className="relative">

@@ -9,11 +9,10 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import { PixelEyeIcon, PixelNewspaperIcon, PixelPointerIcon, PixelScribbleIcon, PixelUserIcon } from "@/components/icons-pixel";
 import { PixelMorph } from "@/components/pixel-morph";
-import { type HeaderMenuProject } from "@/components/header/menu-data";
+import { type HeaderMenuProject } from "@/lib/data/menu";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { responsiveNavButtonSize } from "@/components/ui/button-variants";
 import { DataList, DataListItem, DataListLabel, DataListValue } from "@/components/ui/data-list";
 import {
   DropdownMenu,
@@ -26,6 +25,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { PreviewCardGroup, PreviewCardPrimitive, PreviewCardTrigger } from "@/components/ui/preview-card";
+
+const responsiveNavButtonSize = "max-md:h-button max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";
 
 type WorkMenuProps = {
   projects: HeaderMenuProject[];
@@ -53,7 +54,16 @@ export function WorkMenu({ projects }: WorkMenuProps) {
           }
         }}
       >
-        <DropdownMenuTrigger render={<Button variant="ghost" size="sm" rounded className={cn(responsiveNavButtonSize, "group/trigger font-pixel text-2xs uppercase")} />}>
+        <DropdownMenuTrigger
+          render={
+            <Button
+              variant="ghost"
+              size="sm"
+              rounded
+              className={cn(responsiveNavButtonSize, "group/trigger font-pixel text-2xs uppercase")}
+            />
+          }
+        >
           <span className="max-md:hidden">Work</span>
           <span className="md:hidden">Menu</span>
           <PixelMorph
@@ -110,7 +120,6 @@ export function WorkMenu({ projects }: WorkMenuProps) {
           <DropdownMenuSeparator className="md:hidden" />
           <DropdownMenuGroup>
             <DropdownMenuLabel>Projects</DropdownMenuLabel>
-
             {projects.map((project) => (
               <PreviewCardTrigger
                 key={project.id}

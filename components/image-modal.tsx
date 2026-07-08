@@ -113,7 +113,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
           aria-label="View fullscreen image"
           className={cn(
             "group/trigger block w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
-            "sm:squircle relative bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1"
+            "relative bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1 sm:squircle"
           )}
         >
           <NextImage
@@ -121,12 +121,12 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             sizes="(max-width: 768px) 100vw, 720px"
-            className="sm:squircle h-auto w-full outline -outline-offset-1 outline-border/50 sm:rounded-[calc(var(--radius-2xl)-(--spacing(1)))]"
+            className="h-auto w-full outline -outline-offset-1 outline-border/50 sm:rounded-[calc(var(--radius-2xl)-(--spacing(1)))] sm:squircle"
           />
           <span
             aria-hidden
             className={cn(
-              buttonVariants({ variant: "overlay", size: "icon-sm", rounded: true }),
+              buttonVariants({ variant: "glass", size: "icon-sm", rounded: true }),
               "absolute inset-e-3 bottom-3 cursor-default"
             )}
           >
@@ -168,11 +168,11 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             <DialogBase.Close
               aria-label="Close image preview"
               className="absolute inset-e-3 top-3 z-10"
-              render={<Button variant="overlay" size="icon-sm" rounded />}
+              render={<Button variant="glass" size="icon-sm" rounded />}
             >
               <IconX />
             </DialogBase.Close>
-            <div className="absolute top-2 left-1/2 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-neutral-400/60 shadow-border-xs ring-[0.5px] inset-shadow-xs inset-ring-[0.5px] ring-black/50 inset-shadow-white/10 inset-ring-white/2 backdrop-blur-md"></div>
+            {/* <div className="absolute top-2 left-1/2 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-neutral-400/60 shadow-border-xs ring-[0.5px] inset-shadow-xs inset-ring-[0.5px] ring-black/50 inset-shadow-white/10 inset-ring-white/2 backdrop-blur-md"></div> */}
           </DialogBase.Popup>
         </DialogBase.Viewport>
       </DialogBase.Portal>
@@ -193,7 +193,7 @@ export function ImageModalDrawer({ src, caption }: ImageModalProps) {
                 src={src}
                 alt={typeof caption === "string" ? caption : ""}
                 sizes="(max-width: 768px) 100vw, 720px"
-                className="sm:squircle h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))]"
+                className="h-auto w-full sm:rounded-[calc(var(--radius-xl)---spacing(1))] sm:squircle"
               />
             </DrawerBase.Trigger>
             <DrawerBase.Portal>

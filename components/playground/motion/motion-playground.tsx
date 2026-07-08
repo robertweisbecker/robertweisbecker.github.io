@@ -22,7 +22,7 @@ function DemoLoadingMarker() {
       <MarkerIcon>
         <Loader className="text-primary" />
       </MarkerIcon>
-      <MarkerContent className="shimmer shimmer-color-foreground shimmer-duration-1400">Loading demo&hellip;</MarkerContent>
+      <MarkerContent className="shimmer shimmer-duration-1400">Loading demo&hellip;</MarkerContent>
     </Marker>
   );
 }
@@ -81,7 +81,7 @@ export function MotionPlayground() {
           className="lg:col-span-full"
           innerClass="min-h-[300px]"
           controls={
-            <Button size="xs" variant="ghost" onClick={() => setResetKey((key) => key + 1)}>
+            <Button size="sm" variant="ghost" onClick={() => setResetKey((key) => key + 1)}>
               Replay
               <PixelRedoIcon data-icon="inline-end" />
             </Button>
@@ -118,7 +118,7 @@ export function MotionPlayground() {
         >
           <EmojiFeedbackDemo />
         </DemoContainer>
-        <DemoContainer title="Motion chart" description="Hover to animate" variant="muted" centerContent className="lg:col-span-full">
+        <DemoContainer title="Motion chart" description="Hover to animate" variant="muted" centerContent className="lg:col-span-4">
           <ChartDemo />
         </DemoContainer>
         <DemoContainer title="ColorCode" description="Click to copy" variant="muted" centerContent className="lg:col-span-full">

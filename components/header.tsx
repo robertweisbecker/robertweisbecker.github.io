@@ -1,8 +1,8 @@
-import { HomeLink } from "@/components/header/home-link";
-import { toHeaderMenuProjects } from "@/components/header/menu-data";
-import { NavLinks } from "@/components/header/nav-links";
-import { ThemeActions } from "@/components/header/theme-actions";
-import { WorkMenu } from "@/components/header/work-menu";
+import { HeaderHome } from "@/components/header/header-link";
+import { toHeaderMenuProjects } from "@/lib/data/menu";
+import { NavLinks } from "@/components/header/header-group";
+import { ThemeActions } from "@/components/header/header-theme-control";
+import { WorkMenu } from "@/components/header/header-menu";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,7 @@ export function Header() {
   return (
     <nav className={cn("sticky top-0 isolate z-50 bg-linear-to-b from-[canvas]")} style={{ viewTransitionName: "site-header" }}>
       <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 px-2 py-2 max-sm:px-2">
-        <HomeLink />
+        <HeaderHome />
         <div className="me-auto" />
         <WorkMenu projects={menuProjects} />
         <NavLinks />

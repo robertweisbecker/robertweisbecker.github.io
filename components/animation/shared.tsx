@@ -131,7 +131,7 @@ export function PixelReveal({
           variant="secondary"
           className={cn(
             isAnimating && "hidden",
-            "squircle absolute inset-e-1 bottom-1 scale-95 opacity-0 transition-transform duration-100 ease-out-quad group-hover:scale-100 group-hover:opacity-100"
+            "absolute inset-e-1 bottom-1 scale-95 opacity-0 transition-transform duration-100 ease-out-quad squircle group-hover:scale-100 group-hover:opacity-100"
           )}
         >
           <IconRotateClockwise />

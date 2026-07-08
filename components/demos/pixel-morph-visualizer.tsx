@@ -653,7 +653,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
 
           <ScrollArea className="w-full max-sm:h-64" scrollbarGutter showScrollbar scrollFade innerClass="border-t border-s">
             <ToggleGrid
-              columns={12}
+              columns={8}
               spacing={0}
               shape="square"
               value={activeIcon ? [activeIcon] : []}

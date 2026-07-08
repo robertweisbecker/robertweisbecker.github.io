@@ -1,6 +1,6 @@
+import * as React from "react";
 import { Heading } from "@/components/ui/heading";
 import { cn } from "@/lib/utils";
-import * as React from "react";
 
 type SectionProps = React.ComponentProps<"section"> & {
   title: React.ReactNode;
@@ -39,7 +39,14 @@ export function Section({
         {title}
       </Heading>
       {description ? <p className={cn("max-w-2xl text-sm text-muted-foreground", descriptionClassName)}>{description}</p> : null}
-      <div className={cn("flex w-full min-w-0 flex-col gap-4 rounded-lg border bg-muted/50 p-4", contentClassName)}>{children}</div>
+      <div
+        className={cn(
+          "flex w-full min-w-0 flex-col items-start gap-4 rounded-2xl bg-muted p-4 inset-shadow-border squircle",
+          contentClassName
+        )}
+      >
+        {children}
+      </div>
     </section>
   );
 }

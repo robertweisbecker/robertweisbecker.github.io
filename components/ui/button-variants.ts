@@ -7,7 +7,7 @@ export const iconClasses =
 
 export const buttonVariants = cva(
   [
-    "[--button-radius:var(--radius-md)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] ",
+    "[--button-radius:var(--radius-lg)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] ",
     "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:text-muted-foreground ",
     "not-[.w-full]:active:scale-[0.975] will-change-transform",
     "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[475]",
@@ -18,22 +18,28 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-(--button-bg)/90 to-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground backdrop-blur-[1px]",
+          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-white/8 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm shadow-primary/30 dark:inset-ring-foreground backdrop-blur-[2px] dark:shadow-border-sm",
           "active:shadow-xs active:inset-shadow-button-pressed",
-          "focus-visible:outline-offset-2  disabled:bg-none disabled:bg-muted",
+          "focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
+          // "outline-[0.5px] -outline-offset-[0.5px] outline-(--primary)",
         ],
         outline: [
-          "[--button-color:var(--foreground)] border bg-clip-padding hover:bg-accent text-foreground hover:text-accent-foreground aria-expanded:bg-accent/50 aria-expanded:text-accent-foreground aria-expanded:border-input hover:border-input",
+          "[--button-color:var(--foreground)] border border-b-input/60 bg-clip-padding hover:bg-accent text-(--button-color) hover:text-accent-foreground aria-expanded:bg-accent/50 aria-expanded:text-accent-foreground aria-expanded:border-input hover:border-input",
           "disabled:shadow-none disabled:bg-transparent disabled:border-muted",
         ],
         secondary:
           "[--button-color:var(--secondary-foreground)] bg-secondary text-secondary-foreground hover:bg-secondary/72 aria-expanded:bg-accent aria-expanded:text-accent-foreground",
         ghost:
-          "[--button-color:var(--foreground)] hover:bg-accent/50 active:bg-accent  hover:text-accent-foreground aria-expanded:text-accent-foreground aria-expanded:bg-accent disabled:bg-transparent aria-expanded:[&_svg]:opacity-100",
-        destructive:
-          "[--button-color:white] [--button-bg:var(--destructive)] bg-linear-to-b from-current/15 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--destructive)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground active:shadow-xs active:inset-shadow-button-pressed focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
-        success:
-          "[--button-color:white] bg-success-primary hover:bg-[oklch(from_var(--success-primary)_calc(l*.95)_calc(c*1.05)_h)] focus-visible:outline-success-primary focus-visible:outline-offset-2 text-white shadow-[color-mix(in_oklch,var(--success-primary),black)]/20 inset-shadow-button shadow-sm active:inset-shadow-button-pressed active:shadow-xs",
+          "[--button-color:var(--foreground)] hover:bg-accent/50 active:bg-accent  hover:text-accent-foreground open:text-accent-foreground open:bg-accent disabled:bg-transparent open:[&_svg]:opacity-100",
+        destructive: [
+          "[--button-color:white] [--button-bg:var(--destructive)]",
+          "bg-linear-to-b from-current/8 bg-(--button-bg) text-(--button-color) hover:bg-(--error-600) shadow-sm inset-shadow-button shadow-destructive/30 dark:inset-ring-foreground active:shadow-xs active:inset-shadow-button-pressed focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted [--ring:var(--destructive)]",
+          "outline-[0.5px] -outline-offset-[0.5px] outline-(--error-600)",
+        ],
+        success: [
+          "outline-[0.5px] -outline-offset-[0.5px] outline-(--success-600)",
+          "[--button-color:white] [--button-bg:var(--color-success-primary)] bg-linear-to-b from-current/8 bg-(--button-bg) hover:bg-(--success-600) [--ring:var(--success-primary)] focus-visible:outline-offset-2 text-(--button-color) inset-shadow-button shadow-sm shadow-success-primary/30 active:inset-shadow-button-pressed active:shadow-xs",
+        ],
         link: "[--button-color:var(--foreground)] disabled:bg-transparent cursor-pointer px-0.5 aria-expanded:text-accent-foreground aria-expanded:decoration-current has-data-[icon=inline-start]:ps-0 has-data-[icon=inline-end]:pe-0 has-data-icon:[&_svg]:opacity-50 has-data-icon:hover:[&_svg]:opacity-100  text-secondary-foreground after:absolute after:inset-y-[.25em] font-normal hover:after:bg-accent hover:decoration-current decoration-current/40 underline decoration-[round(.075em,.5px)] underline-offset-[.25em] after:rounded relative after:-inset-x-0.5 *:data-[icon=inline-start]:m-0!",
         "elevated-old":
           "[--button-color:var(--foreground)] text-foreground active:shadow-border-xs bg-card backdrop-blur-xs hover:bg-[color-mix(in_oklch,_var(--accent)_50%,var(--card))] active:bg-muted data-pressed:bg-muted shadow-border-sm data-pressed:inset-shadow-sm data-pressed:inset-ring data-pressed:inset-ring-border data-pressed:shadow-none aria-expanded:text-foreground inset-shadow-none transition-shadows",
@@ -55,8 +61,12 @@ export const buttonVariants = cva(
           "focus-visible:outline-offset-2",
         ],
         glass: [
-          "relative rounded-full! items-center [backdrop-filter:blur(1.5px)_saturate(1.5)_brightness(1.1)] bg-[rgba(248,240,248,0.1)] before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-hard-light before:blur-[2px]",
-          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_3px_-4px_color-mix(in_srgb,canvas_50%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)] after:inset-0 after:absolute after:inset-0 after:rounded-[inherit] after:-z-1 isolate",
+          "relative rounded-2xl items-center [backdrop-filter:blur(1.5px)_saturate(1.5)_contrast(.8)_brightness(1.1)] bg-popover/5 before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-difference before:blur-[2px]",
+          "bg-blend-[luminosity,plus-lighter,normal,normal]",
+          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_5px_-6px_color-mix(in_srgb,canvas_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
+          "after:pointer-events-none after:absolute after:inset-x-px after:inset-y-1 after:-z-1 after:translate-y-1/2 after:scale-x-90 after:rounded-[inherit] after:rounded-t-none after:bg-linear-to-b after:from-card/10 after:to-card/2 after:mix-blend-soft-light after:blur-sm",
+          "dark:bg-popover/60 dark:ring-[0.5px] dark:ring-background [&_svg]:text-neutral-500 [&_svg]:mix-blend-difference dark:[&_svg]:text-neutral-300",
+          "hover:scale-105",
         ],
         overlay: [
           "[--button-color:white] bg-neutral-700/60 hover:bg-neutral-700/70 backdrop-blur-xl text-white outline outline-white/10 ring-1 ring-black/60 -outline-offset-1 ",
@@ -65,8 +75,8 @@ export const buttonVariants = cva(
       },
       size: {
         md: "[--button-x:--spacing(3)] [--button-y:--spacing(2)] h-button",
-        xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-sm)] text-[0.6875rem]/4 gap-1",
-        sm: "h-button-sm [--button-x:--spacing(2.5)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)]  gap-(--spacing) text-sm",
+        xs: "h-button-xs [--button-x:--spacing(2)] [--button-y:--spacing(1)] text-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-md)] text-[0.6875rem]/4 gap-1",
+        sm: "h-button-sm [--button-x:--spacing(2.5)] [--button-y:--spacing(1.5)] [&_svg:not([class*='size-'])]:size-4 [--button-radius:var(--radius-md)] gap-(--spacing) text-sm",
         lg: "h-button-lg [--button-x:--spacing(3)] [--button-y:--spacing(2.5)] [--button-radius:var(--radius-lg)]  text-base",
         icon: "size-button [&_svg:not([class*='size-'])]:size-4",
         "icon-xs": "size-button-xs [&_svg:not([class*='size-'])]:size-3.5 [--button-radius:var(--radius-xs)]",
@@ -74,7 +84,7 @@ export const buttonVariants = cva(
         "icon-lg": "size-button-lg [--button-radius:var(--radius-lg)] [&_svg:not([class*='size-'])]:size-5",
       },
       rounded: {
-        true: "rounded-full before:rounded-full after:rounded-full",
+        true: "rounded-full! before:rounded-full! after:rounded-full!",
         false: "rounded-(--button-radius)",
       },
     },
@@ -97,7 +107,3 @@ export const buttonVariants = cva(
     },
   }
 );
-
-/** sm on md+, md dimensions on viewports below md */
-export const responsiveNavButtonSize =
-  "max-md:h-button max-md:[--button-x:--spacing(3)] max-md:[--button-y:--spacing(2)]";

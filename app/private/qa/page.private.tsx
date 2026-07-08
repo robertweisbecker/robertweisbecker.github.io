@@ -100,7 +100,7 @@ export default function QaPage() {
           </Heading>
           <Section title="Button" className="gap-4">
             <div className="flex flex-wrap gap-2">
-              <div className="squircle size-20 rounded-xl bg-destructive"></div>
+              <div className="size-20 rounded-xl bg-destructive squircle"></div>
               <button
                 type="button"
                 className="focus-visible:outline-focus flex items-center gap-x-2 rounded-md bg-popover px-3.5 py-[calc(5/16*1rem)] text-neutral-500 shadow-[0_1px_rgba(0,0,0,0.04),0_1px_5px_-4px_rgba(0,0,0,0.4),0_2px_5px_rgba(0,0,0,0.06)] ring-1 ring-neutral-900/10 outline-none dark:shadow-[0_-1px_rgba(255,255,255,0.06),0_4px_8px_rgba(0,0,0,0.05),0_1px_6px_-4px_#000] dark:ring-white/10"
@@ -385,7 +385,7 @@ export default function QaPage() {
           </Section>
           <Section title="Dropdown Menu">
             <DropdownMenu>
-              <DropdownMenuTrigger render={<Button variant="outline" />}>Open menu</DropdownMenuTrigger>
+              <DropdownMenuTrigger render={<Button variant="outline" className="justify-start" />}>Open menu</DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuGroup>
                   <DropdownMenuLabel>My account</DropdownMenuLabel>

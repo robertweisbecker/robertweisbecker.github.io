@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Favicon } from "@/components/icons";
 import { LinkButton } from "@/components/ui/link-button";
 
-export function HomeLink() {
+export function HeaderHome() {
   const pathname = usePathname();
 
   return (
@@ -13,7 +13,6 @@ export function HomeLink() {
       <Favicon className="size-4 text-secondary-foreground" data-icon="inline-start" />
 
       <span className="text-[11px]/[10px] max-sm:hidden">
-        {" "}
         bob
         <br />
         <span className="text-(--hue-500)">dot</span>

@@ -1,6 +1,6 @@
 export function MacAppIconDemo() {
   return (
-    <div className="squircle relative isolate flex size-24 items-center justify-center rounded-2xl bg-linear-to-b from-[#1F1E1E] to-[#0E0E0E] shadow-[inset_0px_-0.125px_0.6875px_-0.6875px_var(--color-white-alpha-400),_inset_0px_4px_0.33px_-3.75px_var(--color-white-alpha-400),_inset_0px_22px_5.5px_-17.5px_var(--color-white-alpha-200),_inset_-0.33px_-1.375px_0.6875px_-0.33px_var(--color-white-alpha-200),_inset_0.33px_1.3617px_0.6875px_-0.33px_var(--color-white-alpha-200),_inset_0px_0px_0.6875px_0.6875px_var(--border)] ring-[0.5px] ring-black/50 drop-shadow-lg drop-shadow-black/20">
+    <div className="relative isolate flex size-24 items-center justify-center rounded-2xl bg-linear-to-b from-[#1F1E1E] to-[#0E0E0E] shadow-[inset_0px_-0.125px_0.6875px_-0.6875px_var(--color-white-alpha-400),_inset_0px_4px_0.33px_-3.75px_var(--color-white-alpha-400),_inset_0px_22px_5.5px_-17.5px_var(--color-white-alpha-200),_inset_-0.33px_-1.375px_0.6875px_-0.33px_var(--color-white-alpha-200),_inset_0.33px_1.3617px_0.6875px_-0.33px_var(--color-white-alpha-200),_inset_0px_0px_0.6875px_0.6875px_var(--border)] ring-[0.5px] ring-black/50 drop-shadow-lg drop-shadow-black/20 squircle">
       <div className="aspect-square size-14 bg-conic/decreasing from-(--color-red-300) via-(--color-lime-200) to-(--color-red-300) mask-[url(#mask-0)]" />
       <svg width={0} height={0} xmlns="http://www.w3.org/2000/svg" id="icon-0" className="absolute">
         <defs>

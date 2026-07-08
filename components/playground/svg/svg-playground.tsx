@@ -16,7 +16,7 @@ const DvdLoaderDemo = dynamic(
 export function SvgPlayground() {
   return (
     <div className="flex w-full flex-col gap-14">
-      <PlaygroundSection id="svg" title="SVG">
+      <PlaygroundSection id="svg" title="SVG Animations">
         <DemoContainer title="DVD Loader" variant="muted" className="lg:col-span-full">
           <DvdLoaderDemo />
         </DemoContainer>

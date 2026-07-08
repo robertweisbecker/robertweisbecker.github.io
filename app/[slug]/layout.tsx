@@ -3,7 +3,6 @@ import { BackButton } from "@/components/back-button";
 import { Pagination } from "@/components/pagination";
 import { ProjectMeta } from "@/components/project-meta";
 import { TableOfContents } from "@/components/table-of-contents";
-import { NAV_BACK_TRANSITION, TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { projects } from "@/lib/data/projects";
 import { getProjectFrontmatter, getProjectToc } from "@/lib/projects";
 import { resolveNeighbors } from "@/lib/utils";
@@ -22,7 +21,6 @@ export default async function MDXLayout({ children, params }: { children: React.
       return getProjectFrontmatter(projectSlug).then((frontmatter) => ({
         title: frontmatter.title,
         path: project.path,
-        titleTransitionName: pageTitleTransitionName("project", projectSlug),
       }));
     })
   );
@@ -32,23 +30,19 @@ export default async function MDXLayout({ children, params }: { children: React.
   return (
     <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
       <aside id="toc" className="not-prose @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-32">
-        <BackButton href="/#projects" transitionTypes={NAV_BACK_TRANSITION}>
-          Back
-        </BackButton>
+        <BackButton href="/#projects">Back</BackButton>
 
         <TableOfContents toc={toc} title={fm.title} />
       </aside>
 
       <div id="content-max" className="col-start-2 min-w-0">
         <div id="content-header" className="mx-auto flex max-w-xl flex-col items-start gap-4">
-          <BackButton href="/#projects" className="mb-8 lg:hidden" transitionTypes={NAV_BACK_TRANSITION}>
+          <BackButton href="/#projects" className="mb-8 lg:hidden">
             Projects
           </BackButton>
 
-          <TitleMorph name={pageTitleTransitionName("project", slug)}>
-            <h1 className="scroll-mt-16 text-h1 text-balance">{fm.title}</h1>
-          </TitleMorph>
-          <p className="mb-4 max-w-prose text-base leading-tight text-balance text-muted-foreground">{fm.subtitle}</p>
+          <h1 className="scroll-mt-16 text-h1 text-balance">{fm.title}</h1>
+          <p className="mb-12 max-w-prose text-base leading-tight text-balance text-muted-foreground">{fm.subtitle}</p>
           <ProjectMeta
             role={fm.role}
             team={fm.team}

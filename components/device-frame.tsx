@@ -175,14 +175,24 @@ export interface BrowserProps extends React.ComponentProps<"div"> {
   address?: React.ReactNode;
   /** Add padding so content doesn't sit flush against the header */
   gutter?: boolean;
+  /** Show the copy button in the address bar */
+  copyButton?: boolean;
 }
 
-function Browser({ className, children, toolbar = true, address = "vercel.com", gutter = false, ...props }: BrowserProps) {
+function Browser({
+  className,
+  children,
+  toolbar = true,
+  address = "vercel.com",
+  gutter = false,
+  copyButton = true,
+  ...props
+}: BrowserProps) {
   return (
     <div data-slot="device-frame" className={cn("w-full", className)} {...props}>
       <div style={{ containerType: "inline-size" }}>
-        <div className="squircle overflow-hidden rounded-2xl bg-background shadow-border-md">
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 px-2 py-2.5 @md:px-3">
+        <div className="overflow-hidden rounded-2xl bg-popover shadow-border-md squircle">
+          <div className="flex min-h-button flex-wrap items-center gap-x-4 gap-y-2 px-2 py-2.5 @md:px-3">
             <div className="flex shrink-0 items-center gap-1.5 self-start pe-1 md:self-center md:ps-1">
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ff5f56] inset-ring inset-ring-border/50" />
               <div className="aspect-square size-3 shrink-0 rounded-full bg-[#ffbd2e] inset-ring inset-ring-border/50" />
@@ -203,14 +213,14 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
                   {/* <IconRefresh strokeWidth={2} className={"size-4 text-muted-foreground"} aria-hidden /> */}
                 </div>
 
-                <div className="squircle relative mx-auto flex h-button-sm max-w-md flex-1 items-center rounded-lg bg-card p-1 shadow-border-xs">
+                <div className="relative mx-auto flex h-button-sm max-w-md flex-1 items-center rounded-lg bg-card p-1 shadow-border-xs squircle">
                   <span className="flex min-w-0 flex-1 gap-[.25em] truncate px-1.5 text-xs text-muted-foreground/50">
                     https:// <span className="text-foreground">{address}</span>
                   </span>
-                  <CopyButton value={String(address)} size="icon-xs" className="squircle shrink-0 rounded-md" />
+                  {copyButton && <CopyButton value={String(address)} size="icon-xs" className="shrink-0 rounded-md squircle" />}
                 </div>
                 <div className="flex w-16 justify-end max-md:hidden md:me-1 @max-md:hidden">
-                  <IconDots className={cn("size-4 text-muted-foreground", "shrink-0")} aria-hidden />
+                  <IconDots className={cn("size-4 text-muted-foreground opacity-50", "shrink-0")} aria-hidden />
                 </div>
               </div>
             )}
@@ -224,3 +234,4 @@ function Browser({ className, children, toolbar = true, address = "vercel.com", 
 }
 
 export const DeviceFrame = { Phone, Browser };
+export { Browser, Phone };

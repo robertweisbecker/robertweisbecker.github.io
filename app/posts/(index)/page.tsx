@@ -1,7 +1,6 @@
 import { Alert, AlertTitle, AlertDescription, AlertContent } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemSeparator, ItemTitle } from "@/components/ui/item";
-import { NAV_FORWARD_TRANSITION, TitleMorph, pageTitleTransitionName } from "@/components/view-transitions";
 import { postIcons, posts, type PostIconName } from "@/lib/data/posts";
 import { cn } from "@/lib/utils";
 import { IconFile } from "@tabler/icons-react";
@@ -37,16 +36,12 @@ export default function PostsPage() {
       <ItemGroup className="animate-stagger-enter [--stagger:2]">
         {posts.map((post, index) => (
           <React.Fragment key={post.id}>
-            <Item render={<Link href={post.path} transitionTypes={NAV_FORWARD_TRANSITION} />} className="-mx-4">
+            <Item render={<Link href={post.path} />} className="-mx-4">
               <ItemMedia variant="image">
                 <PostListIcon name={post.icon} />
               </ItemMedia>
               <ItemContent>
-                <ItemTitle>
-                  <TitleMorph name={pageTitleTransitionName("post", post.id)}>
-                    <span className="inline-block w-fit">{post.title}</span>
-                  </TitleMorph>
-                </ItemTitle>
+                <ItemTitle>{post.title}</ItemTitle>
                 <ItemDescription>{post.description}</ItemDescription>
               </ItemContent>
               <ItemActions>

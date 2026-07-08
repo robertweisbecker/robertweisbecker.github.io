@@ -1,12 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Marker, MarkerContent } from "@/components/ui/marker";
+import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
 import { PixelRedoIcon } from "@/components/icons-pixel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import { IconMapPin } from "@tabler/icons-react";
 
 export function SkeletonDemo() {
   const [replayKey, setReplayKey] = React.useState(0);
@@ -33,7 +34,7 @@ export function SkeletonDemo() {
 
       <div
         className={cn(
-          "squircle relative min-h-[13.5rem] overflow-hidden rounded-2xl border",
+          "relative min-h-[13.5rem] overflow-hidden rounded-2xl border squircle",
           "ring-4 transition-[opacity,border-color] duration-500 ease-out",
           loaded ? "pointer-events-none border-success-primary bg-card ring-success-primary/20" : "border-dashed bg-card/50 ring-border/20"
         )}
@@ -73,9 +74,12 @@ export function SkeletonDemo() {
               <AvatarFallback>RW</AvatarFallback>
             </Avatar>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-sm font-medium">Bob Weisbecker</p>
+              <p className="truncate text-sm font-medium">HMS Surprise</p>
               <Marker className="text-xs">
-                <MarkerContent>San Diego, CA</MarkerContent>
+                <MarkerIcon>
+                  <IconMapPin />
+                </MarkerIcon>
+                <MarkerContent>Maritime Museum of San Diego</MarkerContent>
               </Marker>
             </div>
           </div>

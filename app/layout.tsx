@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
-import type { Metadata } from "next";
-import type { Viewport } from "next";
 import localFont from "next/font/local";
+import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -59,10 +58,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${Departure_Mono.variable} ${Display.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${Departure_Mono.variable} ${Display.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
       <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
-        <ScrollReset />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ScrollReset />
           <a
             href="#main"
             className="sr-only top-0 left-0 text-sm font-medium focus:not-sr-only focus:absolute focus:z-100 focus:grid focus:h-12 focus:place-items-center focus:bg-card focus:px-4"
@@ -75,9 +74,9 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

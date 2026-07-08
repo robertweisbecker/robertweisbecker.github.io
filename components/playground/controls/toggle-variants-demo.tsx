@@ -14,7 +14,7 @@ import {
 import { ToggleGrid, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { TooltipGroup, TooltipTrigger } from "@/components/ui/tooltip";
 
-export function ToggleVariantsDemo() {
+export function ToggleGridDemo() {
   const corners = [
     { value: "up-left", label: "Top-left", icon: <IconArrowUpLeft /> },
     { value: "up", label: "Top", icon: <IconArrowUp /> },
