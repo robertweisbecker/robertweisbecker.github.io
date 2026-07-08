@@ -2,34 +2,25 @@
 
 import * as React from "react";
 import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
-import { PixelRedoIcon } from "@/components/icons-pixel";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar } from "@/components/ui/avatar";
+import { Field, FieldLabel } from "@/components/ui/field";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utils";
-import { IconMapPin } from "@tabler/icons-react";
+import { IconMapPin, IconSailboat2 } from "@tabler/icons-react";
 
 export function SkeletonDemo() {
-  const [replayKey, setReplayKey] = React.useState(0);
   const [loaded, setLoaded] = React.useState(false);
-
-  React.useEffect(() => {
-    const timeout = window.setTimeout(() => setLoaded(true), 4000);
-    return () => window.clearTimeout(timeout);
-  }, [replayKey]);
-
-  const replay = React.useCallback(() => {
-    setLoaded(false);
-    setReplayKey((key) => key + 1);
-  }, []);
 
   return (
     <div className="grid w-full max-w-sm gap-3" data-testid="skeleton-demo" data-loaded={loaded}>
       <div className="order-last flex justify-center">
-        <Button variant="outline" rounded onClick={replay} data-testid="skeleton-replay">
-          Reload
-          <PixelRedoIcon data-icon="inline-end" />
-        </Button>
+        <Field orientation="horizontal" className="w-auto items-center gap-2">
+          <FieldLabel className="text-xs" htmlFor="skeleton-loaded">
+            Loaded
+          </FieldLabel>
+          <Switch id="skeleton-loaded" checked={loaded} onCheckedChange={setLoaded} data-testid="skeleton-loaded" />
+        </Field>
       </div>
 
       <div
@@ -70,8 +61,7 @@ export function SkeletonDemo() {
         >
           <div className="flex items-center gap-4">
             <Avatar className="size-10 rounded-md">
-              <AvatarImage src="/assets/unused/bob.png" alt="Robert Weisbecker" />
-              <AvatarFallback>RW</AvatarFallback>
+              <IconSailboat2 className="size-6 fill-muted" />
             </Avatar>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium">HMS Surprise</p>

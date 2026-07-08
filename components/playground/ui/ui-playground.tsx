@@ -12,7 +12,7 @@ import { TabsVariantsDemo } from "@/components/playground/controls/tabs-variants
 import { ToggleGridDemo } from "@/components/playground/controls/toggle-variants-demo";
 import { CarouselDemo } from "@/components/playground/frames/carousel-demo";
 import { ImageToggleDemo } from "@/components/playground/frames/image-toggle-demo";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 import { NumberChip } from "@/components/playground/controls/number-chip";
 import ExampleDrawerNested from "@/components/demos/drawer-demo";
 

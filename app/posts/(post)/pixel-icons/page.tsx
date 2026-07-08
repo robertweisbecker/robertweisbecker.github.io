@@ -6,7 +6,7 @@ import {
   PixelSunMoonMorphDemo,
   TablerRotationIdeaDemo,
 } from "@/components/demos/pixel-icons-post-demos";
-import { PixelIconsPostHero } from "@/components/demos/pixel-icons-post-hero";
+import { PixelIconMatrix } from "@/components/demos/pixel-icons-matrix";
 import { PixelMorphToggles, PixelIconPasswordToggle } from "@/components/demos/pixel-morph-toggles";
 import { PixelMorphVisualizer, PixelMorphVisualizerV2 } from "@/components/demos/pixel-morph-visualizer";
 import * as PixelIcons from "@/components/icons-pixel";
@@ -25,7 +25,7 @@ export default function PixelIconsPage() {
     <>
       <div className="w-full space-y-10">
         <p className="mx-auto max-w-xl">A collection of icons formed by animating 28 pixels around an 11x11 grid</p>
-        <PixelIconsPostHero />
+        <PixelIconMatrix />
         <div className="prose">
           <Heading level={2}>Departure Mono</Heading>
           <p>

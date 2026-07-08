@@ -11,8 +11,8 @@ const toggleVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-transparent text-muted-foreground data-pressed:text-foreground",
-        outline: " data-pressed:border-input border data-pressed:text-foreground",
+        default: "bg-muted/50 text-foreground data-pressed:text-secondary-foreground",
+        outline: "data-pressed:border-input border data-pressed:text-foreground",
         elevated:
           "data-pressed:bg-card dark:data-pressed:bg-popover data-pressed:text-foreground text-muted-foreground data-pressed:shadow-border-xs",
       },
@@ -24,7 +24,7 @@ const toggleVariants = cva(
       },
       size: {
         default: "min-h-button min-w-button px-3 rounded-md gap-1.5",
-        xs: "h-button-xs min-w-button-xs rounded px-1 text-[0.6875rem] gap-1 [&_svg:not([class*='size-'])]:size-3",
+        xs: "h-button-xs min-w-button-xs rounded-sm  p-2 text-xs gap-1 [&_svg:not([class*='size-'])]:size-3",
         sm: "h-button-sm min-w-button-sm rounded-md px-2.5 text-sm gap-1.5 [&_svg:not([class*='size-'])]:size-3.5",
         lg: "h-button-lg min-w-button-lg rounded-lg px-3 gap-2",
       },

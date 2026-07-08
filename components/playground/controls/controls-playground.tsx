@@ -2,7 +2,7 @@
 
 import { CodeBlock } from "@/components/code-block";
 import { DemoContainer } from "@/components/demo";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 import { AnchoredSliderDemo } from "@/components/playground/controls/anchored-slider-demo";
 import { SliderDemo } from "@/components/playground/controls/slider-demo";
 import { SwitchDemo } from "@/components/playground/controls/switch-demo";

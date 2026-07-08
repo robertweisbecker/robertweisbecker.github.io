@@ -2,6 +2,8 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import nprTinyDesk from "@/public/assets/npr/npr-tiny-desk.jpeg";
+
 import {
   BaseUiIcon,
   BeyondMeatIcon,
@@ -14,8 +16,6 @@ import {
   NextJsIcon,
   VercelIcon,
 } from "@/components/icons";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- Preserved for the commented Letterboxd header treatment below.
-import { LetterboxdLogo } from "@/components/icons";
 import { PixelMarkdown2Icon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons-pixel";
 import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
 import { LinkOut } from "@/components/link-out";
@@ -38,7 +38,6 @@ import { ArtCards } from "@/components/demos/art-cards";
 import { Letterboxd } from "@/components/demos/letterboxd";
 import { HomePortrait } from "@/components/home-portrait";
 import { projects } from "@/lib/data/projects";
-import { getProjectFrontmatter } from "@/lib/projects";
 
 const postItems: IndexListItem[] = posts.map((post) => {
   const Icon = post.icon ? postIcons[post.icon] : IconFile;
@@ -49,7 +48,6 @@ const postItems: IndexListItem[] = posts.map((post) => {
     date: post.date,
     path: post.path,
     icon: <Icon aria-hidden strokeWidth={1} className="opacity-72" />,
-    // viewTransitionName: pageTitleTransitionName("post", post.id),
     tags: post.category ? (
       <Badge
         variant={"inherit"}
@@ -66,25 +64,20 @@ const postItems: IndexListItem[] = posts.map((post) => {
   };
 });
 
-export default async function Home() {
-  const projectItems: IndexListItem[] = await Promise.all(
-    projects
-      .filter((project) => project.published ?? true)
-      .map(async (project) => {
-        const slug = project.path.replace(/^\//, "");
-        const frontmatter = await getProjectFrontmatter(slug);
-
-        return {
-          id: project.id,
-          title: frontmatter.title,
-          description: project.description,
-          date: project.date,
-          path: project.path,
-          icon: project.icon,
-          // viewTransitionName: pageTitleTransitionName("project", slug),
-        };
-      })
-  );
+export default function Home() {
+  // Titles live in lib/data/projects.ts and are kept in sync with MDX frontmatter manually.
+  // Importing frontmatter here would pull every project MDX file (and its images) into the
+  // homepage compile graph.
+  const projectItems: IndexListItem[] = projects
+    .filter((project) => project.published ?? true)
+    .map((project) => ({
+      id: project.id,
+      title: project.title,
+      description: project.description,
+      date: project.date,
+      path: project.path,
+      icon: project.icon,
+    }));
 
   return (
     <div className={cn("mx-auto grid max-w-2xl animate-stagger-enter gap-16 md:gap-32")}>
@@ -285,7 +278,13 @@ export default async function Home() {
               </li>
               <li>
                 Built a <ProjectLink href="/npr-maps" text="mapping application" /> at NPR when I wasn&apos;t busy{" "}
-                <LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" /> in the background of Tiny Desk recordings.
+                <PreviewCard>
+                  <PreviewCardTrigger delay={0} render={<LinkOut href="https://youtu.be/lgmw41CY1Fo?t=36" text="standing awkwardly" />} />
+                  <PreviewCardPopup className="p-0.5">
+                    <Image src={nprTinyDesk} alt="Tiny Desk Recording" loading="eager" className="rounded-sm" />
+                  </PreviewCardPopup>
+                </PreviewCard>
+                in the background of Tiny Desk recordings.
               </li>
               <li>
                 Designed web &amp; iOS screens, performed user testing, and made some wacky graphics for{" "}
@@ -428,7 +427,7 @@ export default async function Home() {
           </DescriptionListValue>
           <DescriptionListLabel className="flex items-center gap-2 self-start">
             <Avatar size="sm">
-              <AvatarImage src="/assets/thumb/npr-logo.png" alt="NPR" />
+              <AvatarImage src="/assets/logos/npr-square.webp" alt="NPR" />
             </Avatar>{" "}
             NPR
           </DescriptionListLabel>

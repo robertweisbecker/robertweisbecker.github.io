@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { PlaygroundRouteNav } from "@/components/playground/playground-route-nav";
+import { PlaygroundRouteNav } from "@/components/blocks/playground-route-nav";
 
 export const metadata: Metadata = {
   title: "Playground",

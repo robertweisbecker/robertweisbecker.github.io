@@ -14,7 +14,7 @@ import { Loader } from "@/components/ui/loader";
 import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
 import { MorphIcon } from "@/components/morph-icon";
 import { Toggle } from "@/components/ui/toggle";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 
 function DemoLoadingMarker() {
   return (
@@ -49,12 +49,39 @@ const EmojiFeedbackDemo = dynamic(
   }
 );
 
-const MotionTextPlaygroundDemo = dynamic(
-  () =>
-    import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextPlaygroundDemo })),
-  {
-    loading: () => <DemoLoadingMarker />,
-  }
+const MotionTextRevealDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextRevealDemo })),
+  { loading: () => <DemoLoadingMarker /> }
+);
+
+const MotionTextEffectDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextEffectDemo })),
+  { loading: () => <DemoLoadingMarker /> }
+);
+
+const MotionTextLoopDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextLoopDemo })),
+  { loading: () => <DemoLoadingMarker /> }
+);
+
+const MotionTextScrambleDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextScrambleDemo })),
+  { loading: () => <DemoLoadingMarker /> }
+);
+
+const MotionTextWaveDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextWaveDemo })),
+  { loading: () => <DemoLoadingMarker /> }
+);
+
+const MotionTextMorphDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextMorphDemo })),
+  { loading: () => <DemoLoadingMarker /> }
+);
+
+const MotionTextShimmerDemo = dynamic(
+  () => import("@/components/playground/motion/motion-text-playground-demo").then((module) => ({ default: module.MotionTextShimmerDemo })),
+  { loading: () => <DemoLoadingMarker /> }
 );
 
 const SkeletonDemo = dynamic(
@@ -93,23 +120,72 @@ export function MotionPlayground() {
             duration={600}
             stagger={22}
           >
-            Interfaces should feel alive, but never impatient.
+            Interfaces should feel alive, but never obnoxious.
           </TextReveal>
         </DemoContainer>
         <DemoContainer
-          title="MotionText"
-          caption="Inline playback controls"
+          title="MotionText.Reveal"
           variant="muted"
-          className="lg:col-span-full lg:row-span-2"
-          innerClass="min-h-[420px]"
+          centerContent
+          className="md:col-span-4 lg:col-span-6"
+          innerClass="min-h-[240px]"
         >
-          <MotionTextPlaygroundDemo />
+          <MotionTextRevealDemo />
+        </DemoContainer>
+        <DemoContainer
+          title="MotionText.Effect"
+          variant="muted"
+          centerContent
+          className="md:col-span-4 lg:col-span-6"
+          innerClass="min-h-[240px]"
+        >
+          <MotionTextEffectDemo />
+        </DemoContainer>
+        <DemoContainer
+          title="MotionText.Loop"
+          variant="muted"
+          centerContent
+          className="md:col-span-4 lg:col-span-6"
+          innerClass="min-h-[240px]"
+        >
+          <MotionTextLoopDemo />
+        </DemoContainer>
+        <DemoContainer
+          title="MotionText.Scramble"
+          variant="muted"
+          centerContent
+          className="md:col-span-4 lg:col-span-6"
+          innerClass="min-h-[240px]"
+        >
+          <MotionTextScrambleDemo />
+        </DemoContainer>
+        <DemoContainer
+          title="MotionText.Wave"
+          variant="muted"
+          centerContent
+          className="md:col-span-4 lg:col-span-6"
+          innerClass="min-h-[240px]"
+        >
+          <MotionTextWaveDemo />
+        </DemoContainer>
+        <DemoContainer
+          title="MotionText.Morph"
+          variant="muted"
+          centerContent
+          className="md:col-span-4 lg:col-span-6"
+          innerClass="min-h-[240px]"
+        >
+          <MotionTextMorphDemo />
+        </DemoContainer>
+        <DemoContainer title="Shimmer" variant="muted" centerContent className="md:col-span-4 lg:col-span-6" innerClass="min-h-[240px]">
+          <MotionTextShimmerDemo />
         </DemoContainer>
         <DemoContainer title="Skeleton" variant="muted" centerContent className="lg:col-span-full">
           <SkeletonDemo />
         </DemoContainer>
         <DemoContainer
           title="Emoji Feedback"
+          centerContent
           description="A remix of Vercel's Feedback component"
           controls={<LinkOut href="https://vercel.com/geist/feedback" text="View original" />}
           variant="muted"
@@ -118,16 +194,16 @@ export function MotionPlayground() {
         >
           <EmojiFeedbackDemo />
         </DemoContainer>
-        <DemoContainer title="Motion chart" description="Hover to animate" variant="muted" centerContent className="lg:col-span-4">
+        <DemoContainer title="Motion chart" description="Hover to animate" variant="muted" centerContent className="lg:col-span-7">
           <ChartDemo />
         </DemoContainer>
-        <DemoContainer title="ColorCode" description="Click to copy" variant="muted" centerContent className="lg:col-span-full">
+        <DemoContainer title="ColorCode" description="Click to copy" variant="muted" centerContent className="lg:col-span-4">
           <ColorCode value="#0b0b0b" />
         </DemoContainer>
-        <DemoContainer title="ColorSwatchGroup" variant="muted" centerContent className="lg:col-span-full">
+        <DemoContainer title="ColorSwatchGroup" variant="muted" centerContent className="lg:col-span-6">
           <ColorSwatchGroupDemo />
         </DemoContainer>
-        <DemoContainer title="Animated icon buttons" variant="muted" centerContent className="lg:col-span-full">
+        <DemoContainer title="Animated icon buttons" variant="muted" centerContent className="lg:col-span-6">
           <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
             <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />

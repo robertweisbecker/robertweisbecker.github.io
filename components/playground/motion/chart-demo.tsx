@@ -35,7 +35,7 @@ export function ChartDemo() {
 
   return (
     <div
-      className="relative flex aspect-video w-full min-w-0 flex-col items-end rounded outline -outline-offset-1 outline-border"
+      className="relative flex aspect-video w-full min-w-0 flex-col items-end rounded bg-card bg-dotted bg-cover outline -outline-offset-1 outline-(--separator-color) [--separator-color:var(--info-primary)]/10 md:aspect-3/1"
       onPointerMove={onPointerMove}
       onPointerEnter={() => {
         setIsHovering(true);
@@ -52,7 +52,7 @@ export function ChartDemo() {
       }}
     >
       <motion.div
-        className="absolute top-5 right-full text-center font-pixel text-xs text-muted-foreground transition-[left] duration-100 ease-linear"
+        className="absolute top-5 right-full w-fit min-w-[calc(4ch+1.5rem)] rounded-full bg-info-primary px-3 py-1 text-center font-pixel text-[16.5px] text-white transition-[left] duration-100 ease-linear"
         style={{ left: displayPosition }}
         onPointerMove={onPointerMove}
       >
@@ -67,12 +67,12 @@ export function ChartDemo() {
         className="mt-auto w-full"
         onPointerMove={onPointerMove}
       >
-        <path stroke="var(--success-primary)" strokeWidth="2" d={COLOR_CHART_LINE_PATH}></path>
         <motion.path fill="url(#paint0_linear_540_31)" d={COLOR_CHART_AREA_PATH}></motion.path>
+        <path stroke="var(--info-primary)" strokeWidth="2" d={COLOR_CHART_LINE_PATH}></path>
         <defs>
           <linearGradient id="paint0_linear_540_31" x1="322.5" x2="322.5" y1="1" y2="188" gradientUnits="userSpaceOnUse">
-            <stop stopColor="var(--success-primary)" stopOpacity="0.4"></stop>
-            <stop offset="1" stopColor="var(--success)" stopOpacity="0"></stop>
+            <stop stopColor="var(--info-primary)" stopOpacity=".4"></stop>
+            <stop offset="1" stopColor="var(--info)" stopOpacity=".1"></stop>
           </linearGradient>
         </defs>
       </motion.svg>

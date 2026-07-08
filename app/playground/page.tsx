@@ -1,6 +1,6 @@
 import { TreeIconFile } from "@/components/icons-tree";
-import { FoldedCardDemo } from "@/components/playground/folded-card-demo";
-import { PlaygroundRouteNav } from "@/components/playground/playground-route-nav";
+import { FoldedCardDemo } from "@/components/demos/folded-card-demo";
+import { PlaygroundRouteNav } from "@/components/blocks/playground-route-nav";
 
 export default function PlaygroundPage() {
   return (

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { usePathname } from "next/navigation";
 
-import { getPlaygroundRouteIcon } from "@/components/playground/playground-route-icons";
+import { getPlaygroundRouteIcon } from "@/components/blocks/playground-route-icons";
 import { playgroundRoutes } from "@/lib/data/playground";
 import { LinkButton } from "@/components/ui/link-button";
 import { ScrollArea } from "@/components/ui/scroll-area";

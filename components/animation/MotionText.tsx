@@ -498,6 +498,8 @@ export type MotionTextWaveProps = {
   rotateYDistance?: number;
   transition?: Transition;
   segmentClassName?: string;
+  /** Set to false to ease the wave back to rest; matches the trigger API on Effect/Loop/Scramble. */
+  trigger?: boolean;
 };
 
 export function MotionTextWave({
@@ -514,6 +516,7 @@ export function MotionTextWave({
   rotateYDistance = 10,
   transition,
   segmentClassName,
+  trigger = true,
 }: MotionTextWaveProps) {
   const shouldReduceMotion = useReducedMotion();
   const Component = as;
@@ -528,8 +531,8 @@ export function MotionTextWave({
               className={cn("inline-block transform-3d", segmentClassName)}
               key={`${char}-${index}`}
               animate={
-                shouldReduceMotion
-                  ? undefined
+                shouldReduceMotion || !trigger
+                  ? { opacity: 1, x: 0, y: 0, z: 0, scale: 1, rotateY: 0 }
                   : {
                       opacity: [0.68, 1, 0.68],
                       x: [0, xDistance, 0],
@@ -542,14 +545,16 @@ export function MotionTextWave({
               transition={
                 shouldReduceMotion
                   ? { duration: 0 }
-                  : {
-                      duration,
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      ease: "easeInOut",
-                      delay: index * 0.045 * spread,
-                      ...transition,
-                    }
+                  : !trigger
+                    ? { duration: duration / 2, ease: "easeOut" }
+                    : {
+                        duration,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "easeInOut",
+                        delay: index * 0.045 * spread,
+                        ...transition,
+                      }
               }
             >
               {getReadableSegment(char)}

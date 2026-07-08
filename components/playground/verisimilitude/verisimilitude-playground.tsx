@@ -6,7 +6,7 @@ import { DemoContainer } from "@/components/demo";
 import { Code } from "@/components/ui/code";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { LinkButton } from "@/components/ui/link-button";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 import { Loader } from "@/components/ui/loader";
 
 const ChromeTabsDemo = dynamic(

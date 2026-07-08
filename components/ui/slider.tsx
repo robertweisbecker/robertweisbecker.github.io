@@ -11,7 +11,7 @@ function SliderGroup({ className, defaultValue, value, min = 0, max = 100, child
   return (
     <SliderPrimitive.Root
       className={cn(
-        "group/slider isolate grid gap-1 data-disabled:opacity-50 data-horizontal:w-full data-vertical:h-full data-vertical:flex-col",
+        "group/slider isolate flex items-start justify-start gap-3 data-disabled:opacity-50 data-horizontal:w-full data-vertical:h-full data-vertical:flex-col",
         className
       )}
       data-slot="slider"

@@ -4,7 +4,7 @@ import * as React from "react";
 import { AnimatePresence, motion, useMotionTemplate } from "motion/react";
 import { DemoContainer } from "@/components/demo";
 import { Button } from "@/components/ui/button";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 import { AnimatedButtonDemo } from "@/components/playground/controls/animated-button-demo";
 import { CobotButtonDemo } from "@/components/playground/controls/cobot-button-demo";
 import { DeleteButtonDemo } from "@/components/playground/controls/delete-button-demo";
@@ -44,46 +44,62 @@ export function ButtonsPlayground() {
   return (
     <div className="flex w-full flex-col gap-14">
       <PlaygroundSection id="buttons" title="Buttons">
-        <DemoContainer caption="Loading button" variant="muted" centerContent className="lg:col-span-full">
-          <Button
-            variant="default"
-            className="w-3xs overflow-hidden"
-            loading={isLoading}
-            onClick={() => {
-              setLoading(true);
-              window.setTimeout(() => {
-                setLoading(false);
-              }, 1750);
-            }}
-          >
-            Submit
-          </Button>
-          <Button
-            variant="default"
-            className={cn("w-3xs overflow-hidden")}
-            onClick={() => {
-              setButtonState("loading");
-              window.setTimeout(() => {
-                setButtonState("success");
-              }, 1750);
-              window.setTimeout(() => {
-                setButtonState("idle");
-              }, 3500);
-            }}
-          >
-            <motion.div className="absolute inset-0" />
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-                initial={{ opacity: 0, y: buttonState === "idle" ? 25 : -25 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: buttonState === "success" ? -25 : 25 }}
-                key={buttonState}
-              >
-                {buttonCopy[buttonState as keyof typeof buttonCopy]}
-              </motion.span>
-            </AnimatePresence>
-          </Button>
+        <DemoContainer
+          caption="Loading button"
+          variant="muted"
+          centerContent
+          className="lg:col-span-full"
+          innerClass="space-y-4 text-xs text-muted-foreground text-start"
+        >
+          <div>
+            <p className="mb-2">Default loading state with spinner</p>
+            <Button
+              variant="default"
+              loading={isLoading}
+              onClick={() => {
+                setLoading(true);
+                window.setTimeout(() => {
+                  setLoading(false);
+                }, 1750);
+              }}
+            >
+              Submit
+            </Button>
+          </div>
+          <div>
+            <p className="mb-2">Custom loading state with confirmation</p>
+            <Button
+              variant="default"
+              className={cn("w-3xs overflow-hidden")}
+              onClick={() => {
+                setButtonState("loading");
+                window.setTimeout(() => {
+                  setButtonState("success");
+                }, 1750);
+                window.setTimeout(() => {
+                  setButtonState("idle");
+                }, 3500);
+              }}
+            >
+              {/* <motion.div
+                className="absolute inset-0 bg-success-primary opacity-0 mix-blend-overlay transition-opacity duration-150"
+                style={{
+                  opacity: buttonState === "success" ? 1 : 0,
+                }}
+              /> */}
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.span
+                  transition={{ type: "spring", duration: 0.3, bounce: 0 }}
+                  initial={{ opacity: 0, y: buttonState === "idle" ? 25 : -25 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: buttonState === "success" ? -25 : 25 }}
+                  key={buttonState}
+                >
+                  {buttonCopy[buttonState as keyof typeof buttonCopy]}
+                </motion.span>
+              </AnimatePresence>
+            </Button>
+          </div>
         </DemoContainer>
         <DemoContainer caption="Hover effects" variant="muted" centerContent className="lg:col-span-full">
           <AnimatedButtonDemo />

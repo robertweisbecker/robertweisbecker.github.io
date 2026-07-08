@@ -1,7 +1,7 @@
 "use client";
 
 import { useKeyPress } from "@/hooks/use-key-press";
-import { getPlaygroundRouteIcon } from "@/components/playground/playground-route-icons";
+import { getPlaygroundRouteIcon } from "@/components/blocks/playground-route-icons";
 import { playgroundRoutes } from "@/lib/data/playground";
 import { posts, postIcons } from "@/lib/data/posts";
 import { projects } from "@/lib/data/projects";

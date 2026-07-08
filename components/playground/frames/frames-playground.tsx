@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { DemoContainer } from "@/components/demo";
 import { LinkOut } from "@/components/link-out";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 import { CarouselDemo } from "@/components/playground/frames/carousel-demo";
 import { ImageToggleDemo } from "@/components/playground/frames/image-toggle-demo";
 

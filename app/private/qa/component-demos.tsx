@@ -28,7 +28,7 @@ import { LinkOut } from "@/components/link-out";
 import { Mark, MarkNote } from "@/components/mark-note";
 import { ModeToggle } from "@/components/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
-import { PixelIconsPostHero } from "@/components/demos/pixel-icons-post-hero";
+import { PixelIconMatrix } from "@/components/demos/pixel-icons-matrix";
 import { Stats } from "@/components/stats";
 import { TableOfContents } from "@/components/table-of-contents";
 import { Theme, ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme";
@@ -378,7 +378,7 @@ export function ComponentDemos() {
       </Section>
 
       <Section title="Pixel Icons Post Hero" id="pixel-icons-post-hero">
-        <PixelIconsPostHero />
+        <PixelIconMatrix />
       </Section>
 
       <Section title="Alert">

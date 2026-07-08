@@ -13,6 +13,7 @@
 - This is a mostly static Next.js 16 App Router site with MDX content, no database, and no required environment variables. The only current API route is `app/api/letterboxd/route.ts`, which backs the homepage Letterboxd widget.
 - Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, `npm run format:check`, `npm run typecheck`, `npm run typecheck:build`, `npm run check`, and `npm run analyze:build`.
 - `npm run build` produces the static site output with the default Next/Turbopack production build, while `npm run dev:fresh` clears `.next` before starting dev.
+- Homepage project titles come from `lib/data/projects.ts` and are kept in sync with MDX frontmatter manually. Do not import `getProjectFrontmatter` (or any `content/**` MDX) from `app/page.tsx` — it pulls every project MDX file and its statically imported images into the homepage compile graph and roughly triples dev cold-compile time.
 - Explicit webpack fallback scripts remain available as `npm run dev:webpack`, `npm run dev:fresh:webpack`, `npm run build:webpack`, and `npm run preview:webpack`.
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
 - `ToggleGrid` preserves intended toggle styling by extending `ToggleGroup` context with `grid?: boolean`.
@@ -57,6 +58,14 @@
 - Do not spend time preserving old barrel exports or backwards-compatible aliases.
 
 ## Known Bugs & Workarounds
+
+### iCloud Drive sync corruption (repo lived in ~/Desktop, diagnosed 2026-07-08)
+
+- **Root cause:** The repo's location under `~/Desktop` is synced to iCloud Drive. iCloud sync races with git and npm, creating duplicate " 2"-suffixed files and folders that corrupt state.
+- **Confirmed artifacts from this failure mode:** the invalid git ref `.git/refs/heads/master 2` (broke `git pull`), gutted npm packages with siblings like `node_modules/@vercel/analytics 2` and `node_modules/shadcn/node_modules 2` (caused module-not-found and `shadcn/tailwind.css` resolution errors), duplicate assets like `npr-tiny-desk 2.png`, and `rm -rf .next` failing with "Directory not empty" mid-delete.
+- **Fix:** Move the repo out of iCloud-synced folders (`~/Desktop`, `~/Documents`) to a plain home directory such as `~/Projects`, then reinstall `node_modules` fresh. Git state survives the move unchanged.
+- **If symptoms appear:** Suspect iCloud duplicates first — search for `" 2"`-suffixed files in `.git`, `node_modules`, and `public`. Temporary `scripts/clean-next.mjs` and `scripts/dev-fresh.mjs` workarounds were removed on 2026-07-08 in anticipation of the move; `dev:fresh` is plain `rm -rf .next && next dev` again (re-run it once if the rm races).
+- **Stale port note:** If `next dev` reports "Port 3000 is in use" and hops to 3001, an orphaned `next-server` is holding 3000 — find it with `lsof -nP -iTCP:3000 -sTCP:LISTEN` and kill it rather than developing against 3001.
 
 ### Turbopack + Tailwind v4 Stale CSS Bug (open as of May 2026)
 

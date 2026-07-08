@@ -1,7 +1,7 @@
 export const projects = [
   {
     id: 1,
-    title: "OkLCH Color System",
+    title: "OkLCH Color Palettes",
     nickname: "OkLCH Colors",
     icon: "/assets/logos/oklch-icon.svg",
     heroImage: "/assets/oklch/oklch-gradient.png",
@@ -14,7 +14,7 @@ export const projects = [
   },
   {
     id: 9,
-    title: "okLCH Colors, Part II",
+    title: "Lessons in color-picking",
     nickname: "okLCH Colors II",
     icon: "/assets/logos/udl-icon.svg",
     heroImage: "/assets/oklch/luminance.png",
@@ -51,7 +51,7 @@ export const projects = [
   },
   {
     id: 4,
-    title: "Forge Editor",
+    title: "Everfi Forge",
     nickname: "Forge",
     date: "2022",
     icon: "/assets/logos/forge-app-icon.png",
@@ -91,7 +91,7 @@ export const projects = [
   },
   {
     id: 7,
-    title: "Engage - Hybrid Financial Learning",
+    title: "Engage Financial Workshops",
     nickname: "Engage",
     date: "2018",
     heroImage: "/assets/engage/engage-1.png",
@@ -105,7 +105,7 @@ export const projects = [
   {
     id: 8,
     path: "/npr-maps",
-    title: "Mapping & Population System",
+    title: "NPR Labs",
     icon: "/assets/logos/npr-square.webp",
     heroImage: "/assets/thumb/npr-thumb.png",
     nickname: "NPR Maps",
@@ -117,7 +117,7 @@ export const projects = [
   },
   {
     id: 10,
-    title: "E-Learning Product Design",
+    title: "E-Learning",
     nickname: "E-Learning",
     icon: "/assets/logos/udl-icon.svg",
     date: "2017—2022",

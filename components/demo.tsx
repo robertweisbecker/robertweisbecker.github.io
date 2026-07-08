@@ -47,7 +47,7 @@ export function DemoHeader({ className, ...props }: DemoHeaderProps) {
     <header
       data-slot="demo-header"
       className={cn(
-        "flex items-center justify-between gap-2 rounded-t-xl ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-xs",
+        "flex items-center justify-between gap-2 rounded-t-xl ps-[max(var(--radius-xl),--spacing(3))] pe-2 pt-2 pb-1.5 text-sm",
         className
       )}
       {...props}

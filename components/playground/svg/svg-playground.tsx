@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { PixelDino } from "@/components/animation/pixel-dino";
 import { DemoContainer } from "@/components/demo";
 import { PixelMorphToggles } from "@/components/demos/pixel-morph-toggles";
-import { PlaygroundSection } from "@/components/playground/playground-section";
+import { PlaygroundSection } from "@/components/blocks/playground-section";
 
 const DvdLoaderDemo = dynamic(
   () => import("@/components/playground/svg/dvd-loader-demo").then((module) => ({ default: module.DvdLoaderDemo })),

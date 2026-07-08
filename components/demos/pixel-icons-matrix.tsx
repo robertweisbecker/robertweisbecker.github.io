@@ -108,7 +108,7 @@ function usePixelIconHeroFrame(paused: boolean): Frame {
   return animatedFrames[frameIndex] ?? PIXEL_ICON_HERO_EXPORTS[0];
 }
 
-export function PixelIconsPostHero() {
+export function PixelIconMatrix() {
   const [paused, setPaused] = React.useState(false);
   const currentFrame = usePixelIconHeroFrame(paused);
 

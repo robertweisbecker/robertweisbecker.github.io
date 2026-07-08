@@ -35,8 +35,9 @@ import forgeThemePicker from "@/public/assets/forge/theme-picker.png";
 import forgeLocale from "@/public/assets/forge/locale.png";
 import forgeTemplateLogic from "@/public/assets/forge/template-logic.png";
 import forgeAppIcon from "@/public/assets/forge/app-icon.png";
+import forgeActivityEdit from "@/public/assets/forge/activity-edit.png";
 
-<Image src={forgeAppIcon} alt="Forge app icon" priority className="**:bg-transparent **:shadow-none" />
+<Image src={forgeEditPageAfter} alt="Forge app icon" priority className="**:bg-transparent **:shadow-none" />
 
 Forge is the primary tool used by Everfi's implementation team, who translate course designs into interactive e-learning products.
 
@@ -92,7 +93,9 @@ But organization that makes sense in code doesn't always make sense in a UI.
 
 Edit forms unrelated to content now overtakes the preview. There, you're editing the course itself — not the page you're looking at — free real estate that reinforces the idea of editing a higher-level view.
 
-<ImageToggle before={forgeEditActivityBefore} after={forgeEditActivityAfter} />
+<ImageModal src={forgeActivityEdit} caption="Activity edit" />
+
+<ImageToggle before={forgeEditActivityBefore} after={forgeEditActivityAfter} mode="comparison" />
 
 This also benefitted performance and usability, since the old edit UI always opened another panel adjacent to the navigation, causing the live preview to resize and force a refresh, losing context.
 
