@@ -3,7 +3,7 @@ import { PostPagination } from "../post-pagination";
 
 export default function PostDetailLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
+    <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[10rem_minmax(0,1fr)_10rem] xl:grid-cols-[14rem_minmax(0,1fr)_14rem]">
       {/* <div
         className="absolute inset-0 -z-1"
         style={{
@@ -25,7 +25,7 @@ export default function PostDetailLayout({ children }: { children: React.ReactNo
         <PostPagination />
       </div>
 
-      <div className="max-lg:hidden" aria-hidden />
+      <div className="max-md:hidden" aria-hidden />
     </div>
   );
 }

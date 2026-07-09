@@ -17,7 +17,11 @@ export function BackButton({
       variant="link"
       href={href}
       size={size}
-      className={cn("group/back-button self-start no-underline", pixel && "font-pixel text-[11px] uppercase", className)}
+      className={cn(
+        "group/back-button self-start text-muted-foreground no-underline",
+        pixel && "font-pixel text-[11px] uppercase",
+        className
+      )}
       {...rest}
     >
       {pixel ? (

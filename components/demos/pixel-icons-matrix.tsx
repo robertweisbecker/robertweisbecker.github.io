@@ -113,7 +113,7 @@ export function PixelIconMatrix() {
   const currentFrame = usePixelIconHeroFrame(paused);
 
   return (
-    <DemoContainer variant="muted" centerContent innerClass="relative min-h-[420px] p-12 sm:min-h-[520px] sm:p-16">
+    <DemoContainer variant="muted" centerContent innerClass="relative min-h-[300px]">
       <DotMatrix
         rows={MATRIX_SIZE}
         cols={MATRIX_SIZE}

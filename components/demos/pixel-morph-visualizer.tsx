@@ -621,12 +621,20 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
   React.useEffect(() => clearTimer, [clearTimer]);
 
   return (
-    <div className={cn("grid items-start gap-2 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)]", className)}>
-      <Card>
+    <div className={cn("grid items-start gap-2 lg:grid-cols-12", className)}>
+      <Card className="lg:col-span-7">
         <CardContent>
-          <div className="grid h-[110px] place-items-center" data-section="preview">
-            <div className="grid size-[88px] place-items-center rounded-xl border border-border" data-testid="pixel-morph-preview-v2">
-              {previewFrom && previewTo ? (
+          <div className="grid h-[110px] place-items-center content-center" data-section="preview">
+            <div
+              className="grdi-stack relative grid size-(--preview-size) rounded-[calc(var(--preview-size)/8)] outline -outline-offset-1 outline-border"
+              data-testid="pixel-morph-preview-v2"
+              style={
+                {
+                  "--preview-size": `${previewScale * 11}px`,
+                } as React.CSSProperties
+              }
+            >
+              {previewFrom && previewTo && (
                 <PixelMorph
                   from={previewFrom}
                   to={previewTo}
@@ -638,15 +646,19 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
                   scale={previewScale}
                   style={previewColorStyle}
                 />
-              ) : (
-                <span
-                  className="size-[44px]! bg-[repeating-conic-gradient(--alpha(var(--destructive)/10%)_0_25%,transparent_0_50%)] bg-size-[8px_8px]"
-                  aria-hidden
-                />
               )}
+              <span
+                className="pointer-events-none absolute inset-0 size-full bg-[repeating-conic-gradient(var(--border)_0_25%,transparent_0_50%)] bg-size-[calc(200%/11)_calc(200%/11)]"
+                aria-hidden
+                style={
+                  {
+                    "--preview-scale": previewScale,
+                  } as React.CSSProperties
+                }
+              />
             </div>
+            <div className="min-h-5 text-center font-pixel text-2xs text-foreground">{statusLabel}</div>
           </div>
-          <div className="min-h-5 text-center font-pixel text-2xs text-foreground">{statusLabel}</div>
 
           <ScrollArea className="w-full max-sm:h-64" scrollbarGutter showScrollbar scrollFade innerClass="border-t border-s">
             <ToggleGrid
@@ -681,7 +693,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
         </CardContent>
       </Card>
 
-      <Card variant="muted">
+      <Card variant="muted" className="md:col-span-5">
         <CardContent className="gap-3">
           <AnimationControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
           <AnimationControl type="select" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />
@@ -714,6 +726,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
               onValueChange={setPreviewColor}
               tooltipSide="bottom"
               className="justify-start"
+              allowCustomColors={false}
             />
           </Field>
         </CardContent>
