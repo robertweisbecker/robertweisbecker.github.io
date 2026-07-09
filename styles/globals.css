@@ -163,8 +163,8 @@
   --popover-foreground: var(--neutral-900);
   --primary: var(--hue-500);
   --primary-foreground: var(--hue-25);
-  --secondary: var(--hue-200);
-  --secondary-foreground: var(--hue-700);
+  --secondary: var(--hue-100);
+  --secondary-foreground: var(--hue-600);
   --muted: --alpha(var(--neutral-600) / 6%);
   /* --muted: var(--neutral-75); */
   --muted-foreground: var(--neutral-500);
@@ -696,5 +696,5 @@ mark[data-hue],
 }
 
 @utility bg-glass {
-  @apply relative rounded-2xl border-0! bg-popover/5 [background-blend-mode:luminosity,plus-lighter,normal,normal] shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),0px_0px_0px_0.5px_--alpha(var(--foreground)/14%),0px_8px_10px_-4px_color-mix(in_srgb,var(--muted-foreground)_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.24),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,.33),inset_0px_-1px_2px_rgba(255,255,255,0.4),inset_0px_12px_7px_12px_rgba(0,0,0,0.04)] [backdrop-filter:blur(2px)_saturate(1.5)_contrast(.8)_brightness(1.1)] before:pointer-events-none before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-difference before:blur-xs after:pointer-events-none after:absolute after:inset-x-px after:inset-y-1 after:-z-1 after:translate-y-1/2 after:scale-x-90 after:rounded-[inherit] after:rounded-t-none after:bg-linear-to-b after:via-card/20 after:mix-blend-hard-light after:blur-sm dark:bg-popover/40 dark:ring-[0.5px] dark:ring-background;
+  @apply relative rounded-2xl border-0! bg-popover/5 [background-blend-mode:luminosity,plus-lighter,normal,normal] shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.33),0px_0px_0px_0.5px_--alpha(var(--foreground)/14%),0px_8px_10px_-4px_color-mix(in_srgb,var(--muted-foreground)_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.24),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,.33),inset_0px_-1px_2px_rgba(255,255,255,0.4),inset_0px_12px_7px_12px_rgba(0,0,0,0.04)] [backdrop-filter:blur(2px)_saturate(1.5)_contrast(.8)_brightness(1.1)] before:pointer-events-none before:absolute before:inset-0.5 before:rounded-[inherit] before:border-t before:border-t-black/20 before:mix-blend-difference before:blur-xs after:pointer-events-none after:absolute after:inset-x-px after:inset-y-1 after:-z-1 after:translate-y-1/2 after:scale-x-90 after:rounded-[inherit] after:rounded-t-none after:bg-linear-to-b after:via-card/20 after:mix-blend-hard-light after:blur-sm dark:bg-popover/50 dark:ring-[0.5px] dark:ring-background;
 }

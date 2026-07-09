@@ -17,7 +17,7 @@ function InputGroup({ className, size = "md", ...props }: React.ComponentProps<"
       data-size={size}
       className={cn(
         "w-full min-w-0 rounded-md border border-input bg-card/50 bg-clip-padding text-base text-foreground transition-[color,background-color,border-color,box-shadow] outline-none sm:text-sm",
-        "group/input-group has-[[data-slot=input-group-control]::aria-disabled]:bg-input/50 relative flex shrink-0 gap-0 p-0 in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:disabled]:opacity-50 has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring has-[[data-slot=input-group-control]:focus-visible:not(:read-only)]:ring has-[[data-slot=input-group-control]:read-only]:bg-transparent! has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-2 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40 has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pe-1 has-[>[data-align=inline-start]]:[&>input]:ps-1",
+        "group/input-group has-[[data-slot=input-group-control]::aria-disabled]:bg-input/50 relative flex shrink-0 gap-0 p-0 in-data-[slot=combobox-content]:focus-within:border-inherit in-data-[slot=combobox-content]:focus-within:ring-0 has-[[data-slot=input-group-control]:disabled]:opacity-50 has-[[data-slot=input-group-control]:focus-visible]:border-ring has-[[data-slot=input-group-control]:focus-visible]:ring has-[[data-slot=input-group-control]:focus-visible]:ring-ring has-[[data-slot=input-group-control]:read-only]:bg-transparent! has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:ring-2 has-[[data-slot][aria-invalid=true]]:ring-destructive/20 has-[>[data-align=block-end]]:h-auto has-[>[data-align=block-end]]:flex-col has-[>[data-align=block-start]]:h-auto has-[>[data-align=block-start]]:flex-col has-[>textarea]:h-auto dark:has-[[data-slot][aria-invalid=true]]:ring-destructive/40 has-[>[data-align=block-end]]:[&>input]:pt-3 has-[>[data-align=block-start]]:[&>input]:pb-3 has-[>[data-align=inline-end]]:[&>input]:pe-0.5 has-[>[data-align=inline-start]]:[&>input]:ps-0.5",
         // "has-data-[slot=input-group-control]:read-only:border-border! has-data-[slot=input-group-control]:read-only:ring-0!",
         inputVariants({ size }),
         className
@@ -33,7 +33,7 @@ const inputGroupAddonVariants = cva(
     variants: {
       align: {
         "inline-start": "ps-[0.5em] has-[>button]:ms-[-0.25em] has-[>kbd]:ms-[-0.125em] order-first",
-        "inline-end": "pe-[0.5em] has-[>button]:me-[-0.125em] has-[>kbd]:me-[-0.125em] order-last",
+        "inline-end": "pe-[0.5em] has-[>button]:me-[-0.25em] has-[>kbd]:me-[-0.125em] order-last",
         "block-start": "px-2.5 pt-2 group-has-[>input]/input-group:pt-2 [.border-b]:pb-1 order-first w-full justify-start text-sm",
         "block-end": "px-2.5 pb-2 group-has-[>input]/input-group:pb-2 [.border-t]:pt-1 order-last w-full justify-start text-sm",
       },
@@ -100,9 +100,9 @@ function InputGroupButton({
       className={cn(
         inputGroupButtonVariants({ size }),
         size === "icon-xs" && "size-button-xs rounded-xs [--button-xs:--spacing(5)]",
-        size === "icon-sm" && "size-button-xs rounded-sm p-0 has-[>svg]:p-0",
+        size === "icon-sm" && "size-button-sm rounded-sm p-0 has-[>svg]:p-0",
         size === "xs" && "gap-1 rounded px-1.5 [&>svg:not([class*='size-'])]:size-3",
-        size === "sm" && "gap-1.5 rounded text-sm [--button-sm:--spacing(6)] [&>svg:not([class*='size-'])]:size-3.5",
+        size === "sm" && "gap-1.5 rounded-sm text-sm [--button-sm:--spacing(6)] [&>svg:not([class*='size-'])]:size-3.5",
         className
       )}
       {...props}
@@ -127,7 +127,7 @@ function InputGroupInput({ className, ...props }: React.ComponentProps<typeof In
     <InputPrimitive
       data-slot="input-group-control"
       className={cn(
-        "shadow-0! h-full w-full flex-1 rounded-[inherit] border-0! bg-transparent! py-0! pe-0 shadow-none! ring-0! outline-none focus-visible:ring-0! disabled:bg-transparent! aria-invalid:ring-0 dark:bg-transparent! dark:disabled:bg-transparent!",
+        "shadow-0! h-full w-full flex-1 rounded-[inherit] border-0! bg-transparent! py-0! ps-3 pe-0 shadow-none! ring-0! outline-none focus-visible:ring-0! disabled:bg-transparent! aria-invalid:ring-0 dark:bg-transparent! dark:disabled:bg-transparent!",
         className
       )}
       {...props}

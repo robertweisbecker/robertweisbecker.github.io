@@ -30,7 +30,9 @@ export default async function MDXLayout({ children, params }: { children: React.
   return (
     <div className="mx-auto max-w-7xl gap-8 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-[14rem_minmax(0,1fr)_14rem]">
       <aside id="toc" className="not-prose @container-[scroll-state] self-start max-lg:hidden lg:sticky lg:top-32">
-        <BackButton href="/#projects">Back</BackButton>
+        <BackButton className="-ms-1.5 mb-4" href="/#projects">
+          Projects
+        </BackButton>
 
         <TableOfContents toc={toc} title={fm.title} />
       </aside>

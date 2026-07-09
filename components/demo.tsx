@@ -34,7 +34,7 @@ export function DemoRoot({ className, plain, ...props }: DemoRootProps) {
     <figure
       data-demo
       data-slot="demo-root"
-      className={cn("not-prose flex min-w-0 flex-col rounded-xl", !plain && "bg-muted/50", className)}
+      className={cn("not-prose flex min-w-0 flex-col rounded-xl", !plain && "bg-neutral-75 dark:bg-neutral-950", className)}
       {...props}
     />
   );
@@ -201,7 +201,7 @@ export function DemoFooter({ className, variant = "caption", ...props }: DemoFoo
     <footer
       data-slot="demo-footer"
       data-variant={variant}
-      className={cn(variant === "caption" && "px-(--radius-xl) pt-1.5 pb-2 text-xs text-muted-foreground", className)}
+      className={cn(variant === "caption" && "p-(--radius-xl) pt-1 text-xs text-muted-foreground", "rounded-b-[inherit]", className)}
       {...props}
     />
   );
@@ -289,7 +289,7 @@ export function DemoContainer({
             lineNumbers={code.lineNumbers}
             collapsible={code.collapsible}
             initialHeight={code.initialHeight}
-            className="m-px rounded-b-[inherit] border border-border"
+            className="m-px rounded-b-[inherit]"
           />
         </Demo.Footer>
       ) : null}

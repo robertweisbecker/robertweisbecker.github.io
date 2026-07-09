@@ -535,7 +535,7 @@ function CarouselToolbar({ className, inset = true, ...props }: React.ComponentP
         "z-10 flex shrink-0 items-center gap-3 text-foreground",
         orientation === "horizontal" && "w-fit flex-row",
         orientation === "vertical" && "rotate-90",
-        inset && orientation === "horizontal" && "absolute bottom-4 left-1/2 -translate-x-1/2",
+        inset && orientation === "horizontal" && "absolute -bottom-[calc(var(--button-sm)/2)] left-1/2 -translate-x-1/2",
         inset && orientation === "vertical" && "absolute top-1/2 left-button-sm -translate-x-1/2 -translate-y-1/2",
         !inset && orientation === "vertical" && "translate-x-[calc(50%-var(--button-sm)/2)]",
         !inset && "m-2 mx-auto shrink-0",

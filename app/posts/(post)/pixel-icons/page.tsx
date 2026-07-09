@@ -36,9 +36,9 @@ export default function PixelIconsPage() {
             some great ones for box drawings and ASCII art.
           </p>
 
-          <DemoContainer caption="Just look at this progress bar!">
+          <DemoContainer caption="Just look at this progress bar!" centerContent>
             <div className="mx-auto max-w-3xs text-center">
-              <span className="inline border border-dotted border-current font-pixel text-2xs text-info-primary">
+              <span className="inline border border-current font-pixel text-2xs text-info-primary">
                 <span>████████</span>
                 <span>▒▒▒▒▒</span>
                 <span>░░░░░░░░░░</span>
@@ -50,7 +50,7 @@ export default function PixelIconsPage() {
             I&apos;m using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other
             places. At first glance, it seemed like we Departure would let me replace my Tabler icons with symbols.
           </p>
-          <DemoContainer caption="A few Departure Mono symbols">
+          <DemoContainer caption="A few Departure Mono symbols" centerContent>
             <div className="text-center font-pixel text-[22px]">
               {"❰ ❮ ❬ < ‹ › > ❭ ❯ ❱"}
               <br />
@@ -118,10 +118,10 @@ export default function PixelIconsPage() {
               </span>
             </div>
           </DemoContainer>
-          <DemoContainer title="Animated" description="∙ click each to morph" centerContent innerClass="min-h-[300px]">
+          <DemoContainer title="Animated" description="click each to morph" centerContent innerClass="min-h-[300px]">
             <PixelMorphToggles />
           </DemoContainer>
-          <DemoContainer title="Password toggle" description="∙ type or hide your password" centerContent innerClass="min-h-[300px]">
+          <DemoContainer title="Password toggle" centerContent innerClass="min-h-[300px]">
             <PixelIconPasswordToggle />
           </DemoContainer>
           <Heading level={2}>Twenty-eight pixels</Heading>
@@ -191,7 +191,7 @@ export default function PixelIconsPage() {
           </p>
           <p>A lot, it turns out.</p>
 
-          <DemoContainer caption="The current 28-rect morphable set." innerClass="p-3">
+          <DemoContainer caption="The current 28-rect morphable set." centerContent innerClass="p-3">
             <MorphablePixelIconScrollDemo />
           </DemoContainer>
 
@@ -213,36 +213,32 @@ export default function PixelIconsPage() {
             generates icons from the X/Y coordinates of each 1x1 layer per frame. Icons then become a string it parses from Figma, and the
             helper renders <Code variant="inline-component">rect</Code> elements inside a shared SVG wrapper.
           </p>
-          <DemoContainer caption="Click an icon to inspect the coordinate string behind it." innerClass="p-1">
+          <DemoContainer title="Inspect coordinates" innerClass="min-h-[unset] p-1" variant="plain">
             <PixelIconDataInspectorDemo />
           </DemoContainer>
         </div>
 
-        <div className="prose prose-sm max-w-none">
-          <Heading level={2}>Morph Visualizer</Heading>
+        <div className="prose max-w-none">
+          <Heading level={2}>Morph visualizer(s)</Heading>
           <p>
             With the second batch of icons created, the next step was to see how they animate. Inspired by Benji&apos;s post, Codex and I
             created a visualizer to experiment further. You can select a sequence of icons to see how pixels match up between states, and
             test different animations, speeds, etc. Give it a spin below.
           </p>
+          <Heading level={3}>v1: Sequence builder</Heading>
+          <p>Build a sequence, jump between steps, and play transitions from the preview or footer.</p>
         </div>
 
-        <div className="not-prose grid gap-10">
-          <section className="space-y-3">
-            <Heading level={3}>V1 — sequence builder</Heading>
-            <p className="text-sm text-muted-foreground">
-              Build a sequence, jump between steps, and play transitions from the preview or footer.
-            </p>
-            <PixelMorphVisualizer />
-          </section>
-          <section className="space-y-3">
-            <Heading level={3}>V2 — click to morph</Heading>
-            <p className="text-sm text-muted-foreground">
-              Start empty, click an icon to preview it, then click another to morph. Click the active icon again to clear.
-            </p>
-            <PixelMorphVisualizerV2 />
-          </section>
-        </div>
+        <section className="not-prose">
+          <PixelMorphVisualizer />
+        </section>
+        <section className="prose">
+          <Heading level={3}>v2: Click-to-morph</Heading>
+          <p>Start empty, click an icon to preview it, then click another to morph. Click the active icon again to clear.</p>
+        </section>
+        <section className="not-prose">
+          <PixelMorphVisualizerV2 />
+        </section>
       </div>
     </>
   );

@@ -65,7 +65,7 @@ export const buttonVariants = cva(
           "bg-blend-[luminosity,plus-lighter,normal,normal]",
           "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_5px_-6px_color-mix(in_srgb,canvas_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
           "after:pointer-events-none after:absolute after:inset-x-px after:inset-y-1 after:-z-1 after:translate-y-1/2 after:scale-x-90 after:rounded-[inherit] after:rounded-t-none after:bg-linear-to-b after:from-card/10 after:to-card/2 after:mix-blend-soft-light after:blur-sm",
-          "dark:bg-popover/60 dark:ring-[0.5px] dark:ring-background [&_svg]:text-neutral-500 [&_svg]:mix-blend-difference dark:[&_svg]:text-neutral-300",
+          "dark:bg-popover/60 dark:ring-[0.5px] dark:ring-background **:text-neutral-400 **:mix-blend-difference dark:**:text-neutral-300",
           "hover:scale-105",
         ],
         overlay: [

@@ -6,11 +6,10 @@ import { cn } from "@/lib/utils";
 import { Dialog as DialogBase } from "@base-ui/react/dialog";
 import { Drawer as DrawerBase } from "@base-ui/react/drawer";
 import { Popover } from "@base-ui/react/popover";
-import { IconArrowsDiagonal, IconX } from "@tabler/icons-react";
 import { AnimatePresence, HTMLMotionProps, LazyMotion, LayoutGroup, domAnimation, m } from "motion/react";
 import * as React from "react";
 import { createPortal } from "react-dom";
-
+import { ArrowsExpandIcon, XIcon } from "@/components/icons";
 import { imageSrc } from "@/lib/image-src";
 import NextImage, { type StaticImageData } from "next/image";
 
@@ -52,7 +51,7 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
       onClick={onClick}
       className="group/close pointer-events-auto absolute -top-10 right-0 z-10 inline-flex cursor-pointer items-center gap-0 rounded-full border border-white/20 bg-black/50 p-2 text-sm font-medium text-white shadow-lg backdrop-blur-sm transition-all duration-300 ease-out hover:gap-1 hover:px-3"
     >
-      <IconX className="size-4" />
+      <XIcon className="size-4" />
       <span className="max-w-0 translate-x-2 overflow-hidden text-right opacity-0 transition-all duration-300 ease-out group-hover/close:max-w-[6ch] group-hover/close:translate-x-0 group-hover/close:opacity-100">
         Close
       </span>
@@ -113,7 +112,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
           aria-label="View fullscreen image"
           className={cn(
             "group/trigger block w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
-            "relative bg-card py-1 shadow-border-sm sm:rounded-2xl sm:px-1 sm:squircle"
+            "relative bg-card py-1 shadow-border-md sm:rounded-2xl sm:px-1 sm:squircle"
           )}
         >
           <NextImage
@@ -121,7 +120,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
             src={src}
             alt={typeof caption === "string" ? caption : ""}
             sizes="(max-width: 768px) 100vw, 720px"
-            className="h-auto w-full outline -outline-offset-1 outline-border/50 sm:rounded-[calc(var(--radius-2xl)-(--spacing(1)))] sm:squircle"
+            className="h-auto w-full outline -outline-offset-1 outline-border sm:rounded-xl sm:squircle"
           />
           <span
             aria-hidden
@@ -130,7 +129,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
               "absolute inset-e-3 bottom-3 cursor-default"
             )}
           >
-            <IconArrowsDiagonal />
+            <ArrowsExpandIcon />
           </span>
         </DialogBase.Trigger>
 
@@ -170,7 +169,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
               className="absolute inset-e-3 top-3 z-10"
               render={<Button variant="glass" size="icon-sm" rounded />}
             >
-              <IconX />
+              <XIcon />
             </DialogBase.Close>
             {/* <div className="absolute top-2 left-1/2 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-neutral-400/60 shadow-border-xs ring-[0.5px] inset-shadow-xs inset-ring-[0.5px] ring-black/50 inset-shadow-white/10 inset-ring-white/2 backdrop-blur-md"></div> */}
           </DialogBase.Popup>
@@ -301,7 +300,7 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
               }
               aria-label="View fullscreen image"
             >
-              <IconArrowsDiagonal />
+              <ArrowsExpandIcon />
             </DialogBase.Trigger>
           </div>
 
@@ -339,7 +338,7 @@ export function ImageModalMotion({ src, src2, caption }: ImageModalProps) {
                         />
                       }
                     >
-                      <IconX />
+                      <XIcon />
                     </DialogBase.Close>
                     <MotionNextImage
                       layoutId={layoutId}

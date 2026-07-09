@@ -623,9 +623,6 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
   return (
     <div className={cn("grid items-start gap-2 md:grid-cols-[minmax(0,1fr)_minmax(18rem,0.45fr)]", className)}>
       <Card>
-        <CardHeader>
-          <CardTitle>Preview</CardTitle>
-        </CardHeader>
         <CardContent>
           <div className="grid h-[110px] place-items-center" data-section="preview">
             <div className="grid size-[88px] place-items-center rounded-xl border border-border" data-testid="pixel-morph-preview-v2">
@@ -653,9 +650,9 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
 
           <ScrollArea className="w-full max-sm:h-64" scrollbarGutter showScrollbar scrollFade innerClass="border-t border-s">
             <ToggleGrid
-              columns={8}
+              columns={9}
               spacing={0}
-              shape="square"
+              // shape="square"
               value={activeIcon ? [activeIcon] : []}
               onValueChange={(next) => handleGridChange(next as PixelIcons.MorphablePixelIconName[])}
               aria-label="Morphable pixel icons"
@@ -673,7 +670,7 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
                     className="group aspect-square h-auto! rounded-none"
                   >
                     <Icon className="size-[16.5px]" aria-hidden />
-                    <span className="ease pointer-events-none absolute inset-0 grid-stack overflow-hidden bg-secondary text-center text-[9px]/none text-ellipsis opacity-0 group-hover:opacity-100 group-data-pressed:opacity-0">
+                    <span className="ease pointer-events-none absolute inset-0 grid-stack overflow-hidden bg-card/70 text-center text-[9px]/none opacity-0 backdrop-blur-xs group-hover:opacity-100 group-data-pressed:opacity-0">
                       {formatIconName(icon)}
                     </span>
                   </ToggleGroupItem>
@@ -685,9 +682,6 @@ export function PixelMorphVisualizerV2({ className }: { className?: string }) {
       </Card>
 
       <Card variant="muted">
-        <CardHeader>
-          <CardTitle>Customize</CardTitle>
-        </CardHeader>
         <CardContent className="gap-3">
           <AnimationControl label="Animation" value={animation} options={ANIMATION_OPTIONS} onValueChange={setAnimation} />
           <AnimationControl type="select" label="Strategy" value={strategy} options={STRATEGY_OPTIONS} onValueChange={setStrategy} />

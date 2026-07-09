@@ -124,7 +124,7 @@ export function DepartureMonoTextDemo() {
   ];
 
   return (
-    <div className="grid content-center gap-3">
+    <div className="space-y-5 text-center">
       {sizes.map((size) => (
         <div key={size.label} className={cn("flex items-center gap-2 font-pixel text-foreground", size.textClassName)}>
           <span>★ {size.label}</span>
@@ -205,17 +205,11 @@ export function MorphablePixelIconScrollDemo() {
 export function PixelIconDataInspectorDemo() {
   const [selectedIcon, setSelectedIcon] = React.useState<PixelIcons.MorphablePixelIconName>("PixelPenToolIcon");
   const data = PixelIcons.pixelIconData[selectedIcon];
-  const code = `createPixelIcon(\n  "${selectedIcon}",\n  ${data.width},\n  ${data.height},\n  "${data.data}"\n)`;
+  const code = `createPixelIcon(\n  "${selectedIcon}",\n  ${data.width},\n  ${data.height},\n  "${data.data}")`;
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      {/* <div className="grid aspect-square size-20 w-full place-items-center">
-        <Icon className="size-[44px]" aria-hidden />
-      </div> */}
+    <div className="grid grid-cols-[auto_1fr] gap-2">
       <ToggleGroup
-        spacing={0.25}
-        shape="square"
-        variant="elevated"
         value={[selectedIcon]}
         onValueChange={(next) => {
           const nextValue = Array.isArray(next) ? next[0] : next;
@@ -223,22 +217,19 @@ export function PixelIconDataInspectorDemo() {
             setSelectedIcon(nextValue as PixelIcons.MorphablePixelIconName);
           }
         }}
-        size="xs"
-        className="w-full"
+        spacing={0.25}
+        orientation="vertical"
+        variant="elevated"
         aria-label="Choose pixel icon data"
+        className="p-px"
       >
         {inspectedIcons.map((name) => {
           const OptionIcon = iconComponents[name];
 
           return (
-            <ToggleGroupItem
-              key={name}
-              value={name}
-              aria-label={formatIconName(name)}
-              className="h-fit flex-1 flex-col items-center py-2 wrap-break-word"
-            >
+            <ToggleGroupItem key={name} value={name} aria-label={formatIconName(name)} className="justify-start">
               <OptionIcon data-icon="inline-start" className="size-[16.5px]" aria-hidden />
-              <span className="truncate whitespace-normal">{formatIconName(name)}</span>
+              <span className="truncate whitespace-nowrap">{formatIconName(name)}</span>
             </ToggleGroupItem>
           );
         })}

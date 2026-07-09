@@ -85,10 +85,9 @@ function PixelMorphToggle({ item }: { item: PixelMorphToggleItem }) {
 export function PixelIconPasswordToggle({ className }: { className?: string }) {
   const [pressed, setPressed] = React.useState(false);
   return (
-    <Field>
+    <Field className="flex max-w-3xs flex-col items-center">
       <FieldLabel>Password</FieldLabel>
-
-      <InputGroup size="lg" className={cn("max-w-3xs", className)}>
+      <InputGroup size="lg" className={cn(className)}>
         <InputGroupInput
           placeholder="Password"
           value="Password1234"
@@ -100,18 +99,16 @@ export function PixelIconPasswordToggle({ className }: { className?: string }) {
           <InputGroupButton
             data-pressed={pressed}
             onClick={() => setPressed((prev) => !prev)}
-            aria-label="Hide"
-            className="aspect-square"
+            aria-label="Show password"
             size="icon-sm"
-
-            // render={<Toggle pressed={pressed} onPressedChange={setPressed} aria-label="Hide" size="lg" shape="column" />}
+            aria-pressed={pressed}
           >
             <PixelMorph
-              from="PixelEyeClosedIcon"
-              to="PixelEyeIcon"
+              to="PixelEyeClosedIcon"
+              from="PixelEyeIcon"
               active={pressed}
               animation={ANIMATION}
-              duration={0.03}
+              duration={0.01}
               stagger={0.005}
               scale={1.5}
               className="shrink-0 text-foreground"
