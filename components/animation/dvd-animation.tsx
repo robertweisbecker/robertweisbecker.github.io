@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons-pixel";
+import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons/pixel";
 import { Kbd } from "@/components/ui/kbd";
 import { Separator } from "../ui/separator";
 

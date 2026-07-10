@@ -1,4 +1,4 @@
-import { VerisimilitudePlayground } from "@/components/playground/verisimilitude/verisimilitude-playground";
+import { VerisimilitudePlayground } from "@/components/demos/playground/verisimilitude/verisimilitude-playground";
 
 export default function VerisimilitudePlaygroundPage() {
   return (

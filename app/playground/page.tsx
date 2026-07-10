@@ -1,4 +1,4 @@
-import { TreeIconFile } from "@/components/icons-tree";
+import { TreeIconFile } from "@/components/icons/tree";
 import { FoldedCardDemo } from "@/components/demos/folded-card-demo";
 import { PlaygroundRouteNav } from "@/components/blocks/playground-route-nav";
 

@@ -1,4 +1,4 @@
-import { UiPlayground } from "@/components/playground/ui/ui-playground";
+import { UiPlayground } from "@/components/demos/playground/ui/ui-playground";
 
 export default function UiPlaygroundPage() {
   return (

@@ -1,4 +1,4 @@
-import { MotionPlayground } from "@/components/playground/motion/motion-playground";
+import { MotionPlayground } from "@/components/demos/playground/motion/motion-playground";
 
 export default function MotionPlaygroundPage() {
   return (

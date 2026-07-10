@@ -1,4 +1,4 @@
-import { SvgPlayground } from "@/components/playground/svg/svg-playground";
+import { SvgPlayground } from "@/components/demos/playground/svg/svg-playground";
 
 export default function SvgPlaygroundPage() {
   return (

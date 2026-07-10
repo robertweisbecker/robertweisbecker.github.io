@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/code-block";
-import { DemoContainer } from "@/components/demo";
+import { DemoContainer } from "@/components/blocks/demo";
 import { LinkOut } from "@/components/link-out";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Code } from "@/components/ui/code";

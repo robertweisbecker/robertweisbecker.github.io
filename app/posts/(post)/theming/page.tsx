@@ -1,5 +1,5 @@
 import { CodeBlock } from "@/components/code-block";
-import { DemoContainer } from "@/components/demo";
+import { DemoContainer } from "@/components/blocks/demo";
 import { CheckIconStraight } from "@/components/icons";
 import { Theme, ThemeResetAllButton, ThemeSettingsPanel } from "@/components/theme";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";

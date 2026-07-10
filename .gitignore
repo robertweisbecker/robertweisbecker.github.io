@@ -40,13 +40,15 @@ yarn-error.log*
 
 # agents
 .agents
+.scratch
 .scratch/
+/.scratch/
+/plans/
 plans/
-AGENTS.md
+
 .cursorignore
 skills-lock.json
 .cursor
-
 
 # typescript
 *.tsbuildinfo

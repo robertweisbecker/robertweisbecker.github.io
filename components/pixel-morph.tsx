@@ -1,6 +1,6 @@
 "use client";
 
-import { type MorphablePixelIconName, type PixelIconPoint, morphablePixelIconNames, pixelIconData } from "@/components/icons-pixel";
+import { type MorphablePixelIconName, type PixelIconPoint, morphablePixelIconNames, pixelIconData } from "@/components/icons/pixel";
 import { cn } from "@/lib/utils";
 import { LazyMotion, domAnimation, m, useReducedMotion, type Transition } from "motion/react";
 import * as React from "react";

@@ -35,7 +35,7 @@ function FieldLegend({
         "group/field-legend",
         variant === "heading" && "mb-2 border-b pb-2 text-base font-medium text-foreground",
         variant === "legend" && "text-md font-medium text-foreground",
-        variant === "label" && "text-sm font-[450]",
+        variant === "label" && "text-xs font-[450] text-muted-foreground",
         className
       )}
       {...props}
@@ -106,7 +106,7 @@ function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>)
     <Label
       data-slot="field-label"
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 text-sm font-medium text-foreground group-data-[disabled=true]/field:opacity-50 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-[>[data-slot=field]]:has-data-checked:border-primary/30 has-[>[data-slot=field]]:has-data-checked:bg-primary/5 *:data-[slot=field]:p-2.5 dark:has-[>[data-slot=field]]:has-data-checked:border-primary/20 dark:has-[>[data-slot=field]]:has-data-checked:bg-primary/10",
+        "group/field-label peer/field-label flex w-fit gap-2 text-xs text-muted-foreground group-data-[disabled=true]/field:opacity-50 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-[>[data-slot=field]]:has-data-checked:border-primary/30 has-[>[data-slot=field]]:has-data-checked:bg-primary/5 *:data-[slot=field]:p-2.5 dark:has-[>[data-slot=field]]:has-data-checked:border-primary/20 dark:has-[>[data-slot=field]]:has-data-checked:bg-primary/10",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col",
         "group-data-[orientation=horizontal]/field:min-w-fit",
         className

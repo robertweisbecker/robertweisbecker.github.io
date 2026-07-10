@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons-pixel";
+import { PixelPauseIcon, PixelPlayIcon } from "@/components/icons/pixel";
 import { cn } from "@/lib/utils";
 import { LazyMotion, animate, domAnimation, m, useMotionValue } from "motion/react";
 import { useKeyPress } from "@/hooks/use-key-press";

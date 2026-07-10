@@ -1,7 +1,7 @@
 "use client";
 
-import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-group";
-import { PixelResetSmallIcon } from "@/components/icons-pixel";
+import { ColorSwatchGroup, type ColorSwatch } from "@/components/theme/color-swatch-group";
+import { PixelResetSmallIcon } from "@/components/icons/pixel";
 import { NumberSlider } from "@/components/number-slider";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSeparator, FieldSet } from "@/components/ui/field";

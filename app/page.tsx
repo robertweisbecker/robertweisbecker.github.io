@@ -16,10 +16,10 @@ import {
   NextJsIcon,
   VercelIcon,
 } from "@/components/icons";
-import { PixelMarkdown2Icon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons-pixel";
-import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons-tree";
+import { PixelMarkdown2Icon, PixelExternalIcon, PixelFigmaIcon } from "@/components/icons/pixel";
+import { TreeIconClaude, TreeIconFile, TreeIconRichText, TreeIconTailwind } from "@/components/icons/tree";
 import { LinkOut } from "@/components/link-out";
-import { IndexList, type IndexListItem } from "@/components/index-list";
+import { IndexList, type IndexListItem } from "@/components/blocks/index-list";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardAction, CardHeader, CardTitle } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverDescription, PopoverTrigger } from "@/components/ui/popover";
@@ -34,9 +34,9 @@ import { InfoTip } from "@/components/info-tip";
 import { PreviewCard, PreviewCardPopup, PreviewCardTrigger } from "@/components/ui/preview-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CopyButton } from "@/components/ui/copy-button";
-import { ArtCards } from "@/components/demos/art-cards";
-import { Letterboxd } from "@/components/demos/letterboxd";
-import { HomePortrait } from "@/components/home-portrait";
+import { ArtCards } from "@/components/blocks/art-cards";
+import { Letterboxd } from "@/components/blocks/letterboxd";
+import { HomePortrait } from "@/components/blocks/home-portrait";
 import { projects } from "@/lib/data/projects";
 
 const postItems: IndexListItem[] = posts.map((post) => {

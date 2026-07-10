@@ -67,14 +67,14 @@ const toggleGroupItemVariants = [
   "group-data-vertical/toggle-group:data-[spacing=0]:first:rounded-t-[inherit]",
   "group-data-horizontal/toggle-group:data-[spacing=0]:last:rounded-e-[inherit]",
   "group-data-vertical/toggle-group:data-[spacing=0]:last:rounded-b-[inherit]",
+  "group-data-[spacing=0]/toggle-group:data-[variant=outline]/toggle-group:rounded-none",
+  "group-data-[size=xs]/toggle-group:group-data-[variant=elevated]/toggle-group:rounded-md",
   "group-data-horizontal/toggle-group:group-data-[spacing=0]:data-[variant=outline]:not-first:border-s-transparent",
   "group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:not-first:not-last:-mx-px",
   "group-data-horizontal/toggle-group:group-data-[spacing=0]:data-[variant=outline]:data-pressed:border-s-input",
   "group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:border-t-transparent",
   "group-data-horizontal/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-s",
   "group-data-vertical/toggle-group:data-[spacing=0]:data-[variant=outline]:first:border-t",
-  "group-data-[spacing=0]/toggle-group:data-[variant=outline]/toggle-group:rounded-none",
-  "group-data-[size=xs]/toggle-group:group-data-[variant=elevated]/toggle-group:rounded-md",
   // "group-data-[spacing=0]/toggle-group:px-2",
 ];
 

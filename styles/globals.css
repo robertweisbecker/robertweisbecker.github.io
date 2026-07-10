@@ -206,7 +206,8 @@
 
   --shadow-button-inset:
     inset 0 1.5px 0 0 --alpha(currentColor / 20%), inset 0 0 0 1.5px --alpha(currentColor / 10%),
-    inset 0 -2px 0 -1px hsl(0 0 0% / 8%), inset 0 0 0 1px var(--button-bg, var(--tw-shadow-color));
+    inset 0 -2px 0 -1px hsl(0 0 0% / 8%),
+    inset 0 0 0 1px color-mix(in srgb, var(--button-bg, var(--primary)) 90%, var(--color-border));
   --shadow-button-inset-pressed: inset 0 2px 0 0px hsl(0 0 0% / 10%), inset 0 0 0 1px hsl(0 0 0% / 10%);
 }
 
@@ -219,7 +220,7 @@
 [data-hue="sand"],
 [data-hue="sage"],
 [data-hue="steel"] {
-  --primary: var(--hue-700);
+  --primary: var(--hue-600);
   --primary-foreground: var(--color-white);
 }
 

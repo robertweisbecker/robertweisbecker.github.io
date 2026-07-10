@@ -8,7 +8,9 @@ export const metadata: Metadata = {
 
 const privateLinks = [
   ["/private/qa", "QA"],
+  ["/private/drawer", "Drawer"],
   ["/private/image-modal", "Image modal"],
+  ["/private/svg-canvas", "SVG Canvas primitives & color charts"],
   ["/private/og-preview", "OG preview"],
 ] as const;
 

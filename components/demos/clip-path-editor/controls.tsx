@@ -1,6 +1,6 @@
 "use client";
 
-import { ColorSwatchGroup, type ColorSwatch } from "@/components/color-swatch-group";
+import { ColorSwatchGroup, type ColorSwatch } from "@/components/theme/color-swatch-group";
 import { InfoTip } from "@/components/info-tip";
 import { NumberSlider } from "@/components/number-slider";
 import { Button } from "@/components/ui/button";

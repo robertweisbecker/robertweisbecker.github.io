@@ -1,4 +1,4 @@
-import { ButtonsPlayground } from "@/components/playground/buttons/buttons-playground";
+import { ButtonsPlayground } from "@/components/demos/playground/buttons/buttons-playground";
 
 export default function ButtonsPlaygroundPage() {
   return (

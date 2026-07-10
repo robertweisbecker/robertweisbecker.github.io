@@ -4,7 +4,7 @@ export function PlaygroundSection({ id, title, children }: { id: string; title: 
   return (
     <section id={id} className="grid w-full scroll-mt-28 gap-6 md:gap-8">
       <h1 className="border-b border-border pb-3 text-h1 text-base">{title}</h1>
-      <div className="grid gap-8 md:grid-cols-8 md:gap-10 lg:grid-cols-12">{children}</div>
+      <div className="grid gap-8 md:gap-12 lg:grid-cols-12">{children}</div>
     </section>
   );
 }

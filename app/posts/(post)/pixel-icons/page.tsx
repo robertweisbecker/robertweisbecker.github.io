@@ -1,15 +1,15 @@
-import { DemoContainer } from "@/components/demo";
+import { DemoContainer } from "@/components/blocks/demo";
 import {
   DepartureMonoTextDemo,
   MorphablePixelIconScrollDemo,
   PixelIconDataInspectorDemo,
   PixelSunMoonMorphDemo,
   TablerRotationIdeaDemo,
-} from "@/components/demos/pixel-icons-post-demos";
-import { PixelIconMatrix } from "@/components/demos/pixel-icons-matrix";
-import { PixelMorphToggles, PixelIconPasswordToggle } from "@/components/demos/pixel-morph-toggles";
-import { PixelMorphVisualizer, PixelMorphVisualizerV2 } from "@/components/demos/pixel-morph-visualizer";
-import * as PixelIcons from "@/components/icons-pixel";
+} from "@/components/demos/pixels/pixel-icons-post-demos";
+import { PixelIconMatrix } from "@/components/demos/pixels/pixel-icons-matrix";
+import { PixelMorphToggles, PixelIconPasswordToggle } from "@/components/demos/pixels/pixel-morph-toggles";
+import { PixelMorphVisualizer, PixelMorphVisualizerV2 } from "@/components/demos/pixels/pixel-morph-visualizer";
+import * as PixelIcons from "@/components/icons/pixel";
 import { LinkOut } from "@/components/link-out";
 import { Code } from "@/components/ui/code";
 import { Heading } from "@/components/ui/heading";

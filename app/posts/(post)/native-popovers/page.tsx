@@ -1,4 +1,4 @@
-import { DemoContainer } from "@/components/demo";
+import { DemoContainer } from "@/components/blocks/demo";
 import { Button } from "@/components/ui/button";
 import { Code } from "@/components/ui/code";
 import { Badge } from "@/components/ui/badge";

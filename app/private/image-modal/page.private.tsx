@@ -1,6 +1,6 @@
 "use client";
 
-import { ImageModal, ImageModalMotion, ImageModalPopover, ImageModalPopover2 } from "@/components/image-modal";
+import { ImageModal, ImageModalMotion, ImageModalPopover, ImageModalPopover2 } from "@/components/blocks/image-modal";
 import { Badge } from "@/components/ui/badge";
 import { Code } from "@/components/ui/code";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";

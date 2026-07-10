@@ -1,6 +1,6 @@
 "use client";
 
-import { Pagination } from "@/components/pagination";
+import { Pagination } from "@/components/blocks/pagination";
 import { pageTitleTransitionName } from "@/components/view-transitions";
 import { posts } from "@/lib/data/posts";
 import { resolveNeighbors } from "@/lib/utils";

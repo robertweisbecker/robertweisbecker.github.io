@@ -54,7 +54,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Collapsible } from "@base-ui/react/collapsible";
 import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic } from "@tabler/icons-react";
 import dynamic from "next/dynamic";
-import { Section } from "@/components/section";
+import { Section } from "@/components/blocks/section";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { DeviceFrame } from "@/components/device-frame";
 import { Favicon } from "@/components/icons";
@@ -558,17 +558,13 @@ export default function QaPage() {
           </Section>
         </section>
 
-        <section className="mt-12 grid gap-4">
-          <Heading level={2} id="custom-components">
-            Custom components
-          </Heading>
-          <ComponentDemos />
-        </section>
+        <ComponentDemos />
       </main>
     </div>
   );
 }
 
+/** Inline demos in this page (`components/ui` + a few shared shells). */
 const UI_TOC_ITEMS = [
   { id: "button", text: "Button" },
   { id: "badge", text: "Badge" },
@@ -593,40 +589,69 @@ const UI_TOC_ITEMS = [
   { id: "description-list", text: "Description List" },
 ];
 
-const CUSTOM_TOC_ITEMS = [
-  { id: "animate-height", text: "Animate Height" },
-  { id: "motion-text", text: "Motion Text" },
-  { id: "loader", text: "Loader" },
-  { id: "pixel-icons-post-hero", text: "Pixel Icons Post Hero" },
+/** Additional `components/ui` demos loaded from `component-demos.tsx`. */
+const MORE_UI_TOC_ITEMS = [
+  { id: "drawer", text: "Drawer" },
   { id: "alert", text: "Alert" },
   { id: "avatar", text: "Avatar" },
+  { id: "autocomplete", text: "Autocomplete" },
   { id: "checkbox", text: "Checkbox" },
   { id: "code", text: "Code" },
   { id: "combobox", text: "Combobox" },
   { id: "copy-button", text: "Copy Button" },
+  { id: "empty", text: "Empty" },
   { id: "input-group", text: "Input Group" },
   { id: "item", text: "Item" },
-  { id: "index-list", text: "Index List" },
   { id: "kbd", text: "Kbd" },
+  { id: "link-button", text: "Link Button" },
+  { id: "loader", text: "Loader" },
   { id: "number-field", text: "Number Field" },
+  { id: "resizable", text: "Resizable" },
+  { id: "skeleton", text: "Skeleton" },
   { id: "slider", text: "Slider" },
   { id: "switch", text: "Switch" },
   { id: "heading-levels", text: "Heading Levels" },
+];
+
+/** `components/animation` + pixel matrix (not pixel morph). */
+const ANIMATION_TOC_ITEMS = [
+  { id: "animate-height", text: "Animate Height" },
+  { id: "motion-text", text: "Motion Text" },
+  { id: "pixel-icons-post-hero", text: "Pixel Icons Post Hero" },
+];
+
+/** `components/blocks` demos. */
+const BLOCKS_TOC_ITEMS = [
+  { id: "demo", text: "Demo" },
+  { id: "index-list", text: "Index List" },
+  { id: "image-modal", text: "Image Modal" },
+  { id: "pagination", text: "Pagination" },
+  { id: "stats", text: "Stats" },
+];
+
+/** `components/theme` demos. */
+const THEME_TOC_ITEMS = [
+  { id: "mode-toggle", text: "Mode Toggle" },
+  { id: "color-swatch-group", text: "Color Swatch Group" },
+  { id: "theme-settings", text: "Theme Settings" },
+];
+
+/** `components/icons` demos. */
+const ICONS_TOC_ITEMS = [
+  { id: "icons", text: "Icons" },
+  { id: "morph-icon", text: "Morph Icon" },
+];
+
+/** Root-level / content helpers that stay outside folder groups. */
+const CONTENT_TOC_ITEMS = [
   { id: "table-of-contents", text: "Table of Contents" },
   { id: "link-out", text: "Link Out" },
   { id: "back-button", text: "Back Button" },
   { id: "code-block", text: "Code Block" },
-  { id: "demo", text: "Demo" },
   { id: "card-fan", text: "Card Fan" },
   { id: "info-tip", text: "Info Tip" },
-  { id: "mode-toggle", text: "Mode Toggle" },
   { id: "number-slider", text: "Number Slider" },
-  { id: "stats", text: "Stats" },
-  { id: "color-swatch-group", text: "Color Swatch Group" },
-  { id: "icons", text: "Icons" },
   { id: "image", text: "Image" },
-  { id: "image-modal", text: "Image Modal" },
-  { id: "theme-settings", text: "Theme Settings" },
   { id: "mark-note", text: "Mark Note" },
   { id: "video", text: "Video" },
 ];
@@ -634,6 +659,16 @@ const CUSTOM_TOC_ITEMS = [
 const QA_TOC: TocItem[] = [
   { id: "ui-components", text: "UI components", depth: 2 },
   ...UI_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
-  { id: "custom-components", text: "Custom components", depth: 2 },
-  ...CUSTOM_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "more-ui", text: "More UI", depth: 2 },
+  ...MORE_UI_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "animation", text: "Animation", depth: 2 },
+  ...ANIMATION_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "blocks", text: "Blocks", depth: 2 },
+  ...BLOCKS_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "theme", text: "Theme", depth: 2 },
+  ...THEME_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "icons-group", text: "Icons", depth: 2 },
+  ...ICONS_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
+  { id: "content", text: "Content", depth: 2 },
+  ...CONTENT_TOC_ITEMS.map((item) => ({ ...item, depth: 3 })),
 ];

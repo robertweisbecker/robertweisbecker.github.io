@@ -4,7 +4,7 @@ import { Select as SelectPrimitive } from "@base-ui/react/select";
 import * as React from "react";
 
 import { CheckIcon } from "@/components/icons";
-import { PixelChevronsIcon } from "@/components/icons-pixel";
+import { PixelChevronsIcon } from "@/components/icons/pixel";
 import { cn } from "@/lib/utils";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 

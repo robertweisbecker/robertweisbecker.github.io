@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BackButton } from "@/components/back-button";
-import { Pagination } from "@/components/pagination";
-import { ProjectMeta } from "@/components/project-meta";
+import { Pagination } from "@/components/blocks/pagination";
+import { ProjectMeta } from "@/components/blocks/project-meta";
 import { TableOfContents } from "@/components/table-of-contents";
 import { projects } from "@/lib/data/projects";
 import { getProjectFrontmatter, getProjectToc } from "@/lib/projects";

@@ -11,14 +11,14 @@ const toggleVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-muted/50 text-foreground data-pressed:text-secondary-foreground",
+        default: "text-muted-foreground data-pressed:text-secondary-foreground data-pressed:bg-secondary",
         outline: "data-pressed:border-input border data-pressed:text-foreground",
         elevated:
           "data-pressed:bg-card dark:data-pressed:bg-popover data-pressed:text-foreground text-muted-foreground data-pressed:shadow-border-xs",
       },
       shape: {
-        default: "inline-flex items-center justify-center whitespace-nowrap",
-        column: "flex flex-col gap-1! p-2 items-center justify-center leading-tight h-fit text-center",
+        default: "inline-flex gap-1 items-center justify-center whitespace-nowrap",
+        column: "flex flex-col gap-1 p-2 items-center justify-center leading-tight text-center",
         square: "flex flex-col gap-0 items-center [&_svg]:size-5 justify-center aspect-square h-full",
         round: "inline-flex items-center justify-center whitespace-nowrap rounded-full",
       },

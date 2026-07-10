@@ -4,8 +4,8 @@ import { BackButton } from "@/components/back-button";
 import { AnimateHeight } from "@/components/animation/animate-height";
 import { MotionText } from "@/components/animation/MotionText";
 import { CodeBlock } from "@/components/code-block";
-import { ColorSwatchGroup } from "@/components/color-swatch-group";
-import { Demo, DemoContainer } from "@/components/demo";
+import { ColorSwatchGroup } from "@/components/theme/color-swatch-group";
+import { Demo, DemoContainer } from "@/components/blocks/demo";
 import { CardFan } from "@/components/demos/card-fan";
 import { Card, CardHeader, CardTitle, CardContent, CardAction } from "@/components/ui/card";
 import {
@@ -19,20 +19,31 @@ import {
   ShadcnIcon,
   TailwindIcon,
 } from "@/components/icons";
+import { MorphIcon } from "@/components/icons/morph-icon";
 import { Image } from "@/components/image";
-import { ImageModal, ImageModalDrawer } from "@/components/image-modal";
+import { ImageModal, ImageModalDrawer } from "@/components/blocks/image-modal";
 import forgeBeforeDemo from "@/public/assets/forge/forge-before.png";
-import { IndexList, type IndexListItem } from "@/components/index-list";
+import { IndexList, type IndexListItem } from "@/components/blocks/index-list";
+import { Pagination } from "@/components/blocks/pagination";
 import { InfoTip } from "@/components/info-tip";
 import { LinkOut } from "@/components/link-out";
 import { Mark, MarkNote } from "@/components/mark-note";
-import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 import { NumberSlider } from "@/components/number-slider";
-import { PixelIconMatrix } from "@/components/demos/pixel-icons-matrix";
-import { Stats } from "@/components/stats";
+import { PixelIconMatrix } from "@/components/demos/pixels/pixel-icons-matrix";
+import { Stats } from "@/components/blocks/stats";
 import { TableOfContents } from "@/components/table-of-contents";
 import { Theme, ThemeNeutralColorField, ThemePrimaryColorField, ThemeRadiusField, ThemeResetAllButton } from "@/components/theme";
 import { Alert, AlertAction, AlertContent, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  Autocomplete,
+  AutocompleteCollection,
+  AutocompleteEmpty,
+  AutocompleteInput,
+  AutocompleteItem,
+  AutocompleteList,
+  AutocompletePopup,
+} from "@/components/ui/autocomplete";
 import { Avatar, AvatarFallback, AvatarGroup, AvatarGroupCount, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -41,21 +52,36 @@ import { Code } from "@/components/ui/code";
 import { ColorCode } from "@/components/ui/color-code";
 import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList } from "@/components/ui/combobox";
 import { CopyButton } from "@/components/ui/copy-button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 import { Field, FieldContent, FieldLabel } from "@/components/ui/field";
 import { Heading } from "@/components/ui/heading";
 import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemGroup, ItemMedia, ItemTitle } from "@/components/ui/item";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Label } from "@/components/ui/label";
+import { LinkButton } from "@/components/ui/link-button";
 import { Loader } from "@/components/ui/loader";
 import { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from "@/components/ui/number-field";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Slider, SliderControl, SliderGroup, SliderLabel, SliderValue } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Video } from "@/components/video";
-import { IconAlertTriangle, IconInfoCircle, IconSearch, IconUser } from "@tabler/icons-react";
+import { IconAlertTriangle, IconFolderOff, IconInfoCircle, IconSearch, IconUser } from "@tabler/icons-react";
+import Link from "next/link";
 import * as React from "react";
-import { Section } from "@/components/section";
+import { Section } from "@/components/blocks/section";
 
 const FRAMEWORKS = [
   { value: "next", label: "Next.js" },
@@ -350,35 +376,80 @@ function MotionTextDemo() {
   );
 }
 
+function AutocompleteDemo() {
+  const items = FRAMEWORKS.map((fw) => fw.label);
+
+  return (
+    <div className="max-w-xs">
+      <Autocomplete items={items}>
+        <AutocompleteInput placeholder="Search frameworks…" showTrigger showClear />
+        <AutocompletePopup>
+          <AutocompleteEmpty>No results found.</AutocompleteEmpty>
+          <AutocompleteList>
+            <AutocompleteCollection>
+              {(item: string) => (
+                <AutocompleteItem key={item} value={item}>
+                  {item}
+                </AutocompleteItem>
+              )}
+            </AutocompleteCollection>
+          </AutocompleteList>
+        </AutocompletePopup>
+      </Autocomplete>
+    </div>
+  );
+}
+
+function MorphIconDemo() {
+  const [active, setActive] = React.useState(false);
+
+  return (
+    <div className="flex flex-wrap items-center gap-4">
+      <Button type="button" variant="outline" size="sm" onClick={() => setActive((value) => !value)}>
+        <MorphIcon from="filter" to="chevronRight" active={active} data-icon="inline-start" />
+        Toggle morph
+      </Button>
+      <div className="flex items-center gap-3 text-sm text-muted-foreground">
+        <MorphIcon from="chevronDown" to="chevronUp" active={active} />
+        <MorphIcon from="chevronLeft" to="chevronRight" active={active} />
+        <MorphIcon from="none" to="filter" active={active} />
+      </div>
+    </div>
+  );
+}
+
 export function ComponentDemos() {
   return (
     <>
-      <Section title="Animate Height">
-        <AnimateHeightDemo />
-      </Section>
+      <Heading level={2} id="more-ui" className="mt-12">
+        More UI
+      </Heading>
 
-      <Section title="Motion Text">
-        <MotionTextDemo />
-      </Section>
-
-      <Section title="Loader">
-        <div className="flex flex-wrap items-center gap-4 text-sm">
-          <span className="inline-flex items-center gap-2 text-primary">
-            <Loader />
-            Primary
-          </span>
-          <span className="inline-flex items-center gap-2 text-muted-foreground">
-            <Loader />
-            Muted
-          </span>
-          <Button loading size="sm">
-            Loading
-          </Button>
-        </div>
-      </Section>
-
-      <Section title="Pixel Icons Post Hero" id="pixel-icons-post-hero">
-        <PixelIconMatrix />
+      <Section
+        title="Drawer"
+        description={
+          <>
+            Basic composition smoke test. Full configurable demos live on{" "}
+            <Link className="text-primary underline-offset-4 hover:underline" href="/private/drawer">
+              /private/drawer
+            </Link>
+            .
+          </>
+        }
+      >
+        <Drawer showSwipeHandle swipeDirection="down">
+          <DrawerTrigger render={<Button variant="outline" />}>Open drawer</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Drawer</DrawerTitle>
+              <DrawerDescription>Base UI drawer via the design-system wrapper.</DrawerDescription>
+            </DrawerHeader>
+            <div className="p-4 text-sm text-muted-foreground">Use the dedicated private page for direction, snap points, and nested stacks.</div>
+            <DrawerFooter>
+              <DrawerClose render={<Button />}>Close</DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </Section>
 
       <Section title="Alert">
@@ -448,88 +519,12 @@ export function ComponentDemos() {
         </div>
       </Section>
 
+      <Section title="Autocomplete">
+        <AutocompleteDemo />
+      </Section>
+
       {/* <Section title="Carousel">
-        <div className="grid gap-8">
-          
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">Default — scroll</p>
-            <Carousel>
-              <CarouselViewport>
-                {CAROUSEL_SLIDES.map((slide) => (
-                  <CarouselItem key={slide.src}>
-                    <div
-                      className="aspect-video rounded-xl border bg-cover bg-center"
-                      style={{ backgroundImage: `url('${slide.src}')` }}
-                      role="img"
-                      aria-label={slide.alt}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselViewport>
-              <CarouselToolbar />
-            </Carousel>
-          </div>
-
-          
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">Autoplay — pill progress + play/pause</p>
-            <Carousel autoplay={{ delay: 3000, defaultInteraction: false }}>
-              <CarouselViewport>
-                {CAROUSEL_SLIDES.map((slide) => (
-                  <CarouselItem key={slide.src}>
-                    <div
-                      className="aspect-video rounded-xl border bg-cover bg-center"
-                      style={{ backgroundImage: `url('${slide.src}')` }}
-                      role="img"
-                      aria-label={slide.alt}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselViewport>
-              <CarouselToolbar />
-            </Carousel>
-          </div>
-
-          
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">Fade — crossfade transitions</p>
-            <Carousel fade>
-              <CarouselViewport>
-                {CAROUSEL_SLIDES.map((slide) => (
-                  <CarouselItem key={slide.src}>
-                    <div
-                      className="aspect-video rounded-xl border bg-cover bg-center"
-                      style={{ backgroundImage: `url('${slide.src}')` }}
-                      role="img"
-                      aria-label={slide.alt}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselViewport>
-              <CarouselToolbar />
-            </Carousel>
-          </div>
-
-          
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">Autoplay + Fade</p>
-            <Carousel autoplay={{ delay: 3000, defaultInteraction: false }} fade>
-              <CarouselViewport>
-                {CAROUSEL_SLIDES.map((slide) => (
-                  <CarouselItem key={slide.src}>
-                    <div
-                      className="aspect-video rounded-xl border bg-cover bg-center"
-                      style={{ backgroundImage: `url('${slide.src}')` }}
-                      role="img"
-                      aria-label={slide.alt}
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselViewport>
-              <CarouselToolbar />
-            </Carousel>
-          </div>
-        </div>
+        Covered by /private/testing/carousel and playground frames.
       </Section> */}
 
       <Section title="Checkbox">
@@ -563,8 +558,9 @@ export function ComponentDemos() {
         </div>
         <p className="text-sm">
           Use the <Code variant="inline">cn()</Code> utility for class merging. The <Code variant="inline">inline</Code> variant wraps text
-          in backticks. Or use the color code component for inline HEX <ColorCode value="#000000" />.
+          in backticks.
         </p>
+        <ColorCode value="oklch(0.65 0.18 250)" />
       </Section>
 
       <Section title="Combobox">
@@ -576,6 +572,23 @@ export function ComponentDemos() {
           <CopyButton value="Hello, world!" />
           <span className="text-sm text-muted-foreground">Click to copy &quot;Hello, world!&quot;</span>
         </div>
+      </Section>
+
+      <Section title="Empty">
+        <Empty className="max-w-md border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <IconFolderOff />
+            </EmptyMedia>
+            <EmptyTitle>No results</EmptyTitle>
+            <EmptyDescription>Try a different filter or clear your search.</EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button size="sm" variant="outline">
+              Clear filters
+            </Button>
+          </EmptyContent>
+        </Empty>
       </Section>
 
       <Section title="Input Group">
@@ -632,12 +645,6 @@ export function ComponentDemos() {
         </div>
       </Section>
 
-      <Section title="Index List">
-        <div className="max-w-2xl">
-          <IndexList items={INDEX_LIST_DEMO_ITEMS} maxVisibleItems={5} />
-        </div>
-      </Section>
-
       <Section title="Kbd">
         <div className="flex flex-wrap items-center gap-4">
           <Kbd>⌘</Kbd>
@@ -654,6 +661,34 @@ export function ComponentDemos() {
         </div>
       </Section>
 
+      <Section title="Link Button">
+        <div className="flex flex-wrap gap-2">
+          <LinkButton href="/private/qa">Internal</LinkButton>
+          <LinkButton href="https://ui.shadcn.com" isExternal variant="outline">
+            External
+          </LinkButton>
+          <LinkButton href="/playground" variant="ghost" size="sm">
+            Ghost
+          </LinkButton>
+        </div>
+      </Section>
+
+      <Section title="Loader">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
+          <span className="inline-flex items-center gap-2 text-primary">
+            <Loader />
+            Primary
+          </span>
+          <span className="inline-flex items-center gap-2 text-muted-foreground">
+            <Loader />
+            Muted
+          </span>
+          <Button loading size="sm">
+            Loading
+          </Button>
+        </div>
+      </Section>
+
       <Section title="Number Field">
         <div className="max-w-xs">
           <NumberField defaultValue={50} min={0} max={100}>
@@ -664,6 +699,26 @@ export function ComponentDemos() {
               <NumberFieldIncrement />
             </NumberFieldGroup>
           </NumberField>
+        </div>
+      </Section>
+
+      <Section title="Resizable">
+        <ResizablePanelGroup orientation="horizontal" className="min-h-40 max-w-lg rounded-lg border">
+          <ResizablePanel defaultSize={55} className="grid place-items-center p-4 text-sm">
+            Left
+          </ResizablePanel>
+          <ResizableHandle withHandle />
+          <ResizablePanel defaultSize={45} className="grid place-items-center bg-muted/40 p-4 text-sm">
+            Right
+          </ResizablePanel>
+        </ResizablePanelGroup>
+      </Section>
+
+      <Section title="Skeleton">
+        <div className="flex max-w-sm flex-col gap-3">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-24 w-full" />
         </div>
       </Section>
 
@@ -723,64 +778,25 @@ export function ComponentDemos() {
         </div>
       </Section>
 
-      <Section title="Table of Contents">
-        <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,12rem)_1fr]">
-          <div>
-            <p className="mb-2 font-pixel text-[11px] text-muted-foreground uppercase">All depths</p>
-            <TableOfContents toc={TOC_DEMO_ITEMS} />
-          </div>
-          <div>
-            <p className="mb-2 font-pixel text-[11px] text-muted-foreground uppercase">H2 only</p>
-            <TableOfContents toc={TOC_DEMO_ITEMS} maxDepth={2} />
-          </div>
-          <article className="prose max-w-none">
-            <Heading id="toc-demo-overview" level={2}>
-              Overview
-            </Heading>
-            <p>{LOREM}</p>
-            <Heading id="toc-demo-installation" level={2}>
-              Installation
-            </Heading>
-            <p>{LOREM_ALT}</p>
-            <Heading id="toc-demo-client-component" level={3}>
-              Client component
-            </Heading>
-            <p>{LOREM}</p>
-            <Heading id="toc-demo-server-component" level={3}>
-              Server component
-            </Heading>
-            <p>{LOREM_ALT}</p>
-            <Heading id="toc-demo-options" level={2}>
-              Options
-            </Heading>
-            <p>{LOREM}</p>
-          </article>
-        </div>
+      <Heading level={2} id="animation" className="mt-12">
+        Animation
+      </Heading>
+
+      <Section title="Animate Height">
+        <AnimateHeightDemo />
       </Section>
 
-      <Section title="Link Out" id="link-out">
-        <div className="flex flex-wrap gap-4">
-          <LinkOut href="https://github.com" text="GitHub" />
-          <LinkOut href="https://figma.com" text="Figma" />
-        </div>
+      <Section title="Motion Text">
+        <MotionTextDemo />
       </Section>
 
-      <Section title="Back Button">
-        <div className="flex flex-wrap gap-4">
-          <BackButton href="/#projects">Projects</BackButton>
-          <BackButton href="/">Home</BackButton>
-        </div>
+      <Section title="Pixel Icons Post Hero" id="pixel-icons-post-hero">
+        <PixelIconMatrix />
       </Section>
 
-      <Section title="Code Block">
-        <div className="max-w-lg">
-          <CodeBlock
-            code={`.button {\n  background: var(--primary);\n  border-radius: var(--radius);\n  padding: 0.5rem 1rem;\n}`}
-            language="css"
-            filename="styles.css"
-          />
-        </div>
-      </Section>
+      <Heading level={2} id="blocks" className="mt-12">
+        Blocks
+      </Heading>
 
       <Section title="Demo">
         <div className="grid gap-6">
@@ -898,32 +914,26 @@ export function ComponentDemos() {
         </div>
       </Section>
 
-      <Section title="Card Fan">
-        <DemoContainer title="Forge gallery" description="Click to center a card" caption="Focus to center" innerClass="min-h-[600px]">
-          <CardFan />
-        </DemoContainer>
-      </Section>
-
-      <Section title="Info Tip">
-        <div className="flex items-center gap-2 text-sm">
-          <span>Hover for more info</span>
-          <InfoTip title="Info Tip" description="This is a small popover that appears on hover, useful for inline help text." />
-        </div>
-        <div className="flex items-center gap-2 text-sm">
-          <span>Help variant</span>
-          <InfoTip help description="This uses the help icon variant." />
+      <Section title="Index List">
+        <div className="max-w-2xl">
+          <IndexList items={INDEX_LIST_DEMO_ITEMS} maxVisibleItems={5} />
         </div>
       </Section>
 
-      <Section title="Mode Toggle">
-        <div className="flex items-center gap-4">
-          <ModeToggle />
-          <span className="text-sm text-muted-foreground">Toggle between light and dark themes</span>
+      <Section title="Image Modal">
+        <div className="max-w-md">
+          <ImageModal src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
+          <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
         </div>
       </Section>
 
-      <Section title="Number Slider">
-        <NumberSliderDemo />
+      <Section title="Pagination">
+        <Pagination
+          previous={{ href: "/private/qa", title: "Previous page" }}
+          next={{ href: "/private/drawer", title: "Drawer demos" }}
+          backHref="/private"
+          backLabel="Private"
+        />
       </Section>
 
       <Section title="Stats">
@@ -936,9 +946,28 @@ export function ComponentDemos() {
         />
       </Section>
 
+      <Heading level={2} id="theme" className="mt-12">
+        Theme
+      </Heading>
+
+      <Section title="Mode Toggle">
+        <div className="flex items-center gap-4">
+          <ModeToggle />
+          <span className="text-sm text-muted-foreground">Toggle between light and dark themes</span>
+        </div>
+      </Section>
+
       <Section title="Color Swatch Group">
         <ColorSwatchGroupDemo />
       </Section>
+
+      <Section title="Theme Settings" id="theme-settings">
+        <ThemeSettingsFieldsDemo />
+      </Section>
+
+      <Heading level={2} id="icons-group" className="mt-12">
+        Icons
+      </Heading>
 
       <Section title="Icons">
         <div className="flex flex-wrap items-center gap-4">
@@ -965,22 +994,93 @@ export function ComponentDemos() {
         </div>
       </Section>
 
+      <Section title="Morph Icon">
+        <MorphIconDemo />
+      </Section>
+
+      <Heading level={2} id="content" className="mt-12">
+        Content
+      </Heading>
+
+      <Section title="Table of Contents">
+        <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,12rem)_minmax(0,12rem)_1fr]">
+          <div>
+            <p className="mb-2 font-pixel text-[11px] text-muted-foreground uppercase">All depths</p>
+            <TableOfContents toc={TOC_DEMO_ITEMS} />
+          </div>
+          <div>
+            <p className="mb-2 font-pixel text-[11px] text-muted-foreground uppercase">H2 only</p>
+            <TableOfContents toc={TOC_DEMO_ITEMS} maxDepth={2} />
+          </div>
+          <article className="prose max-w-none">
+            <Heading id="toc-demo-overview" level={2}>
+              Overview
+            </Heading>
+            <p>{LOREM}</p>
+            <Heading id="toc-demo-installation" level={2}>
+              Installation
+            </Heading>
+            <p>{LOREM_ALT}</p>
+            <Heading id="toc-demo-client-component" level={3}>
+              Client component
+            </Heading>
+            <p>{LOREM}</p>
+            <Heading id="toc-demo-server-component" level={3}>
+              Server component
+            </Heading>
+            <p>{LOREM_ALT}</p>
+            <Heading id="toc-demo-options" level={2}>
+              Options
+            </Heading>
+            <p>{LOREM}</p>
+          </article>
+        </div>
+      </Section>
+
+      <Section title="Link Out" id="link-out">
+        <div className="flex flex-wrap gap-4 text-sm">
+          <LinkOut href="https://bob.fyi" text="bob.fyi" />
+          <LinkOut href="mailto:hi@bob.fyi" text="hi@bob.fyi" />
+        </div>
+      </Section>
+
+      <Section title="Back Button">
+        <BackButton href="/private">Private index</BackButton>
+      </Section>
+
+      <Section title="Code Block">
+        <CodeBlock
+          code={`export function ButtonDemo() {\n  return <Button variant="elevated">Save</Button>;\n}`}
+          language="tsx"
+          filename="button-demo.tsx"
+        />
+      </Section>
+
+      <Section title="Card Fan">
+        <DemoContainer title="Forge gallery" description="Click to center a card" caption="Focus to center" innerClass="min-h-[600px]">
+          <CardFan />
+        </DemoContainer>
+      </Section>
+
+      <Section title="Info Tip">
+        <div className="flex items-center gap-2 text-sm">
+          <span>Hover for more info</span>
+          <InfoTip title="Info Tip" description="This is a small popover that appears on hover, useful for inline help text." />
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          <span>Help variant</span>
+          <InfoTip help description="This uses the help icon variant." />
+        </div>
+      </Section>
+
+      <Section title="Number Slider">
+        <NumberSliderDemo />
+      </Section>
+
       <Section title="Image">
         <div className="max-w-md">
           <Image src={forgeBeforeDemo} alt="Sample image with card wrapper" />
         </div>
-      </Section>
-
-      <Section title="Image Modal">
-        <div className="max-w-md">
-          <ImageModal src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
-
-          <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
-        </div>
-      </Section>
-
-      <Section title="Theme Settings" id="theme-settings">
-        <ThemeSettingsFieldsDemo />
       </Section>
 
       <Section title="Mark Note" id="mark-note">
@@ -1013,3 +1113,4 @@ export function ComponentDemos() {
     </>
   );
 }
+

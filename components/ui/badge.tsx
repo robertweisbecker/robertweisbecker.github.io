@@ -9,7 +9,7 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-muted text-muted-foreground [a]:hover:bg-accent outline outline-border",
+        default: "bg-background text-muted-foreground [a]:hover:bg-accent outline outline-border",
         primary: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         secondary: "bg-secondary text-secondary-foreground [a]:hover:bg-secondary/80",
         destructive: "bg-destructive [a]:hover:bg-destructive/20 focus-visible:ring-destructive text-white ",
@@ -23,7 +23,7 @@ const badgeVariants = cva(
         outline:
           "outline bg-card outline-border shadow-[0_-1px_hsl(0_0_100%_/_5%),0_1px_hsl(0_0%_0%_/_5%)] text-card-foreground [a]:hover:bg-muted [a]:hover:text-muted-foreground ",
         ghost: "[a]:hover:bg-accent text-foreground [a]:hover:text-accent-foreground -mx-1",
-        link: "bg-muted dark:bg-white/10 [font-size:inherit] text-foreground hover:underline underline-offset-4 [a]:hover:bg-accent [a]:hover:text-accent-foreground",
+        link: "bg-muted dark:bg-white/10 text-foreground hover:underline underline-offset-4 [a]:hover:bg-accent [a]:hover:text-accent-foreground",
       },
       size: {
         default: "text-xs/5 rounded-sm h-5",

@@ -16,7 +16,7 @@ import {
 import { useState, type ReactNode } from "react";
 
 import { CodeBlock } from "@/components/code-block";
-import { DemoContainer } from "@/components/demo";
+import { DemoContainer } from "@/components/blocks/demo";
 import { InfoIcon } from "@/components/icons";
 import { Alert, AlertContent, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";

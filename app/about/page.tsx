@@ -1,7 +1,7 @@
 "use client";
 
 import { BaseUiIcon, FigmaIcon, NextJsIcon, GithubIcon, LinkedinIcon } from "@/components/icons";
-import { TreeIconTailwind } from "@/components/icons-tree";
+import { TreeIconTailwind } from "@/components/icons/tree";
 import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/components/ui/description-list";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";

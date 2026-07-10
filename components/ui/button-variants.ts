@@ -8,23 +8,23 @@ export const iconClasses =
 export const buttonVariants = cva(
   [
     "[--button-radius:var(--radius-lg)] focus-visible:outline-2 focus-visible:outline-ring text-sm  inline-flex items-center justify-center whitespace-nowrap transition-[color,outline,background,border-color,box-shadow,scale,translate,transform,border-radius] disabled:pointer-events-none disabled:opacity-50 shrink-0 group/button select-none relative duration-100 ease-out-quad px-(--button-x) py-(--button-y) gap-[calc(var(--button-x)/1.5)] ",
-    "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:text-muted-foreground ",
+    "disabled:shadow-none disabled:inset-shadow-none disabled:bg-accent/50 disabled:outline-none",
     "not-[.w-full]:active:scale-[0.975] will-change-transform",
     "data-[loading=true]:pointer-events-none data-[loading=true]:text-transparent data-[loading=true]:[&_svg:not([data-slot=loader])]:opacity-0 font-[475]",
-    "after:absolute before:absolute",
+    "after:absolute before:absolute max-w-xs",
     iconClasses,
   ],
   {
     variants: {
       variant: {
         default: [
-          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-white/8 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm shadow-primary/30 dark:inset-ring-foreground backdrop-blur-[2px] dark:shadow-border-sm",
-          "active:shadow-xs active:inset-shadow-button-pressed",
-          "focus-visible:outline-offset-2 disabled:bg-none disabled:bg-muted",
-          // "outline-[0.5px] -outline-offset-[0.5px] outline-(--primary)",
+          "[--button-color:var(--primary-foreground)] [--button-bg:var(--primary)] bg-linear-to-b from-white/8 bg-(--button-bg) text-(--button-color) hover:bg-[oklch(from_var(--button-bg)_calc(l_-_.05)_calc(c*1.025)_h)] inset-shadow-button shadow-sm dark:inset-ring-foreground backdrop-blur-[1px]",
+          "outline-[0.5px] -outline-offset-[0.5px] outline-(--button-bg)",
+          "active:shadow-border-xs active:inset-shadow-button-pressed",
+          "focus-visible:outline-offset-2 disabled:bg-input",
         ],
         outline: [
-          "[--button-color:var(--foreground)] border border-b-input/60 bg-clip-padding hover:bg-accent text-(--button-color) hover:text-accent-foreground aria-expanded:bg-accent/50 aria-expanded:text-accent-foreground aria-expanded:border-input hover:border-input",
+          "[--button-color:var(--foreground)] border bg-clip-padding hover:bg-accent text-(--button-color) hover:text-accent-foreground aria-expanded:bg-accent/50 aria-expanded:text-accent-foreground aria-expanded:border-input hover:border-input",
           "disabled:shadow-none disabled:bg-transparent disabled:border-muted",
         ],
         secondary:
