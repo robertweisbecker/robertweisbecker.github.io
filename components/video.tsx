@@ -21,8 +21,11 @@ import { Toolbar } from "./ui/toolbar";
 interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {
   src?: string;
   caption?: string;
+  aspectRatio?: number | string;
   unmuted?: boolean;
 }
+
+const VIDEO_LOAD_ROOT_MARGIN = "640px 0px";
 
 type VideoMorphIconProps = {
   className?: string;
@@ -118,14 +121,34 @@ function VideoFullscreenMorphIcon({ className, scale, slot }: VideoMorphIconProp
   );
 }
 
-export function Video({ src, caption, className, children, unmuted = false, ...props }: VideoProps) {
+export function Video({ src, caption, aspectRatio, className, children, unmuted = false, ...props }: VideoProps) {
   const videoRef = React.useRef<HTMLVideoElement>(null);
-  const [intersectionRef, entry] = useVideoIntersectionObserver({ threshold: 0.3 });
+  const [playbackIntersectionRef, entry] = useVideoIntersectionObserver({ threshold: 0.3 });
+  const [loadIntersectionRef, loadEntry] = useVideoIntersectionObserver({ rootMargin: VIDEO_LOAD_ROOT_MARGIN, threshold: 0 });
+  const shouldDeferSource = Boolean(props.poster || aspectRatio);
+  const [sourceActive, setSourceActive] = React.useState(!shouldDeferSource);
   const isInView = entry?.isIntersecting ?? false;
+
+  const intersectionRef = React.useCallback(
+    (node: HTMLDivElement | null) => {
+      playbackIntersectionRef(node);
+      loadIntersectionRef(node);
+    },
+    [loadIntersectionRef, playbackIntersectionRef]
+  );
+
+  React.useEffect(() => {
+    if (!shouldDeferSource || !loadEntry?.isIntersecting) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => setSourceActive(true));
+    return () => window.cancelAnimationFrame(frame);
+  }, [loadEntry?.isIntersecting, shouldDeferSource]);
 
   React.useEffect(() => {
     const video = videoRef.current;
-    if (!video || props.autoPlay) {
+    if (!video || !sourceActive || props.autoPlay) {
       return;
     }
 
@@ -138,18 +161,19 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
     } else if (!video.paused) {
       video.pause();
     }
-  }, [isInView, props.autoPlay]);
+  }, [isInView, props.autoPlay, sourceActive]);
 
   const wrapper = (
     <div
       ref={intersectionRef}
+      style={aspectRatio ? { aspectRatio } : undefined}
       className={cn(
         "not-prose content-visibility-auto relative mx-auto overflow-clip rounded-2xl outline -outline-offset-1 outline-border/50 squircle",
         className
       )}
     >
       <MediaController
-        className="group/media block w-full rounded-[calc(var(--radius-xl)-var(--spacing)*2)]"
+        className="group/media block h-full w-full rounded-[calc(var(--radius-xl)-var(--spacing)*2)]"
         autohide={"3"}
         style={
           {
@@ -195,17 +219,19 @@ export function Video({ src, caption, className, children, unmuted = false, ...p
       >
         <video
           ref={videoRef}
+          data-source-active={shouldDeferSource && sourceActive ? "" : undefined}
           suppressHydrationWarning={true}
           width="100%"
           // height="auto"
           slot="media"
           playsInline
           muted={!unmuted}
-          preload="metadata"
-          src={src}
+          className="h-full w-full object-contain"
+          preload={props.preload ?? (shouldDeferSource ? "none" : "metadata")}
+          src={shouldDeferSource && !sourceActive ? undefined : src}
           {...props}
         >
-          {children}
+          {shouldDeferSource && !sourceActive ? null : children}
         </video>
         <Button
           aria-label="Play / Pause"
