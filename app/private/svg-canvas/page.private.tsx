@@ -44,15 +44,7 @@ function colorFromPreset(preset: ColorPreset) {
   return COLOR_PRESETS[preset];
 }
 
-function CanvasFrame({
-  children,
-  className,
-  padLabels = true,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  padLabels?: boolean;
-}) {
+function CanvasFrame({ children, className, padLabels = true }: { children: React.ReactNode; className?: string; padLabels?: boolean }) {
   return (
     <div className={cn("isolate w-full max-w-sm font-mono text-[10px]/none font-normal", padLabels && "ps-6", className)}>
       <div className="relative mx-auto block aspect-square w-full">
@@ -187,13 +179,7 @@ function SvgGridLinesDemo() {
       />
       <CanvasFrame padLabels={false}>
         <SvgShell ariaLabel="SvgGrid lines only">
-          <SvgGrid
-            intervals={intervals}
-            showGrid
-            showDots={false}
-            showLabels={false}
-            lineColor={colorFromPreset(lineColor)}
-          />
+          <SvgGrid intervals={intervals} showGrid showDots={false} showLabels={false} lineColor={colorFromPreset(lineColor)} />
         </SvgShell>
       </CanvasFrame>
       <p className="font-mono text-2xs text-muted-foreground">intervals=[{intervals.join(", ")}]</p>
@@ -246,13 +232,7 @@ function SvgGridDotsDemo() {
       </FieldGroup>
       <CanvasFrame padLabels={false}>
         <SvgShell ariaLabel="SvgGrid dots only">
-          <SvgGrid
-            intervals={intervals}
-            showGrid={false}
-            showDots
-            showLabels={false}
-            dotColor={colorFromPreset(dotColor)}
-          />
+          <SvgGrid intervals={intervals} showGrid={false} showDots showLabels={false} dotColor={colorFromPreset(dotColor)} />
         </SvgShell>
       </CanvasFrame>
       <p className="font-mono text-2xs text-muted-foreground">
@@ -280,13 +260,7 @@ function SvgGridLabelsDemo() {
       />
       <CanvasFrame>
         <SvgShell ariaLabel="SvgGrid labels only">
-          <SvgGrid
-            intervals={intervals}
-            showGrid={false}
-            showDots={false}
-            showLabels
-            labelColor={colorFromPreset(labelColor)}
-          />
+          <SvgGrid intervals={intervals} showGrid={false} showDots={false} showLabels labelColor={colorFromPreset(labelColor)} />
         </SvgShell>
       </CanvasFrame>
       <p className="font-mono text-2xs text-muted-foreground">
@@ -465,12 +439,8 @@ function AxisLabelsDemo() {
       </FieldGroup>
       <div className="relative w-full max-w-sm">
         <div className="relative ms-8 mt-6 aspect-square w-[calc(100%-2rem)] border border-dashed border-border">
-          {(axis === "both" || axis === "x") && (
-            <AxisLabels ticks={ticks} axis="x" className="-top-5 text-2xs text-muted-foreground" />
-          )}
-          {(axis === "both" || axis === "y") && (
-            <AxisLabels ticks={ticks} axis="y" className="-left-8 text-2xs text-muted-foreground" />
-          )}
+          {(axis === "both" || axis === "x") && <AxisLabels ticks={ticks} axis="x" className="-top-5 text-2xs text-muted-foreground" />}
+          {(axis === "both" || axis === "y") && <AxisLabels ticks={ticks} axis="y" className="-left-8 text-2xs text-muted-foreground" />}
           <div className="flex size-full items-center justify-center font-mono text-2xs text-muted-foreground">plot area</div>
         </div>
       </div>
@@ -636,11 +606,7 @@ export default function SvgCanvasPrivatePage() {
         </nav>
       </header>
 
-      <Section
-        title="SvgGrid · lines"
-        id="svg-grid-lines"
-        description="showGrid only — intervals and lineColor are real SvgGrid props."
-      >
+      <Section title="SvgGrid · lines" id="svg-grid-lines" description="showGrid only — intervals and lineColor are real SvgGrid props.">
         <SvgGridLinesDemo />
       </Section>
 
