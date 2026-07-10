@@ -12,6 +12,9 @@ export const frontmatter = {
 import nprMapBefore from "@/public/assets/npr/map-before.png";
 import nprMapAfter from "@/public/assets/npr/map-after.png";
 import nprMapUi from "@/public/assets/npr/map-ui.png";
+import nprMapSidebar from "@/public/assets/npr/map-sidebar.png";
+import nprMapDetail from "@/public/assets/npr/map-detail.png";
+import NextImage from "next/image";
 
 <ImageToggle before={nprMapBefore} after={nprMapAfter} />
 
@@ -44,7 +47,7 @@ Initially, stations were listed in the sidebar with only their callsigns as iden
 We expanded these list items into cards that included each station's callsign, location, and logo, along with labeled controls to differentiate between coverages and contour toggles.
 
 <div className="not-prose overflow-hidden rounded-xl bg-muted p-2 lg:p-4">
-  <img src="/assets/npr/map-sidebar.png" alt="Station sidebar cards" className="mx-auto max-w-[280px] shadow-2xl" />
+  <NextImage src={nprMapSidebar} alt="Station sidebar cards" sizes="280px" placeholder="blur" className="mx-auto h-auto w-full max-w-[280px] shadow-2xl" />
 </div>
 
 ### Station Detail
@@ -52,7 +55,7 @@ We expanded these list items into cards that included each station's callsign, l
 To accommodate the need for more in-depth station information, we added a detail view in the sidebar when users clicked on a station. Demographic information, previously located in a modal, was moved into the station detail view to provide access without navigating away from the map.
 
 <div className="not-prose overflow-hidden rounded-xl bg-muted p-2 lg:p-4">
-  <img src="/assets/npr/map-detail.png" alt="Station detail view" />
+  <NextImage src={nprMapDetail} alt="Station detail view" sizes="(max-width: 768px) 100vw, 720px" placeholder="blur" className="h-auto w-full" />
 </div>
 
 ### Navigation & Controls
@@ -66,7 +69,7 @@ Stations displaying active contours or coverages were previously only discoverab
 To solve this, a bar displaying active stations was overlaid on the top edge of the map, with chips representing each station. Clicking a station chip would navigate to the station and open its details in the sidebar.
 
 <Browser toolbar={false} copyButton={false} className="lg:max-w-6xl">
-  <Video src="/assets/npr/maps-desktop-settings-720.mp4" className="rounded-none" />
+  <Video aspectRatio={16 / 9} src="/assets/npr/maps-desktop-settings-720.mp4" poster="/assets/npr/maps-desktop-settings-720-poster.webp" className="rounded-none" />
 </Browser>
 
 ## Responsiveness
@@ -74,7 +77,7 @@ To solve this, a bar displaying active stations was overlaid on the top edge of 
 The most significant change was the newly-responsive design. On a phone, there simply isn't enough real estate to pan around a map and see detailed information, so we decided that modality was the best course of action.
 
 <div className="not-prose max-w-xs overflow-hidden rounded-[44px]">
-  <Video className="max-w-xs">
+  <Video aspectRatio={696 / 1416} poster="/assets/npr/maps-mobile-1-poster.webp" className="max-w-xs">
     <source src="/assets/npr/maps-mobile-1.mov" />
   </Video>
 </div>

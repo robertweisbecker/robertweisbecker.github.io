@@ -22,7 +22,9 @@ import {
 import { MorphIcon } from "@/components/icons/morph-icon";
 import { Image } from "@/components/image";
 import { ImageModal, ImageModalDrawer } from "@/components/blocks/image-modal";
+import { ImageToggle } from "@/components/blocks/image-toggle";
 import forgeBeforeDemo from "@/public/assets/forge/forge-before.png";
+import forgeAfterDemo from "@/public/assets/forge/forge-after.png";
 import { IndexList, type IndexListItem } from "@/components/blocks/index-list";
 import { Pagination } from "@/components/blocks/pagination";
 import { InfoTip } from "@/components/info-tip";
@@ -444,7 +446,9 @@ export function ComponentDemos() {
               <DrawerTitle>Drawer</DrawerTitle>
               <DrawerDescription>Base UI drawer via the design-system wrapper.</DrawerDescription>
             </DrawerHeader>
-            <div className="p-4 text-sm text-muted-foreground">Use the dedicated private page for direction, snap points, and nested stacks.</div>
+            <div className="p-4 text-sm text-muted-foreground">
+              Use the dedicated private page for direction, snap points, and nested stacks.
+            </div>
             <DrawerFooter>
               <DrawerClose render={<Button />}>Close</DrawerClose>
             </DrawerFooter>
@@ -927,6 +931,16 @@ export function ComponentDemos() {
         </div>
       </Section>
 
+      <Section title="Image Toggle">
+        <div className="max-w-md">
+          <ImageToggle
+            before={forgeBeforeDemo}
+            after={forgeAfterDemo}
+            imageProps={{ caption: "Hover or focus the tabs to prepare the alternate image." }}
+          />
+        </div>
+      </Section>
+
       <Section title="Pagination">
         <Pagination
           previous={{ href: "/private/qa", title: "Previous page" }}
@@ -1103,14 +1117,16 @@ export function ComponentDemos() {
           Custom video player built on <Code variant="inline">media-chrome</Code> with themed toolbar controls, play/pause overlay,
           fullscreen, and optional volume.
         </p>
-        <div className="max-w-lg">
+        <div className="max-w-lg space-y-2">
+          <p className="text-xs font-medium text-muted-foreground">Poster with near-viewport source activation</p>
           <Video
-            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
-            caption="Themed video player component."
+            aspectRatio={16 / 9}
+            src="/assets/npr/maps-desktop-settings-720.mp4"
+            poster="/assets/npr/maps-desktop-settings-720-poster.webp"
+            caption="Themed video player with deferred media loading."
           />
         </div>
       </Section>
     </>
   );
 }
-

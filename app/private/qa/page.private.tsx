@@ -625,6 +625,7 @@ const BLOCKS_TOC_ITEMS = [
   { id: "demo", text: "Demo" },
   { id: "index-list", text: "Index List" },
   { id: "image-modal", text: "Image Modal" },
+  { id: "image-toggle", text: "Image Toggle" },
   { id: "pagination", text: "Pagination" },
   { id: "stats", text: "Stats" },
 ];

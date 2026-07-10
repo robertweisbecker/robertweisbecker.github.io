@@ -21,6 +21,23 @@ interface ImageToggleProps {
 
 export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mode = "tabs", imageProps }: ImageToggleProps) {
   const [sliderValue, setSliderValue] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState<"before" | "after">("before");
+  const [shouldLoadAfter, setShouldLoadAfter] = React.useState(false);
+
+  const prepareAfterImage = React.useCallback(() => {
+    setShouldLoadAfter(true);
+  }, []);
+
+  const handleTabChange = React.useCallback((value: "before" | "after" | null) => {
+    if (value !== "before" && value !== "after") {
+      return;
+    }
+
+    if (value === "after") {
+      setShouldLoadAfter(true);
+    }
+    setActiveTab(value);
+  }, []);
 
   if (mode === "comparison") {
     return (
@@ -80,7 +97,13 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
   }
 
   return (
-    <Tabs className="not-prose w-full min-w-0">
+    <Tabs
+      value={activeTab}
+      onValueChange={handleTabChange}
+      onPointerEnter={prepareAfterImage}
+      onFocusCapture={prepareAfterImage}
+      className="not-prose w-full min-w-0"
+    >
       <TabsList className="-ms-2" variant="pill">
         <TabsTrigger value="before">{tab1}</TabsTrigger>
         <TabsTrigger value="after">{tab2}</TabsTrigger>
@@ -89,8 +112,10 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
       <TabsContent value="before" keepMounted>
         <Image src={before} alt={`${tab1} image`} caption={imageProps?.caption} />
       </TabsContent>
-      <TabsContent value="after" keepMounted>
-        <Image src={after} alt={`${tab2} image`} caption={imageProps?.caption} loading="eager" />
+      <TabsContent value="after" keepMounted={shouldLoadAfter}>
+        {shouldLoadAfter && (
+          <Image src={after} alt={`${tab2} image`} caption={imageProps?.caption} loading={imageProps?.loading ?? "eager"} />
+        )}
       </TabsContent>
       {/* </div> */}
     </Tabs>
