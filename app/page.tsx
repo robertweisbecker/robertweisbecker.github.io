@@ -89,7 +89,7 @@ export default function Home() {
           </h1>
           <HomePortrait />
           <div className="w-full space-y-3.5 text-base text-muted-foreground max-sm:col-span-2">
-            <p className="text-pretty">
+            <p className="text-md text-pretty">
               You can call me{" "}
               <Popover>
                 <PopoverTrigger openOnHover className="link text-foreground decoration-dotted">
@@ -101,11 +101,11 @@ export default function Home() {
               </Popover>
               .
             </p>
-            <p className="text-pretty">
+            <p className="text-md text-pretty">
               I&apos;m a principal designer at <LinkOut href="https://everfi.com" text="Everfi" className="text-foreground" /> working on
               products, tools, and systems to help drive social good through education.
             </p>
-            <div className="text-balance">
+            <div className="text-md text-balance">
               These things have&nbsp;
               <PreviewCard>
                 <PreviewCardTrigger
@@ -144,7 +144,7 @@ export default function Home() {
               </PreviewCard>
               &nbsp;reached more than 45 million learners worldwide.
             </div>
-            <p>
+            <p className="text-md">
               This is my little slice of the internet.
               <br /> Have a look around.
             </p>
@@ -182,7 +182,7 @@ export default function Home() {
               key={resource.id}
               size="sm"
               variant="muted"
-              className="group/resource relative gap-0.5 outline outline-border transition-shadow focus-within:ring-2 focus-within:ring-ring hover:-outline-offset-1 hover:outline-primary dark:outline-black"
+              className="group/resource relative gap-0.5 transition-shadow focus-within:ring-2 focus-within:ring-ring hover:outline hover:-outline-offset-1 hover:outline-primary"
             >
               <CardHeader>
                 <CardTitle className="truncate font-normal">

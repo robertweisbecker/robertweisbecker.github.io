@@ -109,12 +109,18 @@ export function ImageToggle({ before, after, tab1 = "Before", tab2 = "After", mo
         <TabsTrigger value="after">{tab2}</TabsTrigger>
       </TabsList>
       {/* <div className="-mx-4 w-[calc(100%+(--spacing(8)))]"> */}
-      <TabsContent value="before" keepMounted>
-        <Image src={before} alt={`${tab1} image`} caption={imageProps?.caption} />
+      <TabsContent value="before">
+        <Image src={before} alt={`${tab1} image`} caption={imageProps?.caption} className="mt-0" />
       </TabsContent>
       <TabsContent value="after" keepMounted={shouldLoadAfter}>
         {shouldLoadAfter && (
-          <Image src={after} alt={`${tab2} image`} caption={imageProps?.caption} loading={imageProps?.loading ?? "eager"} />
+          <Image
+            src={after}
+            alt={`${tab2} image`}
+            caption={imageProps?.caption}
+            loading={imageProps?.loading ?? "eager"}
+            className="mt-0"
+          />
         )}
       </TabsContent>
       {/* </div> */}
