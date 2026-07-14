@@ -18,7 +18,7 @@ const toggleVariants = cva(
       },
       shape: {
         default: "inline-flex gap-1 items-center justify-center whitespace-nowrap",
-        column: "flex flex-col gap-1 p-2 items-center justify-center leading-tight text-center",
+        column: "flex flex-col gap-1 p-2 items-center h-auto! justify-center leading-tight text-center",
         square: "flex flex-col gap-0 items-center [&_svg]:size-5 justify-center aspect-square h-full",
         round: "inline-flex items-center justify-center whitespace-nowrap rounded-full",
       },
