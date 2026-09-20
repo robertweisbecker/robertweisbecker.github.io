@@ -6,12 +6,12 @@ import * as React from "react";
 
 import { PixelChevronDownIcon } from "@/components/icons/pixel";
 import { LinkButton } from "@/components/ui/link-button";
-import art2 from "@/public/art/2025_chi.jpeg";
-import art1 from "@/public/art/2025_br.jpeg";
-import art3 from "@/public/art/2024_otis.jpeg";
-import art4 from "@/public/art/2012_man-enhanced.jpeg";
-import art5 from "@/public/art/2010_spray-cig.jpeg";
-import art6 from "@/public/art/2017_x.jpeg";
+import art2 from "@/media/art/2025_chi.jpeg";
+import art1 from "@/media/art/2025_br.jpeg";
+import art3 from "@/media/art/2024_otis.jpeg";
+import art4 from "@/media/art/2012_man-enhanced.jpeg";
+import art5 from "@/media/art/2010_spray-cig.jpeg";
+import art6 from "@/media/art/2017_x.jpeg";
 
 const CARD_W = 100;
 const CARD_H = 125;

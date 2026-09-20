@@ -7,7 +7,7 @@ import { DescriptionList, DescriptionListLabel, DescriptionListValue } from "@/c
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
 import * as React from "react";
-import testImage from "@/public/assets/oklch/oklch-gradient.png";
+import testImage from "@/media/assets/oklch/oklch-gradient.png";
 
 function PrototypeSection({
   title,
