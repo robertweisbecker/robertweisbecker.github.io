@@ -2,7 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import nprTinyDesk from "@/public/assets/npr/npr-tiny-desk.jpeg";
+import nprTinyDesk from "@/media/assets/npr/npr-tiny-desk.jpeg";
 
 import {
   BaseUiIcon,

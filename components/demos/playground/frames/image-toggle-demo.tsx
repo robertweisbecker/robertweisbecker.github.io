@@ -3,8 +3,8 @@
 import * as React from "react";
 import { ImageToggle } from "@/components/blocks/image-toggle";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import luminance from "@/public/assets/oklch/luminance.png";
-import luminanceBw from "@/public/assets/oklch/luminance-bw.png";
+import luminance from "@/media/assets/oklch/luminance.png";
+import luminanceBw from "@/media/assets/oklch/luminance-bw.png";
 
 type ImageToggleMode = "tabs" | "slider" | "comparison";
 
