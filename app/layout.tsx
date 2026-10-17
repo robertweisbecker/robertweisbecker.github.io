@@ -58,7 +58,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${Departure_Mono.variable} ${Display.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
+    <html
+      lang="en"
+      className={`${Departure_Mono.variable} ${Display.variable} scroll-pt-[env(safe-area-inset-top,0px)]`}
+      suppressHydrationWarning
+      data-scroll-behavior="smooth"
+    >
       <body className="relative min-h-dvh max-w-screen overflow-x-clip scroll-smooth pb-[env(safe-area-inset-bottom,0px)] font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ScrollReset />

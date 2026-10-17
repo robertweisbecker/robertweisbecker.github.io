@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <nav className={cn("sticky top-0 isolate z-50 pt-[env(safe-area-inset-top,0px)]")} style={{ viewTransitionName: "site-header" }}>
-      <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 py-2 pr-[max(0.5rem,env(safe-area-inset-right,0px))] pl-[max(0.5rem,env(safe-area-inset-left,0px))]">
+      <div className="mx-auto flex h-12 max-w-7xl items-center gap-1 py-2 pr-[max(0.5rem,env(safe-area-inset-right,0px))] pl-[max(0.5rem,env(safe-area-inset-left,0px))] *:z-2">
         <HeaderHome />
         <div className="me-auto" />
         <WorkMenu projects={menuProjects} />
@@ -32,7 +32,7 @@ export function Header() {
       <div
         aria-hidden="true"
         data-slot="header-chrome-tint"
-        className="pointer-events-none fixed inset-x-0 top-0 -z-1 h-[calc(0.75rem+env(safe-area-inset-top,0px))] bg-background"
+        className="pointer-events-none fixed inset-x-0 top-0 z-1 h-[calc(0.75rem+env(safe-area-inset-top,0px))] bg-background"
       />
     </nav>
   );
