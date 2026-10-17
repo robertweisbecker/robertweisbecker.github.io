@@ -46,8 +46,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: "light dark",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
-    { media: "(prefers-color-scheme: dark)", color: "#2f2615" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f4f4" },
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
   ],
   viewportFit: "cover",
 };
@@ -59,7 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${Departure_Mono.variable} ${Display.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
-      <body className="safe-area-inset-bottom relative min-h-[calc(100vh-env(safe-area-inset-bottom))] max-w-screen overflow-x-clip scroll-smooth font-sans antialiased">
+      <body className="relative min-h-dvh max-w-screen overflow-x-clip scroll-smooth pb-[env(safe-area-inset-bottom,0px)] font-sans antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <ScrollReset />
           <a
@@ -70,7 +70,10 @@ export default function RootLayout({
           </a>
 
           <Header />
-          <main id="main" className="container mx-auto scroll-pt-20 px-4 py-12 md:py-20">
+          <main
+            id="main"
+            className="container mx-auto scroll-pt-20 py-12 pr-[max(1rem,env(safe-area-inset-right,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] md:py-20"
+          >
             {children}
           </main>
           <Footer />
