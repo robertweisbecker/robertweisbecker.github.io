@@ -48,7 +48,7 @@ export default function PixelIconsPage() {
 
           <p>
             I&apos;m using Departure sparingly, and not every page here needs it, but I wanted to thread the pixel motif into a few other
-            places. At first glance, it seemed like we Departure would let me replace my Tabler icons with symbols.
+            places. At first glance, it seemed like Departure would let me replace my Tabler icons with symbols.
           </p>
           <DemoContainer caption="A few Departure Mono symbols" centerContent>
             <div className="text-center font-pixel text-[22px]">
