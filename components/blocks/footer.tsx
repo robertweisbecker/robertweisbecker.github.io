@@ -4,7 +4,10 @@ import { ScrollToTop } from "@/components/blocks/scroll-to-top";
 
 export function Footer() {
   return (
-    <footer className="mx-auto max-w-4xl py-3" style={{ viewTransitionName: "site-footer" }}>
+    <footer
+      className="mx-auto max-w-4xl py-3 pr-[env(safe-area-inset-right,0px)] pl-[env(safe-area-inset-left,0px)]"
+      style={{ viewTransitionName: "site-footer" }}
+    >
       <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
         <p className="text-xs text-muted-foreground" suppressHydrationWarning>
           &copy; {new Date().getFullYear()} Robert Weisbecker

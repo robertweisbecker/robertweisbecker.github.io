@@ -90,7 +90,7 @@ export default function ArtPage() {
         </div>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+          <h2 className="sticky top-[calc(5rem+env(safe-area-inset-top,0px))] self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             People
           </h2>
         </div>
@@ -108,7 +108,7 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+          <h2 className="sticky top-[calc(5rem+env(safe-area-inset-top,0px))] self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             Places
           </h2>
         </div>
@@ -118,7 +118,7 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+          <h2 className="sticky top-[calc(5rem+env(safe-area-inset-top,0px))] self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             Pets
           </h2>
         </div>
@@ -130,7 +130,7 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+          <h2 className="sticky top-[calc(5rem+env(safe-area-inset-top,0px))] self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             Portraits
           </h2>
         </div>
@@ -142,7 +142,7 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+          <h2 className="sticky top-[calc(5rem+env(safe-area-inset-top,0px))] self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             Poses
           </h2>
         </div>
@@ -157,7 +157,7 @@ export default function ArtPage() {
         </section>
 
         <div className="relative">
-          <h2 className="sticky top-20 self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
+          <h2 className="sticky top-[calc(5rem+env(safe-area-inset-top,0px))] self-start font-pixel text-2xs uppercase max-sm:-rotate-180 max-sm:[writing-mode:vertical-rl]">
             Misc.
           </h2>
         </div>
