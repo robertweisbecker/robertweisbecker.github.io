@@ -95,4 +95,4 @@ Checks formatting without writing changes.
 
 Deployed automatically to [Vercel](https://vercel.com) on push to `master`.
 
-Vercel detects `pnpm-lock.yaml`. To honor the exact `packageManager` pin, enable `ENABLE_EXPERIMENTAL_COREPACK=1` in the Vercel project before the migration preview. Remove any npm-specific Install Command override and use `pnpm run build` (or the detected Next.js default) for the build. Verify the preview logs show pnpm 12.15.0 and the expected Node 24.x runtime before merging. These project settings are not changed by this repository.
+Vercel detects `pnpm-lock.yaml`. The migration preview automatically honored `packageManager: pnpm@12.15.0` without account changes. Verify that future preview logs still use the pinned version; if they do not, Vercel documents `ENABLE_EXPERIMENTAL_COREPACK=1` as an explicit package-manager selection option. Remove any npm-specific Install Command override and use `pnpm run build` (or the detected Next.js default) for the build. Verify the preview logs show pnpm 12.15.0 and the expected Node 24.x runtime before merging. These project settings are not changed by this repository.
