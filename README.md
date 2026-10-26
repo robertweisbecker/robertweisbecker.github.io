@@ -11,78 +11,82 @@
 
 ## Local Development
 
-Use Node.js 24.22.1 or a newer 24.x release (`nvm install && nvm use` selects the version in `.nvmrc`) before installing dependencies or starting the development server. This includes the Node.js security fixes for [CVE-2026-111497](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases). The `engines.node` requirement describes the supported range; npm may only warn on an unsupported runtime. Vercel selects the major version and manages runtime patches; this pin does not prove the patch version of a deployed function. See the [Vercel advisory](https://vercel.com/kb/bulletin/node-js-security-advisory) for rollout status.
+Use Node.js 24.22.1 or a newer 24.x release (`nvm install && nvm use` selects the version in `.nvmrc`) before installing dependencies or starting the development server. This includes the Node.js security fixes for [CVE-2026-111497](https://nodejs.org/en/blog/vulnerability/october-2026-security-releases). The `engines.node` requirement describes the supported range; package managers may only warn on an unsupported runtime. Vercel selects the major version and manages runtime patches; this pin does not prove the patch version of a deployed function. See the [Vercel advisory](https://vercel.com/kb/bulletin/node-js-security-advisory) for rollout status.
+
+Install the pinned pnpm version once with `npm install --global pnpm@12.15.0` (or use a Corepack setup that honors `packageManager`), then:
 
 ```
-npm install
+pnpm install --frozen-lockfile
 ```
 
-Installs project dependencies.
+Installs the exact dependencies from `pnpm-lock.yaml`. Do not use `npm install` in this repo or commit a second lockfile. When switching an existing checkout from npm, remove its old `node_modules` before this first pnpm install.
+
+`pnpm-workspace.yaml` configures this single-package project: it preserves the PostCSS security override and permits install scripts only for the reviewed `sharp` and `unrs-resolver` versions. If dependencies change, review new build scripts before updating `allowBuilds`; do not enable all builds.
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 Starts the Next.js dev server on [http://localhost:3000](http://localhost:3000) with hot reload.
 
 ```
-npm run dev:fresh
+pnpm run dev:fresh
 ```
 
 Clears `.next` before starting the Next.js dev server.
 
 ```
-npm run build
+pnpm run build
 ```
 
 Builds the Next.js production output with the default Next/Turbopack build (`next build`).
 
 ```
-npm run analyze:build
+pnpm run analyze:build
 ```
 
 Reports build output diagnostics from the latest production build.
 
 ```
-npm run build:webpack
+pnpm run build:webpack
 ```
 
 Builds with the explicit webpack fallback (`next build --webpack`).
 
 ```
-npm run typecheck
+pnpm run typecheck
 ```
 
 Runs TypeScript type checking without emitting files.
 
 ```
-npm run typecheck:build
+pnpm run typecheck:build
 ```
 
 Runs the production build graph TypeScript check.
 
 ```
-npm run check
+pnpm run check
 ```
 
 Runs typecheck, lint, and format check in sequence.
 
-CI runs `npm run check && npm run build` on every push to `master` and every pull request. Vercel deploys independently, so a red check means `master` deployed unverified; fix forward.
+CI runs `pnpm run check && pnpm run build` on every push to `master` and every pull request. Vercel deploys independently, so a red check means `master` deployed unverified; fix forward.
 
 ```
-npm run lint
+pnpm run lint
 ```
 
 Runs ESLint across the project.
 
 ```
-npm run format
+pnpm run format
 ```
 
 Formats all files with Prettier.
 
 ```
-npm run format:check
+pnpm run format:check
 ```
 
 Checks formatting without writing changes.
@@ -90,3 +94,5 @@ Checks formatting without writing changes.
 ## Deployment
 
 Deployed automatically to [Vercel](https://vercel.com) on push to `master`.
+
+Vercel detects `pnpm-lock.yaml`. To honor the exact `packageManager` pin, enable `ENABLE_EXPERIMENTAL_COREPACK=1` in the Vercel project before the migration preview. Remove any npm-specific Install Command override and use `pnpm run build` (or the detected Next.js default) for the build. Verify the preview logs show pnpm 12.15.0 and the expected Node 24.x runtime before merging. These project settings are not changed by this repository.

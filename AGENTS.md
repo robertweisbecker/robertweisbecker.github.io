@@ -11,16 +11,16 @@
 ## Learned Workspace Facts
 
 - This is a mostly static Next.js 16 App Router site with MDX content, no database, and no required environment variables. The only current API route is `app/api/letterboxd/route.ts`, which backs the homepage Letterboxd widget.
-- Canonical commands include `npm run dev`, `npm run lint`, `npm run build`, `npm run format`, `npm run format:check`, `npm run typecheck`, `npm run typecheck:build`, `npm run check`, and `npm run analyze:build`.
-- `npm run build` produces the static site output with the default Next/Turbopack production build, while `npm run dev:fresh` clears `.next` before starting dev.
+- Canonical commands include `pnpm run dev`, `pnpm run lint`, `pnpm run build`, `pnpm run format`, `pnpm run format:check`, `pnpm run typecheck`, `pnpm run typecheck:build`, `pnpm run check`, and `pnpm run analyze:build`.
+- `pnpm run build` produces the static site output with the default Next/Turbopack production build, while `pnpm run dev:fresh` clears `.next` before starting dev.
 - Homepage project titles come from `lib/data/projects.ts` and are kept in sync with MDX frontmatter manually. Do not import `getProjectFrontmatter` (or any `content/**` MDX) from `app/page.tsx` — it pulls every project MDX file and its statically imported images into the homepage compile graph and roughly triples dev cold-compile time.
-- Explicit webpack fallback scripts remain available as `npm run dev:webpack`, `npm run dev:fresh:webpack`, `npm run build:webpack`, and `npm run preview:webpack`.
+- Explicit webpack fallback scripts remain available as `pnpm run dev:webpack`, `pnpm run dev:fresh:webpack`, `pnpm run build:webpack`, and `pnpm run preview:webpack`.
 - The clip-path curve generator closes the `shape()` using `vline` then `hline` (based on the chosen start corner coords).
 - `ToggleGrid` preserves intended toggle styling by extending `ToggleGroup` context with `grid?: boolean`.
 - Tailwind v4.3 custom variants such as `@stuck-top` are valid here; see **Known Bugs & Workarounds** for the Turbopack stale-CSS bug that makes errors persist past the fix.
 - The Agentation development toolbar and packages were removed because they added a large optional dev-only graph; do not reintroduce them unless the user explicitly asks for Agentation again.
 - `@vercel/analytics` and `@vercel/speed-insights` are no-ops locally and only activate on Vercel deployments.
-- The only current `overrides` entry is `postcss: ^8.5.15`, kept for GHSA-qx2v-qp2m-jg93 while allowing `@tailwindcss/postcss` to resolve within its declared range; previous dev-only `hono`/`qs` overrides were removed on 2026-07-02.
+- The only current `pnpm-workspace.yaml` `overrides` entry is `postcss: ^8.5.15`, kept for GHSA-qx2v-qp2m-jg93 while allowing `@tailwindcss/postcss` to resolve within its declared range; previous dev-only `hono`/`qs` overrides were removed on 2026-07-02.
 - The homepage doubles as the About page at `/`; there is no separate `/about` route in the nav.
 - `/oklch-colors` is heavier than many project routes because its MDX renders hundreds of color swatches/palette nodes plus a large inline SVG.
 - Pixel icon morphing is implemented in `components/pixel-icon-morph.tsx` and is intentionally limited to `MorphablePixelIconName` icons from `components/icons-pixel.tsx`: 11x11 `createPixelIcon(...)` data icons with exactly 28 points. Non-28 data icons remain normal pixel icons but are excluded from `morphablePixelIconNames`.
@@ -76,7 +76,7 @@
 - **Partial fix landed** in Tailwind v4.1.3 (PRs #17514 and #17554, April 2025) but does not cover the general case.
 - **Workarounds (in order of preference):**
   1. Touch `styles/globals.css` or `postcss.config.mjs` to force a CSS graph rebuild and clear the stale error.
-  2. Run `npm run dev:fresh` (`rm -rf .next && next dev`) for a full reset.
+  2. Run `pnpm run dev:fresh` (`rm -rf .next && next dev`) for a full reset.
   3. Run `next dev --webpack` for reliable CSS HMR when doing complex CSS work.
   4. Do **not** use the prettier-plugin-tailwindcss canonical form `@stuck-top:**:data-[slot=title]:visible` — it produces invalid CSS with this custom variant. Always use the bracketed form `@stuck-top:[&_[data-slot=title]]:visible` and add `{/* prettier-ignore */}` to prevent rewriting.
 
@@ -84,15 +84,15 @@
 
 - The forced webpack production path was retired on 2026-07-01 after dependency updates to Next `16.2.9`, Tailwind `4.3.2`, and `@tailwindcss/postcss` `4.3.2`.
 - Current evidence: after clearing `.next`, plain `npx next build` completed successfully with Turbopack: compile in 62s, TypeScript in 29.6s, and static generation for 49 static pages in 5.2s (no `/private/**` routes in production).
-- Keep explicit webpack scripts for fallback testing only: `npm run build:webpack` and `npm run preview:webpack`.
-- If Turbopack production builds regress, compare against `npm run build:webpack`, clear `.next`, and update this file with the new evidence before making webpack the default again.
+- Keep explicit webpack scripts for fallback testing only: `pnpm run build:webpack` and `pnpm run preview:webpack`.
+- If Turbopack production builds regress, compare against `pnpm run build:webpack`, clear `.next`, and update this file with the new evidence before making webpack the default again.
 
 ### Next webpack/cssnano conic-gradient minification bug (open as of June 2026)
 
 - **Symptom:** Tailwind `bg-conic` gradients render locally in development but disappear after production deployment/build; affected elements can compute `background-image: none` even when the Tailwind classes are correct.
 - **Root cause:** Next's webpack production CSS minimizer (`next/dist/compiled/cssnano-simple`) rewrites Tailwind's `@property --tw-gradient-from-position { syntax: "<length-percentage>"; initial-value: 0%; }` to `initial-value: 0`. Browsers then treat the value as a length (`0px`), which invalidates conic-gradient color stops.
 - **Tracked upstream:** [vercel/next.js #79149](https://github.com/vercel/next.js/issues/79149), [tailwindlabs/tailwindcss #17977](https://github.com/tailwindlabs/tailwindcss/issues/17977), and the upstream cssnano fix path [cssnano/cssnano #1702](https://github.com/cssnano/cssnano/pull/1702).
-- **Current verification:** The default `npm run build` now uses Turbopack and emits `@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0%}` under `.next/static/chunks/*.css`. The webpack/cssnano bug still matters when using `npm run build:webpack`.
+- **Current verification:** The default `pnpm run build` now uses Turbopack and emits `@property --tw-gradient-from-position{syntax:"<length-percentage>";inherits:false;initial-value:0%}` under `.next/static/chunks/*.css`. The webpack/cssnano bug still matters when using `pnpm run build:webpack`.
 - **Workaround:** Keep an explicit post-Tailwind override such as `:where(.bg-conic, [class*="bg-conic/"]) { --tw-gradient-from-position: 0%; }` while webpack fallback builds are still used for comparison. Reconsider it only after production browser QA confirms conic gradients render on the default Turbopack build and fallback webpack builds no longer emit `initial-value:0`.
 
 ## Agent skills
