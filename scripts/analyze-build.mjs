@@ -61,7 +61,7 @@ function inspectConicGradientCss() {
 const stats = readJson(diagnosticsPath);
 
 if (!stats) {
-  console.error(`Missing ${diagnosticsPath}. Run npm run build first.`);
+  console.error(`Missing ${diagnosticsPath}. Run pnpm run build first.`);
   process.exit(1);
 }
 
