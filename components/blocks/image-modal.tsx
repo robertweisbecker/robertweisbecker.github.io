@@ -150,6 +150,9 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
 
         {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
       </figure>
+      {/* Experimental grab handle from the dialog prototype.
+      <div className="absolute top-2 left-1/2 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-neutral-400/60 shadow-border-xs ring-[0.5px] inset-shadow-xs inset-ring-[0.5px] ring-black/50 inset-shadow-white/10 inset-ring-white/2 backdrop-blur-md"></div>
+      */}
       <Lightbox.Gallery
         items={[item]}
         ariaLabel={alt || "Image preview"}

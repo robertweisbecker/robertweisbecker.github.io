@@ -251,7 +251,12 @@ function Slides({ className, ...props }: React.ComponentProps<typeof RamkaLightb
   return (
     <RamkaLightbox.Slides
       data-slot="lightbox-slides"
-      className={cn("flex-1 [scrollbar-width:none] gap-5 md:gap-0 [&::-webkit-scrollbar]:hidden", className)}
+      className={cn(
+        // Scrim dismiss only fires when the event target is Content. The letterbox
+        // is slide padding, so the track lets those presses through; Media opts back in.
+        "pointer-events-none flex-1 [scrollbar-width:none] gap-5 md:gap-0 [&::-webkit-scrollbar]:hidden",
+        className
+      )}
       {...props}
     />
   );
@@ -281,7 +286,9 @@ function Media({ className, ...props }: React.ComponentProps<typeof RamkaLightbo
       // absolute insets just work. The shadow is gated to md+ — the mobile
       // edge-to-edge layout stays outline-free.
       className={cn(
-        "overflow-hidden md:rounded-lg [&_img]:select-none",
+        // Item fills the slide, so the letterbox inside it would swallow scrim
+        // clicks. Only the photo (and zoom gestures on it) should take hits.
+        "pointer-events-auto overflow-hidden md:rounded-lg [&_img]:select-none",
         "after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-[inherit]",
         "md:after:shadow-[inset_0_0_0_0.5px_rgb(0_0_0/0.1)]",
         "md:dark:after:shadow-[inset_0_0_0_0.5px_rgb(255_255_255/0.12)]",
