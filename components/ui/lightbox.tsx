@@ -1,20 +1,8 @@
 "use client";
 
 /**
- * Default Ramka lightbox, Tailwind variant — the preset from
- * https://ramka.dev/presets/default, dropped in as a design-system entry.
- *
- * Re-exports ramka Lightbox primitives with this skin attached, plus composed
- * `Lightbox.Gallery` (bleed or snug slides, glass controls, desktop thumbnail strip).
- *
- * Adaptations for this site:
- * - Icons come from `@tabler/icons-react` (already a dependency) instead of lucide.
- * - Backdrop and Content use `z-100` so the portaled lightbox clears the sticky
- *   header (`z-50` inside an isolated root).
- * - `renderMedia` lets a caller supply `next/image` while this file keeps the
- *   preset's `<img>` path as the default.
- * - A single-item gallery hides the theater/peek toggle; that control only
- *   changes how neighbors peek.
+ * Default Ramka lightbox (https://ramka.dev/presets/default).
+ * Tabler icons, `z-100` above the sticky header, optional `renderMedia`.
  *
  * Conventions:
  * - Requires Tailwind CSS v4 (`starting:`, `not-*`, bare `data-*` variants)
@@ -194,9 +182,6 @@ function Backdrop({ className, ...props }: React.ComponentProps<typeof RamkaLigh
     <RamkaLightbox.Backdrop
       data-slot="lightbox-backdrop"
       className={cn(
-        // Translucent veil so the page stays visible behind the lightbox.
-        // z-100 clears the sticky site header (z-50 inside an isolated root).
-        // Alpha lives on the color; element opacity still tracks pull-to-dismiss.
         "fixed inset-0 z-100 bg-white/50 opacity-0 dark:bg-black/60",
         // Duration cascade: `--lightbox-pull-snap-*` exist only while a
         // cancelled pull-to-dismiss springs back (so the refade matches the
@@ -622,10 +607,6 @@ function Gallery({
 
         <div
           className={cn(
-            // Keep the glass controls inside the window. The preset's 0.75rem
-            // inset put the close button on the viewport edge, where the window
-            // chrome clipped it. Desktop lines the cluster up with the 3rem
-            // letterbox gutter.
             "absolute z-[1] flex gap-2",
             "end-[max(1.25rem,env(safe-area-inset-right,0px))] top-[max(1rem,env(safe-area-inset-top,0px))]",
             "md:end-12 md:top-6",

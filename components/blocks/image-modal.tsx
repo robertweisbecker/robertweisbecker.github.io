@@ -94,8 +94,6 @@ function ModalImage({ src, alt, imgAspect }: { src: StaticImageData; alt: string
 
 export function ImageModal({ src, caption, className }: ImageModalProps) {
   const alt = typeof caption === "string" ? caption : "";
-  // Same static asset on both sides so the morph shares one intrinsic aspect.
-  // https://ramka.dev/docs/lightbox/nextjs-image
   const item: LightboxItem = {
     src: src.src,
     thumb: src.src,
@@ -129,7 +127,6 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
               <NextImage
                 ref={(node) => {
                   imageRef(node);
-                  // Morph the photo, not the frame or the expand control.
                   morphRef(node);
                 }}
                 placeholder="blur"
@@ -156,17 +153,7 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
       <Lightbox.Gallery
         items={[item]}
         ariaLabel={alt || "Image preview"}
-        renderMedia={() => (
-          <NextImage
-            src={src}
-            alt={alt}
-            // Fullscreen destination. No blur placeholder: the trigger image is
-            // the open bridge, and a LQIP would paint in front of it.
-            sizes="100vw"
-            preload
-            draggable={false}
-          />
-        )}
+        renderMedia={() => <NextImage src={src} alt={alt} sizes="100vw" preload draggable={false} />}
       />
     </Lightbox.Root>
   );
