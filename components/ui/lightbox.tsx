@@ -194,9 +194,10 @@ function Backdrop({ className, ...props }: React.ComponentProps<typeof RamkaLigh
     <RamkaLightbox.Backdrop
       data-slot="lightbox-backdrop"
       className={cn(
-        // Solid — the page underneath is fully covered while open.
+        // Translucent veil so the page stays visible behind the lightbox.
         // z-100 clears the sticky site header (z-50 inside an isolated root).
-        "fixed inset-0 z-100 bg-white opacity-0 dark:bg-black",
+        // Alpha lives on the color; element opacity still tracks pull-to-dismiss.
+        "fixed inset-0 z-100 bg-white/50 opacity-0 dark:bg-black/60",
         // Duration cascade: `--lightbox-pull-snap-*` exist only while a
         // cancelled pull-to-dismiss springs back (so the refade matches the
         // item's spring); otherwise `--lightbox-vt-duration` — the Root's
@@ -621,7 +622,13 @@ function Gallery({
 
         <div
           className={cn(
-            "absolute end-3 top-[calc(0.75rem_+_env(safe-area-inset-top,0px))] z-[1] flex gap-2",
+            // Keep the glass controls inside the window. The preset's 0.75rem
+            // inset put the close button on the viewport edge, where the window
+            // chrome clipped it. Desktop lines the cluster up with the 3rem
+            // letterbox gutter.
+            "absolute z-[1] flex gap-2",
+            "end-[max(1.25rem,env(safe-area-inset-right,0px))] top-[max(1rem,env(safe-area-inset-top,0px))]",
+            "md:end-12 md:top-6",
             chromeGestureHideClass,
             // On mobile, zoom also hides the top controls — the media fills the screen.
             "max-md:group-data-zoomed/lb:invisible max-md:group-data-zoomed/lb:opacity-0",
