@@ -925,9 +925,18 @@ export function ComponentDemos() {
       </Section>
 
       <Section title="Image Modal">
-        <div className="max-w-md">
-          <ImageModal src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
-          <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
+        <div className="grid max-w-md gap-8">
+          <div className="grid gap-2">
+            <p className="text-sm font-medium">Case study modal</p>
+            <p className="text-xs text-muted-foreground">
+              Closed frame, border, caption, and expand control stay in place. Opening uses the Ramka lightbox.
+            </p>
+            <ImageModal src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
+          </div>
+          <div className="grid gap-2">
+            <p className="text-sm font-medium">Drawer prototype</p>
+            <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
+          </div>
         </div>
       </Section>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Dialog as DialogBase } from "@base-ui/react/dialog";
@@ -11,6 +11,7 @@ import * as React from "react";
 import { createPortal } from "react-dom";
 import { ArrowsExpandIcon, XIcon } from "@/components/icons";
 import { imageSrc } from "@/lib/image-src";
+import { Lightbox, type LightboxItem } from "@/components/ui/lightbox";
 import NextImage, { type StaticImageData } from "next/image";
 
 const SPRING = { type: "spring" as const, damping: 28, stiffness: 220 };
@@ -92,14 +93,20 @@ function ModalImage({ src, alt, imgAspect }: { src: StaticImageData; alt: string
 }
 
 export function ImageModal({ src, caption, className }: ImageModalProps) {
-  const aspectRatio = `${src.width} / ${src.height}`;
-  const popupStyle = {
-    "--image-ratio": src.width / src.height,
-    aspectRatio,
-  } as React.CSSProperties & { "--image-ratio": number };
+  const alt = typeof caption === "string" ? caption : "";
+  // Same static asset on both sides so the morph shares one intrinsic aspect.
+  // https://ramka.dev/docs/lightbox/nextjs-image
+  const item: LightboxItem = {
+    src: src.src,
+    thumb: src.src,
+    alt,
+    caption: alt || undefined,
+    width: src.width,
+    height: src.height,
+  };
 
   return (
-    <DialogBase.Root>
+    <Lightbox.Root>
       <figure
         data-media
         className={cn(
@@ -108,74 +115,60 @@ export function ImageModal({ src, caption, className }: ImageModalProps) {
           className
         )}
       >
-        <DialogBase.Trigger
+        <Lightbox.Trigger
+          index={0}
+          type="button"
           aria-label="View fullscreen image"
           className={cn(
             "group/trigger block w-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring",
             "relative bg-card py-1 shadow-border-md sm:rounded-2xl sm:px-1 sm:squircle"
           )}
         >
-          <NextImage
-            placeholder="blur"
-            src={src}
-            alt={typeof caption === "string" ? caption : ""}
-            sizes="(max-width: 768px) 100vw, 720px"
-            className="h-auto w-full outline -outline-offset-1 outline-border sm:rounded-xl sm:squircle"
-          />
-          <span
-            aria-hidden
-            className={cn(
-              buttonVariants({ variant: "glass", size: "icon-sm", rounded: true }),
-              "absolute inset-e-3 bottom-3 cursor-default"
-            )}
-          >
-            <ArrowsExpandIcon />
-          </span>
-        </DialogBase.Trigger>
+          {({ imageRef, morphRef }) => (
+            <>
+              <NextImage
+                ref={(node) => {
+                  imageRef(node);
+                  // Morph the photo, not the frame or the expand control.
+                  morphRef(node);
+                }}
+                placeholder="blur"
+                src={src}
+                alt={alt}
+                sizes="(max-width: 768px) 100vw, 720px"
+                className="h-auto w-full outline -outline-offset-1 outline-border sm:rounded-xl sm:squircle"
+              />
+              <span
+                aria-hidden
+                className={cn(
+                  buttonVariants({ variant: "glass", size: "icon-sm", rounded: true }),
+                  "absolute inset-e-3 bottom-3 cursor-default"
+                )}
+              >
+                <ArrowsExpandIcon />
+              </span>
+            </>
+          )}
+        </Lightbox.Trigger>
 
         {caption && <figcaption className="mx-auto text-center text-xs text-muted-foreground">{caption}</figcaption>}
       </figure>
-      <DialogBase.Portal>
-        <DialogBase.Backdrop className="fixed inset-0 z-100 h-dvh w-dvw bg-black/40" />
-        <DialogBase.Viewport
-          className={cn(
-            "fixed inset-0 z-100 flex items-start justify-center overflow-y-auto overscroll-contain outline-none",
-            "pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]",
-            "px-0 sm:px-4 sm:pt-6 sm:pb-10 lg:py-10"
-          )}
-        >
-          <DialogBase.Popup
-            className={cn(
-              "relative mx-auto my-0 overflow-hidden rounded-none bg-popover p-0 shadow-none outline-none sm:rounded-3xl sm:shadow-border-xl sm:ring sm:ring-popover",
-              // Width is capped by the viewport height via the image ratio so tall
-              // images always fit fully on screen instead of being clipped.
-              "w-[min(100vw,calc((100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-3rem)*var(--image-ratio)))]",
-              "sm:my-16 sm:w-[min(var(--container-7xl),calc(100vw-2rem),calc((100dvh-10rem)*var(--image-ratio)))]"
-            )}
-            style={popupStyle}
-          >
-            <DialogBase.Title className="sr-only">{caption || "Image"}</DialogBase.Title>
-            <NextImage
-              placeholder="blur"
-              sizes="(max-width: 768px) 100vw, 960px"
-              src={src}
-              alt={typeof caption === "string" ? caption : ""}
-              fill
-              className="pointer-events-none object-contain object-center select-none"
-              preload
-            />
-            <DialogBase.Close
-              aria-label="Close image preview"
-              className="absolute inset-e-3 top-3 z-10"
-              render={<Button variant="glass" size="icon-sm" rounded />}
-            >
-              <XIcon />
-            </DialogBase.Close>
-            {/* <div className="absolute top-2 left-1/2 z-10 h-1.5 w-12 -translate-x-1/2 rounded-full bg-neutral-400/60 shadow-border-xs ring-[0.5px] inset-shadow-xs inset-ring-[0.5px] ring-black/50 inset-shadow-white/10 inset-ring-white/2 backdrop-blur-md"></div> */}
-          </DialogBase.Popup>
-        </DialogBase.Viewport>
-      </DialogBase.Portal>
-    </DialogBase.Root>
+      <Lightbox.Gallery
+        items={[item]}
+        ariaLabel={alt || "Image preview"}
+        renderMedia={() => (
+          <NextImage
+            src={src}
+            alt={alt}
+            // Fullscreen destination. No blur placeholder: the trigger image is
+            // the open bridge, and a LQIP would paint in front of it.
+            sizes="100vw"
+            preload
+            draggable={false}
+          />
+        )}
+      />
+    </Lightbox.Root>
   );
 }
 

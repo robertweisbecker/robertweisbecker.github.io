@@ -26,6 +26,7 @@
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.2.10",
+    "@ramka/react": "^0.0.2",
     "@tabler/icons-react": "^3.44.0",
     "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^2.0.1",
