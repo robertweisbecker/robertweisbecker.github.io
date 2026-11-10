@@ -426,9 +426,7 @@ function Gallery({
             "absolute z-[1] flex gap-2",
             "end-[max(1.25rem,env(safe-area-inset-right,0px))] top-[max(1rem,env(safe-area-inset-top,0px))]",
             "md:end-12 md:top-6",
-            chromeGestureHideClass,
-            "max-md:group-data-zoomed/lb:invisible max-md:group-data-zoomed/lb:opacity-0",
-            "max-md:group-data-zoomed/lb:[transition:opacity_200ms,visibility_0s_linear_200ms]"
+            chromeGestureHideClass
           )}
         >
           {solo ? null : (
@@ -444,11 +442,16 @@ function Gallery({
               {snug ? <IconCarouselHorizontal /> : <IconRectangle />}
             </Button>
           )}
-          <ButtonGroup variant="glass" className="max-md:hidden">
+          <ButtonGroup variant="glass">
             <ZoomOut />
             <ZoomIn />
           </ButtonGroup>
-          <Close />
+          <Close
+            className={cn(
+              "max-md:group-data-zoomed/lb:invisible max-md:group-data-zoomed/lb:opacity-0",
+              "max-md:group-data-zoomed/lb:[transition:opacity_200ms,visibility_0s_linear_200ms]"
+            )}
+          />
         </div>
 
         <div
