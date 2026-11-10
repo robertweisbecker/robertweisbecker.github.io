@@ -95,7 +95,7 @@ function Backdrop({ className, ...props }: React.ComponentProps<typeof RamkaLigh
     <RamkaLightbox.Backdrop
       data-slot="lightbox-backdrop"
       className={cn(
-        "fixed inset-0 z-100 bg-white/50 opacity-0 dark:bg-black/60",
+        "fixed inset-0 z-100 bg-white/70 opacity-0 dark:bg-black/75",
         "transition-opacity",
         "duration-[var(--lightbox-pull-snap-duration,var(--lightbox-vt-duration,360ms))]",
         "ease-[var(--lightbox-pull-snap-easing,var(--lb-ease-out-expo))]",
