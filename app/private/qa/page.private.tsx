@@ -52,7 +52,17 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Toolbar } from "@/components/ui/toolbar";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible } from "@base-ui/react/collapsible";
-import { IconAlignLeft, IconAlignRight, IconBold, IconChevronDown, IconCopy, IconHome, IconItalic } from "@tabler/icons-react";
+import {
+  IconAlignLeft,
+  IconAlignRight,
+  IconBold,
+  IconChevronDown,
+  IconCopy,
+  IconHome,
+  IconItalic,
+  IconZoomIn,
+  IconZoomOut,
+} from "@tabler/icons-react";
 import dynamic from "next/dynamic";
 import { Section } from "@/components/blocks/section";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -191,12 +201,26 @@ export default function QaPage() {
             </DeviceFrame.Browser>
           </Section>
           <Section title="Button Group" id="button-group">
-            <div className="flex flex-wrap gap-4">
-              <ButtonGroup>
-                <Button variant="outline">Left</Button>
-                <Button variant="outline">Center</Button>
-                <Button variant="outline">Right</Button>
-              </ButtonGroup>
+            <div className="flex flex-wrap items-end gap-8">
+              <div className="grid gap-2">
+                <p className="text-xs text-muted-foreground">Outline</p>
+                <ButtonGroup>
+                  <Button variant="outline">Left</Button>
+                  <Button variant="outline">Center</Button>
+                  <Button variant="outline">Right</Button>
+                </ButtonGroup>
+              </div>
+              <div className="grid gap-2">
+                <p className="text-xs text-muted-foreground">Glass</p>
+                <ButtonGroup variant="glass">
+                  <Button variant="glass" size="icon-sm" rounded aria-label="Zoom out">
+                    <IconZoomOut />
+                  </Button>
+                  <Button variant="glass" size="icon-sm" rounded aria-label="Zoom in">
+                    <IconZoomIn />
+                  </Button>
+                </ButtonGroup>
+              </div>
             </div>
           </Section>
           <Section title="Form & Input" id="form-input">

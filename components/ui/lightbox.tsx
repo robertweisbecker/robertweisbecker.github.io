@@ -12,6 +12,7 @@ import * as RamkaLightbox from "@ramka/react/lightbox";
 
 import { XIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "@/components/ui/button-group";
 import { cn } from "@/lib/utils";
 
 export type LightboxItem = {
@@ -187,13 +188,7 @@ function Zoom(props: React.ComponentProps<typeof RamkaLightbox.Zoom>) {
 
 function ZoomIn({ className, children, ...props }: React.ComponentProps<typeof RamkaLightbox.ZoomIn>) {
   return (
-    <RamkaLightbox.ZoomIn
-      data-slot="lightbox-zoom-in"
-      aria-label="Zoom in"
-      render={<GlassButton />}
-      className={cn("max-md:hidden", className)}
-      {...props}
-    >
+    <RamkaLightbox.ZoomIn data-slot="lightbox-zoom-in" aria-label="Zoom in" render={<GlassButton />} className={className} {...props}>
       {children ?? <IconZoomIn strokeWidth={2.25} />}
     </RamkaLightbox.ZoomIn>
   );
@@ -201,13 +196,7 @@ function ZoomIn({ className, children, ...props }: React.ComponentProps<typeof R
 
 function ZoomOut({ className, children, ...props }: React.ComponentProps<typeof RamkaLightbox.ZoomOut>) {
   return (
-    <RamkaLightbox.ZoomOut
-      data-slot="lightbox-zoom-out"
-      aria-label="Zoom out"
-      render={<GlassButton />}
-      className={cn("max-md:hidden", className)}
-      {...props}
-    >
+    <RamkaLightbox.ZoomOut data-slot="lightbox-zoom-out" aria-label="Zoom out" render={<GlassButton />} className={className} {...props}>
       {children ?? <IconZoomOut strokeWidth={2.25} />}
     </RamkaLightbox.ZoomOut>
   );
@@ -455,8 +444,10 @@ function Gallery({
               {snug ? <IconCarouselHorizontal /> : <IconRectangle />}
             </Button>
           )}
-          <ZoomOut />
-          <ZoomIn />
+          <ButtonGroup variant="glass" className="max-md:hidden">
+            <ZoomOut />
+            <ZoomIn />
+          </ButtonGroup>
           <Close />
         </div>
 

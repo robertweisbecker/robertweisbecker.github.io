@@ -17,20 +17,54 @@ const buttonGroupVariants = cva(
         vertical:
           "flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-(--button-radius)! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0",
       },
+      variant: {
+        default: "",
+        glass: [
+          "overflow-hidden rounded-full!",
+          "bg-popover/5 [backdrop-filter:blur(1.5px)_saturate(1.5)_contrast(.8)_brightness(1.1)]",
+          "shadow-[1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),-1.25px_0px_0px_-0.75px_rgba(0,0,0,0.2),0px_0px_0px_0.5px_rgba(0,0,0,0.14),0px_12px_5px_-6px_color-mix(in_srgb,canvas_10%,transparent),0px_9px_6px_-2px_rgba(0,0,0,0.1),inset_0px_-1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_0px_-0.5px_rgba(255,255,255,0.4),inset_0px_1px_1px_rgba(255,255,255,0.2),inset_0px_-1px_1px_rgba(255,255,255,0.2),inset_0px_6px_6px_4px_rgba(0,0,0,0.07)]",
+          "dark:bg-popover/60 dark:ring-[0.5px] dark:ring-background",
+          "[&>button]:rounded-none! [&>button]:bg-transparent [&>button]:shadow-none [&>button]:[backdrop-filter:none]",
+          "[&>button]:before:hidden [&>button]:after:hidden",
+          "[&>button]:hover:scale-100 [&>button]:active:scale-100",
+          "[&>button]:hover:bg-foreground/8 [&>button]:active:bg-foreground/12",
+          "[&>button]:focus-visible:outline-offset-[-2px]",
+          "[&>button:disabled]:bg-transparent",
+        ],
+      },
     },
+    compoundVariants: [
+      {
+        orientation: "horizontal",
+        variant: "glass",
+        className: "[&>button:not(:first-child)]:border-s! [&>button:not(:first-child)]:border-foreground/20",
+      },
+      {
+        orientation: "vertical",
+        variant: "glass",
+        className: "[&>button:not(:first-child)]:border-t! [&>button:not(:first-child)]:border-foreground/20",
+      },
+    ],
     defaultVariants: {
       orientation: "horizontal",
+      variant: "default",
     },
   }
 );
 
-function ButtonGroup({ className, orientation, ...props }: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>) {
+function ButtonGroup({
+  className,
+  orientation,
+  variant,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>) {
   return (
     <div
       role="group"
       data-slot="button-group"
       data-orientation={orientation}
-      className={cn(buttonGroupVariants({ orientation }), "rounded-(--button-radius)", className)}
+      data-variant={variant}
+      className={cn(buttonGroupVariants({ orientation, variant }), "rounded-(--button-radius)", className)}
       {...props}
     />
   );
