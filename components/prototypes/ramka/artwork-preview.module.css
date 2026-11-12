@@ -1,0 +1,248 @@
+.desk {
+  position: relative;
+  isolation: isolate;
+  height: clamp(27rem, 85vw, 38rem);
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(ellipse at 8% 0%, #fff8, transparent 65%),
+    repeating-linear-gradient(2deg, #785a3b05 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(91deg, #fff2 0 1px, transparent 1px 19px), #d6cbb9;
+  box-shadow:
+    inset 0 0 60px #6e543019,
+    inset 0 1px #fff8;
+}
+
+.objects {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.artwork {
+  position: absolute;
+  left: var(--art-x);
+  top: var(--art-y);
+  z-index: var(--layer);
+  width: 29%;
+  aspect-ratio: 4 / 5;
+  padding: 4% 3% 6%;
+  border-radius: 1px 2px 3px 1px;
+  background: linear-gradient(135deg, #fffefa, #eae5d9);
+  box-shadow:
+    0 1px 1px #493e2840,
+    2px 4px 5px #493e2830,
+    8px 15px 17px -9px #493e2870;
+  transform: translate(-50%, -50%) rotate(var(--art-rotation));
+  transition: transform 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: zoom-in;
+  outline-offset: 6px;
+}
+
+.picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+.artwork[data-landscape] {
+  aspect-ratio: 1.14;
+  width: 34%;
+  padding: 2.5% 2.5% 5%;
+}
+.artwork[data-material="sketch"] {
+  padding: 2% 2% 5%;
+  background: #d7cbbb;
+  width: 25%;
+  aspect-ratio: 0.59;
+}
+
+/* A thin, uneven shadow reads as a lifted sheet edge without bending the art. */
+.artwork[data-material="paper"]::before,
+.artwork[data-material="sketch"]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 75% 4% 0;
+  border-radius: 0 0 50% 30%;
+  box-shadow: 0 8px 7px #493e284d;
+  transform: rotate(-3deg);
+}
+
+.artwork[data-material="paper"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 8%;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, #e5dece 40%, #fffdf7 50%, #ded7c8 72%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.artwork[data-material="canvas"] {
+  padding: 0;
+  border-radius: 1px;
+  background: #e4dece;
+  box-shadow:
+    1px 1px #b7af9f,
+    2px 2px #b7af9f,
+    3px 3px #ada594,
+    4px 4px #a09887,
+    5px 5px 1px #918978,
+    8px 10px 7px #40342550,
+    14px 20px 20px -10px #40342580;
+}
+
+.grain {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  opacity: 0.17;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23706040' filter='url(%23n)' opacity='.6' d='M0 0h160v160H0z'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.artwork[data-material="canvas"] .grain {
+  opacity: 0.4;
+  background:
+    repeating-linear-gradient(0deg, #fff3 0 1px, #0001 1px 2px, transparent 2px 3px),
+    repeating-linear-gradient(90deg, #fff3 0 1px, #0001 1px 2px, transparent 2px 3px);
+  box-shadow:
+    inset 1px 1px 1px #fff6,
+    inset -2px -2px 3px #0003;
+}
+
+.signature {
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  right: 10%;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+  color: #756c5a;
+  font:
+    italic clamp(6px, 1.5vw, 10px)/1.2 Georgia,
+    serif;
+}
+.artwork[data-material="canvas"] .signature {
+  display: none;
+}
+
+.spareSheet {
+  position: absolute;
+  left: 35%;
+  top: 29%;
+  width: 31%;
+  height: 44%;
+  transform: rotate(19deg);
+  background: #e9dfc9;
+  box-shadow: 2px 3px 5px #493e2829;
+}
+.colorStudy {
+  position: absolute;
+  top: 6%;
+  left: 39%;
+  display: flex;
+  gap: 4px;
+  padding: 10px;
+  background: #e8dfc9;
+  transform: rotate(-14deg);
+  box-shadow: 1px 2px 3px #493e2840;
+}
+.colorStudy i {
+  width: 12px;
+  height: 19px;
+  background: #7d9294;
+  opacity: 0.7;
+  border-radius: 45% 10% 25% 15%;
+}
+.colorStudy i:nth-child(2) {
+  background: #bd8a70;
+}
+.colorStudy i:nth-child(3) {
+  background: #8e966b;
+}
+.colorStudy i:nth-child(4) {
+  background: #555969;
+}
+.coffeeRing {
+  position: absolute;
+  right: -4%;
+  top: -5%;
+  width: 25%;
+  aspect-ratio: 1;
+  border: 3px solid #8e674120;
+  border-radius: 49% 47% 48% 50%;
+  box-shadow:
+    0 0 2px 2px #8e67410d,
+    inset 0 0 3px 1px #8e674112;
+}
+.pencil {
+  position: absolute;
+  left: 6%;
+  bottom: 7%;
+  width: 35%;
+  height: 7px;
+  border-radius: 1px;
+  background: linear-gradient(#384b46 30%, #7b8d6c 35% 60%, #293e38 65%);
+  transform: rotate(-15deg);
+  box-shadow: 1px 3px 2px #40342550;
+}
+.pencil::before {
+  content: "";
+  position: absolute;
+  left: -17px;
+  border-top: 3.5px solid transparent;
+  border-bottom: 3.5px solid transparent;
+  border-right: 17px solid #bca07e;
+}
+.pencil::after {
+  content: "";
+  position: absolute;
+  left: -18px;
+  border-top: 3.5px solid transparent;
+  border-bottom: 3.5px solid transparent;
+  border-right: 5px solid #39342e;
+}
+.charcoal {
+  position: absolute;
+  right: 7%;
+  bottom: 6%;
+  width: 11%;
+  height: 9px;
+  background: linear-gradient(#4f4a42, #24231f 55%, #423b34);
+  border-radius: 2px;
+  transform: rotate(24deg);
+  box-shadow: 1px 3px 3px #40342560;
+}
+.deskNote {
+  position: absolute;
+  bottom: 4%;
+  left: 43%;
+  color: #756c5a;
+  font:
+    italic 11px Georgia,
+    serif;
+  transform: rotate(-4deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .desk:not([data-open]) .artwork:hover {
+    z-index: 10;
+    transform: translate(-50%, -54%) rotate(calc(var(--art-rotation) * 0.5)) scale(1.05);
+  }
+}
+.artwork:focus-visible {
+  z-index: 10;
+  outline: 2px solid var(--ring);
+  transform: translate(-50%, -54%) rotate(0deg) scale(1.05);
+}
+@media (prefers-reduced-motion: reduce) {
+  .artwork {
+    transition: none;
+  }
+}

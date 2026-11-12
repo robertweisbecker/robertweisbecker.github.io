@@ -84,6 +84,7 @@ import { IconAlertTriangle, IconFolderOff, IconInfoCircle, IconSearch, IconUser 
 import Link from "next/link";
 import * as React from "react";
 import { Section } from "@/components/blocks/section";
+import { RamkaQaExamples } from "@/components/prototypes/ramka/review";
 
 const FRAMEWORKS = [
   { value: "next", label: "Next.js" },
@@ -938,6 +939,7 @@ export function ComponentDemos() {
             <ImageModalDrawer src={forgeBeforeDemo} caption="Click the expand icon to view fullscreen." />
           </div>
         </div>
+        <RamkaQaExamples />
       </Section>
 
       <Section title="Image Toggle">

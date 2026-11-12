@@ -1,0 +1,81 @@
+.slides {
+  --gallery-top: 4.5rem;
+  --gallery-gutter: 2rem;
+  --gallery-gap: 0.75rem;
+  --gallery-first-width: min(
+    calc(100cqw - 2 * var(--gallery-gutter)),
+    calc((100cqh - var(--gallery-top) - var(--gallery-bottom)) * var(--gallery-first-ratio))
+  );
+  --gallery-last-width: min(
+    calc(100cqw - 2 * var(--gallery-gutter)),
+    calc((100cqh - var(--gallery-top) - var(--gallery-bottom)) * var(--gallery-last-ratio))
+  );
+
+  height: 100%;
+  gap: var(--gallery-gap);
+  scrollbar-width: none;
+}
+
+/* End spacers let the first and last images center like every other slide. */
+.slides::before,
+.slides::after {
+  content: "";
+  pointer-events: none;
+}
+
+.slides::before {
+  flex: 0 0 calc((100cqw - var(--gallery-first-width)) / 2 - var(--gallery-gap));
+}
+
+.slides::after {
+  flex: 0 0 calc((100cqw - var(--gallery-last-width)) / 2 - var(--gallery-gap));
+}
+
+.slide {
+  z-index: 0;
+  flex: 0 0 auto;
+  width: min(
+    calc(100cqw - 2 * var(--gallery-gutter)),
+    calc((100cqh - var(--gallery-top) - var(--gallery-bottom)) * var(--gallery-ratio))
+  );
+  min-width: 0;
+  height: 100%;
+  padding-block: var(--gallery-top) var(--gallery-bottom);
+}
+
+.gallery[data-zoomed] .slide:has([data-active]) {
+  z-index: 1;
+}
+
+.item:not([data-active]) {
+  opacity: calc(1 - max(var(--lightbox-pull-progress, 0), var(--lightbox-zoom-progress, 0)));
+}
+
+.thumbnailStrip {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0.75rem auto 0;
+  padding-block: 0.5rem;
+  mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+}
+
+/* Ramka moves the track beneath this stationary selection frame. */
+.thumbnailFrame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4rem;
+  height: 4rem;
+  translate: -50% -50%;
+  border: 2px solid var(--foreground);
+  border-radius: calc(var(--radius-lg) + 4px);
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .slides {
+    --gallery-gutter: 4rem;
+    --gallery-gap: 1.25rem;
+  }
+}

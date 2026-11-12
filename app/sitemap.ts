@@ -5,6 +5,7 @@ import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://bob.fyi";
 
+// Dev-only /private/** routes, including Ramka explorations, stay out of the sitemap.
 const staticRoutes = ["/", "/about", "/posts", "/art", "/playground"] as const;
 export const dynamic = "force-static";
 

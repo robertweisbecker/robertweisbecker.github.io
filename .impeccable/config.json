@@ -1,0 +1,15 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": ["components/prototypes/ramka/artwork-preview.module.css"],
+        "createdAt": "2026-11-12T06:07:03.458Z",
+        "reason": "Agent reviewed: .pencil::before uses a CSS border triangle to draw the wooden pencil tip in the requested skeuomorphic studio desk illustration; it is not a card accent border."
+      }
+    ]
+  }
+}

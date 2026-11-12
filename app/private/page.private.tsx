@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 };
 
 const privateLinks = [
+  ["/private/ramka", "Ramka explorations"],
   ["/private/qa", "QA"],
   ["/private/drawer", "Drawer"],
   ["/private/image-modal", "Image modal"],
