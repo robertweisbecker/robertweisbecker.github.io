@@ -465,7 +465,7 @@ mark[data-hue],
 
 @utility link {
   :where(&) {
-    @apply before-hitbox relative isolate inline rounded-[.25em] wrap-break-word break-all text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring;
+    @apply before-hitbox relative isolate inline rounded-[.25em] break-normal wrap-anywhere text-foreground underline decoration-current/40 decoration-[round(.075em,.5px)] underline-offset-[.25em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring;
     svg {
       @apply inline max-h-[1em] max-w-[1em];
     }

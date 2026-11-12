@@ -1,6 +1,5 @@
 import { DemoContainer } from "@/components/blocks/demo";
 import {
-  DepartureMonoTextDemo,
   MorphablePixelIconScrollDemo,
   PixelIconDataInspectorDemo,
   PixelSunMoonMorphDemo,
@@ -69,8 +68,23 @@ export default function PixelIconsPage() {
             at font-size multiples of 11px, you can use a half-step at 16.5px to make each &quot;pixel&quot; land on a pixel edge on at
             least one side. This equates to an icon with a 1.5px stroke (like Lucide) and remains decently crisp.{" "}
           </p>
-          <DemoContainer caption="A few Departure Mono text sizes">
-            <DepartureMonoTextDemo />
+          <DemoContainer caption="A few Departure Mono text sizes" centerContent>
+            <div className="flex flex-col items-center gap-10">
+              <div className="flex items-center gap-[.5em] font-pixel text-[11px]/none">
+                <span className="grid-stack aspect-square size-[1em] bg-border/50">★</span>
+                <span className="text-muted-foreground/72">∙ 11 ∙ 1×</span>
+              </div>
+
+              <div className="flex items-center gap-[.5em] font-pixel text-[16.5px]/none">
+                <span className="grid-stack aspect-square size-[1em] bg-border/50">★</span>
+                <span className="text-muted-foreground/72">16.5 ∙ 1.5×</span>
+              </div>
+
+              <div className="flex items-center gap-[.5em] font-pixel text-[22px]/none">
+                <span className="grid-stack aspect-square size-[1em] bg-border/50">★</span>
+                <span className="text-muted-foreground/72">22 ∙ 2×</span>
+              </div>
+            </div>
           </DemoContainer>
           <p>That means we should be able use the trio of 11 / 16.5 / 22px in place of common SVG sizes like 12, 16, 20, and 24px.</p>
           <p>
@@ -136,8 +150,9 @@ export default function PixelIconsPage() {
         </section>
 
         <section className="prose">
+          {/* prettier-ignore */}
           <p>
-            But how might one accomplish this with pixels? They don&apos;t rotate. Elements painted with pixels can <em>appear</em> to
+            But how might one accomplish this with pixels? They don&apos;t rotate. Elements painted with pixels can <em>appear</em>{" "}to
             rotate, but really it&apos;s just other pixels along its path lighting up. Pixels are discrete and don&apos;t maintain the kind
             of illusory continuity you&apos;d get from a rotated path, so having a little rectangle spin into place breaks the
             metaphor.{" "}
@@ -157,16 +172,18 @@ export default function PixelIconsPage() {
               then the animation would be way too slow and jerky.
             </small>
           </p>
+          {/* prettier-ignore */}
           <p>
             So, why 28 pixels? That&apos;s just how many pixels it took for the sun{" "}
-            <PixelIcons.PixelSunSmallIcon className="inline size-[16.5px] align-text-top text-yellow-400" /> to look right, and it&apos;s
+            <PixelIcons.PixelSunSmallIcon className="inline size-[16.5px] align-text-top text-yellow-400" />{" "}to look right, and it&apos;s
             the first one I made. That&apos;s all. This could work with any number of pixels, and you don&apos;t even need a constant
             number; unused pixels could combine or dissolve. Speaking of which: the moon{" "}
             <PixelIcons.PixelMoon2Icon className="inline size-[16.5px] align-text-top text-purple-400" /> only needed 24, so it earned a
             little star. Good job, buddy.
           </p>
+          {/* prettier-ignore */}
           <p className="text-pretty">
-            In reality, each &quot;pixel&quot; is a <Code variant="inline-component">rect</Code> element with a width and height of 1px.
+            In reality, each &quot;pixel&quot; is a <Code variant="inline-component">rect</Code>{" "}element with a width and height of 1px.
             Motion animates each&apos;s <Code variant="inline">x</Code> and <Code variant="inline">y</Code> properties to move it to its new
             position.
           </p>{" "}
@@ -184,8 +201,9 @@ export default function PixelIconsPage() {
 
         <div className="prose prose-sm max-w-none">
           <Heading level={2}>Going overboard</Heading>
+          {/* prettier-ignore */}
           <p>
-            Then I saw <LinkOut href="https://benji.org/morphing-icons-with-claude" text="this post" /> from Benji Taylor about morphing
+            Then I saw <LinkOut href="https://benji.org/morphing-icons-with-claude" text="this post" />{" "}from Benji Taylor about morphing
             icons with Claude, in which he&apos;s animating between 21 different SVGs made from 3 lines each. That got me wondering how many
             more icons I could squeeze out of 28 pixels.
           </p>

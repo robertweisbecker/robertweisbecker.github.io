@@ -140,6 +140,7 @@ export function ClipPathEditorResetButton() {
     <Tooltip>
       <TooltipProvider delay={0}>
         <TooltipTrigger
+          aria-label="Reset curve"
           render={<Button variant="ghost" size="icon-sm" className="hover:[&>svg]:-rotate-90 active:[&>svg]:animate-spin" />}
           onClick={() => dispatch({ type: "reset" })}
         >
@@ -247,13 +248,16 @@ export function ClipPathEditorSettings({ className }: React.ComponentProps<"div"
                 aria-label="Curve mode"
                 className="w-fit"
               >
-                <TooltipTrigger tooltip="Linear path" render={<ToggleGroupItem value="line" />}>
+                <TooltipTrigger tooltip="Linear path" render={<ToggleGroupItem value="line" aria-label="Linear path" />}>
                   <IconLine />
                 </TooltipTrigger>
-                <TooltipTrigger tooltip="Quadratic bezier curve" render={<ToggleGroupItem value="quadratic" />}>
+                <TooltipTrigger
+                  tooltip="Quadratic bezier curve"
+                  render={<ToggleGroupItem value="quadratic" aria-label="Quadratic bezier curve" />}
+                >
                   <IconVectorSpline />
                 </TooltipTrigger>
-                <TooltipTrigger tooltip="Cubic bezier curve" render={<ToggleGroupItem value="cubic" />}>
+                <TooltipTrigger tooltip="Cubic bezier curve" render={<ToggleGroupItem value="cubic" aria-label="Cubic bezier curve" />}>
                   <IconVectorBezier2 />
                 </TooltipTrigger>
               </ToggleGrid>

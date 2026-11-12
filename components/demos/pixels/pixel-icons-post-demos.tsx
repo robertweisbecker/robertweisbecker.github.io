@@ -4,7 +4,8 @@ import { CodeBlock } from "@/components/code-block";
 import * as PixelIcons from "@/components/icons/pixel";
 import { PixelMorph, type PixelMorphAnimation } from "@/components/pixel-morph";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardAction } from "@/components/ui/card";
+// import {Item, ItemHeader, ItemContent, ItemTitle, ItemDescription, ItemFooter, ItemAction, ItemMedia} from "@/components/ui/card";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
@@ -64,58 +65,6 @@ function replay(setActive: React.Dispatch<React.SetStateAction<boolean>>) {
   });
 }
 
-export function DepartureMonoSymbolDemo() {
-  const glyphs = [
-    "❰",
-    "❮",
-    "❬",
-    "‹",
-    "<",
-    "×",
-    "❱",
-    "❯",
-    "❭",
-    "↖",
-    "←",
-    "↑",
-    "→",
-    ">",
-    "›",
-    "↓",
-    "↗",
-    "↘",
-    "↙",
-    "↕",
-    "↰",
-    "↱",
-    "↲",
-    "↳",
-    "↴",
-    "↵",
-    "★",
-    "☆",
-    "♥",
-    "♦",
-    "✦",
-    "✧",
-    "√",
-  ];
-
-  return (
-    <div className="mx-auto grid grid-cols-8 place-content-center gap-1 font-pixel text-2xs">
-      {glyphs.map((glyph) => (
-        <span
-          key={glyph}
-          className="grid aspect-square size-8 place-items-center rounded border font-pixel text-[22px]/none text-foreground"
-          aria-label={`Departure Mono ${glyph}`}
-        >
-          {glyph}
-        </span>
-      ))}
-    </div>
-  );
-}
-
 export function DepartureMonoTextDemo() {
   const sizes = [
     { label: "11px", textClassName: "text-[11px]/none" },
@@ -124,11 +73,10 @@ export function DepartureMonoTextDemo() {
   ];
 
   return (
-    <div className="space-y-5 text-center">
+    <div className="mx-auto flex">
       {sizes.map((size) => (
-        <div key={size.label} className={cn("flex items-center gap-2 font-pixel text-foreground", size.textClassName)}>
+        <div key={size.label} className={cn("flex items-center gap-[1em] font-pixel text-destructive", size.textClassName)}>
           <span>★ {size.label}</span>
-          <span className="text-muted-foreground">icon beside text</span>
         </div>
       ))}
     </div>
@@ -188,12 +136,12 @@ export function PixelSunMoonMorphDemo() {
 
 export function MorphablePixelIconScrollDemo() {
   return (
-    <div className="grid grid-cols-8 gap-1 sm:grid-cols-12 md:grid-cols-16">
+    <div className="grid grid-cols-8 gap-4 sm:grid-cols-12 md:grid-cols-16">
       {sortedMorphableIconNames.map((name) => {
         const Icon = iconComponents[name];
 
         return (
-          <div key={name} title={formatIconName(name)} className="grid aspect-square place-items-center rounded-md border text-foreground">
+          <div key={name} title={formatIconName(name)} className="grid aspect-square place-items-center bg-muted text-foreground">
             <Icon className="size-[16.5px]" aria-hidden />
           </div>
         );
@@ -244,7 +192,7 @@ export function PixelAnimationOptionsDemo() {
   return (
     <div className="grid gap-2 md:grid-cols-3">
       {animationOptions.map((option) => (
-        <AnimationOptionCard {...option} key={option.animation} />
+        <AnimationOptionCard key={option.animation} {...option} />
       ))}
     </div>
   );
@@ -255,28 +203,26 @@ function AnimationOptionCard({ animation, label, description }: { animation: Pix
 
   return (
     <Card variant="muted" size="sm">
-      <CardContent className="grid gap-3">
-        <div className="flex items-center justify-between gap-2">
-          <div>
-            <div className="font-medium text-foreground">{label}</div>
-            <p className="text-xs text-muted-foreground">{description}</p>
-          </div>
+      <CardHeader>
+        <CardTitle>{label}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+        <CardAction>
           <Button type="button" size="icon-sm" variant="ghost" onClick={() => replay(setActive)} aria-label={`Play ${label}`}>
             <IconPlayerPlayFilled />
           </Button>
-        </div>
-        <div className="grid h-20 place-items-center rounded-lg bg-background text-foreground shadow-border-xs">
-          <PixelMorph
-            from="PixelCopyIcon"
-            to="PixelClipboardCheckIcon"
-            active={active}
-            animation={animation}
-            strategy="nearest"
-            duration={0.8}
-            stagger={0.02}
-            scale={3}
-          />
-        </div>
+        </CardAction>
+      </CardHeader>
+      <CardContent>
+        <PixelMorph
+          from="PixelCopyIcon"
+          to="PixelClipboardCheckIcon"
+          active={active}
+          animation={animation}
+          strategy="nearest"
+          duration={0.8}
+          stagger={0.02}
+          scale={3}
+        />
       </CardContent>
     </Card>
   );

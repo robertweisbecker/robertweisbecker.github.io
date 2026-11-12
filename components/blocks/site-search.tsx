@@ -121,7 +121,7 @@ function itemImage(src: string): ReactNode {
 
 const staticPages: SearchItem[] = [
   { value: "home", label: "Home", path: "/", icon: itemIcon(IconHome), group: "Pages" },
-  { value: "about", label: "About", path: "/about", icon: itemIcon(IconUser), group: "Pages" },
+  { value: "about", label: "About", path: "/#about", icon: itemIcon(IconUser), group: "Pages" },
   { value: "posts-index", label: "Posts", path: "/posts", icon: itemIcon(PixelNewsIcon), group: "Pages" },
   { value: "art", label: "Art", path: "/art", icon: itemIcon(PixelScribbleIcon), group: "Pages" },
 ];

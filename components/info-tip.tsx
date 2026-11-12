@@ -18,6 +18,7 @@ export function InfoTip({ title, description, className, help, children }: InfoT
     <Popover>
       <PopoverTrigger
         openOnHover
+        aria-label={typeof title === "string" ? title : typeof description === "string" ? description : "More information"}
         // render={<Button variant="ghost" size={buttonToInfoTipSize[size]} />}
         className={cn(
           "relative inline-grid min-h-lh shrink-0 place-items-center rounded p-0 text-foreground/50 after:absolute after:aspect-square after:min-h-5 after:min-w-5 after:rounded-[inherit] hover:text-current hover:after:bg-current/5 aria-expanded:text-current aria-expanded:after:bg-current/10",

@@ -103,11 +103,11 @@ export default function ThemingPostPage() {
       <section className="prose">
         <p>
           A working demo of the theming described in my{" "}
-          <Link href="/projects/oklch" className="link">
+          <Link href="/oklch-colors" className="link">
             writeup
           </Link>{" "}
           of the okLCH color system I created for the{" "}
-          <Link href="/projects/unified-design-language" className="link">
+          <Link href="/unified-design-language" className="link">
             Unified Design Language
           </Link>{" "}
           project. While that design system doesn&apos;t use Tailwind, I&apos;ve applied the same thinking to this site, so we end up with a
@@ -313,8 +313,9 @@ components/
 }`}
           />
 
+          {/* prettier-ignore */}
           <p>
-            PS — If you&apos;re wondering what the <Code variant="plain">--ellipse-factor</Code> is for, it has nothing to do with theming.
+            PS — If you&apos;re wondering what the <Code variant="plain">--ellipse-factor</Code>{" "}is for, it has nothing to do with theming.
             I made a utility class for squircle corners, and that&apos;ll offset the radius variable to get the desired effect.
           </p>
 

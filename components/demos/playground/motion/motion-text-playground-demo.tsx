@@ -209,7 +209,13 @@ export function MotionTextScrambleDemo() {
   return (
     <SampleShell
       controls={
-        <Button size="icon" variant="ghost" type="button" onClick={() => setScrambleKey((key) => key + 1)}>
+        <Button
+          aria-label="Replay text scramble"
+          size="icon"
+          variant="ghost"
+          type="button"
+          onClick={() => setScrambleKey((key) => key + 1)}
+        >
           <PixelShuffleIcon scale={1.5} />
         </Button>
       }
@@ -272,7 +278,7 @@ export function MotionTextMorphDemo() {
   return (
     <SampleShell
       controls={
-        <Button size="icon" variant="ghost" type="button" onClick={() => setAlternate((value) => !value)}>
+        <Button aria-label="Change morph text" size="icon" variant="ghost" type="button" onClick={() => setAlternate((value) => !value)}>
           <PixelShuffleIcon scale={1.5} />
         </Button>
       }

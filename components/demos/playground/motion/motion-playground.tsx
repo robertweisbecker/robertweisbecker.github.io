@@ -219,7 +219,13 @@ export function MotionPlayground() {
         </DemoContainer>
         <DemoContainer title="Animated icon buttons" variant="muted" centerContent className="lg:col-span-6">
           <div className="grid grid-cols-3 grid-rows-2 place-items-center gap-2 text-center text-xs">
-            <Toggle pressed={morphIcon} onPressedChange={() => setMorphIcon((prev) => !prev)} variant="outline" className="w-button">
+            <Toggle
+              aria-label="Line morph"
+              pressed={morphIcon}
+              onPressedChange={() => setMorphIcon((prev) => !prev)}
+              variant="outline"
+              className="w-button"
+            >
               <MorphIcon from="filter" to="chevronRight" active={morphIcon} />
             </Toggle>
             <p className="row-2">Line morph</p>

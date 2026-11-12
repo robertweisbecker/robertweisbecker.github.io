@@ -44,7 +44,7 @@ export function Artwork({
             alt={title ? title : ""}
             // fill
             placeholder="blur"
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 767px) 40vw, (max-width: 1279px) 25vw, 300px"
             className="object-contain"
             loading={loading}
           />

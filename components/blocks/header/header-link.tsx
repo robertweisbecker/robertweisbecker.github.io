@@ -9,7 +9,14 @@ export function HeaderHome() {
   const pathname = usePathname();
 
   return (
-    <LinkButton href="/" variant="ghost" size="sm" aria-current={pathname === "/" ? "true" : "false"} className="me-2 gap-2 font-pixel">
+    <LinkButton
+      href="/"
+      aria-label="Home"
+      variant="ghost"
+      size="sm"
+      aria-current={pathname === "/" ? "true" : "false"}
+      className="me-2 gap-2 font-pixel"
+    >
       <Favicon className="size-4 text-secondary-foreground" data-icon="inline-start" />
 
       <span className="text-[11px]/[10px] max-sm:hidden">

@@ -33,7 +33,7 @@ export function PlaygroundRouteNav({ className, hideOnRoot = false, size = "sm" 
 
   return (
     <div ref={rootRef} className={cn("mx-auto flex w-full max-w-7xl items-center gap-5", className)}>
-      <LinkButton href="/playground" variant="secondary" size="icon" rounded>
+      <LinkButton href="/playground" aria-label="Playground overview" variant="secondary" size="icon" rounded>
         <IconChevronLeft className="-ms-0.5 size-5" strokeWidth={2} />
       </LinkButton>
       <Separator orientation="vertical" className="h-button-xs" />

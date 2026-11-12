@@ -4,8 +4,8 @@ export function AnimatedButtonDemo() {
   const buttonClassName =
     "group relative **:duration-300 select-none min-w-32 h-button bg-muted overflow-hidden rounded-lg inline-flex h-button items-center justify-center overflow-hidden rounded-lg bg-muted px-(--button-x) py-(--button-y) text-[13px] font-[550] tracking-[-.02em] hover:bg-accent hover:text-accent-foreground [--button-x:--spacing(3)] [--button-y:--spacing(2)]";
   return (
-    <div className={cn("grid grid-cols-3 gap-2")}>
-      <span />
+    <div className={cn("flex w-full flex-wrap justify-center gap-2 sm:grid sm:w-auto sm:grid-cols-3")}>
+      <span className="max-sm:hidden" />
       <button className={cn(buttonClassName, "justify-self-center")}>
         <span className="translate-y-0 blur-none transition-all group-hover:pointer-events-none group-hover:-translate-y-(--button-y) group-hover:opacity-0">
           Hover up
@@ -14,7 +14,7 @@ export function AnimatedButtonDemo() {
           Hovered! &uarr;
         </span>
       </button>
-      <span />
+      <span className="max-sm:hidden" />
       <button className={buttonClassName}>
         <span className="transition-all group-hover:pointer-events-none group-hover:-translate-x-(--button-x) group-hover:opacity-0 group-hover:blur-[1px]">
           Hover left
@@ -43,7 +43,7 @@ export function AnimatedButtonDemo() {
           &rarr; Hovered!
         </span>
       </button>
-      <span />
+      <span className="max-sm:hidden" />
       <button className={cn(buttonClassName, "justify-self-center")}>
         <span className="transition-all group-hover:pointer-events-none group-hover:translate-y-(--button-y) group-hover:opacity-0 group-hover:blur-[1px]">
           Hover down

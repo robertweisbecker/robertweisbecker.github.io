@@ -20,12 +20,7 @@ export function LinkOut({ text, href, src, icon, className, linkClass, children,
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={cn(
-        "group/link link relative mx-px inline-block space-x-1 text-[1em] leading-[inherit]",
-        src && "ps-[1.25em]",
-        className,
-        linkClass
-      )}
+      className={cn("group/link link relative mx-px inline text-[1em] leading-[inherit]", src && "ps-[1.25em]", className, linkClass)}
       {...props}
     >
       {src && (
@@ -34,7 +29,7 @@ export function LinkOut({ text, href, src, icon, className, linkClass, children,
           <AvatarFallback>{text?.toString().charAt(0)}</AvatarFallback>
         </Avatar>
       )}
-      {icon && <span className="-my-1 size-[1em] opacity-50 group-hover/link:opacity-72 [&_svg]:inline">{icon}</span>}
+      {icon && <span className="-my-1 me-1 size-[1em] opacity-50 group-hover/link:opacity-72 [&_svg]:inline">{icon}</span>}
       {text || children}
       <LinkOutIcon className="absolute -top-[.167em] -right-[.33em] size-[1em] opacity-0 transition-[translate,opacity] group-hover/link:translate-x-[0.125em] group-hover/link:-translate-y-[0.125em] group-hover/link:opacity-100 group-focus-visible:hidden" />
     </a>

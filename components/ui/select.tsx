@@ -98,8 +98,8 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "group/select-item relative flex w-full items-center gap-2 rounded-md py-2 ps-7 pe-3 text-sm/none text-popover-foreground outline-none select-none squircle",
-        // "[:is([data-selected])]:not-focus:bg-accent [:is([data-selected])]:not-focus:text-popover-foreground",
+        "group/select-item grid w-full grid-cols-[1rem_1fr] items-center gap-2 rounded-md py-2 ps-2 pe-3 text-sm/none text-popover-foreground outline-none select-none squircle",
+        "[:is([data-selected])]:not-focus:bg-accent [:is([data-selected])]:not-focus:text-popover-foreground",
         "focus:bg-info-primary focus:text-white focus:shadow-border-xs focus:**:text-white",
         "data-disabled:pointer-events-none data-disabled:opacity-50",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
@@ -107,10 +107,10 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
       )}
       {...props}
     >
-      <SelectPrimitive.ItemIndicator className="pointer-events-none absolute inset-s-2 grid place-items-center">
+      <SelectPrimitive.ItemIndicator className="pointer-events-none col-start-1 grid size-4 place-items-center self-start">
         <CheckIcon className="pointer-events-none size-3" />
       </SelectPrimitive.ItemIndicator>
-      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 items-center gap-1.5">{children}</SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemText className="col-start-2 flex flex-1 shrink-0 items-center gap-1.5">{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
   );
 }

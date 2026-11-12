@@ -275,6 +275,7 @@ export default function Home() {
                 Delivered a (prescient?) <ProjectLink href="/conversational-immigration-forms" text="thesis" /> exploring chatbots and
                 conversational interface design patterns.{" "}
               </li>
+              {/* prettier-ignore */}
               <li>
                 Built a <ProjectLink href="/npr-maps" text="mapping application" /> at NPR when I wasn&apos;t busy{" "}
                 <PreviewCard>
@@ -282,7 +283,7 @@ export default function Home() {
                   <PreviewCardPopup className="p-0.5">
                     <Image src={nprTinyDesk} alt="Tiny Desk Recording" loading="eager" className="rounded-sm" />
                   </PreviewCardPopup>
-                </PreviewCard>
+                </PreviewCard>{" "}
                 in the background of Tiny Desk recordings.
               </li>
               <li>

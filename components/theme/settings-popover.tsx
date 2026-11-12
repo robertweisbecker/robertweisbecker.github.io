@@ -26,7 +26,7 @@ export function ThemeSettingsPopover({ className, ...props }: Omit<React.Compone
         </span>
         Theme
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-xs overflow-hidden">
+      <PopoverContent align="end" className="max-h-(--available-height) w-xs max-w-(--available-width) overflow-auto">
         <PopoverHeader>
           <PopoverTitle>Theme</PopoverTitle>
           <PopoverDescription>Adjust the theme to your heart&apos;s content.</PopoverDescription>
