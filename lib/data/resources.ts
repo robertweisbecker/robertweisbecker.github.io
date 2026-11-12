@@ -1,5 +1,12 @@
 export const resources = [
   {
+    id: "fyicons",
+    title: "FYIcons",
+    description: "An open-source icon library for Figma and React.",
+    href: "https://fyicons.com",
+    thumbnail: "/assets/resources/fyicons.png",
+  },
+  {
     id: "figma-trees",
     title: "Trees, from Pierre",
     description: `A file tree component.`,
