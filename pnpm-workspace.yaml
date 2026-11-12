@@ -1,0 +1,8 @@
+overrides:
+  postcss: ^8.5.15
+
+# Reviewed native dependency setup only. New scripts require explicit review.
+allowBuilds:
+  sharp@0.34.5: true
+  unrs-resolver@1.12.2: true
+strictDepBuilds: true
