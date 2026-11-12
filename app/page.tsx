@@ -192,11 +192,19 @@ export default function Home() {
                 </CardTitle>
                 <CardAction>
                   <div className="size-lh -me-0.5 -mt-px grid-stack self-center text-muted-foreground">
-                    <PixelFigmaIcon
-                      scale={1}
-                      className="ease shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
-                      aria-label="Figma Community"
-                    />
+                    {resource.href.startsWith("https://www.figma.com/") ? (
+                      <PixelFigmaIcon
+                        scale={1}
+                        className="ease shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
+                        aria-label="Figma Community"
+                      />
+                    ) : (
+                      <PixelExternalIcon
+                        scale={1}
+                        className="ease shrink-0 translate-x-0 translate-y-0 opacity-100 transition-[opacity,translate] duration-150 group-hover/resource:translate-x-1/2 group-hover/resource:-translate-y-1/2 group-hover/resource:opacity-0"
+                        aria-hidden
+                      />
+                    )}
                     <span
                       className="ease shrink-0 -translate-x-1/2 translate-y-1/2 scale-50 font-pixel opacity-0 transition-[opacity,translate,transform] duration-150 group-hover/resource:translate-0 group-hover/resource:scale-100 group-hover/resource:opacity-100"
                       aria-hidden

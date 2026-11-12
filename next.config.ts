@@ -5,6 +5,16 @@ const isDev = process.env.NODE_ENV === "development";
 const basePageExtensions = ["js", "jsx", "md", "mdx", "ts", "tsx"] as const;
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "icons.bob.fyi" }],
+        destination: "https://fyicons.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   images: {
     deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920, 2048, 2560, 3840],
     remotePatterns: [
